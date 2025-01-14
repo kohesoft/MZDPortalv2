@@ -719,4 +719,4 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\Microsoft.AspNetC
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\Microsoft.AspNetCore.Routing.xml
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\Microsoft.Extensions.DependencyInjection.xml
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\System.Diagnostics.DiagnosticSource.xml
-C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.Migrations.AddIpAddressToFeedback.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.Migrations.Inti.resources

@@ -6,7 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.form-group').hide();
@@ -23,7 +23,7 @@
 
     <link href="~/Content/Dokumantasyon.css" rel='stylesheet'>
 
-  
+
 </head>
 <body style="color:white;" class="container">
 
@@ -47,7 +47,7 @@
                 <label class="lf--label" for="TalepAdSoyad">
                     <i class='bx bx-id-card'></i>
                 </label>
-                    @Html.EditorFor(model => model.TalepAdSoyad, new { htmlAttributes = new { @class = "lf--input", placeholder = "Ad Soyadınızı Girin" } })
+                    @Html.EditorFor(model => model.TalepAdSoyad, new { htmlAttributes = new { @class = "lf--input", placeholder = "Ad Soyadınızı Girin", required = "required" } })
                     @Html.ValidationMessageFor(model => model.TalepAdSoyad, "", new { @class = "text-danger" })
             </div>
 
@@ -55,7 +55,7 @@
                 <label class="lf--label" for="TalepBirim">
                     <i class='bx bx-building'></i>
                 </label>
-                @Html.EditorFor(model => model.TalepBirim, new { htmlAttributes = new { @class = "lf--input", placeholder = "Biriminizi Girin" } })
+                @Html.EditorFor(model => model.TalepBirim, new { htmlAttributes = new { @class = "lf--input", placeholder = "Biriminizi Girin", required = "required" } })
                 @Html.ValidationMessageFor(model => model.TalepBirim, "", new { @class = "text-danger" })
             </div>
 
@@ -63,7 +63,7 @@
                 <label class="lf--label" for="TalepUnvan">
                     <i class='bx bx-briefcase'></i>
                 </label>
-                @Html.EditorFor(model => model.TalepUnvan, new { htmlAttributes = new { @class = "lf--input", placeholder = "Ünvanınızı Girin" } })
+                @Html.EditorFor(model => model.TalepUnvan, new { htmlAttributes = new { @class = "lf--input", placeholder = "Ünvanınızı Girin", required = "required" } })
                 @Html.ValidationMessageFor(model => model.TalepUnvan, "", new { @class = "text-danger" })
             </div>
 

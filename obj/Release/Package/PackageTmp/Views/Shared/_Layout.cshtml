@@ -143,7 +143,7 @@ nav.sidebar {
                             </ul>
                         </li>
                     }
-                    @if (User.IsInRole("Dokumantasyon") || User.IsInRole("Yonetici") || User.IsInRole("Sys"))
+                    @if (User.IsInRole("Dokumantasyon") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("Kullanici"))
                     {
                         <li class="nav-link dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,8 +152,16 @@ nav.sidebar {
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="@Url.Action("Index", "Dokumantasyon")">Stok Kartı</a></li>
-                                <li><a href="@Url.Action("Index_sorumlu", "Dokumantasyon")">Dokümantasyon</a></li>
                             </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole("Dokumantasyon") || User.IsInRole("Yonetici") || User.IsInRole("Sys"))
+                    {
+                        <li class="nav-link">
+                            <a href="@Url.Action("Index_sorumlu", "Dokumantasyon")">
+                                <i class='bx bx-book-open icon'></i>
+                                <span class="text nav-text">Dokümantasyon</span>
+                            </a>
                         </li>
                     }
                     <li class="nav-link">
@@ -172,6 +180,24 @@ nav.sidebar {
                         <a href="@Url.Action("Mola", "Home")">
                             <i class='bx bx-time icon'></i>
                             <span class="text nav-text">Mola Saatleri</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="@Url.Action("ManagerView", "Task")">
+                            <i class='bx bx-time icon'></i>
+                            <span class="text nav-text">Manager View</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="@Url.Action("MyTasks", "Task")">
+                            <i class='bx bx-time icon'></i>
+                            <span class="text nav-text">My Tasks</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="@Url.Action("Create", "Task")">
+                            <i class='bx bx-time icon'></i>
+                            <span class="text nav-text">Create Task</span>
                         </a>
                     </li>
 

@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\migrations\\202501141227208_inti.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:migrations\\202501141227208_inti.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "202501141227208_Inti.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Migrations\\202501141227208_Inti.cs",
+              "RelativeDocumentMoniker": "Migrations\\202501141227208_Inti.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Migrations\\202501141227208_Inti.cs",
+              "RelativeToolTip": "Migrations\\202501141227208_Inti.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T12:27:28.913Z",
+              "EditorCaption": ""
             }
           ]
         }

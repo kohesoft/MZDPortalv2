@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
+using System.Threading.Tasks;
 using MZDNETWORK.Models;
 
 namespace MZDNETWORK.Models
@@ -22,7 +23,6 @@ public class User
     public string InternalEmail { get; set; }
     public string ExternalEmail { get; set; }
     public string Sicil { get; set; }
-
     public ICollection<UserInfo> UserInfo { get; set; }
     public bool IsPasswordChanged { get; set; }
 

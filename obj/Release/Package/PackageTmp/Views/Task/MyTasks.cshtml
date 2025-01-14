@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MZDNETWORK.Models.Task>
+
+@{
+    ViewBag.Title = "My Tasks";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manager View</title>
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h2 class="text-center">My Tasks</h2>
+
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td>
+                            @Html.ActionLink("Complete", "UpdateStatus", new { id = item.Id, status = "Completed" }, new { @class = "btn btn-success btn-sm" }) |
+                            @Html.ActionLink("In Progress", "UpdateStatus", new { id = item.Id, status = "InProgress" }, new { @class = "btn btn-warning btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
