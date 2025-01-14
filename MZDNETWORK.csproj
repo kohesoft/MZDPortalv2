@@ -1,0 +1,2426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{74A72F7C-97AB-4993-B841-263969A9A589}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MZDNETWORK</RootNamespace>
+    <AssemblyName>MZDNETWORK</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44318</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
+    <PublishDatabases>false</PublishDatabases>
+    <LegacyPublishPropertiesPageEnabled>true</LegacyPublishPropertiesPageEnabled>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Identity.Core.2.2.4\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Identity.EntityFramework.2.2.4\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Identity.Owin.2.2.4\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Authentication.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Authentication.Core.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Authorization.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization.Policy, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Authorization.Policy.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.Policy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Http.2.2.2\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Http.Extensions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=5.0.17.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Http.Features.5.0.17\lib\net461\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Mvc.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Mvc.Core.2.2.5\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.ResponseCaching.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.ResponseCaching.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Routing.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Routing.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.WebUtilities.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Base, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Configuration.ConfigurationBuilders.Base.3.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.UserSecrets, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.3.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.DotNet.PlatformAbstractions.2.1.0\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.Binder.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.DependencyModel.2.1.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.FileProviders.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Logging.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.ObjectPool.2.2.0\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Options.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Primitives.5.0.1\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Security.4.2.2\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Security.Cookies.4.2.2\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Security.OAuth.4.2.2\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>packages\NLog.5.3.4\lib\net46\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog.Extensions.Logging, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>packages\NLog.Extensions.Logging.5.3.15\lib\net461\NLog.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog.Web, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>packages\NLog.Web.5.3.15\lib\net46\NLog.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog.Web.AspNetCore, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>packages\NLog.Web.AspNetCore.5.3.15\lib\net461\NLog.Web.AspNetCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Pipelines.5.0.2\lib\net461\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.6.0\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.6.0\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.4.5.1\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.6.0\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BildirimlerimController.cs" />
+    <Compile Include="Controllers\BilgiIslemController.cs" />
+    <Compile Include="Controllers\DilekOneriController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DokumantasyonController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\GonderiController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InsanKaynaklariController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="FilterConfig.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LogActionFilter.cs" />
+    <Compile Include="Migrations\202501140700364_AddIpAddressToFeedback.cs" />
+    <Compile Include="Migrations\202501140700364_AddIpAddressToFeedback.Designer.cs">
+      <DependentUpon>202501140700364_AddIpAddressToFeedback.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\DilekOneri.cs" />
+    <Compile Include="Models\Dokumantasyon.cs" />
+    <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\Gonderi.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserAndInfo.cs" />
+    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\Kullanici_IslemleriController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\all.min.css" />
+    <Content Include="Content\animations.css" />
+    <Content Include="Content\Bakim.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\boxicons.css" />
+    <Content Include="Content\boxicons.min.css" />
+    <Content Include="Content\Contact.css" />
+    <Content Include="Content\DilekIstek.css" />
+    <Content Include="Content\IKlayout.css" />
+    <Content Include="Content\my.css" />
+    <Content Include="Content\Dokumantasyon.css" />
+    <Content Include="Content\transformations.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\boxicons.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="libman.json" />
+    <Content Include="logo.ico" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\boxicons.eot" />
+    <Content Include="fonts\boxicons.ttf" />
+    <Content Include="fonts\boxicons.woff" />
+    <Content Include="fonts\boxicons.woff2" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\modernizr-3.4.0.js" />
+    <Content Include="Scripts\modernizr-3.4.0.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\tinymce\icons\default\icons.js" />
+    <Content Include="Scripts\tinymce\icons\default\icons.min.js" />
+    <Content Include="Scripts\tinymce\models\dom\model.js" />
+    <Content Include="Scripts\tinymce\models\dom\model.min.js" />
+    <Content Include="Scripts\tinymce\plugins\accordion\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\accordion\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\advlist\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\anchor\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\charmap\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\codesample\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\codesample\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\code\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\js\emojiimages.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\js\emojiimages.min.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\js\emojis.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\js\emojis.min.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\ar.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\bg_BG.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\ca.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\cs.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\da.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\de.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\el.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\en.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\es.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\eu.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\fa.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\fi.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\fr_FR.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\he_IL.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\hi.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\hr.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\hu_HU.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\id.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\it.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\ja.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\kk.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\ko_KR.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\ms.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\nb_NO.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\nl.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\pl.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\pt_BR.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\pt_PT.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\ro.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\ru.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\sk.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\sl_SI.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\sv_SE.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\th_TH.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\tr.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\uk.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\vi.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\zh_CN.js" />
+    <Content Include="Scripts\tinymce\plugins\help\js\i18n\keynav\zh_TW.js" />
+    <Content Include="Scripts\tinymce\plugins\help\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\help\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\image\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\importcss\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\link\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\media\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\quickbars\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\quickbars\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\save\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\table\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="Scripts\tinymce\skins\content\dark\content.css" />
+    <Content Include="Scripts\tinymce\skins\content\dark\content.js" />
+    <Content Include="Scripts\tinymce\skins\content\dark\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\content\default\content.css" />
+    <Content Include="Scripts\tinymce\skins\content\default\content.js" />
+    <Content Include="Scripts\tinymce\skins\content\default\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\content\document\content.css" />
+    <Content Include="Scripts\tinymce\skins\content\document\content.js" />
+    <Content Include="Scripts\tinymce\skins\content\document\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\content\tinymce-5-dark\content.css" />
+    <Content Include="Scripts\tinymce\skins\content\tinymce-5-dark\content.js" />
+    <Content Include="Scripts\tinymce\skins\content\tinymce-5-dark\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\content\tinymce-5\content.css" />
+    <Content Include="Scripts\tinymce\skins\content\tinymce-5\content.js" />
+    <Content Include="Scripts\tinymce\skins\content\tinymce-5\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\content\writer\content.css" />
+    <Content Include="Scripts\tinymce\skins\content\writer\content.js" />
+    <Content Include="Scripts\tinymce\skins\content\writer\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\content.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\content.inline.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\content.inline.js" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\content.inline.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\content.js" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\skin.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\skin.js" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\skin.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\skin.shadowdom.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\skin.shadowdom.js" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide-dark\skin.shadowdom.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\content.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\content.inline.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\content.inline.js" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\content.inline.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\content.js" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\skin.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\skin.js" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\skin.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\skin.shadowdom.css" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\skin.shadowdom.js" />
+    <Content Include="Scripts\tinymce\skins\ui\oxide\skin.shadowdom.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\content.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\content.inline.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\content.inline.js" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\content.inline.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\content.js" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\skin.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\skin.js" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\skin.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.js" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\content.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\content.inline.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\content.inline.js" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\content.inline.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\content.js" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\skin.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\skin.js" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\skin.min.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\skin.shadowdom.css" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\skin.shadowdom.js" />
+    <Content Include="Scripts\tinymce\skins\ui\tinymce-5\skin.shadowdom.min.css" />
+    <Content Include="Scripts\tinymce\themes\silver\theme.js" />
+    <Content Include="Scripts\tinymce\themes\silver\theme.min.js" />
+    <Content Include="Scripts\tinymce\tinymce.js" />
+    <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Gonderi\GonderiListele.cshtml" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Mzdportal.pfx" />
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\MzdPortal.pubxml" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.1.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="svg\logos\bxl-500px.svg" />
+    <Content Include="svg\logos\bxl-99designs.svg" />
+    <Content Include="svg\logos\bxl-adobe.svg" />
+    <Content Include="svg\logos\bxl-airbnb.svg" />
+    <Content Include="svg\logos\bxl-algolia.svg" />
+    <Content Include="svg\logos\bxl-amazon.svg" />
+    <Content Include="svg\logos\bxl-android.svg" />
+    <Content Include="svg\logos\bxl-angular.svg" />
+    <Content Include="svg\logos\bxl-apple.svg" />
+    <Content Include="svg\logos\bxl-audible.svg" />
+    <Content Include="svg\logos\bxl-aws.svg" />
+    <Content Include="svg\logos\bxl-baidu.svg" />
+    <Content Include="svg\logos\bxl-behance.svg" />
+    <Content Include="svg\logos\bxl-bing.svg" />
+    <Content Include="svg\logos\bxl-bitcoin.svg" />
+    <Content Include="svg\logos\bxl-blender.svg" />
+    <Content Include="svg\logos\bxl-blogger.svg" />
+    <Content Include="svg\logos\bxl-bootstrap.svg" />
+    <Content Include="svg\logos\bxl-c-plus-plus.svg" />
+    <Content Include="svg\logos\bxl-chrome.svg" />
+    <Content Include="svg\logos\bxl-codepen.svg" />
+    <Content Include="svg\logos\bxl-creative-commons.svg" />
+    <Content Include="svg\logos\bxl-css3.svg" />
+    <Content Include="svg\logos\bxl-dailymotion.svg" />
+    <Content Include="svg\logos\bxl-deezer.svg" />
+    <Content Include="svg\logos\bxl-dev-to.svg" />
+    <Content Include="svg\logos\bxl-deviantart.svg" />
+    <Content Include="svg\logos\bxl-digg.svg" />
+    <Content Include="svg\logos\bxl-digitalocean.svg" />
+    <Content Include="svg\logos\bxl-discord-alt.svg" />
+    <Content Include="svg\logos\bxl-discord.svg" />
+    <Content Include="svg\logos\bxl-discourse.svg" />
+    <Content Include="svg\logos\bxl-django.svg" />
+    <Content Include="svg\logos\bxl-docker.svg" />
+    <Content Include="svg\logos\bxl-dribbble.svg" />
+    <Content Include="svg\logos\bxl-dropbox.svg" />
+    <Content Include="svg\logos\bxl-drupal.svg" />
+    <Content Include="svg\logos\bxl-ebay.svg" />
+    <Content Include="svg\logos\bxl-edge.svg" />
+    <Content Include="svg\logos\bxl-etsy.svg" />
+    <Content Include="svg\logos\bxl-facebook-circle.svg" />
+    <Content Include="svg\logos\bxl-facebook-square.svg" />
+    <Content Include="svg\logos\bxl-facebook.svg" />
+    <Content Include="svg\logos\bxl-figma.svg" />
+    <Content Include="svg\logos\bxl-firebase.svg" />
+    <Content Include="svg\logos\bxl-firefox.svg" />
+    <Content Include="svg\logos\bxl-flask.svg" />
+    <Content Include="svg\logos\bxl-flickr-square.svg" />
+    <Content Include="svg\logos\bxl-flickr.svg" />
+    <Content Include="svg\logos\bxl-flutter.svg" />
+    <Content Include="svg\logos\bxl-foursquare.svg" />
+    <Content Include="svg\logos\bxl-git.svg" />
+    <Content Include="svg\logos\bxl-github.svg" />
+    <Content Include="svg\logos\bxl-gitlab.svg" />
+    <Content Include="svg\logos\bxl-gmail.svg" />
+    <Content Include="svg\logos\bxl-go-lang.svg" />
+    <Content Include="svg\logos\bxl-google-cloud.svg" />
+    <Content Include="svg\logos\bxl-google-plus-circle.svg" />
+    <Content Include="svg\logos\bxl-google-plus.svg" />
+    <Content Include="svg\logos\bxl-google.svg" />
+    <Content Include="svg\logos\bxl-heroku.svg" />
+    <Content Include="svg\logos\bxl-html5.svg" />
+    <Content Include="svg\logos\bxl-imdb.svg" />
+    <Content Include="svg\logos\bxl-instagram-alt.svg" />
+    <Content Include="svg\logos\bxl-instagram.svg" />
+    <Content Include="svg\logos\bxl-internet-explorer.svg" />
+    <Content Include="svg\logos\bxl-invision.svg" />
+    <Content Include="svg\logos\bxl-java.svg" />
+    <Content Include="svg\logos\bxl-javascript.svg" />
+    <Content Include="svg\logos\bxl-joomla.svg" />
+    <Content Include="svg\logos\bxl-jquery.svg" />
+    <Content Include="svg\logos\bxl-jsfiddle.svg" />
+    <Content Include="svg\logos\bxl-kickstarter.svg" />
+    <Content Include="svg\logos\bxl-kubernetes.svg" />
+    <Content Include="svg\logos\bxl-less.svg" />
+    <Content Include="svg\logos\bxl-linkedin-square.svg" />
+    <Content Include="svg\logos\bxl-linkedin.svg" />
+    <Content Include="svg\logos\bxl-magento.svg" />
+    <Content Include="svg\logos\bxl-mailchimp.svg" />
+    <Content Include="svg\logos\bxl-markdown.svg" />
+    <Content Include="svg\logos\bxl-mastercard.svg" />
+    <Content Include="svg\logos\bxl-mastodon.svg" />
+    <Content Include="svg\logos\bxl-medium-old.svg" />
+    <Content Include="svg\logos\bxl-medium-square.svg" />
+    <Content Include="svg\logos\bxl-medium.svg" />
+    <Content Include="svg\logos\bxl-messenger.svg" />
+    <Content Include="svg\logos\bxl-meta.svg" />
+    <Content Include="svg\logos\bxl-microsoft-teams.svg" />
+    <Content Include="svg\logos\bxl-microsoft.svg" />
+    <Content Include="svg\logos\bxl-mongodb.svg" />
+    <Content Include="svg\logos\bxl-netlify.svg" />
+    <Content Include="svg\logos\bxl-nodejs.svg" />
+    <Content Include="svg\logos\bxl-ok-ru.svg" />
+    <Content Include="svg\logos\bxl-opera.svg" />
+    <Content Include="svg\logos\bxl-patreon.svg" />
+    <Content Include="svg\logos\bxl-paypal.svg" />
+    <Content Include="svg\logos\bxl-periscope.svg" />
+    <Content Include="svg\logos\bxl-php.svg" />
+    <Content Include="svg\logos\bxl-pinterest-alt.svg" />
+    <Content Include="svg\logos\bxl-pinterest.svg" />
+    <Content Include="svg\logos\bxl-play-store.svg" />
+    <Content Include="svg\logos\bxl-pocket.svg" />
+    <Content Include="svg\logos\bxl-postgresql.svg" />
+    <Content Include="svg\logos\bxl-product-hunt.svg" />
+    <Content Include="svg\logos\bxl-python.svg" />
+    <Content Include="svg\logos\bxl-quora.svg" />
+    <Content Include="svg\logos\bxl-react.svg" />
+    <Content Include="svg\logos\bxl-redbubble.svg" />
+    <Content Include="svg\logos\bxl-reddit.svg" />
+    <Content Include="svg\logos\bxl-redux.svg" />
+    <Content Include="svg\logos\bxl-sass.svg" />
+    <Content Include="svg\logos\bxl-shopify.svg" />
+    <Content Include="svg\logos\bxl-sketch.svg" />
+    <Content Include="svg\logos\bxl-skype.svg" />
+    <Content Include="svg\logos\bxl-slack-old.svg" />
+    <Content Include="svg\logos\bxl-slack.svg" />
+    <Content Include="svg\logos\bxl-snapchat.svg" />
+    <Content Include="svg\logos\bxl-soundcloud.svg" />
+    <Content Include="svg\logos\bxl-spotify.svg" />
+    <Content Include="svg\logos\bxl-spring-boot.svg" />
+    <Content Include="svg\logos\bxl-squarespace.svg" />
+    <Content Include="svg\logos\bxl-stack-overflow.svg" />
+    <Content Include="svg\logos\bxl-steam.svg" />
+    <Content Include="svg\logos\bxl-stripe.svg" />
+    <Content Include="svg\logos\bxl-tailwind-css.svg" />
+    <Content Include="svg\logos\bxl-telegram.svg" />
+    <Content Include="svg\logos\bxl-tiktok.svg" />
+    <Content Include="svg\logos\bxl-trello.svg" />
+    <Content Include="svg\logos\bxl-trip-advisor.svg" />
+    <Content Include="svg\logos\bxl-tumblr.svg" />
+    <Content Include="svg\logos\bxl-tux.svg" />
+    <Content Include="svg\logos\bxl-twitch.svg" />
+    <Content Include="svg\logos\bxl-twitter.svg" />
+    <Content Include="svg\logos\bxl-unity.svg" />
+    <Content Include="svg\logos\bxl-unsplash.svg" />
+    <Content Include="svg\logos\bxl-upwork.svg" />
+    <Content Include="svg\logos\bxl-venmo.svg" />
+    <Content Include="svg\logos\bxl-vimeo.svg" />
+    <Content Include="svg\logos\bxl-visa.svg" />
+    <Content Include="svg\logos\bxl-visual-studio.svg" />
+    <Content Include="svg\logos\bxl-vk.svg" />
+    <Content Include="svg\logos\bxl-vuejs.svg" />
+    <Content Include="svg\logos\bxl-whatsapp-square.svg" />
+    <Content Include="svg\logos\bxl-whatsapp.svg" />
+    <Content Include="svg\logos\bxl-wikipedia.svg" />
+    <Content Include="svg\logos\bxl-windows.svg" />
+    <Content Include="svg\logos\bxl-wix.svg" />
+    <Content Include="svg\logos\bxl-wordpress.svg" />
+    <Content Include="svg\logos\bxl-xing.svg" />
+    <Content Include="svg\logos\bxl-yahoo.svg" />
+    <Content Include="svg\logos\bxl-yelp.svg" />
+    <Content Include="svg\logos\bxl-youtube.svg" />
+    <Content Include="svg\logos\bxl-zoom.svg" />
+    <Content Include="svg\regular\bx-abacus.svg" />
+    <Content Include="svg\regular\bx-accessibility.svg" />
+    <Content Include="svg\regular\bx-add-to-queue.svg" />
+    <Content Include="svg\regular\bx-adjust.svg" />
+    <Content Include="svg\regular\bx-alarm-add.svg" />
+    <Content Include="svg\regular\bx-alarm-exclamation.svg" />
+    <Content Include="svg\regular\bx-alarm-off.svg" />
+    <Content Include="svg\regular\bx-alarm-snooze.svg" />
+    <Content Include="svg\regular\bx-alarm.svg" />
+    <Content Include="svg\regular\bx-album.svg" />
+    <Content Include="svg\regular\bx-align-justify.svg" />
+    <Content Include="svg\regular\bx-align-left.svg" />
+    <Content Include="svg\regular\bx-align-middle.svg" />
+    <Content Include="svg\regular\bx-align-right.svg" />
+    <Content Include="svg\regular\bx-analyse.svg" />
+    <Content Include="svg\regular\bx-anchor.svg" />
+    <Content Include="svg\regular\bx-angry.svg" />
+    <Content Include="svg\regular\bx-aperture.svg" />
+    <Content Include="svg\regular\bx-arch.svg" />
+    <Content Include="svg\regular\bx-archive-in.svg" />
+    <Content Include="svg\regular\bx-archive-out.svg" />
+    <Content Include="svg\regular\bx-archive.svg" />
+    <Content Include="svg\regular\bx-area.svg" />
+    <Content Include="svg\regular\bx-arrow-back.svg" />
+    <Content Include="svg\regular\bx-arrow-from-bottom.svg" />
+    <Content Include="svg\regular\bx-arrow-from-left.svg" />
+    <Content Include="svg\regular\bx-arrow-from-right.svg" />
+    <Content Include="svg\regular\bx-arrow-from-top.svg" />
+    <Content Include="svg\regular\bx-arrow-to-bottom.svg" />
+    <Content Include="svg\regular\bx-arrow-to-left.svg" />
+    <Content Include="svg\regular\bx-arrow-to-right.svg" />
+    <Content Include="svg\regular\bx-arrow-to-top.svg" />
+    <Content Include="svg\regular\bx-at.svg" />
+    <Content Include="svg\regular\bx-atom.svg" />
+    <Content Include="svg\regular\bx-award.svg" />
+    <Content Include="svg\regular\bx-badge-check.svg" />
+    <Content Include="svg\regular\bx-badge.svg" />
+    <Content Include="svg\regular\bx-baguette.svg" />
+    <Content Include="svg\regular\bx-ball.svg" />
+    <Content Include="svg\regular\bx-band-aid.svg" />
+    <Content Include="svg\regular\bx-bar-chart-alt-2.svg" />
+    <Content Include="svg\regular\bx-bar-chart-alt.svg" />
+    <Content Include="svg\regular\bx-bar-chart-square.svg" />
+    <Content Include="svg\regular\bx-bar-chart.svg" />
+    <Content Include="svg\regular\bx-barcode-reader.svg" />
+    <Content Include="svg\regular\bx-barcode.svg" />
+    <Content Include="svg\regular\bx-baseball.svg" />
+    <Content Include="svg\regular\bx-basket.svg" />
+    <Content Include="svg\regular\bx-basketball.svg" />
+    <Content Include="svg\regular\bx-bath.svg" />
+    <Content Include="svg\regular\bx-battery.svg" />
+    <Content Include="svg\regular\bx-bed.svg" />
+    <Content Include="svg\regular\bx-been-here.svg" />
+    <Content Include="svg\regular\bx-beer.svg" />
+    <Content Include="svg\regular\bx-bell-minus.svg" />
+    <Content Include="svg\regular\bx-bell-off.svg" />
+    <Content Include="svg\regular\bx-bell-plus.svg" />
+    <Content Include="svg\regular\bx-bell.svg" />
+    <Content Include="svg\regular\bx-bible.svg" />
+    <Content Include="svg\regular\bx-bitcoin.svg" />
+    <Content Include="svg\regular\bx-blanket.svg" />
+    <Content Include="svg\regular\bx-block.svg" />
+    <Content Include="svg\regular\bx-bluetooth.svg" />
+    <Content Include="svg\regular\bx-body.svg" />
+    <Content Include="svg\regular\bx-bold.svg" />
+    <Content Include="svg\regular\bx-bolt-circle.svg" />
+    <Content Include="svg\regular\bx-bomb.svg" />
+    <Content Include="svg\regular\bx-bone.svg" />
+    <Content Include="svg\regular\bx-bong.svg" />
+    <Content Include="svg\regular\bx-book-add.svg" />
+    <Content Include="svg\regular\bx-book-alt.svg" />
+    <Content Include="svg\regular\bx-book-bookmark.svg" />
+    <Content Include="svg\regular\bx-book-content.svg" />
+    <Content Include="svg\regular\bx-book-heart.svg" />
+    <Content Include="svg\regular\bx-book-open.svg" />
+    <Content Include="svg\regular\bx-book-reader.svg" />
+    <Content Include="svg\regular\bx-book.svg" />
+    <Content Include="svg\regular\bx-bookmark-alt-minus.svg" />
+    <Content Include="svg\regular\bx-bookmark-alt-plus.svg" />
+    <Content Include="svg\regular\bx-bookmark-alt.svg" />
+    <Content Include="svg\regular\bx-bookmark-heart.svg" />
+    <Content Include="svg\regular\bx-bookmark-minus.svg" />
+    <Content Include="svg\regular\bx-bookmark-plus.svg" />
+    <Content Include="svg\regular\bx-bookmark.svg" />
+    <Content Include="svg\regular\bx-bookmarks.svg" />
+    <Content Include="svg\regular\bx-border-all.svg" />
+    <Content Include="svg\regular\bx-border-bottom.svg" />
+    <Content Include="svg\regular\bx-border-inner.svg" />
+    <Content Include="svg\regular\bx-border-left.svg" />
+    <Content Include="svg\regular\bx-border-none.svg" />
+    <Content Include="svg\regular\bx-border-outer.svg" />
+    <Content Include="svg\regular\bx-border-radius.svg" />
+    <Content Include="svg\regular\bx-border-right.svg" />
+    <Content Include="svg\regular\bx-border-top.svg" />
+    <Content Include="svg\regular\bx-bot.svg" />
+    <Content Include="svg\regular\bx-bowl-hot.svg" />
+    <Content Include="svg\regular\bx-bowl-rice.svg" />
+    <Content Include="svg\regular\bx-bowling-ball.svg" />
+    <Content Include="svg\regular\bx-box.svg" />
+    <Content Include="svg\regular\bx-bracket.svg" />
+    <Content Include="svg\regular\bx-braille.svg" />
+    <Content Include="svg\regular\bx-brain.svg" />
+    <Content Include="svg\regular\bx-briefcase-alt-2.svg" />
+    <Content Include="svg\regular\bx-briefcase-alt.svg" />
+    <Content Include="svg\regular\bx-briefcase.svg" />
+    <Content Include="svg\regular\bx-brightness-half.svg" />
+    <Content Include="svg\regular\bx-brightness.svg" />
+    <Content Include="svg\regular\bx-broadcast.svg" />
+    <Content Include="svg\regular\bx-brush-alt.svg" />
+    <Content Include="svg\regular\bx-brush.svg" />
+    <Content Include="svg\regular\bx-bug-alt.svg" />
+    <Content Include="svg\regular\bx-bug.svg" />
+    <Content Include="svg\regular\bx-building-house.svg" />
+    <Content Include="svg\regular\bx-building.svg" />
+    <Content Include="svg\regular\bx-buildings.svg" />
+    <Content Include="svg\regular\bx-bulb.svg" />
+    <Content Include="svg\regular\bx-bullseye.svg" />
+    <Content Include="svg\regular\bx-buoy.svg" />
+    <Content Include="svg\regular\bx-bus-school.svg" />
+    <Content Include="svg\regular\bx-bus.svg" />
+    <Content Include="svg\regular\bx-cabinet.svg" />
+    <Content Include="svg\regular\bx-cable-car.svg" />
+    <Content Include="svg\regular\bx-cake.svg" />
+    <Content Include="svg\regular\bx-calculator.svg" />
+    <Content Include="svg\regular\bx-calendar-alt.svg" />
+    <Content Include="svg\regular\bx-calendar-check.svg" />
+    <Content Include="svg\regular\bx-calendar-edit.svg" />
+    <Content Include="svg\regular\bx-calendar-event.svg" />
+    <Content Include="svg\regular\bx-calendar-exclamation.svg" />
+    <Content Include="svg\regular\bx-calendar-heart.svg" />
+    <Content Include="svg\regular\bx-calendar-minus.svg" />
+    <Content Include="svg\regular\bx-calendar-plus.svg" />
+    <Content Include="svg\regular\bx-calendar-star.svg" />
+    <Content Include="svg\regular\bx-calendar-week.svg" />
+    <Content Include="svg\regular\bx-calendar-x.svg" />
+    <Content Include="svg\regular\bx-calendar.svg" />
+    <Content Include="svg\regular\bx-camera-home.svg" />
+    <Content Include="svg\regular\bx-camera-movie.svg" />
+    <Content Include="svg\regular\bx-camera-off.svg" />
+    <Content Include="svg\regular\bx-camera.svg" />
+    <Content Include="svg\regular\bx-candles.svg" />
+    <Content Include="svg\regular\bx-capsule.svg" />
+    <Content Include="svg\regular\bx-captions.svg" />
+    <Content Include="svg\regular\bx-car.svg" />
+    <Content Include="svg\regular\bx-card.svg" />
+    <Content Include="svg\regular\bx-caret-down-circle.svg" />
+    <Content Include="svg\regular\bx-caret-down-square.svg" />
+    <Content Include="svg\regular\bx-caret-down.svg" />
+    <Content Include="svg\regular\bx-caret-left-circle.svg" />
+    <Content Include="svg\regular\bx-caret-left-square.svg" />
+    <Content Include="svg\regular\bx-caret-left.svg" />
+    <Content Include="svg\regular\bx-caret-right-circle.svg" />
+    <Content Include="svg\regular\bx-caret-right-square.svg" />
+    <Content Include="svg\regular\bx-caret-right.svg" />
+    <Content Include="svg\regular\bx-caret-up-circle.svg" />
+    <Content Include="svg\regular\bx-caret-up-square.svg" />
+    <Content Include="svg\regular\bx-caret-up.svg" />
+    <Content Include="svg\regular\bx-carousel.svg" />
+    <Content Include="svg\regular\bx-cart-add.svg" />
+    <Content Include="svg\regular\bx-cart-alt.svg" />
+    <Content Include="svg\regular\bx-cart-download.svg" />
+    <Content Include="svg\regular\bx-cart.svg" />
+    <Content Include="svg\regular\bx-cast.svg" />
+    <Content Include="svg\regular\bx-category-alt.svg" />
+    <Content Include="svg\regular\bx-category.svg" />
+    <Content Include="svg\regular\bx-cctv.svg" />
+    <Content Include="svg\regular\bx-certification.svg" />
+    <Content Include="svg\regular\bx-chair.svg" />
+    <Content Include="svg\regular\bx-chalkboard.svg" />
+    <Content Include="svg\regular\bx-chart.svg" />
+    <Content Include="svg\regular\bx-chat.svg" />
+    <Content Include="svg\regular\bx-check-circle.svg" />
+    <Content Include="svg\regular\bx-check-double.svg" />
+    <Content Include="svg\regular\bx-check-shield.svg" />
+    <Content Include="svg\regular\bx-check-square.svg" />
+    <Content Include="svg\regular\bx-check.svg" />
+    <Content Include="svg\regular\bx-checkbox-checked.svg" />
+    <Content Include="svg\regular\bx-checkbox-minus.svg" />
+    <Content Include="svg\regular\bx-checkbox-square.svg" />
+    <Content Include="svg\regular\bx-checkbox.svg" />
+    <Content Include="svg\regular\bx-cheese.svg" />
+    <Content Include="svg\regular\bx-chevron-down-circle.svg" />
+    <Content Include="svg\regular\bx-chevron-down-square.svg" />
+    <Content Include="svg\regular\bx-chevron-down.svg" />
+    <Content Include="svg\regular\bx-chevron-left-circle.svg" />
+    <Content Include="svg\regular\bx-chevron-left-square.svg" />
+    <Content Include="svg\regular\bx-chevron-left.svg" />
+    <Content Include="svg\regular\bx-chevron-right-circle.svg" />
+    <Content Include="svg\regular\bx-chevron-right-square.svg" />
+    <Content Include="svg\regular\bx-chevron-right.svg" />
+    <Content Include="svg\regular\bx-chevron-up-circle.svg" />
+    <Content Include="svg\regular\bx-chevron-up-square.svg" />
+    <Content Include="svg\regular\bx-chevron-up.svg" />
+    <Content Include="svg\regular\bx-chevrons-down.svg" />
+    <Content Include="svg\regular\bx-chevrons-left.svg" />
+    <Content Include="svg\regular\bx-chevrons-right.svg" />
+    <Content Include="svg\regular\bx-chevrons-up.svg" />
+    <Content Include="svg\regular\bx-chip.svg" />
+    <Content Include="svg\regular\bx-church.svg" />
+    <Content Include="svg\regular\bx-circle-half.svg" />
+    <Content Include="svg\regular\bx-circle-quarter.svg" />
+    <Content Include="svg\regular\bx-circle-three-quarter.svg" />
+    <Content Include="svg\regular\bx-circle.svg" />
+    <Content Include="svg\regular\bx-clinic.svg" />
+    <Content Include="svg\regular\bx-clipboard.svg" />
+    <Content Include="svg\regular\bx-closet.svg" />
+    <Content Include="svg\regular\bx-cloud-download.svg" />
+    <Content Include="svg\regular\bx-cloud-drizzle.svg" />
+    <Content Include="svg\regular\bx-cloud-light-rain.svg" />
+    <Content Include="svg\regular\bx-cloud-lightning.svg" />
+    <Content Include="svg\regular\bx-cloud-rain.svg" />
+    <Content Include="svg\regular\bx-cloud-snow.svg" />
+    <Content Include="svg\regular\bx-cloud-upload.svg" />
+    <Content Include="svg\regular\bx-cloud.svg" />
+    <Content Include="svg\regular\bx-code-alt.svg" />
+    <Content Include="svg\regular\bx-code-block.svg" />
+    <Content Include="svg\regular\bx-code-curly.svg" />
+    <Content Include="svg\regular\bx-code.svg" />
+    <Content Include="svg\regular\bx-coffee-togo.svg" />
+    <Content Include="svg\regular\bx-coffee.svg" />
+    <Content Include="svg\regular\bx-cog.svg" />
+    <Content Include="svg\regular\bx-coin-stack.svg" />
+    <Content Include="svg\regular\bx-coin.svg" />
+    <Content Include="svg\regular\bx-collapse-alt.svg" />
+    <Content Include="svg\regular\bx-collapse-horizontal.svg" />
+    <Content Include="svg\regular\bx-collapse-vertical.svg" />
+    <Content Include="svg\regular\bx-collapse.svg" />
+    <Content Include="svg\regular\bx-collection.svg" />
+    <Content Include="svg\regular\bx-color-fill.svg" />
+    <Content Include="svg\regular\bx-color.svg" />
+    <Content Include="svg\regular\bx-columns.svg" />
+    <Content Include="svg\regular\bx-command.svg" />
+    <Content Include="svg\regular\bx-comment-add.svg" />
+    <Content Include="svg\regular\bx-comment-check.svg" />
+    <Content Include="svg\regular\bx-comment-detail.svg" />
+    <Content Include="svg\regular\bx-comment-dots.svg" />
+    <Content Include="svg\regular\bx-comment-edit.svg" />
+    <Content Include="svg\regular\bx-comment-error.svg" />
+    <Content Include="svg\regular\bx-comment-minus.svg" />
+    <Content Include="svg\regular\bx-comment-x.svg" />
+    <Content Include="svg\regular\bx-comment.svg" />
+    <Content Include="svg\regular\bx-compass.svg" />
+    <Content Include="svg\regular\bx-confused.svg" />
+    <Content Include="svg\regular\bx-conversation.svg" />
+    <Content Include="svg\regular\bx-cookie.svg" />
+    <Content Include="svg\regular\bx-cool.svg" />
+    <Content Include="svg\regular\bx-copy-alt.svg" />
+    <Content Include="svg\regular\bx-copy.svg" />
+    <Content Include="svg\regular\bx-copyright.svg" />
+    <Content Include="svg\regular\bx-credit-card-alt.svg" />
+    <Content Include="svg\regular\bx-credit-card-front.svg" />
+    <Content Include="svg\regular\bx-credit-card.svg" />
+    <Content Include="svg\regular\bx-cricket-ball.svg" />
+    <Content Include="svg\regular\bx-crop.svg" />
+    <Content Include="svg\regular\bx-cross.svg" />
+    <Content Include="svg\regular\bx-crosshair.svg" />
+    <Content Include="svg\regular\bx-crown.svg" />
+    <Content Include="svg\regular\bx-cube-alt.svg" />
+    <Content Include="svg\regular\bx-cube.svg" />
+    <Content Include="svg\regular\bx-cuboid.svg" />
+    <Content Include="svg\regular\bx-current-location.svg" />
+    <Content Include="svg\regular\bx-customize.svg" />
+    <Content Include="svg\regular\bx-cut.svg" />
+    <Content Include="svg\regular\bx-cycling.svg" />
+    <Content Include="svg\regular\bx-cylinder.svg" />
+    <Content Include="svg\regular\bx-data.svg" />
+    <Content Include="svg\regular\bx-desktop.svg" />
+    <Content Include="svg\regular\bx-detail.svg" />
+    <Content Include="svg\regular\bx-devices.svg" />
+    <Content Include="svg\regular\bx-dialpad-alt.svg" />
+    <Content Include="svg\regular\bx-dialpad.svg" />
+    <Content Include="svg\regular\bx-diamond.svg" />
+    <Content Include="svg\regular\bx-dice-1.svg" />
+    <Content Include="svg\regular\bx-dice-2.svg" />
+    <Content Include="svg\regular\bx-dice-3.svg" />
+    <Content Include="svg\regular\bx-dice-4.svg" />
+    <Content Include="svg\regular\bx-dice-5.svg" />
+    <Content Include="svg\regular\bx-dice-6.svg" />
+    <Content Include="svg\regular\bx-directions.svg" />
+    <Content Include="svg\regular\bx-disc.svg" />
+    <Content Include="svg\regular\bx-dish.svg" />
+    <Content Include="svg\regular\bx-dislike.svg" />
+    <Content Include="svg\regular\bx-dizzy.svg" />
+    <Content Include="svg\regular\bx-dna.svg" />
+    <Content Include="svg\regular\bx-dock-bottom.svg" />
+    <Content Include="svg\regular\bx-dock-left.svg" />
+    <Content Include="svg\regular\bx-dock-right.svg" />
+    <Content Include="svg\regular\bx-dock-top.svg" />
+    <Content Include="svg\regular\bx-dollar-circle.svg" />
+    <Content Include="svg\regular\bx-dollar.svg" />
+    <Content Include="svg\regular\bx-donate-blood.svg" />
+    <Content Include="svg\regular\bx-donate-heart.svg" />
+    <Content Include="svg\regular\bx-door-open.svg" />
+    <Content Include="svg\regular\bx-dots-horizontal-rounded.svg" />
+    <Content Include="svg\regular\bx-dots-horizontal.svg" />
+    <Content Include="svg\regular\bx-dots-vertical-rounded.svg" />
+    <Content Include="svg\regular\bx-dots-vertical.svg" />
+    <Content Include="svg\regular\bx-doughnut-chart.svg" />
+    <Content Include="svg\regular\bx-down-arrow-alt.svg" />
+    <Content Include="svg\regular\bx-down-arrow-circle.svg" />
+    <Content Include="svg\regular\bx-down-arrow.svg" />
+    <Content Include="svg\regular\bx-download.svg" />
+    <Content Include="svg\regular\bx-downvote.svg" />
+    <Content Include="svg\regular\bx-drink.svg" />
+    <Content Include="svg\regular\bx-droplet.svg" />
+    <Content Include="svg\regular\bx-dumbbell.svg" />
+    <Content Include="svg\regular\bx-duplicate.svg" />
+    <Content Include="svg\regular\bx-edit-alt.svg" />
+    <Content Include="svg\regular\bx-edit.svg" />
+    <Content Include="svg\regular\bx-envelope-open.svg" />
+    <Content Include="svg\regular\bx-envelope.svg" />
+    <Content Include="svg\regular\bx-equalizer.svg" />
+    <Content Include="svg\regular\bx-eraser.svg" />
+    <Content Include="svg\regular\bx-error-alt.svg" />
+    <Content Include="svg\regular\bx-error-circle.svg" />
+    <Content Include="svg\regular\bx-error.svg" />
+    <Content Include="svg\regular\bx-euro.svg" />
+    <Content Include="svg\regular\bx-exclude.svg" />
+    <Content Include="svg\regular\bx-exit-fullscreen.svg" />
+    <Content Include="svg\regular\bx-exit.svg" />
+    <Content Include="svg\regular\bx-expand-alt.svg" />
+    <Content Include="svg\regular\bx-expand-horizontal.svg" />
+    <Content Include="svg\regular\bx-expand-vertical.svg" />
+    <Content Include="svg\regular\bx-expand.svg" />
+    <Content Include="svg\regular\bx-export.svg" />
+    <Content Include="svg\regular\bx-extension.svg" />
+    <Content Include="svg\regular\bx-face.svg" />
+    <Content Include="svg\regular\bx-fast-forward-circle.svg" />
+    <Content Include="svg\regular\bx-fast-forward.svg" />
+    <Content Include="svg\regular\bx-female-sign.svg" />
+    <Content Include="svg\regular\bx-female.svg" />
+    <Content Include="svg\regular\bx-file-blank.svg" />
+    <Content Include="svg\regular\bx-file-find.svg" />
+    <Content Include="svg\regular\bx-file.svg" />
+    <Content Include="svg\regular\bx-film.svg" />
+    <Content Include="svg\regular\bx-filter-alt.svg" />
+    <Content Include="svg\regular\bx-filter.svg" />
+    <Content Include="svg\regular\bx-fingerprint.svg" />
+    <Content Include="svg\regular\bx-first-aid.svg" />
+    <Content Include="svg\regular\bx-first-page.svg" />
+    <Content Include="svg\regular\bx-flag.svg" />
+    <Content Include="svg\regular\bx-folder-minus.svg" />
+    <Content Include="svg\regular\bx-folder-open.svg" />
+    <Content Include="svg\regular\bx-folder-plus.svg" />
+    <Content Include="svg\regular\bx-folder.svg" />
+    <Content Include="svg\regular\bx-font-color.svg" />
+    <Content Include="svg\regular\bx-font-family.svg" />
+    <Content Include="svg\regular\bx-font-size.svg" />
+    <Content Include="svg\regular\bx-font.svg" />
+    <Content Include="svg\regular\bx-food-menu.svg" />
+    <Content Include="svg\regular\bx-food-tag.svg" />
+    <Content Include="svg\regular\bx-football.svg" />
+    <Content Include="svg\regular\bx-fork.svg" />
+    <Content Include="svg\regular\bx-fridge.svg" />
+    <Content Include="svg\regular\bx-fullscreen.svg" />
+    <Content Include="svg\regular\bx-game.svg" />
+    <Content Include="svg\regular\bx-gas-pump.svg" />
+    <Content Include="svg\regular\bx-ghost.svg" />
+    <Content Include="svg\regular\bx-gift.svg" />
+    <Content Include="svg\regular\bx-git-branch.svg" />
+    <Content Include="svg\regular\bx-git-commit.svg" />
+    <Content Include="svg\regular\bx-git-compare.svg" />
+    <Content Include="svg\regular\bx-git-merge.svg" />
+    <Content Include="svg\regular\bx-git-pull-request.svg" />
+    <Content Include="svg\regular\bx-git-repo-forked.svg" />
+    <Content Include="svg\regular\bx-glasses-alt.svg" />
+    <Content Include="svg\regular\bx-glasses.svg" />
+    <Content Include="svg\regular\bx-globe-alt.svg" />
+    <Content Include="svg\regular\bx-globe.svg" />
+    <Content Include="svg\regular\bx-grid-alt.svg" />
+    <Content Include="svg\regular\bx-grid-horizontal.svg" />
+    <Content Include="svg\regular\bx-grid-small.svg" />
+    <Content Include="svg\regular\bx-grid-vertical.svg" />
+    <Content Include="svg\regular\bx-grid.svg" />
+    <Content Include="svg\regular\bx-group.svg" />
+    <Content Include="svg\regular\bx-handicap.svg" />
+    <Content Include="svg\regular\bx-happy-alt.svg" />
+    <Content Include="svg\regular\bx-happy-beaming.svg" />
+    <Content Include="svg\regular\bx-happy-heart-eyes.svg" />
+    <Content Include="svg\regular\bx-happy.svg" />
+    <Content Include="svg\regular\bx-hard-hat.svg" />
+    <Content Include="svg\regular\bx-hash.svg" />
+    <Content Include="svg\regular\bx-hdd.svg" />
+    <Content Include="svg\regular\bx-heading.svg" />
+    <Content Include="svg\regular\bx-headphone.svg" />
+    <Content Include="svg\regular\bx-health.svg" />
+    <Content Include="svg\regular\bx-heart-circle.svg" />
+    <Content Include="svg\regular\bx-heart-square.svg" />
+    <Content Include="svg\regular\bx-heart.svg" />
+    <Content Include="svg\regular\bx-help-circle.svg" />
+    <Content Include="svg\regular\bx-hide.svg" />
+    <Content Include="svg\regular\bx-highlight.svg" />
+    <Content Include="svg\regular\bx-history.svg" />
+    <Content Include="svg\regular\bx-hive.svg" />
+    <Content Include="svg\regular\bx-home-alt-2.svg" />
+    <Content Include="svg\regular\bx-home-alt.svg" />
+    <Content Include="svg\regular\bx-home-circle.svg" />
+    <Content Include="svg\regular\bx-home-heart.svg" />
+    <Content Include="svg\regular\bx-home-smile.svg" />
+    <Content Include="svg\regular\bx-home.svg" />
+    <Content Include="svg\regular\bx-horizontal-center.svg" />
+    <Content Include="svg\regular\bx-hotel.svg" />
+    <Content Include="svg\regular\bx-hourglass.svg" />
+    <Content Include="svg\regular\bx-id-card.svg" />
+    <Content Include="svg\regular\bx-image-add.svg" />
+    <Content Include="svg\regular\bx-image-alt.svg" />
+    <Content Include="svg\regular\bx-image.svg" />
+    <Content Include="svg\regular\bx-images.svg" />
+    <Content Include="svg\regular\bx-import.svg" />
+    <Content Include="svg\regular\bx-infinite.svg" />
+    <Content Include="svg\regular\bx-info-circle.svg" />
+    <Content Include="svg\regular\bx-info-square.svg" />
+    <Content Include="svg\regular\bx-injection.svg" />
+    <Content Include="svg\regular\bx-intersect.svg" />
+    <Content Include="svg\regular\bx-italic.svg" />
+    <Content Include="svg\regular\bx-joystick-alt.svg" />
+    <Content Include="svg\regular\bx-joystick-button.svg" />
+    <Content Include="svg\regular\bx-joystick.svg" />
+    <Content Include="svg\regular\bx-key.svg" />
+    <Content Include="svg\regular\bx-knife.svg" />
+    <Content Include="svg\regular\bx-label.svg" />
+    <Content Include="svg\regular\bx-landscape.svg" />
+    <Content Include="svg\regular\bx-laptop.svg" />
+    <Content Include="svg\regular\bx-last-page.svg" />
+    <Content Include="svg\regular\bx-laugh.svg" />
+    <Content Include="svg\regular\bx-layer-minus.svg" />
+    <Content Include="svg\regular\bx-layer-plus.svg" />
+    <Content Include="svg\regular\bx-layer.svg" />
+    <Content Include="svg\regular\bx-layout.svg" />
+    <Content Include="svg\regular\bx-leaf.svg" />
+    <Content Include="svg\regular\bx-left-arrow-alt.svg" />
+    <Content Include="svg\regular\bx-left-arrow-circle.svg" />
+    <Content Include="svg\regular\bx-left-arrow.svg" />
+    <Content Include="svg\regular\bx-left-down-arrow-circle.svg" />
+    <Content Include="svg\regular\bx-left-indent.svg" />
+    <Content Include="svg\regular\bx-left-top-arrow-circle.svg" />
+    <Content Include="svg\regular\bx-lemon.svg" />
+    <Content Include="svg\regular\bx-library.svg" />
+    <Content Include="svg\regular\bx-like.svg" />
+    <Content Include="svg\regular\bx-line-chart-down.svg" />
+    <Content Include="svg\regular\bx-line-chart.svg" />
+    <Content Include="svg\regular\bx-link-alt.svg" />
+    <Content Include="svg\regular\bx-link-external.svg" />
+    <Content Include="svg\regular\bx-link.svg" />
+    <Content Include="svg\regular\bx-lira.svg" />
+    <Content Include="svg\regular\bx-list-check.svg" />
+    <Content Include="svg\regular\bx-list-minus.svg" />
+    <Content Include="svg\regular\bx-list-ol.svg" />
+    <Content Include="svg\regular\bx-list-plus.svg" />
+    <Content Include="svg\regular\bx-list-ul.svg" />
+    <Content Include="svg\regular\bx-loader-alt.svg" />
+    <Content Include="svg\regular\bx-loader-circle.svg" />
+    <Content Include="svg\regular\bx-loader.svg" />
+    <Content Include="svg\regular\bx-location-plus.svg" />
+    <Content Include="svg\regular\bx-lock-alt.svg" />
+    <Content Include="svg\regular\bx-lock-open-alt.svg" />
+    <Content Include="svg\regular\bx-lock-open.svg" />
+    <Content Include="svg\regular\bx-lock.svg" />
+    <Content Include="svg\regular\bx-log-in-circle.svg" />
+    <Content Include="svg\regular\bx-log-in.svg" />
+    <Content Include="svg\regular\bx-log-out-circle.svg" />
+    <Content Include="svg\regular\bx-log-out.svg" />
+    <Content Include="svg\regular\bx-low-vision.svg" />
+    <Content Include="svg\regular\bx-magnet.svg" />
+    <Content Include="svg\regular\bx-mail-send.svg" />
+    <Content Include="svg\regular\bx-male-female.svg" />
+    <Content Include="svg\regular\bx-male-sign.svg" />
+    <Content Include="svg\regular\bx-male.svg" />
+    <Content Include="svg\regular\bx-map-alt.svg" />
+    <Content Include="svg\regular\bx-map-pin.svg" />
+    <Content Include="svg\regular\bx-map.svg" />
+    <Content Include="svg\regular\bx-mask.svg" />
+    <Content Include="svg\regular\bx-math.svg" />
+    <Content Include="svg\regular\bx-medal.svg" />
+    <Content Include="svg\regular\bx-meh-alt.svg" />
+    <Content Include="svg\regular\bx-meh-blank.svg" />
+    <Content Include="svg\regular\bx-meh.svg" />
+    <Content Include="svg\regular\bx-memory-card.svg" />
+    <Content Include="svg\regular\bx-menu-alt-left.svg" />
+    <Content Include="svg\regular\bx-menu-alt-right.svg" />
+    <Content Include="svg\regular\bx-menu.svg" />
+    <Content Include="svg\regular\bx-merge.svg" />
+    <Content Include="svg\regular\bx-message-add.svg" />
+    <Content Include="svg\regular\bx-message-alt-add.svg" />
+    <Content Include="svg\regular\bx-message-alt-check.svg" />
+    <Content Include="svg\regular\bx-message-alt-detail.svg" />
+    <Content Include="svg\regular\bx-message-alt-dots.svg" />
+    <Content Include="svg\regular\bx-message-alt-edit.svg" />
+    <Content Include="svg\regular\bx-message-alt-error.svg" />
+    <Content Include="svg\regular\bx-message-alt-minus.svg" />
+    <Content Include="svg\regular\bx-message-alt-x.svg" />
+    <Content Include="svg\regular\bx-message-alt.svg" />
+    <Content Include="svg\regular\bx-message-check.svg" />
+    <Content Include="svg\regular\bx-message-detail.svg" />
+    <Content Include="svg\regular\bx-message-dots.svg" />
+    <Content Include="svg\regular\bx-message-edit.svg" />
+    <Content Include="svg\regular\bx-message-error.svg" />
+    <Content Include="svg\regular\bx-message-minus.svg" />
+    <Content Include="svg\regular\bx-message-rounded-add.svg" />
+    <Content Include="svg\regular\bx-message-rounded-check.svg" />
+    <Content Include="svg\regular\bx-message-rounded-detail.svg" />
+    <Content Include="svg\regular\bx-message-rounded-dots.svg" />
+    <Content Include="svg\regular\bx-message-rounded-edit.svg" />
+    <Content Include="svg\regular\bx-message-rounded-error.svg" />
+    <Content Include="svg\regular\bx-message-rounded-minus.svg" />
+    <Content Include="svg\regular\bx-message-rounded-x.svg" />
+    <Content Include="svg\regular\bx-message-rounded.svg" />
+    <Content Include="svg\regular\bx-message-square-add.svg" />
+    <Content Include="svg\regular\bx-message-square-check.svg" />
+    <Content Include="svg\regular\bx-message-square-detail.svg" />
+    <Content Include="svg\regular\bx-message-square-dots.svg" />
+    <Content Include="svg\regular\bx-message-square-edit.svg" />
+    <Content Include="svg\regular\bx-message-square-error.svg" />
+    <Content Include="svg\regular\bx-message-square-minus.svg" />
+    <Content Include="svg\regular\bx-message-square-x.svg" />
+    <Content Include="svg\regular\bx-message-square.svg" />
+    <Content Include="svg\regular\bx-message-x.svg" />
+    <Content Include="svg\regular\bx-message.svg" />
+    <Content Include="svg\regular\bx-meteor.svg" />
+    <Content Include="svg\regular\bx-microchip.svg" />
+    <Content Include="svg\regular\bx-microphone-off.svg" />
+    <Content Include="svg\regular\bx-microphone.svg" />
+    <Content Include="svg\regular\bx-minus-back.svg" />
+    <Content Include="svg\regular\bx-minus-circle.svg" />
+    <Content Include="svg\regular\bx-minus-front.svg" />
+    <Content Include="svg\regular\bx-minus.svg" />
+    <Content Include="svg\regular\bx-mobile-alt.svg" />
+    <Content Include="svg\regular\bx-mobile-landscape.svg" />
+    <Content Include="svg\regular\bx-mobile-vibration.svg" />
+    <Content Include="svg\regular\bx-mobile.svg" />
+    <Content Include="svg\regular\bx-money-withdraw.svg" />
+    <Content Include="svg\regular\bx-money.svg" />
+    <Content Include="svg\regular\bx-moon.svg" />
+    <Content Include="svg\regular\bx-mouse-alt.svg" />
+    <Content Include="svg\regular\bx-mouse.svg" />
+    <Content Include="svg\regular\bx-move-horizontal.svg" />
+    <Content Include="svg\regular\bx-move-vertical.svg" />
+    <Content Include="svg\regular\bx-move.svg" />
+    <Content Include="svg\regular\bx-movie-play.svg" />
+    <Content Include="svg\regular\bx-movie.svg" />
+    <Content Include="svg\regular\bx-music.svg" />
+    <Content Include="svg\regular\bx-navigation.svg" />
+    <Content Include="svg\regular\bx-network-chart.svg" />
+    <Content Include="svg\regular\bx-news.svg" />
+    <Content Include="svg\regular\bx-no-entry.svg" />
+    <Content Include="svg\regular\bx-no-signal.svg" />
+    <Content Include="svg\regular\bx-note.svg" />
+    <Content Include="svg\regular\bx-notepad.svg" />
+    <Content Include="svg\regular\bx-notification-off.svg" />
+    <Content Include="svg\regular\bx-notification.svg" />
+    <Content Include="svg\regular\bx-outline.svg" />
+    <Content Include="svg\regular\bx-package.svg" />
+    <Content Include="svg\regular\bx-paint-roll.svg" />
+    <Content Include="svg\regular\bx-paint.svg" />
+    <Content Include="svg\regular\bx-palette.svg" />
+    <Content Include="svg\regular\bx-paper-plane.svg" />
+    <Content Include="svg\regular\bx-paperclip.svg" />
+    <Content Include="svg\regular\bx-paragraph.svg" />
+    <Content Include="svg\regular\bx-party.svg" />
+    <Content Include="svg\regular\bx-paste.svg" />
+    <Content Include="svg\regular\bx-pause-circle.svg" />
+    <Content Include="svg\regular\bx-pause.svg" />
+    <Content Include="svg\regular\bx-pen.svg" />
+    <Content Include="svg\regular\bx-pencil.svg" />
+    <Content Include="svg\regular\bx-phone-call.svg" />
+    <Content Include="svg\regular\bx-phone-incoming.svg" />
+    <Content Include="svg\regular\bx-phone-off.svg" />
+    <Content Include="svg\regular\bx-phone-outgoing.svg" />
+    <Content Include="svg\regular\bx-phone.svg" />
+    <Content Include="svg\regular\bx-photo-album.svg" />
+    <Content Include="svg\regular\bx-pie-chart-alt-2.svg" />
+    <Content Include="svg\regular\bx-pie-chart-alt.svg" />
+    <Content Include="svg\regular\bx-pie-chart.svg" />
+    <Content Include="svg\regular\bx-pin.svg" />
+    <Content Include="svg\regular\bx-planet.svg" />
+    <Content Include="svg\regular\bx-play-circle.svg" />
+    <Content Include="svg\regular\bx-play.svg" />
+    <Content Include="svg\regular\bx-plug.svg" />
+    <Content Include="svg\regular\bx-plus-circle.svg" />
+    <Content Include="svg\regular\bx-plus-medical.svg" />
+    <Content Include="svg\regular\bx-plus.svg" />
+    <Content Include="svg\regular\bx-podcast.svg" />
+    <Content Include="svg\regular\bx-pointer.svg" />
+    <Content Include="svg\regular\bx-poll.svg" />
+    <Content Include="svg\regular\bx-polygon.svg" />
+    <Content Include="svg\regular\bx-popsicle.svg" />
+    <Content Include="svg\regular\bx-pound.svg" />
+    <Content Include="svg\regular\bx-power-off.svg" />
+    <Content Include="svg\regular\bx-printer.svg" />
+    <Content Include="svg\regular\bx-pulse.svg" />
+    <Content Include="svg\regular\bx-purchase-tag-alt.svg" />
+    <Content Include="svg\regular\bx-purchase-tag.svg" />
+    <Content Include="svg\regular\bx-pyramid.svg" />
+    <Content Include="svg\regular\bx-qr-scan.svg" />
+    <Content Include="svg\regular\bx-qr.svg" />
+    <Content Include="svg\regular\bx-question-mark.svg" />
+    <Content Include="svg\regular\bx-radar.svg" />
+    <Content Include="svg\regular\bx-radio-circle-marked.svg" />
+    <Content Include="svg\regular\bx-radio-circle.svg" />
+    <Content Include="svg\regular\bx-radio.svg" />
+    <Content Include="svg\regular\bx-receipt.svg" />
+    <Content Include="svg\regular\bx-rectangle.svg" />
+    <Content Include="svg\regular\bx-recycle.svg" />
+    <Content Include="svg\regular\bx-redo.svg" />
+    <Content Include="svg\regular\bx-reflect-horizontal.svg" />
+    <Content Include="svg\regular\bx-reflect-vertical.svg" />
+    <Content Include="svg\regular\bx-refresh.svg" />
+    <Content Include="svg\regular\bx-registered.svg" />
+    <Content Include="svg\regular\bx-rename.svg" />
+    <Content Include="svg\regular\bx-repeat.svg" />
+    <Content Include="svg\regular\bx-reply-all.svg" />
+    <Content Include="svg\regular\bx-reply.svg" />
+    <Content Include="svg\regular\bx-repost.svg" />
+    <Content Include="svg\regular\bx-reset.svg" />
+    <Content Include="svg\regular\bx-restaurant.svg" />
+    <Content Include="svg\regular\bx-revision.svg" />
+    <Content Include="svg\regular\bx-rewind-circle.svg" />
+    <Content Include="svg\regular\bx-rewind.svg" />
+    <Content Include="svg\regular\bx-right-arrow-alt.svg" />
+    <Content Include="svg\regular\bx-right-arrow-circle.svg" />
+    <Content Include="svg\regular\bx-right-arrow.svg" />
+    <Content Include="svg\regular\bx-right-down-arrow-circle.svg" />
+    <Content Include="svg\regular\bx-right-indent.svg" />
+    <Content Include="svg\regular\bx-right-top-arrow-circle.svg" />
+    <Content Include="svg\regular\bx-rocket.svg" />
+    <Content Include="svg\regular\bx-rotate-left.svg" />
+    <Content Include="svg\regular\bx-rotate-right.svg" />
+    <Content Include="svg\regular\bx-rss.svg" />
+    <Content Include="svg\regular\bx-ruble.svg" />
+    <Content Include="svg\regular\bx-ruler.svg" />
+    <Content Include="svg\regular\bx-run.svg" />
+    <Content Include="svg\regular\bx-rupee.svg" />
+    <Content Include="svg\regular\bx-sad.svg" />
+    <Content Include="svg\regular\bx-save.svg" />
+    <Content Include="svg\regular\bx-scan.svg" />
+    <Content Include="svg\regular\bx-scatter-chart.svg" />
+    <Content Include="svg\regular\bx-screenshot.svg" />
+    <Content Include="svg\regular\bx-search-alt-2.svg" />
+    <Content Include="svg\regular\bx-search-alt.svg" />
+    <Content Include="svg\regular\bx-search.svg" />
+    <Content Include="svg\regular\bx-select-multiple.svg" />
+    <Content Include="svg\regular\bx-selection.svg" />
+    <Content Include="svg\regular\bx-send.svg" />
+    <Content Include="svg\regular\bx-server.svg" />
+    <Content Include="svg\regular\bx-shape-circle.svg" />
+    <Content Include="svg\regular\bx-shape-polygon.svg" />
+    <Content Include="svg\regular\bx-shape-square.svg" />
+    <Content Include="svg\regular\bx-shape-triangle.svg" />
+    <Content Include="svg\regular\bx-share-alt.svg" />
+    <Content Include="svg\regular\bx-share.svg" />
+    <Content Include="svg\regular\bx-shekel.svg" />
+    <Content Include="svg\regular\bx-shield-alt-2.svg" />
+    <Content Include="svg\regular\bx-shield-alt.svg" />
+    <Content Include="svg\regular\bx-shield-quarter.svg" />
+    <Content Include="svg\regular\bx-shield-x.svg" />
+    <Content Include="svg\regular\bx-shield.svg" />
+    <Content Include="svg\regular\bx-shocked.svg" />
+    <Content Include="svg\regular\bx-shopping-bag.svg" />
+    <Content Include="svg\regular\bx-show-alt.svg" />
+    <Content Include="svg\regular\bx-show.svg" />
+    <Content Include="svg\regular\bx-shuffle.svg" />
+    <Content Include="svg\regular\bx-sidebar.svg" />
+    <Content Include="svg\regular\bx-signal-1.svg" />
+    <Content Include="svg\regular\bx-signal-2.svg" />
+    <Content Include="svg\regular\bx-signal-3.svg" />
+    <Content Include="svg\regular\bx-signal-4.svg" />
+    <Content Include="svg\regular\bx-signal-5.svg" />
+    <Content Include="svg\regular\bx-sitemap.svg" />
+    <Content Include="svg\regular\bx-skip-next-circle.svg" />
+    <Content Include="svg\regular\bx-skip-next.svg" />
+    <Content Include="svg\regular\bx-skip-previous-circle.svg" />
+    <Content Include="svg\regular\bx-skip-previous.svg" />
+    <Content Include="svg\regular\bx-sleepy.svg" />
+    <Content Include="svg\regular\bx-slider-alt.svg" />
+    <Content Include="svg\regular\bx-slider.svg" />
+    <Content Include="svg\regular\bx-slideshow.svg" />
+    <Content Include="svg\regular\bx-smile.svg" />
+    <Content Include="svg\regular\bx-sort-a-z.svg" />
+    <Content Include="svg\regular\bx-sort-alt-2.svg" />
+    <Content Include="svg\regular\bx-sort-down.svg" />
+    <Content Include="svg\regular\bx-sort-up.svg" />
+    <Content Include="svg\regular\bx-sort-z-a.svg" />
+    <Content Include="svg\regular\bx-sort.svg" />
+    <Content Include="svg\regular\bx-spa.svg" />
+    <Content Include="svg\regular\bx-space-bar.svg" />
+    <Content Include="svg\regular\bx-speaker.svg" />
+    <Content Include="svg\regular\bx-spray-can.svg" />
+    <Content Include="svg\regular\bx-spreadsheet.svg" />
+    <Content Include="svg\regular\bx-square-rounded.svg" />
+    <Content Include="svg\regular\bx-square.svg" />
+    <Content Include="svg\regular\bx-star.svg" />
+    <Content Include="svg\regular\bx-station.svg" />
+    <Content Include="svg\regular\bx-stats.svg" />
+    <Content Include="svg\regular\bx-sticker.svg" />
+    <Content Include="svg\regular\bx-stop-circle.svg" />
+    <Content Include="svg\regular\bx-stop.svg" />
+    <Content Include="svg\regular\bx-stopwatch.svg" />
+    <Content Include="svg\regular\bx-store-alt.svg" />
+    <Content Include="svg\regular\bx-store.svg" />
+    <Content Include="svg\regular\bx-street-view.svg" />
+    <Content Include="svg\regular\bx-strikethrough.svg" />
+    <Content Include="svg\regular\bx-subdirectory-left.svg" />
+    <Content Include="svg\regular\bx-subdirectory-right.svg" />
+    <Content Include="svg\regular\bx-sun.svg" />
+    <Content Include="svg\regular\bx-support.svg" />
+    <Content Include="svg\regular\bx-swim.svg" />
+    <Content Include="svg\regular\bx-sync.svg" />
+    <Content Include="svg\regular\bx-tab.svg" />
+    <Content Include="svg\regular\bx-table.svg" />
+    <Content Include="svg\regular\bx-tachometer.svg" />
+    <Content Include="svg\regular\bx-tag-alt.svg" />
+    <Content Include="svg\regular\bx-tag.svg" />
+    <Content Include="svg\regular\bx-target-lock.svg" />
+    <Content Include="svg\regular\bx-task-x.svg" />
+    <Content Include="svg\regular\bx-task.svg" />
+    <Content Include="svg\regular\bx-taxi.svg" />
+    <Content Include="svg\regular\bx-tennis-ball.svg" />
+    <Content Include="svg\regular\bx-terminal.svg" />
+    <Content Include="svg\regular\bx-test-tube.svg" />
+    <Content Include="svg\regular\bx-text.svg" />
+    <Content Include="svg\regular\bx-time-five.svg" />
+    <Content Include="svg\regular\bx-time.svg" />
+    <Content Include="svg\regular\bx-timer.svg" />
+    <Content Include="svg\regular\bx-tired.svg" />
+    <Content Include="svg\regular\bx-toggle-left.svg" />
+    <Content Include="svg\regular\bx-toggle-right.svg" />
+    <Content Include="svg\regular\bx-tone.svg" />
+    <Content Include="svg\regular\bx-traffic-cone.svg" />
+    <Content Include="svg\regular\bx-train.svg" />
+    <Content Include="svg\regular\bx-transfer-alt.svg" />
+    <Content Include="svg\regular\bx-transfer.svg" />
+    <Content Include="svg\regular\bx-trash-alt.svg" />
+    <Content Include="svg\regular\bx-trash.svg" />
+    <Content Include="svg\regular\bx-trending-down.svg" />
+    <Content Include="svg\regular\bx-trending-up.svg" />
+    <Content Include="svg\regular\bx-trim.svg" />
+    <Content Include="svg\regular\bx-trip.svg" />
+    <Content Include="svg\regular\bx-trophy.svg" />
+    <Content Include="svg\regular\bx-tv.svg" />
+    <Content Include="svg\regular\bx-underline.svg" />
+    <Content Include="svg\regular\bx-undo.svg" />
+    <Content Include="svg\regular\bx-unite.svg" />
+    <Content Include="svg\regular\bx-unlink.svg" />
+    <Content Include="svg\regular\bx-up-arrow-alt.svg" />
+    <Content Include="svg\regular\bx-up-arrow-circle.svg" />
+    <Content Include="svg\regular\bx-up-arrow.svg" />
+    <Content Include="svg\regular\bx-upload.svg" />
+    <Content Include="svg\regular\bx-upside-down.svg" />
+    <Content Include="svg\regular\bx-upvote.svg" />
+    <Content Include="svg\regular\bx-usb.svg" />
+    <Content Include="svg\regular\bx-user-check.svg" />
+    <Content Include="svg\regular\bx-user-circle.svg" />
+    <Content Include="svg\regular\bx-user-minus.svg" />
+    <Content Include="svg\regular\bx-user-pin.svg" />
+    <Content Include="svg\regular\bx-user-plus.svg" />
+    <Content Include="svg\regular\bx-user-voice.svg" />
+    <Content Include="svg\regular\bx-user-x.svg" />
+    <Content Include="svg\regular\bx-user.svg" />
+    <Content Include="svg\regular\bx-vector.svg" />
+    <Content Include="svg\regular\bx-vertical-center.svg" />
+    <Content Include="svg\regular\bx-vial.svg" />
+    <Content Include="svg\regular\bx-video-off.svg" />
+    <Content Include="svg\regular\bx-video-plus.svg" />
+    <Content Include="svg\regular\bx-video-recording.svg" />
+    <Content Include="svg\regular\bx-video.svg" />
+    <Content Include="svg\regular\bx-voicemail.svg" />
+    <Content Include="svg\regular\bx-volume-full.svg" />
+    <Content Include="svg\regular\bx-volume-low.svg" />
+    <Content Include="svg\regular\bx-volume-mute.svg" />
+    <Content Include="svg\regular\bx-volume.svg" />
+    <Content Include="svg\regular\bx-walk.svg" />
+    <Content Include="svg\regular\bx-wallet-alt.svg" />
+    <Content Include="svg\regular\bx-wallet.svg" />
+    <Content Include="svg\regular\bx-water.svg" />
+    <Content Include="svg\regular\bx-webcam.svg" />
+    <Content Include="svg\regular\bx-wifi-0.svg" />
+    <Content Include="svg\regular\bx-wifi-1.svg" />
+    <Content Include="svg\regular\bx-wifi-2.svg" />
+    <Content Include="svg\regular\bx-wifi-off.svg" />
+    <Content Include="svg\regular\bx-wifi.svg" />
+    <Content Include="svg\regular\bx-wind.svg" />
+    <Content Include="svg\regular\bx-window-alt.svg" />
+    <Content Include="svg\regular\bx-window-close.svg" />
+    <Content Include="svg\regular\bx-window-open.svg" />
+    <Content Include="svg\regular\bx-window.svg" />
+    <Content Include="svg\regular\bx-windows.svg" />
+    <Content Include="svg\regular\bx-wine.svg" />
+    <Content Include="svg\regular\bx-wink-smile.svg" />
+    <Content Include="svg\regular\bx-wink-tongue.svg" />
+    <Content Include="svg\regular\bx-won.svg" />
+    <Content Include="svg\regular\bx-world.svg" />
+    <Content Include="svg\regular\bx-wrench.svg" />
+    <Content Include="svg\regular\bx-x-circle.svg" />
+    <Content Include="svg\regular\bx-x.svg" />
+    <Content Include="svg\regular\bx-yen.svg" />
+    <Content Include="svg\regular\bx-zoom-in.svg" />
+    <Content Include="svg\regular\bx-zoom-out.svg" />
+    <Content Include="svg\solid\bxs-add-to-queue.svg" />
+    <Content Include="svg\solid\bxs-adjust-alt.svg" />
+    <Content Include="svg\solid\bxs-adjust.svg" />
+    <Content Include="svg\solid\bxs-alarm-add.svg" />
+    <Content Include="svg\solid\bxs-alarm-exclamation.svg" />
+    <Content Include="svg\solid\bxs-alarm-off.svg" />
+    <Content Include="svg\solid\bxs-alarm-snooze.svg" />
+    <Content Include="svg\solid\bxs-alarm.svg" />
+    <Content Include="svg\solid\bxs-album.svg" />
+    <Content Include="svg\solid\bxs-ambulance.svg" />
+    <Content Include="svg\solid\bxs-analyse.svg" />
+    <Content Include="svg\solid\bxs-angry.svg" />
+    <Content Include="svg\solid\bxs-arch.svg" />
+    <Content Include="svg\solid\bxs-archive-in.svg" />
+    <Content Include="svg\solid\bxs-archive-out.svg" />
+    <Content Include="svg\solid\bxs-archive.svg" />
+    <Content Include="svg\solid\bxs-area.svg" />
+    <Content Include="svg\solid\bxs-arrow-from-bottom.svg" />
+    <Content Include="svg\solid\bxs-arrow-from-left.svg" />
+    <Content Include="svg\solid\bxs-arrow-from-right.svg" />
+    <Content Include="svg\solid\bxs-arrow-from-top.svg" />
+    <Content Include="svg\solid\bxs-arrow-to-bottom.svg" />
+    <Content Include="svg\solid\bxs-arrow-to-left.svg" />
+    <Content Include="svg\solid\bxs-arrow-to-right.svg" />
+    <Content Include="svg\solid\bxs-arrow-to-top.svg" />
+    <Content Include="svg\solid\bxs-award.svg" />
+    <Content Include="svg\solid\bxs-baby-carriage.svg" />
+    <Content Include="svg\solid\bxs-backpack.svg" />
+    <Content Include="svg\solid\bxs-badge-check.svg" />
+    <Content Include="svg\solid\bxs-badge-dollar.svg" />
+    <Content Include="svg\solid\bxs-badge.svg" />
+    <Content Include="svg\solid\bxs-baguette.svg" />
+    <Content Include="svg\solid\bxs-ball.svg" />
+    <Content Include="svg\solid\bxs-band-aid.svg" />
+    <Content Include="svg\solid\bxs-bank.svg" />
+    <Content Include="svg\solid\bxs-bar-chart-alt-2.svg" />
+    <Content Include="svg\solid\bxs-bar-chart-square.svg" />
+    <Content Include="svg\solid\bxs-barcode.svg" />
+    <Content Include="svg\solid\bxs-baseball.svg" />
+    <Content Include="svg\solid\bxs-basket.svg" />
+    <Content Include="svg\solid\bxs-basketball.svg" />
+    <Content Include="svg\solid\bxs-bath.svg" />
+    <Content Include="svg\solid\bxs-battery-charging.svg" />
+    <Content Include="svg\solid\bxs-battery-full.svg" />
+    <Content Include="svg\solid\bxs-battery-low.svg" />
+    <Content Include="svg\solid\bxs-battery.svg" />
+    <Content Include="svg\solid\bxs-bed.svg" />
+    <Content Include="svg\solid\bxs-been-here.svg" />
+    <Content Include="svg\solid\bxs-beer.svg" />
+    <Content Include="svg\solid\bxs-bell-minus.svg" />
+    <Content Include="svg\solid\bxs-bell-off.svg" />
+    <Content Include="svg\solid\bxs-bell-plus.svg" />
+    <Content Include="svg\solid\bxs-bell-ring.svg" />
+    <Content Include="svg\solid\bxs-bell.svg" />
+    <Content Include="svg\solid\bxs-bible.svg" />
+    <Content Include="svg\solid\bxs-binoculars.svg" />
+    <Content Include="svg\solid\bxs-blanket.svg" />
+    <Content Include="svg\solid\bxs-bolt-circle.svg" />
+    <Content Include="svg\solid\bxs-bolt.svg" />
+    <Content Include="svg\solid\bxs-bomb.svg" />
+    <Content Include="svg\solid\bxs-bone.svg" />
+    <Content Include="svg\solid\bxs-bong.svg" />
+    <Content Include="svg\solid\bxs-book-add.svg" />
+    <Content Include="svg\solid\bxs-book-alt.svg" />
+    <Content Include="svg\solid\bxs-book-bookmark.svg" />
+    <Content Include="svg\solid\bxs-book-content.svg" />
+    <Content Include="svg\solid\bxs-book-heart.svg" />
+    <Content Include="svg\solid\bxs-book-open.svg" />
+    <Content Include="svg\solid\bxs-book-reader.svg" />
+    <Content Include="svg\solid\bxs-book.svg" />
+    <Content Include="svg\solid\bxs-bookmark-alt-minus.svg" />
+    <Content Include="svg\solid\bxs-bookmark-alt-plus.svg" />
+    <Content Include="svg\solid\bxs-bookmark-alt.svg" />
+    <Content Include="svg\solid\bxs-bookmark-heart.svg" />
+    <Content Include="svg\solid\bxs-bookmark-minus.svg" />
+    <Content Include="svg\solid\bxs-bookmark-plus.svg" />
+    <Content Include="svg\solid\bxs-bookmark-star.svg" />
+    <Content Include="svg\solid\bxs-bookmark.svg" />
+    <Content Include="svg\solid\bxs-bookmarks.svg" />
+    <Content Include="svg\solid\bxs-bot.svg" />
+    <Content Include="svg\solid\bxs-bowl-hot.svg" />
+    <Content Include="svg\solid\bxs-bowl-rice.svg" />
+    <Content Include="svg\solid\bxs-bowling-ball.svg" />
+    <Content Include="svg\solid\bxs-box.svg" />
+    <Content Include="svg\solid\bxs-brain.svg" />
+    <Content Include="svg\solid\bxs-briefcase-alt-2.svg" />
+    <Content Include="svg\solid\bxs-briefcase-alt.svg" />
+    <Content Include="svg\solid\bxs-briefcase.svg" />
+    <Content Include="svg\solid\bxs-brightness-half.svg" />
+    <Content Include="svg\solid\bxs-brightness.svg" />
+    <Content Include="svg\solid\bxs-brush-alt.svg" />
+    <Content Include="svg\solid\bxs-brush.svg" />
+    <Content Include="svg\solid\bxs-bug-alt.svg" />
+    <Content Include="svg\solid\bxs-bug.svg" />
+    <Content Include="svg\solid\bxs-building-house.svg" />
+    <Content Include="svg\solid\bxs-building.svg" />
+    <Content Include="svg\solid\bxs-buildings.svg" />
+    <Content Include="svg\solid\bxs-bulb.svg" />
+    <Content Include="svg\solid\bxs-bullseye.svg" />
+    <Content Include="svg\solid\bxs-buoy.svg" />
+    <Content Include="svg\solid\bxs-bus-school.svg" />
+    <Content Include="svg\solid\bxs-bus.svg" />
+    <Content Include="svg\solid\bxs-business.svg" />
+    <Content Include="svg\solid\bxs-cabinet.svg" />
+    <Content Include="svg\solid\bxs-cable-car.svg" />
+    <Content Include="svg\solid\bxs-cake.svg" />
+    <Content Include="svg\solid\bxs-calculator.svg" />
+    <Content Include="svg\solid\bxs-calendar-alt.svg" />
+    <Content Include="svg\solid\bxs-calendar-check.svg" />
+    <Content Include="svg\solid\bxs-calendar-edit.svg" />
+    <Content Include="svg\solid\bxs-calendar-event.svg" />
+    <Content Include="svg\solid\bxs-calendar-exclamation.svg" />
+    <Content Include="svg\solid\bxs-calendar-heart.svg" />
+    <Content Include="svg\solid\bxs-calendar-minus.svg" />
+    <Content Include="svg\solid\bxs-calendar-plus.svg" />
+    <Content Include="svg\solid\bxs-calendar-star.svg" />
+    <Content Include="svg\solid\bxs-calendar-week.svg" />
+    <Content Include="svg\solid\bxs-calendar-x.svg" />
+    <Content Include="svg\solid\bxs-calendar.svg" />
+    <Content Include="svg\solid\bxs-camera-home.svg" />
+    <Content Include="svg\solid\bxs-camera-movie.svg" />
+    <Content Include="svg\solid\bxs-camera-off.svg" />
+    <Content Include="svg\solid\bxs-camera-plus.svg" />
+    <Content Include="svg\solid\bxs-camera.svg" />
+    <Content Include="svg\solid\bxs-capsule.svg" />
+    <Content Include="svg\solid\bxs-captions.svg" />
+    <Content Include="svg\solid\bxs-car-battery.svg" />
+    <Content Include="svg\solid\bxs-car-crash.svg" />
+    <Content Include="svg\solid\bxs-car-garage.svg" />
+    <Content Include="svg\solid\bxs-car-mechanic.svg" />
+    <Content Include="svg\solid\bxs-car-wash.svg" />
+    <Content Include="svg\solid\bxs-car.svg" />
+    <Content Include="svg\solid\bxs-card.svg" />
+    <Content Include="svg\solid\bxs-caret-down-circle.svg" />
+    <Content Include="svg\solid\bxs-caret-down-square.svg" />
+    <Content Include="svg\solid\bxs-caret-left-circle.svg" />
+    <Content Include="svg\solid\bxs-caret-left-square.svg" />
+    <Content Include="svg\solid\bxs-caret-right-circle.svg" />
+    <Content Include="svg\solid\bxs-caret-right-square.svg" />
+    <Content Include="svg\solid\bxs-caret-up-circle.svg" />
+    <Content Include="svg\solid\bxs-caret-up-square.svg" />
+    <Content Include="svg\solid\bxs-carousel.svg" />
+    <Content Include="svg\solid\bxs-cart-add.svg" />
+    <Content Include="svg\solid\bxs-cart-alt.svg" />
+    <Content Include="svg\solid\bxs-cart-download.svg" />
+    <Content Include="svg\solid\bxs-cart.svg" />
+    <Content Include="svg\solid\bxs-cat.svg" />
+    <Content Include="svg\solid\bxs-category-alt.svg" />
+    <Content Include="svg\solid\bxs-category.svg" />
+    <Content Include="svg\solid\bxs-cctv.svg" />
+    <Content Include="svg\solid\bxs-certification.svg" />
+    <Content Include="svg\solid\bxs-chalkboard.svg" />
+    <Content Include="svg\solid\bxs-chart.svg" />
+    <Content Include="svg\solid\bxs-chat.svg" />
+    <Content Include="svg\solid\bxs-check-circle.svg" />
+    <Content Include="svg\solid\bxs-check-shield.svg" />
+    <Content Include="svg\solid\bxs-check-square.svg" />
+    <Content Include="svg\solid\bxs-checkbox-checked.svg" />
+    <Content Include="svg\solid\bxs-checkbox-minus.svg" />
+    <Content Include="svg\solid\bxs-checkbox.svg" />
+    <Content Include="svg\solid\bxs-cheese.svg" />
+    <Content Include="svg\solid\bxs-chess.svg" />
+    <Content Include="svg\solid\bxs-chevron-down-circle.svg" />
+    <Content Include="svg\solid\bxs-chevron-down-square.svg" />
+    <Content Include="svg\solid\bxs-chevron-down.svg" />
+    <Content Include="svg\solid\bxs-chevron-left-circle.svg" />
+    <Content Include="svg\solid\bxs-chevron-left-square.svg" />
+    <Content Include="svg\solid\bxs-chevron-left.svg" />
+    <Content Include="svg\solid\bxs-chevron-right-circle.svg" />
+    <Content Include="svg\solid\bxs-chevron-right-square.svg" />
+    <Content Include="svg\solid\bxs-chevron-right.svg" />
+    <Content Include="svg\solid\bxs-chevron-up-circle.svg" />
+    <Content Include="svg\solid\bxs-chevron-up-square.svg" />
+    <Content Include="svg\solid\bxs-chevron-up.svg" />
+    <Content Include="svg\solid\bxs-chevrons-down.svg" />
+    <Content Include="svg\solid\bxs-chevrons-left.svg" />
+    <Content Include="svg\solid\bxs-chevrons-right.svg" />
+    <Content Include="svg\solid\bxs-chevrons-up.svg" />
+    <Content Include="svg\solid\bxs-chip.svg" />
+    <Content Include="svg\solid\bxs-church.svg" />
+    <Content Include="svg\solid\bxs-circle-half.svg" />
+    <Content Include="svg\solid\bxs-circle-quarter.svg" />
+    <Content Include="svg\solid\bxs-circle-three-quarter.svg" />
+    <Content Include="svg\solid\bxs-circle.svg" />
+    <Content Include="svg\solid\bxs-city.svg" />
+    <Content Include="svg\solid\bxs-clinic.svg" />
+    <Content Include="svg\solid\bxs-cloud-download.svg" />
+    <Content Include="svg\solid\bxs-cloud-lightning.svg" />
+    <Content Include="svg\solid\bxs-cloud-rain.svg" />
+    <Content Include="svg\solid\bxs-cloud-upload.svg" />
+    <Content Include="svg\solid\bxs-cloud.svg" />
+    <Content Include="svg\solid\bxs-coffee-alt.svg" />
+    <Content Include="svg\solid\bxs-coffee-togo.svg" />
+    <Content Include="svg\solid\bxs-coffee.svg" />
+    <Content Include="svg\solid\bxs-cog.svg" />
+    <Content Include="svg\solid\bxs-coin-stack.svg" />
+    <Content Include="svg\solid\bxs-coin.svg" />
+    <Content Include="svg\solid\bxs-collection.svg" />
+    <Content Include="svg\solid\bxs-color-fill.svg" />
+    <Content Include="svg\solid\bxs-color.svg" />
+    <Content Include="svg\solid\bxs-comment-add.svg" />
+    <Content Include="svg\solid\bxs-comment-check.svg" />
+    <Content Include="svg\solid\bxs-comment-detail.svg" />
+    <Content Include="svg\solid\bxs-comment-dots.svg" />
+    <Content Include="svg\solid\bxs-comment-edit.svg" />
+    <Content Include="svg\solid\bxs-comment-error.svg" />
+    <Content Include="svg\solid\bxs-comment-minus.svg" />
+    <Content Include="svg\solid\bxs-comment-x.svg" />
+    <Content Include="svg\solid\bxs-comment.svg" />
+    <Content Include="svg\solid\bxs-compass.svg" />
+    <Content Include="svg\solid\bxs-component.svg" />
+    <Content Include="svg\solid\bxs-confused.svg" />
+    <Content Include="svg\solid\bxs-contact.svg" />
+    <Content Include="svg\solid\bxs-conversation.svg" />
+    <Content Include="svg\solid\bxs-cookie.svg" />
+    <Content Include="svg\solid\bxs-cool.svg" />
+    <Content Include="svg\solid\bxs-copy-alt.svg" />
+    <Content Include="svg\solid\bxs-copy.svg" />
+    <Content Include="svg\solid\bxs-copyright.svg" />
+    <Content Include="svg\solid\bxs-coupon.svg" />
+    <Content Include="svg\solid\bxs-credit-card-alt.svg" />
+    <Content Include="svg\solid\bxs-credit-card-front.svg" />
+    <Content Include="svg\solid\bxs-credit-card.svg" />
+    <Content Include="svg\solid\bxs-cricket-ball.svg" />
+    <Content Include="svg\solid\bxs-crop.svg" />
+    <Content Include="svg\solid\bxs-crown.svg" />
+    <Content Include="svg\solid\bxs-cube-alt.svg" />
+    <Content Include="svg\solid\bxs-cube.svg" />
+    <Content Include="svg\solid\bxs-cuboid.svg" />
+    <Content Include="svg\solid\bxs-customize.svg" />
+    <Content Include="svg\solid\bxs-cylinder.svg" />
+    <Content Include="svg\solid\bxs-dashboard.svg" />
+    <Content Include="svg\solid\bxs-data.svg" />
+    <Content Include="svg\solid\bxs-detail.svg" />
+    <Content Include="svg\solid\bxs-devices.svg" />
+    <Content Include="svg\solid\bxs-diamond.svg" />
+    <Content Include="svg\solid\bxs-dice-1.svg" />
+    <Content Include="svg\solid\bxs-dice-2.svg" />
+    <Content Include="svg\solid\bxs-dice-3.svg" />
+    <Content Include="svg\solid\bxs-dice-4.svg" />
+    <Content Include="svg\solid\bxs-dice-5.svg" />
+    <Content Include="svg\solid\bxs-dice-6.svg" />
+    <Content Include="svg\solid\bxs-direction-left.svg" />
+    <Content Include="svg\solid\bxs-direction-right.svg" />
+    <Content Include="svg\solid\bxs-directions.svg" />
+    <Content Include="svg\solid\bxs-disc.svg" />
+    <Content Include="svg\solid\bxs-discount.svg" />
+    <Content Include="svg\solid\bxs-dish.svg" />
+    <Content Include="svg\solid\bxs-dislike.svg" />
+    <Content Include="svg\solid\bxs-dizzy.svg" />
+    <Content Include="svg\solid\bxs-dock-bottom.svg" />
+    <Content Include="svg\solid\bxs-dock-left.svg" />
+    <Content Include="svg\solid\bxs-dock-right.svg" />
+    <Content Include="svg\solid\bxs-dock-top.svg" />
+    <Content Include="svg\solid\bxs-dog.svg" />
+    <Content Include="svg\solid\bxs-dollar-circle.svg" />
+    <Content Include="svg\solid\bxs-donate-blood.svg" />
+    <Content Include="svg\solid\bxs-donate-heart.svg" />
+    <Content Include="svg\solid\bxs-door-open.svg" />
+    <Content Include="svg\solid\bxs-doughnut-chart.svg" />
+    <Content Include="svg\solid\bxs-down-arrow-alt.svg" />
+    <Content Include="svg\solid\bxs-down-arrow-circle.svg" />
+    <Content Include="svg\solid\bxs-down-arrow-square.svg" />
+    <Content Include="svg\solid\bxs-down-arrow.svg" />
+    <Content Include="svg\solid\bxs-download.svg" />
+    <Content Include="svg\solid\bxs-downvote.svg" />
+    <Content Include="svg\solid\bxs-drink.svg" />
+    <Content Include="svg\solid\bxs-droplet-half.svg" />
+    <Content Include="svg\solid\bxs-droplet.svg" />
+    <Content Include="svg\solid\bxs-dryer.svg" />
+    <Content Include="svg\solid\bxs-duplicate.svg" />
+    <Content Include="svg\solid\bxs-edit-alt.svg" />
+    <Content Include="svg\solid\bxs-edit-location.svg" />
+    <Content Include="svg\solid\bxs-edit.svg" />
+    <Content Include="svg\solid\bxs-eject.svg" />
+    <Content Include="svg\solid\bxs-envelope-open.svg" />
+    <Content Include="svg\solid\bxs-envelope.svg" />
+    <Content Include="svg\solid\bxs-eraser.svg" />
+    <Content Include="svg\solid\bxs-error-alt.svg" />
+    <Content Include="svg\solid\bxs-error-circle.svg" />
+    <Content Include="svg\solid\bxs-error.svg" />
+    <Content Include="svg\solid\bxs-ev-station.svg" />
+    <Content Include="svg\solid\bxs-exit.svg" />
+    <Content Include="svg\solid\bxs-extension.svg" />
+    <Content Include="svg\solid\bxs-eyedropper.svg" />
+    <Content Include="svg\solid\bxs-face-mask.svg" />
+    <Content Include="svg\solid\bxs-face.svg" />
+    <Content Include="svg\solid\bxs-factory.svg" />
+    <Content Include="svg\solid\bxs-fast-forward-circle.svg" />
+    <Content Include="svg\solid\bxs-file-archive.svg" />
+    <Content Include="svg\solid\bxs-file-blank.svg" />
+    <Content Include="svg\solid\bxs-file-css.svg" />
+    <Content Include="svg\solid\bxs-file-doc.svg" />
+    <Content Include="svg\solid\bxs-file-export.svg" />
+    <Content Include="svg\solid\bxs-file-find.svg" />
+    <Content Include="svg\solid\bxs-file-gif.svg" />
+    <Content Include="svg\solid\bxs-file-html.svg" />
+    <Content Include="svg\solid\bxs-file-image.svg" />
+    <Content Include="svg\solid\bxs-file-import.svg" />
+    <Content Include="svg\solid\bxs-file-jpg.svg" />
+    <Content Include="svg\solid\bxs-file-js.svg" />
+    <Content Include="svg\solid\bxs-file-json.svg" />
+    <Content Include="svg\solid\bxs-file-md.svg" />
+    <Content Include="svg\solid\bxs-file-pdf.svg" />
+    <Content Include="svg\solid\bxs-file-plus.svg" />
+    <Content Include="svg\solid\bxs-file-png.svg" />
+    <Content Include="svg\solid\bxs-file-txt.svg" />
+    <Content Include="svg\solid\bxs-file.svg" />
+    <Content Include="svg\solid\bxs-film.svg" />
+    <Content Include="svg\solid\bxs-filter-alt.svg" />
+    <Content Include="svg\solid\bxs-first-aid.svg" />
+    <Content Include="svg\solid\bxs-flag-alt.svg" />
+    <Content Include="svg\solid\bxs-flag-checkered.svg" />
+    <Content Include="svg\solid\bxs-flag.svg" />
+    <Content Include="svg\solid\bxs-flame.svg" />
+    <Content Include="svg\solid\bxs-flask.svg" />
+    <Content Include="svg\solid\bxs-florist.svg" />
+    <Content Include="svg\solid\bxs-folder-minus.svg" />
+    <Content Include="svg\solid\bxs-folder-open.svg" />
+    <Content Include="svg\solid\bxs-folder-plus.svg" />
+    <Content Include="svg\solid\bxs-folder.svg" />
+    <Content Include="svg\solid\bxs-food-menu.svg" />
+    <Content Include="svg\solid\bxs-fridge.svg" />
+    <Content Include="svg\solid\bxs-game.svg" />
+    <Content Include="svg\solid\bxs-gas-pump.svg" />
+    <Content Include="svg\solid\bxs-ghost.svg" />
+    <Content Include="svg\solid\bxs-gift.svg" />
+    <Content Include="svg\solid\bxs-graduation.svg" />
+    <Content Include="svg\solid\bxs-grid-alt.svg" />
+    <Content Include="svg\solid\bxs-grid.svg" />
+    <Content Include="svg\solid\bxs-group.svg" />
+    <Content Include="svg\solid\bxs-guitar-amp.svg" />
+    <Content Include="svg\solid\bxs-hand-down.svg" />
+    <Content Include="svg\solid\bxs-hand-left.svg" />
+    <Content Include="svg\solid\bxs-hand-right.svg" />
+    <Content Include="svg\solid\bxs-hand-up.svg" />
+    <Content Include="svg\solid\bxs-hand.svg" />
+    <Content Include="svg\solid\bxs-happy-alt.svg" />
+    <Content Include="svg\solid\bxs-happy-beaming.svg" />
+    <Content Include="svg\solid\bxs-happy-heart-eyes.svg" />
+    <Content Include="svg\solid\bxs-happy.svg" />
+    <Content Include="svg\solid\bxs-hard-hat.svg" />
+    <Content Include="svg\solid\bxs-hdd.svg" />
+    <Content Include="svg\solid\bxs-heart-circle.svg" />
+    <Content Include="svg\solid\bxs-heart-square.svg" />
+    <Content Include="svg\solid\bxs-heart.svg" />
+    <Content Include="svg\solid\bxs-help-circle.svg" />
+    <Content Include="svg\solid\bxs-hide.svg" />
+    <Content Include="svg\solid\bxs-home-alt-2.svg" />
+    <Content Include="svg\solid\bxs-home-circle.svg" />
+    <Content Include="svg\solid\bxs-home-heart.svg" />
+    <Content Include="svg\solid\bxs-home-smile.svg" />
+    <Content Include="svg\solid\bxs-home.svg" />
+    <Content Include="svg\solid\bxs-hot.svg" />
+    <Content Include="svg\solid\bxs-hotel.svg" />
+    <Content Include="svg\solid\bxs-hourglass-bottom.svg" />
+    <Content Include="svg\solid\bxs-hourglass-top.svg" />
+    <Content Include="svg\solid\bxs-hourglass.svg" />
+    <Content Include="svg\solid\bxs-id-card.svg" />
+    <Content Include="svg\solid\bxs-image-add.svg" />
+    <Content Include="svg\solid\bxs-image-alt.svg" />
+    <Content Include="svg\solid\bxs-image.svg" />
+    <Content Include="svg\solid\bxs-inbox.svg" />
+    <Content Include="svg\solid\bxs-info-circle.svg" />
+    <Content Include="svg\solid\bxs-info-square.svg" />
+    <Content Include="svg\solid\bxs-injection.svg" />
+    <Content Include="svg\solid\bxs-institution.svg" />
+    <Content Include="svg\solid\bxs-invader.svg" />
+    <Content Include="svg\solid\bxs-joystick-alt.svg" />
+    <Content Include="svg\solid\bxs-joystick-button.svg" />
+    <Content Include="svg\solid\bxs-joystick.svg" />
+    <Content Include="svg\solid\bxs-key.svg" />
+    <Content Include="svg\solid\bxs-keyboard.svg" />
+    <Content Include="svg\solid\bxs-label.svg" />
+    <Content Include="svg\solid\bxs-landmark.svg" />
+    <Content Include="svg\solid\bxs-landscape.svg" />
+    <Content Include="svg\solid\bxs-laugh.svg" />
+    <Content Include="svg\solid\bxs-layer-minus.svg" />
+    <Content Include="svg\solid\bxs-layer-plus.svg" />
+    <Content Include="svg\solid\bxs-layer.svg" />
+    <Content Include="svg\solid\bxs-layout.svg" />
+    <Content Include="svg\solid\bxs-leaf.svg" />
+    <Content Include="svg\solid\bxs-left-arrow-alt.svg" />
+    <Content Include="svg\solid\bxs-left-arrow-circle.svg" />
+    <Content Include="svg\solid\bxs-left-arrow-square.svg" />
+    <Content Include="svg\solid\bxs-left-arrow.svg" />
+    <Content Include="svg\solid\bxs-left-down-arrow-circle.svg" />
+    <Content Include="svg\solid\bxs-left-top-arrow-circle.svg" />
+    <Content Include="svg\solid\bxs-lemon.svg" />
+    <Content Include="svg\solid\bxs-like.svg" />
+    <Content Include="svg\solid\bxs-location-plus.svg" />
+    <Content Include="svg\solid\bxs-lock-alt.svg" />
+    <Content Include="svg\solid\bxs-lock-open-alt.svg" />
+    <Content Include="svg\solid\bxs-lock-open.svg" />
+    <Content Include="svg\solid\bxs-lock.svg" />
+    <Content Include="svg\solid\bxs-log-in-circle.svg" />
+    <Content Include="svg\solid\bxs-log-in.svg" />
+    <Content Include="svg\solid\bxs-log-out-circle.svg" />
+    <Content Include="svg\solid\bxs-log-out.svg" />
+    <Content Include="svg\solid\bxs-low-vision.svg" />
+    <Content Include="svg\solid\bxs-magic-wand.svg" />
+    <Content Include="svg\solid\bxs-magnet.svg" />
+    <Content Include="svg\solid\bxs-map-alt.svg" />
+    <Content Include="svg\solid\bxs-map-pin.svg" />
+    <Content Include="svg\solid\bxs-map.svg" />
+    <Content Include="svg\solid\bxs-mask.svg" />
+    <Content Include="svg\solid\bxs-medal.svg" />
+    <Content Include="svg\solid\bxs-megaphone.svg" />
+    <Content Include="svg\solid\bxs-meh-alt.svg" />
+    <Content Include="svg\solid\bxs-meh-blank.svg" />
+    <Content Include="svg\solid\bxs-meh.svg" />
+    <Content Include="svg\solid\bxs-memory-card.svg" />
+    <Content Include="svg\solid\bxs-message-add.svg" />
+    <Content Include="svg\solid\bxs-message-alt-add.svg" />
+    <Content Include="svg\solid\bxs-message-alt-check.svg" />
+    <Content Include="svg\solid\bxs-message-alt-detail.svg" />
+    <Content Include="svg\solid\bxs-message-alt-dots.svg" />
+    <Content Include="svg\solid\bxs-message-alt-edit.svg" />
+    <Content Include="svg\solid\bxs-message-alt-error.svg" />
+    <Content Include="svg\solid\bxs-message-alt-minus.svg" />
+    <Content Include="svg\solid\bxs-message-alt-x.svg" />
+    <Content Include="svg\solid\bxs-message-alt.svg" />
+    <Content Include="svg\solid\bxs-message-check.svg" />
+    <Content Include="svg\solid\bxs-message-detail.svg" />
+    <Content Include="svg\solid\bxs-message-dots.svg" />
+    <Content Include="svg\solid\bxs-message-edit.svg" />
+    <Content Include="svg\solid\bxs-message-error.svg" />
+    <Content Include="svg\solid\bxs-message-minus.svg" />
+    <Content Include="svg\solid\bxs-message-rounded-add.svg" />
+    <Content Include="svg\solid\bxs-message-rounded-check.svg" />
+    <Content Include="svg\solid\bxs-message-rounded-detail.svg" />
+    <Content Include="svg\solid\bxs-message-rounded-dots.svg" />
+    <Content Include="svg\solid\bxs-message-rounded-edit.svg" />
+    <Content Include="svg\solid\bxs-message-rounded-error.svg" />
+    <Content Include="svg\solid\bxs-message-rounded-minus.svg" />
+    <Content Include="svg\solid\bxs-message-rounded-x.svg" />
+    <Content Include="svg\solid\bxs-message-rounded.svg" />
+    <Content Include="svg\solid\bxs-message-square-add.svg" />
+    <Content Include="svg\solid\bxs-message-square-check.svg" />
+    <Content Include="svg\solid\bxs-message-square-detail.svg" />
+    <Content Include="svg\solid\bxs-message-square-dots.svg" />
+    <Content Include="svg\solid\bxs-message-square-edit.svg" />
+    <Content Include="svg\solid\bxs-message-square-error.svg" />
+    <Content Include="svg\solid\bxs-message-square-minus.svg" />
+    <Content Include="svg\solid\bxs-message-square-x.svg" />
+    <Content Include="svg\solid\bxs-message-square.svg" />
+    <Content Include="svg\solid\bxs-message-x.svg" />
+    <Content Include="svg\solid\bxs-message.svg" />
+    <Content Include="svg\solid\bxs-meteor.svg" />
+    <Content Include="svg\solid\bxs-microchip.svg" />
+    <Content Include="svg\solid\bxs-microphone-alt.svg" />
+    <Content Include="svg\solid\bxs-microphone-off.svg" />
+    <Content Include="svg\solid\bxs-microphone.svg" />
+    <Content Include="svg\solid\bxs-minus-circle.svg" />
+    <Content Include="svg\solid\bxs-minus-square.svg" />
+    <Content Include="svg\solid\bxs-mobile-vibration.svg" />
+    <Content Include="svg\solid\bxs-mobile.svg" />
+    <Content Include="svg\solid\bxs-moon.svg" />
+    <Content Include="svg\solid\bxs-mouse-alt.svg" />
+    <Content Include="svg\solid\bxs-mouse.svg" />
+    <Content Include="svg\solid\bxs-movie-play.svg" />
+    <Content Include="svg\solid\bxs-movie.svg" />
+    <Content Include="svg\solid\bxs-music.svg" />
+    <Content Include="svg\solid\bxs-navigation.svg" />
+    <Content Include="svg\solid\bxs-network-chart.svg" />
+    <Content Include="svg\solid\bxs-news.svg" />
+    <Content Include="svg\solid\bxs-no-entry.svg" />
+    <Content Include="svg\solid\bxs-note.svg" />
+    <Content Include="svg\solid\bxs-notepad.svg" />
+    <Content Include="svg\solid\bxs-notification-off.svg" />
+    <Content Include="svg\solid\bxs-notification.svg" />
+    <Content Include="svg\solid\bxs-offer.svg" />
+    <Content Include="svg\solid\bxs-package.svg" />
+    <Content Include="svg\solid\bxs-paint-roll.svg" />
+    <Content Include="svg\solid\bxs-paint.svg" />
+    <Content Include="svg\solid\bxs-palette.svg" />
+    <Content Include="svg\solid\bxs-paper-plane.svg" />
+    <Content Include="svg\solid\bxs-parking.svg" />
+    <Content Include="svg\solid\bxs-party.svg" />
+    <Content Include="svg\solid\bxs-paste.svg" />
+    <Content Include="svg\solid\bxs-pen.svg" />
+    <Content Include="svg\solid\bxs-pencil.svg" />
+    <Content Include="svg\solid\bxs-phone-call.svg" />
+    <Content Include="svg\solid\bxs-phone-incoming.svg" />
+    <Content Include="svg\solid\bxs-phone-off.svg" />
+    <Content Include="svg\solid\bxs-phone-outgoing.svg" />
+    <Content Include="svg\solid\bxs-phone.svg" />
+    <Content Include="svg\solid\bxs-photo-album.svg" />
+    <Content Include="svg\solid\bxs-piano.svg" />
+    <Content Include="svg\solid\bxs-pie-chart-alt-2.svg" />
+    <Content Include="svg\solid\bxs-pie-chart-alt.svg" />
+    <Content Include="svg\solid\bxs-pie-chart.svg" />
+    <Content Include="svg\solid\bxs-pin.svg" />
+    <Content Include="svg\solid\bxs-pizza.svg" />
+    <Content Include="svg\solid\bxs-plane-alt.svg" />
+    <Content Include="svg\solid\bxs-plane-land.svg" />
+    <Content Include="svg\solid\bxs-plane-take-off.svg" />
+    <Content Include="svg\solid\bxs-plane.svg" />
+    <Content Include="svg\solid\bxs-planet.svg" />
+    <Content Include="svg\solid\bxs-playlist.svg" />
+    <Content Include="svg\solid\bxs-plug.svg" />
+    <Content Include="svg\solid\bxs-plus-circle.svg" />
+    <Content Include="svg\solid\bxs-plus-square.svg" />
+    <Content Include="svg\solid\bxs-pointer.svg" />
+    <Content Include="svg\solid\bxs-polygon.svg" />
+    <Content Include="svg\solid\bxs-popsicle.svg" />
+    <Content Include="svg\solid\bxs-printer.svg" />
+    <Content Include="svg\solid\bxs-purchase-tag-alt.svg" />
+    <Content Include="svg\solid\bxs-purchase-tag.svg" />
+    <Content Include="svg\solid\bxs-pyramid.svg" />
+    <Content Include="svg\solid\bxs-quote-alt-left.svg" />
+    <Content Include="svg\solid\bxs-quote-alt-right.svg" />
+    <Content Include="svg\solid\bxs-quote-left.svg" />
+    <Content Include="svg\solid\bxs-quote-right.svg" />
+    <Content Include="svg\solid\bxs-quote-single-left.svg" />
+    <Content Include="svg\solid\bxs-quote-single-right.svg" />
+    <Content Include="svg\solid\bxs-radiation.svg" />
+    <Content Include="svg\solid\bxs-radio.svg" />
+    <Content Include="svg\solid\bxs-receipt.svg" />
+    <Content Include="svg\solid\bxs-rectangle.svg" />
+    <Content Include="svg\solid\bxs-registered.svg" />
+    <Content Include="svg\solid\bxs-rename.svg" />
+    <Content Include="svg\solid\bxs-report.svg" />
+    <Content Include="svg\solid\bxs-rewind-circle.svg" />
+    <Content Include="svg\solid\bxs-right-arrow-alt.svg" />
+    <Content Include="svg\solid\bxs-right-arrow-circle.svg" />
+    <Content Include="svg\solid\bxs-right-arrow-square.svg" />
+    <Content Include="svg\solid\bxs-right-arrow.svg" />
+    <Content Include="svg\solid\bxs-right-down-arrow-circle.svg" />
+    <Content Include="svg\solid\bxs-right-top-arrow-circle.svg" />
+    <Content Include="svg\solid\bxs-rocket.svg" />
+    <Content Include="svg\solid\bxs-ruler.svg" />
+    <Content Include="svg\solid\bxs-sad.svg" />
+    <Content Include="svg\solid\bxs-save.svg" />
+    <Content Include="svg\solid\bxs-school.svg" />
+    <Content Include="svg\solid\bxs-search-alt-2.svg" />
+    <Content Include="svg\solid\bxs-search.svg" />
+    <Content Include="svg\solid\bxs-select-multiple.svg" />
+    <Content Include="svg\solid\bxs-send.svg" />
+    <Content Include="svg\solid\bxs-server.svg" />
+    <Content Include="svg\solid\bxs-shapes.svg" />
+    <Content Include="svg\solid\bxs-share-alt.svg" />
+    <Content Include="svg\solid\bxs-share.svg" />
+    <Content Include="svg\solid\bxs-shield-alt-2.svg" />
+    <Content Include="svg\solid\bxs-shield-x.svg" />
+    <Content Include="svg\solid\bxs-shield.svg" />
+    <Content Include="svg\solid\bxs-ship.svg" />
+    <Content Include="svg\solid\bxs-shocked.svg" />
+    <Content Include="svg\solid\bxs-shopping-bag-alt.svg" />
+    <Content Include="svg\solid\bxs-shopping-bag.svg" />
+    <Content Include="svg\solid\bxs-shopping-bags.svg" />
+    <Content Include="svg\solid\bxs-show.svg" />
+    <Content Include="svg\solid\bxs-skip-next-circle.svg" />
+    <Content Include="svg\solid\bxs-skip-previous-circle.svg" />
+    <Content Include="svg\solid\bxs-skull.svg" />
+    <Content Include="svg\solid\bxs-sleepy.svg" />
+    <Content Include="svg\solid\bxs-slideshow.svg" />
+    <Content Include="svg\solid\bxs-smile.svg" />
+    <Content Include="svg\solid\bxs-sort-alt.svg" />
+    <Content Include="svg\solid\bxs-spa.svg" />
+    <Content Include="svg\solid\bxs-speaker.svg" />
+    <Content Include="svg\solid\bxs-spray-can.svg" />
+    <Content Include="svg\solid\bxs-spreadsheet.svg" />
+    <Content Include="svg\solid\bxs-square-rounded.svg" />
+    <Content Include="svg\solid\bxs-square.svg" />
+    <Content Include="svg\solid\bxs-star-half.svg" />
+    <Content Include="svg\solid\bxs-star.svg" />
+    <Content Include="svg\solid\bxs-sticker.svg" />
+    <Content Include="svg\solid\bxs-stopwatch.svg" />
+    <Content Include="svg\solid\bxs-store-alt.svg" />
+    <Content Include="svg\solid\bxs-store.svg" />
+    <Content Include="svg\solid\bxs-sun.svg" />
+    <Content Include="svg\solid\bxs-t-shirt.svg" />
+    <Content Include="svg\solid\bxs-tachometer.svg" />
+    <Content Include="svg\solid\bxs-tag-alt.svg" />
+    <Content Include="svg\solid\bxs-tag-x.svg" />
+    <Content Include="svg\solid\bxs-tag.svg" />
+    <Content Include="svg\solid\bxs-taxi.svg" />
+    <Content Include="svg\solid\bxs-tennis-ball.svg" />
+    <Content Include="svg\solid\bxs-terminal.svg" />
+    <Content Include="svg\solid\bxs-thermometer.svg" />
+    <Content Include="svg\solid\bxs-time-five.svg" />
+    <Content Include="svg\solid\bxs-time.svg" />
+    <Content Include="svg\solid\bxs-timer.svg" />
+    <Content Include="svg\solid\bxs-tired.svg" />
+    <Content Include="svg\solid\bxs-to-top.svg" />
+    <Content Include="svg\solid\bxs-toggle-left.svg" />
+    <Content Include="svg\solid\bxs-toggle-right.svg" />
+    <Content Include="svg\solid\bxs-tone.svg" />
+    <Content Include="svg\solid\bxs-torch.svg" />
+    <Content Include="svg\solid\bxs-traffic-barrier.svg" />
+    <Content Include="svg\solid\bxs-traffic-cone.svg" />
+    <Content Include="svg\solid\bxs-traffic.svg" />
+    <Content Include="svg\solid\bxs-train.svg" />
+    <Content Include="svg\solid\bxs-trash-alt.svg" />
+    <Content Include="svg\solid\bxs-trash.svg" />
+    <Content Include="svg\solid\bxs-tree-alt.svg" />
+    <Content Include="svg\solid\bxs-tree.svg" />
+    <Content Include="svg\solid\bxs-trophy.svg" />
+    <Content Include="svg\solid\bxs-truck.svg" />
+    <Content Include="svg\solid\bxs-tv.svg" />
+    <Content Include="svg\solid\bxs-up-arrow-alt.svg" />
+    <Content Include="svg\solid\bxs-up-arrow-circle.svg" />
+    <Content Include="svg\solid\bxs-up-arrow-square.svg" />
+    <Content Include="svg\solid\bxs-up-arrow.svg" />
+    <Content Include="svg\solid\bxs-upside-down.svg" />
+    <Content Include="svg\solid\bxs-upvote.svg" />
+    <Content Include="svg\solid\bxs-user-account.svg" />
+    <Content Include="svg\solid\bxs-user-badge.svg" />
+    <Content Include="svg\solid\bxs-user-check.svg" />
+    <Content Include="svg\solid\bxs-user-circle.svg" />
+    <Content Include="svg\solid\bxs-user-detail.svg" />
+    <Content Include="svg\solid\bxs-user-minus.svg" />
+    <Content Include="svg\solid\bxs-user-pin.svg" />
+    <Content Include="svg\solid\bxs-user-plus.svg" />
+    <Content Include="svg\solid\bxs-user-rectangle.svg" />
+    <Content Include="svg\solid\bxs-user-voice.svg" />
+    <Content Include="svg\solid\bxs-user-x.svg" />
+    <Content Include="svg\solid\bxs-user.svg" />
+    <Content Include="svg\solid\bxs-vector.svg" />
+    <Content Include="svg\solid\bxs-vial.svg" />
+    <Content Include="svg\solid\bxs-video-off.svg" />
+    <Content Include="svg\solid\bxs-video-plus.svg" />
+    <Content Include="svg\solid\bxs-video-recording.svg" />
+    <Content Include="svg\solid\bxs-video.svg" />
+    <Content Include="svg\solid\bxs-videos.svg" />
+    <Content Include="svg\solid\bxs-virus-block.svg" />
+    <Content Include="svg\solid\bxs-virus.svg" />
+    <Content Include="svg\solid\bxs-volume-full.svg" />
+    <Content Include="svg\solid\bxs-volume-low.svg" />
+    <Content Include="svg\solid\bxs-volume-mute.svg" />
+    <Content Include="svg\solid\bxs-volume.svg" />
+    <Content Include="svg\solid\bxs-wallet-alt.svg" />
+    <Content Include="svg\solid\bxs-wallet.svg" />
+    <Content Include="svg\solid\bxs-washer.svg" />
+    <Content Include="svg\solid\bxs-watch-alt.svg" />
+    <Content Include="svg\solid\bxs-watch.svg" />
+    <Content Include="svg\solid\bxs-webcam.svg" />
+    <Content Include="svg\solid\bxs-widget.svg" />
+    <Content Include="svg\solid\bxs-window-alt.svg" />
+    <Content Include="svg\solid\bxs-wine.svg" />
+    <Content Include="svg\solid\bxs-wink-smile.svg" />
+    <Content Include="svg\solid\bxs-wink-tongue.svg" />
+    <Content Include="svg\solid\bxs-wrench.svg" />
+    <Content Include="svg\solid\bxs-x-circle.svg" />
+    <Content Include="svg\solid\bxs-x-square.svg" />
+    <Content Include="svg\solid\bxs-yin-yang.svg" />
+    <Content Include="svg\solid\bxs-zap.svg" />
+    <Content Include="svg\solid\bxs-zoom-in.svg" />
+    <Content Include="svg\solid\bxs-zoom-out.svg" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\InsanKaynaklari\DilekIstek_IK.cshtml" />
+    <Content Include="Views\DilekOneri\Create.cshtml" />
+    <Content Include="Views\Account\Logout.cshtml" />
+    <Content Include="Views\Kullanici_Islemleri\Create.cshtml" />
+    <Content Include="Views\Kullanici_Islemleri\Delete.cshtml" />
+    <Content Include="Views\Kullanici_Islemleri\Details.cshtml" />
+    <Content Include="Views\Kullanici_Islemleri\Edit.cshtml" />
+    <Content Include="Views\Kullanici_Islemleri\Index.cshtml" />
+    <Content Include="Views\BilgiIslem\YemekYukle.cshtml" />
+    <Content Include="Views\Home\YemekListesi.cshtml" />
+    <Content Include="Views\Gonderi\GonderiOlustur.cshtml" />
+    <Content Include="Views\Gonderi\GonderiSil.cshtml" />
+    <Content Include="Views\DilekOneri\Bildirimlerim.cshtml" />
+    <Content Include="Views\Dokumantasyon\Delete.cshtml" />
+    <Content Include="Views\Dokumantasyon\Details.cshtml" />
+    <Content Include="Views\Dokumantasyon\Edit.cshtml" />
+    <Content Include="Views\Dokumantasyon\Index.cshtml" />
+    <Content Include="Views\Dokumantasyon\Index_sorumlu.cshtml" />
+    <Content Include="Views\Dokumantasyon\Create.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\Home\Mola.cshtml" />
+    <Content Include="Views\BilgiIslem\MolaYukle.cshtml" />
+    <Content Include="Scripts\tinymce\license.md" />
+    <Content Include="Scripts\tinymce\langs\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="imgs\" />
+    <Folder Include="Service\" />
+    <Folder Include="UploadPhotos\" />
+    <Folder Include="Uploads\" />
+    <Folder Include="Views\SysYonetici\" />
+    <Folder Include="Views\Yoneticisi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202501140700364_AddIpAddressToFeedback.resx">
+      <DependentUpon>202501140700364_AddIpAddressToFeedback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\tinymce\tinymce.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Mzdportal.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61384</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44318/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <UserProperties content_4bootstrap-reboot_1css_1map__JsonSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Bu proje bu bilgisayarda olmayan NuGet paketlerine başvuru yapıyor. Bunları indirmek için NuGet Paket Geri Yükleme'yi kullanın. Daha fazla bilgi için, bkz. http://go.microsoft.com/fwlink/?LinkID=322105. Eksik dosya: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.targets'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\TinyMCE.7.6.0\build\TinyMCE.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\TinyMCE.7.6.0\build\TinyMCE.targets'))" />
+  </Target>
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.targets')" />
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="packages\TinyMCE.7.6.0\build\TinyMCE.targets" Condition="Exists('packages\TinyMCE.7.6.0\build\TinyMCE.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,109 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\controllers\\feedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\feedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\migrations\\202501140700364_addipaddresstofeedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:migrations\\202501140700364_addipaddresstofeedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\models\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:models\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "202501140700364_AddIpAddressToFeedback.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Migrations\\202501140700364_AddIpAddressToFeedback.cs",
+              "RelativeDocumentMoniker": "Migrations\\202501140700364_AddIpAddressToFeedback.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Migrations\\202501140700364_AddIpAddressToFeedback.cs",
+              "RelativeToolTip": "Migrations\\202501140700364_AddIpAddressToFeedback.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T07:00:45.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T06:59:00.808Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FeedbackController.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Controllers\\FeedbackController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FeedbackController.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Controllers\\FeedbackController.cs",
+              "RelativeToolTip": "Controllers\\FeedbackController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T06:56:36.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Feedback.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Models\\Feedback.cs",
+              "RelativeDocumentMoniker": "Models\\Feedback.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Models\\Feedback.cs",
+              "RelativeToolTip": "Models\\Feedback.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T06:56:05.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Home\\Index.cshtml*",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml*",
+              "ViewState": "AgIAABkAAAAAAAAAAAAYwCsAAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-14T06:54:21.46Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

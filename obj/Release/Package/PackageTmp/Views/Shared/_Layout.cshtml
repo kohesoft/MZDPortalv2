@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com -->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>MZD Portal</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----======== CSS ======== -->
+    <!----===== Boxicons CSS ===== -->
+    <link href='~/Content/boxicons.min.css' rel='stylesheet'>
+
+    <!--<title>Dashboard Sidebar Menu</title>-->
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <link rel="stylesheet" href="~/Content/my.css" />
+
+    <style>
+        html, body {
+            height: 100%;
+            overflow: auto;
+        }
+        body {
+            background-image: url('@Url.Content("~/imgs/background.jpeg")');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: 0;
+        }
+
+nav.sidebar {
+    width: 250px; /* Sidebar genişliği */
+}
+
+.nav-link.dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Dropdown menüsünü altına yerleştirir */
+    left: 0;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.nav-link.dropdown .dropdown-menu.show {
+    display: block;
+}
+
+.bottom-content .nav-link.dropdown .dropdown-menu {
+    top: auto;
+    bottom: 100%; /* Dropdown menüsünü yukarı doğru açılacak şekilde yerleştirir */
+}
+
+        .main-content {
+            margin-left: 250px; /* Sidebar genişliği kadar boşluk bırak */
+            padding: 20px;
+            min-width: calc(100% - 250px); /* Sidebar genişliğini hesaba kat */
+            min-height: 100vh;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <nav class="sidebar">
+        <header>
+
+            <div class="image-text">
+                <span class="image">
+                    <img src="~/imgs/logo.png" alt="">
+                </span>
+
+            </div>
+            <div class="text logo-text">
+            </div>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="@Url.Action("Index", "Home")">
+                            <i class='bx bx-home-alt icon'></i>
+                            <span class="text nav-text">Anasayfa</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="@Url.Action("Index", "Contact")">
+                            <i class='bx bxs-contact icon'></i>
+                            <span class="text nav-text">Rehber</span>
+                        </a>
+                    </li>
+                    @if (User.IsInRole("IK") || User.IsInRole("Yonetici") || User.IsInRole("Sys"))
+                    {
+                        <li class="nav-link dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class='bx bx-street-view icon'></i>
+                                <span class="text nav-text">İnsan Kaynakları</span>
+                            </a>
+                            <ul class="dropdown-menu menu-links">
+                                <li class="nav-link"><a href="@Url.Action("DilekIstek_IK", "InsanKaynaklari")">Dilek Kutusu</a></li>
+                                <li class="nav-link"><a href="@Url.Action("GonderiOlustur", "Gonderi")">Duyuru Oluştur</a></li>
+                                <li class="nav-link"><a href="@Url.Action("GonderiListele", "Gonderi")">Duyuru Listele</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("BilgiIslem") || User.IsInRole("Yonetici") || User.IsInRole("Sys"))
+                    {
+                        <li class="nav-link dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class='bx bx-signal-5 icon'></i>
+                                <span class="text nav-text">Bilgi İşlem</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index", "Kullanici_Islemleri")">Kullanıcı İşlemleri</a></li>
+                                <li><a href="@Url.Action("YemekYukle", "BilgiIslem")">Yemek Yükle/Sil</a></li>
+                                <li><a href="@Url.Action("MolaYukle", "BilgiIslem")">Mola Yükle/Sil</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("IdariIsler") || User.IsInRole("Yonetici") || User.IsInRole("Sys"))
+                    {
+                        <li class="nav-link dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class='bx bx-street-view icon'></i>
+                                <span class="text nav-text">İdari İşler</span>
+                            </a>
+                            <ul class="dropdown-menu menu-links">
+                                <li class="nav-link"><a href="@Url.Action("GonderiOlustur", "Gonderi")">Duyuru Oluştur</a></li>
+                                <li class="nav-link"><a href="@Url.Action("GonderiListele", "Gonderi")">Duyuru Listele</a></li>
+                            </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole("Dokumantasyon") || User.IsInRole("Yonetici") || User.IsInRole("Sys"))
+                    {
+                        <li class="nav-link dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class='bx bx-book-open icon'></i>
+                                <span class="text nav-text">Dokümantasyon</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index", "Dokumantasyon")">Stok Kartı</a></li>
+                                <li><a href="@Url.Action("Index_sorumlu", "Dokumantasyon")">Dokümantasyon</a></li>
+                            </ul>
+                        </li>
+                    }
+                    <li class="nav-link">
+                        <a href="@Url.Action("Create", "DilekOneri")">
+                            <i class='bx bx-envelope icon'></i>
+                            <span class="text nav-text">Dilek & Öneri</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="@Url.Action("YemekListesi", "Home")">
+                            <i class='bx bx-food-menu icon'></i>
+                            <span class="text nav-text">Yemek Listesi</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="@Url.Action("Mola", "Home")">
+                            <i class='bx bx-time icon'></i>
+                            <span class="text nav-text">Mola Saatleri</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="bottom-content">
+                <li class="nav-link dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class='bx bx-user icon'></i>
+                        <span class="text nav-text">Profilim</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("Edit", "User")">Profil Detayları</a></li>
+                        <li><a href="@Url.Action("Bildirimlerim", "DilekOneri")">Bildirimlerim</a></li>
+                    </ul>
+                </li>
+                <li class="nav-link">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("Logout", "Account")">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text">Çıkış yap</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login", "Account")">
+                            <i class='bx bx-log-in icon'></i>
+                            <span class="text nav-text">Giriş yap</span>
+                        </a>
+                    }
+                </li>
+            </div>
+        </div>
+    </nav>
+    <div class="main-content">
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+<script>
+    $(document).ready(function () {
+        const body = document.querySelector('body'),
+            sidebar = body.querySelector('nav'),
+            searchBtn = body.querySelector(".search-box"),
+            modeSwitch = body.querySelector(".toggle-switch"),
+            modeText = body.querySelector(".mode-text");
+
+        if (searchBtn) {
+            searchBtn.addEventListener("click", () => {
+                sidebar.classList.remove("close");
+            });
+        }
+
+        if (modeSwitch) {
+            modeSwitch.addEventListener("click", () => {
+                body.classList.toggle("dark");
+                if (body.classList.contains("dark")) {
+                    modeText.innerText = "Light mode";
+                } else {
+                    modeText.innerText = "Dark mode";
+                }
+            });
+        }
+
+        // Aktif menü öğesini belirleme
+        $('.nav-link a').on('click', function () {
+            $('.nav-link').removeClass('active');
+            $(this).parent().addClass('active');
+        });
+
+        // Dropdown menü tıklama olayını işleme
+        $('.nav-link.dropdown > a').on('click', function (e) {
+            e.preventDefault();
+            const dropdownMenu = $(this).siblings('.dropdown-menu');
+
+            if (dropdownMenu.hasClass('show')) {
+                dropdownMenu.removeClass('show').slideUp(200);
+            } else {
+                dropdownMenu.addClass('show').slideDown(200);
+            }
+        });
+
+        // Dropdown menüden ayrıldığında kapatma
+        $('.nav-link.dropdown').on('mouseleave', function () {
+            const dropdownMenu = $(this).find('.dropdown-menu');
+            if (dropdownMenu.hasClass('show')) {
+                dropdownMenu.removeClass('show').slideUp(200);
+            }
+        });
+
+        // Dropdown menüden ayrıldığında kapatma (eklenen kod)
+        $('.dropdown-menu').on('mouseleave', function () {
+            $(this).removeClass('show').slideUp(200);
+        });
+    });
+
+</script>
+</body>
+
+</html>

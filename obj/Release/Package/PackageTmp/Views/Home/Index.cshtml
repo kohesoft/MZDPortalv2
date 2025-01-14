@@ -1,0 +1,110 @@
+﻿@model List<Gonderi>
+
+@{
+    ViewBag.Title = "Ana Sayfa";
+}
+<head>
+
+</head>
+
+<body style="overflow-y: auto;">
+    <div class="container" style="max-width:100%; max-height:100%;">
+        <h2 style="text-align:center;">DUYURULAR</h2>
+
+        <div class="timeline" id="timeline">
+            @foreach (var post in Model)
+            {
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>@post.Title</h3>
+                        <p>@Html.Raw(post.Content)</p>
+                        <small>@post.CreatedAt.ToString("g")</small>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <p id="loading" style="text-align:center; display:none;">Yükleniyor...</p>
+    </div>
+</body>
+
+<style>
+    .timeline {
+        position: relative;
+        width: 100%;
+        margin: auto;
+        padding: 20px 0;
+        list-style: none;
+    }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #ddd;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+    .timeline-item {
+        position: relative;
+        margin: 20px 0;
+    }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            top: 0;
+            left: 50%;
+            margin-left: -10px;
+        }
+
+    .timeline-content {
+        padding: 20px;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        position: relative;
+        width: 45%;
+        overflow: hidden; /* Taşan içeriği gizlemek için */
+        word-wrap: break-word; /* Uzun kelimeleri bölmek için */
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+        left: 0;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+        left: 55%;
+    }
+
+    .timeline-content h3 {
+        margin-top: 0;
+        color: #007bff;
+    }
+
+    .timeline-content small {
+        color: #888;
+    }
+
+    .homev2 {
+        position: relative; /* absolute yerine relative kullanıldı */
+        top: 100px;
+        left: 50px;
+        min-height: 85vh; /* height yerine min-height kullanıldı */
+        width: calc(94% - 250px);
+        transition: var(--tran-05);
+    }
+
+    h2 {
+        margin-top: 0;
+        color: #007bff;
+        text-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Mavi glow efekti */
+    }
+</style>
