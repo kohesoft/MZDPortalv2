@@ -3,8 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\migrations\\202501141227208_inti.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:migrations\\202501141227208_inti.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\views\\task\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\task\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\views\\task\\usertasks.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\task\\usertasks.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\views\\task\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\task\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\views\\task\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\task\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\migrations\\202501141358113_user\u0131dtousername.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:migrations\\202501141358113_user\u0131dtousername.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\views\\task\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\task\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\views\\task\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\task\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalearlyaccess\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,23 +50,144 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "202501141227208_Inti.cs",
-              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Migrations\\202501141227208_Inti.cs",
-              "RelativeDocumentMoniker": "Migrations\\202501141227208_Inti.cs",
-              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Migrations\\202501141227208_Inti.cs",
-              "RelativeToolTip": "Migrations\\202501141227208_Inti.cs",
+              "DocumentIndex": 3,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Views\\Task\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\Delete.cshtml",
+              "RelativeToolTip": "Views\\Task\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAUwDYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-14T14:01:15.922Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "202501141358113_User\u0131dtoUsername.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Migrations\\202501141358113_User\u0131dtoUsername.cs",
+              "RelativeDocumentMoniker": "Migrations\\202501141358113_User\u0131dtoUsername.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Migrations\\202501141358113_User\u0131dtoUsername.cs",
+              "RelativeToolTip": "Migrations\\202501141358113_User\u0131dtoUsername.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-14T12:27:28.913Z",
+              "WhenOpened": "2025-01-14T13:58:19.291Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAB0AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-14T13:33:21.903Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T13:21:02.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Models\\User.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAwwBgAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T13:19:27.395Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Task\\Index.cshtml",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\Index.cshtml",
+              "RelativeToolTip": "Views\\Task\\Index.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACgAAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-14T13:18:02.009Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserTasks.cshtml",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\UserTasks.cshtml",
+              "RelativeDocumentMoniker": "Views\\Task\\UserTasks.cshtml",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\UserTasks.cshtml",
+              "RelativeToolTip": "Views\\Task\\UserTasks.cshtml",
+              "ViewState": "AgIAACMAAAAAAAAAAAAUwDsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-14T13:16:59.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\Task\\Details.cshtml",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\Details.cshtml",
+              "RelativeToolTip": "Views\\Task\\Details.cshtml",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAF0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-14T13:16:35.005Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Task\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Task\\Edit.cshtml",
+              "ViewState": "AgIAADQAAAAAAAAAAAAUwFUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-14T13:16:19.745Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Task\\Create.cshtml",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalEarlyAccess\\Views\\Task\\Create.cshtml",
+              "RelativeToolTip": "Views\\Task\\Create.cshtml",
+              "ViewState": "AgIAADsAAAAAAAAAAAAUwFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-14T13:16:06.576Z",
               "EditorCaption": ""
             }
           ]

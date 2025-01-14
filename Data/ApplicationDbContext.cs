@@ -1,4 +1,5 @@
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace MZDNETWORK.Models
 {
@@ -13,6 +14,8 @@ namespace MZDNETWORK.Models
         public DbSet<Gonderi> Gonderiler { get; set; }
         public DbSet<Dokumantasyon> Dokumantasyons { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<TodoItem> TodoItems { get; set; }
 
     }
 }

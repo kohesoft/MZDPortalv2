@@ -306,6 +306,7 @@
     <Compile Include="Controllers\GonderiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsanKaynaklariController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="FilterConfig.cs" />
@@ -313,9 +314,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202501141227208_Inti.cs" />
-    <Compile Include="Migrations\202501141227208_Inti.Designer.cs">
-      <DependentUpon>202501141227208_Inti.cs</DependentUpon>
+    <Compile Include="Migrations\202501141321348_Inti.cs" />
+    <Compile Include="Migrations\202501141321348_Inti.Designer.cs">
+      <DependentUpon>202501141321348_Inti.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501141358113_UserıdtoUsername.cs" />
+    <Compile Include="Migrations\202501141358113_UserıdtoUsername.Designer.cs">
+      <DependentUpon>202501141358113_UserıdtoUsername.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
@@ -323,6 +328,8 @@
     <Compile Include="Models\Dokumantasyon.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Gonderi.cs" />
+    <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\TodoItem.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserAndInfo.cs" />
     <Compile Include="Models\UserInfo.cs" />
@@ -2304,6 +2311,12 @@
     <Content Include="Views\BilgiIslem\MolaYukle.cshtml" />
     <Content Include="Scripts\tinymce\license.md" />
     <Content Include="Scripts\tinymce\langs\README.md" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Task\Edit.cshtml" />
+    <Content Include="Views\Task\Details.cshtml" />
+    <Content Include="Views\Task\UserTasks.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2345,8 +2358,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202501141227208_Inti.resx">
-      <DependentUpon>202501141227208_Inti.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202501141321348_Inti.resx">
+      <DependentUpon>202501141321348_Inti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501141358113_UserıdtoUsername.resx">
+      <DependentUpon>202501141358113_UserıdtoUsername.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MZDNETWORK.Models.Task>
+
+@{
+    ViewBag.Title = "Tasks";
+}
+
+<h2>Tasks</h2>
+
+<p>
+    @Html.ActionLink("Create New Task", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>User</th>
+        <th>Progress</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.User.Name)</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: @item.Progress%;" aria-valuenow="@item.Progress" aria-valuemin="0" aria-valuemax="100">@item.Progress%</div>
+                </div>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("User Tasks", "UserTasks", new { userId = item.Username })
+            </td>
+        </tr>
+    }
+
+</table>
+
