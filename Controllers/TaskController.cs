@@ -16,26 +16,44 @@ namespace MZDNETWORK.Controllers
         {
             _context = new MZDNETWORKContext();
         }
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
+
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
         public ActionResult Index()
         {
             var currentUsername = User.Identity.Name; // Oturum açmýþ kullanýcýnýn kullanýcý adýný al
-            var tasks = _context.Tasks.Where(item => item.Username == currentUsername).ToList(); // Modeli filtrele ve listeye dönüþtür
+            var tasks = _context.Tasks.Where(item => item.CreatedBy == currentUsername).ToList(); // Modeli filtrele ve listeye dönüþtür
             return View(tasks);
         }
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
+
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
         public ActionResult Create()
         {
             ViewData["Username"] = new SelectList(_context.Users, "Username", "Username");
             return View();
         }
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
+
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(MZDNETWORK.Models.Task task, string[] todoDescriptions, string[] additionalDescriptions, DateTime[] dueDates)
         {
             if (ModelState.IsValid)
             {
+                task.CreatedBy = User.Identity.Name; // Görevi oluþturan kullanýcýyý kaydet
+
+                // Kullanýcýyý bul ve UserId'yi ayarla
+                var user = _context.Users.FirstOrDefault(u => u.Username == task.Username);
+                if (user != null)
+                {
+                    task.UserId = user.Id;
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Geçersiz kullanýcý adý.");
+                    ViewBag.Users = new SelectList(_context.Users, "Username", "Name", task.Username);
+                    return View(task);
+                }
+
                 if (todoDescriptions != null)
                 {
                     task.TodoItems = todoDescriptions.Select((desc, index) => new TodoItem
@@ -55,7 +73,11 @@ namespace MZDNETWORK.Controllers
             ViewBag.Users = new SelectList(_context.Users, "Username", "Name", task.Username);
             return View(task);
         }
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
+
+
+
+
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
         public ActionResult Edit(int id)
         {
             var task = _context.Tasks.Include("TodoItems").FirstOrDefault(t => t.Id == id);
@@ -68,7 +90,7 @@ namespace MZDNETWORK.Controllers
             ViewBag.TodoItems = task.TodoItems; // Mevcut TodoItems öðelerini ViewBag'e ekle
             return View(task);
         }
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(MZDNETWORK.Models.Task task, string[] todoDescriptions, string[] additionalDescriptions, DateTime[] dueDates)
@@ -124,7 +146,7 @@ namespace MZDNETWORK.Controllers
             ViewBag.Username = task.Username; // Username bilgisini ViewBag'e ekle
             return View(task);
         }
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
         public ActionResult Delete(int id)
         {
             var task = _context.Tasks.FirstOrDefault(t => t.Id == id);
@@ -136,7 +158,7 @@ namespace MZDNETWORK.Controllers
             ViewBag.Username = task.Username; // Username bilgisini ViewBag'e ekle
             return View(task);
         }
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

@@ -333,3 +333,4 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWOR
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.csproj.Up2Date
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.pdb
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.Migrations.Inti.resources

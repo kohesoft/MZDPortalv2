@@ -26410,3 +26410,1031 @@ Parametre adı: parameters
 2025-01-15 14:27:52.2397|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/Account/Login|
 2025-01-15 14:27:53.2759|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
 2025-01-15 14:27:53.2759|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 15:58:45.2639|INFO|MZDNETWORK.MvcApplication|Application started|
+2025-01-15 15:58:46.6880|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 15:58:46.6880|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 15:58:46.7277|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 15:58:46.7277|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 15:58:46.7703|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 15:58:46.7703|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 15:59:27.2084|INFO|MZDNETWORK.MvcApplication|Application started|
+2025-01-15 15:59:27.3783|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 15:59:27.3783|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 15:59:27.4084|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 15:59:27.4084|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 15:59:27.4588|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 15:59:27.4588|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:00:03.7630|INFO|MZDNETWORK.MvcApplication|Application started|
+2025-01-15 16:00:03.9428|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:00:03.9428|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:00:04.0118|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:00:04.0118|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:00:04.0963|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:00:04.0963|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:00:11.9795|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:00:11.9795|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:00:11.9857|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:00:11.9857|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:00:11.9857|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:00:11.9857|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:41.1252|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:41.1262|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:46.0666|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:46.0666|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:48.2870|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:48.2870|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:48.9628|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:48.9628|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:49.4971|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:49.4971|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:49.6473|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:49.6473|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:50.6568|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:50.6568|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:50.7956|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:50.7956|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:53.5298|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:53.5298|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:54.8775|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:54.8775|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:56.4557|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:56.4557|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:56.8433|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:56.8433|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:57.8842|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:57.8842|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:58.9447|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:58.9447|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:01:59.9090|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:01:59.9090|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:00.7613|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:00.7613|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:01.4394|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:01.4394|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:02.0218|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:02.0218|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:02.6258|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:02.6258|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:03.2957|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:03.2957|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:03.9275|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:03.9275|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:04.5764|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:04.5764|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:05.1702|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:05.1702|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:05.7886|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:05.7886|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:06.4740|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:06.4740|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:07.1682|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:07.1682|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:07.6071|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:07.6071|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:08.0510|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:08.0510|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:08.4745|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:08.4745|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:08.8889|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:08.8889|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:09.2795|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:09.2795|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:09.6940|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:09.6940|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:10.1686|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:10.1686|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:10.5343|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:10.5343|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:10.9951|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:10.9951|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:11.4604|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:11.4604|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:11.8160|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:11.8160|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:12.2774|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:12.2774|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:12.7204|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:12.7204|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:13.1292|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:13.1292|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:13.5742|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:13.5742|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:13.9827|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:13.9827|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:14.3899|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:14.3899|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:14.7394|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:14.7394|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:15.4037|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:15.4037|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:15.8683|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:15.8683|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:16.4404|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:16.4404|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:16.8461|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:16.8461|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:17.2030|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:17.2039|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:17.4158|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:17.4158|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:17.6681|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:17.6681|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:17.9021|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:17.9021|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:18.2045|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:18.2045|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:18.5377|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:18.5377|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:02:18.6413|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:18.6413|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Contact|
+2025-01-15 16:02:18.9270|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:18.9270|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Contact|
+2025-01-15 16:02:19.2200|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:19.2200|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Contact|
+2025-01-15 16:02:19.5537|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:19.5537|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Contact|
+2025-01-15 16:02:23.4408|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:23.4408|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:02:26.7528|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:02:26.7528|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:03:10.4668|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:03:10.4668|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:03:11.0272|INFO|MZDNETWORK.MvcApplication|Application_Error called|
+2025-01-15 16:03:11.0272|ERROR|MZDNETWORK.MvcApplication|Unhandled exception, URL: https://localhost:44318/Task/Create, User: MZDNETDC\berat-oksuz|System.Data.Entity.Infrastructure.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.Entity.Core.UpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_dbo.Tasks_dbo.Users_UserId". The conflict occurred in database "MZDPORTAL_DB", table "dbo.Users", column 'Id'.
+The statement has been terminated.
+   konum: System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__180_0(Task`1 result)
+   konum: System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   konum: System.Threading.Tasks.Task.Execute()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.<ExecuteAsync>d__8.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.<UpdateAsync>d__39.MoveNext()
+   --- İç özel durum yığını izlemesinin sonu ---
+   konum: System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.<UpdateAsync>d__39.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Data.Entity.Core.Objects.ObjectContext.<ExecuteInTransactionAsync>d__156`1.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Data.Entity.Core.Objects.ObjectContext.<SaveChangesToStoreAsync>d__154.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<ExecuteAsyncImplementation>d__6`1.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Data.Entity.Core.Objects.ObjectContext.<SaveChangesInternalAsync>d__151.MoveNext()
+   --- İç özel durum yığını izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   konum: MZDNETWORK.Controllers.TaskController.<Create>d__4.MoveNext() C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\Controllers\TaskController.cs içinde: satır 56
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   konum: System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass8_0.<BeginInvokeAsynchronousActionMethod>b__1(IAsyncResult asyncResult)
+   konum: System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   konum: System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_0.<InvokeActionMethodFilterAsynchronouslyRecursive>b__0()
+   konum: System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass11_2.<InvokeActionMethodFilterAsynchronouslyRecursive>b__2()
+   konum: System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   konum: System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_6.<BeginInvokeAction>b__4()
+   konum: System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__1(IAsyncResult asyncResult)
+   konum: System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   konum: System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   konum: System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   konum: System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   konum: System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   konum: System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   konum: System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+   konum: System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   konum: System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.InvokeEndHandler(IAsyncResult ar)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.OnAsyncHandlerCompletion(IAsyncResult ar)
+System.Data.Entity.Core.UpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_dbo.Tasks_dbo.Users_UserId". The conflict occurred in database "MZDPORTAL_DB", table "dbo.Users", column 'Id'.
+The statement has been terminated.
+   konum: System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__180_0(Task`1 result)
+   konum: System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   konum: System.Threading.Tasks.Task.Execute()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.<ExecuteAsync>d__8.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.<UpdateAsync>d__39.MoveNext()
+   --- İç özel durum yığını izlemesinin sonu ---
+   konum: System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.<UpdateAsync>d__39.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Data.Entity.Core.Objects.ObjectContext.<ExecuteInTransactionAsync>d__156`1.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Data.Entity.Core.Objects.ObjectContext.<SaveChangesToStoreAsync>d__154.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<ExecuteAsyncImplementation>d__6`1.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Data.Entity.Core.Objects.ObjectContext.<SaveChangesInternalAsync>d__151.MoveNext()
+System.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_dbo.Tasks_dbo.Users_UserId". The conflict occurred in database "MZDPORTAL_DB", table "dbo.Users", column 'Id'.
+The statement has been terminated.
+   konum: System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__180_0(Task`1 result)
+   konum: System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   konum: System.Threading.Tasks.Task.Execute()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.<ExecuteAsync>d__8.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.<UpdateAsync>d__39.MoveNext()
+ClientConnectionId:257d30e8-17cf-4f10-a937-c99e04568578
+Error Number:547,State:0,Class:16 HelpLink.ProdName: Microsoft SQL Server;HelpLink.ProdVer: 16.00.1000;HelpLink.EvtSrc: MSSQLServer;HelpLink.EvtID: 547;HelpLink.BaseHelpUrl: http://go.microsoft.com/fwlink;HelpLink.LinkId: 20476
+2025-01-15 16:06:22.0348|INFO|MZDNETWORK.MvcApplication|Application started|
+2025-01-15 16:06:22.8065|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:22.8065|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:06:22.8374|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:22.8374|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:06:22.8808|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:22.8808|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:30.0393|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:30.0393|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:06:30.0513|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:30.0513|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:06:30.0669|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:30.0669|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:31.9843|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:31.9843|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:32.4334|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:32.4334|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:41.1680|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:41.1680|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:43.0625|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:43.0625|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:06:43.0774|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:43.0774|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:06:43.0873|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:43.0873|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:47.0461|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:47.0461|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:47.0636|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:47.0636|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:48.4528|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:48.4528|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:48.7984|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:48.7984|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:48.9305|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:48.9305|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:49.1704|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:49.1704|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:49.2621|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:49.2621|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:06:49.5336|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:49.5336|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:06:49.6308|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:49.6308|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:06:49.8437|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:49.8437|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:06:49.9752|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:49.9752|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:06:50.1787|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:50.1787|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:06:51.9563|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:51.9563|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:06:53.4416|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:06:53.4416|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:06:53.4416|INFO|MZDNETWORK.MvcApplication|Application_Error called|
+2025-01-15 16:06:53.4416|ERROR|MZDNETWORK.MvcApplication|Unhandled exception, URL: https://localhost:44318/Task/Create, User: MZDNETDC\berat-oksuz|System.Reflection.AmbiguousMatchException: 'TaskController' denetleyici türünde 'Create' eylemiyle ilgili geçerli istek şu eylem yöntemleri arasında belirsiz:
+MZDNETWORK.Controllers.TaskController türünde System.Web.Mvc.ActionResult Create()
+MZDNETWORK.Controllers.TaskController türünde System.Threading.Tasks.Task`1[System.Web.Mvc.ActionResult] Create(MZDNETWORK.Models.Task, System.String[], System.String[], System.DateTime[])
+   konum: System.Web.Mvc.ActionMethodSelectorBase.FindActionMethod(ControllerContext controllerContext, String actionName)
+   konum: System.Web.Mvc.Async.AsyncActionMethodSelector.FindAction(ControllerContext controllerContext, String actionName)
+   konum: System.Web.Mvc.Async.ReflectedAsyncControllerDescriptor.FindAction(ControllerContext controllerContext, String actionName)
+   konum: System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeAction(ControllerContext controllerContext, String actionName, AsyncCallback callback, Object state)
+   konum: System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_0(AsyncCallback asyncCallback, Object asyncState, ExecuteCoreState innerState)
+   konum: System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   konum: System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   konum: System.Web.Mvc.Controller.BeginExecuteCore(AsyncCallback callback, Object state)
+   konum: System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   konum: System.Web.Mvc.Controller.BeginExecute(RequestContext requestContext, AsyncCallback callback, Object state)
+   konum: System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_0(AsyncCallback asyncCallback, Object asyncState, ProcessRequestState innerState)
+   konum: System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   konum: System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-01-15 16:07:36.0409|INFO|MZDNETWORK.MvcApplication|Application started|
+2025-01-15 16:07:36.8580|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:36.8580|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:07:36.9247|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:36.9247|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:07:37.0192|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:37.0192|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:07:46.4359|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:46.4359|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:07:46.4454|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:46.4454|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:07:46.4543|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:46.4543|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:07:51.2553|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:51.2553|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:07:55.6352|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:55.6352|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:07:56.4367|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:56.4367|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:07:56.7981|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:56.7981|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:07:56.9263|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:56.9263|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:07:57.1785|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:57.1785|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:07:57.2729|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:57.2729|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:07:57.5249|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:57.5249|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:07:57.5667|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:57.5667|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:07:57.8565|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:57.8565|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:07:57.9368|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:57.9368|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:07:58.2019|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:58.2019|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:07:58.4376|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:58.4386|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:07:59.7014|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:07:59.7014|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:08:01.1285|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:01.1285|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:18.8295|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:18.8295|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:19.3644|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:19.3644|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:27.9079|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:27.9079|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:34.7788|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:34.7788|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:37.2484|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:37.2484|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:39.3377|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:39.3377|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:39.3472|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:39.3472|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:44.1915|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:44.1915|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:44.2040|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:44.2040|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:46.2389|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:46.2389|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:46.6011|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:46.6011|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:46.7094|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:46.7094|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:46.9713|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:46.9713|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:08:47.0702|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:47.0702|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd2, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:08:47.3370|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:47.3370|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd2, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:08:47.3589|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:47.3589|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd2, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:08:47.6368|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:47.6368|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd2, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:08:47.7248|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:47.7248|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd2, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:08:47.9614|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:47.9614|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd2, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:08:48.0211|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:48.0211|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd2, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:08:48.2156|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:48.2156|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd2, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:08:50.1343|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:50.1343|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd2, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:08:53.4336|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:08:53.4336|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:13.1335|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:13.1335|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:13.1556|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:13.1556|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:23.5729|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:23.5729|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:24.7261|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:24.7261|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:27.8279|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:27.8279|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:27.8348|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:27.8348|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:32.1928|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:32.1928|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:34.3961|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:34.3961|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:34.3961|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:34.3961|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:40.0693|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:40.0693|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:40.0813|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:40.0813|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:42.2112|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:42.2112|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:42.5401|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:42.5401|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd3, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:09:43.7851|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:43.7851|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd3, IP: ::1, URL: https://localhost:44318/Home/Mola|
+2025-01-15 16:09:45.1186|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:45.1186|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:46.8211|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:46.8211|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:47.5512|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:47.5512|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:48.1725|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:48.1725|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:48.6674|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:48.6674|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:49.1485|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:49.1485|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:49.7131|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:49.7131|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:50.0862|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:50.0862|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:50.1634|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:50.1634|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd3, IP: ::1, URL: https://localhost:44318/Task/UserTasks|
+2025-01-15 16:09:50.4556|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:50.4556|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd3, IP: ::1, URL: https://localhost:44318/Task/UserTasks|
+2025-01-15 16:09:50.7464|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:50.7464|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:51.6450|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:51.6450|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:52.3753|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:52.3753|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:52.9460|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:52.9460|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:53.6726|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:53.6726|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:55.2985|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:55.2985|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:56.0473|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:56.0473|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:56.7172|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:56.7172|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:57.4281|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:57.4281|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:58.0828|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:58.0828|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:58.7115|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:58.7115|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:09:59.3453|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:09:59.3453|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:00.0343|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:00.0343|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:00.6467|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:00.6467|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:01.2926|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:01.2926|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:01.6626|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:01.6626|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:02.4423|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:02.4423|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:02.8107|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:02.8107|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:02.9580|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:02.9580|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:03.2061|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:03.2061|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:03.2989|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:03.2989|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:03.5546|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:03.5546|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd3, IP: ::1, URL: https://localhost:44318/Task/UserTasks|
+2025-01-15 16:10:03.8782|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:03.8782|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:04.0093|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:04.0093|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd3, IP: ::1, URL: https://localhost:44318/Task/UserTasks|
+2025-01-15 16:10:08.6821|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:08.6821|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:11.0023|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:11.0023|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:11.0407|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:11.0407|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:11.1381|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:11.1381|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:12.9092|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:12.9092|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:14.6115|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:14.6115|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:16.4132|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:16.4132|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:16.4224|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:16.4224|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:18.4381|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:18.4381|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:19.3873|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:19.3873|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:19.9562|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:19.9562|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:20.3259|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:20.3259|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:20.4922|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:20.4922|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:20.7301|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:20.7301|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:20.7919|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:20.7919|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:20.8079|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:20.8079|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:20.8278|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:20.8278|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:21.0578|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:21.0578|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:21.1123|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:21.1123|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:21.1261|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:21.1261|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:21.1417|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:21.1417|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:21.2700|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:21.2700|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:21.2700|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:21.2700|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:21.2853|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:21.2853|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:21.4249|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:21.4249|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:21.6638|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:21.6638|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:22.0126|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:22.0126|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:22.0305|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:22.0305|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:22.7353|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:22.7353|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:23.0916|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:23.0916|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:23.1515|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:23.1515|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:23.1631|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:23.1631|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:23.2861|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:23.2861|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:23.2861|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:23.2861|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:23.6471|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:23.6471|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:24.0458|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:24.0458|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:24.1868|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:24.1868|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:24.4537|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:24.4537|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:24.4716|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:24.4716|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:24.5060|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:24.5060|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:24.5249|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:24.5249|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:24.6736|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:24.6736|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:24.6921|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:24.6921|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:25.0388|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:25.0388|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:25.2024|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:25.2024|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:25.2024|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:25.2024|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:25.5614|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:25.5614|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:25.6185|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:25.6185|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:25.6295|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:25.6295|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:25.7397|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:25.7397|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:25.7397|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:25.7397|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:25.9205|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:25.9205|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:25.9285|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:25.9285|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:26.2900|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:26.2900|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:26.3327|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:26.3327|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:26.3327|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:26.3442|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:26.4523|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:26.4523|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:26.4598|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:26.4598|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:26.5981|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:26.5981|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:26.8085|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:26.8085|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:27.1643|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:27.1643|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:27.2024|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:27.2024|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:27.2108|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:27.2108|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:27.3527|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:27.3527|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:27.5953|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:27.5953|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:27.6179|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:27.6179|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:27.7365|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:27.7365|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:27.9958|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:27.9958|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:28.1103|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:28.1103|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:28.1103|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:28.1103|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:28.3083|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:28.3083|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:28.4423|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:28.4423|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:28.4423|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:28.4423|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:28.6366|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:28.6366|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:28.9580|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:28.9580|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:29.0314|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:29.0324|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:29.0324|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:29.0324|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:29.2683|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:29.2683|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:29.3774|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:29.3774|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:29.5970|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:29.5970|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:29.7091|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:29.7091|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:29.7091|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:29.7091|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:29.9327|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:29.9327|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:30.0201|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.0201|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:30.0201|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.0201|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:30.2764|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.2764|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:30.2957|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.2957|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:30.3399|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.3399|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:30.3474|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.3474|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:30.5022|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.5022|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:30.5022|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.5168|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:30.8618|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.8618|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:30.9042|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.9042|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:30.9227|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.9227|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:30.9872|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.9872|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:30.9872|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:30.9872|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:31.1403|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:31.1403|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:31.3459|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:31.3459|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:31.6620|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:31.6620|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:31.7538|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:31.7538|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:31.7668|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:31.7668|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:33.7354|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:33.7354|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:34.5402|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:34.5402|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:35.0494|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:35.0494|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:35.4128|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:35.4128|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:35.4848|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:35.4848|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:35.5011|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:35.5011|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:35.5011|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:35.5011|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:35.6232|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:35.6232|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:35.6285|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:35.6285|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-15 16:10:35.6285|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:35.6285|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:35.9832|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:35.9832|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:36.1630|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:36.1630|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:40.7392|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:40.7392|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:40.7505|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:40.7505|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:42.0250|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:42.0250|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:42.4399|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:42.4399|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:42.4918|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:42.4918|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd3, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:10:42.5864|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:42.5864|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd3, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:10:42.9103|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:42.9103|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd3, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:10:44.1213|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:44.1213|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd3, IP: ::1, URL: https://localhost:44318/Task/UserTasks|
+2025-01-15 16:10:46.8415|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:46.8415|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:48.9866|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:48.9866|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:49.0065|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:49.0065|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:49.0843|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:49.0843|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:50.9741|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:50.9741|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:57.6915|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:57.6915|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:10:57.6915|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:10:57.6915|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:01.6495|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:01.6495|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:01.6661|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:01.6661|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:03.5438|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:03.5438|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:04.9707|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:04.9707|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:05.6973|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:05.6973|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:06.0540|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:06.0540|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:06.9185|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:06.9185|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:07.6073|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:07.6073|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:08.2248|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:08.2248|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:08.7195|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:08.7195|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:09.1943|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:09.1943|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:09.7205|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:09.7205|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:10.2059|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:10.2059|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:10.7168|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:10.7168|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:11.2644|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:11.2644|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:11.8210|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:11.8210|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:12.3193|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:12.3193|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:12.8188|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:12.8188|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:13.3191|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:13.3191|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:13.8441|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:13.8441|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:14.3037|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:14.3037|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:14.7525|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:14.7525|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:15.3189|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:15.3189|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:15.6956|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:15.6956|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:16.6007|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:16.6007|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:16.9769|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:16.9769|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:17.0711|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:17.0711|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task/UserTasks|
+2025-01-15 16:11:17.8636|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:17.8636|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:18.0122|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:18.0122|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:18.2707|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:18.2707|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:19.0084|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:19.0084|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:19.3670|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:19.3670|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:19.3845|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:19.3845|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:19.5688|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:19.5688|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task/UserTasks|
+2025-01-15 16:11:19.8652|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:19.8652|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:19.9364|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:19.9364|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task/UserTasks|
+2025-01-15 16:11:20.0984|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:20.0984|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task/UserTasks|
+2025-01-15 16:11:23.2891|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:23.2891|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:25.6543|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:25.6543|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:26.0538|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:26.0538|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:26.2246|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:26.2246|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:26.4587|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:26.4587|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:26.7716|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:26.7716|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:26.8270|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:26.8270|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:27.1276|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:27.1276|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:11:27.1939|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:27.1939|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:27.4321|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:27.4321|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:27.7693|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:27.7693|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:28.8226|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:28.8226|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:29.4958|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:29.4958|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:30.1457|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:30.1457|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:30.8769|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:30.8769|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:31.5291|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:31.5291|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:32.1140|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:32.1140|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:32.6953|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:32.6953|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:33.2455|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:33.2455|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:33.7957|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:33.7957|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:34.3024|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:34.3024|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:34.9381|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:34.9381|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:35.4239|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:35.4239|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:36.1611|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:36.1611|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:36.7441|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:36.7441|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:37.1110|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:37.1110|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:37.1310|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:37.1310|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:37.4603|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:37.4603|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:11:40.1443|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:40.1443|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:41.6833|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:41.6833|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:42.3263|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:42.3263|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:42.7619|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:42.7619|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:43.2836|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:43.2836|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:43.7280|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:43.7280|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:44.2056|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:44.2056|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:44.6699|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:44.6699|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:45.0908|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:45.0908|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:45.5168|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:45.5168|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:45.9623|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:45.9623|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:46.5912|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:46.5912|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:47.1770|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:47.1770|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:47.8999|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:47.8999|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:48.5494|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:48.5494|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:49.2290|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:49.2290|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:49.8677|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:49.8677|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:51.2177|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:51.2177|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:51.8397|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:51.8397|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:52.4744|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:52.4744|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:52.8404|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:52.8404|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:53.0226|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:53.0226|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:53.2462|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:53.2462|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:53.5543|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:53.5543|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:54.3893|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:54.3893|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:54.7588|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:54.7588|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:54.8107|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:54.8107|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:54.9579|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:54.9579|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:11:55.2605|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:55.2605|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:11:55.3204|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:55.3204|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:11:55.4975|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:11:55.4975|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:12:00.2209|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:00.2209|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:12:02.0368|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:02.0368|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:12:02.5194|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:02.5194|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:12:02.8913|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:02.8913|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:12:02.9918|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:02.9918|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:12:03.1539|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:03.1539|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:12:03.4608|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:03.4608|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:12:04.0803|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:04.0803|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:12:52.7558|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:52.7558|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:12:52.7667|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:52.7667|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:12:56.9526|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:56.9526|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:12:56.9636|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:56.9636|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:12:59.0861|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:59.0861|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:12:59.2239|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:12:59.2239|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:02.0428|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:02.0428|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:03.4190|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:03.4190|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:07.4734|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:07.4734|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:08.5454|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:08.5454|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:08.5552|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:08.5552|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:12.5616|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:12.5616|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:12.5719|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:12.5719|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:13.9882|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:13.9882|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:14.1451|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:14.1451|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:14.3584|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:14.3584|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:14.4526|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:14.4526|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:13:14.7133|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:14.7133|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:13:14.7325|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:14.7325|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:13:15.0337|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:15.0337|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:13:15.0784|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:15.0784|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:13:15.1284|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:15.1284|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:13:15.3911|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:15.3911|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:13:15.6203|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:15.6203|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Account/Login|
+2025-01-15 16:13:17.1317|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:17.1317|INFO|MZDNETWORK.MvcApplication|User authenticated: mzd, IP: ::1, URL: https://localhost:44318/Task|
+2025-01-15 16:13:39.9017|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:39.9017|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-15 16:13:40.0559|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-15 16:13:40.0559|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|

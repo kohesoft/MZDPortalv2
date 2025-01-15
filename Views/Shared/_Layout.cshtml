@@ -182,11 +182,27 @@ nav.sidebar {
                             <span class="text nav-text">Mola Saatleri</span>
                         </a>
                     </li>
+                    @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler"))
+                    {
+                        <li class="nav-link dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class='bx bx-user icon'></i>
+                                <span class="text nav-text">Görev</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler"))
+                                {
+                                    <li><a href="@Url.Action("Index", "Task")">Görev Atama</a></li>
+                                }
 
-                </ul>
+                                <li><a href="@Url.Action("UserTasks", "Task")">Görevlerim</a></li>
+                            </ul>
+                        </li>
+                    }
+                    </ul>
             </div>
             <div class="bottom-content">
-                @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("Kullanici") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem"))
+                @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("Kullanici") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler"))
                 {
                     <li class="nav-link dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -194,12 +210,6 @@ nav.sidebar {
                             <span class="text nav-text">Profilim</span>
                         </a>
                         <ul class="dropdown-menu">
-                            @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem"))
-                            {
-                                <li><a href="@Url.Action("Index", "Task")">Görev Atama</a></li>
-                            }
-
-                            <li><a href="@Url.Action("UserTasks", "Task")">Görevlerim</a></li>
                             <li><a href="@Url.Action("Edit", "User")">Profil Detayları</a></li>
                             <li><a href="@Url.Action("Bildirimlerim", "DilekOneri")">Bildirimlerim</a></li>
                         </ul>

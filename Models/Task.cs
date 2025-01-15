@@ -12,9 +12,12 @@ namespace MZDNETWORK.Models
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string Username { get; set; } // UserId yerine Username kullanýlýyor
+        public string Username { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
         public ICollection<TodoItem> TodoItems { get; set; }
         public int Progress { get; set; }
+        public string CreatedBy { get; set; } // Görevi oluþturan kullanýcý
     }
+
 }
