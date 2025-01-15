@@ -35,10 +35,10 @@
             @Html.DisplayFor(model => model.EndDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.User.Username)
+            @Html.DisplayNameFor(model => model.Username)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.User.Username)
+            @Html.DisplayFor(model => model.Username)
         </dd>
         <dt>
             Progress
@@ -55,6 +55,8 @@
 <table class="table">
     <tr>
         <th>Description</th>
+        <th>Additional Description</th>
+        <th>Due Date</th>
         <th>Is Completed</th>
         <th></th>
     </tr>
@@ -62,6 +64,15 @@
     {
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>
+                @using (Html.BeginForm("UpdateAdditionalDescription", "Task", FormMethod.Post, new { @class = "additional-description-form" }))
+                {
+                    @Html.Hidden("taskId", Model.Id)
+                    @Html.Hidden("todoItemId", item.Id)
+                    <input type="text" name="additionalDescription" value="@item.AdditionalDescription" class="form-control" />
+                }
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.DueDate)</td>
             <td>
                 @Html.CheckBoxFor(modelItem => item.IsCompleted, new { @class = "todo-checkbox", data_taskid = Model.Id, data_todoitemid = item.Id })
             </td>
@@ -86,6 +97,13 @@
                 $.post('@Url.Action("UpdateProgress", "Task")', { taskId: taskId, todoItemId: todoItemId, isCompleted: isCompleted }, function (data) {
                     location.reload();
                 });
+            });
+
+            $('.additional-description-form input[name="additionalDescription"]').keypress(function (e) {
+                if (e.which == 13) { // Enter tuşuna basıldığında
+                    e.preventDefault(); // Formun varsayılan gönderimini engelle
+                    $(this).closest('form').submit(); // Formu gönder
+                }
             });
         });
     </script>

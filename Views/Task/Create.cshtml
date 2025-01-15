@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", @type = "datetime-local" })
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                @Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", @type = "datetime-local" })
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -59,7 +59,11 @@
             @Html.Label("Todo Items", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div id="todoItemsContainer">
-                    <input type="text" name="todoDescriptions" class="form-control" placeholder="Todo item description" />
+                    <div class="todo-item">
+                        <input type="text" name="todoDescriptions" class="form-control" placeholder="Todo item description" />
+                        <input type="text" name="additionalDescriptions" class="form-control" placeholder="Additional description" />
+                        <input type="datetime-local" name="dueDates" class="form-control" placeholder="Due date" />
+                    </div>
                 </div>
                 <button type="button" id="addTodoItem" class="btn btn-default">Add Todo Item</button>
             </div>
@@ -81,12 +85,12 @@
     <script>
         document.getElementById('addTodoItem').addEventListener('click', function () {
             var container = document.getElementById('todoItemsContainer');
-            var input = document.createElement('input');
-            input.type = 'text';
-            input.name = 'todoDescriptions';
-            input.className = 'form-control';
-            input.placeholder = 'Todo item description';
-            container.appendChild(input);
+            var div = document.createElement('div');
+            div.className = 'todo-item';
+            div.innerHTML = '<input type="text" name="todoDescriptions" class="form-control" placeholder="Todo item description" />' +
+                '<input type="text" name="additionalDescriptions" class="form-control" placeholder="Additional description" />' +
+                '<input type="datetime-local" name="dueDates" class="form-control" placeholder="Due date" />';
+            container.appendChild(div);
         });
     </script>
 }

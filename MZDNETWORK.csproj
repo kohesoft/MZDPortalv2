@@ -314,14 +314,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202501141321348_Inti.cs" />
-    <Compile Include="Migrations\202501141321348_Inti.Designer.cs">
-      <DependentUpon>202501141321348_Inti.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202501141358113_UserıdtoUsername.cs" />
-    <Compile Include="Migrations\202501141358113_UserıdtoUsername.Designer.cs">
-      <DependentUpon>202501141358113_UserıdtoUsername.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\DilekOneri.cs" />
@@ -2358,12 +2350,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202501141321348_Inti.resx">
-      <DependentUpon>202501141321348_Inti.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202501141358113_UserıdtoUsername.resx">
-      <DependentUpon>202501141358113_UserıdtoUsername.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -28,7 +28,7 @@
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
             <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
             <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-            <td>@Html.DisplayFor(modelItem => item.User.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Username)</td>
             <td>
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" style="width: @item.Progress%;" aria-valuenow="@item.Progress" aria-valuemin="0" aria-valuemax="100">@item.Progress%</div>
@@ -44,4 +44,3 @@
     }
 
 </table>
-

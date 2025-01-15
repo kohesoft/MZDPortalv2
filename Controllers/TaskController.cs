@@ -1,8 +1,10 @@
+using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
+using System.Data.Entity;
 
 namespace MZDNETWORK.Controllers
 {
@@ -17,7 +19,7 @@ namespace MZDNETWORK.Controllers
 
         public ActionResult Index()
         {
-            var tasks = _context.Tasks.Include("User").Include("TodoItems").ToList();
+            var tasks = _context.Tasks.Include(t => t.User).ToList();
             return View(tasks);
         }
 
@@ -29,13 +31,19 @@ namespace MZDNETWORK.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> Create(MZDNETWORK.Models.Task task, string[] todoDescriptions)
+        public async Task<ActionResult> Create(MZDNETWORK.Models.Task task, string[] todoDescriptions, string[] additionalDescriptions, DateTime[] dueDates)
         {
             if (ModelState.IsValid)
             {
                 if (todoDescriptions != null)
                 {
-                    task.TodoItems = todoDescriptions.Select(desc => new TodoItem { Description = desc, IsCompleted = false }).ToList();
+                    task.TodoItems = todoDescriptions.Select((desc, index) => new TodoItem
+                    {
+                        Description = desc,
+                        AdditionalDescription = additionalDescriptions[index],
+                        DueDate = dueDates[index],
+                        IsCompleted = false
+                    }).ToList();
                 }
 
                 _context.Tasks.Add(task);
@@ -62,7 +70,7 @@ namespace MZDNETWORK.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> Edit(MZDNETWORK.Models.Task task, string[] todoDescriptions)
+        public async Task<ActionResult> Edit(MZDNETWORK.Models.Task task, string[] todoDescriptions, string[] additionalDescriptions, DateTime[] dueDates)
         {
             if (ModelState.IsValid)
             {
@@ -81,9 +89,15 @@ namespace MZDNETWORK.Controllers
                         _context.TodoItems.RemoveRange(existingTask.TodoItems);
 
                         // Yeni TodoItems öðelerini ekle
-                        foreach (var desc in todoDescriptions)
+                        for (int i = 0; i < todoDescriptions.Length; i++)
                         {
-                            existingTask.TodoItems.Add(new TodoItem { Description = desc, IsCompleted = false });
+                            existingTask.TodoItems.Add(new TodoItem
+                            {
+                                Description = todoDescriptions[i],
+                                AdditionalDescription = additionalDescriptions[i],
+                                DueDate = dueDates[i],
+                                IsCompleted = false
+                            });
                         }
                     }
 
@@ -98,8 +112,6 @@ namespace MZDNETWORK.Controllers
             return View(task);
         }
 
-
-
         public ActionResult Details(int id)
         {
             var task = _context.Tasks.Include("User").Include("TodoItems").FirstOrDefault(t => t.Id == id);
@@ -108,6 +120,7 @@ namespace MZDNETWORK.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.Username = task.Username; // Username bilgisini ViewBag'e ekle
             return View(task);
         }
 
@@ -119,12 +132,13 @@ namespace MZDNETWORK.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.Username = task.Username; // Username bilgisini ViewBag'e ekle
             return View(task);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
             var task = _context.Tasks.FirstOrDefault(t => t.Id == id);
             _context.Tasks.Remove(task);
@@ -133,7 +147,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        public async System.Threading.Tasks.Task<ActionResult> UpdateProgress(int taskId, int todoItemId, bool isCompleted)
+        public async Task<ActionResult> UpdateProgress(int taskId, int todoItemId, bool isCompleted)
         {
             var todoItem = _context.TodoItems.FirstOrDefault(t => t.Id == todoItemId);
             if (todoItem == null)
@@ -154,6 +168,26 @@ namespace MZDNETWORK.Controllers
             return RedirectToAction("Details", new { id = taskId });
         }
 
+        [HttpPost]
+        public async Task<ActionResult> UpdateAdditionalDescription(int taskId, int todoItemId, string additionalDescription)
+        {
+            if (string.IsNullOrEmpty(additionalDescription))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Additional description cannot be null or empty.");
+            }
+
+            var todoItem = _context.TodoItems.FirstOrDefault(t => t.Id == todoItemId);
+            if (todoItem == null)
+            {
+                return HttpNotFound();
+            }
+
+            todoItem.AdditionalDescription = additionalDescription;
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = taskId });
+        }
+
         // Kullanýcýlarýn görevlerini listelemek için yeni bir action
         public ActionResult UserTasks()
         {
@@ -167,6 +201,5 @@ namespace MZDNETWORK.Controllers
             ViewBag.Username = username; // Kullanýcý adýný ViewBag'e ekle
             return View(tasks);
         }
-
     }
 }
