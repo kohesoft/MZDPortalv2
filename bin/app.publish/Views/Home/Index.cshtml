@@ -1,0 +1,212 @@
+﻿@model List<Gonderi>
+@using System.Linq
+
+@{
+    ViewBag.Title = "Ana Sayfa";
+    Model.Reverse();
+}
+<head>
+
+</head>
+
+
+<body style="overflow-y: auto;">
+    <div class="container" style="max-width:100%; max-height:100%;">
+        <h2 style="text-align:center;">DUYURULAR</h2>
+
+        <div class="timeline" id="timeline">
+            @foreach (var post in Model)
+            {
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>@post.Title</h3>
+                        <p>@Html.Raw(post.Content)</p>
+                        <small>@post.CreatedAt.ToString("g")</small>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <p id="loading" style="text-align:center; display:none;">Yükleniyor...</p>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="feedbackModalLabel">Geri Bildirim</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Portalı beğendiniz mi?</p>
+                    <button type="button" class="btn btn-success" id="likeButton">Evet</button>
+                    <button type="button" class="btn btn-danger" id="dislikeButton">Hayır</button>
+                    <div id="suggestionDiv" style="display:none; margin-top: 10px;">
+                        <label for="suggestionInput">Ne önerirsiniz?</label>
+                        <input type="text" class="form-control" id="suggestionInput">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="submitFeedbackButton" style="display:none;">Gönder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+<style>
+    .timeline {
+        position: relative;
+        width: 100%;
+        margin: auto;
+        padding: 20px 0;
+        list-style: none;
+    }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #ddd;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+    .timeline-item {
+        position: relative;
+        margin: 20px 0;
+    }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            top: 0;
+            left: 50%;
+            margin-left: -10px;
+        }
+
+    .timeline-content {
+        padding: 50px;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        position: relative;
+        width: 45%;
+        overflow: hidden; /* Taşan içeriği gizlemek için */
+        word-wrap: break-word; /* Uzun kelimeleri bölmek için */
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+        left: 0;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+        left: 55%;
+    }
+
+    .timeline-content h3 {
+        margin-top: 0;
+        color: #007bff;
+    }
+
+    .timeline-content small {
+        color: #888;
+    }
+
+    .homev2 {
+        position: relative; /* absolute yerine relative kullanıldı */
+        top: 100px;
+        left: 50px;
+        min-height: 85vh; /* height yerine min-height kullanıldı */
+        width: calc(94% - 250px);
+        transition: var(--tran-05);
+    }
+
+    h2 {
+        margin-top: 0;
+        color: #007bff;
+        text-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Mavi glow efekti */
+    }
+
+
+
+    .modal-header {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .modal-footer {
+        justify-content: center;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('@Url.Action("HasFeedback", "Feedback")', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.hasFeedback) {
+                $('#feedbackModal').modal('show');
+            }
+        });
+
+        document.getElementById('likeButton').addEventListener('click', function() {
+            submitFeedback(true, "");
+            $('#feedbackModal').modal('hide');
+        });
+
+        document.getElementById('dislikeButton').addEventListener('click', function() {
+            document.getElementById('suggestionDiv').style.display = 'block';
+            document.getElementById('submitFeedbackButton').style.display = 'block';
+        });
+
+        document.getElementById('submitFeedbackButton').addEventListener('click', function() {
+            var suggestion = document.getElementById('suggestionInput').value;
+            submitFeedback(false, suggestion);
+            $('#feedbackModal').modal('hide');
+        });
+    });
+
+    function submitFeedback(liked, suggestion) {
+        fetch('@Url.Action("SubmitFeedback", "Feedback")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'RequestVerificationToken': '@Html.AntiForgeryToken()'
+            },
+            body: JSON.stringify({ liked: liked, suggestion: suggestion })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                localStorage.setItem("feedbackGiven", "true");
+            } else {
+                alert(data.message);
+            }
+        });
+    }
+</script>

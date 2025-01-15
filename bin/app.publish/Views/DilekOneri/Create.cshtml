@@ -1,0 +1,82 @@
+@model MZDNETWORK.Models.DilekOneri
+
+@{
+    ViewBag.Title = "Yeni Dilek ve Öneri";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<form class='dilek-istek-form login-form container' action="@Url.Action("Create", "DilekOneri")" method="post">
+    @Html.AntiForgeryToken()
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <div class="flex-row">
+        <label class="lf--label" for="Anonymous" style=" color:white">
+            <input type="checkbox" id="Anonymous" name="Anonymous" onclick="toggleUsername()" style="margin:10px;"> İsimsiz Gönder
+        </label>
+    </div>
+
+    <div class="flex-row">
+        <label class="lf--label" for="Username" style=" color:white; margin:10px;" >
+            <i class='bx bx-id-card'></i>
+        </label>
+        @Html.TextBoxFor(model => model.Username, new { @class = "lf--input", value = User.Identity.Name, @readonly = "readonly", id = "Username" })
+    </div>
+
+    <div class="flex-row">
+        <label class="lf--label" for="Mesaj" style=" color: white; margin: 10px;">
+            <i class='bx bx-message-dots'></i>
+        </label>
+        @Html.TextAreaFor(model => model.Mesaj, new { @class = "lf--input", placeholder = "Dilek ve önerileriniz", })
+        @Html.ValidationMessageFor(model => model.Mesaj)
+    </div>
+
+    <input class='lf--submit' type='submit' value='Gönder'>
+</form>
+<script>
+    function toggleUsername() {
+        var usernameField = document.getElementById("Username");
+        var anonymousCheckbox = document.getElementById("Anonymous");
+        if (anonymousCheckbox.checked) {
+            usernameField.value = "";
+            usernameField.readOnly = true;
+        } else {
+            usernameField.value = "@User.Identity.Name";
+            usernameField.readOnly = true;
+        }
+    }
+</script>
+<style>
+    .login-form {
+        width: 50vw;
+        max-width: unset;
+    }
+
+    .lf--label{
+        width:unset;
+    }
+</style>

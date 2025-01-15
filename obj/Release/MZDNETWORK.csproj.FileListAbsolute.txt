@@ -327,7 +327,6 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\tr\System.Web.Web
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\tr\System.Web.WebPages.Razor.resources.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\tr\System.Web.Optimization.resources.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.csproj.AssemblyReference.cache
-C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.Migrations.Inti.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.Properties.Resources.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.csproj.GenerateResource.cache
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.csproj.CoreCompileInputs.cache

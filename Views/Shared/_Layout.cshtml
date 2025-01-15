@@ -186,7 +186,7 @@ nav.sidebar {
                 </ul>
             </div>
             <div class="bottom-content">
-                @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("Kullanici") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon"))
+                @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("Kullanici") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem"))
                 {
                     <li class="nav-link dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -194,7 +194,7 @@ nav.sidebar {
                             <span class="text nav-text">Profilim</span>
                         </a>
                         <ul class="dropdown-menu">
-                            @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK"))
+                            @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem"))
                             {
                                 <li><a href="@Url.Action("Index", "Task")">Görev Atama</a></li>
                             }

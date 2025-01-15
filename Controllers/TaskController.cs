@@ -19,13 +19,14 @@ namespace MZDNETWORK.Controllers
         [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
         public ActionResult Index()
         {
-            var tasks = _context.Tasks.Include(t => t.User).ToList();
+            var currentUsername = User.Identity.Name; // Oturum açmýþ kullanýcýnýn kullanýcý adýný al
+            var tasks = _context.Tasks.Where(item => item.Username == currentUsername).ToList(); // Modeli filtrele ve listeye dönüþtür
             return View(tasks);
         }
         [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
         public ActionResult Create()
         {
-            ViewData["Username"] = new SelectList(_context.Users, "Username", "Name");
+            ViewData["Username"] = new SelectList(_context.Users, "Username", "Username");
             return View();
         }
         [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
