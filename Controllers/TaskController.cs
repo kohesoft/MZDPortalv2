@@ -16,19 +16,19 @@ namespace MZDNETWORK.Controllers
         {
             _context = new MZDNETWORKContext();
         }
-
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
         public ActionResult Index()
         {
             var tasks = _context.Tasks.Include(t => t.User).ToList();
             return View(tasks);
         }
-
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
         public ActionResult Create()
         {
             ViewData["Username"] = new SelectList(_context.Users, "Username", "Name");
             return View();
         }
-
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(MZDNETWORK.Models.Task task, string[] todoDescriptions, string[] additionalDescriptions, DateTime[] dueDates)
@@ -54,7 +54,7 @@ namespace MZDNETWORK.Controllers
             ViewBag.Users = new SelectList(_context.Users, "Username", "Name", task.Username);
             return View(task);
         }
-
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
         public ActionResult Edit(int id)
         {
             var task = _context.Tasks.Include("TodoItems").FirstOrDefault(t => t.Id == id);
@@ -67,7 +67,7 @@ namespace MZDNETWORK.Controllers
             ViewBag.TodoItems = task.TodoItems; // Mevcut TodoItems öðelerini ViewBag'e ekle
             return View(task);
         }
-
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(MZDNETWORK.Models.Task task, string[] todoDescriptions, string[] additionalDescriptions, DateTime[] dueDates)
@@ -123,7 +123,7 @@ namespace MZDNETWORK.Controllers
             ViewBag.Username = task.Username; // Username bilgisini ViewBag'e ekle
             return View(task);
         }
-
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
         public ActionResult Delete(int id)
         {
             var task = _context.Tasks.FirstOrDefault(t => t.Id == id);
@@ -135,7 +135,7 @@ namespace MZDNETWORK.Controllers
             ViewBag.Username = task.Username; // Username bilgisini ViewBag'e ekle
             return View(task);
         }
-
+        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

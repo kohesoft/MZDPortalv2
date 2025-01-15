@@ -4,51 +4,48 @@
     ViewBag.Title = "Görev Sil";
 }
 
-<h2>Görev Sil</h2>
+<head>
+    <link rel="stylesheet" href="~/Content/all.min.css" />
+    <link rel="stylesheet" href="~/Content/Task.css" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-<h3>Bu görevi silmek istediğinizden emin misiniz?</h3>
-<div>
-    <h4>Görev</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Görevin Adı
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            Görev Açıklaması
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            Görevin Başlangıç Tarihi
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt>
-            Görevin Bitiş Tarihi
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt>
-            Atanan Kullanıcı
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-    </dl>
+<section class="container" style="max-width:100%; max-height:100%;">
+    <div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Görev Sil</h3>
+            </div>
+            <div class="card-body">
+                <h3>Bu görevi silmek istediğinizden emin misiniz?</h3>
+                <div class="form-horizontal">
+                    <h4>Görev</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>Görevin Adı</dt>
+                        <dd>@Html.DisplayFor(model => model.Title)</dd>
+                        <dt>Görev Açıklaması</dt>
+                        <dd>@Html.DisplayFor(model => model.Description)</dd>
+                        <dt>Görevin Başlangıç Tarihi</dt>
+                        <dd>@Html.DisplayFor(model => model.StartDate)</dd>
+                        <dt>Görevin Bitiş Tarihi</dt>
+                        <dd>@Html.DisplayFor(model => model.EndDate)</dd>
+                        <dt>Atanan Kullanıcı</dt>
+                        <dd>@Html.DisplayFor(model => model.Username)</dd>
+                    </dl>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div class="form-actions no-color">
-            <input type="submit" value="Sil" class="btn btn-default" /> |
-            @Html.ActionLink("Geri Dön", "Index")
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Sil" class="btn btn-danger" />
+                            @Html.ActionLink("Geri Dön", "Index", null, new { @class = "btn btn-secondary" })
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
-    }
-</div>
+    </div>
+</section>

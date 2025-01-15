@@ -1,88 +1,83 @@
 ﻿@model MZDNETWORK.Models.Task
 
 @{
-    ViewBag.Title = "Task Details";
+    ViewBag.Title = "Görev Detayları";
 }
 
-<h2>Task Details</h2>
+<head>
+    <link rel="stylesheet" href="~/Content/all.min.css" />
+    <link rel="stylesheet" href="~/Content/Task.css" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-<div>
-    <h4>Task</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Görev Adı
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            Görev Açıklaması
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            Görevin Başlangıç Tarihi
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt>
-            Görevin Bitiş Tarihi
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt>
-            Atanan Kullanıcı
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-        <dt>
-            Görev İlerlemesi
-        </dt>
-        <dd>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: @Model.Progress%;" aria-valuenow="@Model.Progress" aria-valuemin="0" aria-valuemax="100">@Model.Progress%</div>
+<section class="container" style="max-width:100%; max-height:100%;">
+    <div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Görev Detayları</h3>
             </div>
-        </dd>
-    </dl>
-</div>
+            <div class="card-body">
+                <div class="form-horizontal">
+                    <h4>Görev</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>Görev Adı</dt>
+                        <dd style="border: 1px solid #ccc; padding: 5px;">@Html.DisplayFor(model => model.Title)</dd>
+                        <dt>Görev Açıklaması</dt>
+                        <dd style="border: 1px solid #ccc; padding: 5px;">@Html.DisplayFor(model => model.Description)</dd>
+                        <dt>Görevin Başlangıç Tarihi</dt>
+                        <dd style="border: 1px solid #ccc; padding: 5px;">@Html.DisplayFor(model => model.StartDate)</dd>
+                        <dt>Görevin Bitiş Tarihi</dt>
+                        <dd style="border: 1px solid #ccc; padding: 5px;">@Html.DisplayFor(model => model.EndDate)</dd>
+                        <dt>Atanan Kullanıcı</dt>
+                        <dd style="border: 1px solid #ccc; padding: 5px;">@Html.DisplayFor(model => model.Username)</dd>
+                        <dt>Görev İlerlemesi</dt>
+                        <dd>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: @Model.Progress%;" aria-valuenow="@Model.Progress" aria-valuemin="0" aria-valuemax="100">@Model.Progress%</div>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
 
-<h4>Todo Items</h4>
-<table class="table">
-    <tr>
-        <th>Görev Açıklaması</th>
-        <th>Ek Açıklama</th>
-        <th>Geç Tarih</th>
-        <th>Tamamlandı mı?</th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model.TodoItems)
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Description)</td>
-            <td>
-                @using (Html.BeginForm("UpdateAdditionalDescription", "Task", FormMethod.Post, new { @class = "additional-description-form" }))
-                {
-                    @Html.Hidden("taskId", Model.Id)
-                    @Html.Hidden("todoItemId", item.Id)
-                    <input type="text" name="additionalDescription" value="@item.AdditionalDescription" class="form-control" />
-                }
-            </td>
-            <td>@Html.DisplayFor(modelItem => item.DueDate)</td>
-            <td>
-                @Html.CheckBoxFor(modelItem => item.IsCompleted, new { @class = "todo-checkbox", data_taskid = Model.Id, data_todoitemid = item.Id })
-            </td>
-        </tr>
-    }
-</table>
+                <h4>Todo Items</h4>
+                <table class="table">
+                    <tr>
+                        <th>Görev Açıklaması</th>
+                        <th>Ek Açıklama</th>
+                        <th>Geç Tarih</th>
+                        <th>Tamamlandı mı?</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.TodoItems)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                            <td>
+                                @using (Html.BeginForm("UpdateAdditionalDescription", "Task", FormMethod.Post, new { @class = "additional-description-form" }))
+                                {
+                                    @Html.Hidden("taskId", Model.Id)
+                                    @Html.Hidden("todoItemId", item.Id)
+                                    <input type="text" name="additionalDescription" value="@item.AdditionalDescription" class="form-control" />
+                                }
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.DueDate)</td>
+                            <td>
+                                @Html.CheckBoxFor(modelItem => item.IsCompleted, new { @class = "todo-checkbox", data_taskid = Model.Id, data_todoitemid = item.Id })
+                            </td>
+                        </tr>
+                    }
+                </table>
 
-<div>
-    @Html.ActionLink("Geri Dön", "Index")
-</div>
+                <div>
+                    @Html.ActionLink("Geri Dön", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -107,4 +102,3 @@
         });
     </script>
 }
-

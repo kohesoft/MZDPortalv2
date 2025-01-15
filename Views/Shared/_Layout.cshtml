@@ -182,49 +182,46 @@ nav.sidebar {
                             <span class="text nav-text">Mola Saatleri</span>
                         </a>
                     </li>
-                    <li class="nav-link">
-                        <a href="@Url.Action("Index", "Task")">
-                            <i class='bx bx-time icon'></i>
-                            <span class="text nav-text">Task</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="@Url.Action("UserTasks", "Task")">
-                            <i class='bx bx-time icon'></i>
-                            <span class="text nav-text">UserTasks</span>
-                        </a>
-                    </li>
 
                 </ul>
             </div>
             <div class="bottom-content">
-                <li class="nav-link dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class='bx bx-user icon'></i>
-                        <span class="text nav-text">Profilim</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="@Url.Action("Edit", "User")">Profil Detayları</a></li>
-                        <li><a href="@Url.Action("Bildirimlerim", "DilekOneri")">Bildirimlerim</a></li>
-                    </ul>
-                </li>
-                <li class="nav-link">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <a href="@Url.Action("Logout", "Account")">
-                            <i class='bx bx-log-out icon'></i>
-                            <span class="text nav-text">Çıkış yap</span>
+                @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("Kullanici") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon"))
+                {
+                    <li class="nav-link dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class='bx bx-user icon'></i>
+                            <span class="text nav-text">Profilim</span>
                         </a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Login", "Account")">
-                            <i class='bx bx-log-in icon'></i>
-                            <span class="text nav-text">Giriş yap</span>
-                        </a>
-                    }
-                </li>
-            </div>
+                        <ul class="dropdown-menu">
+                            @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK"))
+                            {
+                                <li><a href="@Url.Action("Index", "Task")">Görev Atama</a></li>
+                            }
+
+                            <li><a href="@Url.Action("UserTasks", "Task")">Görevlerim</a></li>
+                            <li><a href="@Url.Action("Edit", "User")">Profil Detayları</a></li>
+                            <li><a href="@Url.Action("Bildirimlerim", "DilekOneri")">Bildirimlerim</a></li>
+                        </ul>
+                    </li>
+                }
+                    <li class="nav-link">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="@Url.Action("Logout", "Account")">
+                                <i class='bx bx-log-out icon'></i>
+                                <span class="text nav-text">Çıkış yap</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Login", "Account")">
+                                <i class='bx bx-log-in icon'></i>
+                                <span class="text nav-text">Giriş yap</span>
+                            </a>
+                        }
+                    </li>
+                </div>
         </div>
     </nav>
     <div class="main-content">
