@@ -11,37 +11,37 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            Görev Adı
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Title)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            Görev Açıklaması
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            Görevin Başlangıç Tarihi
         </dt>
         <dd>
             @Html.DisplayFor(model => model.StartDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
+            Görevin Bitiş Tarihi
         </dt>
         <dd>
             @Html.DisplayFor(model => model.EndDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Username)
+            Atanan Kullanıcı
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Username)
         </dd>
         <dt>
-            Progress
+            Görev İlerlemesi
         </dt>
         <dd>
             <div class="progress">
@@ -54,10 +54,10 @@
 <h4>Todo Items</h4>
 <table class="table">
     <tr>
-        <th>Description</th>
-        <th>Additional Description</th>
-        <th>Due Date</th>
-        <th>Is Completed</th>
+        <th>Görev Açıklaması</th>
+        <th>Ek Açıklama</th>
+        <th>Geç Tarih</th>
+        <th>Tamamlandı mı?</th>
         <th></th>
     </tr>
     @foreach (var item in Model.TodoItems)
@@ -81,8 +81,7 @@
 </table>
 
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Geri Dön", "Index")
 </div>
 
 @section Scripts {

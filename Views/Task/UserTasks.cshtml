@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<MZDNETWORK.Models.Task>
 @{
-    ViewBag.Title = "User Tasks";
+    ViewBag.Title = "Kullanıcı Görevleri";
 }
 
 <h2>Görevler</h2>
@@ -13,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Görev Adı
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Görev Açıklaması
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartDate)
+                Görev Başlangıç Tarihi
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndDate)
+                Görev Bitiş Tarihi
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Progress)
+                Görev İlerlemesi
             </th>
             <th></th>
         </tr>
@@ -52,7 +52,7 @@
                     </div>
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Detaylar", "Details", new { id = item.Id }) |
                 </td>
             </tr>
         }

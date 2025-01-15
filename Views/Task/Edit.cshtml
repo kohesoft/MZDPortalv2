@@ -1,88 +1,88 @@
 ﻿@model MZDNETWORK.Models.Task
 
 @{
-    ViewBag.Title = "Edit Task";
+    ViewBag.Title = "Görev Düzenle";
 }
 
-<h2>Edit Task</h2>
+<h2>Görev Düzenle</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Task</h4>
+        <h4>Görev</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        Görevin Adı
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
         </div>
+    </div>
+
+    <div class="form-group">
+        Görev Açıklaması
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Görevin Başlangıç Tarihi
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Görevin Bitiş Tarihi
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Atanacak Kullanıcı
+        <div class="col-md-10">
+            @Html.DropDownList("Username", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, "Username", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Username", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Todo Items</label>
+            <label class="control-label col-md-2">Görevler</label>
             <div class="col-md-10">
                 <div id="todoItemsContainer">
                     @foreach (var item in ViewBag.TodoItems)
                     {
                         <div class="todo-item">
-                            <input type="text" name="todoDescriptions" class="form-control" value="@item.Description" placeholder="Todo item description" />
-                            <input type="text" name="additionalDescriptions" class="form-control" value="@item.AdditionalDescription" placeholder="Additional description" />
-                            <input type="datetime-local" name="dueDates" class="form-control" value="@item.DueDate.ToString("yyyy-MM-ddTHH:mm")" placeholder="Due date" />
+                            <input type="text" name="todoDescriptions" class="form-control" value="@item.Description" placeholder="Görev Açıklaması" />
+                            <input type="text" name="additionalDescriptions" class="form-control" value="@item.AdditionalDescription" placeholder="Ek Açıklama" />
+                            <input type="datetime-local" name="dueDates" class="form-control" value="@item.DueDate.ToString("yyyy-MM-ddTHH:mm")" placeholder="Geç Tarih" />
                         </div>
                     }
                 </div>
-                <button type="button" id="addTodoItem" class="btn btn-default">Add Todo Item</button>
+                <button type="button" id="addTodoItem" class="btn btn-default">Görev Ekle</button>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Kaydet" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Geri Dön", "Index")
 </div>
 
 @section Scripts {
