@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2025-01-15T13:16:47.8734929Z||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
+    <History>True|2025-01-16T14:13:10.8439532Z||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -148,10 +148,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.dll">
-      <publishTime>01/15/2025 17:05:20</publishTime>
+      <publishTime>01/16/2025 17:13:01</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.pdb">
-      <publishTime>01/15/2025 17:05:20</publishTime>
+      <publishTime>01/16/2025 17:13:01</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -457,7 +457,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Content/Dokumantasyon.css">
-      <publishTime>01/07/2025 08:33:56</publishTime>
+      <publishTime>01/16/2025 16:36:18</publishTime>
     </File>
     <File Include="Content/IKlayout.css">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6196,7 +6196,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/BilgiIslem/YemekYukle.cshtml">
-      <publishTime>01/07/2025 08:33:56</publishTime>
+      <publishTime>01/16/2025 14:30:13</publishTime>
     </File>
     <File Include="Views/Contact/Index.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6208,16 +6208,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/Dokumantasyon/Create.cshtml">
-      <publishTime>01/07/2025 08:33:56</publishTime>
+      <publishTime>01/16/2025 16:14:03</publishTime>
     </File>
     <File Include="Views/Dokumantasyon/Delete.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/Dokumantasyon/Details.cshtml">
-      <publishTime>01/07/2025 08:33:56</publishTime>
+      <publishTime>01/16/2025 16:36:18</publishTime>
     </File>
     <File Include="Views/Dokumantasyon/Edit.cshtml">
-      <publishTime>01/07/2025 08:33:56</publishTime>
+      <publishTime>01/16/2025 16:14:03</publishTime>
     </File>
     <File Include="Views/Dokumantasyon/Index.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6237,11 +6237,17 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Views/Home/Index.cshtml">
       <publishTime>01/14/2025 10:09:54</publishTime>
     </File>
+    <File Include="Views/Home/MerkezYemekListesi.cshtml">
+      <publishTime>01/16/2025 14:30:13</publishTime>
+    </File>
     <File Include="Views/Home/Mola.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/Home/YemekListesi.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="Views/Home/YerleskeYemekListesi.cshtml">
+      <publishTime>01/16/2025 14:30:13</publishTime>
     </File>
     <File Include="Views/InsanKaynaklari/DilekIstek_IK.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6250,7 +6256,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/24/2024 08:04:40</publishTime>
     </File>
     <File Include="Views/Kullanici_Islemleri/Create.cshtml">
-      <publishTime>01/15/2025 11:47:50</publishTime>
+      <publishTime>01/16/2025 12:45:43</publishTime>
     </File>
     <File Include="Views/Kullanici_Islemleri/Delete.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6259,7 +6265,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/Kullanici_Islemleri/Edit.cshtml">
-      <publishTime>01/07/2025 08:33:56</publishTime>
+      <publishTime>01/16/2025 12:45:41</publishTime>
     </File>
     <File Include="Views/Kullanici_Islemleri/Index.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6277,7 +6283,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/24/2024 14:29:26</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/15/2025 17:02:55</publishTime>
+      <publishTime>01/16/2025 16:46:16</publishTime>
     </File>
     <File Include="Views/Task/Create.cshtml">
       <publishTime>01/15/2025 10:36:09</publishTime>
@@ -6307,7 +6313,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/User/Edit.cshtml">
-      <publishTime>01/07/2025 08:33:56</publishTime>
+      <publishTime>01/16/2025 17:07:41</publishTime>
     </File>
     <File Include="Views/UserInfoes/Create.cshtml">
       <publishTime>01/02/2025 17:22:05</publishTime>
