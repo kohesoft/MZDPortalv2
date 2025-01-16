@@ -128,7 +128,7 @@ namespace MZDNETWORK.Controllers
             Dokumantasyon dokumantasyon = db.Dokumantasyons.Find(id);
             db.Dokumantasyons.Remove(dokumantasyon);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index_sorumlu");
         }
 
         protected override void Dispose(bool disposing)

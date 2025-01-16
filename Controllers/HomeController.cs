@@ -33,7 +33,11 @@ namespace MZDNETWORK.Controllers
             return PartialView("_PostPartial", posts);
         }
 
-        public ActionResult YemekListesi()
+        public ActionResult MerkezYemekListesi()
+        {
+            return View();
+        }
+        public ActionResult YerleskeYemekListesi()
         {
             return View();
         }

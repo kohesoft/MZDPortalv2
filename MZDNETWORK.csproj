@@ -314,9 +314,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202501151257351_Inti.cs" />
-    <Compile Include="Migrations\202501151257351_Inti.Designer.cs">
-      <DependentUpon>202501151257351_Inti.cs</DependentUpon>
+    <Compile Include="Migrations\202501161131511_Inti.cs" />
+    <Compile Include="Migrations\202501161131511_Inti.Designer.cs">
+      <DependentUpon>202501161131511_Inti.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
@@ -2281,7 +2281,6 @@
     <Content Include="Views\Kullanici_Islemleri\Edit.cshtml" />
     <Content Include="Views\Kullanici_Islemleri\Index.cshtml" />
     <Content Include="Views\BilgiIslem\YemekYukle.cshtml" />
-    <Content Include="Views\Home\YemekListesi.cshtml" />
     <Content Include="Views\Gonderi\GonderiOlustur.cshtml" />
     <Content Include="Views\Gonderi\GonderiSil.cshtml" />
     <Content Include="Views\DilekOneri\Bildirimlerim.cshtml" />
@@ -2313,6 +2312,8 @@
     <Content Include="Views\Task\UserTasks.cshtml" />
     <Content Include="Views\Task\Index.cshtml" />
     <Content Include="Views\Task\Delete.cshtml" />
+    <Content Include="Views\Home\MerkezYemekListesi.cshtml" />
+    <Content Include="Views\Home\YerleskeYemekListesi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2354,8 +2355,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202501151257351_Inti.resx">
-      <DependentUpon>202501151257351_Inti.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202501161131511_Inti.resx">
+      <DependentUpon>202501161131511_Inti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -36,7 +36,7 @@
         }
 
 nav.sidebar {
-    width: 250px; /* Sidebar genişliği */
+    width: 285px; /* Sidebar genişliği */
 }
 
 .nav-link.dropdown .dropdown-menu {
@@ -61,9 +61,9 @@ nav.sidebar {
 }
 
         .main-content {
-            margin-left: 250px; /* Sidebar genişliği kadar boşluk bırak */
+            margin-left: 285px; /* Sidebar genişliği kadar boşluk bırak */
             padding: 20px;
-            min-width: calc(100% - 250px); /* Sidebar genişliğini hesaba kat */
+            min-width: calc(100% - 285px); /* Sidebar genişliğini hesaba kat */
             min-height: 100vh;
         }
     </style>
@@ -143,7 +143,7 @@ nav.sidebar {
                             </ul>
                         </li>
                     }
-                    @if (User.IsInRole("Dokumantasyon") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("Kullanici"))
+                    @if (User.IsInRole("Dokumantasyon") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("Merkez") || User.IsInRole("Yerleske"))
                     {
                         <li class="nav-link dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,57 +152,67 @@ nav.sidebar {
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="@Url.Action("Index", "Dokumantasyon")">Stok Kartı</a></li>
+                                @if (User.IsInRole("Dokumantasyon") || User.IsInRole("Yonetici") || User.IsInRole("Sys"))
+                                {
+                                    <li><a href="@Url.Action("Index_sorumlu", "Dokumantasyon")">Gelen Talepler</a></li>
+                                }
                             </ul>
                         </li>
                     }
-                    @if (User.IsInRole("Dokumantasyon") || User.IsInRole("Yonetici") || User.IsInRole("Sys"))
+                    @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler") || User.IsInRole("Merkez") || User.IsInRole("Yerleske"))
                     {
                         <li class="nav-link">
-                            <a href="@Url.Action("Index_sorumlu", "Dokumantasyon")">
-                                <i class='bx bx-book-open icon'></i>
-                                <span class="text nav-text">Dokümantasyon</span>
+                            <a href="@Url.Action("Create", "DilekOneri")">
+                                <i class='bx bx-envelope icon'></i>
+                                <span class="text nav-text">Dilek & Öneri</span>
                             </a>
                         </li>
                     }
-                    <li class="nav-link">
-                        <a href="@Url.Action("Create", "DilekOneri")">
-                            <i class='bx bx-envelope icon'></i>
-                            <span class="text nav-text">Dilek & Öneri</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="@Url.Action("YemekListesi", "Home")">
-                            <i class='bx bx-food-menu icon'></i>
-                            <span class="text nav-text">Yemek Listesi</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="@Url.Action("Mola", "Home")">
-                            <i class='bx bx-time icon'></i>
-                            <span class="text nav-text">Mola Saatleri</span>
-                        </a>
-                    </li>
-                    @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler"))
+                    @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler") || User.IsInRole("Merkez"))
                     {
-                        <li class="nav-link dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class='bx bx-user icon'></i>
-                                <span class="text nav-text">Görev</span>
+                        <li class="nav-link">
+                            <a href="@Url.Action("MerkezYemekListesi", "Home")">
+                                <i class='bx bx-food-menu icon'></i>
+                                <span class="text nav-text">Merkez Yemek Listesi</span>
                             </a>
-                            <ul class="dropdown-menu">
-                                @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler"))
-                                {
-                                    <li><a href="@Url.Action("Index", "Task")">Görev Atama</a></li>
-                                }
-
-                                <li><a href="@Url.Action("UserTasks", "Task")">Görevlerim</a></li>
-                            </ul>
                         </li>
                     }
+                    @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler") || User.IsInRole("Yerleske"))
+                    {
+                        <li class="nav-link">
+                            <a href="@Url.Action("YerleskeYemekListesi", "Home")">
+                                <i class='bx bx-food-menu icon'></i>
+                                <span class="text nav-text">Yerleşke Yemek Listesi</span>
+                            </a>
+                        </li>
+                    }
+                        <li class="nav-link">
+                            <a href="@Url.Action("Mola", "Home")">
+                                <i class='bx bx-time icon'></i>
+                                <span class="text nav-text">Mola Saatleri</span>
+                            </a>
+                        </li>
+                        @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler"))
+                        {
+                            <li class="nav-link dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class='bx bx-user icon'></i>
+                                    <span class="text nav-text">Görev</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Task")">Görev Atama</a></li>
+                                    }
+
+                                    <li><a href="@Url.Action("UserTasks", "Task")">Görevlerim</a></li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
             </div>
             <div class="bottom-content">
-                @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("Kullanici") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler"))
+                @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler") || User.IsInRole("Merkez") || User.IsInRole("Yerleske"))
                 {
                     <li class="nav-link dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

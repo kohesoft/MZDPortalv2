@@ -17,18 +17,25 @@ namespace MZDNETWORK.Controllers
 
         public ActionResult YemekYukle()
         {
-            var photoDirectory = HttpContext.Server.MapPath("~/UploadPhotos");
-            var photos = Directory.GetFiles(photoDirectory).Select(Path.GetFileName).ToList();
-            return View(photos);
+            var photoDirectoryMerkez = HttpContext.Server.MapPath("~/UploadPhotosMerkez");
+            var photosMerkez = Directory.GetFiles(photoDirectoryMerkez).Select(Path.GetFileName).ToList();
+
+            var photoDirectoryYerleske = HttpContext.Server.MapPath("~/UploadPhotosYerleske");
+            var photosYerleske = Directory.GetFiles(photoDirectoryYerleske).Select(Path.GetFileName).ToList();
+
+            ViewBag.PhotosMerkez = photosMerkez;
+            ViewBag.PhotosYerleske = photosYerleske;
+
+            return View();
         }
 
         [HttpPost]
-        public ActionResult UploadPhoto(HttpPostedFileBase photo)
+        public ActionResult UploadPhotoMerkez(HttpPostedFileBase photo)
         {
             if (photo != null && photo.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(photo.FileName);
-                var path = Path.Combine(HttpContext.Server.MapPath("~/UploadPhotos"), fileName);
+                var path = Path.Combine(HttpContext.Server.MapPath("~/UploadPhotosMerkez"), fileName);
                 try
                 {
                     photo.SaveAs(path);
@@ -42,11 +49,60 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteYemek(string fileName)
+        public ActionResult UploadPhotoYerleske(HttpPostedFileBase photo)
+        {
+            if (photo != null && photo.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(photo.FileName);
+                var path = Path.Combine(HttpContext.Server.MapPath("~/UploadPhotosYerleske"), fileName);
+                try
+                {
+                    photo.SaveAs(path);
+                }
+                catch (Exception ex)
+                {
+                    TempData["Error"] = "Fotoğraf yüklenirken bir hata oluştu.";
+                }
+            }
+            return RedirectToAction("YemekYukle", "BilgiIslem");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteYemekMerkez(string fileName)
         {
             if (!string.IsNullOrEmpty(fileName))
             {
-                var path = Path.Combine(HttpContext.Server.MapPath("~/UploadPhotos"), fileName);
+                var path = Path.Combine(HttpContext.Server.MapPath("~/UploadPhotosMerkez"), fileName);
+                if (System.IO.File.Exists(path))
+                {
+                    try
+                    {
+                        System.IO.File.Delete(path);
+                        TempData["Message"] = "Dosya başarıyla silindi.";
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["Error"] = $"Dosya silinirken bir hata oluştu: {ex.Message}";
+                    }
+                }
+                else
+                {
+                    TempData["Error"] = "Dosya bulunamadı.";
+                }
+            }
+            else
+            {
+                TempData["Error"] = "Geçersiz dosya adı.";
+            }
+            return RedirectToAction("YemekYukle", "BilgiIslem");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteYemekYerleske(string fileName)
+        {
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                var path = Path.Combine(HttpContext.Server.MapPath("~/UploadPhotosYerleske"), fileName);
                 if (System.IO.File.Exists(path))
                 {
                     try
