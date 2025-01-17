@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
     <script src="~/Scripts/jquery-3.7.1.min.js"></script>
-    <script>$(document).ready(function () {
+    <script>
+        $(document).ready(function () {
             $('.form-group').hide();
             $('.common-fields').show();
 
@@ -22,7 +23,15 @@
 
     <link href="~/Content/Dokumantasyon.css" rel='stylesheet'>
 
+    <style>
+        .single-line-textarea {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
 </head>
+
 <body style="color:white;">
 
     @using (Html.BeginForm())
@@ -87,7 +96,6 @@
                         </label>
                         @Html.EditorFor(model => model.DokumantasyonTarih, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dokumantasyon Tarih", id = "DokumantasyonTarih", @readonly = "readonly" } })
                         @Html.ValidationMessageFor(model => model.DokumantasyonTarih, "", new { @class = "text-danger" })
-                        <button type="button" class="btn btn-primary" id="setCurrentDate">Güncel Tarih</button>
                     </div>
 
                     <script>$(document).ready(function () {
@@ -522,7 +530,6 @@
 
                     <div class="form-group common-fields">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Kaydet" class="btn btn-success" />
                             @Html.ActionLink("Geri Dön", "Index", null, new { @class = "btn btn-secondary" })
                         </div>
                     </div>
