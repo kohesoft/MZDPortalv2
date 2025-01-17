@@ -6,11 +6,189 @@
     Model.Reverse();
 }
 <head>
+    <script>
+     /*   document.addEventListener("DOMContentLoaded", function () {
+            const apiKey = 'f74518f7055cb2380f242b601abffe66'; // OpenWeatherMap API anahtarınızı buraya ekleyin
+            const city = 'Ankara'; // Hava durumu bilgisini almak istediğiniz şehir
 
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=tr`)
+                .then(response => response.json())
+                .then(data => {
+                    const weatherContainer = document.getElementById('weather');
+                    const weatherDescription = data.weather[0].description;
+                    const temperature = data.main.temp;
+                    const humidity = data.main.humidity;
+                    const windSpeed = data.wind.speed;
+
+                    weatherContainer.innerHTML = `
+                        <h3>Hava Durumu - ${city}</h3>
+                        <p>Durum: ${weatherDescription}</p>
+                        <p>Sıcaklık: ${temperature}°C</p>
+                        <p>Nem: ${humidity}%</p>
+                        <p>Rüzgar Hızı: ${windSpeed} m/s</p>
+                    `;
+                })
+                .catch(error => console.error('Hava durumu verileri alınamadı:', error));
+        });
+        */
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const apiKey = '2dc4999e55138269e510d80f4ffde03a'; // Weatherstack API anahtarınızı buraya ekleyin
+            const city = 'Ankara'; // Hava durumu bilgisini almak istediğiniz şehir
+
+            const weatherTranslations = {
+                "Sunny": "Güneşli",
+                "Partly cloudy": "Parçalı bulutlu",
+                "Cloudy": "Bulutlu",
+                "Overcast": "Kapalı",
+                "Mist": "Sisli",
+                "Patchy rain possible": "Yer yer yağmur ihtimali",
+                "Patchy snow possible": "Yer yer kar ihtimali",
+                "Patchy sleet possible": "Yer yer sulu kar ihtimali",
+                "Patchy freezing drizzle possible": "Yer yer donan çisenti ihtimali",
+                "Thundery outbreaks possible": "Gök gürültülü sağanak ihtimali",
+                "Blowing snow": "Savrulan kar",
+                "Blizzard": "Kar fırtınası",
+                "Fog": "Sis",
+                "Freezing fog": "Donan sis",
+                "Patchy light drizzle": "Yer yer hafif çisenti",
+                "Light drizzle": "Hafif çisenti",
+                "Freezing drizzle": "Donan çisenti",
+                "Heavy freezing drizzle": "Yoğun donan çisenti",
+                "Patchy light rain": "Yer yer hafif yağmur",
+                "Light rain": "Hafif yağmur",
+                "Moderate rain at times": "Zaman zaman orta şiddetli yağmur",
+                "Moderate rain": "Orta şiddetli yağmur",
+                "Heavy rain at times": "Zaman zaman şiddetli yağmur",
+                "Heavy rain": "Şiddetli yağmur",
+                "Light freezing rain": "Hafif donan yağmur",
+                "Moderate or heavy freezing rain": "Orta şiddetli veya şiddetli donan yağmur",
+                "Light sleet": "Hafif sulu kar",
+                "Moderate or heavy sleet": "Orta şiddetli veya şiddetli sulu kar",
+                "Patchy light snow": "Yer yer hafif kar",
+                "Light snow": "Hafif kar",
+                "Patchy moderate snow": "Yer yer orta şiddetli kar",
+                "Moderate snow": "Orta şiddetli kar",
+                "Patchy heavy snow": "Yer yer yoğun kar",
+                "Heavy snow": "Yoğun kar",
+                "Ice pellets": "Buz taneleri",
+                "Light rain shower": "Hafif sağanak yağmur",
+                "Moderate or heavy rain shower": "Orta şiddetli veya şiddetli sağanak yağmur",
+                "Torrential rain shower": "Şiddetli sağanak yağmur",
+                "Light sleet showers": "Hafif sağanak sulu kar",
+                "Moderate or heavy sleet showers": "Orta şiddetli veya şiddetli sağanak sulu kar",
+                "Light snow showers": "Hafif sağanak kar",
+                "Moderate or heavy snow showers": "Orta şiddetli veya şiddetli sağanak kar",
+                "Light showers of ice pellets": "Hafif sağanak buz taneleri",
+                "Moderate or heavy showers of ice pellets": "Orta şiddetli veya şiddetli sağanak buz taneleri",
+                "Patchy light rain with thunder": "Gök gürültülü yer yer hafif yağmur",
+                "Moderate or heavy rain with thunder": "Gök gürültülü orta şiddetli veya şiddetli yağmur",
+                "Patchy light snow with thunder": "Gök gürültülü yer yer hafif kar",
+                "Moderate or heavy snow with thunder": "Gök gürültülü orta şiddetli veya şiddetli kar"
+            };
+
+            const weatherBackgrounds = {
+                "Güneşli": "sunny-bg",
+                "Parçalı bulutlu": "partly-cloudy-bg",
+                "Bulutlu": "cloudy-bg",
+                "Kapalı": "overcast-bg",
+                "Sisli": "mist-bg",
+                "Yer yer yağmur ihtimali": "patchy-rain-bg",
+                "Yer yer kar ihtimali": "patchy-snow-bg",
+                "Yer yer sulu kar ihtimali": "patchy-sleet-bg",
+                "Yer yer donan çisenti ihtimali": "patchy-freezing-drizzle-bg",
+                "Gök gürültülü sağanak ihtimali": "thundery-outbreaks-bg",
+                "Savrulan kar": "blowing-snow-bg",
+                "Kar fırtınası": "blizzard-bg",
+                "Sis": "fog-bg",
+                "Donan sis": "freezing-fog-bg",
+                "Yer yer hafif çisenti": "patchy-light-drizzle-bg",
+                "Hafif çisenti": "light-drizzle-bg",
+                "Donan çisenti": "freezing-drizzle-bg",
+                "Yoğun donan çisenti": "heavy-freezing-drizzle-bg",
+                "Yer yer hafif yağmur": "patchy-light-rain-bg",
+                "Hafif yağmur": "light-rain-bg",
+                "Zaman zaman orta şiddetli yağmur": "moderate-rain-at-times-bg",
+                "Orta şiddetli yağmur": "moderate-rain-bg",
+                "Zaman zaman şiddetli yağmur": "heavy-rain-at-times-bg",
+                "Şiddetli yağmur": "heavy-rain-bg",
+                "Hafif donan yağmur": "light-freezing-rain-bg",
+                "Orta şiddetli veya şiddetli donan yağmur": "moderate-or-heavy-freezing-rain-bg",
+                "Hafif sulu kar": "light-sleet-bg",
+                "Orta şiddetli veya şiddetli sulu kar": "moderate-or-heavy-sleet-bg",
+                "Yer yer hafif kar": "patchy-light-snow-bg",
+                "Hafif kar": "light-snow-bg",
+                "Yer yer orta şiddetli kar": "patchy-moderate-snow-bg",
+                "Orta şiddetli kar": "moderate-snow-bg",
+                "Yer yer yoğun kar": "patchy-heavy-snow-bg",
+                "Yoğun kar": "heavy-snow-bg",
+                "Buz taneleri": "ice-pellets-bg",
+                "Hafif sağanak yağmur": "light-rain-shower-bg",
+                "Orta şiddetli veya şiddetli sağanak yağmur": "moderate-or-heavy-rain-shower-bg",
+                "Şiddetli sağanak yağmur": "torrential-rain-shower-bg",
+                "Hafif sağanak sulu kar": "light-sleet-showers-bg",
+                "Orta şiddetli veya şiddetli sağanak sulu kar": "moderate-or-heavy-sleet-showers-bg",
+                "Hafif sağanak kar": "light-snow-showers-bg",
+                "Orta şiddetli veya şiddetli sağanak kar": "moderate-or-heavy-snow-showers-bg",
+                "Hafif sağanak buz taneleri": "light-showers-of-ice-pellets-bg",
+                "Orta şiddetli veya şiddetli sağanak buz taneleri": "moderate-or-heavy-showers-of-ice-pellets-bg",
+                "Gök gürültülü yer yer hafif yağmur": "patchy-light-rain-with-thunder-bg",
+                "Gök gürültülü orta şiddetli veya şiddetli yağmur": "moderate-or-heavy-rain-with-thunder-bg",
+                "Gök gürültülü yer yer hafif kar": "patchy-light-snow-with-thunder-bg",
+                "Gök gürültülü orta şiddetli veya şiddetli kar": "moderate-or-heavy-snow-with-thunder-bg"
+            };
+
+            fetch(`https://api.weatherstack.com/current?access_key=${apiKey}&query=${city}&units=m`)
+                .then(response => response.json())
+                .then(data => {
+                    const weatherContainer = document.getElementById('weather');
+                    const weatherIcon = data.current.weather_icons[0];
+                    const weatherDescription = data.current.weather_descriptions[0];
+                    const translatedDescription = weatherTranslations[weatherDescription] || weatherDescription;
+                    const backgroundClass = weatherBackgrounds[translatedDescription] || "default-bg";
+                    const temperature = data.current.temperature;
+                    const humidity = data.current.humidity;
+                    const windSpeed = data.current.wind_speed;
+
+                    weatherContainer.classList.add(backgroundClass);
+
+                    weatherContainer.innerHTML = `
+                 <div class="weather-item">
+                     <img src="${weatherIcon}" alt="Hava Durumu İkonu">
+                     <p>${translatedDescription}</p>
+                 </div>
+                 <div class="weather-item">
+                     <p>Sıcaklık: ${temperature}°C</p>
+                 </div>
+                 <div class="weather-item">
+                     <p>Nem: ${humidity}%</p>
+                 </div>
+                 <div class="weather-item">
+                     <p>Rüzgar Hızı: ${windSpeed} m/s</p>
+                 </div>
+             `;
+                })
+                .catch(error => console.error('Hava durumu verileri alınamadı:', error));
+        });
+    </script>
 </head>
 
 
 <body style="overflow-y: auto;">
+
+
+
+
+    <div class="weather-container" id="weather">
+    <!-- Hava durumu bilgileri burada gösterilecek -->
+</div>
+
+
+
+
+
+
+
     <div class="container" style="max-width:100%; max-height:100%;">
         <h2 style="text-align:center;">DUYURULAR</h2>
 
@@ -66,6 +244,29 @@
 </body>
 
 <style>
+    .weather-container {
+        display: flex;
+        justify-content: space-around;
+        background: linear-gradient(to right, #6dd5fa, #2980b9);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .weather-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .weather-item img {
+            width: 50px;
+            height: 50px;
+        }
+
     .timeline {
         position: relative;
         width: 100%;
@@ -145,8 +346,6 @@
         text-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Mavi glow efekti */
     }
 
-
-
     .modal-header {
         background-color: #007bff;
         color: white;
@@ -154,6 +353,202 @@
 
     .modal-footer {
         justify-content: center;
+    }
+
+    .sunny-bg {
+        background: linear-gradient(to right, #f7b733, #fc4a1a);
+    }
+
+    .partly-cloudy-bg {
+        background: linear-gradient(to right, #d7d2cc, #304352);
+    }
+
+    .cloudy-bg {
+        background: linear-gradient(to right, #bdc3c7, #2c3e50);
+    }
+
+    .overcast-bg {
+        background: linear-gradient(to right, #757f9a, #d7dde8);
+    }
+
+    .mist-bg {
+        background: linear-gradient(to right, #e0eafc, #cfdef3);
+    }
+
+    .patchy-rain-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .patchy-snow-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .patchy-sleet-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .patchy-freezing-drizzle-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .thundery-outbreaks-bg {
+        background: linear-gradient(to right, #141e30, #243b55);
+    }
+
+    .blowing-snow-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .blizzard-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .fog-bg {
+        background: linear-gradient(to right, #e0eafc, #cfdef3);
+    }
+
+    .freezing-fog-bg {
+        background: linear-gradient(to right, #e0eafc, #cfdef3);
+    }
+
+    .patchy-light-drizzle-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .light-drizzle-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .freezing-drizzle-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .heavy-freezing-drizzle-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .patchy-light-rain-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .light-rain-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .moderate-rain-at-times-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .moderate-rain-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .heavy-rain-at-times-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .heavy-rain-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .light-freezing-rain-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .moderate-or-heavy-freezing-rain-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .light-sleet-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .moderate-or-heavy-sleet-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .patchy-light-snow-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .light-snow-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .patchy-moderate-snow-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .moderate-snow-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .patchy-heavy-snow-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .heavy-snow-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .ice-pellets-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .light-rain-shower-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .moderate-or-heavy-rain-shower-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .torrential-rain-shower-bg {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .light-sleet-showers-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .moderate-or-heavy-sleet-showers-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .light-snow-showers-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .moderate-or-heavy-snow-showers-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .light-showers-of-ice-pellets-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .moderate-or-heavy-showers-of-ice-pellets-bg {
+        background: linear-gradient(to right, #e6dada, #274046);
+    }
+
+    .patchy-light-rain-with-thunder-bg {
+        background: linear-gradient(to right, #141e30, #243b55);
+    }
+
+    .moderate-or-heavy-rain-with-thunder-bg {
+        background: linear-gradient(to right, #141e30, #243b55);
+    }
+
+    .patchy-light-snow-with-thunder-bg {
+        background: linear-gradient(to right, #141e30, #243b55);
+    }
+
+    .moderate-or-heavy-snow-with-thunder-bg {
+        background: linear-gradient(to right, #141e30, #243b55);
+    }
+
+    .default-bg {
+        background: linear-gradient(to right, #6dd5fa, #2980b9);
     }
 </style>
 
