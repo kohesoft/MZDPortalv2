@@ -29589,3 +29589,17 @@ MZDNETWORK.Controllers.DokumantasyonController türünde System.Web.Mvc.ActionRe
 2025-01-16 17:11:35.5537|INFO|MZDNETWORK.MvcApplication|User authenticated: berat, IP: ::1, URL: https://localhost:44318/User/ChangePassword|
 2025-01-16 17:11:37.6069|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
 2025-01-16 17:11:37.6069|INFO|MZDNETWORK.MvcApplication|User authenticated: berat, IP: ::1, URL: https://localhost:44318/User/Edit|
+2025-01-17 09:21:30.3335|INFO|MZDNETWORK.MvcApplication|Application started|
+2025-01-17 09:21:31.3629|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-17 09:21:31.3629|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-17 09:21:31.3831|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-17 09:21:31.3831|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-17 09:21:31.4300|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-17 09:21:31.4300|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-17 09:22:47.5972|INFO|MZDNETWORK.MvcApplication|Application started|
+2025-01-17 09:22:47.7771|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-17 09:22:47.7889|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-17 09:22:47.8207|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-17 09:22:47.8207|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-17 09:22:47.8725|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-17 09:22:47.8725|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|

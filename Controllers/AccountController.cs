@@ -22,22 +22,22 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public ActionResult Login(User model)
+    public ActionResult Login(User model, bool rememberMe = false)
     {
         if (ModelState.IsValid)
         {
             if (IsValidUser(model.Username, model.Password, out string role))
             {
                 // Kimlik doðrulama çerezi oluþturma
-                FormsAuthentication.SetAuthCookie(model.Username, false);
+                FormsAuthentication.SetAuthCookie(model.Username, rememberMe);
 
                 // Kullanýcýnýn rolünü saklamak için bir çerez oluþturma
                 var authTicket = new FormsAuthenticationTicket(
                     1,                             // Sürüm
                     model.Username,                // Kullanýcý adý
                     DateTime.Now,                  // Oluþturulma zamaný
-                    DateTime.Now.AddMinutes(30),   // Bitiþ zamaný
-                    false,                         // Kalýcý mý?
+                    rememberMe ? DateTime.Now.AddDays(30) : DateTime.Now.AddMinutes(30),   // Bitiþ zamaný
+                    rememberMe,                    // Kalýcý mý?
                     role                           // Kullanýcý rolü
                 );
 
@@ -57,6 +57,7 @@ public class AccountController : Controller
 
         return View(model);
     }
+
 
 
     [HttpGet]
