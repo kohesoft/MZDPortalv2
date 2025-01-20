@@ -34,7 +34,7 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.Username</td>
+                                <td>@(item.IsAnonymous ? "isimgizlendi (" + item.Username + ")" : item.Username)</td>
                                 <td style="width:35%">@item.Mesaj</td>
                                 <td style="width:35%">@item.Bilidirim</td>
                                 <td>@item.GonderimTarihi</td>

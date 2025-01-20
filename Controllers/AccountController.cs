@@ -42,8 +42,14 @@ public class AccountController : Controller
                 );
 
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-                var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
+                {
+                    HttpOnly = true,
+                    Secure = FormsAuthentication.RequireSSL,
+                    Expires = rememberMe ? DateTime.Now.AddDays(30) : DateTime.Now.AddMinutes(30)
+                };
                 HttpContext.Response.Cookies.Add(authCookie);
+
 
                 TempData["SuccessMessage"] = "Baþarýyla giriþ yaptýnýz, Anasayfaya yönlendiriliyor!";
                 TempData["RedirectUrl"] = Url.Action("Index", "Home");

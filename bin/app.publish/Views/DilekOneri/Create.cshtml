@@ -41,10 +41,16 @@
     </div>
 
     <div class="flex-row">
-        <label class="lf--label" for="Username" style=" color:white; margin:10px;" >
+        <label class="lf--label" for="Username" style=" color:white; margin:10px;">
             <i class='bx bx-id-card'></i>
         </label>
         @Html.TextBoxFor(model => model.Username, new { @class = "lf--input", value = User.Identity.Name, @readonly = "readonly", id = "Username" })
+    </div>
+
+    <div class="flex-row">
+        <label class="lf--label" for="IsAnonymous" style="display:none;">
+            @Html.HiddenFor(model => model.IsAnonymous, new { id = "IsAnonymous" })
+        </label>
     </div>
 
     <div class="flex-row">
@@ -61,12 +67,15 @@
     function toggleUsername() {
         var usernameField = document.getElementById("Username");
         var anonymousCheckbox = document.getElementById("Anonymous");
+        var isAnonymousField = document.getElementById("IsAnonymous");
         if (anonymousCheckbox.checked) {
             usernameField.value = "";
             usernameField.readOnly = true;
+            isAnonymousField.value = true;
         } else {
             usernameField.value = "@User.Identity.Name";
             usernameField.readOnly = true;
+            isAnonymousField.value = false;
         }
     }
 </script>
@@ -76,7 +85,7 @@
         max-width: unset;
     }
 
-    .lf--label{
-        width:unset;
+    .lf--label {
+        width: unset;
     }
 </style>

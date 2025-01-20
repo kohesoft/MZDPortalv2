@@ -14,6 +14,8 @@ namespace MZDNETWORK.Models
         public string Bilidirim { get; set; }
         [DataType(DataType.Date)]
         public DateTime GonderimTarihi { get; set; } = DateTime.Now;
+        public bool IsAnonymous { get; set; } // Yeni özellik eklendi
+
     }
 
 
