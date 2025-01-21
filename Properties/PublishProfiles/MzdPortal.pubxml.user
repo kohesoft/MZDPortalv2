@@ -9,17 +9,35 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
+    <File Include="bin/AngleSharp.Css.dll">
+      <publishTime>01/16/2023 01:45:20</publishTime>
+    </File>
+    <File Include="bin/AngleSharp.dll">
+      <publishTime>06/02/2022 18:03:00</publishTime>
+    </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
+    <File Include="bin/BouncyCastle.Crypto.dll">
+      <publishTime>08/17/2017 21:20:54</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>06/16/2024 23:46:24</publishTime>
+      <publishTime>04/16/2020 23:38:42</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>06/16/2024 23:47:02</publishTime>
+      <publishTime>04/16/2020 23:38:56</publishTime>
+    </File>
+    <File Include="bin/HtmlSanitizer.dll">
+      <publishTime>07/26/2024 18:10:46</publishTime>
+    </File>
+    <File Include="bin/Lib.Net.Http.EncryptedContentEncoding.dll">
+      <publishTime>08/26/2020 21:08:42</publishTime>
+    </File>
+    <File Include="bin/Lib.Net.Http.WebPush.dll">
+      <publishTime>10/24/2024 14:10:48</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -29,6 +47,18 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.Core.dll">
+      <publishTime>01/14/2022 05:40:14</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.Core.pdb">
+      <publishTime>01/14/2022 05:32:32</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.dll">
+      <publishTime>01/14/2022 05:40:14</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.pdb">
+      <publishTime>01/14/2022 05:34:16</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNetCore.Authentication.Abstractions.dll">
       <publishTime>01/15/2025 01:00:50</publishTime>
@@ -144,6 +174,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/Microsoft.Owin.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>01/13/2014 18:11:04</publishTime>
+    </File>
     <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
@@ -157,10 +190,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.dll">
-      <publishTime>01/20/2025 14:08:31</publishTime>
+      <publishTime>01/21/2025 16:43:34</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.pdb">
-      <publishTime>01/20/2025 14:08:31</publishTime>
+      <publishTime>01/21/2025 16:43:34</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.Bson.dll">
       <publishTime>11/05/2024 02:51:46</publishTime>
@@ -285,6 +318,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/System.Buffers.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
+    <File Include="bin/System.Collections.Immutable.dll">
+      <publishTime>10/31/2023 18:04:34</publishTime>
+    </File>
     <File Include="bin/System.ComponentModel.Annotations.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
@@ -314,6 +350,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="bin/System.Text.Encoding.CodePages.dll">
+      <publishTime>10/23/2021 02:45:56</publishTime>
     </File>
     <File Include="bin/System.Text.Encodings.Web.dll">
       <publishTime>12/11/2024 00:06:04</publishTime>
@@ -621,6 +660,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Scripts/jquery-3.7.1.slim.min.map">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
+    <File Include="Scripts/jquery.signalR-2.4.3.js">
+      <publishTime>01/21/2025 10:50:36</publishTime>
+    </File>
+    <File Include="Scripts/jquery.signalR-2.4.3.min.js">
+      <publishTime>01/21/2025 10:50:35</publishTime>
+    </File>
     <File Include="Scripts/jquery.validate.js">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
@@ -668,6 +713,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Scripts/README.md">
       <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="Scripts/service-worker.js">
+      <publishTime>01/21/2025 16:03:23</publishTime>
     </File>
     <File Include="Scripts/src/index.js">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6217,7 +6265,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>01/17/2025 09:22:38</publishTime>
+      <publishTime>01/21/2025 11:19:18</publishTime>
     </File>
     <File Include="Views/Account/Logout.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6265,7 +6313,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/Gonderi/GonderiOlustur.cshtml">
-      <publishTime>01/07/2025 08:33:56</publishTime>
+      <publishTime>01/21/2025 16:30:39</publishTime>
     </File>
     <File Include="Views/Gonderi/GonderiSil.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6306,6 +6354,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Views/Kullanici_Islemleri/Index.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
+    <File Include="Views/Notification/SendNotification.cshtml">
+      <publishTime>01/21/2025 16:30:39</publishTime>
+    </File>
     <File Include="Views/Profilim/Profilim.cshtml">
       <publishTime>12/30/2024 12:33:58</publishTime>
     </File>
@@ -6319,7 +6370,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/24/2024 14:29:26</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/20/2025 08:03:08</publishTime>
+      <publishTime>01/21/2025 16:30:39</publishTime>
     </File>
     <File Include="Views/Task/Create.cshtml">
       <publishTime>01/15/2025 10:36:09</publishTime>
@@ -6379,7 +6430,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/20/2025 14:08:33</publishTime>
+      <publishTime>01/21/2025 16:21:26</publishTime>
     </File>
   </ItemGroup>
 </Project>

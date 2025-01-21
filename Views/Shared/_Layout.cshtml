@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-<!-- Coding by CodingLab | www.codinglabweb.com -->
 <html lang="en">
 
 <head>
@@ -8,18 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!----======== CSS ======== -->
-    <!----===== Boxicons CSS ===== -->
     <link href='~/Content/boxicons.min.css' rel='stylesheet'>
-
-    <!--<title>Dashboard Sidebar Menu</title>-->
-
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
-
     @Scripts.Render("~/bundles/bootstrap")
-
+    @Scripts.Render("~/bundles/popper")
     <link rel="stylesheet" href="~/Content/my.css" />
 
     <style>
@@ -35,30 +28,30 @@
             background-position: 0;
         }
 
-nav.sidebar {
-    width: 285px; /* Sidebar genişliği */
-}
+        nav.sidebar {
+            width: 285px; /* Sidebar genişliği */
+        }
 
-.nav-link.dropdown .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%; /* Dropdown menüsünü altına yerleştirir */
-    left: 0;
-    z-index: 1000;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    border-radius: 5px;
-}
+        .nav-link.dropdown .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%; /* Dropdown menüsünü altına yerleştirir */
+            left: 0;
+            z-index: 1000;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+        }
 
-.nav-link.dropdown .dropdown-menu.show {
-    display: block;
-}
+        .nav-link.dropdown .dropdown-menu.show {
+            display: block;
+        }
 
-.bottom-content .nav-link.dropdown .dropdown-menu {
-    top: auto;
-    bottom: 100%; /* Dropdown menüsünü yukarı doğru açılacak şekilde yerleştirir */
-}
+        .bottom-content .nav-link.dropdown .dropdown-menu {
+            top: auto;
+            bottom: 100%; /* Dropdown menüsünü yukarı doğru açılacak şekilde yerleştirir */
+        }
 
         .main-content {
             margin-left: 285px; /* Sidebar genişliği kadar boşluk bırak */
@@ -66,9 +59,22 @@ nav.sidebar {
             min-width: calc(100% - 285px); /* Sidebar genişliğini hesaba kat */
             min-height: 100vh;
         }
+
+        .modal-dialog {
+            max-width: 80%; /* Modal genişliğini ayarla */
+            max-height: 80%; /* Modal yüksekliğini ayarla */
+        }
+
+        .modal-content {
+            overflow: auto; /* İçeriğin taşmasını engelle */
+        }
+
+        .modal-body {
+            max-height: 60vh; /* İçeriğin yüksekliğini sınırlamak için */
+            overflow-y: auto; /* Dikey kaydırma çubuğu ekle */
+            word-wrap: break-word; /* Uzun kelimelerin taşmasını engelle */
+        }
     </style>
-
-
 </head>
 
 <body>
@@ -111,6 +117,8 @@ nav.sidebar {
                                 <li class="nav-link"><a href="@Url.Action("DilekIstek_IK", "InsanKaynaklari")">Dilek Kutusu</a></li>
                                 <li class="nav-link"><a href="@Url.Action("GonderiOlustur", "Gonderi")">Duyuru Oluştur</a></li>
                                 <li class="nav-link"><a href="@Url.Action("GonderiListele", "Gonderi")">Duyuru Listele</a></li>
+                                <li class="nav-link"><a href="@Url.Action("SendNotification", "Notification")">Anlık Bildirim</a></li>
+
                             </ul>
                         </li>
                     }
@@ -126,6 +134,7 @@ nav.sidebar {
                                 <li><a href="@Url.Action("Index", "Kullanici_Islemleri")">Kullanıcı İşlemleri</a></li>
                                 <li><a href="@Url.Action("YemekYukle", "BilgiIslem")">Yemek Yükle/Sil</a></li>
                                 <li><a href="@Url.Action("MolaYukle", "BilgiIslem")">Mola Yükle/Sil</a></li>
+                                <li><a href="@Url.Action("SendNotification", "Notification")">Anlık Bildirim</a></li>
                             </ul>
                         </li>
                     }
@@ -140,6 +149,7 @@ nav.sidebar {
                             <ul class="dropdown-menu menu-links">
                                 <li class="nav-link"><a href="@Url.Action("GonderiOlustur", "Gonderi")">Duyuru Oluştur</a></li>
                                 <li class="nav-link"><a href="@Url.Action("GonderiListele", "Gonderi")">Duyuru Listele</a></li>
+                                <li class="nav-link"><a href="@Url.Action("SendNotification", "Notification")">Anlık Bildirim</a></li>
                             </ul>
                         </li>
                     }
@@ -225,90 +235,127 @@ nav.sidebar {
                         </ul>
                     </li>
                 }
-                    <li class="nav-link">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <a href="@Url.Action("Logout", "Account")">
-                                <i class='bx bx-log-out icon'></i>
-                                <span class="text nav-text">Çıkış yap</span>
-                            </a>
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("Login", "Account")">
-                                <i class='bx bx-log-in icon'></i>
-                                <span class="text nav-text">Giriş yap</span>
-                            </a>
-                        }
-                    </li>
-                </div>
+                <li class="nav-link">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("Logout", "Account")">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text">Çıkış yap</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login", "Account")">
+                            <i class='bx bx-log-in icon'></i>
+                            <span class="text nav-text">Giriş yap</span>
+                        </a>
+                    }
+                </li>
+            </div>
         </div>
     </nav>
     <div class="main-content">
         @RenderBody()
     </div>
+
+    <div class="modal" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationModalLabel">Bildirim</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="notificationMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-<script>
-    $(document).ready(function () {
-        const body = document.querySelector('body'),
-            sidebar = body.querySelector('nav'),
-            searchBtn = body.querySelector(".search-box"),
-            modeSwitch = body.querySelector(".toggle-switch"),
-            modeText = body.querySelector(".mode-text");
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(document).ready(function () {
+            const body = document.querySelector('body'),
+                sidebar = body.querySelector('nav'),
+                searchBtn = body.querySelector(".search-box"),
+                modeSwitch = body.querySelector(".toggle-switch"),
+                modeText = body.querySelector(".mode-text");
 
-        if (searchBtn) {
-            searchBtn.addEventListener("click", () => {
-                sidebar.classList.remove("close");
+            if (searchBtn) {
+                searchBtn.addEventListener("click", () => {
+                    sidebar.classList.remove("close");
+                });
+            }
+
+            if (modeSwitch) {
+                modeSwitch.addEventListener("click", () => {
+                    body.classList.toggle("dark");
+                    if (body.classList.contains("dark")) {
+                        modeText.innerText = "Light mode";
+                    } else {
+                        modeText.innerText = "Dark mode";
+                    }
+                });
+            }
+
+            // Aktif menü öğesini belirleme
+            $('.nav-link a').on('click', function () {
+                $('.nav-link').removeClass('active');
+                $(this).parent().addClass('active');
             });
-        }
 
-        if (modeSwitch) {
-            modeSwitch.addEventListener("click", () => {
-                body.classList.toggle("dark");
-                if (body.classList.contains("dark")) {
-                    modeText.innerText = "Light mode";
+            // Dropdown menü tıklama olayını işleme
+            $('.nav-link.dropdown > a').on('click', function (e) {
+                e.preventDefault();
+                const dropdownMenu = $(this).siblings('.dropdown-menu');
+
+                if (dropdownMenu.hasClass('show')) {
+                    dropdownMenu.removeClass('show').slideUp(200);
                 } else {
-                    modeText.innerText = "Dark mode";
+                    dropdownMenu.addClass('show').slideDown(200);
                 }
             });
-        }
 
-        // Aktif menü öğesini belirleme
-        $('.nav-link a').on('click', function () {
-            $('.nav-link').removeClass('active');
-            $(this).parent().addClass('active');
+            // Dropdown menüden ayrıldığında kapatma
+            $('.nav-link.dropdown').on('mouseleave', function () {
+                const dropdownMenu = $(this).find('.dropdown-menu');
+                if (dropdownMenu.hasClass('show')) {
+                    dropdownMenu.removeClass('show').slideUp(200);
+                }
+            });
+
+            // Dropdown menüden ayrıldığında kapatma (eklenen kod)
+            $('.dropdown-menu').on('mouseleave', function () {
+                $(this).removeClass('show').slideUp(200);
+            });
+
+            var notificationHub = $.connection.notificationHub;
+
+            notificationHub.client.showNotification = function (message) {
+                document.getElementById('notificationMessage').innerHTML = message;
+                var modal = document.getElementById('notificationModal');
+                modal.style.display = "block";
+            };
+
+            $.connection.hub.start().done(function () {
+                console.log("SignalR bağlantısı kuruldu.");
+            });
+
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function () {
+                var modal = document.getElementById('notificationModal');
+                modal.style.display = "none";
+            };
         });
 
-        // Dropdown menü tıklama olayını işleme
-        $('.nav-link.dropdown > a').on('click', function (e) {
-            e.preventDefault();
-            const dropdownMenu = $(this).siblings('.dropdown-menu');
-
-            if (dropdownMenu.hasClass('show')) {
-                dropdownMenu.removeClass('show').slideUp(200);
-            } else {
-                dropdownMenu.addClass('show').slideDown(200);
-            }
-        });
-
-        // Dropdown menüden ayrıldığında kapatma
-        $('.nav-link.dropdown').on('mouseleave', function () {
-            const dropdownMenu = $(this).find('.dropdown-menu');
-            if (dropdownMenu.hasClass('show')) {
-                dropdownMenu.removeClass('show').slideUp(200);
-            }
-        });
-
-        // Dropdown menüden ayrıldığında kapatma (eklenen kod)
-        $('.dropdown-menu').on('mouseleave', function () {
-            $(this).removeClass('show').slideUp(200);
-        });
-    });
-
-</script>
+    </script>
 </body>
 
 </html>

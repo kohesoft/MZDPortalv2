@@ -5,6 +5,10 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using NLog;
+using Microsoft.Owin;
+using Owin;
+
+[assembly: OwinStartup(typeof(MZDNETWORK.Startup))]
 
 namespace MZDNETWORK
 {
@@ -19,6 +23,8 @@ namespace MZDNETWORK
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // SignalR'ý baþlatma kodu kaldýrýldý
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -58,5 +64,12 @@ namespace MZDNETWORK
             }
         }
     }
-}
 
+    public class Startup
+    {
+        public void Configuration(IAppBuilder app)
+        {
+            app.MapSignalR();
+        }
+    }
+}

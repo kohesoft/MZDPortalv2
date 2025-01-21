@@ -25,6 +25,16 @@ namespace MZDNETWORK
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/popper").Include(
+              "~/Scripts/umd/popper.js")); // Popper.js ekleniyor
+
+
+            bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
+                        "~/Scripts/tinymce/tinymce.min.js",
+                        "~/Scripts/tinymce/plugins/print/plugin.min.js",
+                        "~/Scripts/tinymce/plugins/hr/plugin.min.js")); // TinyMCE eklentileri ekleniyor
+
         }
     }
 }
