@@ -23,23 +23,6 @@
     });
 </script>
 
-<script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
-<script src="~/signalr/hubs"></script>
-<script>
-    $(document).ready(function () {
-        var notificationHub = $.connection.notificationHub;
-
-        $('#sendNotification').click(function () {
-            var message = tinymce.get('message').getContent();
-            notificationHub.server.sendNotification(message);
-        });
-
-        $.connection.hub.start().done(function () {
-            console.log("SignalR bağlantısı kuruldu.");
-        });
-    });
-</script>
-
 <style>
     .form-group {
         margin-bottom: 15px;

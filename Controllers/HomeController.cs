@@ -7,20 +7,20 @@ using System.Web.Routing;
 using MZDNETWORK.Models;
 using System.Data.Entity;
 
+
 namespace MZDNETWORK.Controllers
 {
     [AllowAnonymous]
     public class HomeController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext(); // Veritabanı context'i
-
+        
 
         public ActionResult Index()
         {
-            List<Gonderi> model = GetGonderiler(); // Ensure this method returns a valid list
+            List<Gonderi> model = GetGonderiler(); // Ensure this method returns a valid list                                            
             return View(model);
         }
-
         
         private List<Gonderi> GetGonderiler()
         {
@@ -45,7 +45,6 @@ namespace MZDNETWORK.Controllers
         {
             return View();
         }
-
 
     }
 }

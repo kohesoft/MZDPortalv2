@@ -380,3 +380,12 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\Lib.Net.Http.Encr
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\Lib.Net.Http.WebPush.xml
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\System.Collections.Immutable.xml
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\System.Text.Encoding.CodePages.xml
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\SocketIO.Core.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\SocketIO.Serializer.Core.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\SocketIO.Serializer.SystemTextJson.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\SocketIOClient.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\websocket-sharp.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\SocketIOClient.xml
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\websocket-sharp.xml
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\RestSharp.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\RestSharp.xml

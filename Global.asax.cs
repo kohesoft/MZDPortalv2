@@ -7,6 +7,8 @@ using System.Web.Security;
 using NLog;
 using Microsoft.Owin;
 using Owin;
+using WebSocketSharp.Server;
+
 
 [assembly: OwinStartup(typeof(MZDNETWORK.Startup))]
 
@@ -23,10 +25,8 @@ namespace MZDNETWORK
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            // SignalR'ý baþlatma kodu kaldýrýldý
         }
-
+      
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
             Logger.Info("Application_AuthenticateRequest called");

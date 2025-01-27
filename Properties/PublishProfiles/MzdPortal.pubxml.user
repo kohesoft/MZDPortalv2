@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2025-01-16T14:13:10.8439532Z||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
+    <History>True|2025-01-23T11:00:22.9464047Z||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -190,10 +190,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.dll">
-      <publishTime>01/21/2025 16:43:34</publishTime>
+      <publishTime>01/27/2025 11:35:18</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.pdb">
-      <publishTime>01/21/2025 16:43:34</publishTime>
+      <publishTime>01/27/2025 11:35:18</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.Bson.dll">
       <publishTime>11/05/2024 02:51:46</publishTime>
@@ -221,6 +221,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="bin/RestSharp.dll">
+      <publishTime>10/04/2024 14:49:34</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -314,6 +317,18 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
       <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="bin/SocketIO.Core.dll">
+      <publishTime>08/18/2024 13:22:12</publishTime>
+    </File>
+    <File Include="bin/SocketIO.Serializer.Core.dll">
+      <publishTime>08/18/2024 13:23:32</publishTime>
+    </File>
+    <File Include="bin/SocketIO.Serializer.SystemTextJson.dll">
+      <publishTime>08/18/2024 13:28:36</publishTime>
+    </File>
+    <File Include="bin/SocketIOClient.dll">
+      <publishTime>08/18/2024 13:26:14</publishTime>
     </File>
     <File Include="bin/System.Buffers.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -410,6 +425,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="bin/websocket-sharp.dll">
+      <publishTime>10/24/2017 16:52:46</publishTime>
     </File>
     <File Include="Content/all.min.css">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -534,6 +552,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/IKlayout.css">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
+    <File Include="Content/Loading.css">
+      <publishTime>01/22/2025 08:59:22</publishTime>
+    </File>
     <File Include="Content/my.css">
       <publishTime>01/14/2025 11:37:43</publishTime>
     </File>
@@ -641,6 +662,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Scripts/index.js.flow">
       <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="Scripts/jquery-2.2.4.min.js">
+      <publishTime>01/27/2025 11:17:02</publishTime>
     </File>
     <File Include="Scripts/jquery-3.7.1.js">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6264,6 +6288,15 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="svg/solid/bxs-zoom-out.svg">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
+    <File Include="UploadPhotosMerkez/yemek.png">
+      <publishTime>01/16/2025 14:38:51</publishTime>
+    </File>
+    <File Include="UploadPhotosMola/logo.png">
+      <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="UploadPhotosYerleske/Commits over time.png">
+      <publishTime>01/16/2025 14:38:58</publishTime>
+    </File>
     <File Include="Views/Account/Login.cshtml">
       <publishTime>01/21/2025 11:19:18</publishTime>
     </File>
@@ -6319,7 +6352,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>01/17/2025 15:18:56</publishTime>
+      <publishTime>01/27/2025 08:53:14</publishTime>
     </File>
     <File Include="Views/Home/MerkezYemekListesi.cshtml">
       <publishTime>01/16/2025 14:30:13</publishTime>
@@ -6355,7 +6388,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/Notification/SendNotification.cshtml">
-      <publishTime>01/21/2025 16:30:39</publishTime>
+      <publishTime>01/27/2025 08:16:49</publishTime>
     </File>
     <File Include="Views/Profilim/Profilim.cshtml">
       <publishTime>12/30/2024 12:33:58</publishTime>
@@ -6370,7 +6403,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/24/2024 14:29:26</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/21/2025 16:30:39</publishTime>
+      <publishTime>01/27/2025 11:34:59</publishTime>
     </File>
     <File Include="Views/Task/Create.cshtml">
       <publishTime>01/15/2025 10:36:09</publishTime>
@@ -6430,7 +6463,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/21/2025 16:21:26</publishTime>
+      <publishTime>01/27/2025 11:35:20</publishTime>
     </File>
   </ItemGroup>
 </Project>
