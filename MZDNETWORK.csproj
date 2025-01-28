@@ -483,6 +483,7 @@
     <Content Include="Content\Loading.css" />
     <Content Include="Content\my.css" />
     <Content Include="Content\Dokumantasyon.css" />
+    <Content Include="Content\notification.mp3" />
     <Content Include="Content\transformations.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\boxicons.svg" />
