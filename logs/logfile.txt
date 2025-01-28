@@ -17611,3 +17611,205 @@ Daha fazla bilgi edinmek için bkz. http://go.microsoft.com/fwlink/?LinkId=25246
 2025-01-28 07:56:39.6530|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
 2025-01-28 07:56:43.4978|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
 2025-01-28 07:56:43.4978|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:15:18.1391|INFO|MZDNETWORK.MvcApplication|Application started|
+2025-01-28 14:15:20.9447|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:15:20.9599|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/Views/Home/Index.cshtml|
+2025-01-28 14:15:21.2115|INFO|MZDNETWORK.MvcApplication|Application_Error called|
+2025-01-28 14:15:21.2115|ERROR|MZDNETWORK.MvcApplication|Unhandled exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: sys|System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-01-28 14:15:29.2801|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:15:29.2801|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-28 14:15:29.3136|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:15:29.3136|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-28 14:15:29.3637|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:15:29.3637|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:15:32.6996|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:15:32.6996|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:15:34.8131|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:15:34.8131|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:15:35.0459|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:15:35.0459|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-28 14:15:35.0459|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:15:35.0459|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:15:35.1710|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:15:35.1710|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:16:09.4612|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:09.4612|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:16:46.0204|INFO|MZDNETWORK.MvcApplication|Application started|
+2025-01-28 14:16:48.7313|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:48.7329|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-28 14:16:48.8353|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:48.8353|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-28 14:16:48.8965|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:48.8965|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:16:52.4638|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:52.4638|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:16:54.9467|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:54.9467|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:16:55.2189|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:55.2189|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-28 14:16:55.2189|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:55.2189|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:16:55.3861|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:55.3861|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-28 14:16:55.3931|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:55.3931|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-01-28 14:16:55.3931|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:55.3931|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:16:55.5268|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:16:55.5268|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:01.4735|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:01.4735|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:07.9051|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:07.9051|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:08.1203|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:08.1203|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:08.4904|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:08.4904|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:08.5136|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:08.5136|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=44zmgGoBfbDHzkwnzVtnF5qIYGQvRPoStb2nrEM3CB/W3r8ah75OmPiVg51XeNzf4M2iFvAXSYJRj0Zo8O7TqfbC6cAC3jFy5c4LLU9u9WsgOl9hxhGbSUWPEmTsw72B6nTKKWB90ib1u8wyDjyvYA==&connectionData=[{"name":"notificationhub"},{"name":"onlineusershub"}]&tid=8|
+2025-01-28 14:17:08.5292|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:08.5292|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:08.5605|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:08.5605|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/start?transport=serverSentEvents&clientProtocol=2.1&connectionToken=44zmgGoBfbDHzkwnzVtnF5qIYGQvRPoStb2nrEM3CB/W3r8ah75OmPiVg51XeNzf4M2iFvAXSYJRj0Zo8O7TqfbC6cAC3jFy5c4LLU9u9WsgOl9hxhGbSUWPEmTsw72B6nTKKWB90ib1u8wyDjyvYA==&connectionData=[{"name":"notificationhub"},{"name":"onlineusershub"}]&_=1738063028469|
+2025-01-28 14:17:08.5886|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:08.5886|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=serverSentEvents&clientProtocol=2.1&connectionToken=44zmgGoBfbDHzkwnzVtnF5qIYGQvRPoStb2nrEM3CB/W3r8ah75OmPiVg51XeNzf4M2iFvAXSYJRj0Zo8O7TqfbC6cAC3jFy5c4LLU9u9WsgOl9hxhGbSUWPEmTsw72B6nTKKWB90ib1u8wyDjyvYA==&connectionData=[{"name":"notificationhub"},{"name":"onlineusershub"}]|
+2025-01-28 14:17:10.1714|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:10.1714|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/|
+2025-01-28 14:17:10.2684|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:10.2684|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/|
+2025-01-28 14:17:10.3010|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:10.3010|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-01-28 14:17:10.6625|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:10.6625|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/Feedback/HasFeedback|
+2025-01-28 14:17:16.7379|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:16.7379|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:16.9504|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:16.9504|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:17.2590|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:17.2590|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:17.2670|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:17.2670|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:17.2882|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:17.2882|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=e+UMzniKWMnDV8EEIxu1ZYFn5lrIEM1Ti7AgY3NCY9Y23nYi0jvPB4ry8RJGXMJ+gyPtyDunuZoxasK0veUWTKgv+KkViGrS9oqvBFQpODbfsB2MSNS3dSGmf+Kn9tRz71C3I/INLiKXkeogl3Oukw==&connectionData=[{"name":"notificationhub"},{"name":"onlineusershub"}]&tid=2|
+2025-01-28 14:17:17.2882|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:17.2882|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:17.3008|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:17.3008|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/start?transport=serverSentEvents&clientProtocol=2.1&connectionToken=e+UMzniKWMnDV8EEIxu1ZYFn5lrIEM1Ti7AgY3NCY9Y23nYi0jvPB4ry8RJGXMJ+gyPtyDunuZoxasK0veUWTKgv+KkViGrS9oqvBFQpODbfsB2MSNS3dSGmf+Kn9tRz71C3I/INLiKXkeogl3Oukw==&connectionData=[{"name":"notificationhub"},{"name":"onlineusershub"}]&_=1738063037253|
+2025-01-28 14:17:17.3008|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:17.3008|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=serverSentEvents&clientProtocol=2.1&connectionToken=e+UMzniKWMnDV8EEIxu1ZYFn5lrIEM1Ti7AgY3NCY9Y23nYi0jvPB4ry8RJGXMJ+gyPtyDunuZoxasK0veUWTKgv+KkViGrS9oqvBFQpODbfsB2MSNS3dSGmf+Kn9tRz71C3I/INLiKXkeogl3Oukw==&connectionData=[{"name":"notificationhub"},{"name":"onlineusershub"}]|
+2025-01-28 14:17:19.1593|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:19.1593|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/|
+2025-01-28 14:17:19.1819|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:19.1819|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-01-28 14:17:19.5093|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:19.5093|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/Feedback/HasFeedback|
+2025-01-28 14:17:19.5292|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:19.5292|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]&_=1738063039500|
+2025-01-28 14:17:19.5292|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:19.5292|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=LAAYgzzspB+b6JFIX4zRMNhrw2zaE+ZpA+YvmGDqjt2E2UKbNmcRKZb8rjb82JciXE56KM7q9eObcz+LIOuUAKm1D/12oYAIP4qhK1jZRnUvRWi41Qu460fKJca3KwOy&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]&tid=1|
+2025-01-28 14:17:19.5745|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:19.5745|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=serverSentEvents&clientProtocol=2.1&connectionToken=LAAYgzzspB+b6JFIX4zRMNhrw2zaE+ZpA+YvmGDqjt2E2UKbNmcRKZb8rjb82JciXE56KM7q9eObcz+LIOuUAKm1D/12oYAIP4qhK1jZRnUvRWi41Qu460fKJca3KwOy&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]&tid=1|
+2025-01-28 14:17:19.5745|INFO|MZDNETWORK.MvcApplication|Application_Error called|
+2025-01-28 14:17:19.5901|ERROR|MZDNETWORK.MvcApplication|Unhandled exception, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=LAAYgzzspB+b6JFIX4zRMNhrw2zaE+ZpA+YvmGDqjt2E2UKbNmcRKZb8rjb82JciXE56KM7q9eObcz+LIOuUAKm1D/12oYAIP4qhK1jZRnUvRWi41Qu460fKJca3KwOy&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]&tid=1, User: sys|System.InvalidOperationException: WebSocket'ler geçerli uygulama yapılandırmasında desteklenmez. Bunu yapmak için aşağıdaki yapılandırma anahtarını Web.config dosyasında ayarlayın:
+<system.web>
+  <httpRuntime targetFramework="4.5" />
+</system.web>
+Daha fazla bilgi edinmek için bkz. http://go.microsoft.com/fwlink/?LinkId=252465.
+   konum: System.Web.Util.SynchronizationContextUtil.ValidateMode(SynchronizationContextMode currentMode, SynchronizationContextMode requiredMode, String specificErrorMessage)
+   konum: System.Web.HttpContext.AcceptWebSocketRequest(Func`2 userFunc, AspNetWebSocketOptions options)
+   konum: Microsoft.AspNet.SignalR.Transports.WebSocketTransport.AcceptWebSocketRequest(Func`2 callback)
+   konum: Microsoft.AspNet.SignalR.PersistentConnection.ProcessRequestPostGroupRead(HostContext context, String groupsToken)
+   konum: Microsoft.AspNet.SignalR.TaskAsyncHelper.FromMethod[T1,T2,T3,TResult](Func`4 func, T1 arg1, T2 arg2, T3 arg3)
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: Microsoft.Owin.Mapping.MapMiddleware.<Invoke>d__3.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: Microsoft.Owin.Host.SystemWeb.IntegratedPipeline.StageAsyncResult.End(IAsyncResult ar)
+   konum: System.Web.HttpApplication.AsyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-01-28 14:17:19.6312|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:19.6312|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/start?transport=serverSentEvents&clientProtocol=2.1&connectionToken=LAAYgzzspB+b6JFIX4zRMNhrw2zaE+ZpA+YvmGDqjt2E2UKbNmcRKZb8rjb82JciXE56KM7q9eObcz+LIOuUAKm1D/12oYAIP4qhK1jZRnUvRWi41Qu460fKJca3KwOy&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]&_=1738063039501|
+2025-01-28 14:17:19.9714|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:19.9714|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/|
+2025-01-28 14:17:19.9880|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:19.9880|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=serverSentEvents&clientProtocol=2.1&connectionToken=LAAYgzzspB+b6JFIX4zRMNhrw2zaE+ZpA+YvmGDqjt2E2UKbNmcRKZb8rjb82JciXE56KM7q9eObcz+LIOuUAKm1D/12oYAIP4qhK1jZRnUvRWi41Qu460fKJca3KwOy&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]|
+2025-01-28 14:17:20.0181|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:20.0181|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-01-28 14:17:20.2730|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:20.2730|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/Feedback/HasFeedback|
+2025-01-28 14:17:20.2939|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:20.2939|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]&_=1738063040264|
+2025-01-28 14:17:20.3361|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:20.3361|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=ZnTtU6GzvcfJBY9esOXgunJt7WoivrqxcQ68JMBVyB8Ca/CSBFxoFgNQU3ImVQK7/933YqsZwXH9GRjoPRJs8h7XmcS/NRmU9ltayQcOu+LVYLYHPtjanfTGT+Yw8jiD&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]&tid=5|
+2025-01-28 14:17:20.3423|INFO|MZDNETWORK.MvcApplication|Application_Error called|
+2025-01-28 14:17:20.3423|ERROR|MZDNETWORK.MvcApplication|Unhandled exception, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=ZnTtU6GzvcfJBY9esOXgunJt7WoivrqxcQ68JMBVyB8Ca/CSBFxoFgNQU3ImVQK7/933YqsZwXH9GRjoPRJs8h7XmcS/NRmU9ltayQcOu+LVYLYHPtjanfTGT+Yw8jiD&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]&tid=5, User: sys|System.InvalidOperationException: WebSocket'ler geçerli uygulama yapılandırmasında desteklenmez. Bunu yapmak için aşağıdaki yapılandırma anahtarını Web.config dosyasında ayarlayın:
+<system.web>
+  <httpRuntime targetFramework="4.5" />
+</system.web>
+Daha fazla bilgi edinmek için bkz. http://go.microsoft.com/fwlink/?LinkId=252465.
+   konum: System.Web.Util.SynchronizationContextUtil.ValidateMode(SynchronizationContextMode currentMode, SynchronizationContextMode requiredMode, String specificErrorMessage)
+   konum: System.Web.HttpContext.AcceptWebSocketRequest(Func`2 userFunc, AspNetWebSocketOptions options)
+   konum: Microsoft.AspNet.SignalR.Transports.WebSocketTransport.AcceptWebSocketRequest(Func`2 callback)
+   konum: Microsoft.AspNet.SignalR.PersistentConnection.ProcessRequestPostGroupRead(HostContext context, String groupsToken)
+   konum: Microsoft.AspNet.SignalR.TaskAsyncHelper.FromMethod[T1,T2,T3,TResult](Func`4 func, T1 arg1, T2 arg2, T3 arg3)
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   konum: Microsoft.Owin.Mapping.MapMiddleware.<Invoke>d__3.MoveNext()
+--- Özel durumun oluşturulduğu önceki konumdan başlayan yığın izlemesinin sonu ---
+   konum: System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   konum: Microsoft.Owin.Host.SystemWeb.IntegratedPipeline.StageAsyncResult.End(IAsyncResult ar)
+   konum: System.Web.HttpApplication.AsyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-01-28 14:17:20.3423|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:20.3423|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=serverSentEvents&clientProtocol=2.1&connectionToken=ZnTtU6GzvcfJBY9esOXgunJt7WoivrqxcQ68JMBVyB8Ca/CSBFxoFgNQU3ImVQK7/933YqsZwXH9GRjoPRJs8h7XmcS/NRmU9ltayQcOu+LVYLYHPtjanfTGT+Yw8jiD&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]&tid=0|
+2025-01-28 14:17:20.3863|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:20.3863|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/start?transport=serverSentEvents&clientProtocol=2.1&connectionToken=ZnTtU6GzvcfJBY9esOXgunJt7WoivrqxcQ68JMBVyB8Ca/CSBFxoFgNQU3ImVQK7/933YqsZwXH9GRjoPRJs8h7XmcS/NRmU9ltayQcOu+LVYLYHPtjanfTGT+Yw8jiD&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]&_=1738063040265|
+2025-01-28 14:17:31.0013|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:31.0013|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/send?transport=serverSentEvents&clientProtocol=2.1&connectionToken=ZnTtU6GzvcfJBY9esOXgunJt7WoivrqxcQ68JMBVyB8Ca/CSBFxoFgNQU3ImVQK7/933YqsZwXH9GRjoPRJs8h7XmcS/NRmU9ltayQcOu+LVYLYHPtjanfTGT+Yw8jiD&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]|
+2025-01-28 14:17:50.3069|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:50.3069|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/Contact|
+2025-01-28 14:17:50.3528|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:50.3528|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=serverSentEvents&clientProtocol=2.1&connectionToken=ZnTtU6GzvcfJBY9esOXgunJt7WoivrqxcQ68JMBVyB8Ca/CSBFxoFgNQU3ImVQK7/933YqsZwXH9GRjoPRJs8h7XmcS/NRmU9ltayQcOu+LVYLYHPtjanfTGT+Yw8jiD&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]|
+2025-01-28 14:17:50.3964|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:50.3964|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:50.8234|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:50.8234|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:50.8654|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:50.8654|INFO|MZDNETWORK.MvcApplication|User authenticated: sys, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=MM12EFFKtB9iS7F0BqPadXKOeB9G+2WexHCwPVjtb5wBkaW8DJZ9qC3rp/QyxEEXgKE/n99s8OTrKhlCawA1MGS78l0Ga6Pz/KHdKHAMrGeKOxHZ4cyCtfGqUFdG3TRch4YGkKUHK8gM8Fn+3aTBfQ==&connectionData=[{"name":"chathub"},{"name":"notificationhub"},{"name":"onlineusershub"}]&tid=3|
+2025-01-28 14:17:50.8654|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:50.8808|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:50.8889|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:50.8889|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:53.2507|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:53.2507|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:54.2643|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:54.2643|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:54.9855|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:54.9855|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:55.2077|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:55.2077|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:55.4082|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:55.4082|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:55.5844|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:55.5844|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:55.7519|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:55.7519|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:55.8777|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:55.8777|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:57.8819|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:57.8819|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:58.1018|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:58.1018|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:17:58.2373|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:17:58.2373|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-01-28 14:18:00.1421|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-01-28 14:18:00.1421|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
