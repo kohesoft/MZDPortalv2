@@ -16,6 +16,9 @@ namespace MZDNETWORK.Models
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
 
     }
 }

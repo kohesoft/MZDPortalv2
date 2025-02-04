@@ -15,6 +15,9 @@
     @Scripts.Render("~/bundles/popper")
     <link rel="stylesheet" href="~/Content/my.css" />
     <link rel="stylesheet" href="~/Content/Loading.css" />
+    <script src="~/Scripts/chart.js"></script>
+    <script src="~/Scripts/json2.min.js"</script>
+    <script src="~/Scripts/jquery.min.js"></script>
 
     <style>
         html, body {
@@ -250,6 +253,15 @@
                             <a href="@Url.Action("Create", "DilekOneri")">
                                 <i class='bx bx-envelope icon'></i>
                                 <span class="text nav-text">Dilek & Öneri</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler") || User.IsInRole("Merkez") || User.IsInRole("Yerleske"))
+                    {
+                        <li class="nav-link">
+                            <a href="@Url.Action("Index", "Survey")">
+                                <i class='bx bx-edit icon'></i>
+                                <span class="text nav-text">Anketler</span>
                             </a>
                         </li>
                     }

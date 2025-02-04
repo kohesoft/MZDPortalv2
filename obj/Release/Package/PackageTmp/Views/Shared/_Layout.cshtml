@@ -15,6 +15,9 @@
     @Scripts.Render("~/bundles/popper")
     <link rel="stylesheet" href="~/Content/my.css" />
     <link rel="stylesheet" href="~/Content/Loading.css" />
+    <script src="~/Scripts/chart.js"></script>
+    <script src="~/Scripts/json2.min.js"</script>
+    <script src="~/Scripts/jquery.min.js"></script>
 
     <style>
         html, body {
@@ -94,18 +97,18 @@
             color: #000;
         }
         .toggle-box {
-            font-size:16px;
+            font-size: 16px;
             position: fixed;
             bottom: 20px;
             right: 10px;
             width: 500px;
-            max-height: 300px;
+            max-height: 60vh; /* İçeriğin yüksekliğini sınırlamak için */
             border: 1px solid #ccc;
             padding: 10px;
+            padding-top:35px;
             border-radius: 5px;
             background-color: white;
             display: none;
-            max-height: 60vh; /* İçeriğin yüksekliğini sınırlamak için */
             overflow-y: auto; /* Dikey kaydırma çubuğu ekle */
             scroll-behavior: smooth; /* Otomatik kaydırma için */
             word-wrap: break-word; /* Uzun kelimelerin taşmasını engelle */
@@ -122,6 +125,32 @@
             color: white;
             cursor: pointer;
         }
+
+        .online-user {
+            display: flex;
+            align-items: center;
+        }
+
+            .online-user::before {
+                content: '•';
+                color: green;
+                margin-right: 5px;
+            }
+
+        .btn-custom {
+            all: unset; /* Tüm CSS özelliklerini sıfırla */
+            background-color: #28a745; /* Yeşil arka plan rengi */
+            color: white; /* Beyaz yazı rengi */
+            border: none; /* Kenarlık yok */
+            padding: 5px; /* İç boşluk */
+            border-radius: 5px; /* Köşe yuvarlama */
+            cursor: pointer; /* İmleç değişimi */
+            transition: background-color 0.3s; /* Geçiş efekti */
+        }
+
+            .btn-custom:hover {
+                background-color: #218838; /* Hover durumunda daha koyu yeşil */
+            }
     </style>
 </head>
 
@@ -227,6 +256,15 @@
                             </a>
                         </li>
                     }
+                    @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler") || User.IsInRole("Merkez") || User.IsInRole("Yerleske"))
+                    {
+                        <li class="nav-link">
+                            <a href="@Url.Action("Index", "Survey")">
+                                <i class='bx bx-edit icon'></i>
+                                <span class="text nav-text">Anketler</span>
+                            </a>
+                        </li>
+                    }
                     @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler") || User.IsInRole("Merkez"))
                     {
                         <li class="nav-link">
@@ -320,12 +358,16 @@
     </div>
 
     <div id="toggleBox" class="toggle-box">
-        <button id="closeButton" class="btn btn-close" style="position: absolute; top: 10px; right: 10px;"></button>
+        <button id="closeButton" class="btn-close" style="position: absolute; top: 10px; right: 7px;"></button>
         <div id="messages" style="max-height: 200px; overflow-y: auto;"></div>
-        <input type="text" id="messageInput" placeholder="Mesajınızı yazın..." style="min-width:80%;"/>
-        <button id="sendButton" class="btn btn-success">Gönder</button>
+        <input type="text" id="messageInput" placeholder="Mesajınızı yazın..." style="min-width:80%;" />
+        <button id="sendButton" class="btn-custom">Gönder</button>
+        <div id="onlineUsersListContainer" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+            <ul id="onlineUsersList" style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px;"></ul>
+        </div>
     </div>
     <button id="toggleButton" class="toggle-button" style="background-color: #28a745;">Chat Aç/Kapa</button>
+
 
     <div class="modal" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -366,6 +408,13 @@
             $('#toggleButton').show();
         });
 
+        $('#messageInput').keypress(function (e) {
+            if (e.which == 13) { // Enter tuşunun kodu 13'tür
+                $('#sendButton').click();
+                return false; // Formun gönderilmesini engelle
+            }
+        });
+
          @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler"))
             {
                <text>
@@ -383,34 +432,50 @@
         });
 
     function initializeChatHub() {
-        var chat = $.connection.chatHub;
+    var chat = $.connection.chatHub;
+    var notificationSound = new Audio('@Url.Content("~/Content/notification.mp3")'); // Ses dosyasını yükleyin
 
-        chat.client.broadcastMessage = function (user, message) {
-            var timestamp = new Date().toLocaleTimeString(); // Zaman damgasını al
-            $('#messages').append('<div><strong>' + user + '</strong> (' + timestamp + '): ' + message + '</div>');
-            scrollToBottom();
-        };
 
-        chat.client.userConnected = function (user, users) {
-            $('#messages').append('<div><em>' + user + ' katıldı</em></div>');
-        };
+    chat.client.broadcastMessage = function (user, message) {
+        var timestamp = new Date().toLocaleTimeString(); // Zaman damgasını al
+        $('#messages').append('<div><strong>' + user + '</strong> (' + timestamp + '): ' + message + '</div>');
+        scrollToBottom();
+        notificationSound.play(); // Yeni mesaj geldiğinde ses dosyasını çal
+    };
 
-        chat.client.userDisconnected = function (user, users) {
-            $('#messages').append('<div><em>' + user + ' ayrıldı</em></div>');
-        };
+    chat.client.userConnected = function (user, users) {
+        $('#messages').append('<div><em>' + user + ' katıldı</em></div>');
+        scrollToBottom();
+        updateUsersList(users);
+    };
 
-        $('#sendButton').click(function () {
-            var message = $('#messageInput').val();
-            chat.server.send('@User.Identity.Name', message);
-            $('#messageInput').val('').focus();
-        });
+    chat.client.userDisconnected = function (user, users) {
+        $('#messages').append('<div><em>' + user + ' ayrıldı</em></div>');
+        scrollToBottom();
+        updateUsersList(users);
+    };
 
-        $.connection.hub.start().done(function () {
-            console.log('SignalR bağlantısı kuruldu. (_ChatHub)');
-        }).fail(function (error) {
-            console.error('SignalR bağlantısı kurulamadı: ' + error);
-        });
-    }
+    $('#sendButton').click(function () {
+        var message = $('#messageInput').val();
+        chat.server.send('@User.Identity.Name', message);
+        $('#messageInput').val('').focus();
+    });
+
+    $.connection.hub.start().done(function () {
+        console.log('SignalR bağlantısı kuruldu. (_ChatHub)');
+    }).fail(function (error) {
+        console.error('SignalR bağlantısı kurulamadı: ' + error);
+    });
+}
+
+        function updateUsersList(users) {
+            var usersList = $('#onlineUsersList');
+            usersList.empty();
+            users.forEach(function (user) {
+                usersList.append('<li class="online-user">' + user + '</li>');
+            });
+        }
+
 
         function initializeOnlineUsersHub() {
             var onlineUsersHub = $.connection.onlineUsersHub;

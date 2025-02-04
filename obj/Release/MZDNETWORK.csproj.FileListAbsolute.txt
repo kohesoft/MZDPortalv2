@@ -389,3 +389,8 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\SocketIOClient.xm
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\websocket-sharp.xml
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\RestSharp.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\RestSharp.xml
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.Migrations.Initi.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.Migrations.inti2.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.Migrations.FixAnswersTable.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.Migrations.Addedusername.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.Migrations.deleteusername.resources

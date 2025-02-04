@@ -1,0 +1,89 @@
+﻿@model MZDNETWORK.Models.Survey
+
+<h2>@Model.Title</h2>
+<p>@Model.Description</p>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @Html.ValidationSummary()
+    </div>
+}
+
+<form id="surveyForm" method="post" action="@Url.Action("SubmitSurvey", "Answer")">
+    <input type="hidden" name="surveyId" value="@Model.ID" /> <!-- Gizli alan eklendi -->
+
+    @for (int i = 0; i < Model.Questions.Count; i++)
+    {
+        <div class="question-container">
+            <label>@Model.Questions[i].QuestionText</label>
+
+            @if (Model.Questions[i].Type == QuestionType.Text)
+            {
+                <input type="text" name="answers[@i].AnswerText" class="form-control" />
+            }
+            else if (Model.Questions[i].Type == QuestionType.Radio)
+            {
+                foreach (var option in Model.Questions[i].AnswerOptions)
+                {
+                    <div>
+                        <input type="radio" name="answers[@i].AnswerText" value="@option.OptionText" />
+                        @option.OptionText
+                    </div>
+                }
+            }
+            else if (Model.Questions[i].Type == QuestionType.Checkbox)
+            {
+                foreach (var option in Model.Questions[i].AnswerOptions)
+                {
+                    <div>
+                        <input type="checkbox" name="answers[@i].AnswerText" value="@option.OptionText" />
+                        @option.OptionText
+                    </div>
+                }
+            }
+
+            <input type="hidden" name="answers[@i].QuestionID" value="@Model.Questions[i].ID" />
+        </div>
+    }
+
+    <button type="button" class="btn btn-success" onclick="showModal()">Gönder</button>
+</form>
+
+<!-- Modal HTML -->
+<div id="confirmationModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Anket Tamamlandı</h5>
+            </div>
+            <div class="modal-body">
+                <p>Anketinizi tamamladığınız için teşekkür ederiz. <img src="~/imgs/tick.gif" /></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .question-container {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    body {
+        all: unset;
+        background-color: white;
+    }
+</style>
+
+<script>
+    function showModal() {
+        var modal = document.getElementById('confirmationModal');
+        $(modal).modal('show');
+        setTimeout(function () {
+            document.getElementById('surveyForm').submit();
+        }, 3000);
+    }
+
+</script>
