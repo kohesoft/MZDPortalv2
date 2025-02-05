@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\app.publish\</_PublishTargetUrl>
-    <History>False|2025-02-04T12:40:20.6188778Z||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
+    <History>True|2025-02-05T05:01:20.4143254Z||;False|2025-02-04T15:40:20.6188778+03:00||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -29,6 +29,15 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
       <publishTime>06/16/2024 23:47:02</publishTime>
+    </File>
+    <File Include="bin/EPPlus.dll">
+      <publishTime>01/16/2025 12:08:18</publishTime>
+    </File>
+    <File Include="bin/EPPlus.Interfaces.dll">
+      <publishTime>11/15/2024 16:59:58</publishTime>
+    </File>
+    <File Include="bin/EPPlus.System.Drawing.dll">
+      <publishTime>11/15/2024 17:00:14</publishTime>
     </File>
     <File Include="bin/HtmlSanitizer.dll">
       <publishTime>01/29/2025 20:10:26</publishTime>
@@ -168,6 +177,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/Microsoft.Extensions.Primitives.dll">
       <publishTime>12/11/2024 00:05:48</publishTime>
     </File>
+    <File Include="bin/Microsoft.IO.RecyclableMemoryStream.dll">
+      <publishTime>06/11/2024 23:23:46</publishTime>
+    </File>
     <File Include="bin/Microsoft.Net.Http.Headers.dll">
       <publishTime>01/15/2025 01:00:52</publishTime>
     </File>
@@ -190,10 +202,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.dll">
-      <publishTime>02/04/2025 16:03:37</publishTime>
+      <publishTime>02/05/2025 09:41:55</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.pdb">
-      <publishTime>02/04/2025 16:03:37</publishTime>
+      <publishTime>02/05/2025 09:41:55</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.Bson.dll">
       <publishTime>11/05/2024 02:51:46</publishTime>
@@ -341,6 +353,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
       <publishTime>12/11/2024 00:05:36</publishTime>
+    </File>
+    <File Include="bin/System.Drawing.Common.dll">
+      <publishTime>03/20/2024 02:40:58</publishTime>
+    </File>
+    <File Include="bin/System.Drawing.Common.pdb">
+      <publishTime>03/20/2024 02:40:58</publishTime>
     </File>
     <File Include="bin/System.IO.Pipelines.dll">
       <publishTime>12/11/2024 00:06:04</publishTime>
@@ -740,6 +758,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Scripts/modernizr-3.4.0.min.js">
       <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="Scripts/pako.min.js">
+      <publishTime>02/05/2025 08:30:02</publishTime>
     </File>
     <File Include="Scripts/popper-utils.js">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6349,7 +6370,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/16/2025 14:30:13</publishTime>
     </File>
     <File Include="Views/Contact/Index.cshtml">
-      <publishTime>01/07/2025 08:33:56</publishTime>
+      <publishTime>02/05/2025 09:12:33</publishTime>
     </File>
     <File Include="Views/DilekOneri/Bildirimlerim.cshtml">
       <publishTime>02/03/2025 15:42:11</publishTime>
@@ -6505,7 +6526,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/04/2025 16:03:39</publishTime>
+      <publishTime>02/05/2025 09:41:58</publishTime>
     </File>
   </ItemGroup>
 </Project>

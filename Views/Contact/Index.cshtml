@@ -18,6 +18,10 @@
                 <h3 class="card-title">Rehber</h3>
                 <div class="card-toolbar">
                     <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Kullanıcıları ara..." class="form-control" style="width: 300px;">
+                    @if (User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("IdariIsler") || User.IsInRole("BilgiIslem"))
+                    {
+                        <button onclick="exportToExcel()" class="btn btn-primary ml-2">Excel'e Aktar</button>
+                    }
                 </div>
             </div>
             <div class="card-body">
@@ -89,6 +93,45 @@
         }
         document.getElementById("recordCount").innerText = "Toplam Kayıt: " + visibleCount;
     }
+
+    function exportToExcel() {
+        var table = document.getElementById("userTable");
+        var rows = table.getElementsByTagName("tr");
+        var data = [];
+
+        for (var i = 1; i < rows.length; i++) { // Başlık satırını atlamak için i = 1'den başlatın
+            var cells = rows[i].getElementsByTagName("td");
+            var rowData = [];
+            for (var j = 0; j < cells.length; j++) {
+                rowData.push(cells[j].innerText);
+            }
+            data.push(rowData);
+        }
+
+        console.log("Gönderilen veri:", data); // Konsola log ekleyin
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/Contact/ExportToExcel", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.responseType = "blob";
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var blob = new Blob([xhr.response], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+                var link = document.createElement("a");
+                link.href = window.URL.createObjectURL(blob);
+                link.download = "KullaniciListesi.xlsx";
+                link.click();
+                console.log("Excel dosyası başarıyla indirildi.");
+            } else {
+                console.error("Excel dosyası indirilirken bir hata oluştu.");
+            }
+        };
+        xhr.onerror = function () {
+            console.error("Excel dosyası indirilirken bir hata oluştu.");
+        };
+        xhr.send(JSON.stringify(data));
+    }
+
 
     function sortTable(n) {
         var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;

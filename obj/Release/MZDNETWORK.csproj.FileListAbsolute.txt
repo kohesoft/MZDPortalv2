@@ -394,3 +394,12 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWOR
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.Migrations.FixAnswersTable.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.Migrations.Addedusername.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Release\MZDNETWORK.Migrations.deleteusername.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\EPPlus.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\EPPlus.Interfaces.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\EPPlus.System.Drawing.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\System.Drawing.Common.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\EPPlus.xml
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\Microsoft.IO.RecyclableMemoryStream.xml
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\System.Drawing.Common.pdb
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\System.Drawing.Common.xml
