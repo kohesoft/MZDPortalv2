@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -65,10 +65,10 @@
       <HintPath>packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus, Version=7.5.3.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>packages\EPPlus.7.5.3\lib\net462\EPPlus.dll</HintPath>
@@ -454,25 +454,13 @@
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202502040604391_Initi.cs" />
-    <Compile Include="Migrations\202502040604391_Initi.Designer.cs">
-      <DependentUpon>202502040604391_Initi.cs</DependentUpon>
+    <Compile Include="Migrations\202502051200296_SyncWithCurrentDatabase.cs" />
+    <Compile Include="Migrations\202502051200296_SyncWithCurrentDatabase.Designer.cs">
+      <DependentUpon>202502051200296_SyncWithCurrentDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202502040657050_inti2.cs" />
-    <Compile Include="Migrations\202502040657050_inti2.Designer.cs">
-      <DependentUpon>202502040657050_inti2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202502040708543_FixAnswersTable.cs" />
-    <Compile Include="Migrations\202502040708543_FixAnswersTable.Designer.cs">
-      <DependentUpon>202502040708543_FixAnswersTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202502040849564_Addedusername.cs" />
-    <Compile Include="Migrations\202502040849564_Addedusername.Designer.cs">
-      <DependentUpon>202502040849564_Addedusername.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202502040903501_deleteusername.cs" />
-    <Compile Include="Migrations\202502040903501_deleteusername.Designer.cs">
-      <DependentUpon>202502040903501_deleteusername.cs</DependentUpon>
+    <Compile Include="Migrations\202502051307362_nvarchar.cs" />
+    <Compile Include="Migrations\202502051307362_nvarchar.Designer.cs">
+      <DependentUpon>202502051307362_nvarchar.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -526,6 +514,7 @@
     <Content Include="Content\my.css" />
     <Content Include="Content\Dokumantasyon.css" />
     <Content Include="Content\notification.mp3" />
+    <Content Include="Content\Spinner.css" />
     <Content Include="Content\transformations.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\boxicons.svg" />
@@ -535,6 +524,7 @@
     <Content Include="imgs\tick.gif" />
     <Content Include="libman.json" />
     <Content Include="logo.ico" />
+    <Content Include="Scripts\901ba758ee.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -806,9 +796,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="UploadPhotosMerkez\yemek.png" />
-    <Content Include="UploadPhotosMola\logo.png" />
-    <Content Include="UploadPhotosYerleske\Commits over time.png" />
     <Content Include="Views\Gonderi\GonderiListele.cshtml" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -2498,16 +2485,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Services\" />
     <Folder Include="UploadPhotosMerkez\Merkez\" />
     <Folder Include="UploadPhotosMerkez\Yerleske\" />
+    <Folder Include="UploadPhotosMola\" />
     <Folder Include="UploadPhotosYerleske\Merkez\" />
     <Folder Include="UploadPhotosYerleske\Yerleske\" />
     <Folder Include="UploadPhotos\" />
-    <Folder Include="UploadsDataSheet\" />
-    <Folder Include="Uploads\" />
-    <Folder Include="Views\SysYonetici\" />
-    <Folder Include="Views\Yoneticisi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -2540,20 +2523,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202502040604391_Initi.resx">
-      <DependentUpon>202502040604391_Initi.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202502051200296_SyncWithCurrentDatabase.resx">
+      <DependentUpon>202502051200296_SyncWithCurrentDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202502040657050_inti2.resx">
-      <DependentUpon>202502040657050_inti2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202502040708543_FixAnswersTable.resx">
-      <DependentUpon>202502040708543_FixAnswersTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202502040849564_Addedusername.resx">
-      <DependentUpon>202502040849564_Addedusername.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202502040903501_deleteusername.resx">
-      <DependentUpon>202502040903501_deleteusername.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202502051307362_nvarchar.resx">
+      <DependentUpon>202502051307362_nvarchar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -2616,16 +2590,16 @@
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
     <Error Condition="!Exists('packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.props'))" />
     <Error Condition="!Exists('packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.targets'))" />
-    <Error Condition="!Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
     <Error Condition="!Exists('packages\TinyMCE.7.6.1\build\TinyMCE.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\TinyMCE.7.6.1\build\TinyMCE.targets'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Import Project="packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.targets')" />
-  <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
   <Import Project="packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Import Project="packages\TinyMCE.7.6.1\build\TinyMCE.targets" Condition="Exists('packages\TinyMCE.7.6.1\build\TinyMCE.targets')" />
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

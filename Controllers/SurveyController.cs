@@ -9,6 +9,7 @@ public class SurveyController : Controller
     private MZDNETWORKContext db = new MZDNETWORKContext();
 
     // Anketleri listele
+    [Authorize(Roles = "IK, Yonetici, Sys, BilgiIslem, Merkez,Yerleske , IdariIsler, Lider")]
     public ActionResult Index()
     {
         var surveys = db.Surveys.ToList();
@@ -63,6 +64,22 @@ public class SurveyController : Controller
 
         return View(survey);
     }
+
+    [Authorize(Roles = "Yonetici, Sys, IK")]
+    public ActionResult Delete(int id)
+    {
+        var survey = db.Surveys.Find(id);
+        if (survey == null)
+        {
+            return HttpNotFound();
+        }
+
+        db.Surveys.Remove(survey);
+        db.SaveChanges();
+
+        return RedirectToAction("Index");
+    }
+
     public JsonResult GetUsernames()
     {
         var usernames = db.Users.Select(u => new { u.Id, u.Username }).ToList();

@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2025-02-05T05:01:20.4143254Z||;False|2025-02-04T15:40:20.6188778+03:00||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
+    <History>True|2025-02-06T12:05:37.1100667Z||;True|2025-02-06T09:18:03.9934870+03:00||;True|2025-02-05T16:09:52.3757058+03:00||;True|2025-02-05T15:31:09.2168402+03:00||;True|2025-02-05T08:01:20.4143254+03:00||;False|2025-02-04T15:40:20.6188778+03:00||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -25,10 +25,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/19/2021 14:53:32</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>06/16/2024 23:46:24</publishTime>
+      <publishTime>04/16/2020 23:38:42</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>06/16/2024 23:47:02</publishTime>
+      <publishTime>04/16/2020 23:38:56</publishTime>
     </File>
     <File Include="bin/EPPlus.dll">
       <publishTime>01/16/2025 12:08:18</publishTime>
@@ -202,10 +202,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.dll">
-      <publishTime>02/05/2025 09:41:55</publishTime>
+      <publishTime>02/06/2025 15:05:27</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.pdb">
-      <publishTime>02/05/2025 09:41:55</publishTime>
+      <publishTime>02/06/2025 15:05:27</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.Bson.dll">
       <publishTime>11/05/2024 02:51:46</publishTime>
@@ -582,6 +582,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/Site.css">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
+    <File Include="Content/snow.css">
+      <publishTime>02/06/2025 08:07:34</publishTime>
+    </File>
+    <File Include="Content/Spinner.css">
+      <publishTime>02/06/2025 13:20:25</publishTime>
+    </File>
     <File Include="Content/transformations.css">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
@@ -632,6 +638,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="NLog.config">
       <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="Scripts/901ba758ee.js">
+      <publishTime>02/06/2025 09:03:41</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6358,7 +6367,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/30/2024 17:25:45</publishTime>
     </File>
     <File Include="Views/Answer/TakeSurvey.cshtml">
-      <publishTime>02/04/2025 15:18:40</publishTime>
+      <publishTime>02/06/2025 13:39:59</publishTime>
     </File>
     <File Include="Views/BilgiIslem/Index.cshtml">
       <publishTime>12/24/2024 08:04:40</publishTime>
@@ -6370,7 +6379,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/16/2025 14:30:13</publishTime>
     </File>
     <File Include="Views/Contact/Index.cshtml">
-      <publishTime>02/05/2025 09:12:33</publishTime>
+      <publishTime>02/05/2025 10:10:17</publishTime>
     </File>
     <File Include="Views/DilekOneri/Bildirimlerim.cshtml">
       <publishTime>02/03/2025 15:42:11</publishTime>
@@ -6457,16 +6466,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/24/2024 14:29:26</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/04/2025 14:13:02</publishTime>
+      <publishTime>02/06/2025 13:44:37</publishTime>
     </File>
     <File Include="Views/Survey/Create.cshtml">
-      <publishTime>02/04/2025 15:06:43</publishTime>
+      <publishTime>02/06/2025 14:49:28</publishTime>
     </File>
     <File Include="Views/Survey/Index.cshtml">
-      <publishTime>02/04/2025 15:30:52</publishTime>
+      <publishTime>02/06/2025 14:39:14</publishTime>
     </File>
     <File Include="Views/Survey/SurveyResults.cshtml">
-      <publishTime>02/04/2025 15:06:43</publishTime>
+      <publishTime>02/06/2025 14:34:10</publishTime>
     </File>
     <File Include="Views/Task/Create.cshtml">
       <publishTime>01/15/2025 10:36:09</publishTime>
@@ -6526,7 +6535,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/05/2025 09:41:58</publishTime>
+      <publishTime>02/05/2025 15:31:00</publishTime>
     </File>
   </ItemGroup>
 </Project>

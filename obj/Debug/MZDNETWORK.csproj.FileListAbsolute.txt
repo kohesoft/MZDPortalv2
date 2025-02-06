@@ -775,11 +775,6 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.csproj.Up2Date
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.pdb
-C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.Migrations.Initi.resources
-C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.Migrations.inti2.resources
-C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.Migrations.FixAnswersTable.resources
-C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.Migrations.Addedusername.resources
-C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.Migrations.deleteusername.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\EPPlus.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\EPPlus.Interfaces.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\EPPlus.System.Drawing.dll
@@ -789,3 +784,5 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\EPPlus.xml
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\Microsoft.IO.RecyclableMemoryStream.xml
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\System.Drawing.Common.pdb
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\System.Drawing.Common.xml
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.Migrations.SyncWithCurrentDatabase.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.Migrations.nvarchar.resources

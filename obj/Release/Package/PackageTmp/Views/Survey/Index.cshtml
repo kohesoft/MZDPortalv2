@@ -27,6 +27,7 @@
                     @if (User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK"))
                     {
                         <a href="@Url.Action("SurveyResults", "Survey", new { surveyId = survey.ID })" class="btn btn-info">Sonuçları Gör</a>
+                        <a href="@Url.Action("Delete", "Survey", new { id = survey.ID })" class="btn btn-danger" onclick="return confirm('Bu anketi silmek istediğinizden emin misiniz?');">Sil</a>
                     }
                 </td>
             </tr>
@@ -35,7 +36,7 @@
 </table>
 
 <!-- Modal -->
-<div class="modal fade" id="surveyModal" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true">
+<div class="modal fade" id="surveyModal" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true" style="z-index:9999;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -43,9 +44,6 @@
             </div>
             <div class="modal-body">
                 Bu anketi daha önce yanıtladınız.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
             </div>
         </div>
     </div>
@@ -68,12 +66,12 @@
     </script>
 }
 
-
 <style>
     body {
         all: unset;
         background-color: white;
     }
+
     modal {
         z-index: 1;
     }

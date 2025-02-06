@@ -18,7 +18,7 @@
                 <h3 class="card-title">Rehber</h3>
                 <div class="card-toolbar">
                     <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Kullanıcıları ara..." class="form-control" style="width: 300px;">
-                    @if (User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("IdariIsler") || User.IsInRole("IK"))
+                    @if (User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("IdariIsler") || User.IsInRole("BilgiIslem"))
                     {
                         <button onclick="exportToExcel()" class="btn btn-primary ml-2">Excel'e Aktar</button>
                     }
