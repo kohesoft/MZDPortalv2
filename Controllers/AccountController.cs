@@ -24,6 +24,7 @@ public class AccountController : Controller
     [HttpPost]
     public ActionResult Login(User model, bool rememberMe = false)
     {
+        Debug.WriteLine($"Remember Me: {rememberMe}");
         if (ModelState.IsValid)
         {
             if (IsValidUser(model.Username, model.Password, out string role))
@@ -50,7 +51,6 @@ public class AccountController : Controller
                 };
                 HttpContext.Response.Cookies.Add(authCookie);
 
-
                 TempData["SuccessMessage"] = "Baþarýyla giriþ yaptýnýz, Anasayfaya yönlendiriliyor!";
                 TempData["RedirectUrl"] = Url.Action("Index", "Home");
                 return RedirectToAction("Login", "Account");
@@ -60,9 +60,23 @@ public class AccountController : Controller
                 ModelState.AddModelError("", "Geçersiz kullanýcý adý veya þifre.");
             }
         }
+        else
+        {
+            Debug.WriteLine("ModelState is not valid");
+            foreach (var state in ModelState)
+            {
+                foreach (var error in state.Value.Errors)
+                {
+                    Debug.WriteLine($"Property: {state.Key}, Error: {error.ErrorMessage}");
+                }
+            }
+        }
 
         return View(model);
     }
+
+
+
 
 
 

@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2025-02-06T12:05:37.1100667Z||;True|2025-02-06T09:18:03.9934870+03:00||;True|2025-02-05T16:09:52.3757058+03:00||;True|2025-02-05T15:31:09.2168402+03:00||;True|2025-02-05T08:01:20.4143254+03:00||;False|2025-02-04T15:40:20.6188778+03:00||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
+    <History>True|2025-02-07T11:38:17.8974705Z||;True|2025-02-06T15:05:37.1100667+03:00||;True|2025-02-06T09:18:03.9934870+03:00||;True|2025-02-05T16:09:52.3757058+03:00||;True|2025-02-05T15:31:09.2168402+03:00||;True|2025-02-05T08:01:20.4143254+03:00||;False|2025-02-04T15:40:20.6188778+03:00||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -202,10 +202,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.dll">
-      <publishTime>02/06/2025 15:05:27</publishTime>
+      <publishTime>02/07/2025 14:38:07</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.pdb">
-      <publishTime>02/06/2025 15:05:27</publishTime>
+      <publishTime>02/07/2025 14:38:07</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.Bson.dll">
       <publishTime>11/05/2024 02:51:46</publishTime>
@@ -615,14 +615,110 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="ILLink/ILLink.Descriptors.LibraryBuild.xml">
       <publishTime>01/17/2025 17:07:03</publishTime>
     </File>
+    <File Include="imgs/01background.png">
+      <publishTime>01/28/2025 15:13:26</publishTime>
+    </File>
     <File Include="imgs/01background.webp">
       <publishTime>01/28/2025 15:13:26</publishTime>
+    </File>
+    <File Include="imgs/02background.png">
+      <publishTime>01/28/2025 15:10:52</publishTime>
     </File>
     <File Include="imgs/02background.webp">
       <publishTime>01/28/2025 15:10:52</publishTime>
     </File>
     <File Include="imgs/03background.jpeg">
       <publishTime>01/28/2025 15:13:49</publishTime>
+    </File>
+    <File Include="imgs/background.jpeg">
+      <publishTime>01/28/2025 15:13:49</publishTime>
+    </File>
+    <File Include="imgs/loader.png">
+      <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="imgs/logo.ico">
+      <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="imgs/logo.png">
+      <publishTime>01/07/2025 08:33:56</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto1.png">
+      <publishTime>02/06/2025 16:53:35</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto10.png">
+      <publishTime>02/07/2025 11:34:59</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto11.png">
+      <publishTime>02/07/2025 11:47:34</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto12.png">
+      <publishTime>02/07/2025 11:48:05</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto13.png">
+      <publishTime>02/07/2025 11:48:22</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto14.png">
+      <publishTime>02/07/2025 11:48:43</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto15.png">
+      <publishTime>02/07/2025 11:50:22</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto16.png">
+      <publishTime>02/07/2025 11:50:38</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto17.png">
+      <publishTime>02/07/2025 11:50:52</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto18.png">
+      <publishTime>02/07/2025 11:51:11</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto19.png">
+      <publishTime>02/07/2025 11:51:23</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto2.png">
+      <publishTime>02/06/2025 17:13:58</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto20.png">
+      <publishTime>02/07/2025 11:52:15</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto21.png">
+      <publishTime>02/07/2025 11:53:00</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto22.png">
+      <publishTime>02/07/2025 11:54:23</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto23.png">
+      <publishTime>02/07/2025 11:54:54</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto24.png">
+      <publishTime>02/07/2025 11:57:03</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto25.png">
+      <publishTime>02/07/2025 11:57:20</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto26.png">
+      <publishTime>02/07/2025 11:49:59</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto3.png">
+      <publishTime>02/06/2025 17:07:28</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto4.png">
+      <publishTime>02/06/2025 17:10:30</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto5.png">
+      <publishTime>02/06/2025 16:52:50</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto6.png">
+      <publishTime>02/05/2025 13:33:23</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto7.png">
+      <publishTime>02/07/2025 11:44:25</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto8.png">
+      <publishTime>02/07/2025 11:43:59</publishTime>
+    </File>
+    <File Include="imgs/MZDfoto9.png">
+      <publishTime>02/07/2025 11:43:22</publishTime>
     </File>
     <File Include="imgs/tick.gif">
       <publishTime>02/04/2025 14:20:53</publishTime>
@@ -6358,7 +6454,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/16/2025 14:38:58</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>01/21/2025 11:19:18</publishTime>
+      <publishTime>02/07/2025 11:29:13</publishTime>
     </File>
     <File Include="Views/Account/Logout.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6385,7 +6481,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/03/2025 15:42:11</publishTime>
     </File>
     <File Include="Views/DilekOneri/Create.cshtml">
-      <publishTime>01/20/2025 13:42:39</publishTime>
+      <publishTime>02/07/2025 14:33:10</publishTime>
     </File>
     <File Include="Views/Dokumantasyon/Create.cshtml">
       <publishTime>01/16/2025 16:14:03</publishTime>
@@ -6451,7 +6547,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/Notification/SendNotification.cshtml">
-      <publishTime>01/27/2025 08:16:49</publishTime>
+      <publishTime>02/07/2025 14:04:50</publishTime>
     </File>
     <File Include="Views/Profilim/Profilim.cshtml">
       <publishTime>12/30/2024 12:33:58</publishTime>
@@ -6466,7 +6562,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/24/2024 14:29:26</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/06/2025 13:44:37</publishTime>
+      <publishTime>02/07/2025 13:40:14</publishTime>
     </File>
     <File Include="Views/Survey/Create.cshtml">
       <publishTime>02/06/2025 14:49:28</publishTime>
@@ -6535,7 +6631,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/05/2025 15:31:00</publishTime>
+      <publishTime>02/07/2025 14:38:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

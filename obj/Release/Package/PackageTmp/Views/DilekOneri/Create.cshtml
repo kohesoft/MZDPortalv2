@@ -7,7 +7,6 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </head>
 
 <form class='dilek-istek-form login-form container' action="@Url.Action("Create", "DilekOneri")" method="post">
@@ -35,13 +34,13 @@
     }
 
     <div class="flex-row">
-        <label class="lf--label" for="Anonymous" style=" color:white">
+        <label class="lf--label" for="Anonymous" style="color: black;">
             <input type="checkbox" id="Anonymous" name="Anonymous" onclick="toggleUsername()" style="margin:10px;"> İsimsiz Gönder
         </label>
     </div>
 
     <div class="flex-row">
-        <label class="lf--label" for="Username" style=" color:white; margin:10px;">
+        <label class="lf--label" for="Username" style="color: black; margin:10px;">
             <i class='bx bx-id-card'></i>
         </label>
         @Html.TextBoxFor(model => model.Username, new { @class = "lf--input", value = User.Identity.Name, @readonly = "readonly", id = "Username" })
@@ -54,7 +53,7 @@
     </div>
 
     <div class="flex-row">
-        <label class="lf--label" for="Mesaj" style=" color: white; margin: 10px;">
+        <label class="lf--label" for="Mesaj" style="color: black; margin: 10px;">
             <i class='bx bx-message-dots'></i>
         </label>
         @Html.TextAreaFor(model => model.Mesaj, new { @class = "lf--input", placeholder = "Dilek ve önerileriniz", })
@@ -83,9 +82,35 @@
     .login-form {
         width: 50vw;
         max-width: unset;
+        background-color: white; /* Arka plan beyaz */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .lf--label {
         width: unset;
+        color: black; /* Metin rengi siyah */
     }
+
+    .lf--input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .lf--submit {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .lf--submit:hover {
+            background-color: #0056b3;
+        }
 </style>
