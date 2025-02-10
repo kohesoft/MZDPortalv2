@@ -224,7 +224,7 @@
                             </ul>
                         </li>
                     }
-                    @if (User.IsInRole("Dokumantasyon") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("Merkez") || User.IsInRole("Yerleske"))
+                    @if (User.IsInRole("Dokumantasyon") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("Merkez") || User.IsInRole("Yerleske") || User.IsInRole("Lider"))
                     {
                         <li class="nav-link dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -282,7 +282,7 @@
                             <span class="text nav-text">Mola Saatleri</span>
                         </a>
                     </li>
-                    @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler") || User.IsInRole("Yerleske") || User.IsInRole("Merkez"))
+                    @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler") || User.IsInRole("Yerleske") || User.IsInRole("Merkez") || User.IsInRole("Dokumantasyon"))
                     {
                         <li class="nav-link dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -411,17 +411,18 @@
          @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler"))
             {
                <text>
-                     initializeChatHub();
+        initializeChatHub();
                </text>
             }
-            initializeOnlineUsersHub();
-            initializeSidebar();
-            initializeModeSwitch();
-            initializeActiveMenu();
-            initializeDropdownMenus();
-            initializeLoadingOverlay();
-            scrollToBottom();
-            initializeNotificationHub();
+
+        initializeNotificationHub();
+        initializeOnlineUsersHub();
+        initializeSidebar();
+        initializeModeSwitch();
+        initializeActiveMenu();
+        initializeDropdownMenus();
+        initializeLoadingOverlay();
+        scrollToBottom();
         });
 
     function initializeChatHub() {

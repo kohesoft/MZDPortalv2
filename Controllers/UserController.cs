@@ -6,6 +6,8 @@ using System.Net;
 
 namespace MZDNETWORK.Controllers
 {
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske, Dokumantasyon")]
+
     public class UserController : Controller
     {
         private readonly MZDNETWORKContext db;

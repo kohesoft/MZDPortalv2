@@ -2516,12 +2516,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="UploadPhotosMerkez\Merkez\" />
-    <Folder Include="UploadPhotosMerkez\Yerleske\" />
+    <Folder Include="UploadPhotosMerkez\" />
     <Folder Include="UploadPhotosMola\" />
-    <Folder Include="UploadPhotosYerleske\Merkez\" />
-    <Folder Include="UploadPhotosYerleske\Yerleske\" />
-    <Folder Include="UploadPhotos\" />
+    <Folder Include="UploadPhotosYerleske\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

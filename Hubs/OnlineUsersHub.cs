@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace MZDNETWORK.Hubs
 {
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
     public class OnlineUsersHub : Hub
     {
         private static int onlineUsersCount = 0;

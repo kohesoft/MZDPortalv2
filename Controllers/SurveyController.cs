@@ -9,7 +9,7 @@ public class SurveyController : Controller
     private MZDNETWORKContext db = new MZDNETWORKContext();
 
     // Anketleri listele
-    [Authorize(Roles = "IK, Yonetici, Sys, BilgiIslem, Merkez,Yerleske , IdariIsler, Lider")]
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske, Dokumantasyon")]
     public ActionResult Index()
     {
         var surveys = db.Surveys.ToList();

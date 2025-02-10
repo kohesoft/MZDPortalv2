@@ -8,7 +8,7 @@ using MZDNETWORK.Models;
 
 namespace MZDNETWORK.Controllers
 {
-  [Authorize(Roles = "IK, Yonetici, Sys, BilgiIslem, Merkez,Yerleske, IdariIsler")]
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske, Dokumantasyon")]
     public class BildirimlerimController : Controller
     {
 

@@ -6,7 +6,7 @@ using System;
 
 namespace MZDNETWORK.Controllers
 {
-   [Authorize(Roles = "IK, Yonetici, Sys, BilgiIslem, Merkez,Yerleske , IdariIsler, Lider")]
+   [Authorize(Roles = "IK, Yonetici, Sys, BilgiIslem, Merkez,Yerleske , IdariIsler, Lider, Dokumantasyon")]
     public class DilekOneriController : Controller
     {
 
@@ -129,6 +129,7 @@ namespace MZDNETWORK.Controllers
                 return Json(new { success = false, error = ex.Message });
             }
         }
+        [Authorize(Roles = "Yonetici, Sys, IdariIsler, IK")]
 
         [HttpPost]
         public JsonResult UpdateMessage(int id, string message)

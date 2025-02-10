@@ -8,6 +8,8 @@ using System.Data.Entity;
 
 namespace MZDNETWORK.Controllers
 {
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske, Dokumantasyon")]
+
     public class TaskController : Controller
     {
         private readonly MZDNETWORKContext _context;

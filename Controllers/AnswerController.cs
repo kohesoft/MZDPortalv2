@@ -10,7 +10,7 @@ public class AnswerController : Controller
     private MZDNETWORKContext db = new MZDNETWORKContext();
 
     // Kullanıcı anketi doldururken
-    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske")]
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske, Dokumantasyon")]
     public ActionResult TakeSurvey(int surveyId)
     {
         var survey = db.Surveys
@@ -23,7 +23,7 @@ public class AnswerController : Controller
         return View(survey);
     }
 
-    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske")]
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske, Dokumantasyon")]
 
     [HttpPost]
     public ActionResult SubmitSurvey(FormCollection form)

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNet.SignalR;
 using System.Collections.Generic;
 
+[Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
+
 public class ChatHub : Hub
 {
     private static HashSet<string> ConnectedUsers = new HashSet<string>();

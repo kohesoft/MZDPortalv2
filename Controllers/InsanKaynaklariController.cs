@@ -7,7 +7,7 @@ using MZDNETWORK.Models;
 
 namespace MZDNETWORK.Controllers
 {
-      [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler")]
+   [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler")]
     public class InsanKaynaklariController : Controller
     {
 

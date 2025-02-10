@@ -19,6 +19,7 @@ namespace MZDNETWORK.Controllers
             return View(users);
         }
 
+        [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
 
         [HttpPost]
         public ActionResult ExportToExcel(List<List<string>> data)

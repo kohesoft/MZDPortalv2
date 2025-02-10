@@ -10,7 +10,7 @@ using MZDNETWORK.Models;
 
 namespace MZDNETWORK.Controllers
 {
-
+    [Authorize(Roles = "Dokumantasyon, Yonetici, Sys, IdariIsler, BilgiIslem, IK, Lider, Merkez, Yerleske")]
     public class DokumantasyonController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
@@ -41,7 +41,7 @@ namespace MZDNETWORK.Controllers
             }
             return View(dokumantasyon);
         }
-
+        [Authorize(Roles = "Dokumantasyon, Yonetici, Sys")]
         // GET: Dokumantasyon/Create
         [HttpGet]
         public ActionResult Create()
@@ -52,7 +52,6 @@ namespace MZDNETWORK.Controllers
             };
             return View(model);
         }
-
         // POST: Dokumantasyon/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -69,7 +68,7 @@ namespace MZDNETWORK.Controllers
 
             return View(dokumantasyon);
         }
-
+        [Authorize(Roles = "Dokumantasyon, Yonetici, Sys")]
         // GET: Dokumantasyon/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -84,7 +83,7 @@ namespace MZDNETWORK.Controllers
             }
             return View(dokumantasyon);
         }
-
+        [Authorize(Roles = "Dokumantasyon, Yonetici, Sys")]
         // POST: Dokumantasyon/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -100,11 +99,11 @@ namespace MZDNETWORK.Controllers
 
                 db.Entry(dokumantasyon).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index_sorumlu");
             }
             return View(dokumantasyon);
         }
-
+        [Authorize(Roles = "Dokumantasyon, Yonetici, Sys")]
         // GET: Dokumantasyon/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -119,7 +118,7 @@ namespace MZDNETWORK.Controllers
             }
             return View(dokumantasyon);
         }
-
+        [Authorize(Roles = "Dokumantasyon, Yonetici, Sys")]
         // POST: Dokumantasyon/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

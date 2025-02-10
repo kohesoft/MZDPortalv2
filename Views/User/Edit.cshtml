@@ -8,227 +8,289 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!----======== CSS ======== -->
-    <!----===== Boxicons CSS ===== -->
-    <link href='~/Content/boxicons.css' rel='stylesheet'>
-
     <link rel="stylesheet" href="~/Content/my.css" />
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .login-form {
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .lf--input {
+            width: calc(50% - 20px);
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .lf--submit {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .lf--submit:hover {
+                background: #0056b3;
+            }
+
+        .flex-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            width: calc(50% - 20px);
+            margin: 10px;
+        }
+
+        .lf--label {
+            margin-right: 10px;
+        }
+
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+    </style>
 </head>
 
-<body style="overflow:auto;">
-    <form class='login-form' style="max-width:90%;" action="@Url.Action("Edit", "User")" method="post">
-        @Html.AntiForgeryToken()
-        @if (!ViewData.ModelState.IsValid)
-        {
-            <div class="error-message">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            </div>
-        }
-        @Html.HiddenFor(model => model.UserId)
+<body>
+    <div class="container">
+        <div class="form-container">
+            <form class='login-form' action="@Url.Action("Edit", "User")" method="post">
+                @Html.AntiForgeryToken()
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="error-message">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    </div>
+                }
+                @Html.HiddenFor(model => model.UserId)
 
-        <div class="flex-row">
-            <label class="lf--label" for="Email">
-                <i class='bx bx-envelope'></i>
-            </label>
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "lf--input", placeholder = "E-posta" } })
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <div class="flex-row">
+                    <label class="lf--label" for="Email">
+                        <i class='bx bx-envelope'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "lf--input", placeholder = "E-posta" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="RealPhoneNumber">
+                        <i class='bx bx-phone'></i>
+                    </label>
+                    @Html.EditorFor(model => model.RealPhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Telefon Numarası" } })
+                    @Html.ValidationMessageFor(model => model.RealPhoneNumber, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Adres">
+                        <i class='bx bx-home'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Adres, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres" } })
+                    @Html.ValidationMessageFor(model => model.Adres, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Adres2">
+                        <i class='bx bx-home'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Adres2, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres 2" } })
+                    @Html.ValidationMessageFor(model => model.Adres2, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Sehir">
+                        <i class='bx bx-map'></i>
+                    </label>
+                    @Html.DropDownListFor(model => model.Sehir, new SelectList(new List<SelectListItem>
+                            {
+                        new SelectListItem { Text = "İstanbul", Value = "İstanbul" },
+                        new SelectListItem { Text = "Ankara", Value = "Ankara" },
+                        new SelectListItem { Text = "İzmir", Value = "İzmir" },
+                        new SelectListItem { Text = "Bursa", Value = "Bursa" },
+                        new SelectListItem { Text = "Antalya", Value = "Antalya" },
+                        new SelectListItem { Text = "Adana", Value = "Adana" },
+                        new SelectListItem { Text = "Konya", Value = "Konya" },
+                        new SelectListItem { Text = "Gaziantep", Value = "Gaziantep" },
+                        new SelectListItem { Text = "Mersin", Value = "Mersin" },
+                        new SelectListItem { Text = "Kayseri", Value = "Kayseri" },
+                        new SelectListItem { Text = "Sakarya", Value = "Sakarya" },
+                        new SelectListItem { Text = "Kocaeli", Value = "Kocaeli" },
+                        new SelectListItem { Text = "Tekirdağ", Value = "Tekirdağ" },
+                        new SelectListItem { Text = "Manisa", Value = "Manisa" },
+                        new SelectListItem { Text = "Eskişehir", Value = "Eskişehir" },
+                        new SelectListItem { Text = "Aydın", Value = "Aydın" },
+                        new SelectListItem { Text = "Denizli", Value = "Denizli" },
+                        new SelectListItem { Text = "Samsun", Value = "Samsun" },
+                        new SelectListItem { Text = "Trabzon", Value = "Trabzon" },
+                        new SelectListItem { Text = "Ordu", Value = "Ordu" },
+                        new SelectListItem { Text = "Bolu", Value = "Bolu" },
+                        new SelectListItem { Text = "Düzce", Value = "Düzce" },
+                        new SelectListItem { Text = "Kastamonu", Value = "Kastamonu" },
+                        new SelectListItem { Text = "Zonguldak", Value = "Zonguldak" },
+                        new SelectListItem { Text = "Karabük", Value = "Karabük" },
+                        new SelectListItem { Text = "Bartın", Value = "Bartın" },
+                        new SelectListItem { Text = "Çorum", Value = "Çorum" },
+                        new SelectListItem { Text = "Amasya", Value = "Amasya" },
+                        new SelectListItem { Text = "Tokat", Value = "Tokat" },
+                        new SelectListItem { Text = "Sivas", Value = "Sivas" },
+                        new SelectListItem { Text = "Nevşehir", Value = "Nevşehir" },
+                        new SelectListItem { Text = "Niğde", Value = "Niğde" },
+                        new SelectListItem { Text = "Kırşehir", Value = "Kırşehir" },
+                        new SelectListItem { Text = "Malatya", Value = "Malatya" },
+                        new SelectListItem { Text = "Elazığ", Value = "Elazığ" },
+                        new SelectListItem { Text = "Tunceli", Value = "Tunceli" },
+                        new SelectListItem { Text = "Diyarbakır", Value = "Diyarbakır" },
+                        new SelectListItem { Text = "Şanlıurfa", Value = "Şanlıurfa" },
+                        new SelectListItem { Text = "Mardin", Value = "Mardin" },
+                        new SelectListItem { Text = "Batman", Value = "Batman" },
+                        new SelectListItem { Text = "Siirt", Value = "Siirt" },
+                        new SelectListItem { Text = "Bitlis", Value = "Bitlis" },
+                        new SelectListItem { Text = "Van", Value = "Van" },
+                        new SelectListItem { Text = "Hakkari", Value = "Hakkari" },
+                        new SelectListItem { Text = "Iğdır", Value = "Iğdır" },
+                        new SelectListItem { Text = "Kars", Value = "Kars" },
+                        new SelectListItem { Text = "Ardahan", Value = "Ardahan" },
+                        new SelectListItem { Text = "Artvin", Value = "Artvin" },
+                        new SelectListItem { Text = "Rize", Value = "Rize" },
+                        new SelectListItem { Text = "Giresun", Value = "Giresun" },
+                        new SelectListItem { Text = "Gümüşhane", Value = "Gümüşhane" },
+                        new SelectListItem { Text = "Bayburt", Value = "Bayburt" },
+                        new SelectListItem { Text = "Kahramanmaraş", Value = "Kahramanmaraş" },
+                        new SelectListItem { Text = "Osmaniye", Value = "Osmaniye" },
+                        new SelectListItem { Text = "Adıyaman", Value = "Adıyaman" },
+                        new SelectListItem { Text = "Şırnak", Value = "Şırnak" },
+                        new SelectListItem { Text = "Ağrı", Value = "Ağrı" },
+                        new SelectListItem { Text = "Kilis", Value = "Kilis" },
+                        new SelectListItem { Text = "Çanakkale", Value = "Çanakkale" },
+                        new SelectListItem { Text = "Balıkesir", Value = "Balıkesir" },
+                        new SelectListItem { Text = "Muğla", Value = "Muğla" },
+                        new SelectListItem { Text = "Uşak", Value = "Uşak" },
+                        new SelectListItem { Text = "Kütahya", Value = "Kütahya" },
+                        new SelectListItem { Text = "Bilecik", Value = "Bilecik" },
+                        new SelectListItem { Text = "Bingöl", Value = "Bingöl" },
+                        new SelectListItem { Text = "Çorum", Value = "Çorum" },
+                        new SelectListItem { Text = "Karaman", Value = "Karaman" },
+                        new SelectListItem { Text = "Yozgat", Value = "Yozgat" },
+                        new SelectListItem { Text = "Yalova", Value = "Yalova" },
+                        new SelectListItem { Text = "Aksaray", Value = "Aksaray" },
+                        new SelectListItem { Text = "Ardahan", Value = "Ardahan" },
+                    }, "Value", "Text"), "Şehir Seçin", new { @class = "lf--input" })
+                    @Html.ValidationMessageFor(model => model.Sehir, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Ulke">
+                        <i class='bx bx-map'></i>
+                    </label>
+                    @Html.DropDownListFor(model => model.Ulke, new SelectList(new List<SelectListItem>
+                            {
+                        new SelectListItem { Text = "Türkiye", Value = "Türkiye" },
+                        new SelectListItem { Text = "Almanya", Value = "Almanya" },
+                        new SelectListItem { Text = "Fransa", Value = "Fransa" },
+                        new SelectListItem { Text = "İngiltere", Value = "İngiltere" },
+                        new SelectListItem { Text = "ABD", Value = "ABD" },
+                        new SelectListItem { Text = "Kanada", Value = "Kanada" },
+                        new SelectListItem { Text = "Avustralya", Value = "Avustralya" },
+                        new SelectListItem { Text = "İtalya", Value = "İtalya" },
+                        new SelectListItem { Text = "İspanya", Value = "İspanya" },
+                        new SelectListItem { Text = "Hindistan", Value = "Hindistan" },
+                        new SelectListItem { Text = "Çin", Value = "Çin" },
+                        new SelectListItem { Text = "Japonya", Value = "Japonya" },
+                        new SelectListItem { Text = "Brezilya", Value = "Brezilya" },
+                        new SelectListItem { Text = "Rusya", Value = "Rusya" },
+                        new SelectListItem { Text = "Meksika", Value = "Meksika" },
+                        new SelectListItem { Text = "Güney Afrika", Value = "Güney Afrika" }
+                    }, "Value", "Text"), "Ülke Seçin", new { @class = "lf--input" })
+                    @Html.ValidationMessageFor(model => model.Ulke, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Postakodu">
+                        <i class='bx bx-envelope'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Postakodu, new { htmlAttributes = new { @class = "lf--input", placeholder = "Posta Kodu" } })
+                    @Html.ValidationMessageFor(model => model.Postakodu, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="KanGrubu">
+                        <i class='bx bx-droplet'></i>
+                    </label>
+                    @Html.DropDownListFor(model => model.KanGrubu, new SelectList(new List<SelectListItem>
+                            {
+                        new SelectListItem { Text = "A Rh+", Value = "A Rh+" },
+                        new SelectListItem { Text = "A Rh-", Value = "A Rh-" },
+                        new SelectListItem { Text = "B Rh+", Value = "B Rh+" },
+                        new SelectListItem { Text = "B Rh-", Value = "B Rh-" },
+                        new SelectListItem { Text = "AB Rh+", Value = "AB Rh+" },
+                        new SelectListItem { Text = "AB Rh-", Value = "AB Rh-" },
+                        new SelectListItem { Text = "0 Rh+", Value = "0 Rh+" },
+                        new SelectListItem { Text = "0 Rh-", Value = "0 Rh-" }
+                    }, "Value", "Text"), "Kan Grubu Seçin", new { @class = "lf--input" })
+                    @Html.ValidationMessageFor(model => model.KanGrubu, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="DogumTarihi">
+                        <i class='bx bx-calendar'></i>
+                    </label>
+                    @Html.TextBoxFor(model => model.DogumTarihi, "{0:yyyy-MM-dd}", new { @class = "lf--input", placeholder = "Doğum Tarihi", type = "date" })
+                    @Html.ValidationMessageFor(model => model.DogumTarihi, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Cinsiyet">
+                        <i class='bx bx-user'></i>
+                    </label>
+                    @Html.DropDownListFor(model => model.Cinsiyet, new SelectList(new List<SelectListItem>
+                            {
+                        new SelectListItem { Text = "Erkek", Value = "Erkek" },
+                        new SelectListItem { Text = "Kadın", Value = "Kadın" },
+                        new SelectListItem { Text = "Diğer", Value = "Diğer" }
+                    }, "Value", "Text"), "Cinsiyet Seçin", new { @class = "lf--input" })
+                    @Html.ValidationMessageFor(model => model.Cinsiyet, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="MedeniDurum">
+                        <i class='bx bx-user'></i>
+                    </label>
+                    @Html.DropDownListFor(model => model.MedeniDurum, new SelectList(new List<SelectListItem>
+                            {
+                        new SelectListItem { Text = "Evli", Value = "Evli" },
+                        new SelectListItem { Text = "Bekar", Value = "Bekar" }
+                    }, "Value", "Text"), "Medeni Durum Seçin", new { @class = "lf--input" })
+                    @Html.ValidationMessageFor(model => model.MedeniDurum, "", new { @class = "text-danger" })
+                </div>
+
+                <input class='lf--submit' type='submit' value='Kaydet'>
+            </form>
         </div>
-
-        <div class="flex-row">
-            <label class="lf--label" for="RealPhoneNumber">
-                <i class='bx bx-phone'></i>
-            </label>
-            @Html.EditorFor(model => model.RealPhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Telefon Numarası" } })
-            @Html.ValidationMessageFor(model => model.RealPhoneNumber, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="flex-row">
-            <label class="lf--label" for="Adres">
-                <i class='bx bx-home'></i>
-            </label>
-            @Html.EditorFor(model => model.Adres, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres" } })
-            @Html.ValidationMessageFor(model => model.Adres, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="flex-row">
-            <label class="lf--label" for="Adres2">
-                <i class='bx bx-home'></i>
-            </label>
-            @Html.EditorFor(model => model.Adres2, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres 2" } })
-            @Html.ValidationMessageFor(model => model.Adres2, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="flex-row">
-            <label class="lf--label" for="Sehir">
-                <i class='bx bx-map'></i>
-            </label>
-            @Html.DropDownListFor(model => model.Sehir, new SelectList(new List<SelectListItem>
-            {
-                new SelectListItem { Text = "İstanbul", Value = "İstanbul" },
-new SelectListItem { Text = "Ankara", Value = "Ankara" },
-new SelectListItem { Text = "İzmir", Value = "İzmir" },
-new SelectListItem { Text = "Bursa", Value = "Bursa" },
-new SelectListItem { Text = "Antalya", Value = "Antalya" },
-new SelectListItem { Text = "Adana", Value = "Adana" },
-new SelectListItem { Text = "Konya", Value = "Konya" },
-new SelectListItem { Text = "Gaziantep", Value = "Gaziantep" },
-new SelectListItem { Text = "Mersin", Value = "Mersin" },
-new SelectListItem { Text = "Kayseri", Value = "Kayseri" },
-new SelectListItem { Text = "Sakarya", Value = "Sakarya" },
-new SelectListItem { Text = "Kocaeli", Value = "Kocaeli" },
-new SelectListItem { Text = "Tekirdağ", Value = "Tekirdağ" },
-new SelectListItem { Text = "Manisa", Value = "Manisa" },
-new SelectListItem { Text = "Eskişehir", Value = "Eskişehir" },
-new SelectListItem { Text = "Aydın", Value = "Aydın" },
-new SelectListItem { Text = "Denizli", Value = "Denizli" },
-new SelectListItem { Text = "Samsun", Value = "Samsun" },
-new SelectListItem { Text = "Trabzon", Value = "Trabzon" },
-new SelectListItem { Text = "Ordu", Value = "Ordu" },
-new SelectListItem { Text = "Bolu", Value = "Bolu" },
-new SelectListItem { Text = "Düzce", Value = "Düzce" },
-new SelectListItem { Text = "Kastamonu", Value = "Kastamonu" },
-new SelectListItem { Text = "Zonguldak", Value = "Zonguldak" },
-new SelectListItem { Text = "Karabük", Value = "Karabük" },
-new SelectListItem { Text = "Bartın", Value = "Bartın" },
-new SelectListItem { Text = "Çorum", Value = "Çorum" },
-new SelectListItem { Text = "Amasya", Value = "Amasya" },
-new SelectListItem { Text = "Tokat", Value = "Tokat" },
-new SelectListItem { Text = "Sivas", Value = "Sivas" },
-new SelectListItem { Text = "Nevşehir", Value = "Nevşehir" },
-new SelectListItem { Text = "Niğde", Value = "Niğde" },
-new SelectListItem { Text = "Kırşehir", Value = "Kırşehir" },
-new SelectListItem { Text = "Malatya", Value = "Malatya" },
-new SelectListItem { Text = "Elazığ", Value = "Elazığ" },
-new SelectListItem { Text = "Tunceli", Value = "Tunceli" },
-new SelectListItem { Text = "Diyarbakır", Value = "Diyarbakır" },
-new SelectListItem { Text = "Şanlıurfa", Value = "Şanlıurfa" },
-new SelectListItem { Text = "Mardin", Value = "Mardin" },
-new SelectListItem { Text = "Batman", Value = "Batman" },
-new SelectListItem { Text = "Siirt", Value = "Siirt" },
-new SelectListItem { Text = "Bitlis", Value = "Bitlis" },
-new SelectListItem { Text = "Van", Value = "Van" },
-new SelectListItem { Text = "Hakkari", Value = "Hakkari" },
-new SelectListItem { Text = "Iğdır", Value = "Iğdır" },
-new SelectListItem { Text = "Kars", Value = "Kars" },
-new SelectListItem { Text = "Ardahan", Value = "Ardahan" },
-new SelectListItem { Text = "Artvin", Value = "Artvin" },
-new SelectListItem { Text = "Rize", Value = "Rize" },
-new SelectListItem { Text = "Giresun", Value = "Giresun" },
-new SelectListItem { Text = "Gümüşhane", Value = "Gümüşhane" },
-new SelectListItem { Text = "Bayburt", Value = "Bayburt" },
-new SelectListItem { Text = "Kahramanmaraş", Value = "Kahramanmaraş" },
-new SelectListItem { Text = "Osmaniye", Value = "Osmaniye" },
-new SelectListItem { Text = "Adıyaman", Value = "Adıyaman" },
-new SelectListItem { Text = "Şırnak", Value = "Şırnak" },
-new SelectListItem { Text = "Ağrı", Value = "Ağrı" },
-new SelectListItem { Text = "Kilis", Value = "Kilis" },
-new SelectListItem { Text = "Çanakkale", Value = "Çanakkale" },
-new SelectListItem { Text = "Balıkesir", Value = "Balıkesir" },
-new SelectListItem { Text = "Muğla", Value = "Muğla" },
-new SelectListItem { Text = "Uşak", Value = "Uşak" },
-new SelectListItem { Text = "Kütahya", Value = "Kütahya" },
-new SelectListItem { Text = "Bilecik", Value = "Bilecik" },
-new SelectListItem { Text = "Bingöl", Value = "Bingöl" },
-new SelectListItem { Text = "Çorum", Value = "Çorum" },
-new SelectListItem { Text = "Karaman", Value = "Karaman" },
-new SelectListItem { Text = "Yozgat", Value = "Yozgat" },
-new SelectListItem { Text = "Yalova", Value = "Yalova" },
-new SelectListItem { Text = "Aksaray", Value = "Aksaray" },
-new SelectListItem { Text = "Ardahan", Value = "Ardahan" },
-
-            }, "Value", "Text"), "Şehir Seçin", new { @class = "lf--input" })
-            @Html.ValidationMessageFor(model => model.Sehir, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="flex-row">
-            <label class="lf--label" for="Ulke">
-                <i class='bx bx-map'></i>
-            </label>
-            @Html.DropDownListFor(model => model.Ulke, new SelectList(new List<SelectListItem>
-            {
-                new SelectListItem { Text = "Türkiye", Value = "Türkiye" },
-                new SelectListItem { Text = "Almanya", Value = "Almanya" },
-                new SelectListItem { Text = "Fransa", Value = "Fransa" },
-                new SelectListItem { Text = "İngiltere", Value = "İngiltere" },
-                new SelectListItem { Text = "ABD", Value = "ABD" },
-                new SelectListItem { Text = "Kanada", Value = "Kanada" },
-                new SelectListItem { Text = "Avustralya", Value = "Avustralya" },
-                new SelectListItem { Text = "İtalya", Value = "İtalya" },
-                new SelectListItem { Text = "İspanya", Value = "İspanya" },
-                new SelectListItem { Text = "Hindistan", Value = "Hindistan" },
-                new SelectListItem { Text = "Çin", Value = "Çin" },
-                new SelectListItem { Text = "Japonya", Value = "Japonya" },
-                new SelectListItem { Text = "Brezilya", Value = "Brezilya" },
-                new SelectListItem { Text = "Rusya", Value = "Rusya" },
-                new SelectListItem { Text = "Meksika", Value = "Meksika" },
-                new SelectListItem { Text = "Güney Afrika", Value = "Güney Afrika" }
-            }, "Value", "Text"), "Ülke Seçin", new { @class = "lf--input" })
-            @Html.ValidationMessageFor(model => model.Ulke, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="flex-row">
-            <label class="lf--label" for="Postakodu">
-                <i class='bx bx-envelope'></i>
-            </label>
-            @Html.EditorFor(model => model.Postakodu, new { htmlAttributes = new { @class = "lf--input", placeholder = "Posta Kodu" } })
-            @Html.ValidationMessageFor(model => model.Postakodu, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="flex-row">
-            <label class="lf--label" for="KanGrubu">
-                <i class='bx bx-droplet'></i>
-            </label>
-            @Html.DropDownListFor(model => model.KanGrubu, new SelectList(new List<SelectListItem>
-            {
-                new SelectListItem { Text = "A Rh+", Value = "A Rh+" },
-                new SelectListItem { Text = "A Rh-", Value = "A Rh-" },
-                new SelectListItem { Text = "B Rh+", Value = "B Rh+" },
-                new SelectListItem { Text = "B Rh-", Value = "B Rh-" },
-                new SelectListItem { Text = "AB Rh+", Value = "AB Rh+" },
-                new SelectListItem { Text = "AB Rh-", Value = "AB Rh-" },
-                new SelectListItem { Text = "0 Rh+", Value = "0 Rh+" },
-                new SelectListItem { Text = "0 Rh-", Value = "0 Rh-" }
-            }, "Value", "Text"), "Kan Grubu Seçin", new { @class = "lf--input" })
-            @Html.ValidationMessageFor(model => model.KanGrubu, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="flex-row">
-            <label class="lf--label" for="DogumTarihi">
-                <i class='bx bx-calendar'></i>
-            </label>
-            @Html.TextBoxFor(model => model.DogumTarihi, "{0:yyyy-MM-dd}", new { @class = "lf--input", placeholder = "Doğum Tarihi", type = "date" })
-            @Html.ValidationMessageFor(model => model.DogumTarihi, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="flex-row">
-            <label class="lf--label" for="Cinsiyet">
-                <i class='bx bx-user'></i>
-            </label>
-            @Html.DropDownListFor(model => model.Cinsiyet, new SelectList(new List<SelectListItem>
-            {
-                new SelectListItem { Text = "Erkek", Value = "Erkek" },
-                new SelectListItem { Text = "Kadın", Value = "Kadın" },
-                new SelectListItem { Text = "Diğer", Value = "Diğer" }
-            }, "Value", "Text"), "Cinsiyet Seçin", new { @class = "lf--input" })
-            @Html.ValidationMessageFor(model => model.Cinsiyet, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="flex-row">
-            <label class="lf--label" for="MedeniDurum">
-                <i class='bx bx-user'></i>
-            </label>
-            @Html.DropDownListFor(model => model.MedeniDurum, new SelectList(new List<SelectListItem>
-            {
-                new SelectListItem { Text = "Evli", Value = "Evli" },
-                new SelectListItem { Text = "Bekar", Value = "Bekar" }
-            }, "Value", "Text"), "Medeni Durum Seçin", new { @class = "lf--input" })
-            @Html.ValidationMessageFor(model => model.MedeniDurum, "", new { @class = "text-danger" })
-        </div>
-
-        <input class='lf--submit' type='submit' value='Kaydet'>
-    </form>
+    </div>
 </body>
-
-<style>
-    i{color:white;}
-</style>
