@@ -5,7 +5,6 @@ using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
 
 namespace MZDNETWORK.Controllers
 {
-    [Authorize(Roles = "IK, Yonetici, Sys, BilgiIslem, IdariIsler")]
     public class ChatController : Controller
     {
         private readonly IHubContext _hubContext;
@@ -16,7 +15,6 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "IK, Yonetici, Sys, BilgiIslem, IdariIsler")]
         public ActionResult SendMessage(string user, string message)
         {
             _hubContext.Clients.All.broadcastMessage(user, message);

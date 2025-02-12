@@ -4,7 +4,6 @@ using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
     
 
 
-[Authorize(Roles = "IK, Yonetici, Sys, BilgiIslem, IdariIsler")]
 public class NotificationController : Controller
 {
 
