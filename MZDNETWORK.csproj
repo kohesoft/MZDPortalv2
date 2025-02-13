@@ -486,6 +486,36 @@
     <Compile Include="Controllers\Kullanici_IslemleriController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="anaimgs\MZDfoto1.png" />
+    <Content Include="anaimgs\MZDfoto10.png" />
+    <Content Include="anaimgs\MZDfoto11.png" />
+    <Content Include="anaimgs\MZDfoto12.png" />
+    <Content Include="anaimgs\MZDfoto13.png" />
+    <Content Include="anaimgs\MZDfoto14.png" />
+    <Content Include="anaimgs\MZDfoto15.png" />
+    <Content Include="anaimgs\MZDfoto16.png" />
+    <Content Include="anaimgs\MZDfoto17.png" />
+    <Content Include="anaimgs\MZDfoto18.png" />
+    <Content Include="anaimgs\MZDfoto19.png" />
+    <Content Include="anaimgs\MZDfoto2.png" />
+    <Content Include="anaimgs\MZDfoto20.png" />
+    <Content Include="anaimgs\MZDfoto21.png" />
+    <Content Include="anaimgs\MZDfoto22.png" />
+    <Content Include="anaimgs\MZDfoto23.png" />
+    <Content Include="anaimgs\MZDfoto24.png" />
+    <Content Include="anaimgs\MZDfoto25.png" />
+    <Content Include="anaimgs\MZDfoto26.png" />
+    <Content Include="anaimgs\MZDfoto27.png" />
+    <Content Include="anaimgs\MZDfoto29.png" />
+    <Content Include="anaimgs\MZDfoto3.png" />
+    <Content Include="anaimgs\MZDfoto30.png" />
+    <Content Include="anaimgs\MZDfoto31.png" />
+    <Content Include="anaimgs\MZDfoto4.png" />
+    <Content Include="anaimgs\MZDfoto5.png" />
+    <Content Include="anaimgs\MZDfoto6.png" />
+    <Content Include="anaimgs\MZDfoto7.png" />
+    <Content Include="anaimgs\MZDfoto8.png" />
+    <Content Include="anaimgs\MZDfoto9.png" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\animations.css" />
     <Content Include="Content\Bakim.css" />
@@ -508,6 +538,7 @@
     <Content Include="Content\boxicons.css" />
     <Content Include="Content\boxicons.min.css" />
     <Content Include="Content\Contact.css" />
+    <Content Include="Content\coursel.css" />
     <Content Include="Content\DilekIstek.css" />
     <Content Include="Content\IKlayout.css" />
     <Content Include="Content\Loading.css" />
@@ -527,32 +558,7 @@
     <Content Include="imgs\loader.png" />
     <Content Include="imgs\logo.ico" />
     <Content Include="imgs\logo.png" />
-    <Content Include="imgs\MZDfoto1.png" />
-    <Content Include="imgs\MZDfoto10.png" />
-    <Content Include="imgs\MZDfoto11.png" />
-    <Content Include="imgs\MZDfoto12.png" />
-    <Content Include="imgs\MZDfoto13.png" />
-    <Content Include="imgs\MZDfoto14.png" />
-    <Content Include="imgs\MZDfoto15.png" />
-    <Content Include="imgs\MZDfoto16.png" />
-    <Content Include="imgs\MZDfoto17.png" />
-    <Content Include="imgs\MZDfoto18.png" />
-    <Content Include="imgs\MZDfoto19.png" />
-    <Content Include="imgs\MZDfoto2.png" />
-    <Content Include="imgs\MZDfoto20.png" />
-    <Content Include="imgs\MZDfoto21.png" />
-    <Content Include="imgs\MZDfoto22.png" />
-    <Content Include="imgs\MZDfoto23.png" />
-    <Content Include="imgs\MZDfoto24.png" />
-    <Content Include="imgs\MZDfoto25.png" />
-    <Content Include="imgs\MZDfoto26.png" />
-    <Content Include="imgs\MZDfoto3.png" />
-    <Content Include="imgs\MZDfoto4.png" />
-    <Content Include="imgs\MZDfoto5.png" />
-    <Content Include="imgs\MZDfoto6.png" />
-    <Content Include="imgs\MZDfoto7.png" />
-    <Content Include="imgs\MZDfoto8.png" />
-    <Content Include="imgs\MZDfoto9.png" />
+    <Content Include="imgs\MZDfoto28.png" />
     <Content Include="libman.json" />
     <Content Include="logo.ico" />
     <Content Include="Scripts\901ba758ee.js" />
@@ -568,6 +574,7 @@
     <Content Include="fonts\boxicons.woff2" />
     <Content Include="Scripts\chart.js" />
     <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\coursel.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -827,6 +834,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="UploadPhotosMerkez\a.png" />
+    <Content Include="UploadPhotosMola\a.png" />
+    <Content Include="UploadPhotosYerleske\a.png" />
     <Content Include="Views\Gonderi\GonderiListele.cshtml" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -2516,9 +2526,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="UploadPhotosMerkez\" />
-    <Folder Include="UploadPhotosMola\" />
-    <Folder Include="UploadPhotosYerleske\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
