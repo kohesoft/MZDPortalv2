@@ -552,13 +552,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
-    <Content Include="imgs\01background.png" />
-    <Content Include="imgs\02background.png" />
-    <Content Include="imgs\background.jpeg" />
     <Content Include="imgs\loader.png" />
     <Content Include="imgs\logo.ico" />
     <Content Include="imgs\logo.png" />
-    <Content Include="imgs\MZDfoto28.png" />
     <Content Include="libman.json" />
     <Content Include="logo.ico" />
     <Content Include="Scripts\901ba758ee.js" />
