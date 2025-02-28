@@ -486,36 +486,6 @@
     <Compile Include="Controllers\Kullanici_IslemleriController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="anaimgs\MZDfoto1.png" />
-    <Content Include="anaimgs\MZDfoto10.png" />
-    <Content Include="anaimgs\MZDfoto11.png" />
-    <Content Include="anaimgs\MZDfoto12.png" />
-    <Content Include="anaimgs\MZDfoto13.png" />
-    <Content Include="anaimgs\MZDfoto14.png" />
-    <Content Include="anaimgs\MZDfoto15.png" />
-    <Content Include="anaimgs\MZDfoto16.png" />
-    <Content Include="anaimgs\MZDfoto17.png" />
-    <Content Include="anaimgs\MZDfoto18.png" />
-    <Content Include="anaimgs\MZDfoto19.png" />
-    <Content Include="anaimgs\MZDfoto2.png" />
-    <Content Include="anaimgs\MZDfoto20.png" />
-    <Content Include="anaimgs\MZDfoto21.png" />
-    <Content Include="anaimgs\MZDfoto22.png" />
-    <Content Include="anaimgs\MZDfoto23.png" />
-    <Content Include="anaimgs\MZDfoto24.png" />
-    <Content Include="anaimgs\MZDfoto25.png" />
-    <Content Include="anaimgs\MZDfoto26.png" />
-    <Content Include="anaimgs\MZDfoto27.png" />
-    <Content Include="anaimgs\MZDfoto29.png" />
-    <Content Include="anaimgs\MZDfoto3.png" />
-    <Content Include="anaimgs\MZDfoto30.png" />
-    <Content Include="anaimgs\MZDfoto31.png" />
-    <Content Include="anaimgs\MZDfoto4.png" />
-    <Content Include="anaimgs\MZDfoto5.png" />
-    <Content Include="anaimgs\MZDfoto6.png" />
-    <Content Include="anaimgs\MZDfoto7.png" />
-    <Content Include="anaimgs\MZDfoto8.png" />
-    <Content Include="anaimgs\MZDfoto9.png" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\animations.css" />
     <Content Include="Content\Bakim.css" />
@@ -2521,6 +2491,7 @@
     <Content Include="Scripts\tinymce\langs\README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="anaimgs\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
