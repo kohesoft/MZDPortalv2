@@ -15,7 +15,13 @@
 
         <div class="image-thumbnail-carousel">
             <section class="image-display">
-                <div class="screen"></div>
+                <div class="screen">
+                    <!-- Büyük resim burada gösterilecek -->
+                    @if (imageFiles != null && imageFiles.Any())
+                    {
+                        <img id="mainImage" src="~/anaimgs/@imageFiles.First()" alt="Main Image" style="width: 100%; height: auto;" />
+                    }
+                </div>
             </section>
             <p style="text-align:center; font-size:small;"> Tam halini görüntülemek için resmin üzerinde sağ tık > Resmi yeni sekmede aç</p>
             <section class="thumbnail-carousel">
@@ -29,7 +35,7 @@
                     {
                         <li class="carousel__slide">
                             <div class="thumbnail">
-                                <img loading="lazy" src="~/anaimgs/@imageFile" alt="">
+                                <img loading="lazy" src="~/anaimgs/@imageFile" alt="" onclick="updateMainImage('@imageFile')">
                             </div>
                         </li>
                     }

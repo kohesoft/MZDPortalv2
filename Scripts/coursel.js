@@ -23,9 +23,14 @@ const Carousel = (() => {
 
     const updateScreen = (activeSlide) => {
         const carouselScreen = document.querySelector(".image-display .screen");
-        const img = activeSlide.querySelector("img").cloneNode(true);
-        carouselScreen.innerHTML = "";
-        carouselScreen.appendChild(img);
+        const img = activeSlide.querySelector("img");
+        if (img) {
+            const clonedImg = img.cloneNode(true);
+            carouselScreen.innerHTML = "";
+            carouselScreen.appendChild(clonedImg);
+        } else {
+            console.error("Active slide does not contain an image.");
+        }
     };
 
     const scrollToActiveSlide = (activeSlide) => {
@@ -114,14 +119,13 @@ const Carousel = (() => {
             nextButton.addEventListener("click", handleButtonClick);
         }
 
-        // Otomatik kaydýrma için zamanlayýcý ekleyelim
-        const slideInterval = 5000; // 3 saniye
+        const slideInterval = 30000; // 30 saniye
         setInterval(() => {
             const activeSlide = getActiveSlide();
             const nextSlide = getSiblingSlide(activeSlide, "next") || getFirstSlide();
             updateCarousel(nextSlide);
         }, slideInterval);
+    };
 
-        initCarousel();
-    }
+    initCarousel();
 })();

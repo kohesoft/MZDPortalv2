@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2025-03-04T11:16:21.0542349Z||;True|2025-02-26T09:04:51.4626023+03:00||;False|2025-02-26T09:03:30.1216822+03:00||;True|2025-02-13T12:18:20.1578498+03:00||;True|2025-02-10T07:47:42.7457441+03:00||;True|2025-02-07T14:38:17.8974705+03:00||;True|2025-02-06T15:05:37.1100667+03:00||;True|2025-02-06T09:18:03.9934870+03:00||;True|2025-02-05T16:09:52.3757058+03:00||;True|2025-02-05T15:31:09.2168402+03:00||;True|2025-02-05T08:01:20.4143254+03:00||;False|2025-02-04T15:40:20.6188778+03:00||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
+    <History>True|2025-03-04T11:50:32.8991500Z||;True|2025-03-04T14:16:21.0542349+03:00||;True|2025-02-26T09:04:51.4626023+03:00||;False|2025-02-26T09:03:30.1216822+03:00||;True|2025-02-13T12:18:20.1578498+03:00||;True|2025-02-10T07:47:42.7457441+03:00||;True|2025-02-07T14:38:17.8974705+03:00||;True|2025-02-06T15:05:37.1100667+03:00||;True|2025-02-06T09:18:03.9934870+03:00||;True|2025-02-05T16:09:52.3757058+03:00||;True|2025-02-05T15:31:09.2168402+03:00||;True|2025-02-05T08:01:20.4143254+03:00||;False|2025-02-04T15:40:20.6188778+03:00||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -292,10 +292,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:52</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.dll">
-      <publishTime>03/04/2025 14:16:04</publishTime>
+      <publishTime>03/04/2025 14:50:13</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.pdb">
-      <publishTime>03/04/2025 14:16:04</publishTime>
+      <publishTime>03/04/2025 14:50:13</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.Bson.dll">
       <publishTime>02/26/2025 08:57:53</publishTime>
@@ -877,7 +877,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Scripts/coursel.js">
-      <publishTime>03/04/2025 14:00:54</publishTime>
+      <publishTime>03/04/2025 14:47:52</publishTime>
     </File>
     <File Include="Scripts/esm/popper-utils.js">
       <publishTime>02/26/2025 08:57:46</publishTime>
@@ -6619,7 +6619,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>03/04/2025 14:47:52</publishTime>
     </File>
     <File Include="Views/Home/MerkezYemekListesi.cshtml">
       <publishTime>02/26/2025 08:57:46</publishTime>
