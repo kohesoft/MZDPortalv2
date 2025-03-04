@@ -113,7 +113,15 @@ const Carousel = (() => {
         if (nextButton) {
             nextButton.addEventListener("click", handleButtonClick);
         }
-    };
 
-    initCarousel();
+        // Otomatik kaydýrma için zamanlayýcý ekleyelim
+        const slideInterval = 5000; // 3 saniye
+        setInterval(() => {
+            const activeSlide = getActiveSlide();
+            const nextSlide = getSiblingSlide(activeSlide, "next") || getFirstSlide();
+            updateCarousel(nextSlide);
+        }, slideInterval);
+
+        initCarousel();
+    }
 })();

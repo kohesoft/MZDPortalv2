@@ -122,5 +122,6 @@ const Carousel = (() => {
             updateCarousel(nextSlide);
         }, slideInterval);
 
-    initCarousel();
+        initCarousel();
+    }
 })();
