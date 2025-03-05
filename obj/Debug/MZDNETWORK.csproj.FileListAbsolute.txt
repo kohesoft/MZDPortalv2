@@ -788,7 +788,6 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalEarlyAccess\obj\Debug\MZDNETWORK.Migrations.nvarchar.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.App.config
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.AssemblyReference.cache
-C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.SyncWithCurrentDatabase.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.nvarchar.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Properties.Resources.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.GenerateResource.cache
@@ -1032,3 +1031,4 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\tr\System.Web.WebPages.Raz
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\tr\System.Web.Optimization.resources.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.CoreCompileInputs.cache
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.Up2Date
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.itial.resources

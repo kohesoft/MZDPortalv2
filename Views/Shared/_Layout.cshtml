@@ -144,6 +144,32 @@
             .btn-custom:hover {
                 background-color: #218838; /* Hover durumunda daha koyu yeşil */
             }
+
+        #messages div {
+            background-color: #f1f1f1;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            #messages div strong {
+                color: #007bff;
+                font-weight: bold;
+            }
+
+            #messages div em {
+                color: #888;
+                font-style: italic;
+            }
+
+            #messages div.user-message {
+                text-align: right;
+                background-color: #d1e7dd;
+            }
     </style>
 </head>
 
@@ -426,40 +452,42 @@
     });
 
     function initializeChatHub() {
-        var chat = $.connection.chatHub;
-        var notificationSound = new Audio('@Url.Content("~/Content/notification.mp3")');
+    var chat = $.connection.chatHub;
+    var notificationSound = new Audio('@Url.Content("~/Content/notification.mp3")');
 
-        chat.client.broadcastMessage = function (user, message) {
-            var timestamp = new Date().toLocaleTimeString();
-            $('#messages').append('<div><strong>' + user + '</strong> (' + timestamp + '): ' + message + '</div>');
-            scrollToBottom();
-            notificationSound.play();
-        };
+    chat.client.broadcastMessage = function (user, message) {
+        var timestamp = new Date().toLocaleTimeString();
+        $('#messages').append('<div><strong>' + user + '</strong> (' + timestamp + '): ' + message + '</div>');
+        scrollToBottom();
+        notificationSound.play();
+    };
 
-        chat.client.userConnected = function (user, users) {
-            $('#messages').append('<div><em>' + user + ' katıldı</em></div>');
-            scrollToBottom();
-            updateUsersList(users);
-        };
+    // Kullanıcı giriş/çıkış mesajlarını kaldırdık
+    // chat.client.userConnected = function (user, users) {
+    //     $('#messages').append('<div><em>' + user + ' katıldı</em></div>');
+    //     scrollToBottom();
+    //     updateUsersList(users);
+    // };
 
-        chat.client.userDisconnected = function (user, users) {
-            $('#messages').append('<div><em>' + user + ' ayrıldı</em></div>');
-            scrollToBottom();
-            updateUsersList(users);
-        };
+    // chat.client.userDisconnected = function (user, users) {
+    //     $('#messages').append('<div><em>' + user + ' ayrıldı</em></div>');
+    //     scrollToBottom();
+    //     updateUsersList(users);
+    // };
 
-        $('#sendButton').click(function () {
-            var message = $('#messageInput').val();
-            chat.server.send('@User.Identity.Name', message);
-            $('#messageInput').val('').focus();
-        });
+    $('#sendButton').click(function () {
+        var message = $('#messageInput').val();
+        chat.server.send('@User.Identity.Name', message);
+        $('#messageInput').val('').focus();
+    });
 
-        $.connection.hub.start().done(function () {
-            console.log('SignalR bağlantısı kuruldu. (_ChatHub)');
-        }).fail(function (error) {
-            console.error('SignalR bağlantısı kurulamadı: ' + error);
-        });
-    }
+    $.connection.hub.start().done(function () {
+        console.log('SignalR bağlantısı kuruldu. (_ChatHub)');
+    }).fail(function (error) {
+        console.error('SignalR bağlantısı kurulamadı: ' + error);
+    });
+}
+
 
         function initializeOnlineUsersHub() {
             var onlineUsersHub = $.connection.onlineUsersHub;

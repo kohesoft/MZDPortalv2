@@ -1,9 +1,8 @@
 ﻿using System.Web.Mvc;
 using Microsoft.AspNet.SignalR;
 using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
-    
 
-
+[Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
 public class NotificationController : Controller
 {
 
@@ -18,6 +17,7 @@ public class NotificationController : Controller
     {
         _hubContext = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
     }
+
 
     [HttpPost]
     public ActionResult SendNotification(string message)
