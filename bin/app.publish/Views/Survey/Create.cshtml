@@ -1,0 +1,101 @@
+﻿@model MZDNETWORK.Models.Survey
+
+<h2>Yeni Anket Oluştur</h2>
+<form method="post">
+    <div class="form-group">
+        <label>Anket Başlığı</label>
+        <input type="text" class="form-control" name="Title" required />
+    </div>
+
+    <div class="form-group">
+        <label>Açıklama</label>
+        <textarea class="form-control" name="Description"></textarea>
+    </div>
+
+    <h3>Sorular</h3>
+    <div id="questions-container">
+        <!-- Sorular buraya eklenecek -->
+    </div>
+
+
+    <br><br>
+    <button type="button" id="add-question" class="btn btn-info">Soru Ekle</button>
+    <button type="submit" class="btn btn-success">Kaydet</button>
+</form>
+
+@section scripts {
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script>
+        var questionIndex = 0;
+
+        $("#add-question").click(function () {
+            var html = `
+            <div class="question-item">
+                <hr>
+                <label>Soru Metni</label>
+                <input type="text" class="form-control" name="Questions[${questionIndex}].QuestionText" required />
+
+                <label>Soru Tipi</label>
+                <select class="form-control question-type" name="Questions[${questionIndex}].Type">
+                    <option value="Text">Serbest Metin</option>
+                    <option value="Radio">Tek Seçenek (Radio)</option>
+                    <option value="Checkbox">Çoklu Seçenek (Checkbox)</option>
+                </select>
+
+                <div class="answer-options" data-index="${questionIndex}" style="display:none;">
+                    <h4>Seçenekler</h4>
+                    <div class="options-container"></div>
+                    <button type="button" class="btn btn-sm btn-secondary add-option">Seçenek Ekle</button>
+                </div>
+                <button type="button" class="btn btn-sm btn-danger remove-question">Soru Sil</button>
+            </div>`;
+
+            $("#questions-container").append(html);
+            questionIndex++;
+        });
+
+        $(document).on("change", ".question-type", function () {
+            var parent = $(this).closest(".question-item");
+            var answerOptionsDiv = parent.find(".answer-options");
+
+            if ($(this).val() == "Radio" || $(this).val() == "Checkbox") {
+                answerOptionsDiv.show();
+            } else {
+                answerOptionsDiv.hide();
+            }
+        });
+
+        $(document).on("click", ".add-option", function () {
+            var container = $(this).siblings(".options-container");
+            var index = $(this).closest(".answer-options").data("index");
+            var optionIndex = container.children().length;
+
+            var optionHtml = `
+            <div>
+                <input type="text" class="form-control d-inline-block" name="Questions[${index}].AnswerOptions[${optionIndex}].OptionText" required />
+                <button type="button" class="btn btn-sm btn-danger remove-option">Sil</button>
+            </div>`;
+
+            container.append(optionHtml);
+        });
+
+        $(document).on("click", ".remove-option", function () {
+            $(this).parent().remove();
+        });
+
+        $(document).on("click", ".remove-question", function () {
+            $(this).closest(".question-item").remove();
+        });
+    </script>
+
+}
+
+<style>
+    body {
+        all: unset;
+        background-color: white;
+    }
+    .form-control {
+    width:95%;
+    }
+</style>

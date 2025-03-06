@@ -638,11 +638,10 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\tr\System.Web.WebPages.Raz
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\tr\System.Web.Optimization.resources.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.App.config
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.AssemblyReference.cache
-C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.SyncWithCurrentDatabase.resources
-C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.nvarchar.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Properties.Resources.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.GenerateResource.cache
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.CoreCompileInputs.cache
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.Up2Date
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.pdb
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.AddNotifications.resources

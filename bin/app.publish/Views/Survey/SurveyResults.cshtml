@@ -1,0 +1,191 @@
+﻿@using Newtonsoft.Json
+@model Survey
+
+<h2>@Model.Title - Sonuçlar</h2>
+
+@foreach (var question in Model.Questions)
+{
+    <div class="question-container">
+        <h3>@question.QuestionText</h3>
+        <table class="answer-options-table">
+            <thead>
+                <tr>
+                    <th>Cevap Seçeneği</th>
+                    <th>Cevap Sayısı</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var option in question.AnswerOptions)
+                {
+                    <tr>
+                        <td>@option.OptionText</td>
+                        <td>@question.Answers.Count(a => a.AnswerText.Split(',').Contains(option.OptionText))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<h3>Kullanıcı Cevapları</h3>
+<table class="user-answers-table">
+    <thead>
+        <tr>
+            <th>Kullanıcı Adı</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody id="user-answers-body">
+        @foreach (var userAnswers in Model.Questions.SelectMany(q => q.Answers).GroupBy(a => a.UserID))
+        {
+            <tr>
+                <td data-userid="@userAnswers.Key">@userAnswers.Key</td>
+                <td><button class="btn btn-primary" onclick="showUserAnswers('@userAnswers.Key')">Cevapları Göster</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="user-answers-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h4>Kullanıcı Cevapları</h4>
+        <div id="user-answers-content"></div>
+        <button class="btn btn-secondary" onclick="closeModal()">Kapat</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function showUserAnswers(userId) {
+            var userAnswers = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
+                Model.Questions.SelectMany(q => q.Answers)
+                .GroupBy(a => a.UserID)
+                .ToDictionary(g => g.Key, g => g.ToList()),
+                new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
+            ));
+            var answers = userAnswers[userId];
+            var content = '';
+            for (var i = 0; i < answers.length; i++) {
+                content += '<p><strong>Soru:</strong> ' + answers[i].Question.QuestionText + ' - <strong>Cevap:</strong> ' + answers[i].AnswerText + '</p>';
+            }
+            document.getElementById('user-answers-content').innerHTML = content;
+            document.getElementById('user-answers-modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('user-answers-modal').style.display = 'none';
+        }
+
+        // Kullanıcı adlarını almak ve tabloyu güncellemek için AJAX çağrısı
+        $(document).ready(function() {
+            $.ajax({
+                url: '@Url.Action("GetUsernames", "Survey")',
+                type: 'GET',
+                success: function(data) {
+                    var userAnswersBody = document.getElementById('user-answers-body');
+                    var rows = userAnswersBody.getElementsByTagName('tr');
+                    for (var i = 0; i < rows.length; i++) {
+                        var userIdCell = rows[i].getElementsByTagName('td')[0];
+                        var userId = userIdCell.getAttribute('data-userid');
+                        var user = data.find(u => u.Id == userId); // '===' yerine '==' kullanarak karşılaştırma yapalım
+                        if (user) {
+                            userIdCell.innerText = user.Username; // UserName yerine Username kullanıyoruz
+                        } else {
+                            userIdCell.innerText = 'Bilinmeyen Kullanıcı';
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Kullanıcı adları alınırken bir hata oluştu:', error);
+                }
+            });
+        });
+    </script>
+}
+
+
+<style>
+    .question-container {
+        margin-bottom: 20px;
+    }
+
+    .answer-options-table, .user-answers-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        .answer-options-table th, .answer-options-table td, .user-answers-table th, .user-answers-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            width: 80%;
+        }
+
+        .answer-options-table th, .user-answers-table th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+    .btn {
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        position: relative;
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    body {
+        all: unset;
+        background-color: white;
+    }
+</style>
