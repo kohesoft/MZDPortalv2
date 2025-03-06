@@ -4,10 +4,10 @@ using Microsoft.AspNet.SignalR;
 using MZDNETWORK.Models;
 using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
 
-[Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
 public class NotificationController : Controller
 {
     private readonly MZDNETWORKContext db;
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
 
     public ActionResult SendNotification()
     {
@@ -23,6 +23,7 @@ public class NotificationController : Controller
 
     }
 
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
 
     [HttpPost]
     public ActionResult SendNotification(string message)
@@ -30,6 +31,7 @@ public class NotificationController : Controller
         _hubContext.Clients.All.showNotification(message);
         return new HttpStatusCodeResult(200);
     }
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem,Lider,Merkez,Yerleske, Dokumantasyon")]
 
     [HttpPost]
     public ActionResult MarkAsRead(int id)
@@ -42,6 +44,7 @@ public class NotificationController : Controller
         }
         return Json(new { success = true });
     }
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem,Lider,Merkez,Yerleske, Dokumantasyon")]
 
     [HttpGet]
     public ActionResult GetUnreadNotifications()
