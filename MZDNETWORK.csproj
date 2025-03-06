@@ -454,13 +454,9 @@
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202502051307362_nvarchar.cs" />
-    <Compile Include="Migrations\202502051307362_nvarchar.Designer.cs">
-      <DependentUpon>202502051307362_nvarchar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503051220254_itial.cs" />
-    <Compile Include="Migrations\202503051220254_itial.Designer.cs">
-      <DependentUpon>202503051220254_itial.cs</DependentUpon>
+    <Compile Include="Migrations\202503060638304_AddNotifications.cs" />
+    <Compile Include="Migrations\202503060638304_AddNotifications.Designer.cs">
+      <DependentUpon>202503060638304_AddNotifications.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -470,6 +466,7 @@
     <Compile Include="Models\Dokumantasyon.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Gonderi.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Survey.cs" />
     <Compile Include="Models\Task.cs" />
@@ -2525,11 +2522,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202502051307362_nvarchar.resx">
-      <DependentUpon>202502051307362_nvarchar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503051220254_itial.resx">
-      <DependentUpon>202503051220254_itial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202503060638304_AddNotifications.resx">
+      <DependentUpon>202503060638304_AddNotifications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

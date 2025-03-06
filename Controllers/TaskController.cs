@@ -41,9 +41,8 @@ namespace MZDNETWORK.Controllers
         {
             if (ModelState.IsValid)
             {
-                task.CreatedBy = User.Identity.Name; // Görevi oluþturan kullanýcýyý kaydet
+                task.CreatedBy = User.Identity.Name;
 
-                // Kullanýcýyý bul ve UserId'yi ayarla
                 var user = _context.Users.FirstOrDefault(u => u.Username == task.Username);
                 if (user != null)
                 {
@@ -69,12 +68,24 @@ namespace MZDNETWORK.Controllers
 
                 _context.Tasks.Add(task);
                 await _context.SaveChangesAsync();
+
+                var notification = new Notification
+                {
+                    UserId = task.UserId.ToString(),
+                    Message = "Yeni bir görev atandý.",
+                    IsRead = false,
+                    CreatedDate = DateTime.Now
+                };
+                _context.Notifications.Add(notification);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction("Index");
             }
 
             ViewBag.Users = new SelectList(_context.Users, "Username", "Name", task.Username);
             return View(task);
         }
+
 
 
 

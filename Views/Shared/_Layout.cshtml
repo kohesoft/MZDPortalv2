@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="~/Content/Loading.css" />
 
     <script src="~/Scripts/chart.js"></script>
-    <script src="~/Scripts/json2.min.js"</script>
+    <script src="~/Scripts/json2.min.js"></script>
     <script src="~/Scripts/jquery.min.js"></script>
     <style>
         html, body {
@@ -335,13 +335,35 @@
                 @if (User.IsInRole("Lider") || User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK") || User.IsInRole("Dokumantasyon") || User.IsInRole("BilgiIslem") || User.IsInRole("IdariIsler") || User.IsInRole("Merkez") || User.IsInRole("Yerleske"))
                 {
                     <li class="nav-link dropdown">
+                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Bildirimler
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @if (TempData["Notifications"] != null && ((List<Notification>)TempData["Notifications"]).Count > 0)
+                            {
+                                var notifications = TempData["Notifications"] as List<Notification>;
+                                foreach (var notification in notifications)
+                                {
+                                    <a href="#">@notification.Message</a>
+                                }
+                            }
+                            else
+                            {
+                                <a href="#">Hiç bildirim yok</a>
+                            }
+                        </div>
+                    </li>
+
+
+
+                    <li class="nav-link dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class='bx bx-user icon'></i>
                             <span class="text nav-text">Profilim</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="@Url.Action("Edit", "User")">Profil Detayları</a></li>
-                            <li><a href="@Url.Action("Bildirimlerim", "DilekOneri")">Bildirimlerim</a></li>
+                            <li><a href="@Url.Action("Bildirimlerim", "DilekOneri")">Dilek ve Öneri Kutum</a></li>
                         </ul>
                     </li>
                 }
@@ -386,6 +408,7 @@
         </div>
     </div>
     <button id="toggleButton" class="toggle-button" style="background-color: #28a745;">Chat Aç/Kapa</button>
+
 
 
     <div class="modal" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">

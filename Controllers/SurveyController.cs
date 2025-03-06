@@ -32,7 +32,6 @@ public class SurveyController : Controller
         {
             survey.CreatedDate = DateTime.Now;
 
-            // Sorular ve seçenekler varsa kaydediyoruz
             foreach (var question in survey.Questions)
             {
                 db.Questions.Add(question);
@@ -47,10 +46,26 @@ public class SurveyController : Controller
 
             db.Surveys.Add(survey);
             db.SaveChanges();
+
+            var users = db.Users.ToList();
+            foreach (var user in users)
+            {
+                var notification = new Notification
+                {
+                    UserId = user.Id.ToString(),
+                    Message = "Yeni bir anket oluşturuldu.",
+                    IsRead = false,
+                    CreatedDate = DateTime.Now
+                };
+                db.Notifications.Add(notification);
+            }
+            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
         return View(survey);
     }
+
 
     [Authorize(Roles = "IK, Yonetici, Sys")]
     public ActionResult SurveyResults(int surveyId)

@@ -24,22 +24,19 @@ public class AccountController : Controller
     [HttpPost]
     public ActionResult Login(User model, bool rememberMe = false)
     {
-        Debug.WriteLine($"Remember Me: {rememberMe}");
         if (ModelState.IsValid)
         {
             if (IsValidUser(model.Username, model.Password, out string role))
             {
-                // Kimlik doðrulama çerezi oluþturma
                 FormsAuthentication.SetAuthCookie(model.Username, rememberMe);
 
-                // Kullanýcýnýn rolünü saklamak için bir çerez oluþturma
                 var authTicket = new FormsAuthenticationTicket(
-                    1,                             // Sürüm
-                    model.Username,                // Kullanýcý adý
-                    DateTime.Now,                  // Oluþturulma zamaný
-                    rememberMe ? DateTime.Now.AddDays(30) : DateTime.Now.AddMinutes(30),   // Bitiþ zamaný
-                    rememberMe,                    // Kalýcý mý?
-                    role                           // Kullanýcý rolü
+                    1,
+                    model.Username,
+                    DateTime.Now,
+                    rememberMe ? DateTime.Now.AddDays(30) : DateTime.Now.AddMinutes(30),
+                    rememberMe,
+                    role
                 );
 
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
@@ -51,8 +48,22 @@ public class AccountController : Controller
                 };
                 HttpContext.Response.Cookies.Add(authCookie);
 
+                var user = db.Users.SingleOrDefault(u => u.Username == model.Username);
+                if (user != null)
+                {
+                    var notifications = db.Notifications
+                        .Where(n => n.UserId == user.Id.ToString() && !n.IsRead)
+                        .ToList();
+
+                    TempData["Notifications"] = notifications;
+
+                    // Debug: TempData içeriðini kontrol et
+                    Debug.WriteLine("TempData[\"Notifications\"]: " + string.Join(", ", notifications.Select(n => n.Message)));
+                }
+
                 TempData["SuccessMessage"] = "Baþarýyla giriþ yaptýnýz, Anasayfaya yönlendiriliyor!";
                 TempData["RedirectUrl"] = Url.Action("Index", "Home");
+               
                 return RedirectToAction("Login", "Account");
             }
             else
@@ -60,24 +71,9 @@ public class AccountController : Controller
                 ModelState.AddModelError("", "Geçersiz kullanýcý adý veya þifre.");
             }
         }
-        else
-        {
-            Debug.WriteLine("ModelState is not valid");
-            foreach (var state in ModelState)
-            {
-                foreach (var error in state.Value.Errors)
-                {
-                    Debug.WriteLine($"Property: {state.Key}, Error: {error.ErrorMessage}");
-                }
-            }
-        }
 
         return View(model);
     }
-
-
-
-
 
 
     [HttpGet]

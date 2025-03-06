@@ -129,19 +129,34 @@ namespace MZDNETWORK.Controllers
                 return Json(new { success = false, error = ex.Message });
             }
         }
-        [Authorize(Roles = "Yonetici, Sys, IdariIsler, IK")]
 
+
+        [Authorize(Roles = "Yonetici, Sys, IdariIsler, IK")]
         [HttpPost]
         public JsonResult UpdateMessage(int id, string message)
         {
             try
             {
-                // Mesajý veritabanýnda bul ve güncelle
                 var mesaj = db.DilekOneriler.Find(id);
                 if (mesaj != null)
                 {
                     mesaj.Bilidirim = message;
                     db.SaveChanges();
+
+                    var user = db.Users.FirstOrDefault(u => u.Username == mesaj.Username);
+                    if (user != null)
+                    {
+                        var notification = new Notification
+                        {
+                            UserId = user.Id.ToString(),
+                            Message = "Dilek ve öneriniz yanýtlandý.",
+                            IsRead = false,
+                            CreatedDate = DateTime.Now
+                        };
+                        db.Notifications.Add(notification);
+                        db.SaveChanges();
+                    }
+
                     return Json(new { success = true });
                 }
                 else
@@ -154,5 +169,8 @@ namespace MZDNETWORK.Controllers
                 return Json(new { success = false, error = ex.Message });
             }
         }
+
+
+
     }
 }

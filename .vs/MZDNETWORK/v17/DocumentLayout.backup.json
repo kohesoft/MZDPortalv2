@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalv2\\controllers\\dilekonericontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\dilekonericontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalv2\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalv2\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalv2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalv2\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalv2\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalv2\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalv2\\controllers\\surveycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\surveycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalv2\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,28 +54,106 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ChatController.cs",
-              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ChatController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ChatController.cs",
-              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ChatController.cs",
-              "RelativeToolTip": "Controllers\\ChatController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "NotificationController.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\NotificationController.cs",
+              "RelativeDocumentMoniker": "Controllers\\NotificationController.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\NotificationController.cs",
+              "RelativeToolTip": "Controllers\\NotificationController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAA3wCMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T05:47:02.067Z",
+              "WhenOpened": "2025-03-06T08:24:38.025Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAEsCAAAAAAAAAAAlwLsBAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAEgBAAAAAAAAAAAlwF4BAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-05T12:24:26.714Z",
+              "WhenOpened": "2025-03-06T06:43:51.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAawDgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T06:43:27.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TaskController.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\TaskController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TaskController.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\TaskController.cs",
+              "RelativeToolTip": "Controllers\\TaskController.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAowFcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T06:42:25.561Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DilekOneriController.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\DilekOneriController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DilekOneriController.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\DilekOneriController.cs*",
+              "RelativeToolTip": "Controllers\\DilekOneriController.cs*",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAkwIQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T06:39:06.824Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Models\\Notification.cs",
+              "RelativeDocumentMoniker": "Models\\Notification.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Models\\Notification.cs",
+              "RelativeToolTip": "Models\\Notification.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T06:37:42.156Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SurveyController.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\SurveyController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SurveyController.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\SurveyController.cs",
+              "RelativeToolTip": "Controllers\\SurveyController.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAmwEMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T06:43:08.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAA3wBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T06:38:03.033Z",
               "EditorCaption": ""
             }
           ]
