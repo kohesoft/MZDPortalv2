@@ -170,6 +170,7 @@
                 text-align: right;
                 background-color: #d1e7dd;
             }
+
         #notificationCount {
             color: red;
             font-size: 14px;
@@ -343,8 +344,9 @@
                 {
                     <li class="nav-link dropdown">
                         <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <i class='bx bxs-inbox icon'></i> <span class="text nav-text">Gelen Kutusu</span>  <span id="notificationCount"></span>
-                            <i id="notificationIcon" class="bx bx-exclamation-mark" style="display: none;"></i>
+                            <i class='bx bxs-inbox icon'></i> <span class="text nav-text">Gelen Kutusu</span>
+                            <!--<span id="notificationCount"></span>-->
+                            <i id="notificationIcon" class="bx bxs-bell-ring bx-tada" style="display: none; color:gray; margin-left:5px;"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="notificationList">
                             <span class="text nav-text">Hiç Bildirim Yok</span>
@@ -636,41 +638,40 @@
 
 
 
+$(document).ready(function () {
+    function updateNotifications() {
+        $.get('@Url.Action("GetUnreadNotifications", "Notification")', function (data) {
+            var notificationList = $('#notificationList');
+            var notificationCount = $('#notificationCount');
+            var notificationIcon = $('#notificationIcon');
+            notificationList.empty();
+            if (data.length > 0) {
+                notificationCount.text(data.length);
+                notificationIcon.css('display', 'inline'); // Burada display stilini inline olarak ayarlıyoruz
+                data.forEach(function (notification) {
+                    notificationList.append('<a href="#" class="notification-link" data-id="' + notification.Id + '">' + notification.Message + '</a>');
+                });
+            } else {
+                notificationCount.text('');
+                notificationIcon.css('display', 'none'); // Burada display stilini none olarak ayarlıyoruz
+                notificationList.append('<span class="text nav-text">Hiç Bildirim Yok</span>');
+            }
+        });
+    }
 
-        $(document).ready(function () {
-     function updateNotifications() {
-         $.get('@Url.Action("GetUnreadNotifications", "Notification")', function (data) {
-             var notificationList = $('#notificationList');
-             var notificationCount = $('#notificationCount');
-             var notificationIcon = $('#notificationIcon');
-             notificationList.empty();
-             if (data.length > 0) {
-                 notificationCount.text(data.length);
-                 notificationIcon.show();
-                 data.forEach(function (notification) {
-                     notificationList.append('<a href="#" class="notification-link" data-id="' + notification.Id + '">' + notification.Message + '</a>');
-                 });
-             } else {
-                 notificationCount.text('');
-                 notificationIcon.hide();
-                 notificationList.append('<span class="text nav-text">Hiç Bildirim Yok</span>');
-             }
-         });
-     }
+    updateNotifications();
+    setInterval(updateNotifications, 60000); // 60 saniyede bir bildirimleri kontrol et
 
-     updateNotifications();
-     setInterval(updateNotifications, 60000); // 60 saniyede bir bildirimleri kontrol et
-
-     $(document).on('click', '.notification-link', function (e) {
-         e.preventDefault();
-         var id = $(this).data('id');
-         $.post('@Url.Action("MarkAsRead", "Notification")', { id: id }, function (data) {
-             if (data.success) {
-                 updateNotifications();
-             }
-         });
-     });
- });
+    $(document).on('click', '.notification-link', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        $.post('@Url.Action("MarkAsRead", "Notification")', { id: id }, function (data) {
+            if (data.success) {
+                updateNotifications();
+            }
+        });
+    });
+});
 
  function GetNotificationUrl(notification) {
      if (notification.Message.includes("anket")) {
