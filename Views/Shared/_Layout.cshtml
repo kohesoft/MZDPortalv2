@@ -170,6 +170,13 @@
                 text-align: right;
                 background-color: #d1e7dd;
             }
+        #notificationCount {
+            color: red;
+            font-size: 14px;
+            position: relative;
+            font-weight: bold;
+            margin-left: 5px;
+        }
     </style>
 </head>
 
@@ -336,25 +343,13 @@
                 {
                     <li class="nav-link dropdown">
                         <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Bildirimler
+                           <i class='bx bxs-inbox icon'></i> <span class="text nav-text">Gelen Kutusu</span>  <span id="notificationCount"></span>
+                            <i id="notificationIcon" class="bx bx-exclamation-mark" style="display: none;"></i>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @if (TempData["Notifications"] != null && ((List<Notification>)TempData["Notifications"]).Count > 0)
-                            {
-                                var notifications = TempData["Notifications"] as List<Notification>;
-                                foreach (var notification in notifications)
-                                {
-                                    <a href="#">@notification.Message</a>
-                                }
-                            }
-                            else
-                            {
-                                <a href="#">Hiç bildirim yok</a>
-                            }
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="notificationList">
+                            <span class="text nav-text">Hiç Bildirim Yok</span>
                         </div>
                     </li>
-
-
 
                     <li class="nav-link dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -636,7 +631,75 @@
                 $('#loadingOverlay').show();
             }
         });
-    }
+        }
+
+
+
+
+
+        $(document).ready(function () {
+     function updateNotifications() {
+         $.get('@Url.Action("GetUnreadNotifications", "Notification")', function (data) {
+             var notificationList = $('#notificationList');
+             var notificationCount = $('#notificationCount');
+             var notificationIcon = $('#notificationIcon');
+             notificationList.empty();
+             if (data.length > 0) {
+                 notificationCount.text(data.length);
+                 notificationIcon.show();
+                 data.forEach(function (notification) {
+                     notificationList.append('<a href="#" class="notification-link" data-id="' + notification.Id + '">' + notification.Message + '</a>');
+                 });
+             } else {
+                 notificationCount.text('');
+                 notificationIcon.hide();
+                 notificationList.append('<span class="text nav-text">Hiç Bildirim Yok</span>');
+             }
+         });
+     }
+
+     updateNotifications();
+     setInterval(updateNotifications, 60000); // 60 saniyede bir bildirimleri kontrol et
+
+     $(document).on('click', '.notification-link', function (e) {
+         e.preventDefault();
+         var id = $(this).data('id');
+         $.post('@Url.Action("MarkAsRead", "Notification")', { id: id }, function (data) {
+             if (data.success) {
+                 updateNotifications();
+             }
+         });
+     });
+ });
+
+ function GetNotificationUrl(notification) {
+     if (notification.Message.includes("anket")) {
+         return '@Url.Action("Index", "Survey")';
+     } else if (notification.Message.includes("görev")) {
+         return '@Url.Action("UserTasks", "Task")';
+     }
+     else if (notification.Message.includes("Dilek")) {
+         return '@Url.Action("Bildirimlerim", "DilekOneri")';
+     }
+     else {
+         return '#';
+     }
+ }
+
+ $(document).on('click', '.notification-link', function (e) {
+     e.preventDefault();
+     var id = $(this).data('id');
+     var url = GetNotificationUrl({ Message: $(this).text() });
+     $.post('@Url.Action("MarkAsRead", "Notification")', { id: id }, function (data) {
+         if (data.success) {
+             window.location.href = url;
+         }
+     });
+ });
+
+
+
+
     </script>
 
 </body>

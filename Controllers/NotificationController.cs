@@ -42,4 +42,16 @@ public class NotificationController : Controller
         }
         return Json(new { success = true });
     }
+
+    [HttpGet]
+    public ActionResult GetUnreadNotifications()
+    {
+        var username = User.Identity.Name;
+        var userId = db.Users.SingleOrDefault(u => u.Username == username)?.Id.ToString();
+        var notifications = db.Notifications
+            .Where(n => n.UserId == userId && !n.IsRead)
+            .Select(n => new { n.Id, n.Message })
+            .ToList();
+        return Json(notifications, JsonRequestBehavior.AllowGet);
+    }
 }
