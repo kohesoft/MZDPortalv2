@@ -5,6 +5,8 @@ using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
 
 namespace MZDNETWORK.Controllers
 {
+    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider")]
+
     public class ChatController : Controller
     {
         private readonly IHubContext _hubContext;

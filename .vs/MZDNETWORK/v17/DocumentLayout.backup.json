@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalv2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat-oksuz\\documents\\github\\mzdportalv2\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,13 +30,26 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatController.cs",
+              "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ChatController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ChatController.cs",
+              "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ChatController.cs",
+              "RelativeToolTip": "Controllers\\ChatController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T05:47:02.067Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\berat-oksuz\\Documents\\GitHub\\MZDPortalv2\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAJEAAAAAAAAAAAAqwJ0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEsCAAAAAAAAAAAlwLsBAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-05T12:24:26.714Z",
               "EditorCaption": ""
