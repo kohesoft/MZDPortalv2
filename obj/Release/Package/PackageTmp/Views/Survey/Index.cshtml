@@ -5,12 +5,14 @@
 {
     <a href="@Url.Action("Create", "Survey")" class="btn btn-success mb-3">Yeni Anket Oluştur</a>
 }
-<table class="table">
+<table class="table table-modern table-blue">
     <thead>
         <tr>
             <th>Anket Adı</th>
             <th>Açıklama</th>
-            <th>Oluşturulma Tarihi</th>
+            <th>Başlangıç Tarihi</th>
+            <th>Bitiş Tarihi</th>
+            <th>Kalan Süre</th>
             <th>İşlemler</th>
         </tr>
     </thead>
@@ -20,14 +22,18 @@
             <tr>
                 <td>@survey.Title</td>
                 <td>@survey.Description</td>
-                <td>@survey.CreatedDate.ToString("dd/MM/yyyy")</td>
+                <td>@survey.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@survey.EndDate.ToString("dd/MM/yyyy HH:mm")</td>
                 <td>
-                    <a href="javascript:void(0);" onclick="checkSurvey(@survey.ID)" class="btn btn-primary">Cevapla</a>
+                    <span class="timer" data-end-time="@survey.EndDate.ToString("o")"></span>
+                </td>
+                <td>
+                    <a href="javascript:void(0);" onclick="checkSurvey(@survey.ID)" class="btn btn-sm btn-primary">Cevapla</a>
 
                     @if (User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK"))
                     {
-                        <a href="@Url.Action("SurveyResults", "Survey", new { surveyId = survey.ID })" class="btn btn-info">Sonuçları Gör</a>
-                        <a href="@Url.Action("Delete", "Survey", new { id = survey.ID })" class="btn btn-danger" onclick="return confirm('Bu anketi silmek istediğinizden emin misiniz?');">Sil</a>
+                        <a href="@Url.Action("SurveyResults", "Survey", new { surveyId = survey.ID })" class="btn btn-sm btn-info">Sonuçları Gör</a>
+                        <a href="@Url.Action("Delete", "Survey", new { id = survey.ID })" class="btn btn-sm btn-danger" onclick="return confirm('Bu anketi silmek istediğinizden emin misiniz?');">Sil</a>
                     }
                 </td>
             </tr>
@@ -63,6 +69,25 @@
                 }
             });
         }
+
+        function updateTimers() {
+            $(".timer").each(function () {
+                var endTime = new Date($(this).data("end-time"));
+                var now = new Date();
+                var remainingTime = endTime - now;
+
+                if (remainingTime > 0) {
+                    var hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+                    $(this).text(hours + ":" + minutes + ":" + seconds);
+                } else {
+                    $(this).text("Süre doldu");
+                }
+            });
+        }
+
+        setInterval(updateTimers, 1000);
     </script>
 }
 
@@ -72,7 +97,31 @@
         background-color: white;
     }
 
-    modal {
+    .modal {
         z-index: 1;
     }
+
+    .table-modern {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table-modern th, .table-modern td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table-modern th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .table-modern tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .table-blue th {
+            border: 1px solid #007bff;
+        }
 </style>

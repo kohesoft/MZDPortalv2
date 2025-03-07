@@ -31,6 +31,7 @@ public class SurveyController : Controller
         if (ModelState.IsValid)
         {
             survey.CreatedDate = DateTime.Now;
+            survey.EndDate = survey.CreatedDate.AddMinutes(survey.Duration); // Bitiş tarihini hesapla
 
             foreach (var question in survey.Questions)
             {

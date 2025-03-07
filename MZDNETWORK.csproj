@@ -458,6 +458,14 @@
     <Compile Include="Migrations\202503060638304_AddNotifications.Designer.cs">
       <DependentUpon>202503060638304_AddNotifications.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503070540500_AddSurveyDuration.cs" />
+    <Compile Include="Migrations\202503070540500_AddSurveyDuration.Designer.cs">
+      <DependentUpon>202503070540500_AddSurveyDuration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202503070655200_addendate.cs" />
+    <Compile Include="Migrations\202503070655200_addendate.Designer.cs">
+      <DependentUpon>202503070655200_addendate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerOption.cs" />
@@ -2524,6 +2532,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202503060638304_AddNotifications.resx">
       <DependentUpon>202503060638304_AddNotifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503070540500_AddSurveyDuration.resx">
+      <DependentUpon>202503070540500_AddSurveyDuration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503070655200_addendate.resx">
+      <DependentUpon>202503070655200_addendate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

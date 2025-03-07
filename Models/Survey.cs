@@ -11,6 +11,8 @@ namespace MZDNETWORK.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
+        public int Duration { get; set; } // Süre (dakika cinsinden)
+        public DateTime EndDate { get; set; } // Bitiş Tarihi
 
         public virtual List<Question> Questions { get; set; } // ICollection yerine List kullanıldı
     }
