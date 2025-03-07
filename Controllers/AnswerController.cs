@@ -20,6 +20,12 @@ public class AnswerController : Controller
         if (survey == null)
             return HttpNotFound();
 
+        // Anketin süresinin dolup dolmadığını kontrol et
+        if (survey.EndDate < DateTime.Now)
+        {
+            return RedirectToAction("Index", "Survey", new { error = "Bu anketin süresi dolmuştur." });
+        }
+
         return View(survey);
     }
 
@@ -39,6 +45,18 @@ public class AnswerController : Controller
             return RedirectToAction("TakeSurvey", new { surveyId, error = "Geçersiz kullanıcı." });
         }
         int userId = user.Id;
+
+        var survey = db.Surveys.FirstOrDefault(s => s.ID == surveyId);
+        if (survey == null)
+        {
+            return HttpNotFound();
+        }
+
+        // Anketin süresinin dolup dolmadığını kontrol et
+        if (survey.EndDate < DateTime.Now)
+        {
+            return RedirectToAction("Index", "Survey", new { error = "Bu anketin süresi dolmuştur." });
+        }
 
         var questionIds = form.AllKeys
             .Where(k => k.StartsWith("answers[") && k.EndsWith("].QuestionID"))
@@ -73,7 +91,6 @@ public class AnswerController : Controller
         return RedirectToAction("Index", "Home");
     }
 
-
     [HttpGet]
     public JsonResult HasAnsweredSurvey(int surveyId)
     {
@@ -94,9 +111,4 @@ public class AnswerController : Controller
         var hasAnswered = db.Answers.Any(a => a.Question.SurveyID == surveyId && a.UserID == userId);
         return Json(hasAnswered, JsonRequestBehavior.AllowGet);
     }
-
-
-
-
-
 }

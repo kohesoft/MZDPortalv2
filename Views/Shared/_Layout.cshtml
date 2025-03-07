@@ -625,15 +625,16 @@
         };
     }
 
-    function initializeLoadingOverlay() {
-        $('#loadingOverlay').hide();
+        function initializeLoadingOverlay() {
+            $('#loadingOverlay').hide();
 
-        $('a').on('click', function (e) {
-            if (!$(this).hasClass('dropdown-toggle')) {
-                $('#loadingOverlay').show();
-            }
-        });
+            $('a').on('click', function (e) {
+                if (!$(this).hasClass('dropdown-toggle') && !$(this).hasClass('no-loading')) {
+                    $('#loadingOverlay').show();
+                }
+            });
         }
+
 
 
 
