@@ -436,6 +436,7 @@
 
 
     <script>
+
     $(document).ready(function () {
         $('#toggleButton').click(function () {
             $('#toggleBox').toggle();
@@ -470,7 +471,7 @@
         initializeLoadingOverlay();
         scrollToBottom();
     });
-
+    
     function initializeChatHub() {
     var chat = $.connection.chatHub;
     var notificationSound = new Audio('@Url.Content("~/Content/notification.mp3")');

@@ -3,6 +3,16 @@
 
 <h2>@Model.Title - Sonuçlar</h2>
 
+
+@foreach (var question in Model.Questions)
+{
+    <div class="chart-container">
+        <canvas id="surveyChart@(Model.Questions.IndexOf(question))"></canvas>
+    </div>
+}
+
+
+
 @foreach (var question in Model.Questions)
 {
     <div class="question-container">
@@ -56,7 +66,47 @@
 </div>
 
 @section Scripts {
+    <script src="~/Scripts/chart.js"></script>
     <script>
+        $(document).ready(function() {
+            var surveyData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
+                Model.Questions.Select(q => new {
+                    QuestionText = q.QuestionText,
+                    AnswerCounts = q.AnswerOptions.Select(o => new {
+                        OptionText = o.OptionText,
+                        Count = q.Answers.Count(a => a.AnswerText.Split(',').Contains(o.OptionText))
+                    })
+                })
+            ));
+
+            surveyData.forEach((question, index) => {
+                var ctx = document.getElementById(`surveyChart${index}`).getContext('2d');
+                var labels = question.AnswerCounts.map(a => a.OptionText);
+                var data = question.AnswerCounts.map(a => a.Count);
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: question.QuestionText,
+                            data: data,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+        });
+
         function showUserAnswers(userId) {
             var userAnswers = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
                 Model.Questions.SelectMany(q => q.Answers)
@@ -106,6 +156,13 @@
 
 
 <style>
+    .chart-container {
+        width: 50%; /* Genişliği %50 olarak ayarladık */
+        height: 300px; /* Yüksekliği 300px olarak ayarladık */
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
     .question-container {
         margin-bottom: 20px;
     }
