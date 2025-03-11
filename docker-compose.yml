@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mzdnetwork:
+    build: .
+    container_name: mzdnetwork_container
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/app
+    command: ["mono", "bin/Debug/MZDNETWORK.exe"]
+    depends_on:
+      - sqlserver
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_container
+    environment:
+      SA_PASSWORD: "Databaseroot1234"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+
