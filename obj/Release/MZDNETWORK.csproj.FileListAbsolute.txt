@@ -647,3 +647,6 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.pdb
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.AddNotifications.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.AddSurveyDuration.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.addendate.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.Intialcreate22.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.Intialcreate232.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.AddTvHeader.resources

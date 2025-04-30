@@ -1280,3 +1280,6 @@ C:\Users\berat\Documents\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.CoreCompileInpu
 C:\Users\berat\Documents\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.Up2Date
 C:\Users\berat\Documents\MZDPortalv2\obj\Debug\MZDNETWORK.dll
 C:\Users\berat\Documents\MZDPortalv2\obj\Debug\MZDNETWORK.pdb
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.Intialcreate22.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.Intialcreate232.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.AddTvHeader.resources

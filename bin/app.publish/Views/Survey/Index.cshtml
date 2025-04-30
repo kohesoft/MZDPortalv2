@@ -21,20 +21,41 @@
         {
             <tr>
                 <td>@survey.Title</td>
-                <td>@survey.Description</td>
+                <td>
+                    @if (survey.Description.Length > 100)
+                    {
+                        <span>@survey.Description.Substring(0, 100)...</span>
+                        <a href="javascript:void(0);" class="no-loading" onclick="showFullDescription('@survey.Description')">devamını oku</a>
+                    }
+                    else
+                    {
+                        <span>@survey.Description</span>
+                    }
+                </td>
                 <td>@survey.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
                 <td>@survey.EndDate.ToString("dd/MM/yyyy HH:mm")</td>
                 <td>
                     <span class="timer" data-end-time="@survey.EndDate.ToString("o")"></span>
                 </td>
                 <td>
-                    <a href="javascript:void(0);" onclick="checkSurvey(@survey.ID)" class="btn btn-sm btn-primary">Cevapla</a>
+                    <div class="btn-group-vertical">
+                        @if (survey.EndDate > DateTime.Now)
+                        {
+                            <a href="javascript:void(0);" onclick="checkSurvey(@survey.ID)" class="btn btn-sm btn-primary">
+                                <i class="fas fa-edit"></i> Cevapla
+                            </a>
+                        }
 
-                    @if (User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK"))
-                    {
-                        <a href="@Url.Action("SurveyResults", "Survey", new { surveyId = survey.ID })" class="btn btn-sm btn-info">Sonuçları Gör</a>
-                        <a href="@Url.Action("Delete", "Survey", new { id = survey.ID })" class="btn btn-sm btn-danger" onclick="return confirm('Bu anketi silmek istediğinizden emin misiniz?');">Sil</a>
-                    }
+                        @if (User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK"))
+                        {
+                            <a href="@Url.Action("SurveyResults", "Survey", new { surveyId = survey.ID })" class="btn btn-sm btn-info">
+                                <i class="fas fa-chart-bar"></i> Sonuçları Gör
+                            </a>
+                            <a href="javascript:void(0);" onclick="deleteSurvey(@survey.ID)" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash-alt"></i> Sil
+                            </a>
+                        }
+                    </div>
                 </td>
             </tr>
         }
@@ -70,6 +91,24 @@
             });
         }
 
+        function deleteSurvey(surveyId) {
+            if (confirm('Bu anketi silmek istediğinizden emin misiniz?')) {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Survey")',
+                    type: 'POST',
+                    data: { id: surveyId },
+                    success: function () {
+                        location.reload();
+                    },
+                    error: function () {
+                        alert('Anket silinirken bir hata oluştu.');
+                    }
+                });
+            } else {
+                location.reload();
+            }
+        }
+
         function updateTimers() {
             $(".timer").each(function () {
                 var endTime = new Date($(this).data("end-time"));
@@ -88,6 +127,10 @@
         }
 
         setInterval(updateTimers, 1000);
+
+        function showFullDescription(description) {
+            alert(description);
+        }
     </script>
 }
 
@@ -104,12 +147,15 @@
     .table-modern {
         width: 100%;
         border-collapse: collapse;
+        table-layout: fixed; /* Sabit aralıklı yapmak için ekledik */
     }
 
         .table-modern th, .table-modern td {
-            padding: 12px;
+            padding: 8px; /* Boşlukları azaltmak için padding'i küçülttük */
             text-align: left;
             border-bottom: 1px solid #ddd;
+            word-wrap: break-word; /* İçeriğin taşmasını önlemek için ekledik */
+            font-size: 14px; /* Yazı tipini küçülttük */
         }
 
         .table-modern th {
@@ -121,7 +167,44 @@
             background-color: #f1f1f1;
         }
 
-        .table-blue th {
-            border: 1px solid #007bff;
+    .table-blue th {
+        border: 1px solid #007bff;
+    }
+
+    /* Her sütun için sabit genişlikler belirliyoruz */
+    .table-modern th:nth-child(1), .table-modern td:nth-child(1) {
+        width: 15%;
+    }
+
+    .table-modern th:nth-child(2), .table-modern td:nth-child(2) {
+        width: 35%;
+    }
+
+    .table-modern th:nth-child(3), .table-modern td:nth-child(3) {
+        width: 10%;
+    }
+
+    .table-modern th:nth-child(4), .table-modern td:nth-child(4) {
+        width: 10%;
+    }
+
+    .table-modern th:nth-child(5), .table-modern td:nth-child(5) {
+        width: 10%;
+    }
+
+    .table-modern th:nth-child(6), .table-modern td:nth-child(6) {
+        width: 10%;
+    }
+
+    .btn-group-vertical .btn {
+        font-size: 12px; /* Buton yazı tipini küçülttük */
+        padding: 5px 10px; /* Buton padding'ini küçülttük */
+        width: 100%; /* Buton genişliğini %100 yap */
+        margin-bottom: 5px; /* Butonlar arasına boşluk ekledik */
+    }
+
+        .btn-group-vertical .btn i {
+            margin-right: 5px; /* Simgeler arasındaki boşluğu ekledik */
         }
 </style>
+

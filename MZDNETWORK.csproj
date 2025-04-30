@@ -433,6 +433,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
+    <Compile Include="Controllers\BeyazTahtaController.cs" />
     <Compile Include="Controllers\BildirimlerimController.cs" />
     <Compile Include="Controllers\BilgiIslemController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
@@ -469,9 +470,22 @@
     <Compile Include="Migrations\202503070655200_addendate.Designer.cs">
       <DependentUpon>202503070655200_addendate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504280526204_Intialcreate22.cs" />
+    <Compile Include="Migrations\202504280526204_Intialcreate22.Designer.cs">
+      <DependentUpon>202504280526204_Intialcreate22.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202504280655557_Intialcreate232.cs" />
+    <Compile Include="Migrations\202504280655557_Intialcreate232.Designer.cs">
+      <DependentUpon>202504280655557_Intialcreate232.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202504280846339_AddTvHeader.cs" />
+    <Compile Include="Migrations\202504280846339_AddTvHeader.Designer.cs">
+      <DependentUpon>202504280846339_AddTvHeader.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerOption.cs" />
+    <Compile Include="Models\BeyazTahtaEntry.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\DilekOneri.cs" />
     <Compile Include="Models\Dokumantasyon.cs" />
@@ -482,6 +496,7 @@
     <Compile Include="Models\Survey.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\TodoItem.cs" />
+    <Compile Include="Models\TvHeader.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserAndInfo.cs" />
     <Compile Include="Models\UserInfo.cs" />
@@ -2497,6 +2512,8 @@
     <Content Include="Views\Survey\SurveyResults.cshtml" />
     <Content Include="Scripts\tinymce\license.md" />
     <Content Include="Scripts\tinymce\langs\README.md" />
+    <Content Include="Views\BeyazTahta\Index.cshtml" />
+    <Content Include="Views\BeyazTahta\TV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="anaimgs\" />
@@ -2541,6 +2558,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503070655200_addendate.resx">
       <DependentUpon>202503070655200_addendate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504280526204_Intialcreate22.resx">
+      <DependentUpon>202504280526204_Intialcreate22.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504280655557_Intialcreate232.resx">
+      <DependentUpon>202504280655557_Intialcreate232.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504280846339_AddTvHeader.resx">
+      <DependentUpon>202504280846339_AddTvHeader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,0 +1,108 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TV – Öneri Tablosu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        #tv-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        thead th {
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            font-size: 1.8em;
+            border: none;
+        }
+
+        tbody td {
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            font-size: 1.5em;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="tv-title">🔔 Öneriler (En Yeni En Üstte)</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Tarih</th>
+                <th>Öneri Veren</th>
+                <th>Problem</th>
+                <th>Öneri</th>
+            </tr>
+        </thead>
+        <tbody id="tv-body">
+            <!-- AJAX ile yüklenecek -->
+        </tbody>
+    </table>
+
+    <script>
+        // Sunucudan TV başlığını alır ve günceller
+        function refreshHeader() {
+            $.getJSON('@Url.Action("GetHeader","BeyazTahta")', function(res) {
+                $('#tv-title').text(res.title);
+            });
+        }
+
+        // .NET Date("/Date(...)") formatını JS Date objesine çevirir
+        function toDate(dotNetDate) {
+            const ms = parseInt(dotNetDate.replace(/\/Date\((-?\d+)\)\//,'$1'), 10);
+            return new Date(ms).toLocaleString();
+        }
+
+        // Sunucudan öneri listesini alır ve tabloya basar
+        function refreshTable() {
+            $.getJSON('@Url.Action("GetEntries","BeyazTahta")', function(data) {
+                const rows = data.map(function(e) {
+                    return `
+                        <tr>
+                            <td>${toDate(e.CreatedAt)}</td>
+                            <td>${e.OneriVeren}</td>
+                            <td>${e.Problem}</td>
+                            <td>${e.Oneri}</td>
+                        </tr>`;
+                }).join('');
+                $('#tv-body').html(rows);
+            });
+        }
+
+        // Sayfa açıldığında ve her 30 saniyede bir çağır
+        $(function(){
+            refreshHeader();
+            refreshTable();
+            setInterval(function(){
+                refreshHeader();
+                refreshTable();
+            }, 10000);
+        });
+    </script>
+
+</body>
+</html>

@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2025-03-06T11:35:38.2823583Z||;True|2025-03-06T12:57:40.5440983+03:00||;True|2025-03-04T14:50:32.8991500+03:00||;True|2025-03-04T14:16:21.0542349+03:00||;True|2025-02-26T09:04:51.4626023+03:00||;False|2025-02-26T09:03:30.1216822+03:00||;True|2025-02-13T12:18:20.1578498+03:00||;True|2025-02-10T07:47:42.7457441+03:00||;True|2025-02-07T14:38:17.8974705+03:00||;True|2025-02-06T15:05:37.1100667+03:00||;True|2025-02-06T09:18:03.9934870+03:00||;True|2025-02-05T16:09:52.3757058+03:00||;True|2025-02-05T15:31:09.2168402+03:00||;True|2025-02-05T08:01:20.4143254+03:00||;False|2025-02-04T15:40:20.6188778+03:00||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
+    <History>True|2025-04-30T12:38:10.3894047Z||;True|2025-04-02T09:08:45.2009627+03:00||;True|2025-03-06T14:35:38.2823583+03:00||;True|2025-03-06T12:57:40.5440983+03:00||;True|2025-03-04T14:50:32.8991500+03:00||;True|2025-03-04T14:16:21.0542349+03:00||;True|2025-02-26T09:04:51.4626023+03:00||;False|2025-02-26T09:03:30.1216822+03:00||;True|2025-02-13T12:18:20.1578498+03:00||;True|2025-02-10T07:47:42.7457441+03:00||;True|2025-02-07T14:38:17.8974705+03:00||;True|2025-02-06T15:05:37.1100667+03:00||;True|2025-02-06T09:18:03.9934870+03:00||;True|2025-02-05T16:09:52.3757058+03:00||;True|2025-02-05T15:31:09.2168402+03:00||;True|2025-02-05T08:01:20.4143254+03:00||;False|2025-02-04T15:40:20.6188778+03:00||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -292,10 +292,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:52</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.dll">
-      <publishTime>03/07/2025 11:49:01</publishTime>
+      <publishTime>04/30/2025 15:37:49</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.pdb">
-      <publishTime>03/07/2025 11:49:01</publishTime>
+      <publishTime>04/30/2025 15:37:49</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.Bson.dll">
       <publishTime>02/26/2025 08:57:53</publishTime>
@@ -871,7 +871,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Scripts/chart.js">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>03/10/2025 07:42:14</publishTime>
     </File>
     <File Include="Scripts/Chart.min.js">
       <publishTime>02/26/2025 08:57:46</publishTime>
@@ -6571,7 +6571,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/30/2024 17:25:45</publishTime>
     </File>
     <File Include="Views/Answer/TakeSurvey.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>03/07/2025 15:36:25</publishTime>
+    </File>
+    <File Include="Views/BeyazTahta/Index.cshtml">
+      <publishTime>04/30/2025 15:34:06</publishTime>
+    </File>
+    <File Include="Views/BeyazTahta/TV.cshtml">
+      <publishTime>04/28/2025 11:51:10</publishTime>
     </File>
     <File Include="Views/BilgiIslem/Index.cshtml">
       <publishTime>12/24/2024 08:04:40</publishTime>
@@ -6619,7 +6625,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>03/04/2025 14:47:52</publishTime>
+      <publishTime>03/11/2025 14:16:51</publishTime>
     </File>
     <File Include="Views/Home/MerkezYemekListesi.cshtml">
       <publishTime>02/26/2025 08:57:46</publishTime>
@@ -6670,16 +6676,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/24/2024 14:29:26</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>03/06/2025 12:56:34</publishTime>
+      <publishTime>04/28/2025 12:02:33</publishTime>
     </File>
     <File Include="Views/Survey/Create.cshtml">
       <publishTime>03/07/2025 11:44:22</publishTime>
     </File>
     <File Include="Views/Survey/Index.cshtml">
-      <publishTime>03/07/2025 11:29:54</publishTime>
+      <publishTime>03/07/2025 15:24:10</publishTime>
     </File>
     <File Include="Views/Survey/SurveyResults.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>03/10/2025 08:43:16</publishTime>
     </File>
     <File Include="Views/Task/Create.cshtml">
       <publishTime>02/26/2025 08:57:46</publishTime>
@@ -6739,7 +6745,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/04/2025 14:16:08</publishTime>
+      <publishTime>04/02/2025 09:08:26</publishTime>
     </File>
   </ItemGroup>
 </Project>

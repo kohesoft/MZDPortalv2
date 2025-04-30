@@ -20,6 +20,8 @@ namespace MZDNETWORK.Models
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<BeyazTahtaEntry> BeyazTahtaEntries { get; set; }
+        public DbSet<TvHeader> TvHeaders { get; set; }
 
     }
 }

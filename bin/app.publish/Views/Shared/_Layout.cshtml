@@ -333,6 +333,18 @@
                             </ul>
                         </li>
                     }
+                    <li class="nav-link">
+                        <a href="@Url.Action("Index", "BeyazTahta")">
+                            <i class='bx bx-tv icon'></i>
+                            <span class="text nav-text">TV Düzenle</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="@Url.Action("TV", "BeyazTahta")" class="no-loading">
+                            <i class='bx bx-tv icon'></i>
+                            <span class="text nav-text">TV Görünütüle</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -436,6 +448,7 @@
 
 
     <script>
+
     $(document).ready(function () {
         $('#toggleButton').click(function () {
             $('#toggleBox').toggle();
@@ -470,7 +483,7 @@
         initializeLoadingOverlay();
         scrollToBottom();
     });
-
+    
     function initializeChatHub() {
     var chat = $.connection.chatHub;
     var notificationSound = new Audio('@Url.Content("~/Content/notification.mp3")');
@@ -625,15 +638,16 @@
         };
     }
 
-    function initializeLoadingOverlay() {
-        $('#loadingOverlay').hide();
+        function initializeLoadingOverlay() {
+            $('#loadingOverlay').hide();
 
-        $('a').on('click', function (e) {
-            if (!$(this).hasClass('dropdown-toggle')) {
-                $('#loadingOverlay').show();
-            }
-        });
+            $('a').on('click', function (e) {
+                if (!$(this).hasClass('dropdown-toggle') && !$(this).hasClass('no-loading')) {
+                    $('#loadingOverlay').show();
+                }
+            });
         }
+
 
 
 
