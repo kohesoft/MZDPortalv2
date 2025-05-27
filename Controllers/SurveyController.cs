@@ -72,7 +72,7 @@ public class SurveyController : Controller
     public ActionResult SurveyResults(int surveyId)
     {
         var survey = db.Surveys
-            .Include(s => s.Questions.Select(q => q.Answers)) // 🔹 Doğru kullanım
+            .Include(s => s.Questions.Select(q => q.Answers.Select(a => a.Question))) // <-- Bunu ekleyin
             .FirstOrDefault(s => s.ID == surveyId);
 
         if (survey == null)

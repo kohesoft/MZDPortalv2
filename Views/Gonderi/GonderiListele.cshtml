@@ -4,44 +4,87 @@
 @model List<Gonderi>
 
 @{
-    ViewBag.Title = "Gönderi Listele";
+    ViewBag.Title = "Duyurular";
 }
 
 <head>
-    <link rel="stylesheet" href="~/Content/all.min.css" />
-    <link rel="stylesheet" href="~/Content/Contact.css" />
+    <link rel="stylesheet" href="~/Content/gonderilistele.css" />
+    <link href="~/Content/boxicons.min.css" rel='stylesheet'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
 </head>
 
-<section class="container" style="max-width:100%; max-height:100%;">
-    <div>
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Gönderi Listele</h3>
+<section class="gonderi-container" style="max-width:100%; max-height:100%;">
+    <div class="gonderi-wrapper">
+        <div class="gonderi-card">
+            <div class="gonderi-card-header">
+                <h3 class="gonderi-card-title">
+                    <i class='bx bx-list-ul gonderi-icon-list'></i>
+                    Duyurular
+                </h3>
+                <div class="gonderi-card-toolbar">
+                    <a href="@Url.Action("GonderiOlustur", "Gonderi")" class="gonderi-btn-add">
+                        <i class='bx bx-plus gonderi-icon-add'></i>
+                        Yeni Duyuru
+                    </a>
+                </div>
             </div>
-            <div class="card-body">
-                <h3>Gönderiler</h3>
+            <div class="gonderi-card-body">
+                @if (TempData["Message"] != null)
+                {
+                    <div class="gonderi-alert gonderi-alert-success">
+                        <i class='bx bx-check-circle gonderi-alert-icon'></i>
+                        <span>@TempData["Message"]</span>
+                    </div>
+                }
+
+                @if (TempData["Error"] != null)
+                {
+                    <div class="gonderi-alert gonderi-alert-danger">
+                        <i class='bx bx-error-circle gonderi-alert-icon'></i>
+                        <span>@TempData["Error"]</span>
+                    </div>
+                }
+
+                <div class="gonderi-section-header">
+                    <h3 class="gonderi-section-title">
+                        <i class='bx bx-news gonderi-icon-news'></i>
+                        Duyurular
+                    </h3>
+                </div>
+
                 @if (Model != null && Model.Count > 0)
                 {
-                    <div class="table-responsive" style="max-height: 550px; overflow-y: auto;">
-                        <table class="table table-striped table-bordered table-hover">
+                    <div class="gonderi-table-container">
+                        <table class="gonderi-data-table">
                             <thead>
                                 <tr>
-                                    <th>Başlık</th>
-                                    <th>İçerik</th>
-                                    <th>İşlemler</th>
+                                    <th class="gonderi-th-title">
+                                        <i class='bx bx-heading gonderi-th-icon'></i>
+                                        Başlık
+                                    </th>
+                                    <th class="gonderi-th-content">
+                                        <i class='bx bx-text gonderi-th-icon'></i>
+                                        İçerik
+                                    </th>
+                                    <th class="gonderi-th-actions">
+                                        <i class='bx bx-cog gonderi-th-icon'></i>
+                                        İşlemler
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var gonderi in Model)
                                 {
-                                    <tr>
-                                        <td>@gonderi.Title</td>
-                                        <td>@gonderi.Content</td>
-                                        <td>
-                                            <a href="@Url.Action("GonderiSil", "Gonderi", new { id = gonderi.Id })" class="btn btn-danger">Sil</a>
+                                    <tr class="gonderi-data-row">
+                                        <td class="gonderi-td-title">@gonderi.Title</td>
+                                        <td class="gonderi-td-content">@gonderi.Content</td>
+                                        <td class="gonderi-td-actions">
+                                            <button type="button" class="gonderi-btn-delete" onclick="openDeleteModal(@gonderi.Id, '@gonderi.Title')">
+                                                <i class='bx bx-trash gonderi-icon-delete'></i>
+                                                Sil
+                                            </button>
                                         </td>
                                     </tr>
                                 }
@@ -51,34 +94,50 @@
                 }
                 else
                 {
-                    <p>Gönderi bulunmamaktadır.</p>
-                }
-
-                @if (TempData["Message"] != null)
-                {
-                    <p style="color:green;">@TempData["Message"]</p>
-                }
-
-                @if (TempData["Error"] != null)
-                {
-                    <p style="color:red;">@TempData["Error"]</p>
+                    <div class="gonderi-empty-state">
+                        <i class='bx bx-folder-open gonderi-empty-icon'></i>
+                        <p class="gonderi-empty-text">Duyuru bulunmamaktadır.</p>
+                    </div>
                 }
             </div>
         </div>
     </div>
 </section>
 
-<style>
-    .card-toolbar {
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    section.home {
-        overflow: hidden; /* Taşan içeriği gizlemek için */
-        word-wrap: break-word; /* Uzun kelimeleri bölmek için */
-    }
-</style>
+<!-- Silme Modal -->
+<div id="gonderiDeleteModal" class="gonderi-modal">
+    <div class="gonderi-modal-content">
+        <div class="gonderi-modal-header">
+            <i class='bx bx-trash gonderi-modal-icon'></i>
+            <h3 class="gonderi-modal-title">Duyuru Sil</h3>
+            <button type="button" class="gonderi-modal-close" onclick="closeDeleteModal()">
+                <i class='bx bx-x'></i>
+            </button>
+        </div>
+        <div class="gonderi-modal-body">
+            <div class="gonderi-modal-warning">
+                <i class='bx bx-error-circle gonderi-modal-warning-icon'></i>
+                <p class="gonderi-modal-warning-text">Bu duyuruyu silmek istediğinizden emin misiniz?</p>
+            </div>
+            <div class="gonderi-modal-info">
+                <h4 class="gonderi-modal-info-title" id="deleteGonderiTitle"></h4>
+            </div>
+        </div>
+        <div class="gonderi-modal-footer">
+            <button type="button" class="gonderi-modal-btn-cancel" onclick="closeDeleteModal()">
+                <i class='bx bx-x gonderi-modal-btn-icon'></i>
+                İptal
+            </button>
+            <form id="deleteForm" method="post" style="display: inline;">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="gonderi-modal-btn-delete">
+                    <i class='bx bx-trash gonderi-modal-btn-icon'></i>
+                    Sil
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script src="~/Scripts/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
@@ -87,4 +146,32 @@
         plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
         toolbar_mode: 'floating',
     });
+
+    // Modal işlemleri
+    function openDeleteModal(id, title) {
+        document.getElementById('deleteGonderiTitle').textContent = title;
+        document.getElementById('deleteForm').action = '@Url.Action("GonderiSil", "Gonderi")/' + id;
+
+        var modal = document.getElementById('gonderiDeleteModal');
+        modal.classList.add('show');
+
+        // Sayfanın kaydırmasını engelle
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDeleteModal() {
+        var modal = document.getElementById('gonderiDeleteModal');
+        modal.classList.remove('show');
+
+        // Sayfanın kaydırmasını geri aç
+        document.body.style.overflow = '';
+    }
+
+    // Modal dışına tıklandığında kapatma
+    window.onclick = function(event) {
+        var modal = document.getElementById('gonderiDeleteModal');
+        if (event.target == modal) {
+            closeDeleteModal();
+        }
+    }
 </script>

@@ -1,3 +1,4 @@
+
 @model Gonderi
 
 @{
@@ -10,50 +11,48 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link href='~/Content/boxicons.css' rel='stylesheet'>
-    <link rel="stylesheet" href="~/Content/my.css" />
-    
+    <link rel="stylesheet" href="~/Content/gonderisil.css" />
 </head>
 <body>
-    <div class="container">
-        <h2>Gönderi Sil</h2>
-        <p>Bu gönderiyi silmek istediğinizden emin misiniz?</p>
-        <h3>@Model.Title</h3>
-        <p>@Model.Content</p>
+    <div class="gonderiSil-container">
+        <div class="gonderiSil-card">
+            <div class="gonderiSil-card-header">
+                <i class='bx bx-trash gonderiSil-icon-delete'></i>
+                <h2 class="gonderiSil-title">Gönderi Sil</h2>
+            </div>
 
-        <form action="@Url.Action("GonderiSil", "Gonderi", new { id = Model.Id })" method="post">
-            @Html.AntiForgeryToken() <!-- CSRF koruması için -->
-            <button type="submit" class="btn btn-danger">Sil</button>
-            <a href="@Url.Action("GonderiListele", "Gonderi")" class="btn btn-secondary">İptal</a>
-        </form>
+            <div class="gonderiSil-card-body">
+                <div class="gonderiSil-warning">
+                    <i class='bx bx-error-circle gonderiSil-icon-warning'></i>
+                    <p class="gonderiSil-warning-text">Bu gönderiyi silmek istediğinizden emin misiniz?</p>
+                </div>
+
+                <div class="gonderiSil-content-preview">
+                    <div class="gonderiSil-preview-header">
+                        <i class='bx bx-news gonderiSil-icon-news'></i>
+                        <h3 class="gonderiSil-preview-title">@Model.Title</h3>
+                    </div>
+                    <div class="gonderiSil-preview-body">
+                        <p class="gonderiSil-preview-text">@Model.Content</p>
+                    </div>
+                </div>
+
+                <form class="gonderiSil-form" action="@Url.Action("GonderiSil", "Gonderi", new { id = Model.Id })" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="gonderiSil-actions">
+                        <a href="@Url.Action("GonderiListele", "Gonderi")" class="gonderiSil-btn-cancel">
+                            <i class='bx bx-arrow-back gonderiSil-btn-icon'></i>
+                            İptal
+                        </a>
+                        <button type="submit" class="gonderiSil-btn-delete">
+                            <i class='bx bx-trash gonderiSil-btn-icon'></i>
+                            Sil
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>
-
-<style>
-    .container {
-        max-width: 100%;
-        width: 95%;
-        margin: auto;
-        padding: 20px;
-        background: #f9f9f9;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        position: relative; /* Konumlandırma için */
-        z-index: 1; /* Üstte görünmesi için */
-    }
-
-    h2 {
-        margin-bottom: 20px;
-    }
-
-    .btn {
-        margin-right: 10px;
-    }
-
-    body {
-        overflow: auto; /* Taşan içeriği göstermek için */
-        height: auto; /* Yüksekliği otomatik ayarlamak için */
-    }
-</style>

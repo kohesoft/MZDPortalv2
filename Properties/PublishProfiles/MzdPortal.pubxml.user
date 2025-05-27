@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2025-04-30T12:38:10.3894047Z||;True|2025-04-02T09:08:45.2009627+03:00||;True|2025-03-06T14:35:38.2823583+03:00||;True|2025-03-06T12:57:40.5440983+03:00||;True|2025-03-04T14:50:32.8991500+03:00||;True|2025-03-04T14:16:21.0542349+03:00||;True|2025-02-26T09:04:51.4626023+03:00||;False|2025-02-26T09:03:30.1216822+03:00||;True|2025-02-13T12:18:20.1578498+03:00||;True|2025-02-10T07:47:42.7457441+03:00||;True|2025-02-07T14:38:17.8974705+03:00||;True|2025-02-06T15:05:37.1100667+03:00||;True|2025-02-06T09:18:03.9934870+03:00||;True|2025-02-05T16:09:52.3757058+03:00||;True|2025-02-05T15:31:09.2168402+03:00||;True|2025-02-05T08:01:20.4143254+03:00||;False|2025-02-04T15:40:20.6188778+03:00||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
+    <History>True|2025-05-27T09:36:18.6456556Z||;True|2025-05-26T15:06:30.5871785+03:00||;False|2025-05-26T15:03:46.4631455+03:00||;True|2025-04-30T15:38:10.3894047+03:00||;True|2025-04-02T09:08:45.2009627+03:00||;True|2025-03-06T14:35:38.2823583+03:00||;True|2025-03-06T12:57:40.5440983+03:00||;True|2025-03-04T14:50:32.8991500+03:00||;True|2025-03-04T14:16:21.0542349+03:00||;True|2025-02-26T09:04:51.4626023+03:00||;False|2025-02-26T09:03:30.1216822+03:00||;True|2025-02-13T12:18:20.1578498+03:00||;True|2025-02-10T07:47:42.7457441+03:00||;True|2025-02-07T14:38:17.8974705+03:00||;True|2025-02-06T15:05:37.1100667+03:00||;True|2025-02-06T09:18:03.9934870+03:00||;True|2025-02-05T16:09:52.3757058+03:00||;True|2025-02-05T15:31:09.2168402+03:00||;True|2025-02-05T08:01:20.4143254+03:00||;False|2025-02-04T15:40:20.6188778+03:00||;True|2025-02-03T11:08:04.2054252+03:00||;True|2025-02-03T07:43:15.8924687+03:00||;True|2025-01-23T14:00:22.9464047+03:00||;True|2025-01-22T07:38:25.2635589+03:00||;True|2025-01-16T17:13:10.8439532+03:00||;True|2025-01-15T16:16:47.8734929+03:00||;True|2025-01-15T13:40:53.7286084+03:00||;True|2025-01-15T11:50:02.1448789+03:00||;True|2025-01-14T11:17:17.7129355+03:00||;True|2025-01-06T11:54:35.5489392+03:00||;True|2025-01-06T11:39:58.2125003+03:00||;True|2025-01-06T11:14:18.3650987+03:00||;True|2025-01-06T10:56:46.6926374+03:00||;True|2025-01-03T17:10:14.4747564+03:00||;True|2025-01-03T07:34:38.9553984+03:00||;True|2024-12-31T08:46:04.6729827+03:00||;True|2024-12-31T08:34:39.9981630+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -292,10 +292,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:52</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.dll">
-      <publishTime>04/30/2025 15:37:49</publishTime>
+      <publishTime>05/27/2025 16:29:13</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.pdb">
-      <publishTime>04/30/2025 15:37:49</publishTime>
+      <publishTime>05/27/2025 16:29:13</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.Bson.dll">
       <publishTime>02/26/2025 08:57:53</publishTime>
@@ -492,6 +492,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>02/26/2025 08:57:50</publishTime>
     </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>10/20/2023 23:34:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>10/20/2023 23:34:08</publishTime>
+    </File>
     <File Include="bin/System.Web.Mvc.dll">
       <publishTime>02/26/2025 08:57:50</publishTime>
     </File>
@@ -538,13 +544,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:56</publishTime>
     </File>
     <File Include="Content/all.min.css">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/23/2025 16:36:41</publishTime>
     </File>
     <File Include="Content/animations.css">
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Content/Bakim.css">
       <publishTime>02/26/2025 08:57:46</publishTime>
+    </File>
+    <File Include="Content/BeyazTahtaIndex.css">
+      <publishTime>05/23/2025 07:55:34</publishTime>
     </File>
     <File Include="Content/bootstrap-grid.css">
       <publishTime>02/26/2025 08:57:46</publishTime>
@@ -649,28 +658,64 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Content/Contact.css">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 15:38:19</publishTime>
     </File>
     <File Include="Content/coursel.css">
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
+    <File Include="Content/dilekcreate.css">
+      <publishTime>05/27/2025 13:04:49</publishTime>
+    </File>
     <File Include="Content/DilekIstek.css">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/23/2025 09:46:21</publishTime>
+    </File>
+    <File Include="Content/dilekistekik.css">
+      <publishTime>05/27/2025 12:28:34</publishTime>
     </File>
     <File Include="Content/Dokumantasyon.css">
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
+    <File Include="Content/gonderilistele.css">
+      <publishTime>05/23/2025 10:20:45</publishTime>
+    </File>
+    <File Include="Content/gonderiolustur.css">
+      <publishTime>05/23/2025 10:05:37</publishTime>
+    </File>
+    <File Include="Content/gonderisil.css">
+      <publishTime>05/23/2025 10:12:31</publishTime>
+    </File>
+    <File Include="Content/homeindex.css">
+      <publishTime>05/23/2025 10:43:26</publishTime>
+    </File>
     <File Include="Content/IKlayout.css">
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
+    <File Include="Content/kullaniciislemleri.css">
+      <publishTime>05/26/2025 07:46:11</publishTime>
+    </File>
+    <File Include="Content/kullaniciislemleriindex.css">
+      <publishTime>05/26/2025 07:55:25</publishTime>
+    </File>
     <File Include="Content/Loading.css">
       <publishTime>02/26/2025 08:57:46</publishTime>
+    </File>
+    <File Include="Content/merkezyemeklistesi.css">
+      <publishTime>05/23/2025 16:36:41</publishTime>
+    </File>
+    <File Include="Content/mola.css">
+      <publishTime>05/23/2025 16:54:51</publishTime>
+    </File>
+    <File Include="Content/molayukle.css">
+      <publishTime>05/23/2025 08:14:07</publishTime>
     </File>
     <File Include="Content/my.css">
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Content/notification.mp3">
       <publishTime>02/26/2025 08:57:46</publishTime>
+    </File>
+    <File Include="Content/sendnotification.css">
+      <publishTime>05/26/2025 08:09:21</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>02/26/2025 08:57:46</publishTime>
@@ -679,10 +724,28 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/06/2025 08:07:34</publishTime>
     </File>
     <File Include="Content/Spinner.css">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/22/2025 16:20:05</publishTime>
+    </File>
+    <File Include="Content/surveycreate.css">
+      <publishTime>05/26/2025 08:34:52</publishTime>
+    </File>
+    <File Include="Content/surveyresults.css">
+      <publishTime>05/27/2025 16:08:05</publishTime>
+    </File>
+    <File Include="Content/tailwind.min.css">
+      <publishTime>05/23/2025 15:37:57</publishTime>
+    </File>
+    <File Include="Content/TakeSurvey.css">
+      <publishTime>05/22/2025 16:20:26</publishTime>
     </File>
     <File Include="Content/transformations.css">
       <publishTime>02/26/2025 08:57:46</publishTime>
+    </File>
+    <File Include="Content/TV.css">
+      <publishTime>05/27/2025 16:27:53</publishTime>
+    </File>
+    <File Include="Content/_layout.css">
+      <publishTime>05/26/2025 15:37:03</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>02/26/2025 08:57:47</publishTime>
@@ -825,6 +888,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="logo.ico">
       <publishTime>02/26/2025 08:57:47</publishTime>
     </File>
+    <File Include="logs/logfile.txt">
+      <publishTime>05/27/2025 16:28:51</publishTime>
+    </File>
+    <File Include="logs/nlog-internal.log">
+      <publishTime>02/26/2025 08:57:46</publishTime>
+    </File>
     <File Include="Mzdportal.pfx">
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
@@ -871,7 +940,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Scripts/chart.js">
-      <publishTime>03/10/2025 07:42:14</publishTime>
+      <publishTime>05/27/2025 13:50:41</publishTime>
     </File>
     <File Include="Scripts/Chart.min.js">
       <publishTime>02/26/2025 08:57:46</publishTime>
@@ -6546,11 +6615,20 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="UploadPhotosMerkez/a.png">
       <publishTime>02/26/2025 08:57:57</publishTime>
     </File>
+    <File Include="UploadPhotosMerkez/menu_20250523.jpg">
+      <publishTime>05/23/2025 16:40:22</publishTime>
+    </File>
     <File Include="UploadPhotosMerkez/yemek.png">
       <publishTime>01/16/2025 14:38:51</publishTime>
     </File>
     <File Include="UploadPhotosMola/a.png">
       <publishTime>02/26/2025 08:57:57</publishTime>
+    </File>
+    <File Include="UploadPhotosMola/break_schedule_genel.jpg">
+      <publishTime>05/23/2025 16:59:37</publishTime>
+    </File>
+    <File Include="UploadPhotosMola/break_schedule_Part 1.jpg">
+      <publishTime>05/23/2025 16:56:07</publishTime>
     </File>
     <File Include="UploadPhotosMola/logo.png">
       <publishTime>01/07/2025 08:33:56</publishTime>
@@ -6562,7 +6640,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/16/2025 14:38:58</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 15:37:05</publishTime>
     </File>
     <File Include="Views/Account/Logout.cshtml">
       <publishTime>02/26/2025 08:57:46</publishTime>
@@ -6571,31 +6649,31 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/30/2024 17:25:45</publishTime>
     </File>
     <File Include="Views/Answer/TakeSurvey.cshtml">
-      <publishTime>03/07/2025 15:36:25</publishTime>
+      <publishTime>05/26/2025 09:53:34</publishTime>
     </File>
     <File Include="Views/BeyazTahta/Index.cshtml">
-      <publishTime>04/30/2025 15:34:06</publishTime>
+      <publishTime>05/23/2025 08:02:01</publishTime>
     </File>
     <File Include="Views/BeyazTahta/TV.cshtml">
-      <publishTime>04/28/2025 11:51:10</publishTime>
+      <publishTime>05/27/2025 16:24:48</publishTime>
     </File>
     <File Include="Views/BilgiIslem/Index.cshtml">
       <publishTime>12/24/2024 08:04:40</publishTime>
     </File>
     <File Include="Views/BilgiIslem/MolaYukle.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/23/2025 08:17:23</publishTime>
     </File>
     <File Include="Views/BilgiIslem/YemekYukle.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/23/2025 08:20:11</publishTime>
     </File>
     <File Include="Views/Contact/Index.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/23/2025 09:42:27</publishTime>
     </File>
     <File Include="Views/DilekOneri/Bildirimlerim.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/23/2025 09:49:19</publishTime>
     </File>
     <File Include="Views/DilekOneri/Create.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/27/2025 13:04:50</publishTime>
     </File>
     <File Include="Views/Dokumantasyon/Create.cshtml">
       <publishTime>02/26/2025 08:57:46</publishTime>
@@ -6616,37 +6694,37 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Views/Gonderi/GonderiListele.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/23/2025 10:26:45</publishTime>
     </File>
     <File Include="Views/Gonderi/GonderiOlustur.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/23/2025 10:27:53</publishTime>
     </File>
     <File Include="Views/Gonderi/GonderiSil.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/23/2025 10:12:29</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>03/11/2025 14:16:51</publishTime>
+      <publishTime>05/23/2025 10:48:22</publishTime>
     </File>
     <File Include="Views/Home/MerkezYemekListesi.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/27/2025 11:42:57</publishTime>
     </File>
     <File Include="Views/Home/Mola.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/23/2025 16:58:01</publishTime>
     </File>
     <File Include="Views/Home/YemekListesi.cshtml">
       <publishTime>01/07/2025 08:33:56</publishTime>
     </File>
     <File Include="Views/Home/YerleskeYemekListesi.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/27/2025 11:42:42</publishTime>
     </File>
     <File Include="Views/InsanKaynaklari/DilekIstek_IK.cshtml">
-      <publishTime>03/05/2025 12:41:28</publishTime>
+      <publishTime>05/27/2025 12:46:36</publishTime>
     </File>
     <File Include="Views/InsanKaynaklari/Index.cshtml">
       <publishTime>12/24/2024 08:04:40</publishTime>
     </File>
     <File Include="Views/Kullanici_Islemleri/Create.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 10:49:26</publishTime>
     </File>
     <File Include="Views/Kullanici_Islemleri/Delete.cshtml">
       <publishTime>02/26/2025 08:57:46</publishTime>
@@ -6655,13 +6733,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Views/Kullanici_Islemleri/Edit.cshtml">
-      <publishTime>02/26/2025 08:57:42</publishTime>
+      <publishTime>05/26/2025 07:47:51</publishTime>
     </File>
     <File Include="Views/Kullanici_Islemleri/Index.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 16:35:44</publishTime>
+    </File>
+    <File Include="Views/MeetingRoom/Index.cshtml">
+      <publishTime>05/27/2025 09:57:31</publishTime>
     </File>
     <File Include="Views/Notification/SendNotification.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 08:24:43</publishTime>
     </File>
     <File Include="Views/Profilim/Profilim.cshtml">
       <publishTime>12/30/2024 12:33:58</publishTime>
@@ -6676,31 +6757,31 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/24/2024 14:29:26</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/28/2025 12:02:33</publishTime>
+      <publishTime>05/27/2025 16:11:24</publishTime>
     </File>
     <File Include="Views/Survey/Create.cshtml">
-      <publishTime>03/07/2025 11:44:22</publishTime>
+      <publishTime>05/26/2025 08:40:27</publishTime>
     </File>
     <File Include="Views/Survey/Index.cshtml">
-      <publishTime>03/07/2025 15:24:10</publishTime>
+      <publishTime>05/26/2025 08:54:57</publishTime>
     </File>
     <File Include="Views/Survey/SurveyResults.cshtml">
-      <publishTime>03/10/2025 08:43:16</publishTime>
+      <publishTime>05/27/2025 16:09:43</publishTime>
     </File>
     <File Include="Views/Task/Create.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 16:53:30</publishTime>
     </File>
     <File Include="Views/Task/Delete.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 16:53:30</publishTime>
     </File>
     <File Include="Views/Task/Details.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 16:53:30</publishTime>
     </File>
     <File Include="Views/Task/Edit.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 16:53:30</publishTime>
     </File>
     <File Include="Views/Task/Index.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 16:53:30</publishTime>
     </File>
     <File Include="Views/Task/ManagerView.cshtml">
       <publishTime>01/14/2025 11:05:14</publishTime>
@@ -6709,13 +6790,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/14/2025 11:05:14</publishTime>
     </File>
     <File Include="Views/Task/UserTasks.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 16:53:31</publishTime>
     </File>
     <File Include="Views/User/ChangePassword.cshtml">
-      <publishTime>02/26/2025 08:57:46</publishTime>
+      <publishTime>05/26/2025 10:32:38</publishTime>
     </File>
     <File Include="Views/User/Edit.cshtml">
-      <publishTime>02/26/2025 08:57:42</publishTime>
+      <publishTime>05/26/2025 10:47:46</publishTime>
     </File>
     <File Include="Views/UserInfoes/Create.cshtml">
       <publishTime>01/02/2025 17:22:05</publishTime>
@@ -6745,7 +6826,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2025 08:57:46</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/02/2025 09:08:26</publishTime>
+      <publishTime>05/26/2025 15:03:43</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -380,6 +380,12 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.3.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.3.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
@@ -444,6 +450,7 @@
     <Compile Include="Controllers\GonderiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsanKaynaklariController.cs" />
+    <Compile Include="Controllers\MeetingRoomController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\OnlineUsersController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
@@ -458,29 +465,13 @@
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202503060638304_AddNotifications.cs" />
-    <Compile Include="Migrations\202503060638304_AddNotifications.Designer.cs">
-      <DependentUpon>202503060638304_AddNotifications.cs</DependentUpon>
+    <Compile Include="Migrations\202505260846376_InitialCreate.cs" />
+    <Compile Include="Migrations\202505260846376_InitialCreate.Designer.cs">
+      <DependentUpon>202505260846376_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202503070540500_AddSurveyDuration.cs" />
-    <Compile Include="Migrations\202503070540500_AddSurveyDuration.Designer.cs">
-      <DependentUpon>202503070540500_AddSurveyDuration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503070655200_addendate.cs" />
-    <Compile Include="Migrations\202503070655200_addendate.Designer.cs">
-      <DependentUpon>202503070655200_addendate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202504280526204_Intialcreate22.cs" />
-    <Compile Include="Migrations\202504280526204_Intialcreate22.Designer.cs">
-      <DependentUpon>202504280526204_Intialcreate22.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202504280655557_Intialcreate232.cs" />
-    <Compile Include="Migrations\202504280655557_Intialcreate232.Designer.cs">
-      <DependentUpon>202504280655557_Intialcreate232.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202504280846339_AddTvHeader.cs" />
-    <Compile Include="Migrations\202504280846339_AddTvHeader.Designer.cs">
-      <DependentUpon>202504280846339_AddTvHeader.cs</DependentUpon>
+    <Compile Include="Migrations\202505261114458_InitialCreate2.cs" />
+    <Compile Include="Migrations\202505261114458_InitialCreate2.Designer.cs">
+      <DependentUpon>202505261114458_InitialCreate2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -493,6 +484,8 @@
     <Compile Include="Models\Gonderi.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\ReservationStatus.cs" />
     <Compile Include="Models\Survey.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\TodoItem.cs" />
@@ -512,44 +505,46 @@
     <Content Include="Content\all.min.css" />
     <Content Include="Content\animations.css" />
     <Content Include="Content\Bakim.css" />
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-grid.rtl.css" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
-    <Content Include="Content\bootstrap-utilities.css" />
-    <Content Include="Content\bootstrap-utilities.min.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.rtl.css" />
-    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\BeyazTahtaIndex.css" />
     <Content Include="Content\boxicons.css" />
     <Content Include="Content\boxicons.min.css" />
     <Content Include="Content\Contact.css" />
     <Content Include="Content\coursel.css" />
+    <Content Include="Content\dilekcreate.css" />
     <Content Include="Content\DilekIstek.css" />
+    <Content Include="Content\dilekistekik.css" />
+    <Content Include="Content\gonderilistele.css" />
+    <Content Include="Content\gonderiolustur.css" />
+    <Content Include="Content\gonderisil.css" />
+    <Content Include="Content\homeindex.css" />
     <Content Include="Content\IKlayout.css" />
+    <Content Include="Content\kullaniciislemleri.css" />
+    <Content Include="Content\kullaniciislemleriindex.css" />
     <Content Include="Content\Loading.css" />
-    <Content Include="Content\my.css" />
+    <Content Include="Content\merkezyemeklistesi.css" />
+    <Content Include="Content\mola.css" />
+    <Content Include="Content\molayukle.css" />
     <Content Include="Content\Dokumantasyon.css" />
     <Content Include="Content\notification.mp3" />
+    <Content Include="Content\sendnotification.css" />
     <Content Include="Content\Spinner.css" />
+    <Content Include="Content\surveycreate.css" />
+    <Content Include="Content\surveyresults.css" />
+    <Content Include="Content\tailwind.min.css" />
+    <Content Include="Content\TakeSurvey.css" />
     <Content Include="Content\transformations.css" />
+    <Content Include="Content\TV.css" />
+    <Content Include="Content\_layout.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\boxicons.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
     <Content Include="imgs\loader.png" />
     <Content Include="imgs\logo.ico" />
     <Content Include="imgs\logo.png" />
     <Content Include="libman.json" />
     <Content Include="logo.ico" />
+    <Content Include="logs\logfile.txt" />
     <Content Include="Scripts\901ba758ee.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -562,7 +557,6 @@
     <Content Include="fonts\boxicons.woff" />
     <Content Include="fonts\boxicons.woff2" />
     <Content Include="Scripts\chart.js" />
-    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\coursel.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -823,14 +817,15 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="UploadPhotosMerkez\a.png" />
-    <Content Include="UploadPhotosMola\a.png" />
-    <Content Include="UploadPhotosYerleske\a.png" />
+    <Content Include="UploadPhotosMerkez\menu_20250523.jpg" />
+    <Content Include="UploadPhotosMola\break_schedule_genel.jpg" />
+    <Content Include="UploadPhotosMola\break_schedule_Part 1.jpg" />
     <Content Include="Views\Gonderi\GonderiListele.cshtml" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Mzdportal.pfx" />
+    <Content Include="logs\nlog-internal.log" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2463,7 +2458,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\InsanKaynaklari\DilekIstek_IK.cshtml" />
     <Content Include="Views\DilekOneri\Create.cshtml" />
@@ -2514,28 +2508,15 @@
     <Content Include="Scripts\tinymce\langs\README.md" />
     <Content Include="Views\BeyazTahta\Index.cshtml" />
     <Content Include="Views\BeyazTahta\TV.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\MeetingRoom\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="anaimgs\" />
     <Folder Include="App_Data\" />
+    <Folder Include="UploadPhotosYerleske\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.rtl.min.css.map" />
-    <Content Include="Content\bootstrap.rtl.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -2550,23 +2531,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202503060638304_AddNotifications.resx">
-      <DependentUpon>202503060638304_AddNotifications.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202505260846376_InitialCreate.resx">
+      <DependentUpon>202505260846376_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503070540500_AddSurveyDuration.resx">
-      <DependentUpon>202503070540500_AddSurveyDuration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503070655200_addendate.resx">
-      <DependentUpon>202503070655200_addendate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202504280526204_Intialcreate22.resx">
-      <DependentUpon>202504280526204_Intialcreate22.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202504280655557_Intialcreate232.resx">
-      <DependentUpon>202504280655557_Intialcreate232.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202504280846339_AddTvHeader.resx">
-      <DependentUpon>202504280846339_AddTvHeader.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202505261114458_InitialCreate2.resx">
+      <DependentUpon>202505261114458_InitialCreate2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -2619,7 +2588,6 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties content_4bootstrap-reboot_1css_1map__JsonSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

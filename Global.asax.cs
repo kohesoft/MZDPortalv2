@@ -8,6 +8,7 @@ using NLog;
 using Microsoft.Owin;
 using Owin;
 using WebSocketSharp.Server;
+using System.Web.Http;
 
 
 [assembly: OwinStartup(typeof(MZDNETWORK.Startup))]

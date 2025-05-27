@@ -4,57 +4,59 @@
 }
 
 <head>
-    <link rel="stylesheet" href="~/Content/all.min.css" />
-    <link rel="stylesheet" href="~/Content/Task.css" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
 </head>
 
-<section class="container" style="max-width:100%; max-height:100%;">
-    <div>
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Kullanıcı Görevleri</h3>
-                <div class="card-toolbar">
-                    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Görevleri ara..." class="form-control" style="width: 300px;">
+<section class="min-h-screen flex justify-center bg-gray-50">
+    <div class="w-full max-w-5xl">
+        <div class="bg-white/90 shadow-2xl rounded-2xl border border-gray-200">
+            <div class="px-8 py-6 border-b border-gray-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <h3 class="text-2xl font-bold text-gray-800">Kullanıcı Görevleri</h3>
+                <div class="flex flex-col md:flex-row md:items-center gap-2">
+                    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Görevleri ara..." class="form-input rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition py-2 px-3 bg-white/80 placeholder-gray-400 w-72" />
                 </div>
             </div>
-            <div class="card-body">
-                <div class="table-responsive" style="max-height: 550px; overflow-y: auto;">
-                    <table class="table table-striped table-bordered table-hover" id="taskTable">
-                        <thead class="thead-fixed">
+            <div class="px-8 py-6">
+                <div class="overflow-x-auto" style="max-height: 550px;">
+                    <table class="min-w-full bg-white rounded-lg shadow-sm" id="taskTable">
+                        <thead class="sticky top-0 z-10 bg-white">
                             <tr>
-                                <th onclick="sortTable(0)">Görev Adı</th>
-                                <th onclick="sortTable(1)">Görev Açıklaması</th>
-                                <th onclick="sortTable(2)">Görev Başlangıç Tarihi</th>
-                                <th onclick="sortTable(3)">Görev Bitiş Tarihi</th>
-                                <th onclick="sortTable(4)">Görev İlerlemesi</th>
-                                <th></th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer" onclick="sortTable(0)">Görev Adı</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer" onclick="sortTable(1)">Görev Açıklaması</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer" onclick="sortTable(2)">Başlangıç Tarihi</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer" onclick="sortTable(3)">Bitiş Tarihi</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase cursor-pointer" onclick="sortTable(4)">İlerleme</th>
+                                <th class="px-4 py-2"></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" style="width: @item.Progress%;" aria-valuenow="@item.Progress" aria-valuemin="0" aria-valuemax="100">@item.Progress%</div>
+                                <tr class="border-b last:border-b-0 hover:bg-indigo-50 transition">
+                                    <td class="px-4 py-2">@Html.DisplayFor(modelItem => item.Title)</td>
+                                    <td class="px-4 py-2">@Html.DisplayFor(modelItem => item.Description)</td>
+                                    <td class="px-4 py-2">@Html.DisplayFor(modelItem => item.StartDate)</td>
+                                    <td class="px-4 py-2">@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                    <td class="px-4 py-2">
+                                        <div class="w-full bg-gray-200 rounded-full h-5 flex items-center">
+                                            <div class="bg-green-500 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold transition-all duration-300"
+                                                 style="width: @item.Progress%;">
+                                                @item.Progress%
+                                            </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        @Html.ActionLink("Detaylar", "Details", new { id = item.Id }, new { @class = "btn btn-secondary" })
+                                    <td class="px-4 py-2">
+                                        @Html.ActionLink("Detaylar", "Details", new { id = item.Id }, new { @class = "bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition text-center" })
                                     </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
-                <div id="recordCount" class="mt-0">
+                <div id="recordCount" class="mt-4 text-sm text-gray-600">
                     Toplam Kayıt: @Model.Count()
                 </div>
             </div>
@@ -62,7 +64,8 @@
     </div>
 </section>
 
-<script>function searchTable() {
+<script>
+    function searchTable() {
         var input, filter, table, tbody, tr, td, i, j, txtValue;
         input = document.getElementById("searchInput");
         filter = input.value.toUpperCase();
@@ -123,26 +126,5 @@
                 }
             }
         }
-    }</script>
-
-<style>
-    .card-toolbar {
-        display: flex;
-        justify-content: flex-end;
     }
-
-    th {
-        cursor: pointer;
-    }
-
-    .thead-fixed th {
-        position: sticky;
-        top: 0;
-        background-color: white;
-        z-index: 1;
-    }
-
-    body, table, th, td {
-        font-size: 0.875rem; /* Yazıtipi boyutunu küçültmek için */
-    }
-</style>
+</script>

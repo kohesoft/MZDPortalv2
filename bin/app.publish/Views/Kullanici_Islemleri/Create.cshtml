@@ -4,108 +4,35 @@
     ViewBag.Title = "Yeni Kullanıcı";
 }
 
+<!DOCTYPE html>
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="~/Content/my.css" />
-    <style>
-        .container {
-            justify-content: center;
-            align-items: center;
-            overflow: auto;
-            height: 100vh;
-        }
-
-        .form-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        .login-form {
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 800px;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .lf--input {
-            width: calc(50% - 20px);
-            padding: 10px;
-            margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .lf--submit {
-            width: 100%;
-            padding: 10px;
-            background: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px;
-        }
-
-            .lf--submit:hover {
-                background: #0056b3;
-            }
-
-        .flex-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            width: calc(50% - 20px);
-            margin: 10px;
-        }
-
-        .lf--label {
-            margin-right: 10px;
-        }
-
-        .error-message {
-            color: red;
-            margin-bottom: 15px;
-            width: 100%;
-        }
-    </style>
+    <title>Kullanıcı Oluştur</title>
+    <link href='~/Content/tailwind.min.css' rel='stylesheet' />
+    <link href='~/Content/boxicons.min.css' rel='stylesheet' />
+    <link href="~/Content/kullaniciislemleri.css" rel="stylesheet" />
 </head>
-
 <body>
     <div class="container">
         <div class="form-container">
             <form class='login-form' action="@Url.Action("Create", "Kullanici_Islemleri")" method="post">
                 @Html.AntiForgeryToken()
-                @if (!ViewData.ModelState.IsValid)
-                {
-                    <div class="error-message">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    </div>
-                }
 
                 <div class="flex-row">
                     <label class="lf--label" for="Username">
                         <i class='bx bx-id-card'></i>
                     </label>
-                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "lf--input", placeholder = "Kullanıcı Adı", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.Username)
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "lf--input", placeholder = "Kullanıcı Adı" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="Password">
                         <i class='bx bx-lock'></i>
                     </label>
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "lf--input", placeholder = "Şifre", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.Password)
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "lf--input", placeholder = "Şifre" } })
                 </div>
 
                 <div class="flex-row">
@@ -113,7 +40,7 @@
                         <i class='bx bx-user'></i>
                     </label>
                     @Html.DropDownListFor(model => model.Role, new SelectList(new List<SelectListItem>
-                                                                            {
+                            {
                         new SelectListItem { Text = "Yönetici", Value = "Yonetici" },
                         new SelectListItem { Text = "Bilgi İşlem", Value = "BilgiIslem" },
                         new SelectListItem { Text = "İnsan Kaynakları", Value = "IK" },
@@ -122,80 +49,70 @@
                         new SelectListItem { Text = "Dokümantasyon", Value = "Dokumantasyon" },
                         new SelectListItem { Text = "Merkez", Value = "Merkez" },
                         new SelectListItem { Text = "Yerleşke", Value = "Yerleske" }
-                    }, "Value", "Text"), "Rol Seçiniz", new { @class = "lf--input", required = "required" })
-                    @Html.ValidationMessageFor(model => model.Role)
+                    }, "Value", "Text"), "Rol Seçiniz", new { @class = "lf--input" })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="Name">
                         <i class='bx bx-user'></i>
                     </label>
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "lf--input", placeholder = "Ad", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.Name)
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "lf--input", placeholder = "Ad" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="Surname">
                         <i class='bx bx-user'></i>
                     </label>
-                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "lf--input", placeholder = "Soyad", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.Surname)
+                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "lf--input", placeholder = "Soyad" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="Department">
                         <i class='bx bx-building'></i>
                     </label>
-                    @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "lf--input", placeholder = "Departman", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.Department)
+                    @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "lf--input", placeholder = "Departman" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="Position">
                         <i class='bx bx-briefcase'></i>
                     </label>
-                    @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "lf--input", placeholder = "Pozisyon", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.Position)
+                    @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "lf--input", placeholder = "Pozisyon" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="Intercom">
                         <i class='bx bx-phone'></i>
                     </label>
-                    @Html.EditorFor(model => model.Intercom, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dahili Telefon", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.Intercom)
+                    @Html.EditorFor(model => model.Intercom, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dahili Telefon" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="PhoneNumber">
                         <i class='bx bx-phone'></i>
                     </label>
-                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Telefon Numarası", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.PhoneNumber)
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Telefon Numarası" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="InternalEmail">
                         <i class='bx bx-envelope'></i>
                     </label>
-                    @Html.EditorFor(model => model.InternalEmail, new { htmlAttributes = new { @class = "lf--input", placeholder = "İç E-posta", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.InternalEmail)
+                    @Html.EditorFor(model => model.InternalEmail, new { htmlAttributes = new { @class = "lf--input", placeholder = "İç E-posta" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="ExternalEmail">
                         <i class='bx bx-envelope'></i>
                     </label>
-                    @Html.EditorFor(model => model.ExternalEmail, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dış E-posta", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.ExternalEmail)
+                    @Html.EditorFor(model => model.ExternalEmail, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dış E-posta" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="Sicil">
                         <i class='bx bx-id-card'></i>
                     </label>
-                    @Html.EditorFor(model => model.Sicil, new { htmlAttributes = new { @class = "lf--input", placeholder = "Sicil", required = "required" } })
-                    @Html.ValidationMessageFor(model => model.Sicil)
+                    @Html.EditorFor(model => model.Sicil, new { htmlAttributes = new { @class = "lf--input", placeholder = "Sicil" } })
                 </div>
 
                 <div class="flex-row">
@@ -203,7 +120,6 @@
                         <i class='bx bx-envelope'></i>
                     </label>
                     @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Email, new { htmlAttributes = new { @class = "lf--input", placeholder = "E-posta" } })
-                    @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().Email)
                 </div>
 
                 <div class="flex-row">
@@ -211,7 +127,6 @@
                         <i class='bx bx-phone'></i>
                     </label>
                     @Html.EditorFor(model => model.UserInfo.FirstOrDefault().RealPhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Gerçek Telefon Numarası" } })
-                    @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().RealPhoneNumber)
                 </div>
 
                 <div class="flex-row">
@@ -219,7 +134,6 @@
                         <i class='bx bx-home'></i>
                     </label>
                     @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Adres, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres" } })
-                    @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().Adres)
                 </div>
 
                 <div class="flex-row">
@@ -227,7 +141,6 @@
                         <i class='bx bx-home'></i>
                     </label>
                     @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Adres2, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres 2" } })
-                    @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().Adres2)
                 </div>
 
                 <div class="flex-row">
@@ -235,8 +148,8 @@
                         <i class='bx bx-map'></i>
                     </label>
                     @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().Sehir, new SelectList(new List<SelectListItem>
-            {
-        new SelectListItem { Text = "İstanbul", Value = "İstanbul" },
+                            {
+                        new SelectListItem { Text = "İstanbul", Value = "İstanbul" },
                         new SelectListItem { Text = "Ankara", Value = "Ankara" },
                         new SelectListItem { Text = "İzmir", Value = "İzmir" },
                         new SelectListItem { Text = "Bursa", Value = "Bursa" },
@@ -307,8 +220,7 @@
                         new SelectListItem { Text = "Yalova", Value = "Yalova" },
                         new SelectListItem { Text = "Aksaray", Value = "Aksaray" },
                         new SelectListItem { Text = "Ardahan", Value = "Ardahan" },
-    }, "Value", "Text"), "Şehir Seçiniz", new { @class = "lf--input", required = "required" })
-                    @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().Sehir)
+                    }, "Value", "Text"), "Şehir Seçiniz", new { @class = "lf--input" })
                 </div>
 
                 <div class="flex-row">
@@ -316,10 +228,9 @@
                         <i class='bx bx-map'></i>
                     </label>
                     @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().Ulke, new SelectList(new List<SelectListItem>
-                    {
-        new SelectListItem { Text = "Türkiye", Value = "Türkiye" }
-    }, "Value", "Text"), "Ülke Seçiniz", new { @class = "lf--input", required = "required" })
-                    @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().Ulke)
+                            {
+                        new SelectListItem { Text = "Türkiye", Value = "Türkiye" }
+                    }, "Value", "Text"), "Ülke Seçiniz", new { @class = "lf--input" })
                 </div>
 
                 <div class="flex-row">
@@ -327,7 +238,6 @@
                         <i class='bx bx-envelope'></i>
                     </label>
                     @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Postakodu, new { htmlAttributes = new { @class = "lf--input", placeholder = "Posta Kodu" } })
-                    @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().Postakodu)
                 </div>
 
                 <div class="flex-row">
@@ -336,16 +246,15 @@
                     </label>
                     @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().KanGrubu, new SelectList(new List<SelectListItem>
                             {
-        new SelectListItem { Text = "A Rh+", Value = "A Rh+" },
-        new SelectListItem { Text = "A Rh-", Value = "A Rh-" },
-        new SelectListItem { Text = "B Rh+", Value = "B Rh+" },
-        new SelectListItem { Text = "B Rh-", Value = "B Rh-" },
-        new SelectListItem { Text = "0 Rh+", Value = "0 Rh+" },
-        new SelectListItem { Text = "0 Rh-", Value = "0 Rh-" },
-        new SelectListItem { Text = "AB Rh+", Value = "AB Rh+" },
-        new SelectListItem { Text = "AB Rh-", Value = "AB Rh-" }
-    }, "Value", "Text"), "Kan Grubu Seçiniz", new { @class = "lf--input", required = "required" })
-                    @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().KanGrubu)
+                        new SelectListItem { Text = "A Rh+", Value = "A Rh+" },
+                        new SelectListItem { Text = "A Rh-", Value = "A Rh-" },
+                        new SelectListItem { Text = "B Rh+", Value = "B Rh+" },
+                        new SelectListItem { Text = "B Rh-", Value = "B Rh-" },
+                        new SelectListItem { Text = "0 Rh+", Value = "0 Rh+" },
+                        new SelectListItem { Text = "0 Rh-", Value = "0 Rh-" },
+                        new SelectListItem { Text = "AB Rh+", Value = "AB Rh+" },
+                        new SelectListItem { Text = "AB Rh-", Value = "AB Rh-" }
+                    }, "Value", "Text"), "Kan Grubu Seçiniz", new { @class = "lf--input" })
                 </div>
 
                 <div class="flex-row">
@@ -353,7 +262,6 @@
                         <i class='bx bx-calendar'></i>
                     </label>
                     @Html.EditorFor(model => model.UserInfo.FirstOrDefault().DogumTarihi, new { htmlAttributes = new { @class = "lf--input", placeholder = "Doğum Tarihi", type = "date" } })
-                    @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().DogumTarihi)
                 </div>
 
                 <div class="flex-row">
@@ -361,11 +269,10 @@
                         <i class='bx bx-user'></i>
                     </label>
                     @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().Cinsiyet, new SelectList(new List<SelectListItem>
-                                            {
-        new SelectListItem { Text = "Erkek", Value = "Erkek" },
-        new SelectListItem { Text = "Kadın", Value = "Kadin" }
-    }, "Value", "Text"), "Cinsiyet Seçiniz", new { @class = "lf--input", required = "required" })
-                    @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().Cinsiyet)
+                            {
+                        new SelectListItem { Text = "Erkek", Value = "Erkek" },
+                        new SelectListItem { Text = "Kadın", Value = "Kadin" }
+                    }, "Value", "Text"), "Cinsiyet Seçiniz", new { @class = "lf--input" })
                 </div>
 
                 <div class="flex-row">
@@ -373,11 +280,10 @@
                         <i class='bx bx-user'></i>
                     </label>
                     @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().MedeniDurum, new SelectList(new List<SelectListItem>
-                                                    {
-        new SelectListItem { Text = "Evli", Value = "Evli" },
-        new SelectListItem { Text = "Bekar", Value = "Bekar" }
-    }, "Value", "Text"), "Medeni Durum Seçiniz", new { @class = "lf--input", required = "required" })
-                    @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().MedeniDurum)
+                            {
+                        new SelectListItem { Text = "Evli", Value = "Evli" },
+                        new SelectListItem { Text = "Bekar", Value = "Bekar" }
+                    }, "Value", "Text"), "Medeni Durum Seçiniz", new { @class = "lf--input" })
                 </div>
 
                 <input class='lf--submit' type='submit' value='Kaydet'>
@@ -385,4 +291,56 @@
             </form>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Password visibility toggle
+            const passwordToggle = document.getElementById('passwordToggle');
+            const passwordField = document.getElementById('password');
+            passwordToggle.addEventListener('click', function () {
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    passwordToggle.classList.remove('bx-show');
+                    passwordToggle.classList.add('bx-hide');
+                } else {
+                    passwordField.type = 'password';
+                    passwordToggle.classList.remove('bx-hide');
+                    passwordToggle.classList.add('bx-show');
+                }
+            });
+            // Toggle additional fields
+            const toggleMoreFields = document.getElementById('toggleMoreFields');
+            const form = document.querySelector('.login-form');
+            toggleMoreFields.addEventListener('click', function () {
+                form.classList.toggle('show-more-fields');
+                if (form.classList.contains('show-more-fields')) {
+                    toggleMoreFields.innerHTML = '<i class="bx bx-chevron-up"></i> Daha az bilgi göster';
+                } else {
+                    toggleMoreFields.innerHTML = '<i class="bx bx-chevron-down"></i> Daha fazla bilgi ekle';
+                }
+            });
+            // Password strength indicator
+            passwordField.addEventListener('input', function () {
+                const password = this.value;
+                const passwordError = document.getElementById('passwordError');
+                if (password.length === 0) {
+                    passwordError.textContent = '';
+                    return;
+                }
+                if (password.length < 6) {
+                    passwordError.textContent = 'Zayıf şifre (en az 6 karakter)';
+                    passwordError.style.color = '#ef4444';
+                } else if (password.length < 8) {
+                    passwordError.textContent = 'Orta seviye şifre';
+                    passwordError.style.color = '#f59e0b';
+                } else if (/[A-Z]/.test(password) && /[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password)) {
+                    passwordError.textContent = 'Güçlü şifre';
+                    passwordError.style.color = '#10b981';
+                } else {
+                    passwordError.textContent = 'İyi şifre (büyük harf, rakam ve özel karakter ekleyin)';
+                    passwordError.style.color = '#6366f1';
+                }
+            });
+        });
+    </script>
 </body>
+</html>

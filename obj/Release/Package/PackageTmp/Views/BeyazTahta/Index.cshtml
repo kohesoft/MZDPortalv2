@@ -5,170 +5,89 @@
     <title>Öneri Gönder & Yönet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="~/Scripts/jquery-3.7.1.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-
-        h2 {
-            margin-bottom: 10px;
-        }
-
-        /* TV başlığı düzenleme alanı */
-        .tv-header-editor {
-            margin: 20px 0;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-            .tv-header-editor label {
-                font-weight: bold;
-                white-space: nowrap;
-            }
-
-            .tv-header-editor input {
-                flex: 1;
-                padding: 6px 8px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-
-            .tv-header-editor button {
-                padding: 6px 12px;
-                border: none;
-                background: #007acc;
-                color: #fff;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-                .tv-header-editor button:hover {
-                    background: #005fa3;
-                }
-
-        /* Form + liste */
-        .flex {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        input, textarea {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        input {
-            height: 38px;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        button#btnSend {
-            padding: 8px 16px;
-            background: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-            button#btnSend:hover {
-                background: #218838;
-            }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            vertical-align: top;
-        }
-
-        thead {
-            background: #333;
-            color: #fff;
-        }
-
-        tbody tr:nth-child(odd) {
-            background: #f9f9f9;
-        }
-
-        .actions button {
-            margin-right: 5px;
-            padding: 4px 8px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .actions .edit {
-            background: #ffc107;
-            color: #212529;
-        }
-
-            .actions .edit:hover {
-                background: #e0a800;
-            }
-
-        .actions .del {
-            background: #dc3545;
-            color: #fff;
-        }
-
-            .actions .del:hover {
-                background: #c82333;
-            }
-    </style>
+    <link rel="stylesheet" href="~/Content/all.min.css" />
+    <link rel="stylesheet" href="~/Content/BeyazTahtaIndex.css" />
+    <link rel="stylesheet" href="~/Content/boxicons.min.css" />
 </head>
 <body>
-
-    <h2>📝 Yeni Öneri</h2>
-
-    <!-- TV başlığı düzenleme alanı -->
-    <div class="tv-header-editor">
-        <label for="tvHeader">TV Başlığı:</label>
-        <input type="text" id="tvHeader" />
-        <button id="btnSaveTvHeader">Kaydet</button>
+    <div class="container">
+        <div class="card">
+            <h2 class="section-title">
+                <i class="bx bx-lightbulb"></i>
+                Yeni Öneri
+            </h2>
+            <!-- TV başlığı düzenleme alanı -->
+            <div class="tv-header-editor">
+                <label for="tvHeader">TV Başlığı:</label>
+                <input type="text" id="tvHeader" class="form-control" />
+                <button id="btnSaveTvHeader" class="btn btn-secondary">
+                    <i class="bx bx-save"></i>
+                    Kaydet
+                </button>
+            </div>
+            <!-- Öneri Formu -->
+            <div class="suggestion-form">
+                <div class="form-group">
+                    <label class="form-label" for="OneriVeren">Öneri Veren</label>
+                    <input id="OneriVeren" class="form-control" placeholder="Öneri Veren" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="Problem">Problem</label>
+                    <input id="Problem" class="form-control" placeholder="Problemi tanımlayın" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="Oneri">Öneri</label>
+                    <textarea id="Oneri" class="form-control" placeholder="Çözüm önerinizi yazın" rows="2"></textarea>
+                </div>
+                <div class="submit-btn-container">
+                    <button id="btnSend" class="btn btn-success">
+                        <i class="bx bx-paper-plane"></i>
+                        Gönder
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <!-- Mevcut Öneriler Tablosu -->
+            <h2 class="section-title">
+                <i class="bx bx-clipboard"></i>
+                Mevcut Öneriler
+            </h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:15%;">Tarih</th>
+                            <th style="width:20%;">Öneri Veren</th>
+                            <th style="width:25%;">Problem</th>
+                            <th style="width:30%;">Öneri</th>
+                            <th style="width:10%;">İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody id="entries-body">
+                        <!-- AJAX ile yüklenecek -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <!-- Öneri Formu -->
-    <div class="flex">
-        <input id="OneriVeren" placeholder="Öneri Veren" />
-        <input id="Problem" placeholder="Problem" />
-        <textarea id="Oneri" placeholder="Önerinizi yazın" rows="2"></textarea>
-        <button id="btnSend">Gönder</button>
-    </div>
-
-    <!-- Mevcut Öneriler Tablosu -->
-    <h3>📋 Mevcut Öneriler</h3>
-    <table>
-        <thead>
-            <tr>
-                <th style="width:15%;">Tarih</th>
-                <th style="width:20%;">Öneri Veren</th>
-                <th style="width:25%;">Problem</th>
-                <th style="width:30%;">Öneri</th>
-                <th style="width:10%;">İşlem</th>
-            </tr>
-        </thead>
-        <tbody id="entries-body">
-            <!-- AJAX ile yüklenecek -->
-        </tbody>
-    </table>
-
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer"></div>
     <script>
     $(function() {
-        const tvTitleKey = 'tvPageTitle';
+        // Toast notification function
+        function showToast(message, type = 'success') {
+            const toast = $(`\
+                <div class="toast ${type}">\
+                    <div class="toast-icon">\
+                        <i class="bx ${type === 'success' ? 'bx-check-circle' : 'bx-error-circle'}"></i>\
+                    </div>\
+                    <div class="toast-message">${message}</div>\
+                </div>\
+            `);
+            $('#toastContainer').append(toast);
+            setTimeout(() => { toast.remove(); }, 3000);
+        }
 
         // Oturum açmış kullanıcının adını al ve input'a koy
         $.getJSON('@Url.Action("GetCurrentUserName", "BeyazTahta")', r => {
@@ -180,9 +99,18 @@
         // TV başlığı kaydet
         $('#btnSaveTvHeader').on('click', function() {
             const v = $('#tvHeader').val().trim();
-            if (!v) return alert('Başlık boş olamaz');
+            if (!v) {
+                showToast('Başlık boş olamaz', 'error');
+                return;
+            }
+            $(this).prop('disabled', true).html('<i class="bx bx-spinner bx-spin"></i> Kaydediliyor...');
             $.post('@Url.Action("UpdateHeader","BeyazTahta")', { title: v }, r => {
-                alert(r.success ? 'TV başlığı güncellendi!' : 'Başlık güncellenirken hata.');
+                $(this).prop('disabled', false).html('<i class="bx bx-save"></i> Kaydet');
+                if (r.success) {
+                    showToast('TV başlığı başarıyla güncellendi!');
+                } else {
+                    showToast('Başlık güncellenirken hata oluştu.', 'error');
+                }
             });
         });
 
@@ -190,51 +118,81 @@
         function parseNetDate(d) {
             return new Date(
                 parseInt(d.replace(/\/Date\((-?\d+)\)\//,'$1'), 10)
-            ).toLocaleString();
+            ).toLocaleString('tr-TR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
         }
 
         // Önerileri getir ve tabloya bas
         function loadEntries() {
             $.getJSON('@Url.Action("GetEntries","BeyazTahta")', data => {
-                const rows = data.map(e => `
-                    <tr data-id="${e.Id}">
-                        <td>${parseNetDate(e.CreatedAt)}</td>
-                        <td>${e.OneriVeren}</td>
-                        <td>${e.Problem}</td>
-                        <td>${e.Oneri}</td>
-                        <td class="actions">
-                            <button class="edit">✏️</button>
-                            <button class="del">🗑️</button>
-                        </td>
-                    </tr>`).join('');
-                $('#entries-body').html(rows);
+                var entries = Array.isArray(data) ? data : (Array.isArray(data.data) ? data.data : []);
+                if (entries.length > 0) {
+                    const rows = entries.map(e => `\
+                        <tr data-id="${e.Id}">\
+                            <td class="date-cell">${parseNetDate(e.CreatedAt)}</td>\
+                            <td class="person-cell">${e.OneriVeren}</td>\
+                            <td class="problem-cell">${e.Problem}</td>\
+                            <td class="suggestion-cell">${e.Oneri}</td>\
+                            <td>\
+                                <div class="actions">\
+                                    <button class="action-btn edit" title="Düzenle"><i class="bx bx-edit"></i></button>\
+                                    <button class="action-btn del" title="Sil"><i class="bx bx-trash"></i></button>\
+                                </div>\
+                            </td>\
+                        </tr>`).join('');
+                    $('#entries-body').html(rows);
+                } else {
+                    $('#entries-body').html('<tr><td colspan="5" style="text-align: center; padding: 20px;">Henüz öneri bulunmuyor.</td></tr>');
+                }
 
-                // Düzenle
-                $('.edit').off('click').on('click', function() {
+                // Düzenle - prompt ile
+                $('.edit').off('click').on('click', function () {
                     const row = $(this).closest('tr');
-                    const id  = +row.data('id');
-                    const ov  = row.children().eq(1).text();
-                    const prob= row.children().eq(2).text();
+                    const id = +row.data('id');
+                    const ov = row.children().eq(1).text();
+                    const prob = row.children().eq(2).text();
                     const onr = row.children().eq(3).text();
-                    const yeniOv   = prompt('Yeni Öneri Veren?', ov);
+
+                    const yeniOv = prompt('Yeni Öneri Veren?', ov);
                     if (yeniOv == null) return;
                     const yeniProb = prompt('Yeni Problem?', prob);
                     if (yeniProb == null) return;
-                    const yeniOnr  = prompt('Yeni Öneri?', onr);
+                    const yeniOnr = prompt('Yeni Öneri?', onr);
                     if (yeniOnr == null) return;
+
                     $.post('@Url.Action("EditEntry","BeyazTahta")', {
                         Id: id,
                         OneriVeren: yeniOv,
                         Problem: yeniProb,
                         Oneri: yeniOnr
-                    }, r => r.success && loadEntries());
+                    }, r => {
+                        if (r.success) {
+                            showToast('Öneri başarıyla güncellendi');
+                            loadEntries();
+                        } else {
+                            showToast('Öneri güncellenirken bir hata oluştu', 'error');
+                        }
+                    });
                 });
 
-                // Sil
+                // Sil - Onay ile
                 $('.del').off('click').on('click', function() {
                     const id = +$(this).closest('tr').data('id');
-                    if (!confirm('Silinsin mi?')) return;
-                    $.post('@Url.Action("DeleteEntry","BeyazTahta")', { id }, r => r.success && loadEntries());
+                    if (confirm('Bu öneriyi silmek istediğinizden emin misiniz?')) {
+                        $.post('@Url.Action("DeleteEntry","BeyazTahta")', { id }, r => {
+                            if (r.success) {
+                                showToast('Öneri başarıyla silindi');
+                                loadEntries();
+                            } else {
+                                showToast('Öneri silinirken bir hata oluştu', 'error');
+                            }
+                        });
+                    }
                 });
             });
         }
@@ -243,18 +201,25 @@
         $('#btnSend').on('click', function() {
             const vm = {
                 OneriVeren: $('#OneriVeren').val(),
-                Problem:    $('#Problem').val(),
-                Oneri:      $('#Oneri').val()
+                Problem: $('#Problem').val(),
+                Oneri: $('#Oneri').val()
             };
+
             if (!vm.OneriVeren || !vm.Problem || !vm.Oneri) {
-                return alert('Lütfen tüm alanları doldurun.');
+                showToast('Lütfen tüm alanları doldurun', 'error');
+                return;
             }
+
+            $(this).prop('disabled', true).html('<i class="bx bx-spinner bx-spin"></i> Gönderiliyor...');
+
             $.post('@Url.Action("CreateEntry","BeyazTahta")', vm, r => {
+                $(this).prop('disabled', false).html('<i class="bx bx-paper-plane"></i> Gönder');
                 if (r.success) {
-                    $('#OneriVeren,#Problem,#Oneri').val('');
+                    showToast('Öneriniz başarıyla gönderildi');
+                    $('#Problem, #Oneri').val('');
                     loadEntries();
                 } else {
-                    alert('Gönderilemedi.');
+                    showToast('Öneri gönderilirken bir hata oluştu', 'error');
                 }
             });
         });
@@ -266,3 +231,4 @@
     </script>
 </body>
 </html>
+

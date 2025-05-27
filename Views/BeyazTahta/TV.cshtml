@@ -8,62 +8,49 @@
     <title>TV – Öneri Tablosu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="~/Scripts/jquery-3.7.1.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            background: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-        }
-
-        #tv-title {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 3em;
-            font-weight: bold;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 10px;
-        }
-
-        thead th {
-            padding: 15px;
-            background: rgba(255,255,255,0.1);
-            font-size: 1.8em;
-            border: none;
-        }
-
-        tbody td {
-            padding: 20px;
-            background: rgba(255,255,255,0.05);
-            font-size: 1.5em;
-            border: none;
-        }
-    </style>
+    <link rel="stylesheet" href="~/Content/TV.css" />
 </head>
 <body>
+    <div class="fixed-header-bar">
+        <div class="fixed-clock" id="fixed-clock"></div>
+        <div class="fixed-date" id="fixed-date"></div>
+        <div class="fixed-day" id="fixed-day"></div>
+    </div>
+    <div class="container">
+        <h1 id="tv-title">🔔 Öneriler (En Yeni En Üstte)</h1>
 
-    <h1 id="tv-title">🔔 Öneriler (En Yeni En Üstte)</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Tarih</th>
-                <th>Öneri Veren</th>
-                <th>Problem</th>
-                <th>Öneri</th>
-            </tr>
-        </thead>
-        <tbody id="tv-body">
-            <!-- AJAX ile yüklenecek -->
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tarih</th>
+                    <th>Öneri Veren</th>
+                    <th>Problem</th>
+                    <th>Öneri</th>
+                </tr>
+            </thead>
+            <tbody id="tv-body">
+                <tr>
+                    <td colspan="4" class="loading">Yükleniyor</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <script>
+        // Sol üst saat ve sağ üst tarih için
+        function updateClockAndDate() {
+            var now = new Date();
+            var saat = now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            var tarih = now.toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            var gun = now.toLocaleDateString('tr-TR', { weekday: 'long' });
+            $('#fixed-clock').html('<span>' + saat + '</span>');
+            $('#fixed-date').html('<span>' + tarih + '</span>');
+            $('#fixed-day').html('<span>' + gun.charAt(0).toUpperCase() + gun.slice(1) + '</span>');
+        }
+
+        setInterval(updateClockAndDate, 1000);
+        updateClockAndDate();
+
         // Sunucudan TV başlığını alır ve günceller
         function refreshHeader() {
             $.getJSON('@Url.Action("GetHeader","BeyazTahta")', function(res) {
@@ -74,26 +61,58 @@
         // .NET Date("/Date(...)") formatını JS Date objesine çevirir
         function toDate(dotNetDate) {
             const ms = parseInt(dotNetDate.replace(/\/Date\((-?\d+)\)\//,'$1'), 10);
-            return new Date(ms).toLocaleString();
+            return new Date(ms).toLocaleString('tr-TR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
         }
+
+        // Önceki verileri saklamak için
+        let previousData = [];
 
         // Sunucudan öneri listesini alır ve tabloya basar
         function refreshTable() {
             $.getJSON('@Url.Action("GetEntries","BeyazTahta")', function(data) {
+                // Yeni gelen verileri kontrol et
+                const newEntries = data.filter(entry =>
+                    !previousData.some(prevEntry =>
+                        prevEntry.CreatedAt === entry.CreatedAt &&
+                        prevEntry.OneriVeren === entry.OneriVeren &&
+                        prevEntry.Problem === entry.Problem
+                    )
+                );
+
+                previousData = [...data];
+
                 const rows = data.map(function(e) {
+                    // Yeni gelen satırlar için animasyon sınıfı ekle
+                    const isNew = newEntries.some(newEntry =>
+                        newEntry.CreatedAt === e.CreatedAt &&
+                        newEntry.OneriVeren === e.OneriVeren &&
+                        newEntry.Problem === e.Problem
+                    );
+
+                    const animClass = isNew ? 'new-row' : '';
+
                     return `
-                        <tr>
-                            <td>${toDate(e.CreatedAt)}</td>
-                            <td>${e.OneriVeren}</td>
-                            <td>${e.Problem}</td>
-                            <td>${e.Oneri}</td>
+                        <tr class="${animClass}">
+                            <td class="date-cell">${toDate(e.CreatedAt)}</td>
+                            <td class="author-cell">${e.OneriVeren}</td>
+                            <td class="problem-cell">${e.Problem}</td>
+                            <td class="suggestion-cell">${e.Oneri}</td>
                         </tr>`;
                 }).join('');
-                $('#tv-body').html(rows);
+
+                $('#tv-body').html(rows || '<tr><td colspan="4" class="loading">Henüz öneri bulunmuyor</td></tr>');
+            }).fail(function() {
+                $('#tv-body').html('<tr><td colspan="4" class="loading">Veri yüklenirken bir hata oluştu</td></tr>');
             });
         }
 
-        // Sayfa açıldığında ve her 30 saniyede bir çağır
+        // Sayfa açıldığında ve her 10 saniyede bir çağır
         $(function(){
             refreshHeader();
             refreshTable();
@@ -102,7 +121,14 @@
                 refreshTable();
             }, 10000);
         });
-    </script>
 
+        let shift = 0;
+        setInterval(function () {
+            shift = (shift + 1) % 10; // 0-9 arası döngü
+            $('.container').css('transform', `translate(${shift}px, ${shift}px)`);
+            $('.fixed-clock').css('transform', `translate(${shift}px, ${shift}px)`);
+            $('.fixed-date').css('transform', `translate(${shift}px, ${shift}px)`);
+        }, 30000); // 30 saniyede bir kaydır
+    </script>
 </body>
 </html>

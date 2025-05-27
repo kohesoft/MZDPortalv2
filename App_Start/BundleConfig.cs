@@ -30,6 +30,11 @@ namespace MZDNETWORK
               "~/Scripts/umd/popper.js")); // Popper.js ekleniyor
 
 
+            bundles.Add(new ScriptBundle("~/bundles/chart").Include(
+                        "~/Scripts/Chart.min.js",
+                        "~/Scripts/chart.js")); // TinyMCE eklentileri ekleniyor
+
+
             bundles.Add(new ScriptBundle("~/bundles/tinymce").Include(
                         "~/Scripts/tinymce/tinymce.min.js",
                         "~/Scripts/tinymce/plugins/print/plugin.min.js",

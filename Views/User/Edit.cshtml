@@ -7,127 +7,51 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="~/Content/my.css" />
-    <style>
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .form-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        .login-form {
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 800px;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .lf--input {
-            width: calc(50% - 20px);
-            padding: 10px;
-            margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .lf--submit {
-            width: 100%;
-            padding: 10px;
-            background: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-            .lf--submit:hover {
-                background: #0056b3;
-            }
-
-        .flex-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            width: calc(50% - 20px);
-            margin: 10px;
-        }
-
-        .lf--label {
-            margin-right: 10px;
-        }
-
-        .error-message {
-            color: red;
-            margin-bottom: 15px;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
 </head>
 
-<body>
-    <div class="container">
-        <div class="form-container">
-            <form class='login-form' action="@Url.Action("Edit", "User")" method="post">
+<body class="min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-4xl mx-auto">
+        <div class="bg-white shadow-xl rounded-lg p-10">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Kullanıcı Bilgilerini Düzenle</h2>
+            <form action="@Url.Action("Edit", "User")" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                 @Html.AntiForgeryToken()
                 @if (!ViewData.ModelState.IsValid)
                 {
-                    <div class="error-message">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="col-span-1 md:col-span-2 text-red-600 text-sm mb-4">
+                        @Html.ValidationSummary(true, "", new { @class = "text-red-600" })
                     </div>
                 }
                 @Html.HiddenFor(model => model.UserId)
 
-                <div class="flex-row">
-                    <label class="lf--label" for="Email">
-                        <i class='bx bx-envelope'></i>
-                    </label>
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "lf--input", placeholder = "E-posta" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <div>
+                    <label for="Email" class="block text-gray-700 font-medium mb-1">E-posta</label>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder = "E-posta" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-red-600 text-xs" })
                 </div>
 
-                <div class="flex-row">
-                    <label class="lf--label" for="RealPhoneNumber">
-                        <i class='bx bx-phone'></i>
-                    </label>
-                    @Html.EditorFor(model => model.RealPhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Telefon Numarası" } })
-                    @Html.ValidationMessageFor(model => model.RealPhoneNumber, "", new { @class = "text-danger" })
+                <div>
+                    <label for="RealPhoneNumber" class="block text-gray-700 font-medium mb-1">Telefon Numarası</label>
+                    @Html.EditorFor(model => model.RealPhoneNumber, new { htmlAttributes = new { @class = "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder = "Telefon Numarası" } })
+                    @Html.ValidationMessageFor(model => model.RealPhoneNumber, "", new { @class = "text-red-600 text-xs" })
                 </div>
 
-                <div class="flex-row">
-                    <label class="lf--label" for="Adres">
-                        <i class='bx bx-home'></i>
-                    </label>
-                    @Html.EditorFor(model => model.Adres, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres" } })
-                    @Html.ValidationMessageFor(model => model.Adres, "", new { @class = "text-danger" })
+                <div>
+                    <label for="Adres" class="block text-gray-700 font-medium mb-1">Adres</label>
+                    @Html.EditorFor(model => model.Adres, new { htmlAttributes = new { @class = "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder = "Adres" } })
+                    @Html.ValidationMessageFor(model => model.Adres, "", new { @class = "text-red-600 text-xs" })
                 </div>
 
-                <div class="flex-row">
-                    <label class="lf--label" for="Adres2">
-                        <i class='bx bx-home'></i>
-                    </label>
-                    @Html.EditorFor(model => model.Adres2, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres 2" } })
-                    @Html.ValidationMessageFor(model => model.Adres2, "", new { @class = "text-danger" })
+                <div>
+                    <label for="Adres2" class="block text-gray-700 font-medium mb-1">Adres 2</label>
+                    @Html.EditorFor(model => model.Adres2, new { htmlAttributes = new { @class = "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder = "Adres 2" } })
+                    @Html.ValidationMessageFor(model => model.Adres2, "", new { @class = "text-red-600 text-xs" })
                 </div>
 
-                <div class="flex-row">
-                    <label class="lf--label" for="Sehir">
-                        <i class='bx bx-map'></i>
-                    </label>
+                <div>
+                    <label for="Sehir" class="block text-gray-700 font-medium mb-1">Şehir</label>
                     @Html.DropDownListFor(model => model.Sehir, new SelectList(new List<SelectListItem>
-                            {
+                                {
                         new SelectListItem { Text = "İstanbul", Value = "İstanbul" },
                         new SelectListItem { Text = "Ankara", Value = "Ankara" },
                         new SelectListItem { Text = "İzmir", Value = "İzmir" },
@@ -199,96 +123,86 @@
                         new SelectListItem { Text = "Yalova", Value = "Yalova" },
                         new SelectListItem { Text = "Aksaray", Value = "Aksaray" },
                         new SelectListItem { Text = "Ardahan", Value = "Ardahan" },
-                    }, "Value", "Text"), "Şehir Seçin", new { @class = "lf--input" })
-                    @Html.ValidationMessageFor(model => model.Sehir, "", new { @class = "text-danger" })
+                        }, "Value", "Text"), "Şehir Seçin", new { @class = "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" })
+                    @Html.ValidationMessageFor(model => model.Sehir, "", new { @class = "text-red-600 text-xs" })
                 </div>
 
-                <div class="flex-row">
-                    <label class="lf--label" for="Ulke">
-                        <i class='bx bx-map'></i>
-                    </label>
+                <div>
+                    <label for="Ulke" class="block text-gray-700 font-medium mb-1">Ülke</label>
                     @Html.DropDownListFor(model => model.Ulke, new SelectList(new List<SelectListItem>
-                            {
-                        new SelectListItem { Text = "Türkiye", Value = "Türkiye" },
-                        new SelectListItem { Text = "Almanya", Value = "Almanya" },
-                        new SelectListItem { Text = "Fransa", Value = "Fransa" },
-                        new SelectListItem { Text = "İngiltere", Value = "İngiltere" },
-                        new SelectListItem { Text = "ABD", Value = "ABD" },
-                        new SelectListItem { Text = "Kanada", Value = "Kanada" },
-                        new SelectListItem { Text = "Avustralya", Value = "Avustralya" },
-                        new SelectListItem { Text = "İtalya", Value = "İtalya" },
-                        new SelectListItem { Text = "İspanya", Value = "İspanya" },
-                        new SelectListItem { Text = "Hindistan", Value = "Hindistan" },
-                        new SelectListItem { Text = "Çin", Value = "Çin" },
-                        new SelectListItem { Text = "Japonya", Value = "Japonya" },
-                        new SelectListItem { Text = "Brezilya", Value = "Brezilya" },
-                        new SelectListItem { Text = "Rusya", Value = "Rusya" },
-                        new SelectListItem { Text = "Meksika", Value = "Meksika" },
-                        new SelectListItem { Text = "Güney Afrika", Value = "Güney Afrika" }
-                    }, "Value", "Text"), "Ülke Seçin", new { @class = "lf--input" })
-                    @Html.ValidationMessageFor(model => model.Ulke, "", new { @class = "text-danger" })
+                                {
+                            new SelectListItem { Text = "Türkiye", Value = "Türkiye" },
+                            new SelectListItem { Text = "Almanya", Value = "Almanya" },
+                            new SelectListItem { Text = "Fransa", Value = "Fransa" },
+                            new SelectListItem { Text = "İngiltere", Value = "İngiltere" },
+                            new SelectListItem { Text = "ABD", Value = "ABD" },
+                            new SelectListItem { Text = "Kanada", Value = "Kanada" },
+                            new SelectListItem { Text = "Avustralya", Value = "Avustralya" },
+                            new SelectListItem { Text = "İtalya", Value = "İtalya" },
+                            new SelectListItem { Text = "İspanya", Value = "İspanya" },
+                            new SelectListItem { Text = "Hindistan", Value = "Hindistan" },
+                            new SelectListItem { Text = "Çin", Value = "Çin" },
+                            new SelectListItem { Text = "Japonya", Value = "Japonya" },
+                            new SelectListItem { Text = "Brezilya", Value = "Brezilya" },
+                            new SelectListItem { Text = "Rusya", Value = "Rusya" },
+                            new SelectListItem { Text = "Meksika", Value = "Meksika" },
+                            new SelectListItem { Text = "Güney Afrika", Value = "Güney Afrika" }
+                        }, "Value", "Text"), "Ülke Seçin", new { @class = "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" })
+                    @Html.ValidationMessageFor(model => model.Ulke, "", new { @class = "text-red-600 text-xs" })
                 </div>
 
-                <div class="flex-row">
-                    <label class="lf--label" for="Postakodu">
-                        <i class='bx bx-envelope'></i>
-                    </label>
-                    @Html.EditorFor(model => model.Postakodu, new { htmlAttributes = new { @class = "lf--input", placeholder = "Posta Kodu" } })
-                    @Html.ValidationMessageFor(model => model.Postakodu, "", new { @class = "text-danger" })
+                <div>
+                    <label for="Postakodu" class="block text-gray-700 font-medium mb-1">Posta Kodu</label>
+                    @Html.EditorFor(model => model.Postakodu, new { htmlAttributes = new { @class = "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder = "Posta Kodu" } })
+                    @Html.ValidationMessageFor(model => model.Postakodu, "", new { @class = "text-red-600 text-xs" })
                 </div>
 
-                <div class="flex-row">
-                    <label class="lf--label" for="KanGrubu">
-                        <i class='bx bx-droplet'></i>
-                    </label>
+                <div>
+                    <label for="KanGrubu" class="block text-gray-700 font-medium mb-1">Kan Grubu</label>
                     @Html.DropDownListFor(model => model.KanGrubu, new SelectList(new List<SelectListItem>
-                            {
-                        new SelectListItem { Text = "A Rh+", Value = "A Rh+" },
-                        new SelectListItem { Text = "A Rh-", Value = "A Rh-" },
-                        new SelectListItem { Text = "B Rh+", Value = "B Rh+" },
-                        new SelectListItem { Text = "B Rh-", Value = "B Rh-" },
-                        new SelectListItem { Text = "AB Rh+", Value = "AB Rh+" },
-                        new SelectListItem { Text = "AB Rh-", Value = "AB Rh-" },
-                        new SelectListItem { Text = "0 Rh+", Value = "0 Rh+" },
-                        new SelectListItem { Text = "0 Rh-", Value = "0 Rh-" }
-                    }, "Value", "Text"), "Kan Grubu Seçin", new { @class = "lf--input" })
-                    @Html.ValidationMessageFor(model => model.KanGrubu, "", new { @class = "text-danger" })
+                                {
+                            new SelectListItem { Text = "A Rh+", Value = "A Rh+" },
+                            new SelectListItem { Text = "A Rh-", Value = "A Rh-" },
+                            new SelectListItem { Text = "B Rh+", Value = "B Rh+" },
+                            new SelectListItem { Text = "B Rh-", Value = "B Rh-" },
+                            new SelectListItem { Text = "AB Rh+", Value = "AB Rh+" },
+                            new SelectListItem { Text = "AB Rh-", Value = "AB Rh-" },
+                            new SelectListItem { Text = "0 Rh+", Value = "0 Rh+" },
+                            new SelectListItem { Text = "0 Rh-", Value = "0 Rh-" }
+                        }, "Value", "Text"), "Kan Grubu Seçin", new { @class = "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" })
+                    @Html.ValidationMessageFor(model => model.KanGrubu, "", new { @class = "text-red-600 text-xs" })
                 </div>
 
-                <div class="flex-row">
-                    <label class="lf--label" for="DogumTarihi">
-                        <i class='bx bx-calendar'></i>
-                    </label>
-                    @Html.TextBoxFor(model => model.DogumTarihi, "{0:yyyy-MM-dd}", new { @class = "lf--input", placeholder = "Doğum Tarihi", type = "date" })
-                    @Html.ValidationMessageFor(model => model.DogumTarihi, "", new { @class = "text-danger" })
+                <div>
+                    <label for="DogumTarihi" class="block text-gray-700 font-medium mb-1">Doğum Tarihi</label>
+                    @Html.TextBoxFor(model => model.DogumTarihi, "{0:yyyy-MM-dd}", new { @class = "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder = "Doğum Tarihi", type = "date" })
+                    @Html.ValidationMessageFor(model => model.DogumTarihi, "", new { @class = "text-red-600 text-xs" })
                 </div>
 
-                <div class="flex-row">
-                    <label class="lf--label" for="Cinsiyet">
-                        <i class='bx bx-user'></i>
-                    </label>
+                <div>
+                    <label for="Cinsiyet" class="block text-gray-700 font-medium mb-1">Cinsiyet</label>
                     @Html.DropDownListFor(model => model.Cinsiyet, new SelectList(new List<SelectListItem>
-                            {
-                        new SelectListItem { Text = "Erkek", Value = "Erkek" },
-                        new SelectListItem { Text = "Kadın", Value = "Kadın" },
-                        new SelectListItem { Text = "Diğer", Value = "Diğer" }
-                    }, "Value", "Text"), "Cinsiyet Seçin", new { @class = "lf--input" })
-                    @Html.ValidationMessageFor(model => model.Cinsiyet, "", new { @class = "text-danger" })
+                                {
+                            new SelectListItem { Text = "Erkek", Value = "Erkek" },
+                            new SelectListItem { Text = "Kadın", Value = "Kadın" },
+                            new SelectListItem { Text = "Diğer", Value = "Diğer" }
+                        }, "Value", "Text"), "Cinsiyet Seçin", new { @class = "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" })
+                    @Html.ValidationMessageFor(model => model.Cinsiyet, "", new { @class = "text-red-600 text-xs" })
                 </div>
 
-                <div class="flex-row">
-                    <label class="lf--label" for="MedeniDurum">
-                        <i class='bx bx-user'></i>
-                    </label>
+                <div>
+                    <label for="MedeniDurum" class="block text-gray-700 font-medium mb-1">Medeni Durum</label>
                     @Html.DropDownListFor(model => model.MedeniDurum, new SelectList(new List<SelectListItem>
-                            {
-                        new SelectListItem { Text = "Evli", Value = "Evli" },
-                        new SelectListItem { Text = "Bekar", Value = "Bekar" }
-                    }, "Value", "Text"), "Medeni Durum Seçin", new { @class = "lf--input" })
-                    @Html.ValidationMessageFor(model => model.MedeniDurum, "", new { @class = "text-danger" })
+                                {
+                            new SelectListItem { Text = "Evli", Value = "Evli" },
+                            new SelectListItem { Text = "Bekar", Value = "Bekar" }
+                        }, "Value", "Text"), "Medeni Durum Seçin", new { @class = "w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" })
+                    @Html.ValidationMessageFor(model => model.MedeniDurum, "", new { @class = "text-red-600 text-xs" })
                 </div>
 
-                <input class='lf--submit' type='submit' value='Kaydet'>
+                <div class="col-span-1 md:col-span-2 flex justify-center mt-4">
+                    <input type="submit" value="Kaydet" class="w-full md:w-1/3 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded transition duration-200" />
+                </div>
             </form>
         </div>
     </div>

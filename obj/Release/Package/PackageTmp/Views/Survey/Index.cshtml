@@ -1,88 +1,123 @@
 ﻿@model List<MZDNETWORK.Models.Survey>
 
-<h2>Anketler</h2>
-@if (User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK"))
-{
-    <a href="@Url.Action("Create", "Survey")" class="btn btn-success mb-3">Yeni Anket Oluştur</a>
-}
-<table class="table table-modern table-blue">
-    <thead>
-        <tr>
-            <th>Anket Adı</th>
-            <th>Açıklama</th>
-            <th>Başlangıç Tarihi</th>
-            <th>Bitiş Tarihi</th>
-            <th>Kalan Süre</th>
-            <th>İşlemler</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var survey in Model)
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>Anketler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+    <link rel="stylesheet" href="~/Content/boxicons.min.css" />
+
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-full mx-auto bg-white rounded-lg shadow p-8">
+        <h2 class="text-2xl font-bold mb-6">Anketler</h2>
+        @if (User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK"))
         {
-            <tr>
-                <td>@survey.Title</td>
-                <td>
-                    @if (survey.Description.Length > 100)
-                    {
-                        <span>@survey.Description.Substring(0, 100)...</span>
-                        <a href="javascript:void(0);" class="no-loading" onclick="showFullDescription('@survey.Description')">devamını oku</a>
-                    }
-                    else
-                    {
-                        <span>@survey.Description</span>
-                    }
-                </td>
-                <td>@survey.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
-                <td>@survey.EndDate.ToString("dd/MM/yyyy HH:mm")</td>
-                <td>
-                    <span class="timer" data-end-time="@survey.EndDate.ToString("o")"></span>
-                </td>
-                <td>
-                    <div class="btn-group-vertical">
-                        @if (survey.EndDate > DateTime.Now)
-                        {
-                            <a href="javascript:void(0);" onclick="checkSurvey(@survey.ID)" class="btn btn-sm btn-primary">
-                                <i class="fas fa-edit"></i> Cevapla
-                            </a>
-                        }
-
-                        @if (User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK"))
-                        {
-                            <a href="@Url.Action("SurveyResults", "Survey", new { surveyId = survey.ID })" class="btn btn-sm btn-info">
-                                <i class="fas fa-chart-bar"></i> Sonuçları Gör
-                            </a>
-                            <a href="javascript:void(0);" onclick="deleteSurvey(@survey.ID)" class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash-alt"></i> Sil
-                            </a>
-                        }
-                    </div>
-                </td>
-            </tr>
+            <a href="@Url.Action("Create", "Survey")" class="inline-block mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Yeni Anket Oluştur</a>
         }
-    </tbody>
-</table>
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-blue-600 text-white">
+                        <th class="px-3 py-2 w-1/6">Anket Adı</th>
+                        <th class="px-3 py-2 w-2/6">Açıklama</th>
+                        <th class="px-3 py-2 w-1/12">Başlangıç Tarihi</th>
+                        <th class="px-3 py-2 w-1/12">Bitiş Tarihi</th>
+                        <th class="px-3 py-2 w-1/12">Kalan Süre</th>
+                        <th class="px-3 py-2 w-1/6">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var survey in Model)
+                    {
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-3 py-2">@survey.Title</td>
+                            <td class="px-3 py-2">
+                                @if (survey.Description.Length > 100)
+                                {
+                                    <span>@survey.Description.Substring(0, 100)...</span>
+                                    <a href="javascript:void(0);" class="text-blue-600 hover:underline ml-2" onclick="showFullDescription('@Html.Raw(HttpUtility.JavaScriptStringEncode(survey.Description))')">devamını oku</a>
+                                }
+                                else
+                                {
+                                    <span>@survey.Description</span>
+                                }
+                            </td>
+                            <td class="px-3 py-2">@survey.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td class="px-3 py-2">@survey.EndDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td class="px-3 py-2">
+                                <span class="timer font-semibold" data-end-time="@survey.EndDate.ToString("o")"></span>
+                            </td>
+                            <td class="px-3 py-2">
+                                <div class="flex flex-col gap-2">
+                                    @if (survey.EndDate > DateTime.Now)
+                                    {
+                                        <a href="javascript:void(0);" onclick="checkSurvey(@survey.ID)" class="flex items-center px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 transition">
+                                            <i class="bx bx-edit-alt mr-2"></i> Cevapla
+                                        </a>
+                                    }
+                                    @if (User.IsInRole("Yonetici") || User.IsInRole("Sys") || User.IsInRole("IK"))
+                                    {
+                                        <a href="@Url.Action("SurveyResults", "Survey", new { surveyId = survey.ID })" class="flex items-center px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600 transition">
+                                            <i class="bx bx-bar-chart-alt-2 mr-2"></i> Sonuçları Gör
+                                        </a>
 
-<!-- Modal -->
-<div class="modal fade" id="surveyModal" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true" style="z-index:9999;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="surveyModalLabel">Uyarı</h5>
+                                        <a href="javascript:void(0);" onclick="deleteSurvey(@survey.ID)" class="flex items-center px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700 transition">
+                                            <i class="bx bx-trash mr-2"></i> Sil
+                                        </a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Açıklama Modalı -->
+    <div id="descriptionModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold">Anket Açıklaması</h3>
+                <button onclick="closeDescriptionModal()" class="text-gray-500 hover:text-gray-700 text-2xl leading-none">&times;</button>
             </div>
-            <div class="modal-body">
+            <div id="fullDescriptionText" class="text-gray-800"></div>
+        </div>
+    </div>
+
+    <!-- Uyarı Modalı -->
+    <div id="surveyModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+            <div class="flex items-center mb-4">
+                <h3 class="text-lg font-semibold">Uyarı</h3>
+            </div>
+            <div class="text-gray-800">
                 Bu anketi daha önce yanıtladınız.
             </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
     <script>
+        function showFullDescription(description) {
+            document.getElementById('fullDescriptionText').textContent = description;
+            document.getElementById('descriptionModal').classList.remove('hidden');
+            document.getElementById('descriptionModal').classList.add('flex');
+        }
+        function closeDescriptionModal() {
+            document.getElementById('descriptionModal').classList.remove('flex');
+            document.getElementById('descriptionModal').classList.add('hidden');
+        }
+
         function checkSurvey(surveyId) {
             $.getJSON('@Url.Action("HasAnsweredSurvey", "Answer")', { surveyId: surveyId }, function (hasAnswered) {
                 if (hasAnswered) {
-                    $('#surveyModal').modal('show');
-                    setTimeout(function() {
+                    document.getElementById('surveyModal').classList.remove('hidden');
+                    document.getElementById('surveyModal').classList.add('flex');
+                    setTimeout(function () {
                         location.reload();
                     }, 3000);
                 } else {
@@ -104,107 +139,43 @@
                         alert('Anket silinirken bir hata oluştu.');
                     }
                 });
-            } else {
-                location.reload();
             }
         }
 
         function updateTimers() {
-            $(".timer").each(function () {
-                var endTime = new Date($(this).data("end-time"));
+            document.querySelectorAll('.timer').forEach(function (el) {
+                var endTime = new Date(el.getAttribute('data-end-time'));
                 var now = new Date();
-                var remainingTime = endTime - now;
-
-                if (remainingTime > 0) {
-                    var hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    var minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-                    var seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-                    $(this).text(hours + ":" + minutes + ":" + seconds);
-                } else {
-                    $(this).text("Süre doldu");
+                var diff = endTime - now;
+                if (diff <= 0) {
+                    el.textContent = "Süresi Doldu";
+                    el.classList.add("text-red-600");
+                    return;
                 }
+                var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                var timeText = "";
+                if (days > 0) timeText += days + " gün ";
+                if (hours > 0 || days > 0) timeText += hours + " saat ";
+                timeText += minutes + " dk " + seconds + " sn";
+                el.textContent = timeText;
+                if (diff < 24 * 60 * 60 * 1000) el.classList.add("text-yellow-600");
             });
         }
-
         setInterval(updateTimers, 1000);
+        updateTimers();
 
-        function showFullDescription(description) {
-            alert(description);
-        }
+        // Modal kapatma için ESC tuşu
+        document.addEventListener('keydown', function (e) {
+            if (e.key === "Escape") {
+                closeDescriptionModal();
+                document.getElementById('surveyModal').classList.remove('flex');
+                document.getElementById('surveyModal').classList.add('hidden');
+            }
+        });
     </script>
-}
-
-<style>
-    body {
-        all: unset;
-        background-color: white;
-    }
-
-    .modal {
-        z-index: 1;
-    }
-
-    .table-modern {
-        width: 100%;
-        border-collapse: collapse;
-        table-layout: fixed; /* Sabit aralıklı yapmak için ekledik */
-    }
-
-        .table-modern th, .table-modern td {
-            padding: 8px; /* Boşlukları azaltmak için padding'i küçülttük */
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            word-wrap: break-word; /* İçeriğin taşmasını önlemek için ekledik */
-            font-size: 14px; /* Yazı tipini küçülttük */
-        }
-
-        .table-modern th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .table-modern tr:hover {
-            background-color: #f1f1f1;
-        }
-
-    .table-blue th {
-        border: 1px solid #007bff;
-    }
-
-    /* Her sütun için sabit genişlikler belirliyoruz */
-    .table-modern th:nth-child(1), .table-modern td:nth-child(1) {
-        width: 15%;
-    }
-
-    .table-modern th:nth-child(2), .table-modern td:nth-child(2) {
-        width: 35%;
-    }
-
-    .table-modern th:nth-child(3), .table-modern td:nth-child(3) {
-        width: 10%;
-    }
-
-    .table-modern th:nth-child(4), .table-modern td:nth-child(4) {
-        width: 10%;
-    }
-
-    .table-modern th:nth-child(5), .table-modern td:nth-child(5) {
-        width: 10%;
-    }
-
-    .table-modern th:nth-child(6), .table-modern td:nth-child(6) {
-        width: 10%;
-    }
-
-    .btn-group-vertical .btn {
-        font-size: 12px; /* Buton yazı tipini küçülttük */
-        padding: 5px 10px; /* Buton padding'ini küçülttük */
-        width: 100%; /* Buton genişliğini %100 yap */
-        margin-bottom: 5px; /* Butonlar arasına boşluk ekledik */
-    }
-
-        .btn-group-vertical .btn i {
-            margin-right: 5px; /* Simgeler arasındaki boşluğu ekledik */
-        }
-</style>
-
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+</body>
+</html>

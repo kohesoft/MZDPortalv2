@@ -4,129 +4,159 @@
     var photosYerleske = ViewBag.PhotosYerleske as List<string>;
 }
 
+<!DOCTYPE html>
+<html lang="tr">
 <head>
     <link rel="stylesheet" href="~/Content/all.min.css" />
-    <link rel="stylesheet" href="~/Content/Contact.css" />
+    <link rel="stylesheet" href="~/Content/boxicons.min.css" />
+    <link rel="stylesheet" href="~/Content/molayukle.css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
 </head>
-
-<section class="container" style="max-width:100%; max-height:100%;">
-    <div>
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Merkez Yemek Yükle</h3>
+<body>
+    <section class="container" style="max-width:100%; max-height:100%;">
+        <div>
+            <div class="card fade-in">
+                <div class="card-header">
+                    <h3 class="card-title">Merkez Yemek Yükle</h3>
+                </div>
+                <div class="card-body">
+                    <div class="upload-container">
+                        <h4 class="upload-title">Yeni bir merkez yemek fotoğrafı yükleyin</h4>
+                        <form action="@Url.Action("UploadPhotoMerkez", "BilgiIslem")" method="post" enctype="multipart/form-data" class="mb-4">
+                            <div class="input-group">
+                                <input type="file" name="photo" class="form-control" accept="image/*" />
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bx bx-cloud-upload" style="font-size: 20px; margin-right: 8px;"></i>
+                                    Fotoğraf Yükle
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="photos-section">
+                        <h3 class="section-title">Yüklenen Fotoğraflar (Merkez)</h3>
+                        @if (photosMerkez != null && photosMerkez.Count > 0)
+                        {
+                            <div class="table-responsive" style="max-height: 550px; overflow-y: auto;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Fotoğraf Adı</th>
+                                            <th style="width: 120px;">İşlem</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var photo in photosMerkez)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <div class="file-name">@photo</div>
+                                                </td>
+                                                <td>
+                                                    <form action="@Url.Action("DeleteYemekMerkez", "BilgiIslem")" method="post" style="display:inline;">
+                                                        <input type="hidden" name="fileName" value="@photo" />
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="bx bx-trash" style="font-size: 18px; margin-right: 4px;"></i>
+                                                            Sil
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="empty-state">
+                                <div class="empty-state-icon">📁</div>
+                                <p>Henüz yüklenmiş fotoğraf bulunmamaktadır.</p>
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <form action="@Url.Action("UploadPhotoMerkez", "BilgiIslem")" method="post" enctype="multipart/form-data" class="mb-4">
-                    <div class="input-group">
-                        <input type="file" name="photo" class="form-control" />
-                        <div class="input-group-append">
-                            <input type="submit" value="Fotoğraf Yükle" class="btn btn-primary" />
-                        </div>
-                    </div>
-                </form>
 
-                <h3>Yüklenen Fotoğraflar (Merkez)</h3>
-                @if (photosMerkez != null && photosMerkez.Count > 0)
-                {
-                    <div class="table-responsive" style="max-height: 550px; overflow-y: auto;">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Fotoğraf</th>
-                                    <th>İşlem</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var photo in photosMerkez)
-                                {
-                                    <tr>
-                                        <td>@photo</td>
-                                        <td>
-                                            <form action="@Url.Action("DeleteYemekMerkez", "BilgiIslem")" method="post" style="display:inline;">
-                                                <input type="hidden" name="fileName" value="@photo" />
-                                                <input type="submit" value="Sil" class="btn btn-danger" />
-                                            </form>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+            <div class="card fade-in mt-4">
+                <div class="card-header">
+                    <h3 class="card-title">Yerleşke Yemek Yükle</h3>
+                </div>
+                <div class="card-body">
+                    <div class="upload-container">
+                        <h4 class="upload-title">Yeni bir yerleşke yemek fotoğrafı yükleyin</h4>
+                        <form action="@Url.Action("UploadPhotoYerleske", "BilgiIslem")" method="post" enctype="multipart/form-data" class="mb-4">
+                            <div class="input-group">
+                                <input type="file" name="photo" class="form-control" accept="image/*" />
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bx bx-cloud-upload" style="font-size: 20px; margin-right: 8px;"></i>
+                                    Fotoğraf Yükle
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                }
-                else
-                {
-                    <p>Yüklenmiş fotoğraf bulunmamaktadır.</p>
-                }
+                    <div class="photos-section">
+                        <h3 class="section-title">Yüklenen Fotoğraflar (Yerleşke)</h3>
+                        @if (photosYerleske != null && photosYerleske.Count > 0)
+                        {
+                            <div class="table-responsive" style="max-height: 550px; overflow-y: auto;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Fotoğraf Adı</th>
+                                            <th style="width: 120px;">İşlem</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var photo in photosYerleske)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <div class="file-name">@photo</div>
+                                                </td>
+                                                <td>
+                                                    <form action="@Url.Action("DeleteYemekYerleske", "BilgiIslem")" method="post" style="display:inline;">
+                                                        <input type="hidden" name="fileName" value="@photo" />
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="bx bx-trash" style="font-size: 18px; margin-right: 4px;"></i>
+                                                            Sil
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="empty-state">
+                                <div class="empty-state-icon">📁</div>
+                                <p>Henüz yüklenmiş fotoğraf bulunmamaktadır.</p>
+                            </div>
+                        }
+                    </div>
+
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-success fade-in">
+                            <i class="bx bx-check-circle" style="font-size: 18px; margin-right: 8px;"></i>
+                            @TempData["Message"]
+                        </div>
+                    }
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger fade-in">
+                            <i class="bx bx-error-circle" style="font-size: 18px; margin-right: 8px;"></i>
+                            @TempData["Error"]
+                        </div>
+                    }
+                </div>
             </div>
         </div>
-
-        <div class="card mt-4">
-            <div class="card-header">
-                <h3 class="card-title">Yerleşke Yemek Yükle</h3>
-            </div>
-            <div class="card-body">
-                <form action="@Url.Action("UploadPhotoYerleske", "BilgiIslem")" method="post" enctype="multipart/form-data" class="mb-4">
-                    <div class="input-group">
-                        <input type="file" name="photo" class="form-control" />
-                        <div class="input-group-append">
-                            <input type="submit" value="Fotoğraf Yükle" class="btn btn-primary" />
-                        </div>
-                    </div>
-                </form>
-
-                <h3>Yüklenen Fotoğraflar (Yerleşke)</h3>
-                @if (photosYerleske != null && photosYerleske.Count > 0)
-                {
-                    <div class="table-responsive" style="max-height: 550px; overflow-y: auto;">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Fotoğraf</th>
-                                    <th>İşlem</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var photo in photosYerleske)
-                                {
-                                    <tr>
-                                        <td>@photo</td>
-                                        <td>
-                                            <form action="@Url.Action("DeleteYemekYerleske", "BilgiIslem")" method="post" style="display:inline;">
-                                                <input type="hidden" name="fileName" value="@photo" />
-                                                <input type="submit" value="Sil" class="btn btn-danger" />
-                                            </form>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
-                else
-                {
-                    <p>Yüklenmiş fotoğraf bulunmamaktadır.</p>
-                }
-
-                @if (TempData["Message"] != null)
-                {
-                    <p style="color:green;">@TempData["Message"]</p>
-                }
-
-                @if (TempData["Error"] != null)
-                {
-                    <p style="color:red;">@TempData["Error"]</p>
-                }
-            </div>
-        </div>
-    </div>
-</section>
-
-<style>
-    .card-toolbar {
-        display: flex;
-        justify-content: flex-end;
-    }
-</style>
+    </section>
+</body>
+</html>

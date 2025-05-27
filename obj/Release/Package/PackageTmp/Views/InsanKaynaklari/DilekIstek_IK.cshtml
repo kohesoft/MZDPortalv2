@@ -1,44 +1,84 @@
 @using MZDNETWORK.Models
 @model IEnumerable<DilekOneri>
 
-
-
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-    <link rel="stylesheet" href="~/Content/all.min.css" />
-    <link rel="stylesheet" href="~/Content/DilekIstek.css" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8" />
-
+    <title>Dilek ve Öneri Kutusu</title>
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+    <link rel="stylesheet" href="~/Content/boxicons.min.css" />
+    <link rel="stylesheet" href="~/Content/dilekistekik.css" />
+    <style>
+        /* This style block ensures the modal is correctly displayed when 'active' */
+        .modal.active {
+            display: flex !important; /* Changed to flex for proper centering */
+            opacity: 1; /* Ensure full visibility */
+            visibility: visible; /* Ensure it's not hidden by visibility property */
+        }
+    </style>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
 </head>
-
-<div class="container" style="max-width:100%; max-height:100%;">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Dilek ve Öneri Kutusu</h3>
-            <div class="card-toolbar">
-                <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Arama kutusu" class="form-control" style="width: 300px;">
+<body class="bg-gray-100 min-h-screen p-4 md:p-6">
+    <div class="max-w-7xl mx-auto suggestion-container">
+        <div class="suggestion-header">
+            <h1 class="suggestion-title"><i class="bx bx-bulb"></i> Dilek ve Öneri Kutusu</h1>
+            <p class="mt-2 opacity-90">Çalışanlardan gelen dilek ve önerileri görüntüleyin ve yanıtlayın</p>
+            <div class="search-container">
+                <i class="bx bx-search search-icon"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Ara..." />
             </div>
         </div>
-        <div class="card-body">
-            <div class="table-responsive" style="max-height: 550px; overflow-y: auto;">
-                <table class="table table-striped table-bordered table-hover" id="userTable">
+        <div class="suggestion-body">
+            <div class="table-container overflow-auto max-h-[550px]">
+                <table class="suggestion-table" id="suggestionTable">
                     <thead>
                         <tr>
-                            <th>Kullanıcı adı</th>
-                            <th style="width:35%">Mesaj</th>
-                            <th style="width:35%">Bildirim</th>
+                            <th>Kullanıcı Adı</th>
+                            <th>Mesaj</th>
+                            <th>Yanıt</th>
                             <th>Tarih</th>
+                            <th>İşlem</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="suggestionTableBody">
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>@(item.IsAnonymous ? "isimgizlendi (" + item.Username + ")" : item.Username)</td>
-                                <td style="width:35%">@item.Mesaj</td>
-                                <td style="width:35%">@item.Bilidirim</td>
-                                <td>@item.GonderimTarihi</td>
-                                <td><button class="btn btn-primary" onclick="replyToUser('@item.Username', @item.Id)">Yanıtla</button></td>
+                            <tr class="suggestion-item">
+                                <td>
+                                    @if (item.IsAnonymous)
+                                    {
+                                        <span class="badge badge-anonymous" style="cursor:pointer;" onclick="showUserModal('@Html.Raw(HttpUtility.JavaScriptStringEncode(item.Username))')">
+                                            <i class="bx bx-user-voice"></i> Gizli
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-user"><i class="bx bx-user"></i> @item.Username</span>
+                                    }
+                                </td>
+
+                                <td class="message-cell">
+                                    <span class="text-truncate">@item.Mesaj</span>
+                                    @if (!string.IsNullOrEmpty(item.Mesaj) && item.Mesaj.Length > 25)
+                                    {
+                                        <button class="expand-button" onclick="showLongText('@Html.Raw(HttpUtility.JavaScriptStringEncode(item.Mesaj))')">Daha Fazla</button>
+                                    }
+                                </td>
+                                <td class="message-cell">
+                                    <span class="text-truncate">@(string.IsNullOrEmpty(item.Bilidirim) ? "-" : item.Bilidirim)</span>
+                                    @if (!string.IsNullOrEmpty(item.Bilidirim) && item.Bilidirim.Length > 25)
+                                    {
+                                        <button class="expand-button" onclick="showLongText('@Html.Raw(HttpUtility.JavaScriptStringEncode(item.Bilidirim))')">Daha Fazla</button>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="date-badge"><i class="bx bx-calendar"></i> @item.GonderimTarihi.ToString("dd.MM.yyyy")</span>
+                                </td>
+                                <td>
+                                    <button class="reply-button" onclick="showReplyModal('@(item.IsAnonymous ? "Gizli Kullanıcı" : HttpUtility.JavaScriptStringEncode(item.Username))', @item.Id, '@Html.Raw(HttpUtility.JavaScriptStringEncode(item.Bilidirim ?? ""))')">Yanıtla</button>
+                                </td>
                             </tr>
                         }
                     </tbody>
@@ -46,118 +86,119 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- Reply Modal -->
-<div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal" id="longTextModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="replyModalLabel">Yanıtla</h5>
-            </div>
+            <div class="modal-header"><h5>Metni Oku</h5><button class="modal-close" onclick="closeModal('longTextModal')">&times;</button></div>
+            <div class="modal-body"><pre id="longTextContent"></pre></div>
+        </div>
+    </div>
+
+    <div class="modal" id="replyModal">
+        <div class="modal-content">
+            <div class="modal-header"><h5 id="replyTitle"></h5><button class="modal-close" onclick="closeModal('replyModal')">&times;</button></div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="replyMessage">Mesaj</label>
-                    <textarea class="form-control" id="replyMessage" rows="5" placeholder="Yanıtınızı buraya yazın..."></textarea>
-                </div>
+                <textarea id="replyMessage" class="form-control" rows="4" placeholder="Yanıtınızı yazın..."></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#replyModal').modal('hide');">Kapat</button>
-                <button type="button" class="btn btn-primary" id="sendReplyButton">Gönder</button>
+                <button class="btn btn-secondary" onclick="closeModal('replyModal')">Kapat</button>
+                <button class="btn btn-primary" id="sendReply">Gönder</button>
             </div>
         </div>
     </div>
-</div>
-
-
-
-<script>
-    function searchTable() {
-        var input = document.getElementById("searchInput");
-        var filter = input.value.toUpperCase();
-        var table = document.getElementById("userTable");
-        var tbody = table.getElementsByTagName("tbody")[0];
-        var rows = tbody.getElementsByTagName("tr");
-
-        for (var i = 0; i < rows.length; i++) {
-            var cells = rows[i].getElementsByTagName("td");
-            rows[i].style.display = "none";
-            for (var j = 0; j < cells.length; j++) {
-                if (cells[j]) {
-                    var cellText = cells[j].textContent || cells[j].innerText;
-                    if (cellText.toUpperCase().indexOf(filter) > -1) {
-                        rows[i].style.display = "";
-                        break;
-                    }
-                }
-            }
+    <div class="modal" id="userModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Kullanıcı Bilgisi</h5>
+                <button class="modal-close" onclick="closeModal('userModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <strong>Gerçek Kullanıcı Adı:</strong>
+                <span id="realUsername" style="font-weight:500; color:#2563eb;"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Function to show the long text modal
+        function showLongText(text) {
+            document.getElementById('longTextContent').textContent = text;
+            document.getElementById('longTextModal').classList.add('active');
         }
-    }
 
-function replyToUser(username, messageId) {
-    $('#replyModal').modal('show');
-    $('#sendReplyButton').off('click').on('click', function () {
-        var message = $('#replyMessage').val();
-        if (message) {
-            $.ajax({
-                url: '@Url.Action("UpdateMessage", "DilekOneri")',
-                type: 'POST',
-                data: {
-                    id: messageId,
-                    message: message
-                },
-                success: function (response) {
-                    if (response.success) {
-                        alert('Mesaj başarıyla güncellendi.');
-                        $('#replyModal').modal('hide');
-                    } else {
-                        alert('Mesaj güncellenirken bir hata oluştu: ' + response.error);
+        // Function to close any modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Function to show the reply modal
+        function showReplyModal(username, id, currentReply) {
+            document.getElementById('replyTitle').textContent = username + ' kullanıcısına yanıt';
+            // Set the textarea value. If currentReply is '-', make it an empty string.
+            document.getElementById('replyMessage').value = (currentReply && currentReply !== '-') ? currentReply : '';
+            // Store the ID of the suggestion in the modal's dataset
+            document.getElementById('replyModal').dataset.id = id;
+            document.getElementById('replyModal').classList.add('active');
+        }
+        function showUserModal(username) {
+            document.getElementById('realUsername').textContent = username;
+            document.getElementById('userModal').classList.add('active');
+        }
+        $(function () {
+            // Event listener for the 'Gönder' (Send) button in the reply modal
+            $('#sendReply').on('click', function () {
+                var modal = document.getElementById('replyModal');
+                var id = modal.dataset.id; // Get the ID from the modal's dataset
+                var message = $('#replyMessage').val(); // Get the message from the textarea
+
+                if (!message) {
+                    alert('Yanıt alanı boş olamaz.');
+                    return;
+                }
+
+                // AJAX call to send the reply to the server
+                $.ajax({
+                    url: '@Url.Action("UpdateMessage", "DilekOneri")', // Correct URL using Url.Action
+                    type: 'POST',
+                    data: { id: id, message: message }, // Data to send
+                    success: function (response) {
+                        if (response.success) {
+                            alert('Yanıt başarıyla kaydedildi.');
+                            location.reload(); // Reload the page to show updated reply
+                        } else {
+                            alert('Hata: ' + response.error); // Display error message from server
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // More detailed error handling for debugging
+                        alert('Sunucu hatası oluştu: ' + xhr.responseText);
+                        console.error('AJAX Error:', status, error, xhr.responseText);
                     }
-                },
-                error: function () {
-                    alert('Mesaj güncellenirken bir hata oluştu.');
+                });
+            });
+
+            // Close modal when clicking outside of modal content
+            $('.modal').on('click', function (e) {
+                if (e.target === this) { // Check if the click was directly on the modal backdrop
+                    $(this).removeClass('active');
                 }
             });
-        } else {
-            alert('Mesaj alanı boş olamaz.');
-        }
-    });
-}
-</script>
 
-<style>
-    .card-toolbar {
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .homev2 {
-        position: absolute;
-        top: 100px;
-        left: 300px;
-        height: 85vh;
-        width: calc(94% - 250px);
-        transition: var(--tran-05);
-    }
-
-    .modal-header {
-        background-color: #007bff;
-        color: white;
-    }
-
-    .modal-footer {
-        display: flex;
-        justify-content: space-between;
-    }
-
-        .modal-footer .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .modal-footer .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
-        }
-</style>
-
+            // Search functionality
+            $('#searchInput').on('input', function () {
+                var searchText = $(this).val().toLowerCase();
+                $('#suggestionTableBody tr').each(function () {
+                    var row = $(this);
+                    var match = false;
+                    row.find('td').each(function () {
+                        // Check if any cell's text contains the search text
+                        if ($(this).text().toLowerCase().includes(searchText)) { // Using .includes() for better string matching
+                            match = true;
+                        }
+                    });
+                    row.toggle(match); // Show/hide row based on match
+                });
+            });
+        });
+    </script>
+</body>
+</html>

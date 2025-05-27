@@ -1,172 +1,85 @@
 ﻿@model MZDNETWORK.Models.Survey
 
-<div class="container">
-    <h2>@Model.Title</h2>
-    <p>@Model.Description</p>
+<!-- Tailwind CSS -->
+<link rel="stylesheet" href="~/Content/tailwind.min.css" />
+
+<div class="container mx-auto my-8 px-4 sm:px-6 lg:px-8">
+    <div class="mb-8 text-center pb-4 border-b border-gray-200">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">@Model.Title</h2>
+        <p class="text-gray-500 mt-2">@Model.Description</p>
+    </div>
 
     @if (!ViewData.ModelState.IsValid)
     {
-        <div class="alert alert-danger">
+        <div class="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
             @Html.ValidationSummary()
         </div>
     }
-    <link rel="stylesheet" href="~/Content/Spinner.css" />
-    <form id="surveyForm" method="post" action="@Url.Action("SubmitSurvey", "Answer")">
-        <input type="hidden" name="surveyId" value="@Model.ID" /> <!-- Gizli alan eklendi -->
+
+    <form id="surveyForm" method="post" action="@Url.Action("SubmitSurvey", "Answer")" class="space-y-6">
+        <input type="hidden" name="surveyId" value="@Model.ID" />
 
         @for (int i = 0; i < Model.Questions.Count; i++)
         {
-            <div class="question-container">
-                <div>@Model.Questions[i].QuestionText</div>
+            <div class="mb-6 p-5 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition">
+                <div class="font-medium text-lg text-gray-800 mb-3">@Model.Questions[i].QuestionText</div>
 
-                @if (Model.Questions[i].Type == QuestionType.Text)
-                {
-                    <input type="text" name="answers[@i].AnswerText" class="form-control" />
-                }
-                else if (Model.Questions[i].Type == QuestionType.Radio)
-                {
-                    foreach (var option in Model.Questions[i].AnswerOptions)
+                <div class="mt-2 space-y-2">
+                    @if (Model.Questions[i].Type == QuestionType.Text)
                     {
-                        <div>
-                            <input type="radio" name="answers[@i].AnswerText" value="@option.OptionText" />
-                            @option.OptionText
-                        </div>
+                        <input type="text" name="answers[@i].AnswerText" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600" placeholder="Yanıtınızı buraya yazın..." />
                     }
-                }
-                else if (Model.Questions[i].Type == QuestionType.Checkbox)
-                {
-                    foreach (var option in Model.Questions[i].AnswerOptions)
+                    else if (Model.Questions[i].Type == QuestionType.Radio)
                     {
-                        <div>
-                            <input type="checkbox" name="answers[@i].AnswerText" value="@option.OptionText" />
-                            @option.OptionText
-                        </div>
+                        foreach (var option in Model.Questions[i].AnswerOptions)
+                        {
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="answers[@i].AnswerText" value="@option.OptionText" class="form-radio text-green-600" />
+                                <span class="text-gray-700">@option.OptionText</span>
+                            </label>
+                        }
                     }
-                }
+                    else if (Model.Questions[i].Type == QuestionType.Checkbox)
+                    {
+                        foreach (var option in Model.Questions[i].AnswerOptions)
+                        {
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" name="answers[@i].AnswerText" value="@option.OptionText" class="form-checkbox text-green-600" />
+                                <span class="text-gray-700">@option.OptionText</span>
+                            </label>
+                        }
+                    }
+                </div>
 
                 <input type="hidden" name="answers[@i].QuestionID" value="@Model.Questions[i].ID" />
             </div>
         }
 
-        <button type="button" class="btn btn-success" onclick="showModal()">Gönder</button>
+        <div class="flex justify-center mt-8">
+            <button type="button" class="px-8 py-3 bg-green-700 hover:bg-green-800 text-white rounded-lg font-semibold shadow transition" onclick="showModal()">Gönder</button>
+        </div>
     </form>
 
     <!-- Modal HTML -->
-    <div id="confirmationModal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <!-- partial:index.partial.html -->
-                    <svg class="spinner" viewBox="0 0 48 48" role="img" aria-label="A partial ring that rotates and then is shaped as a checkmark, which pops out yielding confetti">
-                        <g fill="none" stroke="currentcolor" stroke-linecap="round" stroke-width="4">
-                            <circle class="spinner__worm" cx="24" cy="24" r="22" stroke-dasharray="138.23 138.23" stroke-dashoffset="-51.84" transform="rotate(-119)" />
-                            <circle class="spinner__pop-end" stroke="var(--light-green)" cx="24" cy="24" r="18" opacity="0" />
-                            <g fill="currentcolor" stroke="none">
-                                <circle class="spinner__pop-start" fill="var(--light-green)" cx="24" cy="24" r="20" opacity="0" />
-                                <g>
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--periwinkle)" cx="22" cy="5" r="1.5" />
-                                    </g>
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--light-blue)" cx="26" cy="2" r="1.5" />
-                                    </g>
-                                </g>
-                                <g transform="rotate(51.43,24,24)">
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--orange)" cx="22" cy="5" r="1.5" />
-                                    </g>
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--magenta)" cx="26" cy="2" r="1.5" />
-                                    </g>
-                                </g>
-                                <g transform="rotate(102.86,24,24)">
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--light-green)" cx="22" cy="5" r="1.5" />
-                                    </g>
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--light-teal)" cx="26" cy="2" r="1.5" />
-                                    </g>
-                                </g>
-                                <g transform="rotate(154.29,24,24)">
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--purple)" cx="22" cy="5" r="1.5" />
-                                    </g>
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--magenta)" cx="26" cy="2" r="1.5" />
-                                    </g>
-                                </g>
-                                <g transform="rotate(205.71,24,24)">
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--light-teal)" cx="22" cy="5" r="1.5" />
-                                    </g>
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--light-blue)" cx="26" cy="2" r="1.5" />
-                                    </g>
-                                </g>
-                                <g transform="rotate(257.14,24,24)">
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--periwinkle)" cx="22" cy="5" r="1.5" />
-                                    </g>
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--light-blue)" cx="26" cy="2" r="1.5" />
-                                    </g>
-                                </g>
-                                <g transform="rotate(308.57,24,24)">
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--purple)" cx="22" cy="5" r="1.5" />
-                                    </g>
-                                    <g class="spinner__pop-dot-group" opacity="0">
-                                        <circle class="spinner__pop-dot" fill="var(--light-teal)" cx="26" cy="2" r="1.5" />
-                                    </g>
-                                </g>
-                            </g>
-                            <path class="spinner__check" d="M 17 25 L 22 30 C 22 30 32.2 19.8 37.3 14.7 C 41.8 10.2 39 7.9 39 7.9" stroke-dasharray="36.7 36.7" stroke-dashoffset="-36.7" />
-                        </g>
+    <div id="confirmationModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" tabindex="-1" role="dialog" style="display:none;">
+        <div class="max-w-xs mx-auto">
+            <div class="bg-white rounded-lg p-8 shadow-lg text-center">
+                <div class="flex flex-col items-center justify-center">
+                    <svg class="animate-spin h-8 w-8 text-green-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
                     </svg>
-                    <!-- partial -->
-                    <p style="text-align:center;">Yanıtlarınız gönderiliyor...</p>
+                    <p class="text-gray-700">Yanıtlarınız gönderiliyor...</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<style>
-    .container {
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        overflow: hidden;
-    }
-
-    .question-container {
-        margin-bottom: 20px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-        width: 100%;
-    }
-
-    body {
-        all: unset;
-        background-color: white;
-    }
-
-    .modal-dialog {
-        max-width: 30%; /* Modal genişliğini ayarla */
-        max-height: 30%; /* Modal yüksekliğini ayarla */
-    }
-</style>
-
 <script>
     function showModal() {
         var modal = document.getElementById('confirmationModal');
-        $(modal).modal('show');
+        modal.style.display = 'flex';
         setTimeout(function () {
             document.getElementById('surveyForm').submit();
         }, 4000);

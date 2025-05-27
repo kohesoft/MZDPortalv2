@@ -1,0 +1,64 @@
+﻿body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f4f6;
+}
+
+.notification-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .notification-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+.btn-primary {
+    transition: all 0.2s ease;
+}
+
+    .btn-primary:hover {
+        transform: translateY(-1px);
+    }
+
+    .btn-primary:active {
+        transform: translateY(1px);
+    }
+
+.tox-tinymce {
+    border-radius: 0.5rem !important;
+    border-color: #d1d5db !important;
+}
+
+.recipient-tag {
+    transition: all 0.2s ease;
+}
+
+    .recipient-tag:hover {
+        background-color: #4f46e5;
+    }
+
+.success-animation {
+    animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
