@@ -31,7 +31,7 @@
                     <label class="lf--label" for="Username">
                         <i class='bx bx-id-card'></i>
                     </label>
-                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "lf--input", placeholder = "Kullanıcı Adı", required = "required" } })
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "lf--input", placeholder = "Kullanıcı Adı" } })
                     @Html.ValidationMessageFor(model => model.Username)
                 </div>
 
@@ -39,7 +39,7 @@
                     <label class="lf--label" for="Password">
                         <i class='bx bx-lock'></i>
                     </label>
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "lf--input", placeholder = "Şifre", required = "required" } })
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "lf--input", placeholder = "Şifre" } })
                     @Html.ValidationMessageFor(model => model.Password)
                 </div>
 
@@ -57,7 +57,7 @@
                         new SelectListItem { Text = "Dokümantasyon", Value = "Dokumantasyon" },
                         new SelectListItem { Text = "Merkez", Value = "Merkez" },
                         new SelectListItem { Text = "Yerleşke", Value = "Yerleske" }
-                    }, "Value", "Text"), "Rol Seçiniz", new { @class = "lf--input", required = "required" })
+                    }, "Value", "Text"), "Rol Seçiniz", new { @class = "lf--input" })
                     @Html.ValidationMessageFor(model => model.Role)
                 </div>
 
@@ -65,7 +65,7 @@
                     <label class="lf--label" for="Name">
                         <i class='bx bx-user'></i>
                     </label>
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "lf--input", placeholder = "Ad", required = "required" } })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "lf--input", placeholder = "Ad" } })
                     @Html.ValidationMessageFor(model => model.Name)
                 </div>
 
@@ -73,7 +73,7 @@
                     <label class="lf--label" for="Surname">
                         <i class='bx bx-user'></i>
                     </label>
-                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "lf--input", placeholder = "Soyad", required = "required" } })
+                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "lf--input", placeholder = "Soyad" } })
                     @Html.ValidationMessageFor(model => model.Surname)
                 </div>
 
@@ -81,7 +81,7 @@
                     <label class="lf--label" for="Department">
                         <i class='bx bx-building'></i>
                     </label>
-                    @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "lf--input", placeholder = "Departman", required = "required" } })
+                    @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "lf--input", placeholder = "Departman" } })
                     @Html.ValidationMessageFor(model => model.Department)
                 </div>
 
@@ -89,7 +89,7 @@
                     <label class="lf--label" for="Position">
                         <i class='bx bx-briefcase'></i>
                     </label>
-                    @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "lf--input", placeholder = "Pozisyon", required = "required" } })
+                    @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "lf--input", placeholder = "Pozisyon" } })
                     @Html.ValidationMessageFor(model => model.Position)
                 </div>
 
@@ -97,7 +97,7 @@
                     <label class="lf--label" for="Intercom">
                         <i class='bx bx-phone'></i>
                     </label>
-                    @Html.EditorFor(model => model.Intercom, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dahili Telefon", required = "required" } })
+                    @Html.EditorFor(model => model.Intercom, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dahili Telefon" } })
                     @Html.ValidationMessageFor(model => model.Intercom)
                 </div>
 
@@ -105,7 +105,7 @@
                     <label class="lf--label" for="PhoneNumber">
                         <i class='bx bx-phone'></i>
                     </label>
-                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Telefon Numarası", required = "required" } })
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Telefon Numarası" } })
                     @Html.ValidationMessageFor(model => model.PhoneNumber)
                 </div>
 
@@ -113,7 +113,7 @@
                     <label class="lf--label" for="InternalEmail">
                         <i class='bx bx-envelope'></i>
                     </label>
-                    @Html.EditorFor(model => model.InternalEmail, new { htmlAttributes = new { @class = "lf--input", placeholder = "İç E-posta", required = "required" } })
+                    @Html.EditorFor(model => model.InternalEmail, new { htmlAttributes = new { @class = "lf--input", placeholder = "İç E-posta" } })
                     @Html.ValidationMessageFor(model => model.InternalEmail)
                 </div>
 
@@ -121,7 +121,7 @@
                     <label class="lf--label" for="ExternalEmail">
                         <i class='bx bx-envelope'></i>
                     </label>
-                    @Html.EditorFor(model => model.ExternalEmail, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dış E-posta", required = "required" } })
+                    @Html.EditorFor(model => model.ExternalEmail, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dış E-posta" } })
                     @Html.ValidationMessageFor(model => model.ExternalEmail)
                 </div>
 
@@ -129,7 +129,7 @@
                     <label class="lf--label" for="Sicil">
                         <i class='bx bx-id-card'></i>
                     </label>
-                    @Html.EditorFor(model => model.Sicil, new { htmlAttributes = new { @class = "lf--input", placeholder = "Sicil", required = "required" } })
+                    @Html.EditorFor(model => model.Sicil, new { htmlAttributes = new { @class = "lf--input", placeholder = "Sicil" } })
                     @Html.ValidationMessageFor(model => model.Sicil)
                 </div>
 
@@ -242,7 +242,7 @@
                         new SelectListItem { Text = "Yalova", Value = "Yalova" },
                         new SelectListItem { Text = "Aksaray", Value = "Aksaray" },
                         new SelectListItem { Text = "Ardahan", Value = "Ardahan" },
-                    }, "Value", "Text"), "Şehir Seçiniz", new { @class = "lf--input", required = "required" })
+                    }, "Value", "Text"), "Şehir Seçiniz", new { @class = "lf--input" })
                     @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().Sehir)
                 </div>
 
@@ -253,7 +253,7 @@
                     @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().Ulke, new SelectList(new List<SelectListItem>
                             {
                         new SelectListItem { Text = "Türkiye", Value = "Türkiye" }
-                    }, "Value", "Text"), "Ülke Seçiniz", new { @class = "lf--input", required = "required" })
+                    }, "Value", "Text"), "Ülke Seçiniz", new { @class = "lf--input" })
                     @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().Ulke)
                 </div>
 
@@ -279,7 +279,7 @@
                         new SelectListItem { Text = "0 Rh-", Value = "0 Rh-" },
                         new SelectListItem { Text = "AB Rh+", Value = "AB Rh+" },
                         new SelectListItem { Text = "AB Rh-", Value = "AB Rh-" }
-                    }, "Value", "Text"), "Kan Grubu Seçiniz", new { @class = "lf--input", required = "required" })
+                    }, "Value", "Text"), "Kan Grubu Seçiniz", new { @class = "lf--input" })
                     @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().KanGrubu)
                 </div>
 
@@ -299,7 +299,7 @@
                             {
                         new SelectListItem { Text = "Erkek", Value = "Erkek" },
                         new SelectListItem { Text = "Kadın", Value = "Kadin" }
-                    }, "Value", "Text"), "Cinsiyet Seçiniz", new { @class = "lf--input", required = "required" })
+                    }, "Value", "Text"), "Cinsiyet Seçiniz", new { @class = "lf--input" })
                     @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().Cinsiyet)
                 </div>
 
@@ -311,7 +311,7 @@
                             {
                         new SelectListItem { Text = "Evli", Value = "Evli" },
                         new SelectListItem { Text = "Bekar", Value = "Bekar" }
-                    }, "Value", "Text"), "Medeni Durum Seçiniz", new { @class = "lf--input", required = "required" })
+                    }, "Value", "Text"), "Medeni Durum Seçiniz", new { @class = "lf--input" })
                     @Html.ValidationMessageFor(model => model.UserInfo.FirstOrDefault().MedeniDurum)
                 </div>
 

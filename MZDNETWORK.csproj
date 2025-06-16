@@ -817,6 +817,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\xlsx.full.min.js" />
     <Content Include="UploadPhotosMerkez\menu_20250523.jpg" />
     <Content Include="UploadPhotosMola\break_schedule_genel.jpg" />
     <Content Include="UploadPhotosMola\break_schedule_Part 1.jpg" />

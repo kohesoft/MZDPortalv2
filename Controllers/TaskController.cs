@@ -22,8 +22,8 @@ namespace MZDNETWORK.Controllers
         [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
         public ActionResult Index()
         {
-            var currentUsername = User.Identity.Name; // Oturum açmýþ kullanýcýnýn kullanýcý adýný al
-            var tasks = _context.Tasks.Where(item => item.CreatedBy == currentUsername).ToList(); // Modeli filtrele ve listeye dönüþtür
+            var currentUsername = User.Identity.Name; // Oturum aÃ§mÄ± kullanÄ±cÄ±nÄ±n kullanÄ±cÄ± adÄ±nÄ± al
+            var tasks = _context.Tasks.Where(item => item.CreatedBy == currentUsername).ToList(); // Modeli filtrele ve listeye dÃ¶nÃ¼ÅŸtÃ¼r
             return View(tasks);
         }
 
@@ -50,7 +50,7 @@ namespace MZDNETWORK.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Geçersiz kullanýcý adý.");
+                    ModelState.AddModelError("", "GeÃ§ersiz kullanÄ±cÄ± adÄ±.");
                     ViewBag.Users = new SelectList(_context.Users, "Username", "Name", task.Username);
                     return View(task);
                 }
@@ -72,7 +72,7 @@ namespace MZDNETWORK.Controllers
                 var notification = new Notification
                 {
                     UserId = task.UserId.ToString(),
-                    Message = "Yeni bir görev atandý.",
+                    Message = "Yeni bir gÃ¶rev atandÄ±.",
                     IsRead = false,
                     CreatedDate = DateTime.Now
                 };
@@ -100,7 +100,7 @@ namespace MZDNETWORK.Controllers
             }
 
             ViewBag.Username = new SelectList(_context.Users, "Username", "Name", task.Username);
-            ViewBag.TodoItems = task.TodoItems; // Mevcut TodoItems öðelerini ViewBag'e ekle
+            ViewBag.TodoItems = task.TodoItems; // Mevcut TodoItems ï¿½ï¿½elerini ViewBag'e ekle
             return View(task);
         }
         [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
@@ -121,10 +121,10 @@ namespace MZDNETWORK.Controllers
 
                     if (todoDescriptions != null)
                     {
-                        // Mevcut TodoItems öðelerini sil
+                        // Mevcut TodoItems ï¿½ï¿½elerini sil
                         _context.TodoItems.RemoveRange(existingTask.TodoItems);
 
-                        // Yeni TodoItems öðelerini ekle
+                        // Yeni TodoItems ï¿½ï¿½elerini ekle
                         for (int i = 0; i < todoDescriptions.Length; i++)
                         {
                             existingTask.TodoItems.Add(new TodoItem
@@ -144,7 +144,7 @@ namespace MZDNETWORK.Controllers
             }
 
             ViewBag.Users = new SelectList(_context.Users, "Username", "Name", task.Username);
-            ViewBag.TodoItems = task.TodoItems; // Mevcut TodoItems öðelerini ViewBag'e ekle
+            ViewBag.TodoItems = task.TodoItems; // Mevcut TodoItems ï¿½ï¿½elerini ViewBag'e ekle
             return View(task);
         }
 
@@ -176,9 +176,28 @@ namespace MZDNETWORK.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            var task = _context.Tasks.FirstOrDefault(t => t.Id == id);
-            _context.Tasks.Remove(task);
-            await _context.SaveChangesAsync();
+            var task = _context.Tasks
+                .Include(t => t.TodoItems)
+                .FirstOrDefault(t => t.Id == id);
+
+            if (task != null)
+            {
+                // Ä°liÅŸkili TodoItems'larÄ± sil
+                if (task.TodoItems != null)
+                {
+                    _context.TodoItems.RemoveRange(task.TodoItems);
+                }
+
+                // Ä°liÅŸkili bildirimleri sil
+                var notifications = _context.Notifications
+                    .Where(n => n.Message.Contains("gÃ¶rev") && n.UserId == task.UserId.ToString())
+                    .ToList();
+                _context.Notifications.RemoveRange(notifications);
+
+                // GÃ¶revi sil
+                _context.Tasks.Remove(task);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToAction("Index");
         }
 
@@ -224,7 +243,7 @@ namespace MZDNETWORK.Controllers
             return RedirectToAction("Details", new { id = taskId });
         }
 
-        // Kullanýcýlarýn görevlerini listelemek için yeni bir action
+        // KullanÄ±cÄ±larÄ±n gÃ¶revlerini listelemek iÃ§in yeni bir action
         public ActionResult UserTasks()
         {
             var username = HttpContext.User.Identity.Name;
@@ -234,7 +253,7 @@ namespace MZDNETWORK.Controllers
             }
 
             var tasks = _context.Tasks.Include("TodoItems").Where(t => t.Username == username).ToList();
-            ViewBag.Username = username; // Kullanýcý adýný ViewBag'e ekle
+            ViewBag.Username = username; // KullanÄ±cÄ± adÄ±nÄ± ViewBag'e ekle
             return View(tasks);
         }
     }

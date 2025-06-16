@@ -1,4 +1,3 @@
-
 .rehber-container {
     max-width: 1400px;
     margin: 2rem auto;
@@ -72,6 +71,8 @@
     font-size: 0.95rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    color: #333;
+    background-color: white;
 }
 
     .rehber-search-input:focus {
@@ -80,7 +81,7 @@
     }
 
     .rehber-search-input::placeholder {
-        color: #6c757d;
+        color: #999;
     }
 
 .rehber-btn-export {

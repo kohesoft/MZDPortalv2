@@ -36,9 +36,28 @@ namespace MZDNETWORK
                 var formsIdentity = HttpContext.Current.User.Identity as FormsIdentity;
                 if (formsIdentity != null)
                 {
-                    var roles = formsIdentity.Ticket.UserData.Split(',');
-                    HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(formsIdentity, roles);
-                    Logger.Info($"User authenticated: {HttpContext.Current.User.Identity.Name}, IP: {HttpContext.Current.Request.UserHostAddress}, URL: {HttpContext.Current.Request.Url}");
+                    try
+                    {
+                        var ticket = formsIdentity.Ticket;
+                        var userData = ticket.UserData.Split('|');
+                        if (userData.Length >= 2)
+                        {
+                            var username = userData[0];
+                            var role = userData[1];
+                            var roles = new[] { role };
+
+                            HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(formsIdentity, roles);
+                            Logger.Info($"User authenticated: {username}, Role: {role}, IP: {HttpContext.Current.Request.UserHostAddress}, URL: {HttpContext.Current.Request.Url}");
+                        }
+                        else
+                        {
+                            Logger.Warn($"Invalid userData format: {ticket.UserData}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex, "Error processing authentication ticket");
+                    }
                 }
                 else
                 {

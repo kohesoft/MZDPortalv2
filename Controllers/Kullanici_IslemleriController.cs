@@ -82,17 +82,13 @@ namespace MZDNETWORK.Views.InsanKaynaklari
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Username,Password,Role,Name,Surname,Department,Position,Intercom,PhoneNumber,InternalEmail,ExternalEmail,Sicil")] User user, [Bind(Include = "Id,Email,RealPhoneNumber,Adres,Adres2,Sehir,Ulke,Postakodu,KanGrubu,DogumTarihi,Cinsiyet,MedeniDurum")] UserInfo userInfo)
         {
-            if (ModelState.IsValid)
-            {
-                // UserInfo nesnesinin UserId alanını User nesnesinin Id alanı ile eşleştir
-                userInfo.UserId = user.Id; // int türünden int türüne atama
+            // UserInfo nesnesinin UserId alanını User nesnesinin Id alanı ile eşleştir
+            userInfo.UserId = user.Id; // int türünden int türüne atama
 
-                db.Entry(user).State = EntityState.Modified;
-                db.Entry(userInfo).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(user);
+            db.Entry(user).State = EntityState.Modified;
+            db.Entry(userInfo).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: IK_Kullanici/Delete/5
@@ -115,10 +111,49 @@ namespace MZDNETWORK.Views.InsanKaynaklari
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.Users.Include(u => u.UserInfo).FirstOrDefault(u => u.Id == id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                User user = db.Users.Include(u => u.UserInfo).FirstOrDefault(u => u.Id == id);
+                if (user != null)
+                {
+                    // Eğer silinen kullanıcı aktif oturumu olan kullanıcıysa, oturumu sonlandır
+                    if (User.Identity.Name == user.Username)
+                    {
+                        System.Web.Security.FormsAuthentication.SignOut();
+                    }
+
+                    // İlişkili UserInfo kayıtlarını sil
+                    if (user.UserInfo != null)
+                    {
+                        foreach (var userInfo in user.UserInfo.ToList())
+                        {
+                            db.UserInfos.Remove(userInfo);
+                        }
+                    }
+
+                    // Kullanıcıyı sil
+                    db.Users.Remove(user);
+                    db.SaveChanges();
+
+                    if (Request.IsAjaxRequest())
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.OK);
+                    }
+
+                    TempData["SuccessMessage"] = "Kullanıcı başarıyla silindi.";
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                }
+
+                TempData["ErrorMessage"] = "Kullanıcı silinirken bir hata oluştu: " + ex.Message;
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

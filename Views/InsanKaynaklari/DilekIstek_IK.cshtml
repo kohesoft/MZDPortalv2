@@ -10,12 +10,35 @@
     <link rel="stylesheet" href="~/Content/tailwind.min.css" />
     <link rel="stylesheet" href="~/Content/boxicons.min.css" />
     <link rel="stylesheet" href="~/Content/dilekistekik.css" />
+    <script src="~/Scripts/xlsx.full.min.js"></script>
     <style>
         /* This style block ensures the modal is correctly displayed when 'active' */
         .modal.active {
             display: flex !important; /* Changed to flex for proper centering */
             opacity: 1; /* Ensure full visibility */
             visibility: visible; /* Ensure it's not hidden by visibility property */
+        }
+
+        .export-button {
+            background-color: #1d4ed8;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            transition: background-color 0.2s;
+        }
+
+        .export-button:hover {
+            background-color: #1e40af;
+        }
+
+        .export-button i {
+            font-size: 1.2em;
         }
     </style>
     <script src="~/Scripts/jquery-3.7.1.min.js"></script>
@@ -29,6 +52,9 @@
                 <i class="bx bx-search search-icon"></i>
                 <input type="text" id="searchInput" class="search-input" placeholder="Ara..." />
             </div>
+            <button id="exportExcel" class="export-button">
+                <i class="bx bx-export"></i> Excel'e Aktar
+            </button>
         </div>
         <div class="suggestion-body">
             <div class="table-container overflow-auto max-h-[550px]">
@@ -198,6 +224,62 @@
                     row.toggle(match); // Show/hide row based on match
                 });
             });
+
+            // Function to export table to Excel
+            function exportTableToExcel() {
+                // Create a workbook
+                var wb = XLSX.utils.book_new();
+                
+                // Get the table data
+                var data = [];
+                var headers = [];
+                
+                // Get headers
+                $('#suggestionTable thead th').each(function() {
+                    headers.push($(this).text());
+                });
+                data.push(headers);
+                
+                // Get table data
+                $('#suggestionTableBody tr').each(function() {
+                    var row = [];
+                    $(this).find('td').each(function(index) {
+                        // For username column (index 0)
+                        if (index === 0) {
+                            // If it's anonymous, get the real username from the onclick attribute
+                            var isAnonymous = $(this).find('.badge-anonymous').length > 0;
+                            if (isAnonymous) {
+                                var username = $(this).find('.badge-anonymous').attr('onclick');
+                                username = username.split("'")[1]; // Extract username from onclick attribute
+                                row.push(username + " (Gizli)");
+                            } else {
+                                row.push($(this).text().trim());
+                            }
+                        }
+                        // For message and reply columns (index 1 and 2)
+                        else if (index === 1 || index === 2) {
+                            row.push($(this).find('.text-truncate').text().trim());
+                        }
+                        // For other columns
+                        else if (index !== 4) { // Skip the "İşlem" column
+                            row.push($(this).text().trim());
+                        }
+                    });
+                    data.push(row);
+                });
+                
+                // Create worksheet
+                var ws = XLSX.utils.aoa_to_sheet(data);
+                
+                // Add worksheet to workbook
+                XLSX.utils.book_append_sheet(wb, ws, "Dilek ve Öneriler");
+                
+                // Generate Excel file and trigger download
+                XLSX.writeFile(wb, "Dilek_ve_Oneriler.xlsx");
+            }
+
+            // Add click handler for export button
+            $('#exportExcel').on('click', exportTableToExcel);
         });
     </script>
 </body>
