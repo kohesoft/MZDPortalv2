@@ -169,7 +169,6 @@ body {
     margin-left: 260px;
     padding: 2rem 2.5vw;
     min-height: 100vh;
-    background: var(--light);
     transition: var(--transition);
 }
 

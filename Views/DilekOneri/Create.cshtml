@@ -48,12 +48,13 @@
                 <label for="Anonymous">İsimsiz Gönder</label>
             </div>
 
-            <div class="flex-row">
+            <div class="flex-row" id="usernameRow">
                 <div class="input-icon">
                     <i class='bx bx-id-card'></i>
                     @Html.TextBoxFor(model => model.Username, new { @class = "lf--input", value = User.Identity.Name, @readonly = "readonly", id = "Username" })
                 </div>
             </div>
+
 
             @Html.HiddenFor(model => model.IsAnonymous, new { id = "IsAnonymous" })
 
