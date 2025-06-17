@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using MZDNETWORK.Models;
 using System.Linq;
 
+[AllowAnonymous]
 public class FeedbackController : Controller
 {
     private MZDNETWORKContext db = new MZDNETWORKContext();

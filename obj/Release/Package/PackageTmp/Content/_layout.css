@@ -81,6 +81,12 @@ body {
     color: var(--light);
 }
 
+.logo-date {
+    font-size: 1.2rem;
+    color: var(--gray);
+    font-family: monospace;
+}
+
 .menu-bar {
     flex: 1;
     display: flex;
@@ -169,7 +175,6 @@ body {
     margin-left: 260px;
     padding: 2rem 2.5vw;
     min-height: 100vh;
-    background: var(--light);
     transition: var(--transition);
 }
 
@@ -554,5 +559,45 @@ body {
     text-align: center;
     font-weight: bold;
     display: none;
+}
+
+.sidebar-close-btn {
+    display:none;
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:1.4rem;
+    cursor:pointer;
+}
+
+.sidebar-open-btn {
+    display:none;
+    position:fixed;
+    top:15px;
+    left:15px;
+    width:44px;
+    height:44px;
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    z-index:1500;
+    font-size:1.6rem;
+    align-items:center;
+    justify-content:center;
+    box-shadow:var(--shadow);
+    transition:var(--transition);
+}
+
+.sidebar-open-btn:hover {
+    background:var(--primary-dark);
+}
+
+@media (max-width:900px){
+    .sidebar-close-btn{display:block;}
+    .sidebar-open-btn{display:flex;}
 }
    

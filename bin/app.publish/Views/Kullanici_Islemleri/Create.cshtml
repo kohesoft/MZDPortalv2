@@ -1,0 +1,346 @@
+﻿@model MZDNETWORK.Models.User
+
+@{
+    ViewBag.Title = "Yeni Kullanıcı";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Oluştur</title>
+    <link href='~/Content/tailwind.min.css' rel='stylesheet' />
+    <link href='~/Content/boxicons.min.css' rel='stylesheet' />
+    <link href="~/Content/kullaniciislemleri.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <form class='login-form' action="@Url.Action("Create", "Kullanici_Islemleri")" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Username">
+                        <i class='bx bx-id-card'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "lf--input", placeholder = "Kullanıcı Adı" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Password">
+                        <i class='bx bx-lock'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "lf--input", placeholder = "Şifre" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Role">
+                        <i class='bx bx-user'></i>
+                    </label>
+                    @Html.DropDownListFor(model => model.Role, new SelectList(new List<SelectListItem>
+                            {
+                        new SelectListItem { Text = "Yönetici", Value = "Yonetici" },
+                        new SelectListItem { Text = "Bilgi İşlem", Value = "BilgiIslem" },
+                        new SelectListItem { Text = "İnsan Kaynakları", Value = "IK" },
+                        new SelectListItem { Text = "İdari İşler", Value = "IdariIsler" },
+                        new SelectListItem { Text = "Lider", Value = "Lider" },
+                        new SelectListItem { Text = "Dokümantasyon", Value = "Dokumantasyon" },
+                        new SelectListItem { Text = "Merkez", Value = "Merkez" },
+                        new SelectListItem { Text = "Yerleşke", Value = "Yerleske" }
+                    }, "Value", "Text"), "Rol Seçiniz", new { @class = "lf--input" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Name">
+                        <i class='bx bx-user'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "lf--input", placeholder = "Ad" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Surname">
+                        <i class='bx bx-user'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "lf--input", placeholder = "Soyad" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Department">
+                        <i class='bx bx-building'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "lf--input", placeholder = "Departman" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Position">
+                        <i class='bx bx-briefcase'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "lf--input", placeholder = "Pozisyon" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Intercom">
+                        <i class='bx bx-phone'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Intercom, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dahili Telefon" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="PhoneNumber">
+                        <i class='bx bx-phone'></i>
+                    </label>
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Telefon Numarası" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="InternalEmail">
+                        <i class='bx bx-envelope'></i>
+                    </label>
+                    @Html.EditorFor(model => model.InternalEmail, new { htmlAttributes = new { @class = "lf--input", placeholder = "İç E-posta" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="ExternalEmail">
+                        <i class='bx bx-envelope'></i>
+                    </label>
+                    @Html.EditorFor(model => model.ExternalEmail, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dış E-posta" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Sicil">
+                        <i class='bx bx-id-card'></i>
+                    </label>
+                    @Html.EditorFor(model => model.Sicil, new { htmlAttributes = new { @class = "lf--input", placeholder = "Sicil" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Email">
+                        <i class='bx bx-envelope'></i>
+                    </label>
+                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Email, new { htmlAttributes = new { @class = "lf--input", placeholder = "E-posta" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="RealPhoneNumber">
+                        <i class='bx bx-phone'></i>
+                    </label>
+                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().RealPhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Gerçek Telefon Numarası" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Adres">
+                        <i class='bx bx-home'></i>
+                    </label>
+                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Adres, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Adres2">
+                        <i class='bx bx-home'></i>
+                    </label>
+                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Adres2, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres 2" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Sehir">
+                        <i class='bx bx-map'></i>
+                    </label>
+                    @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().Sehir, new SelectList(new List<SelectListItem>
+                            {
+                        new SelectListItem { Text = "İstanbul", Value = "İstanbul" },
+                        new SelectListItem { Text = "Ankara", Value = "Ankara" },
+                        new SelectListItem { Text = "İzmir", Value = "İzmir" },
+                        new SelectListItem { Text = "Bursa", Value = "Bursa" },
+                        new SelectListItem { Text = "Antalya", Value = "Antalya" },
+                        new SelectListItem { Text = "Adana", Value = "Adana" },
+                        new SelectListItem { Text = "Konya", Value = "Konya" },
+                        new SelectListItem { Text = "Gaziantep", Value = "Gaziantep" },
+                        new SelectListItem { Text = "Mersin", Value = "Mersin" },
+                        new SelectListItem { Text = "Kayseri", Value = "Kayseri" },
+                        new SelectListItem { Text = "Sakarya", Value = "Sakarya" },
+                        new SelectListItem { Text = "Kocaeli", Value = "Kocaeli" },
+                        new SelectListItem { Text = "Tekirdağ", Value = "Tekirdağ" },
+                        new SelectListItem { Text = "Manisa", Value = "Manisa" },
+                        new SelectListItem { Text = "Eskişehir", Value = "Eskişehir" },
+                        new SelectListItem { Text = "Aydın", Value = "Aydın" },
+                        new SelectListItem { Text = "Denizli", Value = "Denizli" },
+                        new SelectListItem { Text = "Samsun", Value = "Samsun" },
+                        new SelectListItem { Text = "Trabzon", Value = "Trabzon" },
+                        new SelectListItem { Text = "Ordu", Value = "Ordu" },
+                        new SelectListItem { Text = "Bolu", Value = "Bolu" },
+                        new SelectListItem { Text = "Düzce", Value = "Düzce" },
+                        new SelectListItem { Text = "Kastamonu", Value = "Kastamonu" },
+                        new SelectListItem { Text = "Zonguldak", Value = "Zonguldak" },
+                        new SelectListItem { Text = "Karabük", Value = "Karabük" },
+                        new SelectListItem { Text = "Bartın", Value = "Bartın" },
+                        new SelectListItem { Text = "Çorum", Value = "Çorum" },
+                        new SelectListItem { Text = "Amasya", Value = "Amasya" },
+                        new SelectListItem { Text = "Tokat", Value = "Tokat" },
+                        new SelectListItem { Text = "Sivas", Value = "Sivas" },
+                        new SelectListItem { Text = "Nevşehir", Value = "Nevşehir" },
+                        new SelectListItem { Text = "Niğde", Value = "Niğde" },
+                        new SelectListItem { Text = "Kırşehir", Value = "Kırşehir" },
+                        new SelectListItem { Text = "Malatya", Value = "Malatya" },
+                        new SelectListItem { Text = "Elazığ", Value = "Elazığ" },
+                        new SelectListItem { Text = "Tunceli", Value = "Tunceli" },
+                        new SelectListItem { Text = "Diyarbakır", Value = "Diyarbakır" },
+                        new SelectListItem { Text = "Şanlıurfa", Value = "Şanlıurfa" },
+                        new SelectListItem { Text = "Mardin", Value = "Mardin" },
+                        new SelectListItem { Text = "Batman", Value = "Batman" },
+                        new SelectListItem { Text = "Siirt", Value = "Siirt" },
+                        new SelectListItem { Text = "Bitlis", Value = "Bitlis" },
+                        new SelectListItem { Text = "Van", Value = "Van" },
+                        new SelectListItem { Text = "Hakkari", Value = "Hakkari" },
+                        new SelectListItem { Text = "Iğdır", Value = "Iğdır" },
+                        new SelectListItem { Text = "Kars", Value = "Kars" },
+                        new SelectListItem { Text = "Ardahan", Value = "Ardahan" },
+                        new SelectListItem { Text = "Artvin", Value = "Artvin" },
+                        new SelectListItem { Text = "Rize", Value = "Rize" },
+                        new SelectListItem { Text = "Giresun", Value = "Giresun" },
+                        new SelectListItem { Text = "Gümüşhane", Value = "Gümüşhane" },
+                        new SelectListItem { Text = "Bayburt", Value = "Bayburt" },
+                        new SelectListItem { Text = "Kahramanmaraş", Value = "Kahramanmaraş" },
+                        new SelectListItem { Text = "Osmaniye", Value = "Osmaniye" },
+                        new SelectListItem { Text = "Adıyaman", Value = "Adıyaman" },
+                        new SelectListItem { Text = "Şırnak", Value = "Şırnak" },
+                        new SelectListItem { Text = "Ağrı", Value = "Ağrı" },
+                        new SelectListItem { Text = "Kilis", Value = "Kilis" },
+                        new SelectListItem { Text = "Çanakkale", Value = "Çanakkale" },
+                        new SelectListItem { Text = "Balıkesir", Value = "Balıkesir" },
+                        new SelectListItem { Text = "Muğla", Value = "Muğla" },
+                        new SelectListItem { Text = "Uşak", Value = "Uşak" },
+                        new SelectListItem { Text = "Kütahya", Value = "Kütahya" },
+                        new SelectListItem { Text = "Bilecik", Value = "Bilecik" },
+                        new SelectListItem { Text = "Bingöl", Value = "Bingöl" },
+                        new SelectListItem { Text = "Çorum", Value = "Çorum" },
+                        new SelectListItem { Text = "Karaman", Value = "Karaman" },
+                        new SelectListItem { Text = "Yozgat", Value = "Yozgat" },
+                        new SelectListItem { Text = "Yalova", Value = "Yalova" },
+                        new SelectListItem { Text = "Aksaray", Value = "Aksaray" },
+                        new SelectListItem { Text = "Ardahan", Value = "Ardahan" },
+                    }, "Value", "Text"), "Şehir Seçiniz", new { @class = "lf--input" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Ulke">
+                        <i class='bx bx-map'></i>
+                    </label>
+                    @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().Ulke, new SelectList(new List<SelectListItem>
+                            {
+                        new SelectListItem { Text = "Türkiye", Value = "Türkiye" }
+                    }, "Value", "Text"), "Ülke Seçiniz", new { @class = "lf--input" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Postakodu">
+                        <i class='bx bx-envelope'></i>
+                    </label>
+                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Postakodu, new { htmlAttributes = new { @class = "lf--input", placeholder = "Posta Kodu" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="KanGrubu">
+                        <i class='bx bx-droplet'></i>
+                    </label>
+                    @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().KanGrubu, new SelectList(new List<SelectListItem>
+                            {
+                        new SelectListItem { Text = "A Rh+", Value = "A Rh+" },
+                        new SelectListItem { Text = "A Rh-", Value = "A Rh-" },
+                        new SelectListItem { Text = "B Rh+", Value = "B Rh+" },
+                        new SelectListItem { Text = "B Rh-", Value = "B Rh-" },
+                        new SelectListItem { Text = "0 Rh+", Value = "0 Rh+" },
+                        new SelectListItem { Text = "0 Rh-", Value = "0 Rh-" },
+                        new SelectListItem { Text = "AB Rh+", Value = "AB Rh+" },
+                        new SelectListItem { Text = "AB Rh-", Value = "AB Rh-" }
+                    }, "Value", "Text"), "Kan Grubu Seçiniz", new { @class = "lf--input" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="DogumTarihi">
+                        <i class='bx bx-calendar'></i>
+                    </label>
+                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().DogumTarihi, new { htmlAttributes = new { @class = "lf--input", placeholder = "Doğum Tarihi", type = "date" } })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="Cinsiyet">
+                        <i class='bx bx-user'></i>
+                    </label>
+                    @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().Cinsiyet, new SelectList(new List<SelectListItem>
+                            {
+                        new SelectListItem { Text = "Erkek", Value = "Erkek" },
+                        new SelectListItem { Text = "Kadın", Value = "Kadin" }
+                    }, "Value", "Text"), "Cinsiyet Seçiniz", new { @class = "lf--input" })
+                </div>
+
+                <div class="flex-row">
+                    <label class="lf--label" for="MedeniDurum">
+                        <i class='bx bx-user'></i>
+                    </label>
+                    @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().MedeniDurum, new SelectList(new List<SelectListItem>
+                            {
+                        new SelectListItem { Text = "Evli", Value = "Evli" },
+                        new SelectListItem { Text = "Bekar", Value = "Bekar" }
+                    }, "Value", "Text"), "Medeni Durum Seçiniz", new { @class = "lf--input" })
+                </div>
+
+                <input class='lf--submit' type='submit' value='Kaydet'>
+                @Html.ActionLink("Geri Dön", "Index", null, new { @class = "lf--submit", style = "flex: 1; text-align: center; text-decoration: none;" })
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Password visibility toggle
+            const passwordToggle = document.getElementById('passwordToggle');
+            const passwordField = document.getElementById('password');
+            passwordToggle.addEventListener('click', function () {
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    passwordToggle.classList.remove('bx-show');
+                    passwordToggle.classList.add('bx-hide');
+                } else {
+                    passwordField.type = 'password';
+                    passwordToggle.classList.remove('bx-hide');
+                    passwordToggle.classList.add('bx-show');
+                }
+            });
+            // Toggle additional fields
+            const toggleMoreFields = document.getElementById('toggleMoreFields');
+            const form = document.querySelector('.login-form');
+            toggleMoreFields.addEventListener('click', function () {
+                form.classList.toggle('show-more-fields');
+                if (form.classList.contains('show-more-fields')) {
+                    toggleMoreFields.innerHTML = '<i class="bx bx-chevron-up"></i> Daha az bilgi göster';
+                } else {
+                    toggleMoreFields.innerHTML = '<i class="bx bx-chevron-down"></i> Daha fazla bilgi ekle';
+                }
+            });
+            // Password strength indicator
+            passwordField.addEventListener('input', function () {
+                const password = this.value;
+                const passwordError = document.getElementById('passwordError');
+                if (password.length === 0) {
+                    passwordError.textContent = '';
+                    return;
+                }
+                if (password.length < 6) {
+                    passwordError.textContent = 'Zayıf şifre (en az 6 karakter)';
+                    passwordError.style.color = '#ef4444';
+                } else if (password.length < 8) {
+                    passwordError.textContent = 'Orta seviye şifre';
+                    passwordError.style.color = '#f59e0b';
+                } else if (/[A-Z]/.test(password) && /[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password)) {
+                    passwordError.textContent = 'Güçlü şifre';
+                    passwordError.style.color = '#10b981';
+                } else {
+                    passwordError.textContent = 'İyi şifre (büyük harf, rakam ve özel karakter ekleyin)';
+                    passwordError.style.color = '#6366f1';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

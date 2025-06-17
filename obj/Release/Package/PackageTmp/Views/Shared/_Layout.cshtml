@@ -13,12 +13,20 @@
     @Scripts.Render("~/bundles/popper")
 </head>
 <body>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" style="padding:15px; margin:10px; background-color:#d1fae5; color:#065f46; border:1px solid #a7f3d0; border-radius:8px; text-align:center;">
+            @TempData["SuccessMessage"]
+        </div>
+    }
     <nav class="sidebar">
         <div class="logo-container">
             <span class="image">
                 <img src="~/imgs/logo.png" alt="Logo" />
             </span>
+            <span id="dateTime" class="logo-date"></span>
             <span class="logo-text">MZD Portal</span>
+            <button id="closeSidebar" class="sidebar-close-btn" type="button" aria-label="Menüyü Kapat">×</button>
         </div>
         <div class="menu-bar">
             <ul class="menu menu-links">
@@ -445,9 +453,33 @@ $(document).on('click', '.notification-link', function (e) {
         var messagesContainer = $('#messages');
         messagesContainer.scrollTop(messagesContainer[0].scrollHeight);
     }
+
+    // Sayfa gerçekten değişmeden hemen önce overlay'i göster
+    $(window).on('beforeunload', function () {
+        $('#loadingOverlay').show();          // display:block olur
+        $('#loadingOverlay').addClass('active'); // visibility + opacity
+    });
+
+    // Tarih & Saat
+    function updateDateTime() {
+        var now = new Date();
+        var options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+        document.getElementById('dateTime').textContent = now.toLocaleString('tr-TR', options);
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 60000);
+
+    $('#openSidebar').click(function(){
+        $('.sidebar').addClass('active');
+    });
 });
 
     </script>
+
+    <!-- Mobilde menü açma düğmesi -->
+    <button id="openSidebar" class="sidebar-open-btn" type="button" aria-label="Menüyü Aç">
+        <i class='bx bx-menu'></i>
+    </button>
 
 </body>
 </html>

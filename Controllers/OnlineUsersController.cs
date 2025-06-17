@@ -4,6 +4,7 @@ using MZDNETWORK.Hubs;
 
 namespace MZDNETWORK.Controllers
 {
+    [AllowAnonymous]
     public class OnlineUsersController : Controller
     {
         private readonly IHubContext _hubContext;

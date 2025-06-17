@@ -34,6 +34,15 @@ public class AccountController : Controller
                 return View(model);
             }
 
+            // MVC model binder sometimes maps checkbox value "on" to false for primitive bools.
+            // Therefore explicitly check the raw request value so that "on" or "true" is accepted.
+            bool remember = rememberMe;
+            var rawRemember = Request["rememberMe"];
+            if (!string.IsNullOrEmpty(rawRemember))
+            {
+                remember = rawRemember.Equals("true", StringComparison.OrdinalIgnoreCase) || rawRemember.Equals("on", StringComparison.OrdinalIgnoreCase) || rawRemember == "1";
+            }
+
             if (IsValidUser(model.Username, model.Password, out string role))
             {
                 // Önce mevcut tüm authentication cookie'lerini temizle
@@ -47,8 +56,8 @@ public class AccountController : Controller
                     1,                              // Versiyon
                     model.Username,                 // Kullanıcı adı
                     DateTime.Now,                   // Oluşturulma zamanı
-                    rememberMe ? DateTime.Now.AddDays(30) : DateTime.Now.AddMinutes(30), // Bitiş zamanı
-                    rememberMe,                     // Kalıcı cookie mi?
+                    remember ? DateTime.Now.AddDays(30) : DateTime.Now.AddMinutes(30), // Bitiş zamanı
+                    remember,                     // Kalıcı cookie mi?
                     userData,                       // Kullanıcı bilgileri ve rol
                     FormsAuthentication.FormsCookiePath // Cookie yolu
                 );
@@ -65,7 +74,7 @@ public class AccountController : Controller
                     Domain = FormsAuthentication.CookieDomain
                 };
 
-                if (rememberMe)
+                if (remember)
                 {
                     authCookie.Expires = DateTime.Now.AddDays(30);
                 }
@@ -89,7 +98,14 @@ public class AccountController : Controller
                     TempData["Notifications"] = notifications;
                 }
 
-                TempData["SuccessMessage"] = "Başarıyla giriş yaptınız, Anasayfaya yönlendiriliyor!";
+                if (remember)
+                {
+                    TempData["SuccessMessage"] = "Başarıyla giriş yaptınız! Oturumunuz 30 gün boyunca açık kalacaktır.";
+                }
+                else
+                {
+                    TempData["SuccessMessage"] = "Başarıyla giriş yaptınız!";
+                }
                 
                 if (Request.QueryString["ReturnUrl"] != null)
                 {
