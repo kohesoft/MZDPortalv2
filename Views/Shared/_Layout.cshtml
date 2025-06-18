@@ -284,6 +284,9 @@
         </div>
     </div>
 
+    <!-- Global Toast -->
+    <div id="globalToast" class="fixed top-4 right-4 bg-indigo-600 text-white px-4 py-3 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50"></div>
+
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -368,7 +371,6 @@
                 chat.server.send('@User.Identity.Name', message);
                 $('#messageInput').val('').focus();
             });
-            $.connection.hub.start();
         }
         </text>
     }
@@ -386,7 +388,6 @@
                 usersList.append('<li class="online-user">' + user + '</li>');
             });
         };
-        $.connection.hub.start();
     }
 
     // Bildirimler (Notification)
@@ -442,10 +443,8 @@ $(document).on('click', '.notification-link', function (e) {
     if ($.connection && $.connection.notificationHub) {
         var notificationHub = $.connection.notificationHub;
         notificationHub.client.showNotification = function (message) {
-            $('#notificationMessage').html(message);
-            $('#notificationModal').addClass('show');
+            showToast(message, 'info');
         };
-        $.connection.hub.start();
     }
 
     // Scroll to bottom for chat
@@ -472,6 +471,26 @@ $(document).on('click', '.notification-link', function (e) {
     $('#openSidebar').click(function(){
         $('.sidebar').addClass('active');
     });
+
+    // Global toast helper
+    function showToast(msg, type) {
+        var $toast = $('#globalToast');
+        var color = 'bg-indigo-600';
+        if (type === 'success') color = 'bg-green-600';
+        if (type === 'error') color = 'bg-red-600';
+        $toast.removeClass('bg-indigo-600 bg-green-600 bg-red-600').addClass(color)
+              .text(msg)
+              .removeClass('opacity-0')
+              .addClass('opacity-100');
+        setTimeout(function () {
+            $toast.removeClass('opacity-100').addClass('opacity-0');
+        }, 4000);
+    }
+
+    // Start SignalR connection once
+    if ($.connection && $.connection.hub && $.connection.hub.state === $.signalR.connectionState.disconnected) {
+        $.connection.hub.start();
+    }
 });
 
     </script>

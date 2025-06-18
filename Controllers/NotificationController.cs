@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.SignalR;
 using MZDNETWORK.Models;
 using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
+using Ganss.Xss;
 
 public class NotificationController : Controller
 {
@@ -26,9 +27,12 @@ public class NotificationController : Controller
     [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
 
     [HttpPost]
+    [ValidateInput(false)]
     public ActionResult SendNotification(string message)
     {
-        _hubContext.Clients.All.showNotification(message);
+        var sanitizer = new HtmlSanitizer();
+        var safeMessage = sanitizer.Sanitize(message);
+        _hubContext.Clients.All.showNotification(safeMessage);
         return new HttpStatusCodeResult(200);
     }
     [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem,Lider,Merkez,Yerleske, Dokumantasyon")]

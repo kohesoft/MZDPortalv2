@@ -83,7 +83,7 @@
       <HintPath>packages\EPPlus.System.Drawing.7.5.0\lib\net462\EPPlus.System.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="HtmlSanitizer, Version=9.0.0.0, Culture=neutral, PublicKeyToken=61c49a1a9e79cc28, processorArchitecture=MSIL">
-      <HintPath>packages\HtmlSanitizer.9.0.876\lib\net461\HtmlSanitizer.dll</HintPath>
+      <HintPath>packages\HtmlSanitizer.9.0.886\lib\net47\HtmlSanitizer.dll</HintPath>
     </Reference>
     <Reference Include="Lib.Net.Http.EncryptedContentEncoding, Version=2.1.0.0, Culture=neutral, PublicKeyToken=201801898d7264f1, processorArchitecture=MSIL">
       <HintPath>packages\Lib.Net.Http.EncryptedContentEncoding.2.1.0\lib\net461\Lib.Net.Http.EncryptedContentEncoding.dll</HintPath>
