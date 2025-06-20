@@ -9,6 +9,7 @@ using Microsoft.Owin;
 using Owin;
 using WebSocketSharp.Server;
 using System.Web.Http;
+using MZDNETWORK.Helpers;
 
 
 [assembly: OwinStartup(typeof(MZDNETWORK.Startup))]
@@ -82,6 +83,21 @@ namespace MZDNETWORK
             {
                 Logger.Warn("Exception is null");
             }
+        }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            SessionTracker.Increment();
+        }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+            SessionTracker.Decrement();
+        }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            MZDNETWORK.Helpers.HourlyRequestCounter.Increment();
         }
     }
 

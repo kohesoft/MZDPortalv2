@@ -23,6 +23,7 @@ namespace MZDNETWORK.Models
         public DbSet<BeyazTahtaEntry> BeyazTahtaEntries { get; set; }
         public DbSet<TvHeader> TvHeaders { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-
+        public DbSet<DailyMood> DailyMoods { get; set; }
+        public DbSet<LeaveRequest> LeaveRequests { get; set; }
     }
 }

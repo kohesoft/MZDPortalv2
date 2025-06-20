@@ -154,8 +154,8 @@
     <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNetCore.WebUtilities.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.9.0.6\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -170,6 +170,12 @@
     <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=3.1.6.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.DotNet.PlatformAbstractions.3.1.6\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Caching.Abstractions.9.0.6\lib\net462\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Caching.Memory.9.0.6\lib\net462\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Configuration, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Configuration.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
     </Reference>
@@ -182,8 +188,8 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.DependencyInjection.9.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.6\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.DependencyModel.2.1.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
@@ -203,17 +209,17 @@
     <Reference Include="Microsoft.Extensions.Logging, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Logging.9.0.1\lib\net462\Microsoft.Extensions.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Logging.Abstractions.9.0.1\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Logging.Abstractions.9.0.6\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.ObjectPool, Version=9.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.ObjectPool.9.0.1\lib\net462\Microsoft.Extensions.ObjectPool.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Options.9.0.1\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Options, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Options.9.0.6\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Primitives.9.0.1\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Primitives.9.0.6\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.IO.RecyclableMemoryStream.3.0.1\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
@@ -274,6 +280,9 @@
     <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.CodeDom, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.CodeDom.9.0.6\lib\net462\System.CodeDom.dll</HintPath>
+    </Reference>
     <Reference Include="System.Collections.Immutable, Version=9.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Collections.Immutable.9.0.1\lib\net462\System.Collections.Immutable.dll</HintPath>
     </Reference>
@@ -283,8 +292,8 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Diagnostics.DiagnosticSource.9.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Diagnostics.DiagnosticSource.9.0.6\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -299,6 +308,7 @@
     <Reference Include="System.IO.Pipelines, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.Pipelines.9.0.1\lib\net462\System.IO.Pipelines.dll</HintPath>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.6.0\lib\net462\System.Memory.dll</HintPath>
     </Reference>
@@ -443,6 +453,7 @@
     <Compile Include="Controllers\BildirimlerimController.cs" />
     <Compile Include="Controllers\BilgiIslemController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\DailyMoodController.cs" />
     <Compile Include="Controllers\DilekOneriController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DokumantasyonController.cs" />
@@ -450,9 +461,11 @@
     <Compile Include="Controllers\GonderiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsanKaynaklariController.cs" />
+    <Compile Include="Controllers\LeaveRequestController.cs" />
     <Compile Include="Controllers\MeetingRoomController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\OnlineUsersController.cs" />
+    <Compile Include="Controllers\PerformanceController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -461,6 +474,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EnumDisplayHelper.cs" />
+    <Compile Include="Helpers\HourlyRequestCounter.cs" />
+    <Compile Include="Helpers\SessionTracker.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
@@ -473,15 +489,46 @@
     <Compile Include="Migrations\202505261114458_InitialCreate2.Designer.cs">
       <DependentUpon>202505261114458_InitialCreate2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506171700000_AddDailyMood.cs" />
+    <Compile Include="Migrations\202506180553196_ajhbhfjhb.cs" />
+    <Compile Include="Migrations\202506180553196_ajhbhfjhb.Designer.cs">
+      <DependentUpon>202506180553196_ajhbhfjhb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506180650148_ActivityLogs.cs" />
+    <Compile Include="Migrations\202506180650148_ActivityLogs.Designer.cs">
+      <DependentUpon>202506180650148_ActivityLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506180706349_ActivityLogs2.cs" />
+    <Compile Include="Migrations\202506180706349_ActivityLogs2.Designer.cs">
+      <DependentUpon>202506180706349_ActivityLogs2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506181145556_ActivityLogs3.cs" />
+    <Compile Include="Migrations\202506181145556_ActivityLogs3.Designer.cs">
+      <DependentUpon>202506181145556_ActivityLogs3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506181157463_asdasdasd.cs" />
+    <Compile Include="Migrations\202506181157463_asdasdasd.Designer.cs">
+      <DependentUpon>202506181157463_asdasdasd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506191413544_Leaverequest.cs" />
+    <Compile Include="Migrations\202506191413544_Leaverequest.Designer.cs">
+      <DependentUpon>202506191413544_Leaverequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506201349441_Leaverequestv2.cs" />
+    <Compile Include="Migrations\202506201349441_Leaverequestv2.Designer.cs">
+      <DependentUpon>202506201349441_Leaverequestv2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerOption.cs" />
     <Compile Include="Models\BeyazTahtaEntry.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\DailyMood.cs" />
     <Compile Include="Models\DilekOneri.cs" />
     <Compile Include="Models\Dokumantasyon.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Gonderi.cs" />
+    <Compile Include="Models\LeaveRequest.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Reservation.cs" />
@@ -502,6 +549,7 @@
     <Compile Include="Controllers\Kullanici_IslemleriController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\alert.mp3" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\animations.css" />
     <Content Include="Content\Bakim.css" />
@@ -513,6 +561,7 @@
     <Content Include="Content\dilekcreate.css" />
     <Content Include="Content\DilekIstek.css" />
     <Content Include="Content\dilekistekik.css" />
+    <Content Include="Content\ding.mp3" />
     <Content Include="Content\gonderilistele.css" />
     <Content Include="Content\gonderiolustur.css" />
     <Content Include="Content\gonderisil.css" />
@@ -538,10 +587,10 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\boxicons.svg" />
     <Content Include="Global.asax" />
-    <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
     <Content Include="imgs\loader.png" />
     <Content Include="imgs\logo.ico" />
     <Content Include="imgs\logo.png" />
+    <Content Include="izintalep.html" />
     <Content Include="libman.json" />
     <Content Include="logo.ico" />
     <Content Include="logs\logfile.txt" />
@@ -565,6 +614,7 @@
     <Content Include="Scripts\modernizr-3.4.0.js" />
     <Content Include="Scripts\modernizr-3.4.0.min.js" />
     <Content Include="Scripts\pako.min.js" />
+    <Content Include="Scripts\performance-monitor.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -2505,6 +2555,12 @@
     <Content Include="Views\BeyazTahta\TV.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\MeetingRoom\Index.cshtml" />
+    <Content Include="Views\Performance\Index.cshtml" />
+    <Content Include="Views\LeaveRequest\AdminDashboard.cshtml" />
+    <Content Include="Views\LeaveRequest\Create.cshtml" />
+    <Content Include="Views\LeaveRequest\Details.cshtml" />
+    <Content Include="Views\LeaveRequest\Index.cshtml" />
+    <Content Include="Views\LeaveRequest\Review.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="anaimgs\" />
@@ -2525,6 +2581,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505261114458_InitialCreate2.resx">
       <DependentUpon>202505261114458_InitialCreate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506180553196_ajhbhfjhb.resx">
+      <DependentUpon>202506180553196_ajhbhfjhb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506180650148_ActivityLogs.resx">
+      <DependentUpon>202506180650148_ActivityLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506180706349_ActivityLogs2.resx">
+      <DependentUpon>202506180706349_ActivityLogs2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506181145556_ActivityLogs3.resx">
+      <DependentUpon>202506181145556_ActivityLogs3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506181157463_asdasdasd.resx">
+      <DependentUpon>202506181157463_asdasdasd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506191413544_Leaverequest.resx">
+      <DependentUpon>202506191413544_Leaverequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506201349441_Leaverequestv2.resx">
+      <DependentUpon>202506201349441_Leaverequestv2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

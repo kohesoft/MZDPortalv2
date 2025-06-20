@@ -2,53 +2,100 @@
     ViewBag.Title = "Bildirim Gönder";
 }
 
-<h2 style="color:black;">Bildirim Gönder</h2>
+<div class="max-w-xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Bildirim Gönder</h2>
 
-<form id="notificationForm">
-    <div class="form-group">
-        <textarea id="message" class="form-control" placeholder="Mesajınızı girin" rows="5" cols="50"></textarea>
+    <div class="mb-4">
+        <textarea id="message" class="w-full h-40 border-gray-300 rounded-md" placeholder="Mesajınızı girin"></textarea>
     </div>
-    <button type="button" id="sendNotification" class="btn btn-primary">Gönder</button>
-</form>
 
-<!-- TinyMCE -->
+    <div class="flex flex-col md:flex-row md:items-center md:space-x-4 mb-4">
+        <div class="flex-1 mb-2 md:mb-0">
+            <label for="duration" class="block text-sm font-medium text-gray-700 mb-1">Gösterim Süresi (sn)</label>
+            <input type="number" id="duration" value="5" min="1" class="w-full border-gray-300 rounded-md px-2 py-1" />
+        </div>
+
+        <div class="flex-1 mb-2 md:mb-0">
+            <label for="colorSelect" class="block text-sm font-medium text-gray-700 mb-1">Renk</label>
+            <select id="colorSelect" class="w-full border-gray-300 rounded-md px-2 py-1">
+                <option value="info">Mavi</option>
+                <option value="success">Yeşil</option>
+                <option value="warning">Sarı</option>
+                <option value="error">Kırmızı</option>
+            </select>
+        </div>
+
+        <div class="flex items-center mt-2 md:mt-6">
+            <input type="checkbox" id="playSound" class="mr-2" />
+            <label for="playSound" class="text-sm text-gray-700">Ses Çal</label>
+        </div>
+
+        <div class="flex-1 mb-2 md:mb-0">
+            <label for="soundSelect" class="block text-sm font-medium text-gray-700 mb-1">Ses Dosyası</label>
+            <select id="soundSelect" class="w-full border-gray-300 rounded-md px-2 py-1">
+                <option value="@Url.Content("~/Content/notification.mp3")">Varsayılan</option>
+                <option value="@Url.Content("~/Content/ding.mp3")">Ding</option>
+                <option value="@Url.Content("~/Content/alert.mp3")">Alert</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="flex justify-end">
+        <button type="button" id="sendNotification" class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">Gönder</button>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+<link rel="stylesheet" href="~/Content/tailwind.min.css" />
 <script src="~/Scripts/tinymce/tinymce.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         tinymce.init({
             selector: '#message',
-            plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-            toolbar_mode: 'floating',
+            plugins: 'advlist autolink lists link charmap preview',
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+            height: 250
+        });
+
+        $('#sendNotification').click(function () {
+            var content = tinymce.get('message').getContent();
+            if (!content.trim()) {
+                alert('Mesaj boş olamaz.');
+                return;
+            }
+            var durationMs = parseInt($('#duration').val(), 10) * 1000;
+            var color = $('#colorSelect').val();
+            var playSound = $('#playSound').is(':checked');
+            var soundPath = $('#soundSelect').val();
+
+            $.post('@Url.Action("SendNotification", "Notification")', {
+                    message: content,
+                    duration: durationMs,
+                    color: color,
+                    playSound: playSound,
+                    sound: soundPath
+                })
+                .done(function () {
+                    tinymce.get('message').setContent('');
+                    showToast('Bildirim gönderildi.');
+                })
+                .fail(function () {
+                    showToast('Gönderim sırasında hata oluştu.', true);
+                });
         });
     });
+
+    function showToast(message, isError) {
+        var $toast = $('#toast');
+        $toast.html(message)
+              .removeClass(isError ? 'bg-green-600' : 'bg-red-600')
+              .addClass(isError ? 'bg-red-600' : 'bg-green-600')
+              .removeClass('opacity-0')
+              .addClass('opacity-100');
+        setTimeout(function () {
+            $toast.removeClass('opacity-100').addClass('opacity-0');
+        }, 3000);
+    }
 </script>
-
-<style>
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-    .form-control {
-        width: 100%;
-        padding: 10px;
-        margin: 5px 0 10px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    .btn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-        .btn:hover {
-            background-color: #45a049;
-        }
-</style>

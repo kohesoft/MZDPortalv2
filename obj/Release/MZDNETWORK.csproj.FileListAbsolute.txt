@@ -248,3 +248,14 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.Up2Date
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.pdb
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.ajhbhfjhb.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.ActivityLogs.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.ActivityLogs2.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.ActivityLogs3.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.asdasdasd.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\System.CodeDom.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\Microsoft.Extensions.Caching.Abstractions.xml
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\Microsoft.Extensions.Caching.Memory.xml
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\System.CodeDom.xml

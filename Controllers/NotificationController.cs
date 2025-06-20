@@ -28,11 +28,11 @@ public class NotificationController : Controller
 
     [HttpPost]
     [ValidateInput(false)]
-    public ActionResult SendNotification(string message)
+    public ActionResult SendNotification(string message, int duration = 4000, string color = "info", bool playSound = false, string sound = null)
     {
         var sanitizer = new HtmlSanitizer();
         var safeMessage = sanitizer.Sanitize(message);
-        _hubContext.Clients.All.showNotification(safeMessage);
+        _hubContext.Clients.All.showNotification(safeMessage, duration, color, playSound, sound);
         return new HttpStatusCodeResult(200);
     }
     [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem,Lider,Merkez,Yerleske, Dokumantasyon")]

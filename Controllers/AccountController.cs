@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using MZDNETWORK.Models;
+using System.ComponentModel.DataAnnotations;
 
 public class AccountController : Controller
 {
@@ -15,6 +16,7 @@ public class AccountController : Controller
         db = new MZDNETWORKContext();
     }
 
+    [Display(Name = "Giriş Sayfası")]
     [HttpGet]
     public ActionResult Login()
     {
@@ -24,6 +26,7 @@ public class AccountController : Controller
     [AllowAnonymous]
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Display(Name = "Giriş İşlemi")]
     public ActionResult Login(User model, bool rememberMe = false)
     {
         try
@@ -129,6 +132,7 @@ public class AccountController : Controller
     }
 
 
+    [Display(Name = "Çıkış")]
     [HttpGet]
     public ActionResult Logout()
     {
@@ -152,6 +156,7 @@ public class AccountController : Controller
         return false;
     }
 
+    [Display(Name = "Kullanıcı Oluştur Sayfası")]
     [HttpGet]
     public ActionResult Create()
     {
@@ -160,6 +165,7 @@ public class AccountController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Display(Name = "Kullanıcı Oluştur")]
     public ActionResult Create(User model)
     {
         if (ModelState.IsValid)

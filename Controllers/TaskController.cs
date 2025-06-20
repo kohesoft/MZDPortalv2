@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
 using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace MZDNETWORK.Controllers
 {
@@ -244,6 +245,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // Kullanıcıların görevlerini listelemek için yeni bir action
+        [Display(Name = "Görevlerim")]
         public ActionResult UserTasks()
         {
             var username = HttpContext.User.Identity.Name;

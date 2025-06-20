@@ -42,6 +42,15 @@
                         <span class="nav-text">Rehber</span>
                     </a>
                 </li>
+                @if (User.IsInRole("Yonetici") || User.IsInRole("Sys"))
+                {
+                <li>
+                    <a href="@Url.Action("Index", "Performance")" class="nav-link">
+                        <i class='bx bx-line-chart icon'></i>
+                        <span class="nav-text">Performans</span>
+                    </a>
+                </li>
+                }
                 @if (User.IsInRole("IK") || User.IsInRole("Yonetici") || User.IsInRole("Sys"))
                 {
                     <li class="dropdown">
@@ -284,6 +293,49 @@
         </div>
     </div>
 
+    <!-- Günlük Ruh Hali Modalı -->
+    <div id="dailyMoodModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Merhaba, gününüz nasıldı?</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="mood-options flex justify-around text-3xl mb-3">
+                        <label>
+                            <input type="radio" name="dailyMoodChoice" value="1" hidden />
+                            <span>😞</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="dailyMoodChoice" value="2" hidden />
+                            <span>🙁</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="dailyMoodChoice" value="3" hidden />
+                            <span>😐</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="dailyMoodChoice" value="4" hidden />
+                            <span>🙂</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="dailyMoodChoice" value="5" hidden />
+                            <span>😁</span>
+                        </label>
+                    </div>
+                    <textarea id="dailyMoodComment" class="form-control" placeholder="İsterseniz kısa bir yorum ekleyin (opsiyonel)"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button id="submitDailyMood" class="btn-custom">Gönder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Toast -->
+    <div id="globalToast" class="fixed top-4 right-4 bg-indigo-600 text-white px-4 py-3 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50"></div>
+
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -368,7 +420,6 @@
                 chat.server.send('@User.Identity.Name', message);
                 $('#messageInput').val('').focus();
             });
-            $.connection.hub.start();
         }
         </text>
     }
@@ -386,7 +437,6 @@
                 usersList.append('<li class="online-user">' + user + '</li>');
             });
         };
-        $.connection.hub.start();
     }
 
     // Bildirimler (Notification)
@@ -441,11 +491,10 @@ $(document).on('click', '.notification-link', function (e) {
     // Modal bildirimleri (SignalR NotificationHub)
     if ($.connection && $.connection.notificationHub) {
         var notificationHub = $.connection.notificationHub;
-        notificationHub.client.showNotification = function (message) {
-            $('#notificationMessage').html(message);
-            $('#notificationModal').addClass('show');
+        // message(string), duration(int ms), color(string), playSound(bool)
+        notificationHub.client.showNotification = function (message, duration, color, playSound, soundPath) {
+            showToast(message, color || 'info', duration || 4000, playSound, soundPath);
         };
-        $.connection.hub.start();
     }
 
     // Scroll to bottom for chat
@@ -472,6 +521,81 @@ $(document).on('click', '.notification-link', function (e) {
     $('#openSidebar').click(function(){
         $('.sidebar').addClass('active');
     });
+
+    // Global toast helper
+    function showToast(msg, type, duration, playSound, soundPath) {
+        var $toast = $('#globalToast');
+
+        // Renk belirle
+        var colorClass = 'bg-indigo-600';
+        if (type === 'success') colorClass = 'bg-green-600';
+        if (type === 'error') colorClass = 'bg-red-600';
+        if (type === 'warning') colorClass = 'bg-yellow-600';
+        if (type === 'info') colorClass = 'bg-indigo-600';
+
+        // Renkleri sıfırla ve yeni rengi ata
+        $toast.removeClass('bg-indigo-600 bg-green-600 bg-red-600 bg-yellow-600')
+              .addClass(colorClass)
+              .html(msg)
+              .removeClass('opacity-0')
+              .addClass('opacity-100');
+
+        // İstenilen sürede kapat
+        var hideAfter = typeof duration === 'number' && duration > 0 ? duration : 4000;
+        setTimeout(function () {
+            $toast.removeClass('opacity-100').addClass('opacity-0');
+        }, hideAfter);
+
+        // Ses çal (isteğe bağlı)
+        if (playSound) {
+            var path = soundPath ? soundPath : '@Url.Content("~/Content/notification.mp3")';
+            var toastSound = new Audio(path);
+            toastSound.play();
+        }
+    }
+
+    // Günlük ruh hali modal zamanlayıcısı
+    function showDailyMoodModalIfNeeded() {
+        var now = new Date();
+        if (now.getHours() >= 17) {
+            var key = 'dailyMoodCompleted_' + now.toDateString();
+            if (localStorage.getItem(key) !== 'yes') {
+                $('#dailyMoodModal').addClass('show');
+            }
+        }
+    }
+    showDailyMoodModalIfNeeded();
+    setInterval(showDailyMoodModalIfNeeded, 30000);
+
+    // Emoji seçiminde vurgulama
+    $(document).on('change', 'input[name="dailyMoodChoice"]', function () {
+        $('.mood-options label').removeClass('selected');
+        $(this).closest('label').addClass('selected');
+    });
+
+    // Günlük ruh hali gönder
+    $('#submitDailyMood').click(function () {
+        var mood = $('input[name="dailyMoodChoice"]:checked').val();
+        if (!mood) {
+            showToast('Lütfen bir emoji seçin.', 'warning', 4000, false);
+            return;
+        }
+        var comment = $('#dailyMoodComment').val();
+        $.post('@Url.Action("Submit", "DailyMood")', { mood: mood, comment: comment }, function (r) {
+            if (r && r.success) {
+                localStorage.setItem('dailyMoodCompleted_' + new Date().toDateString(), 'yes');
+                $('#dailyMoodModal').removeClass('show');
+                showToast('Teşekkür ederiz!', 'success', 4000, false);
+            } else {
+                showToast('Bir hata oluştu.', 'error', 4000, false);
+            }
+        });
+    });
+
+    // Start SignalR connection once
+    if ($.connection && $.connection.hub && $.connection.hub.state === $.signalR.connectionState.disconnected) {
+        $.connection.hub.start();
+    }
 });
 
     </script>

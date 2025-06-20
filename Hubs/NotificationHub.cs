@@ -3,10 +3,13 @@ using Microsoft.AspNet.SignalR;
 
 public class NotificationHub : Hub
 {
-    public void SendNotification(string message)
+    /// <summary>
+    /// İstemcilere bildirim gönderir. Ek olarak; mesajın ekranda kalma süresi (ms), renk tipi ve ses ayarı da gönderilebilir.
+    /// </summary>
+    public void SendNotification(string message, int duration = 4000, string color = "info", bool playSound = false, string sound = null)
     {
         var sanitizer = new HtmlSanitizer();
         var sanitizedMessage = sanitizer.Sanitize(message);
-        Clients.All.showNotification(sanitizedMessage);
+        Clients.All.showNotification(sanitizedMessage, duration, color, playSound, sound);
     }
 }
