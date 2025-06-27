@@ -466,80 +466,67 @@
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\OnlineUsersController.cs" />
     <Compile Include="Controllers\PerformanceController.cs" />
+    <Compile Include="Controllers\PermissionTreeController.cs" />
+    <Compile Include="Controllers\RoleOrganizationController.cs" />
+    <Compile Include="Controllers\RolePermissionController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\TestPermissionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="Data\PermissionSeeder.cs" />
     <Compile Include="FilterConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DynamicPermissionHelper.cs" />
     <Compile Include="Helpers\EnumDisplayHelper.cs" />
     <Compile Include="Helpers\HourlyRequestCounter.cs" />
+    <Compile Include="Helpers\RoleHelper.cs" />
+    <Compile Include="Helpers\PermissionHelper.cs" />
+    <Compile Include="Helpers\PermissionCacheService.cs" />
+    <Compile Include="Helpers\PermissionTreeBuilder.cs" />
     <Compile Include="Helpers\SessionTracker.cs" />
+    <Compile Include="Attributes\DynamicAuthorizeAttribute.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202505260846376_InitialCreate.cs" />
-    <Compile Include="Migrations\202505260846376_InitialCreate.Designer.cs">
-      <DependentUpon>202505260846376_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505261114458_InitialCreate2.cs" />
-    <Compile Include="Migrations\202505261114458_InitialCreate2.Designer.cs">
-      <DependentUpon>202505261114458_InitialCreate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506171700000_AddDailyMood.cs" />
-    <Compile Include="Migrations\202506180553196_ajhbhfjhb.cs" />
-    <Compile Include="Migrations\202506180553196_ajhbhfjhb.Designer.cs">
-      <DependentUpon>202506180553196_ajhbhfjhb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506180650148_ActivityLogs.cs" />
-    <Compile Include="Migrations\202506180650148_ActivityLogs.Designer.cs">
-      <DependentUpon>202506180650148_ActivityLogs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506180706349_ActivityLogs2.cs" />
-    <Compile Include="Migrations\202506180706349_ActivityLogs2.Designer.cs">
-      <DependentUpon>202506180706349_ActivityLogs2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506181145556_ActivityLogs3.cs" />
-    <Compile Include="Migrations\202506181145556_ActivityLogs3.Designer.cs">
-      <DependentUpon>202506181145556_ActivityLogs3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506181157463_asdasdasd.cs" />
-    <Compile Include="Migrations\202506181157463_asdasdasd.Designer.cs">
-      <DependentUpon>202506181157463_asdasdasd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506191413544_Leaverequest.cs" />
-    <Compile Include="Migrations\202506191413544_Leaverequest.Designer.cs">
-      <DependentUpon>202506191413544_Leaverequest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506201349441_Leaverequestv2.cs" />
-    <Compile Include="Migrations\202506201349441_Leaverequestv2.Designer.cs">
-      <DependentUpon>202506201349441_Leaverequestv2.cs</DependentUpon>
+    <Compile Include="Migrations\202506261050272_dropcreatedatabase.cs" />
+    <Compile Include="Migrations\202506261050272_dropcreatedatabase.Designer.cs">
+      <DependentUpon>202506261050272_dropcreatedatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerOption.cs" />
     <Compile Include="Models\BeyazTahtaEntry.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\Chat.cs" />
+    <Compile Include="Models\ChatMessage.cs" />
     <Compile Include="Models\DailyMood.cs" />
     <Compile Include="Models\DilekOneri.cs" />
     <Compile Include="Models\Dokumantasyon.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Gonderi.cs" />
     <Compile Include="Models\LeaveRequest.cs" />
+    <Compile Include="Models\MeetingRoomReservation.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\ReservationStatus.cs" />
+    <Compile Include="Models\SuggestionComplaint.cs" />
     <Compile Include="Models\Survey.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\TodoItem.cs" />
     <Compile Include="Models\TvHeader.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserAndInfo.cs" />
     <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Models\PermissionNode.cs" />
+    <Compile Include="Models\RolePermission.cs" />
+    <Compile Include="Models\PermissionCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -590,10 +577,8 @@
     <Content Include="imgs\loader.png" />
     <Content Include="imgs\logo.ico" />
     <Content Include="imgs\logo.png" />
-    <Content Include="izintalep.html" />
     <Content Include="libman.json" />
     <Content Include="logo.ico" />
-    <Content Include="logs\logfile.txt" />
     <Content Include="Scripts\901ba758ee.js" />
     <Content Include="fonts\boxicons.eot" />
     <Content Include="fonts\boxicons.ttf" />
@@ -862,15 +847,14 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\xlsx.full.min.js" />
-    <Content Include="UploadPhotosMerkez\menu_20250523.jpg" />
-    <Content Include="UploadPhotosMola\break_schedule_genel.jpg" />
-    <Content Include="UploadPhotosMola\break_schedule_Part 1.jpg" />
+    <Content Include="UploadPhotosMerkez\Beni Oku.txt" />
+    <Content Include="UploadPhotosMola\Beni Oku.txt" />
+    <Content Include="UploadPhotosYerleske\Beni Oku.txt" />
     <Content Include="Views\Gonderi\GonderiListele.cshtml" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Mzdportal.pfx" />
-    <Content Include="logs\nlog-internal.log" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2556,16 +2540,25 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\MeetingRoom\Index.cshtml" />
     <Content Include="Views\Performance\Index.cshtml" />
+    <Content Include="Views\RoleManagement\Index.cshtml" />
+    <Content Include="Views\RoleManagement\UserRoles.cshtml" />
+    <Content Include="Views\RoleManagement\Roles.cshtml" />
     <Content Include="Views\LeaveRequest\AdminDashboard.cshtml" />
     <Content Include="Views\LeaveRequest\Create.cshtml" />
     <Content Include="Views\LeaveRequest\Details.cshtml" />
     <Content Include="Views\LeaveRequest\Index.cshtml" />
     <Content Include="Views\LeaveRequest\Review.cshtml" />
+    <Content Include="Views\RoleOrganization\Index.cshtml" />
+    <Content Include="Views\PermissionTree\Index.cshtml" />
+    <Content Include="Views\RolePermission\Index.cshtml" />
+    <Content Include="Views\Shared\Unauthorized.cshtml" />
+    <Content Include="Views\Home\TestSeeding.cshtml" />
+    <Content Include="Views\RolePermission\Test.cshtml" />
+    <Content Include="Views\TestPermission\Debug.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="anaimgs\" />
     <Folder Include="App_Data\" />
-    <Folder Include="UploadPhotosYerleske\" />
+    <Folder Include="logs\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -2576,32 +2569,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202505260846376_InitialCreate.resx">
-      <DependentUpon>202505260846376_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505261114458_InitialCreate2.resx">
-      <DependentUpon>202505261114458_InitialCreate2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506180553196_ajhbhfjhb.resx">
-      <DependentUpon>202506180553196_ajhbhfjhb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506180650148_ActivityLogs.resx">
-      <DependentUpon>202506180650148_ActivityLogs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506180706349_ActivityLogs2.resx">
-      <DependentUpon>202506180706349_ActivityLogs2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506181145556_ActivityLogs3.resx">
-      <DependentUpon>202506181145556_ActivityLogs3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506181157463_asdasdasd.resx">
-      <DependentUpon>202506181157463_asdasdasd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506191413544_Leaverequest.resx">
-      <DependentUpon>202506191413544_Leaverequest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506201349441_Leaverequestv2.resx">
-      <DependentUpon>202506201349441_Leaverequestv2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202506261050272_dropcreatedatabase.resx">
+      <DependentUpon>202506261050272_dropcreatedatabase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

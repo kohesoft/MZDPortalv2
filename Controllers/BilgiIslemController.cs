@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [Authorize(Roles = "BilgiIslem, Yonetici, Sys")]
+    [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem")]
     public class BilgiIslemController : Controller
     {
         public ActionResult Index()
@@ -30,6 +31,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
+        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.FoodPhoto", Action = "Manage")]
         public ActionResult UploadPhotoMerkez(HttpPostedFileBase photo)
         {
             if (photo != null && photo.ContentLength > 0)
@@ -49,6 +51,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
+        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.FoodPhoto", Action = "Manage")]
         public ActionResult UploadPhotoYerleske(HttpPostedFileBase photo)
         {
             if (photo != null && photo.ContentLength > 0)
@@ -68,6 +71,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
+        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.FoodPhoto", Action = "Manage")]
         public ActionResult DeleteYemekMerkez(string fileName)
         {
             if (!string.IsNullOrEmpty(fileName))
@@ -98,6 +102,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
+        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.FoodPhoto", Action = "Manage")]
         public ActionResult DeleteYemekYerleske(string fileName)
         {
             if (!string.IsNullOrEmpty(fileName))
@@ -127,6 +132,8 @@ namespace MZDNETWORK.Controllers
             return RedirectToAction("YemekYukle", "BilgiIslem");
         }
 
+        [HttpPost]
+        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.BreakPhoto", Action = "Manage")]
         public ActionResult MolaYukle()
         {
             var photoDirectory = HttpContext.Server.MapPath("~/UploadPhotosMola");
@@ -135,6 +142,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
+        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.BreakPhoto", Action = "Manage")]
         public ActionResult UploadMolaPhoto(HttpPostedFileBase photo)
         {
             if (photo != null && photo.ContentLength > 0)
@@ -154,6 +162,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
+        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.BreakPhoto", Action = "Manage")]
         public ActionResult DeleteMola(string fileName)
         {
             if (!string.IsNullOrEmpty(fileName))

@@ -1,0 +1,212 @@
+using System;
+using System.Linq;
+using System.Web.Mvc;
+using MZDNETWORK.Data;
+using MZDNETWORK.Helpers;
+using MZDNETWORK.Attributes;
+using MZDNETWORK.Models;
+
+namespace MZDNETWORK.Controllers
+{
+    /// <summary>
+    /// Permission sistemi test controller'ı
+    /// </summary>
+    public class TestPermissionController : Controller
+    {
+        private MZDNETWORKContext db = new MZDNETWORKContext();
+
+        /// <summary>
+        /// Permission debug sayfası
+        /// </summary>
+        public ActionResult Debug()
+        {
+            var model = new PermissionDebugModel();
+
+            try
+            {
+                // Mevcut kullanıcı bilgileri
+                model.IsAuthenticated = User.Identity.IsAuthenticated;
+                model.Username = User.Identity.Name;
+
+                if (User.Identity.IsAuthenticated)
+                {
+                    // User ID al
+                    var user = db.Users.FirstOrDefault(u => u.Username == model.Username);
+                    if (user != null)
+                    {
+                        model.UserId = user.Id;
+                        
+                        // Roller
+                        model.UserRoles = DynamicPermissionHelper.GetUserRoles(user.Id);
+                        
+                        // Database'den direkt rol kontrolü
+                        var dbRoles = db.UserRoles
+                            .Where(ur => ur.UserId == user.Id)
+                            .Select(ur => ur.Role.Name)
+                            .ToList();
+                        model.DatabaseRoles = dbRoles.ToArray();
+
+                        // Permission testleri
+                        model.PermissionTests = new[]
+                        {
+                            new PermissionTest { Permission = "UserManagement", Action = "View", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "UserManagement", "View") },
+                            new PermissionTest { Permission = "UserManagement", Action = "Create", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "UserManagement", "Create") },
+                            new PermissionTest { Permission = "UserManagement", Action = "Edit", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "UserManagement", "Edit") },
+                            new PermissionTest { Permission = "SystemManagement.RoleManagement", Action = "View", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "SystemManagement.RoleManagement", "View") },
+                            new PermissionTest { Permission = "HumanResources", Action = "View", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "HumanResources", "View") },
+                            new PermissionTest { Permission = "IT", Action = "View", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "IT", "View") }
+                        };
+
+                        // Permission Node'ları kontrol et
+                        model.PermissionNodesCount = db.PermissionNodes.Count(p => p.IsActive);
+                        
+                        // Role Permission'ları kontrol et
+                        var roleIds = db.Roles.Where(r => dbRoles.Contains(r.Name)).Select(r => r.Id).ToList();
+                        model.RolePermissionsCount = db.RolePermissions.Count(rp => roleIds.Contains(rp.RoleId) && rp.IsActive);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                model.ErrorMessage = ex.Message + "\n" + ex.StackTrace;
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// Cache temizleme
+        /// </summary>
+        public ActionResult ClearCache()
+        {
+            try
+            {
+                DynamicPermissionHelper.InvalidateAllCache();
+                TempData["SuccessMessage"] = "Cache başarıyla temizlendi";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Cache temizlenirken hata: " + ex.Message;
+            }
+
+            return RedirectToAction("Debug");
+        }
+
+        /// <summary>
+        /// Permission Seeder'ı çalıştır
+        /// </summary>
+        public ActionResult RunSeeder()
+        {
+            try
+            {
+                // Static method olarak çağır
+                PermissionSeeder.SeedPermissions(db);
+                
+                // Cache'i temizle
+                DynamicPermissionHelper.InvalidateAllCache();
+                
+                TempData["SuccessMessage"] = "Permission Seeder başarıyla çalıştırıldı ve cache temizlendi";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Seeder çalıştırılırken hata: " + ex.Message + "\n" + ex.StackTrace;
+            }
+
+            return RedirectToAction("Debug");
+        }
+
+        /// <summary>
+        /// Test kullanıcısına admin rolü ata
+        /// </summary>
+        public ActionResult AssignAdminRole(string username = null)
+        {
+            try
+            {
+                var targetUsername = username ?? User.Identity.Name;
+                
+                if (string.IsNullOrEmpty(targetUsername))
+                {
+                    TempData["ErrorMessage"] = "Kullanıcı adı bulunamadı";
+                    return RedirectToAction("Debug");
+                }
+
+                var user = db.Users.FirstOrDefault(u => u.Username == targetUsername);
+                if (user == null)
+                {
+                    TempData["ErrorMessage"] = "Kullanıcı bulunamadı: " + targetUsername;
+                    return RedirectToAction("Debug");
+                }
+
+                // Admin rolü var mı kontrol et
+                var adminRole = db.Roles.FirstOrDefault(r => r.Name == "Admin");
+                if (adminRole == null)
+                {
+                    // Admin rolü yoksa oluştur
+                    adminRole = new Role
+                    {
+                        Name = "Admin",
+                        Description = "Sistem Yöneticisi",
+                        IsActive = true,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = user.Id
+                    };
+                    db.Roles.Add(adminRole);
+                    db.SaveChanges();
+                }
+
+                // Kullanıcının admin rolü var mı kontrol et
+                var existingUserRole = db.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id && ur.RoleId == adminRole.Id);
+                if (existingUserRole == null)
+                {
+                    // Admin rolü ata
+                    db.UserRoles.Add(new UserRole
+                    {
+                        UserId = user.Id,
+                        RoleId = adminRole.Id
+                    });
+                    db.SaveChanges();
+                }
+
+                // Cache temizle
+                DynamicPermissionHelper.InvalidateAllCache();
+
+                TempData["SuccessMessage"] = $"'{targetUsername}' kullanıcısına Admin rolü başarıyla atandı";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Admin rolü atanırken hata: " + ex.Message;
+            }
+
+            return RedirectToAction("Debug");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+
+    public class PermissionDebugModel
+    {
+        public bool IsAuthenticated { get; set; }
+        public string Username { get; set; }
+        public int UserId { get; set; }
+        public string[] UserRoles { get; set; } = new string[0];
+        public string[] DatabaseRoles { get; set; } = new string[0];
+        public PermissionTest[] PermissionTests { get; set; } = new PermissionTest[0];
+        public int PermissionNodesCount { get; set; }
+        public int RolePermissionsCount { get; set; }
+        public string ErrorMessage { get; set; }
+    }
+
+    public class PermissionTest
+    {
+        public string Permission { get; set; }
+        public string Action { get; set; }
+        public bool HasPermission { get; set; }
+    }
+} 

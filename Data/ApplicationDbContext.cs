@@ -1,12 +1,17 @@
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
-using System.Threading.Tasks;
+using System.Linq;
+using System.Web;
+using MZDNETWORK.Models;
 
-namespace MZDNETWORK.Models
+namespace MZDNETWORK.Data
 {
     public class MZDNETWORKContext : DbContext
     {
-        public MZDNETWORKContext() : base("name=MZDNETWORKContext")
+        public MZDNETWORKContext() : base("MZDNETWORKContext")
         {
+            Database.SetInitializer<MZDNETWORKContext>(new CreateDatabaseIfNotExists<MZDNETWORKContext>());
         }
         public DbSet<User> Users { get; set; }
         public DbSet<UserInfo> UserInfos { get; set; }
@@ -25,5 +30,147 @@ namespace MZDNETWORK.Models
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<DailyMood> DailyMoods { get; set; }
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
+        
+        // Yeni multiple roles için
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        
+        // Dinamik yetki sistemi için
+        public DbSet<PermissionNode> PermissionNodes { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<PermissionCache> PermissionCaches { get; set; }
+        
+        // Yeni model'lar
+        public DbSet<SuggestionComplaint> SuggestionComplaints { get; set; }
+        public DbSet<MeetingRoomReservation> MeetingRoomReservations { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // PermissionNode self-referencing relationship
+            modelBuilder.Entity<PermissionNode>()
+                .HasOptional(p => p.Parent)
+                .WithMany(p => p.Children)
+                .HasForeignKey(p => p.ParentId);
+
+            // RolePermission relationships
+            modelBuilder.Entity<RolePermission>()
+                .HasRequired(rp => rp.Role)
+                .WithMany()
+                .HasForeignKey(rp => rp.RoleId);
+
+            modelBuilder.Entity<RolePermission>()
+                .HasRequired(rp => rp.PermissionNode)
+                .WithMany()
+                .HasForeignKey(rp => rp.PermissionNodeId);
+
+            // PermissionCache relationship
+            modelBuilder.Entity<PermissionCache>()
+                .HasRequired(pc => pc.User)
+                .WithMany()
+                .HasForeignKey(pc => pc.UserId);
+
+            // UserRole relationships
+            modelBuilder.Entity<UserRole>()
+                .HasRequired(ur => ur.User)
+                .WithMany(u => u.UserRoles)
+                .HasForeignKey(ur => ur.UserId);
+
+            modelBuilder.Entity<UserRole>()
+                .HasRequired(ur => ur.Role)
+                .WithMany()
+                .HasForeignKey(ur => ur.RoleId);
+
+            // AnswerOption relationship - prevent cascade conflicts
+            modelBuilder.Entity<AnswerOption>()
+                .HasRequired(ao => ao.Answer)
+                .WithMany(a => a.Options)
+                .HasForeignKey(ao => ao.AnswerId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AnswerOption>()
+                .HasRequired(ao => ao.Question)
+                .WithMany()
+                .HasForeignKey(ao => ao.QuestionID)
+                .WillCascadeOnDelete(false);
+
+            // BeyazTahtaEntry User relationship
+            modelBuilder.Entity<BeyazTahtaEntry>()
+                .HasOptional(bte => bte.User)
+                .WithMany()
+                .HasForeignKey(bte => bte.UserId)
+                .WillCascadeOnDelete(false);
+
+            // MeetingRoomReservation User relationship  
+            modelBuilder.Entity<MeetingRoomReservation>()
+                .HasRequired(mrr => mrr.User)
+                .WithMany()
+                .HasForeignKey(mrr => mrr.UserId)
+                .WillCascadeOnDelete(false);
+
+            // Notification UserId string to User relationship
+            modelBuilder.Entity<Notification>()
+                .Ignore(n => n.User);
+
+            // SuggestionComplaint User relationship
+            modelBuilder.Entity<SuggestionComplaint>()
+                .HasRequired(sc => sc.User)
+                .WithMany()
+                .HasForeignKey(sc => sc.UserId)
+                .WillCascadeOnDelete(false);
+
+            // LeaveRequest User relationship - using Entity Framework conventions
+            // The User navigation property will be automatically mapped
+
+            // ChatMessage relationships
+            modelBuilder.Entity<ChatMessage>()
+                .HasRequired(cm => cm.Chat)
+                .WithMany(c => c.Messages)
+                .HasForeignKey(cm => cm.ChatId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ChatMessage>()
+                .HasRequired(cm => cm.User)
+                .WithMany()
+                .HasForeignKey(cm => cm.UserId)
+                .WillCascadeOnDelete(false);
+        }
+
+        /// <summary>
+        /// Database seed işlemlerini yapar
+        /// </summary>
+        public static void SeedDatabase()
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                try
+                {
+                    Console.WriteLine("🌱 MZD Portal Database Seeding başlatılıyor...");
+
+                    // 1. Permission ağacını oluştur
+                    PermissionSeeder.SeedPermissions(context);
+
+                    // 2. Temel admin rolü oluştur
+                    PermissionSeeder.CreateDefaultAdminRole(context);
+
+                    // 3. Admin kullanıcısı oluştur
+                    PermissionSeeder.CreateDefaultAdminUser(context);
+
+                    Console.WriteLine("✅ Database seeding tamamlandı!");
+                    Console.WriteLine("🎯 Giriş yapmak için:");
+                    Console.WriteLine("   👤 Kullanıcı: admin");
+                    Console.WriteLine("   🔐 Şifre: admin123");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"❌ Database seeding hatası: {ex.Message}");
+                    Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+                    throw;
+                }
+            }
+        }
     }
 }

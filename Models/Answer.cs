@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -13,6 +14,13 @@ namespace MZDNETWORK.Models
         public string AnswerText { get; set; }
 
         public virtual Question Question { get; set; }
+        
+        // Navigation property for AnswerOptions
+        public virtual ICollection<AnswerOption> Options { get; set; }
+        
+        public Answer()
+        {
+            Options = new HashSet<AnswerOption>();
+        }
     }
-
 }

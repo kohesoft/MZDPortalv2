@@ -7,21 +7,26 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
+using MZDNETWORK.Helpers;
+using MZDNETWORK.Data;
+using MZDNETWORK.Attributes;
 
-namespace MZDNETWORK.Views.InsanKaynaklari
+namespace MZDNETWORK.Controllers
 {
-    [Authorize(Roles = "BilgiIslem, Yonetici, Sys")]
+    [DynamicAuthorize(Permission = "UserManagement.UserManagement")]
     public class Kullanici_IslemleriController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
 
         // GET: IK_Kullanici
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement")]
         public ActionResult Index()
         {
             return View(db.Users.Include(u => u.UserInfo).ToList());
         }
 
         // GET: IK_Kullanici/Details/5
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,8 +42,11 @@ namespace MZDNETWORK.Views.InsanKaynaklari
         }
 
         // GET: IK_Kullanici/Create
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Create")]
         public ActionResult Create()
         {
+            // Tüm rolleri ViewBag'e ekle (dinamik olarak)
+            ViewBag.AvailableRoles = RoleHelper.GetAllRoles();
             return View();
         }
 
@@ -47,20 +55,50 @@ namespace MZDNETWORK.Views.InsanKaynaklari
         // daha fazla bilgi için bkz. https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Username,Password,Role,Name,Surname,Department,Position,Intercom,PhoneNumber,InternalEmail,ExternalEmail,Sicil")] User user, [Bind(Include = "Email,RealPhoneNumber,Adres,Adres2,Sehir,Ulke,Postakodu,KanGrubu,DogumTarihi,Cinsiyet,MedeniDurum")] UserInfo userInfo)
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Create")]
+        public ActionResult Create([Bind(Include = "Id,Username,Password,Role,Name,Surname,Department,Position,Intercom,PhoneNumber,InternalEmail,ExternalEmail,Sicil")] User user, [Bind(Include = "Email,RealPhoneNumber,Adres,Adres2,Sehir,Ulke,Postakodu,KanGrubu,DogumTarihi,Cinsiyet,MedeniDurum")] UserInfo userInfo, string selectedRole)
         {
             if (ModelState.IsValid)
             {
-                user.UserInfo = new List<UserInfo> { userInfo };
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    user.UserInfo = new List<UserInfo> { userInfo };
+                    db.Users.Add(user);
+                    db.SaveChanges();
+
+                    // Seçilen rolü kullanıcıya ata (yeni multiple roles sistemi)
+                    if (!string.IsNullOrEmpty(selectedRole))
+                    {
+                        bool roleAssigned = RoleHelper.AssignRoleToUser(user.Id, selectedRole);
+                        if (!roleAssigned)
+                        {
+                            TempData["ErrorMessage"] = $"Rol '{selectedRole}' atanamadı.";
+                        }
+                        else
+                        {
+                            TempData["SuccessMessage"] = "Kullanıcı başarıyla oluşturuldu ve rol atandı.";
+                        }
+                    }
+                    else
+                    {
+                        TempData["SuccessMessage"] = "Kullanıcı başarıyla oluşturuldu.";
+                    }
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Kullanıcı oluşturulurken bir hata oluştu: " + ex.Message);
+                }
             }
 
+            // Hata durumunda rolleri tekrar yükle
+            ViewBag.AvailableRoles = RoleHelper.GetAllRoles();
             return View(user);
         }
 
         // GET: IK_Kullanici/Edit/5
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,18 +118,73 @@ namespace MZDNETWORK.Views.InsanKaynaklari
         // daha fazla bilgi için bkz. https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Username,Password,Role,Name,Surname,Department,Position,Intercom,PhoneNumber,InternalEmail,ExternalEmail,Sicil")] User user, [Bind(Include = "Id,Email,RealPhoneNumber,Adres,Adres2,Sehir,Ulke,Postakodu,KanGrubu,DogumTarihi,Cinsiyet,MedeniDurum")] UserInfo userInfo)
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Edit")]
+        public ActionResult Edit([Bind(Include = "Id,Username,Password,Name,Surname,Department,Position,Intercom,PhoneNumber,InternalEmail,ExternalEmail,Sicil")] User user, [Bind(Include = "Id,Email,RealPhoneNumber,Adres,Adres2,Sehir,Ulke,Postakodu,KanGrubu,DogumTarihi,Cinsiyet,MedeniDurum")] UserInfo userInfo)
         {
-            // UserInfo nesnesinin UserId alanını User nesnesinin Id alanı ile eşleştir
-            userInfo.UserId = user.Id; // int türünden int türüne atama
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Veritabanından mevcut kullanıcıyı al
+                    var existingUser = db.Users.Include(u => u.UserInfo).FirstOrDefault(u => u.Id == user.Id);
+                    if (existingUser == null)
+                    {
+                        return HttpNotFound();
+                    }
 
-            db.Entry(user).State = EntityState.Modified;
-            db.Entry(userInfo).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
+                    // User bilgilerini güncelle
+                    existingUser.Username = user.Username;
+                    existingUser.Password = user.Password;
+                    existingUser.Name = user.Name;
+                    existingUser.Surname = user.Surname;
+                    existingUser.Department = user.Department;
+                    existingUser.Position = user.Position;
+                    existingUser.Intercom = user.Intercom;
+                    existingUser.PhoneNumber = user.PhoneNumber;
+                    existingUser.InternalEmail = user.InternalEmail;
+                    existingUser.ExternalEmail = user.ExternalEmail;
+                    existingUser.Sicil = user.Sicil;
+
+                    // UserInfo varsa güncelle, yoksa oluştur
+                    var existingUserInfo = existingUser.UserInfo.FirstOrDefault();
+                    if (existingUserInfo != null)
+                    {
+                        // Mevcut UserInfo'yu güncelle
+                        existingUserInfo.Email = userInfo.Email;
+                        existingUserInfo.RealPhoneNumber = userInfo.RealPhoneNumber;
+                        existingUserInfo.Adres = userInfo.Adres;
+                        existingUserInfo.Adres2 = userInfo.Adres2;
+                        existingUserInfo.Sehir = userInfo.Sehir;
+                        existingUserInfo.Ulke = userInfo.Ulke;
+                        existingUserInfo.Postakodu = userInfo.Postakodu;
+                        existingUserInfo.KanGrubu = userInfo.KanGrubu;
+                        existingUserInfo.DogumTarihi = userInfo.DogumTarihi;
+                        existingUserInfo.Cinsiyet = userInfo.Cinsiyet;
+                        existingUserInfo.MedeniDurum = userInfo.MedeniDurum;
+                    }
+                    else
+                    {
+                        // Yeni UserInfo oluştur
+                        userInfo.UserId = user.Id;
+                        existingUser.UserInfo.Add(userInfo);
+                    }
+
+                    db.SaveChanges();
+                    TempData["SuccessMessage"] = "Kullanıcı bilgileri başarıyla güncellendi.";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    TempData["ErrorMessage"] = "Kullanıcı güncellenirken bir hata oluştu: " + ex.Message;
+                    return View(user);
+                }
+            }
+
+            return View(user);
         }
 
         // GET: IK_Kullanici/Delete/5
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Delete")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,6 +202,7 @@ namespace MZDNETWORK.Views.InsanKaynaklari
         // POST: IK_Kullanici/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             try

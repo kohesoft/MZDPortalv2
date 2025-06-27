@@ -1,16 +1,20 @@
 ﻿using Microsoft.AspNet.Identity;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using MZDNETWORK.Attributes;
 
+[DynamicAuthorize(Permission = "Operational.Survey")]
 public class AnswerController : Controller
 {
+    // Sınıf genelinde Survey görüntüleme izni
     private MZDNETWORKContext db = new MZDNETWORKContext();
 
     // Kullanıcı anketi doldururken
-    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske, Dokumantasyon")]
+    [DynamicAuthorize(Permission = "Operational.Survey")]
     public ActionResult TakeSurvey(int surveyId)
     {
         var survey = db.Surveys
@@ -29,8 +33,7 @@ public class AnswerController : Controller
         return View(survey);
     }
 
-    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske, Dokumantasyon")]
-
+    [DynamicAuthorize(Permission = "Operational.Survey", Action = "Create")]
     [HttpPost]
     public ActionResult SubmitSurvey(FormCollection form)
     {

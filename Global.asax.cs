@@ -10,6 +10,7 @@ using Owin;
 using WebSocketSharp.Server;
 using System.Web.Http;
 using MZDNETWORK.Helpers;
+using MZDNETWORK.Data;
 
 
 [assembly: OwinStartup(typeof(MZDNETWORK.Startup))]
@@ -27,6 +28,20 @@ namespace MZDNETWORK
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // **YENİ: Dynamic Permission System Seeding**
+            try
+            {
+                Logger.Info("Starting database seeding...");
+                MZDNETWORKContext.SeedDatabase();
+                Logger.Info("Database seeding completed successfully");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Database seeding failed");
+                // Production'da bu hata nedeniyle uygulama çökmemeli
+                // Sadece log'a kaydedip devam ediyoruz
+            }
         }
       
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -44,11 +59,35 @@ namespace MZDNETWORK
                         if (userData.Length >= 2)
                         {
                             var username = userData[0];
-                            var role = userData[1];
-                            var roles = new[] { role };
+                            var userId = userData[1];
+                            
+                            // Multiple roles desteği için RoleHelper kullan
+                            string[] roles;
+                            if (int.TryParse(userId, out int userIdInt))
+                            {
+                                roles = MZDNETWORK.Helpers.RoleHelper.GetUserRoles(userIdInt);
+                                if (roles.Length == 0)
+                                {
+                                    // Backward compatibility - eski userData formatı kontrol et
+                                    if (userData.Length >= 3)
+                                    {
+                                        roles = new[] { userData[2] }; // Eski role format
+                                    }
+                                    else
+                                    {
+                                        roles = new[] { "Default" }; // Fallback
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // Eski format: username|role
+                                var role = userData[1];
+                                roles = new[] { role };
+                            }
 
                             HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(formsIdentity, roles);
-                            Logger.Info($"User authenticated: {username}, Role: {role}, IP: {HttpContext.Current.Request.UserHostAddress}, URL: {HttpContext.Current.Request.Url}");
+                            Logger.Info($"User authenticated: {username}, Roles: {string.Join(", ", roles)}, IP: {HttpContext.Current.Request.UserHostAddress}, URL: {HttpContext.Current.Request.Url}");
                         }
                         else
                         {

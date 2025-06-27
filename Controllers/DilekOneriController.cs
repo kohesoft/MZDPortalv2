@@ -1,17 +1,20 @@
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
 using System.Linq;
 using System.Web.Mvc;
 using System;
 using System.Data.Entity; // Added for DbContext
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [Authorize(Roles = "IK, Yonetici, Sys, BilgiIslem, Merkez,Yerleske , IdariIsler, Lider, Dokumantasyon")]
+    [DynamicAuthorize(Permission = "Operational.Suggestion")]
     public class DilekOneriController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
 
         [HttpGet]
+        [DynamicAuthorize(Permission = "Operational.Suggestion", Action = "Create")]
         public ActionResult Create()
         {
             var model = new DilekOneri
@@ -22,7 +25,8 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken] // Recommended for POST actions to prevent CSRF attacks
+        [ValidateAntiForgeryToken]
+        [DynamicAuthorize(Permission = "Operational.Suggestion", Action = "Create")]
         public ActionResult Create(DilekOneri model)
         {
             if (ModelState.IsValid)
@@ -49,20 +53,19 @@ namespace MZDNETWORK.Controllers
                 {
                     // Log the exception for debugging purposes (e.g., using a logging framework)
                     System.Diagnostics.Debug.WriteLine($"Error creating DilekOneri: {GetFullErrorMessage(ex)}");
-                    ViewBag.ErrorMessage = "Bir hata oluþtu: " + ex.Message; // Provide a user-friendly error message
+                    ViewBag.ErrorMessage = "Bir hata oluÅŸtu: " + ex.Message; // Provide a user-friendly error message
                 }
             }
             else
             {
                 // Collect and display model validation errors
                 var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
-                ViewBag.ErrorMessage = "Lütfen formdaki hatalarý düzeltin: " + string.Join("; ", errors);
+                ViewBag.ErrorMessage = "LÃ¼tfen formdaki hatalarÄ± dÃ¼zeltin: " + string.Join("; ", errors);
             }
 
             // If model is not valid or an error occurred, return the view with the model
             return View(model);
         }
-
         // Helper to get detailed error messages
         private string GetFullErrorMessage(Exception ex)
         {
@@ -84,7 +87,7 @@ namespace MZDNETWORK.Controllers
             }
             base.Dispose(disposing);
         }
-
+        [DynamicAuthorize(Permission = "Operational.Suggestion")]
         public ActionResult Bildirimlerim()
         {
             // Use the class-level db context, no need for 'using (var context = new MZDNETWORKContext())' here
@@ -94,14 +97,15 @@ namespace MZDNETWORK.Controllers
         }
 
         // This action seems to be for sending a *new* reply, not updating an existing one.
-        // It's inconsistent with the "Yanýtla" button's purpose of updating an existing entry.
-        // I've kept it as is but note that UpdateMessage is likely the correct one for the 'Yanýtla' button.
+        // It's inconsistent with the "YanÄ±tla" button's purpose of updating an existing entry.
+        // I've kept it as is but note that UpdateMessage is likely the correct one for the 'YanÄ±tla' button.
         [HttpPost]
+        [DynamicAuthorize(Permission = "HumanResources.Suggestion.Reply", Action = "Create")]
         public JsonResult SendReply(string username, string message)
         {
             if (string.IsNullOrWhiteSpace(message))
             {
-                return Json(new { success = false, error = "Mesaj alaný gereklidir." });
+                return Json(new { success = false, error = "Mesaj alanÄ± gereklidir." });
             }
 
             try
@@ -112,7 +116,7 @@ namespace MZDNETWORK.Controllers
                 var dilekOneri = new DilekOneri
                 {
                     Username = username,
-                    Mesaj = "Yanýt: " + message, // Added "Yanýt:" to differentiate if this is a reply
+                    Mesaj = "YanÄ±t: " + message, // Added "YanÄ±t:" to differentiate if this is a reply
                     Bilidirim = null, // This would be the admin's reply, but here it's empty
                     GonderimTarihi = DateTime.Now,
                     IsAnonymous = false // Assuming replies are not anonymous
@@ -129,7 +133,7 @@ namespace MZDNETWORK.Controllers
                     var notification = new Notification
                     {
                         UserId = user.Id.ToString(),
-                        Message = $"Yanýtýnýz gönderildi: {message.Substring(0, Math.Min(message.Length, 50))}...", // Truncate message
+                        Message = $"YanÄ±tÄ±nÄ±z gÃ¶nderildi: {message.Substring(0, Math.Min(message.Length, 50))}...", // Truncate message
                         IsRead = false,
                         CreatedDate = DateTime.Now
                     };
@@ -157,7 +161,7 @@ namespace MZDNETWORK.Controllers
         }
 
 
-        [Authorize(Roles = "Yonetici, Sys, IdariIsler, IK")]
+        [DynamicAuthorize(Permission = "HumanResources.Suggestion.Reply", Action = "Edit")]
         [HttpPost]
         public JsonResult UpdateMessage(int id, string message)
         {
@@ -180,7 +184,7 @@ namespace MZDNETWORK.Controllers
                         var notification = new Notification
                         {
                             UserId = user.Id.ToString(),
-                            Message = "Dilek ve öneriniz yanýtlandý.",
+                            Message = "Dilek ve Ã¶neriniz yanÄ±tlandÄ±.",
                             IsRead = false,
                             CreatedDate = DateTime.Now
                         };
@@ -192,7 +196,7 @@ namespace MZDNETWORK.Controllers
                 }
                 else
                 {
-                    return Json(new { success = false, error = "Mesaj bulunamadý." });
+                    return Json(new { success = false, error = "Mesaj bulunamadÄ±." });
                 }
             }
             catch (Exception ex)

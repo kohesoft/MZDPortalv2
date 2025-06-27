@@ -4,13 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
 using MZDNETWORK.Hubs;
 using Microsoft.AspNet.SignalR;
 using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [Authorize]
+    [DynamicAuthorize(Permission = "Operational.LeaveRequest")]
     public class LeaveRequestController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
@@ -35,6 +37,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: LeaveRequest/Create
+        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "Create")]
         public ActionResult Create()
         {
             PrepareSelectLists();
@@ -65,6 +68,7 @@ namespace MZDNETWORK.Controllers
         // POST: LeaveRequest/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "Create")]
         public async Task<ActionResult> Create(LeaveRequest leaveRequest)
         {
             if (ModelState.IsValid)
@@ -82,9 +86,20 @@ namespace MZDNETWORK.Controllers
                 db.LeaveRequests.Add(leaveRequest);
                 await db.SaveChangesAsync();
 
-                // Notify HR/Admin users
+                // Notify HR/Admin users - Yeni UserRoles sistemi kullan
+                var hrRoleIds = db.Roles
+                    .Where(r => r.Name == "IK" || r.Name == "Yonetici" || r.Name == "Sys" || r.Name == "IdariIsler")
+                    .Select(r => r.Id)
+                    .ToList();
+
+                var hrUserIds = db.UserRoles
+                    .Where(ur => hrRoleIds.Contains(ur.RoleId))
+                    .Select(ur => ur.UserId)
+                    .Distinct()
+                    .ToList();
+
                 var hrUsers = await db.Users
-                    .Where(u => u.Role == "IK" || u.Role == "Yonetici" || u.Role == "Sys" || u.Role == "IdariIsler")
+                    .Where(u => hrUserIds.Contains(u.Id))
                     .ToListAsync();
 
                 foreach (var hrUser in hrUsers)
@@ -110,7 +125,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: LeaveRequest/Review/5
-        [Authorize(Roles = "Sys,Yonetici,IK,IdariIsler")]
+        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "Edit")]
         public async Task<ActionResult> Review(int? id)
         {
             if (id == null)
@@ -143,7 +158,7 @@ namespace MZDNETWORK.Controllers
         // POST: LeaveRequest/Review/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Sys,Yonetici,IK,IdariIsler")]
+        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "Edit")]
         public async Task<ActionResult> Review(int id, LeaveStatus status, string approvalReason)
         {
             var leaveRequest = await db.LeaveRequests.FindAsync(id);
@@ -188,7 +203,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: LeaveRequest/AdminDashboard
-        [Authorize(Roles = "Sys,Yonetici,IK")]
+        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "View")]
         public async Task<ActionResult> AdminDashboard()
         {
             var requests = await db.LeaveRequests
@@ -201,6 +216,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: LeaveRequest/Details/5
+        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "View")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -232,6 +248,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: LeaveRequest/GetSubstitutesByDepartment
+        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "View")]
         public JsonResult GetSubstitutesByDepartment(string department)
         {
             var substitutes = db.Users

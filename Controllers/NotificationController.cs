@@ -2,14 +2,17 @@
 using System.Web.Mvc;
 using Microsoft.AspNet.SignalR;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
 using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
 using Ganss.Xss;
+using MZDNETWORK.Attributes;
 
+[DynamicAuthorize(Permission = "SystemManagement.Notification")]
 public class NotificationController : Controller
 {
     private readonly MZDNETWORKContext db;
-    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
 
+    [DynamicAuthorize(Permission = "SystemManagement.Notification", Action = "Create")]
     public ActionResult SendNotification()
     {
         return View();
@@ -24,10 +27,9 @@ public class NotificationController : Controller
 
     }
 
-    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
-
     [HttpPost]
     [ValidateInput(false)]
+    [DynamicAuthorize(Permission = "SystemManagement.Notification", Action = "Create")]
     public ActionResult SendNotification(string message, int duration = 4000, string color = "info", bool playSound = false, string sound = null)
     {
         var sanitizer = new HtmlSanitizer();
@@ -35,9 +37,9 @@ public class NotificationController : Controller
         _hubContext.Clients.All.showNotification(safeMessage, duration, color, playSound, sound);
         return new HttpStatusCodeResult(200);
     }
-    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem,Lider,Merkez,Yerleske, Dokumantasyon")]
 
     [HttpPost]
+    [DynamicAuthorize(Permission = "SystemManagement.Notification")]
     public ActionResult MarkAsRead(int id)
     {
         var notification = db.Notifications.SingleOrDefault(n => n.Id == id);
@@ -48,9 +50,9 @@ public class NotificationController : Controller
         }
         return Json(new { success = true });
     }
-    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem,Lider,Merkez,Yerleske, Dokumantasyon")]
 
     [HttpGet]
+    [DynamicAuthorize(Permission = "SystemManagement.Notification")]
     public ActionResult GetUnreadNotifications()
     {
         var username = User.Identity.Name;

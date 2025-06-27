@@ -1,10 +1,11 @@
 ﻿using System.Web.Mvc;
 using Microsoft.AspNet.SignalR;
 using MZDNETWORK.Hubs;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [AllowAnonymous]
+    [DynamicAuthorize(Permission = "SystemManagement.OnlineUsers")]
     public class OnlineUsersController : Controller
     {
         private readonly IHubContext _hubContext;
@@ -14,16 +15,19 @@ namespace MZDNETWORK.Controllers
             _hubContext = GlobalHost.ConnectionManager.GetHubContext<OnlineUsersHub>();
         }
 
+        [DynamicAuthorize(Permission = "SystemManagement.OnlineUsers")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [DynamicAuthorize(Permission = "SystemManagement.OnlineUsers")]
         public ActionResult Logout()
         {
             return RedirectToAction("Index");
         }
 
+        [DynamicAuthorize(Permission = "SystemManagement.OnlineUsers")]
         [HttpGet]
         public ActionResult GetOnlineUsers()
         {

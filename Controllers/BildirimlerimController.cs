@@ -4,15 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
-
+using MZDNETWORK.Data;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske, Dokumantasyon")]
+    [DynamicAuthorize(Permission = "Operational.Suggestion")]
     public class BildirimlerimController : Controller
     {
-
-
         public ActionResult Bildirimlerim()
         {
             try
@@ -26,7 +25,6 @@ namespace MZDNETWORK.Controllers
             }
             catch (Exception ex)
             {
-
                 return new HttpStatusCodeResult(500, "Internal server error");
             }
         }

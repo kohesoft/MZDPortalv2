@@ -4,16 +4,21 @@ using System.Linq;
 using System.Web.Mvc;
 using MZDNETWORK;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
+    [DynamicAuthorize(Permission = "Operational.WhiteBoard")]
     public class BeyazTahtaController : Controller
     {
         private readonly MZDNETWORKContext db = new MZDNETWORKContext();
 
+        [DynamicAuthorize(Permission = "Operational.WhiteBoard")]
         public ActionResult Index()
             => View();
 
+        [DynamicAuthorize(Permission = "Operational.WhiteBoard")]
         public ActionResult TV()
         {
             // Varsayılan başlıklar
@@ -21,6 +26,7 @@ namespace MZDNETWORK.Controllers
             return View();
         }
 
+        [DynamicAuthorize(Permission = "Operational.WhiteBoard.Header")]
         [HttpGet]
         public JsonResult GetHeader()
         {
@@ -29,7 +35,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
+        [DynamicAuthorize(Permission = "Operational.WhiteBoard.UpdateHeader", Action = "Edit")]
         public JsonResult UpdateHeader(string title)
         {
             var h = db.TvHeaders.Find(1);
@@ -40,6 +46,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpGet]
+        [DynamicAuthorize(Permission = "Operational.WhiteBoard.Entry")]
         public JsonResult GetEntries()
         {
             var list = db.BeyazTahtaEntries
@@ -56,7 +63,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Dokumantasyon, Yonetici, Sys, IdariIsler, BilgiIslem, IK, Lider, Merkez, Yerleske")]
+        [DynamicAuthorize(Permission = "Operational.WhiteBoard.Entry", Action = "Create")]
         public JsonResult CreateEntry(BeyazTahtaEntry vm)
         {
             vm.CreatedAt = DateTime.Now;
@@ -66,7 +73,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
+        [DynamicAuthorize(Permission = "Operational.WhiteBoard.Entry", Action = "Edit")]
         public JsonResult EditEntry(BeyazTahtaEntry vm)
         {
             var ent = db.BeyazTahtaEntries.Find(vm.Id);
@@ -79,7 +86,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
+        [DynamicAuthorize(Permission = "Operational.WhiteBoard.Entry", Action = "Delete")]
         public JsonResult DeleteEntry(int id)
         {
             var ent = db.BeyazTahtaEntries.Find(id);

@@ -36,20 +36,21 @@
                 </div>
 
                 <div class="flex-row">
-                    <label class="lf--label" for="Role">
+                    <label class="lf--label" for="selectedRole">
                         <i class='bx bx-user'></i>
                     </label>
-                    @Html.DropDownListFor(model => model.Role, new SelectList(new List<SelectListItem>
-                            {
-                        new SelectListItem { Text = "Yönetici", Value = "Yonetici" },
-                        new SelectListItem { Text = "Bilgi İşlem", Value = "BilgiIslem" },
-                        new SelectListItem { Text = "İnsan Kaynakları", Value = "IK" },
-                        new SelectListItem { Text = "İdari İşler", Value = "IdariIsler" },
-                        new SelectListItem { Text = "Lider", Value = "Lider" },
-                        new SelectListItem { Text = "Dokümantasyon", Value = "Dokumantasyon" },
-                        new SelectListItem { Text = "Merkez", Value = "Merkez" },
-                        new SelectListItem { Text = "Yerleşke", Value = "Yerleske" }
-                    }, "Value", "Text"), "Rol Seçiniz", new { @class = "lf--input" })
+                    @{
+                        var availableRoles = ViewBag.AvailableRoles as List<MZDNETWORK.Models.Role> ?? new List<MZDNETWORK.Models.Role>();
+                        var roleSelectList = availableRoles.Select(r => new SelectListItem
+                        {
+                            Value = r.Name,
+                            Text = r.Description ?? r.Name
+                        });
+                    }
+                    @Html.DropDownList("selectedRole", roleSelectList, "Rol Seçiniz", new { @class = "lf--input" })
+                    <small style="color: #666; font-size: 12px; margin-top: 5px;">
+                        Not: Kullanıcı oluşturulduktan sonra ek roller atayabilirsiniz.
+                    </small>
                 </div>
 
                 <div class="flex-row">

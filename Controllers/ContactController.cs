@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
 using OfficeOpenXml;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
@@ -19,8 +21,7 @@ namespace MZDNETWORK.Controllers
             return View(users);
         }
 
-        [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem")]
-
+        [DynamicAuthorize(Permission = "Operational.Contact", Action = "Export")]
         [HttpPost]
         public ActionResult ExportToExcel(List<List<string>> data)
         {

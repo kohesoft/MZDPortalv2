@@ -1,0 +1,95 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MZDNETWORK.Models
+{
+    /// <summary>
+    /// Chat mesajı modeli
+    /// </summary>
+    public class ChatMessage
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        public int ChatId { get; set; }
+
+        [ForeignKey("ChatId")]
+        public virtual Chat Chat { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
+
+        [Required]
+        [Column(TypeName = "text")]
+        [Display(Name = "Mesaj İçeriği")]
+        public string Content { get; set; }
+
+        [StringLength(50)]
+        [Display(Name = "Mesaj Türü")]
+        public string MessageType { get; set; } = "Text"; // Text, Image, File, System
+
+        [StringLength(200)]
+        [Display(Name = "Dosya Yolu")]
+        public string FilePath { get; set; }
+
+        [StringLength(100)]
+        [Display(Name = "Dosya Adı")]
+        public string FileName { get; set; }
+
+        [Display(Name = "Dosya Boyutu")]
+        public long? FileSize { get; set; }
+
+        [Display(Name = "Yanıtlanan Mesaj")]
+        public int? ReplyToMessageId { get; set; }
+
+        [ForeignKey("ReplyToMessageId")]
+        public virtual ChatMessage ReplyToMessage { get; set; }
+
+        [Display(Name = "Düzenlendi mi?")]
+        public bool IsEdited { get; set; } = false;
+
+        [Display(Name = "Silindi mi?")]
+        public bool IsDeleted { get; set; } = false;
+
+        [Display(Name = "Silinme Tarihi")]
+        public DateTime? DeletedAt { get; set; }
+
+        [Display(Name = "Silen Kullanıcı")]
+        public int? DeletedBy { get; set; }
+
+        [ForeignKey("DeletedBy")]
+        public virtual User DeletedByUser { get; set; }
+
+        [Display(Name = "Gönderilme Tarihi")]
+        public DateTime SentAt { get; set; } = DateTime.Now;
+
+        [Display(Name = "Düzenlenme Tarihi")]
+        public DateTime? EditedAt { get; set; }
+
+        [Display(Name = "Okundu mu?")]
+        public bool IsRead { get; set; } = false;
+
+        [Display(Name = "Okunma Tarihi")]
+        public DateTime? ReadAt { get; set; }
+
+        [Display(Name = "IP Adresi")]
+        [StringLength(45)]
+        public string IpAddress { get; set; }
+
+        [Display(Name = "User Agent")]
+        [StringLength(500)]
+        public string UserAgent { get; set; }
+
+        [StringLength(50)]
+        [Display(Name = "Durum")]
+        public string Status { get; set; } = "Sent"; // Sent, Delivered, Read, Failed
+
+        [Display(Name = "Aktif mi?")]
+        public bool IsActive { get; set; } = true;
+    }
+} 

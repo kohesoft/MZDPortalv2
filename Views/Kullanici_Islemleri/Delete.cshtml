@@ -2,19 +2,10 @@
 
 @{
     ViewBag.Title = "Kullanıcı Sil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-</head>
-<body style="color:white;" class="container">
-
+<div class="container mx-auto text-white p-4">
     <div class="container">
         <h3 style="color:red;">Bu kullanıcıyı silmek istediğinizden emin misiniz?</h3>
         <div class="dilek-istek-form login-form">
@@ -41,13 +32,13 @@
         {
             @Html.AntiForgeryToken()
             <div class="form-group">
-                <button type="submit" class="btn btn-danger" style="z-index: 1; position: relative;">Kullanıcıyı Sil</button>
-                <a href="@Url.Action("Index", "Kullanici_Islemleri")" class="btn btn-secondary" style="z-index: 1; position: relative;">İptal</a>
+                <button type="submit" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded">Kullanıcıyı Sil</button>
+                <a href="@Url.Action("Index", "Kullanici_Islemleri")" class="ml-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded">İptal</a>
             </div>
         }
     </div>
+</div>
 
-</body>
 <style>
     .login-form {
         width: 100%;
@@ -89,4 +80,3 @@
         padding-left: 0rem;
     }
 </style>
-</html>

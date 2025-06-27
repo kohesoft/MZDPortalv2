@@ -7,13 +7,16 @@ using System.Diagnostics;
 using System.Management;
 using System.Threading.Tasks;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Net;
 using MZDNETWORK.Helpers;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
+    [DynamicAuthorize(Permission = "SystemManagement.Performance")]
     public class PerformanceController : Controller
     {
         private static PerformanceCounter cpuCounter;
@@ -447,7 +450,7 @@ namespace MZDNETWORK.Controllers
         {
             try
             {
-                using (var context = new MZDNETWORK.Models.MZDNETWORKContext())
+                using (var context = new MZDNETWORKContext())
                 {
                     return context.Database.Exists();
                 }

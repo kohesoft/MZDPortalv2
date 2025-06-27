@@ -2,10 +2,12 @@ using System;
 using System.Linq;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [Authorize]
+    [DynamicAuthorize(Permission = "Operational.DailyMood")]
     public class DailyMoodController : Controller
     {
         private readonly MZDNETWORKContext _db = new MZDNETWORKContext();

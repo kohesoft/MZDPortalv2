@@ -4,25 +4,30 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
+using MZDNETWORK.Attributes;
+
 
 namespace MZDNETWORK.Controllers
 {
-   [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler")]
+    // Dinamik yetki kontrolü – İnsan Kaynakları Duyuruları
+    // Görüntüleme için class seviyesinde View izni yeterli
+    [DynamicAuthorize(Permission = "HumanResources.Announcements")]
     public class GonderiController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext(); // Veritabanı context'i
 
-
+        // Yeni duyuru oluşturma formu
+        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
         public ActionResult GonderiOlustur()
         {
             return View();
         }
 
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
+        [DynamicAuthorize(Permission = "HumanResources.Announcements", Action = "Create")]
         public ActionResult GonderiOlustur(Gonderi model)
         {
             try
@@ -44,14 +49,16 @@ namespace MZDNETWORK.Controllers
             return View(model);
         }
 
-        // Gönderi Listeleme
+        // Duyuru listeleme
+        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
         public ActionResult GonderiListele()
         {
             var gonderiler = db.Gonderiler.ToList();
             return View(gonderiler);
         }
 
-        // Gönderi Silme
+        // Duyuru silme – onay sayfası
+        [DynamicAuthorize(Permission = "HumanResources.Announcements", Action = "Delete")]
         [HttpGet]
         public ActionResult GonderiSil(int id)
         {
@@ -65,6 +72,7 @@ namespace MZDNETWORK.Controllers
 
         [HttpPost, ActionName("GonderiSil")]
         [ValidateAntiForgeryToken]
+        [DynamicAuthorize(Permission = "HumanResources.Announcements", Action = "Delete")]
         public ActionResult GonderiSilConfirmed(int id)
         {
             var gonderi = db.Gonderiler.Find(id);

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-   [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler")]
+    [DynamicAuthorize(Permission = "HumanResources.Suggestion")]
     public class InsanKaynaklariController : Controller
     {
-
         private readonly MZDNETWORKContext db;
 
         public InsanKaynaklariController()
@@ -19,21 +20,17 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpGet]
+        [DynamicAuthorize(Permission = "HumanResources.Suggestion")]
         public ActionResult DilekIstek_IK()
         {
             var dilekIstekler = db.DilekOneriler.ToList();
             return View(dilekIstekler);
         }
 
+        [DynamicAuthorize(Permission = "HumanResources.Suggestion")]
         public ActionResult Index()
         {
             return View();
         }
-
-
-        
-
-
-
     }
 }

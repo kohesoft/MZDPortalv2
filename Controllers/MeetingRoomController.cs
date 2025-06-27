@@ -4,27 +4,29 @@ using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [Authorize]
+    [DynamicAuthorize(Permission = "Operational.MeetingRoom")]
     public class MeetingRoomController : Controller
     {
         private readonly MZDNETWORKContext db = new MZDNETWORKContext();
 
-        [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider")]
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "View")]
         public ActionResult Index()
         {
             ViewBag.Reservations = db.Reservations
                 .OrderBy(r => r.Date)
                 .ThenBy(r => r.StartTime)
                 .ToList();
-            ViewBag.IsAdmin = User.IsInRole("Yonetici") || User.IsInRole("Sys");
+            ViewBag.IsAdmin = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom", "Manage");
             ViewBag.CurrentUserName = User.Identity.GetUserName();
             ViewBag.CurrentUserId = User.Identity.GetUserId();
             return View();
         }
-        [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider")]
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "View")]
         [HttpGet]
         public JsonResult GetReservations()
         {
@@ -54,7 +56,7 @@ namespace MZDNETWORK.Controllers
 
             return Json(reservations, JsonRequestBehavior.AllowGet);
         }
-        [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider")]
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult CreateReservation(
@@ -130,7 +132,7 @@ namespace MZDNETWORK.Controllers
 
 
 
-        [Authorize(Roles = "Yonetici, Sys, IK")]
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Approve")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult ApproveReservation(int id)
@@ -144,7 +146,7 @@ namespace MZDNETWORK.Controllers
             return Json(new { success = true });
         }
 
-        [Authorize(Roles = "Yonetici, Sys, IK")]
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Reject")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult RejectReservation(int id, string reason)

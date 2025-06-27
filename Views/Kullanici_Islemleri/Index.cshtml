@@ -65,10 +65,22 @@
                                     <td class="px-4 py-2">@Html.DisplayFor(modelItem => item.Username)</td>
                                     <td class="px-4 py-2">••••••••</td>
                                     <td class="px-4 py-2">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                            @(item.Role == "Admin" ? "bg-blue-100 text-blue-800" : item.Role == "Manager" ? "bg-purple-100 text-purple-800" : "bg-green-100 text-green-800")">
-                                            @Html.DisplayFor(modelItem => item.Role)
-                                        </span>
+                                        @if (item.RoleNames != null && item.RoleNames.Any())
+                                        {
+                                            foreach (var roleName in item.RoleNames)
+                                            {
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full mr-1 mb-1
+                                                    @(roleName == "Admin" ? "bg-blue-100 text-blue-800" : roleName == "Manager" ? "bg-purple-100 text-purple-800" : "bg-green-100 text-green-800")">
+                                                    @roleName
+                                                </span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                                                Rol Atanmamış
+                                            </span>
+                                        }
                                     </td>
                                     <td class="px-4 py-2">@Html.DisplayFor(modelItem => item.Name)</td>
                                     <td class="px-4 py-2">@Html.DisplayFor(modelItem => item.Surname)</td>

@@ -5,12 +5,14 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
     using MZDNETWORK.Models;
+    using MZDNETWORK.Data;
 
     internal sealed class Configuration : DbMigrationsConfiguration<MZDNETWORKContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;  // Geçici olarak açalım
+            AutomaticMigrationDataLossAllowed = false;
             ContextKey = "ApplicationDbContext";
         }
 

@@ -7,10 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [Authorize(Roles = "Dokumantasyon, Yonetici, Sys, IdariIsler, BilgiIslem, IK, Lider, Merkez, Yerleske")]
     public class DokumantasyonController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
@@ -20,8 +21,7 @@ namespace MZDNETWORK.Controllers
         {
             return View(db.Dokumantasyons.ToList());
         }
-      [Authorize(Roles = "Dokumantasyon, Yonetici, Sys")]
-        // GET: Dokumantasyon
+
         public ActionResult Index_sorumlu()
         {
             return View(db.Dokumantasyons.ToList());
@@ -41,7 +41,7 @@ namespace MZDNETWORK.Controllers
             }
             return View(dokumantasyon);
         }
-        [Authorize(Roles = "Dokumantasyon, Yonetici, Sys")]
+
         // GET: Dokumantasyon/Create
         [HttpGet]
         public ActionResult Create()
@@ -52,6 +52,7 @@ namespace MZDNETWORK.Controllers
             };
             return View(model);
         }
+
         // POST: Dokumantasyon/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -59,7 +60,7 @@ namespace MZDNETWORK.Controllers
         {
             if (ModelState.IsValid)
             {
-                dokumantasyon.Username = User.Identity.Name; // Oturum açan kullanıcının adını ekleyin
+                dokumantasyon.Username = User.Identity.Name;
 
                 db.Dokumantasyons.Add(dokumantasyon);
                 db.SaveChanges();
@@ -68,7 +69,7 @@ namespace MZDNETWORK.Controllers
 
             return View(dokumantasyon);
         }
-        [Authorize(Roles = "Dokumantasyon, Yonetici, Sys")]
+
         // GET: Dokumantasyon/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -83,7 +84,7 @@ namespace MZDNETWORK.Controllers
             }
             return View(dokumantasyon);
         }
-        [Authorize(Roles = "Dokumantasyon, Yonetici, Sys")]
+
         // POST: Dokumantasyon/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -94,7 +95,7 @@ namespace MZDNETWORK.Controllers
                 var existingDokumantasyon = db.Dokumantasyons.AsNoTracking().FirstOrDefault(d => d.Id == dokumantasyon.Id);
                 if (existingDokumantasyon != null)
                 {
-                    dokumantasyon.Username = existingDokumantasyon.Username; // Username'i değiştirmeyin
+                    dokumantasyon.Username = existingDokumantasyon.Username;
                 }
 
                 db.Entry(dokumantasyon).State = EntityState.Modified;
@@ -103,7 +104,7 @@ namespace MZDNETWORK.Controllers
             }
             return View(dokumantasyon);
         }
-        [Authorize(Roles = "Dokumantasyon, Yonetici, Sys")]
+
         // GET: Dokumantasyon/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -118,7 +119,7 @@ namespace MZDNETWORK.Controllers
             }
             return View(dokumantasyon);
         }
-        [Authorize(Roles = "Dokumantasyon, Yonetici, Sys")]
+
         // POST: Dokumantasyon/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

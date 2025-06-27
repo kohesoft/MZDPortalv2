@@ -1,12 +1,11 @@
 ﻿using System.Web.Mvc;
 using Microsoft.AspNet.SignalR;
 using MZDNETWORK.Hubs;
-using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider")]
-
+    [DynamicAuthorize(Permission = "Operational.Chat")]
     public class ChatController : Controller
     {
         private readonly IHubContext _hubContext;
@@ -17,6 +16,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
+        [DynamicAuthorize(Permission = "Operational.Chat", Action = "Create")]
         public ActionResult SendMessage(string user, string message)
         {
             _hubContext.Clients.All.broadcastMessage(user, message);

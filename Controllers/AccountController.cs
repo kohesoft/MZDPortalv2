@@ -5,8 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
 using System.ComponentModel.DataAnnotations;
 
+[AllowAnonymous]
 public class AccountController : Controller
 {
     private readonly MZDNETWORKContext db;
@@ -23,7 +25,7 @@ public class AccountController : Controller
         return View();
     }
 
-    [AllowAnonymous]
+    
     [HttpPost]
     [ValidateAntiForgeryToken]
     [Display(Name = "Giriş İşlemi")]
@@ -46,22 +48,23 @@ public class AccountController : Controller
                 remember = rawRemember.Equals("true", StringComparison.OrdinalIgnoreCase) || rawRemember.Equals("on", StringComparison.OrdinalIgnoreCase) || rawRemember == "1";
             }
 
-            if (IsValidUser(model.Username, model.Password, out string role))
+            if (IsValidUser(model.Username, model.Password, out int userId, out string[] rolesArray))
             {
                 // Önce mevcut tüm authentication cookie'lerini temizle
                 FormsAuthentication.SignOut();
                 Session.Clear();
                 Session.Abandon();
 
-                // Kullanıcı bilgilerini ve rolü içeren bir ticket oluştur
-                var userData = $"{model.Username}|{role}";
+                // Kullanıcı bilgilerini ve userId içeren bir ticket oluştur (multiple roles için)
+                var rolesCsv = string.Join(",", rolesArray ?? new string[0]);
+                var userData = $"{model.Username}|{userId}|{rolesCsv}"; // Multiple roles tutulur
                 var authTicket = new FormsAuthenticationTicket(
                     1,                              // Versiyon
                     model.Username,                 // Kullanıcı adı
                     DateTime.Now,                   // Oluşturulma zamanı
                     remember ? DateTime.Now.AddDays(30) : DateTime.Now.AddMinutes(30), // Bitiş zamanı
                     remember,                     // Kalıcı cookie mi?
-                    userData,                       // Kullanıcı bilgileri ve rol
+                    userData,                       // Kullanıcı bilgileri ve userId
                     FormsAuthentication.FormsCookiePath // Cookie yolu
                 );
 
@@ -88,12 +91,15 @@ public class AccountController : Controller
 
                 // Session'a kullanıcı bilgilerini ekle
                 Session["UserName"] = model.Username;
-                Session["UserRole"] = role;
+                Session["UserRoles"] = rolesArray;
 
                 var user = db.Users.SingleOrDefault(u => u.Username == model.Username);
                 if (user != null)
                 {
                     Session["UserId"] = user.Id;
+                    if (rolesArray == null || rolesArray.Length == 0)
+                        rolesArray = MZDNETWORK.Helpers.RoleHelper.GetUserRoles(user.Id);
+                    Session["UserRoles"] = rolesArray;
                     var notifications = db.Notifications
                         .Where(n => n.UserId == user.Id.ToString() && !n.IsRead)
                         .ToList();
@@ -140,19 +146,26 @@ public class AccountController : Controller
         return RedirectToAction("Login", "Account");
     }
 
-    private bool IsValidUser(string username, string password, out string role)
+    private bool IsValidUser(string username, string password, out int userId, out string[] roles)
     {
         using (var context = new MZDNETWORKContext())
         {
             var user = context.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
             if (user != null)
             {
-                role = user.Role;
-                Debug.WriteLine($"Role: {role}");
+                userId = user.Id;
+                roles = context.UserRoles
+                    .Where(ur => ur.UserId == user.Id)
+                    .Select(ur => ur.Role.Name)
+                    .ToArray();
+                if (roles.Length == 0)
+                    roles = new[] { "User" };
+                Debug.WriteLine($"UserId: {userId}, Roles: {string.Join(",", roles)}");
                 return true;
             }
         }
-        role = null;
+        userId = 0;
+        roles = null;
         return false;
     }
 

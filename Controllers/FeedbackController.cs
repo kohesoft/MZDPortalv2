@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
 using System.Linq;
+using MZDNETWORK.Attributes;
 
-[AllowAnonymous]
 public class FeedbackController : Controller
 {
     private MZDNETWORKContext db = new MZDNETWORKContext();

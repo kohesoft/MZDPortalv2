@@ -4,13 +4,14 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
+using MZDNETWORK.Data;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
+using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [Authorize(Roles = "IK, Yonetici, Sys, IdariIsler, BilgiIslem, Lider, Merkez, Yerleske, Dokumantasyon")]
-
+    [DynamicAuthorize(Permission = "Operational.Task")]
     public class TaskController : Controller
     {
         private readonly MZDNETWORKContext _context;
@@ -20,7 +21,7 @@ namespace MZDNETWORK.Controllers
             _context = new MZDNETWORKContext();
         }
 
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
+        [DynamicAuthorize(Permission = "Operational.Task")]
         public ActionResult Index()
         {
             var currentUsername = User.Identity.Name; // Oturum açmı kullanıcının kullanıcı adını al
@@ -28,16 +29,15 @@ namespace MZDNETWORK.Controllers
             return View(tasks);
         }
 
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
+        [DynamicAuthorize(Permission = "Operational.Task", Action = "Create")]
         public ActionResult Create()
         {
             ViewData["Username"] = new SelectList(_context.Users, "Username", "Username");
             return View();
         }
-
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [DynamicAuthorize(Permission = "Operational.Task", Action = "Create")]
         public async Task<ActionResult> Create(MZDNETWORK.Models.Task task, string[] todoDescriptions, string[] additionalDescriptions, DateTime[] dueDates)
         {
             if (ModelState.IsValid)
@@ -91,7 +91,7 @@ namespace MZDNETWORK.Controllers
 
 
 
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
+        [DynamicAuthorize(Permission = "Operational.Task", Action = "Edit")]
         public ActionResult Edit(int id)
         {
             var task = _context.Tasks.Include("TodoItems").FirstOrDefault(t => t.Id == id);
@@ -104,7 +104,7 @@ namespace MZDNETWORK.Controllers
             ViewBag.TodoItems = task.TodoItems; // Mevcut TodoItems ��elerini ViewBag'e ekle
             return View(task);
         }
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
+        [DynamicAuthorize(Permission = "Operational.Task", Action = "Edit")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(MZDNETWORK.Models.Task task, string[] todoDescriptions, string[] additionalDescriptions, DateTime[] dueDates)
@@ -160,7 +160,7 @@ namespace MZDNETWORK.Controllers
             ViewBag.Username = task.Username; // Username bilgisini ViewBag'e ekle
             return View(task);
         }
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
+        [DynamicAuthorize(Permission = "Operational.Task", Action = "Delete")]
         public ActionResult Delete(int id)
         {
             var task = _context.Tasks.FirstOrDefault(t => t.Id == id);
@@ -172,7 +172,7 @@ namespace MZDNETWORK.Controllers
             ViewBag.Username = task.Username; // Username bilgisini ViewBag'e ekle
             return View(task);
         }
-        [Authorize(Roles = "BilgiIslem, Yonetici, Sys,IK,Lider,IdariIsler")]
+        [DynamicAuthorize(Permission = "Operational.Task", Action = "Delete")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -203,6 +203,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
+        [DynamicAuthorize(Permission = "Operational.Task", Action = "Edit")]
         public async Task<ActionResult> UpdateProgress(int taskId, int todoItemId, bool isCompleted)
         {
             var todoItem = _context.TodoItems.FirstOrDefault(t => t.Id == todoItemId);
@@ -225,6 +226,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
+        [DynamicAuthorize(Permission = "Operational.Task", Action = "Edit")]
         public async Task<ActionResult> UpdateAdditionalDescription(int taskId, int todoItemId, string additionalDescription)
         {
             if (string.IsNullOrEmpty(additionalDescription))
@@ -245,6 +247,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // Kullanıcıların görevlerini listelemek için yeni bir action
+        [DynamicAuthorize(Permission = "Operational.Task")]
         [Display(Name = "Görevlerim")]
         public ActionResult UserTasks()
         {

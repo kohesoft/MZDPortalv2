@@ -23,8 +23,17 @@
                 <dd>@Html.DisplayFor(model => model.Password)</dd>
             </div>
             <div class="detail-row">
-                <dt>@Html.DisplayNameFor(model => model.Role)</dt>
-                <dd>@Html.DisplayFor(model => model.Role)</dd>
+                <dt>Roller</dt>
+                <dd>
+                    @if (Model.RoleNames != null && Model.RoleNames.Any())
+                    {
+                        @string.Join(", ", Model.RoleNames)
+                    }
+                    else
+                    {
+                        <span>Rol Atanmamış</span>
+                    }
+                </dd>
             </div>
             <div class="detail-row">
                 <dt>@Html.DisplayNameFor(model => model.Name)</dt>
