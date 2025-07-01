@@ -1,0 +1,196 @@
+﻿@{
+    var photos = Directory.GetFiles(Server.MapPath("~/UploadPhotosMola"))
+        .Select(path => new
+        {
+            FileName = Path.GetFileName(path),
+            // Örnek: break_schedule_uretim.jpg => Üretim
+            Department = Path.GetFileNameWithoutExtension(path)
+                .Replace("break_schedule_", "")
+                .Replace("_", " ")
+                .Replace("uretim", "Üretim")
+                .Replace("muhasebe", "Muhasebe")
+                .Replace("satis", "Satış")
+                .Replace("it", "IT")
+                .Replace("insan kaynaklari", "İnsan Kaynakları")
+                .Replace("pazarlama", "Pazarlama")
+        }).ToList();
+
+    var departments = photos.Select(p => p.Department).Distinct().ToList();
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mola Saatleri</title>
+    <link rel="stylesheet" href="~/Content/boxicons.min.css" />
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+    <link rel="stylesheet" href="~/Content/all.min.css" />
+    <link href="~/Content/mola.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="break-container">
+            <div class="break-header">
+                <h1 class="break-title text-2xl md:text-3xl">
+                    <i class='bx bx-coffee clock-icon'></i>
+                    Mola Saatleri
+                </h1>
+                <p class="text-sm md:text-base mt-2 opacity-90">Departmanlara göre mola ve dinlenme saatlerini görüntüleyebilirsiniz</p>
+            </div>
+            <div class="break-body">
+                <div class="search-container">
+                    <i class='bx bx-search search-icon'></i>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Departman arayın...">
+                </div>
+                <div class="department-filter" id="departmentFilter">
+                    <button class="active" data-filter="all">Tümü</button>
+                    @foreach (var dep in departments)
+                    {
+                        <button data-filter="@dep">@dep</button>
+                    }
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="breakGrid">
+                    @foreach (var photo in photos)
+                    {
+                        <div class="break-item" data-department="@photo.Department" data-filename="@photo.FileName">
+                            <div class="break-card bg-white rounded-lg overflow-hidden shadow-md">
+                                <div class="relative">
+                                    <img src="~/UploadPhotosMola/@photo.FileName" alt="@photo.Department" class="break-image w-full h-48 object-cover cursor-pointer" data-filename="@photo.FileName" />
+                                    <span class="department-badge">
+                                        <i class='bx bxs-building mr-1'></i> @photo.Department
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class='bx bx-x'></i>
+            </button>
+            <img src="" alt="Mola Saatleri" class="lightbox-image" id="lightboxImage">
+            <div class="lightbox-nav">
+                <button id="prevImage"><i class='bx bx-chevron-left'></i></button>
+                <button id="nextImage"><i class='bx bx-chevron-right'></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fotoğrafları ve departmanları JS'e aktar
+        const photos = [
+            @foreach (var photo in photos)
+            {
+                @: { fileName: '@photo.FileName', department: '@photo.Department' },
+            }
+        ];
+
+        // Filtreleme ve arama
+        const breakGrid = document.getElementById('breakGrid');
+        const departmentFilter = document.getElementById('departmentFilter');
+        const searchInput = document.getElementById('searchInput');
+
+        function displayPhotos(filter = 'all', searchTerm = '') {
+            const items = breakGrid.querySelectorAll('.break-item');
+            let visibleCount = 0;
+            items.forEach(item => {
+                const dep = item.getAttribute('data-department').toLowerCase();
+                const file = item.getAttribute('data-filename').toLowerCase();
+                const matchesFilter = (filter === 'all' || dep === filter.toLowerCase());
+                const matchesSearch = (!searchTerm || dep.includes(searchTerm.toLowerCase()));
+                if (matchesFilter && matchesSearch) {
+                    item.style.display = '';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            if (visibleCount === 0) {
+                if (!document.getElementById('emptyState')) {
+                    const empty = document.createElement('div');
+                    empty.id = 'emptyState';
+                    empty.className = 'empty-state col-span-full';
+                    empty.innerHTML = `<i class='bx bx-search'></i><p>Aradığınız kriterlere uygun mola saati bulunamadı.</p>`;
+                    breakGrid.appendChild(empty);
+                }
+            } else {
+                const empty = document.getElementById('emptyState');
+                if (empty) empty.remove();
+            }
+        }
+
+        departmentFilter.addEventListener('click', function (e) {
+            if (e.target.tagName === 'BUTTON') {
+                document.querySelectorAll('#departmentFilter button').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                displayPhotos(e.target.dataset.filter, searchInput.value);
+            }
+        });
+
+        searchInput.addEventListener('input', function () {
+            const activeFilter = document.querySelector('#departmentFilter button.active').dataset.filter;
+            displayPhotos(activeFilter, this.value);
+        });
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const prevButton = document.getElementById('prevImage');
+        const nextButton = document.getElementById('nextImage');
+        let currentIndex = -1;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            lightboxImage.src = '/UploadPhotosMola/' + photos[index].fileName;
+            lightboxImage.alt = photos[index].department + ' Mola Saatleri';
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function showPrevImage() {
+            if (currentIndex > 0) openLightbox(currentIndex - 1);
+            else openLightbox(photos.length - 1);
+        }
+        function showNextImage() {
+            if (currentIndex < photos.length - 1) openLightbox(currentIndex + 1);
+            else openLightbox(0);
+        }
+
+        breakGrid.addEventListener('click', function (e) {
+            if (e.target.classList.contains('break-image')) {
+                const fileName = e.target.getAttribute('data-filename');
+                const idx = photos.findIndex(p => p.fileName === fileName);
+                if (idx !== -1) openLightbox(idx);
+            }
+        });
+        lightboxClose.addEventListener('click', closeLightbox);
+        prevButton.addEventListener('click', showPrevImage);
+        nextButton.addEventListener('click', showNextImage);
+        lightbox.addEventListener('click', function (e) {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            else if (e.key === 'ArrowLeft') showPrevImage();
+            else if (e.key === 'ArrowRight') showNextImage();
+        });
+
+        // İlk yüklemede tüm fotoğrafları göster
+        displayPhotos();
+    </script>
+</body>
+</html>

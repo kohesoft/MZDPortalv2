@@ -1,6 +1,8 @@
 using Ganss.Xss;
 using Microsoft.AspNet.SignalR;
+using MZDNETWORK.Attributes;
 
+[DynamicAuthorize(Permission = "SystemManagement.Notification", Action = "Create")]
 public class NotificationHub : Hub
 {
     /// <summary>

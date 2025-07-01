@@ -1,0 +1,407 @@
+﻿
+.anasayfa-body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    color: #333;
+}
+
+.anasayfa-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.anasayfa-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.anasayfa-header-icon {
+    font-size: 2rem;
+    color: #3a7bd5;
+}
+
+.anasayfa-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0;
+}
+
+.anasayfa-timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+    .anasayfa-timeline::before {
+        content: '';
+        position: absolute;
+        left: 50px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, transparent, #3a7bd5, #3a7bd5, transparent);
+    }
+
+.anasayfa-timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 80px;
+}
+
+    .anasayfa-timeline-item:last-child {
+        margin-bottom: 0;
+    }
+
+.anasayfa-timeline-dot {
+    position: absolute;
+    left: 44px;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #3a7bd5;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.75rem;
+    z-index: 2;
+}
+
+.anasayfa-timeline-content {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+    .anasayfa-timeline-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+.anasayfa-timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.anasayfa-timeline-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.anasayfa-timeline-date {
+    font-size: 0.875rem;
+    color: #718096;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.anasayfa-timeline-body {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+    .anasayfa-timeline-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+
+    .anasayfa-timeline-body a {
+        color: #3a7bd5;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .anasayfa-timeline-body a:hover {
+            text-decoration: underline;
+        }
+
+.anasayfa-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.anasayfa-empty-icon {
+    font-size: 3rem;
+    color: #a0aec0;
+    margin-bottom: 1rem;
+}
+
+.anasayfa-empty-text {
+    color: #718096;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.anasayfa-loading {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    gap: 1rem;
+    color: #718096;
+}
+
+    .anasayfa-loading i {
+        font-size: 2rem;
+        color: #3a7bd5;
+    }
+
+/* Modal Styles */
+.anasayfa-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+    .anasayfa-modal.show {
+        display: block;
+    }
+
+.anasayfa-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.anasayfa-modal-container {
+    position: relative;
+    background-color: #fff;
+    margin: 10vh auto;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 1002;
+    animation: modalSlideIn 0.3s ease;
+    overflow: hidden;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.anasayfa-modal-header {
+    background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+    color: white;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.anasayfa-modal-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.anasayfa-modal-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+    .anasayfa-modal-close:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+.anasayfa-modal-body {
+    padding: 1.5rem;
+}
+
+.anasayfa-modal-question {
+    font-size: 1.1rem;
+    color: #2d3748;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.anasayfa-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.anasayfa-btn-like,
+.anasayfa-btn-dislike {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.anasayfa-btn-like {
+    background-color: #d1fae5;
+    color: #047857;
+}
+
+    .anasayfa-btn-like:hover {
+        background-color: #a7f3d0;
+    }
+
+.anasayfa-btn-dislike {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+    .anasayfa-btn-dislike:hover {
+        background-color: #fecaca;
+    }
+
+.anasayfa-suggestion {
+    display: none;
+    margin-top: 1.5rem;
+}
+
+.anasayfa-suggestion-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.anasayfa-suggestion-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #4a5568;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+    .anasayfa-suggestion-input:focus {
+        outline: none;
+        border-color: #3a7bd5;
+        box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.1);
+        background-color: #fff;
+    }
+
+.anasayfa-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1.25rem;
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.anasayfa-btn-submit {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(58, 123, 213, 0.25);
+}
+
+    .anasayfa-btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 10px rgba(58, 123, 213, 0.3);
+    }
+
+/* Responsive tasarÄ±m */
+@media (max-width: 768px) {
+    .anasayfa-timeline::before {
+        left: 30px;
+    }
+
+    .anasayfa-timeline-item {
+        padding-left: 60px;
+    }
+
+    .anasayfa-timeline-dot {
+        left: 24px;
+    }
+
+    .anasayfa-timeline-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .anasayfa-modal-buttons {
+        flex-direction: column;
+    }
+
+    .anasayfa-btn-like,
+    .anasayfa-btn-dislike {
+        width: 100%;
+        justify-content: center;
+    }
+}

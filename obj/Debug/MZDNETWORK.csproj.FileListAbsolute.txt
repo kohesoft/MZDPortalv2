@@ -1,6 +1,5 @@
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.App.config
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.AssemblyReference.cache
-C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.dropcreatedatabase.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Properties.Resources.resources
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.GenerateResource.cache
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.CoreCompileInputs.cache
@@ -253,3 +252,8 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\tr\System.Web.Optimization
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.Up2Date
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.pdb
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.apppublish.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.updatedatabase3333.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.updatedatabase33335.resources
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\System.Data.SQLite.dll
+C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\System.Data.SQLite.xml

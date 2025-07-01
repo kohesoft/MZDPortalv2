@@ -9,6 +9,7 @@ namespace MZDNETWORK.Models
     {
         Pending,
         Approved,
-        Rejected
+        Rejected,
+        Cancelled
     }
 }

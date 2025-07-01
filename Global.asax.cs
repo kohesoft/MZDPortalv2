@@ -11,6 +11,7 @@ using WebSocketSharp.Server;
 using System.Web.Http;
 using MZDNETWORK.Helpers;
 using MZDNETWORK.Data;
+using OfficeOpenXml;
 
 
 [assembly: OwinStartup(typeof(MZDNETWORK.Startup))]
@@ -28,6 +29,9 @@ namespace MZDNETWORK
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // EPPlus 5+ gereği lisans bağlamını belirle
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             // **YENİ: Dynamic Permission System Seeding**
             try

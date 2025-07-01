@@ -9,16 +9,16 @@ using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "Operational.WhiteBoard")]
+    
     public class BeyazTahtaController : Controller
     {
         private readonly MZDNETWORKContext db = new MZDNETWORKContext();
 
-        [DynamicAuthorize(Permission = "Operational.WhiteBoard")]
+        
         public ActionResult Index()
             => View();
 
-        [DynamicAuthorize(Permission = "Operational.WhiteBoard")]
+        
         public ActionResult TV()
         {
             // Varsayılan başlıklar
@@ -26,7 +26,7 @@ namespace MZDNETWORK.Controllers
             return View();
         }
 
-        [DynamicAuthorize(Permission = "Operational.WhiteBoard.Header")]
+        
         [HttpGet]
         public JsonResult GetHeader()
         {
@@ -46,7 +46,6 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpGet]
-        [DynamicAuthorize(Permission = "Operational.WhiteBoard.Entry")]
         public JsonResult GetEntries()
         {
             var list = db.BeyazTahtaEntries

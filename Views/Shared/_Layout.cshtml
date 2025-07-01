@@ -11,6 +11,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/popper")
+    <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
 </head>
 <body>
     @if (TempData["SuccessMessage"] != null)
@@ -42,7 +43,8 @@
                         <span class="nav-text">Rehber</span>
                     </a>
                 </li>
-
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Create"))
+                    {   
                 <li class="dropdown">
                     <button class="dropdown-toggle nav-link" type="button">
                         <i class='bx bx-calendar-check icon'></i>
@@ -50,7 +52,7 @@
                         <i class='bx bx-chevron-down icon'></i>
                     </button>
                     <ul class="dropdown-menu">
-                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Edit"))
+                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Approve"))
                         {
                             <li><a href="@Url.Action("AdminDashboard", "LeaveRequest")" class="nav-link">İzin Talebi Yönetimi</a></li>
                         }
@@ -60,7 +62,7 @@
                         }
                     </ul>
                 </li>
-                
+                    }
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SystemManagement.Performance"))
                 {
                 <li>
@@ -70,7 +72,8 @@
                     </a>
                 </li>
                 }
-
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.Suggestion"))
+                {
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
                             <i class='bx bx-street-view icon'></i>
@@ -92,7 +95,9 @@
                             }
                         </ul>
                     </li>
-                
+                }
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("UserManagement.UserManagement"))
+                {
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
                             <i class='bx bx-signal-5 icon'></i>
@@ -130,8 +135,43 @@
                             }
                         </ul>
                     </li>
-                
+                }
+@* Güvenlik menüsü *@
 
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.VisitorEntry"))
+                {
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
+                            <i class='bx bx-shield icon'></i>
+                            <span class="nav-text">Güvenlik</span>
+                            <i class='bx bx-chevron-down icon'></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown">
+                                <button class="dropdown-toggle nav-link" type="button">
+                                    <span class="nav-text">Ziyaretçi</span>
+                                    <i class='bx bx-chevron-down icon'></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Index", "VisitorEntry")" class="nav-link">Ziyaretçi Kayıtları</a></li>
+                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.VisitorEntry", "Create"))
+                                    {
+                                        <li><a href="@Url.Action("Create", "VisitorEntry")" class="nav-link">Ziyaretçi Ekle</a></li>
+                                    }
+                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.VisitorEntry", "Manage"))
+                                    {
+                                        <li><a href="@Url.Action("Header", "VisitorEntry")" class="nav-link">Üst Bilgi</a></li>
+                                    }
+                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.VisitorEntry", "Export"))
+                                    {
+                                        <li><a href="@Url.Action("ExportExcel", "VisitorEntry")" class="nav-link">Excel İndir</a></li>
+                                        <li><a href="@Url.Action("Print", "VisitorEntry")" class="nav-link">Yazdır</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                }
                 <!--
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
@@ -191,6 +231,12 @@
                         <span class="nav-text">Mola Saatleri</span>
                     </a>
                 </li>
+                <li>
+                    <a href="@Url.Action("Index","ServiceRoute")" class="nav-link">
+                        <i class='bx bx-map icon'></i>
+                        <span class="nav-text">Servis Güzergâhları</span>
+                    </a>
+                </li>
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Operational.Task"))
                 {
                     <li class="dropdown">
@@ -229,6 +275,7 @@
                         </a>
                     </li>
                 }
+                
                 <li>
                     <a href="@Url.Action("TV", "BeyazTahta")" class="nav-link no-loading">
                         <i class='bx bx-tv icon'></i>
@@ -308,7 +355,10 @@
         <button id="closeChat" class="btn-close" type="button">×</button>
         <div id="messages"></div>
         <input type="text" id="messageInput" placeholder="Mesajınızı yazın..." />
-        <button id="sendButton" class="btn-custom">Gönder</button>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <button id="sendButton" class="btn-custom">Gönder</button>
+        }
         <div id="onlineUsersListContainer">
             <ul id="onlineUsersList"></ul>
         </div>
@@ -385,6 +435,7 @@
     <script src="~/Scripts/jquery-3.7.1.min.js"></script>
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
     <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
 
     <script>
       $(document).ready(function () {
@@ -414,20 +465,22 @@
     // Dropdown menü aç/kapa
           $('.dropdown-toggle').on('click', function (e) {
               e.preventDefault();
-              var $dropdown = $(this).closest('.dropdown');
-              var $menu = $dropdown.find('.dropdown-menu');
-              // Diğer tüm dropdownları kapat
-              $('.dropdown-menu').not($menu).removeClass('show');
-              // Sadece tıklananı toggle et
+              e.stopPropagation(); // parent dropdown'ların tetiklenmesini önle
+
+              var $menu = $(this).next('.dropdown-menu'); // sadece kendisine bağlı menü
+
+              // Kapatılacak diğer menüler (aynı seviyedeki)
+              $(this).closest('.dropdown').children('.dropdown-menu').not($menu).removeClass('show');
+
               $menu.toggleClass('show');
           });
 
-          // Dropdown dışına tıklayınca kapat
-          $(document).on('click', function (e) {
-              if (!$(e.target).closest('.dropdown').length) {
-                  $('.dropdown-menu').removeClass('show');
-              }
-          });
+    // Dropdown dışına tıklayınca kapat
+    $(document).on('click', function (e) {
+        if (!$(e.target).closest('.dropdown').length) {
+            $('.dropdown-menu').removeClass('show');
+        }
+    });
 
     // Modal kapama
     $('[data-dismiss="modal"]').click(function () {
@@ -594,7 +647,7 @@ $(document).on('click', '.notification-link', function (e) {
     // Günlük ruh hali modal zamanlayıcısı
     function showDailyMoodModalIfNeeded() {
         var now = new Date();
-        if (now.getHours() >= 18) {
+        if (now.getHours() >= 17) {
             var key = 'dailyMoodCompleted_' + now.toDateString();
             if (localStorage.getItem(key) !== 'yes') {
                 $('#dailyMoodModal').addClass('show');

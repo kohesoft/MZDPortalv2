@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace MZDNETWORK.Models
 {
@@ -12,8 +13,10 @@ namespace MZDNETWORK.Models
         public string UserName { get; set; }
         public string Room { get; set; }
         public DateTime Date { get; set; }
-        public string StartTime { get; set; } // Örn: "09:00"
-        public string EndTime { get; set; }   // Örn: "12:00"
+        [Display(Name = "Başlangıç Saati")]
+        public TimeSpan StartTime { get; set; } // Örn: 09:00
+        [Display(Name = "Bitiş Saati")]
+        public TimeSpan EndTime { get; set; }   // Örn: 12:00
         public string Title { get; set; }
         public string Description { get; set; }
         public string Attendees { get; set; }

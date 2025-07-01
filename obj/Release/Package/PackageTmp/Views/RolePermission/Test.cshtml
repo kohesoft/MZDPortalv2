@@ -1,0 +1,129 @@
+@{
+    ViewBag.Title = "Yetki Sistemi Test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bx bx-test-tube me-2"></i>Yetki Sistemi Test</h4>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="alert alert-info">
+                        <strong>Test Sonucu:</strong> @ViewBag.Message
+                    </div>
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Hata Detayı:</strong><br/>
+                            <pre style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 12px;">@ViewBag.Error</pre>
+                        </div>
+                    }
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>📊 İstatistikler</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <span>📝 Permission Sayısı:</span>
+                                            <span class="badge bg-primary">@ViewBag.PermissionCount</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <span>👥 Rol Sayısı:</span>
+                                            <span class="badge bg-success">@ViewBag.RoleCount</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>🔧 Test İşlemleri</h5>
+                                </div>
+                                <div class="card-body">
+                                    <a href="/RolePermission" class="btn btn-primary mb-2">
+                                        <i class="bx bx-shield-check"></i> Yetki Matrisi
+                                    </a>
+                                    <br/>
+                                    <a href="/Home/TestSeeding" class="btn btn-warning mb-2">
+                                        <i class="bx bx-data"></i> Manuel Seeding
+                                    </a>
+                                    <br/>
+                                    <button onclick="location.reload()" class="btn btn-info mb-2">
+                                        <i class="bx bx-refresh"></i> Sayfayı Yenile
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (ViewBag.SamplePermissions != null)
+                    {
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>📝 Örnek Permission'lar</h5>
+                                    </div>
+                                    <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                                        @foreach (var permission in ViewBag.SamplePermissions)
+                                        {
+                                            <div class="border-bottom pb-2 mb-2">
+                                                <strong>@permission.Name</strong><br/>
+                                                <small class="text-muted">@permission.Path</small><br/>
+                                                <span class="badge bg-secondary">@permission.Type</span>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>👥 Örnek Roller</h5>
+                                    </div>
+                                    <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                                        @foreach (var role in ViewBag.SampleRoles)
+                                        {
+                                            <div class="border-bottom pb-2 mb-2">
+                                                <strong>@role.Name</strong><br/>
+                                                <small class="text-muted">@role.Description</small>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: none;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+    
+    .card-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
+    
+    .badge {
+        font-size: 0.875em;
+    }
+</style> 

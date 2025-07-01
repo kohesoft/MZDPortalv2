@@ -1,0 +1,729 @@
+@{
+    ViewBag.Title = "Yetki Ağacı Yönetimi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid p-6">
+    <!-- Header Section -->
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">
+                <i class="bx bx-sitemap mr-3"></i>Yetki Ağacı Yönetimi
+            </h1>
+            <p class="text-gray-600 mt-2">Sistem yetkileri hiyerarşik yapısını görüntüleyin ve yönetin</p>
+        </div>
+        <div class="flex space-x-3">
+            <button onclick="refreshTree()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                <i class="bx bx-refresh mr-2"></i>Yenile
+            </button>
+            <button onclick="showCreateModal()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                <i class="bx bx-plus mr-2"></i>Yeni Yetki
+            </button>
+        </div>
+    </div>
+
+    <!-- Control Panel -->
+    <div class="bg-white rounded-lg shadow p-4 mb-6">
+        <div class="flex flex-wrap items-center justify-between">
+            <div class="flex space-x-4">
+                <label class="flex items-center">
+                    <input type="checkbox" id="expandAll" class="mr-2" onchange="toggleExpandAll()">
+                    <span class="text-sm text-gray-600">Tümünü Genişlet</span>
+                </label>
+                <select id="filterType" class="border rounded px-3 py-1 text-sm" onchange="filterByType()">
+                    <option value="">Tüm Tipler</option>
+                    <option value="module">Modül</option>
+                    <option value="controller">Kontrolcü</option>
+                    <option value="action">Aksiyon</option>
+                    <option value="page">Sayfa</option>
+                </select>
+            </div>
+            <div class="flex items-center space-x-4">
+                <input type="text" id="searchTree" placeholder="Yetki ara..." class="border rounded px-3 py-2 text-sm w-64" oninput="searchInTree()">
+                <button onclick="reseedPermissions()" class="bg-orange-600 hover:bg-orange-700 text-white px-3 py-2 rounded text-sm">
+                    <i class="bx bx-recycle mr-1"></i>Yeniden Oluştur
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid grid-cols-12 gap-6">
+        <!-- Permission Tree -->
+        <div class="col-span-8">
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-4 border-b">
+                    <h3 class="text-lg font-semibold text-gray-800">
+                        <i class="bx bx-tree mr-2"></i>Yetki Ağacı Yapısı
+                    </h3>
+                </div>
+                <div class="p-4">
+                    <div id="permissionTree" class="min-h-96">
+                        <div class="flex items-center justify-center h-32">
+                            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                            <span class="ml-3 text-gray-600">Yetki ağacı yükleniyor...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Details Panel -->
+        <div class="col-span-4">
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-4 border-b">
+                    <h3 class="text-lg font-semibold text-gray-800">
+                        <i class="bx bx-info-circle mr-2"></i>Yetki Detayları
+                    </h3>
+                </div>
+                <div class="p-4">
+                    <div id="permissionDetails">
+                        <div class="text-center text-gray-500 py-8">
+                            <i class="bx bx-click text-3xl mb-3"></i>
+                            <p>Detayları görmek için bir yetki seçin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Statistics -->
+            <div class="bg-white rounded-lg shadow mt-6">
+                <div class="p-4 border-b">
+                    <h3 class="text-lg font-semibold text-gray-800">
+                        <i class="bx bx-stats mr-2"></i>Hızlı İstatistikler
+                    </h3>
+                </div>
+                <div class="p-4">
+                    <div id="quickStats" class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Toplam Yetki:</span>
+                            <span class="font-semibold" id="totalNodes">-</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Modül Sayısı:</span>
+                            <span class="font-semibold" id="moduleCount">-</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Alt Modül:</span>
+                            <span class="font-semibold" id="subModuleCount">-</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Aksiyon Sayısı:</span>
+                            <span class="font-semibold" id="actionCount">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Create/Edit Permission Modal -->
+<div id="permissionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-screen overflow-y-auto">
+            <div class="p-6 border-b">
+                <h3 class="text-xl font-semibold" id="modalTitle">Yeni Yetki Oluştur</h3>
+            </div>
+            <form id="permissionForm" class="p-6">
+                <input type="hidden" id="permissionId" name="Id">
+                
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Yetki Adı *</label>
+                        <input type="text" id="permissionName" name="Name" class="w-full border rounded-lg px-3 py-2" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Yetki Yolu *</label>
+                        <input type="text" id="permissionPath" name="Path" class="w-full border rounded-lg px-3 py-2" required>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Açıklama</label>
+                    <textarea id="permissionDescription" name="Description" class="w-full border rounded-lg px-3 py-2 h-20"></textarea>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Üst Yetki</label>
+                        <select id="parentPermission" name="ParentId" class="w-full border rounded-lg px-3 py-2">
+                            <option value="">Ana Seviye</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tip *</label>
+                        <select id="permissionType" name="Type" class="w-full border rounded-lg px-3 py-2" required>
+                            <option value="Module">Modül</option>
+                            <option value="Controller">Kontrolcü</option>
+                            <option value="Action">Aksiyon</option>
+                            <option value="Page">Sayfa</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Sıra No</label>
+                        <input type="number" id="sortOrder" name="SortOrder" class="w-full border rounded-lg px-3 py-2" value="0">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">İkon</label>
+                    <input type="text" id="permissionIcon" name="Icon" class="w-full border rounded-lg px-3 py-2" placeholder="bx-key">
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Yetki Türleri</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex items-center">
+                            <input type="checkbox" id="hasView" name="HasViewPermission" class="mr-2">
+                            <span class="text-sm">Görüntüleme</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" id="hasCreate" name="HasCreatePermission" class="mr-2">
+                            <span class="text-sm">Oluşturma</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" id="hasEdit" name="HasEditPermission" class="mr-2">
+                            <span class="text-sm">Düzenleme</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" id="hasDelete" name="HasDeletePermission" class="mr-2">
+                            <span class="text-sm">Silme</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                        İptal
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        <span id="submitText">Kaydet</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+.permission-node {
+    cursor: pointer;
+    padding: 8px 12px;
+    margin: 2px 0;
+    border-radius: 6px;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.permission-node:hover {
+    background-color: #f8fafc;
+    border-left-color: #3b82f6;
+}
+
+.permission-node.selected {
+    background-color: #eff6ff;
+    border-left-color: #2563eb;
+}
+
+.permission-node .node-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.permission-node .node-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.permission-node .node-actions {
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.permission-node:hover .node-actions {
+    opacity: 1;
+}
+
+.permission-children {
+    margin-left: 20px;
+    border-left: 2px solid #e2e8f0;
+    padding-left: 12px;
+}
+
+.type-badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.type-module { background-color: #dcfce7; color: #166534; }
+.type-controller { background-color: #dbeafe; color: #1e40af; }
+.type-action { background-color: #fef3c7; color: #92400e; }
+.type-page { background-color: #f3e8ff; color: #7c3aed; }
+</style>
+
+<script>
+let permissionTreeData = [];
+let selectedPermissionId = null;
+
+$(document).ready(function() {
+    loadPermissionTree();
+    loadQuickStats();
+    loadParentOptions();
+});
+
+function loadPermissionTree() {
+    var pct=0;
+    var pctTimer=setInterval(function(){pct=Math.min(pct+4,95);$('#permissionTree span.loadingPercent').text(pct+'%');},400);
+    $.get('@Url.Action("GetPermissionTree", "PermissionTree")')
+        .done(function(data) {
+            clearInterval(pctTimer);
+            if (data.error) {
+                showAlert('Hata: ' + data.error, 'error');
+                return;
+            }
+            
+            permissionTreeData = data;
+            renderPermissionTree(data);
+        })
+        .fail(function() {
+            clearInterval(pctTimer);
+            showAlert('Yetki ağacı yüklenirken hata oluştu', 'error');
+        });
+}
+
+function renderPermissionTree(data) {
+    const container = $('#permissionTree');
+    container.empty();
+    
+    if (!data || data.length === 0) {
+        container.html('<div class="text-center text-gray-500 py-8">Henüz yetki tanımlanmamış</div>');
+        return;
+    }
+    
+    // Build hierarchical structure
+    const hierarchy = buildHierarchy(data);
+    const html = renderNodes(hierarchy);
+    container.html(html);
+}
+
+function buildHierarchy(data) {
+    const nodeMap = {};
+    const rootNodes = [];
+    
+    // Create map
+    data.forEach(node => {
+        nodeMap[node.id] = { ...node, children: [] };
+    });
+    
+    // Build hierarchy
+    data.forEach(node => {
+        if (node.parent === '#') {
+            rootNodes.push(nodeMap[node.id]);
+        } else {
+            const parentId = parseInt(node.parent);
+            if (nodeMap[parentId]) {
+                nodeMap[parentId].children.push(nodeMap[node.id]);
+            }
+        }
+    });
+    
+    return rootNodes;
+}
+
+function renderNodes(nodes, level = 0) {
+    let html = '';
+    
+    nodes.forEach(node => {
+        const hasChildren = node.children && node.children.length > 0;
+        const typeClass = `type-${node.type}`;
+        
+        html += `
+            <div class="permission-node" data-id="${node.id}" onclick="selectPermission(${node.id})">
+                <div class="node-content">
+                    <div class="node-info">
+                        ${hasChildren ? '<i class="bx bx-chevron-right toggle-icon"></i>' : '<div style="width: 16px;"></div>'}
+                        <i class="${node.data.icon || 'bx bx-key'} text-lg"></i>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-medium">${node.text}</span>
+                                <span class="type-badge ${typeClass}">${node.type}</span>
+                            </div>
+                            <div class="text-xs text-gray-500">${node.data.path}</div>
+                        </div>
+                    </div>
+                    <div class="node-actions">
+                        <button onclick="editPermission(${node.id}, event)" class="text-blue-600 hover:bg-blue-100 p-1 rounded" title="Düzenle">
+                            <i class="bx bx-edit text-sm"></i>
+                        </button>
+                        <button onclick="deletePermission(${node.id}, event)" class="text-red-600 hover:bg-red-100 p-1 rounded" title="Sil">
+                            <i class="bx bx-trash text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+                ${hasChildren ? `<div class="permission-children hidden">${renderNodes(node.children, level + 1)}</div>` : ''}
+            </div>
+        `;
+    });
+    
+    return html;
+}
+
+function selectPermission(permissionId) {
+    selectedPermissionId = permissionId;
+    
+    // Update visual selection
+    $('.permission-node').removeClass('selected');
+    $(`.permission-node[data-id="${permissionId}"]`).addClass('selected');
+    
+    // Load details
+    loadPermissionDetails(permissionId);
+}
+
+function loadPermissionDetails(permissionId) {
+    $.get('@Url.Action("GetPermissionDetails", "PermissionTree")', { id: permissionId })
+        .done(function(response) {
+            if (response.success) {
+                renderPermissionDetails(response.data);
+            } else {
+                showAlert(response.message, 'error');
+            }
+        })
+        .fail(function() {
+            showAlert('Yetki detayları yüklenirken hata oluştu', 'error');
+        });
+}
+
+function renderPermissionDetails(data) {
+    const html = `
+        <div class="space-y-4">
+            <div class="flex items-center gap-3">
+                <i class="${data.icon || 'bx bx-key'} text-2xl text-blue-600"></i>
+                <div>
+                    <h4 class="font-semibold text-lg">${data.name}</h4>
+                    <p class="text-sm text-gray-500">${data.path}</p>
+                </div>
+            </div>
+            
+            ${data.description ? `<p class="text-gray-600">${data.description}</p>` : ''}
+            
+            <div class="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                    <span class="text-gray-500">Tip:</span>
+                    <span class="ml-2 font-medium">${data.type}</span>
+                </div>
+                <div>
+                    <span class="text-gray-500">Sıra:</span>
+                    <span class="ml-2 font-medium">${data.sortOrder}</span>
+                </div>
+                <div>
+                    <span class="text-gray-500">Alt Yetki:</span>
+                    <span class="ml-2 font-medium">${data.childrenCount}</span>
+                </div>
+                <div>
+                    <span class="text-gray-500">Rol Atama:</span>
+                    <span class="ml-2 font-medium">${data.roleCount}</span>
+                </div>
+            </div>
+            
+            <div>
+                <h5 class="font-medium mb-2">Yetki Türleri:</h5>
+                <div class="grid grid-cols-2 gap-2 text-sm">
+                    <div class="flex items-center">
+                        <i class="bx ${data.hasViewPermission ? 'bx-check text-green-600' : 'bx-x text-red-600'} mr-2"></i>
+                        <span>Görüntüleme</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="bx ${data.hasCreatePermission ? 'bx-check text-green-600' : 'bx-x text-red-600'} mr-2"></i>
+                        <span>Oluşturma</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="bx ${data.hasEditPermission ? 'bx-check text-green-600' : 'bx-x text-red-600'} mr-2"></i>
+                        <span>Düzenleme</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="bx ${data.hasDeletePermission ? 'bx-check text-green-600' : 'bx-x text-red-600'} mr-2"></i>
+                        <span>Silme</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-3 border-t">
+                <button onclick="editPermission(${data.id})" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+                    <i class="bx bx-edit mr-2"></i>Düzenle
+                </button>
+            </div>
+        </div>
+    `;
+    
+    $('#permissionDetails').html(html);
+}
+
+function loadQuickStats() {
+    $.get('@Url.Action("GetPermissionStatistics", "PermissionTree")')
+        .done(function(data) {
+            if (data.error) {
+                console.error('İstatistik hatası:', data.error);
+                return;
+            }
+            
+            $('#totalNodes').text(data.totalNodes || 0);
+            $('#moduleCount').text(data.modules || 0);
+            $('#subModuleCount').text(data.subModules || 0);
+            $('#actionCount').text(data.actions || 0);
+        });
+}
+
+function showCreateModal() {
+    resetForm();
+    $('#modalTitle').text('Yeni Yetki Oluştur');
+    $('#submitText').text('Oluştur');
+    $('#permissionModal').removeClass('hidden');
+}
+
+function editPermission(permissionId, event) {
+    if (event) {
+        event.stopPropagation();
+    }
+    
+    const permission = findPermissionById(permissionId);
+    if (!permission) return;
+    
+    // Fill form
+    $('#permissionId').val(permission.id);
+    $('#permissionName').val(permission.text);
+    $('#permissionPath').val(permission.data.path);
+    $('#permissionDescription').val(permission.data.description || '');
+    $('#parentPermission').val(permission.parent !== '#' ? permission.parent : '');
+    $('#permissionType').val(permission.type);
+    $('#permissionIcon').val(permission.data.icon || '');
+    $('#sortOrder').val(permission.data.sortOrder || 0);
+    $('#hasView').prop('checked', permission.data.hasView);
+    $('#hasCreate').prop('checked', permission.data.hasCreate);
+    $('#hasEdit').prop('checked', permission.data.hasEdit);
+    $('#hasDelete').prop('checked', permission.data.hasDelete);
+    
+    $('#modalTitle').text('Yetki Düzenle');
+    $('#submitText').text('Güncelle');
+    $('#permissionModal').removeClass('hidden');
+}
+
+function deletePermission(permissionId, event) {
+    if (event) {
+        event.stopPropagation();
+    }
+    
+    if (!confirm('Bu yetkiyi silmek istediğinizden emin misiniz?')) {
+        return;
+    }
+    
+    $.post('@Url.Action("DeletePermissionNode", "PermissionTree")', { id: permissionId })
+        .done(function(response) {
+            if (response.success) {
+                showAlert(response.message, 'success');
+                loadPermissionTree();
+                loadQuickStats();
+                $('#permissionDetails').html('<div class="text-center text-gray-500 py-8"><i class="bx bx-click text-3xl mb-3"></i><p>Detayları görmek için bir yetki seçin</p></div>');
+            } else {
+                showAlert(response.message, 'error');
+            }
+        })
+        .fail(function() {
+            showAlert('Yetki silinirken hata oluştu', 'error');
+        });
+}
+
+function findPermissionById(id) {
+    return permissionTreeData.find(p => p.id == id);
+}
+
+function loadParentOptions() {
+    $.get('@Url.Action("GetPermissionTree", "PermissionTree")')
+        .done(function(data) {
+            const select = $('#parentPermission');
+            select.find('option:not(:first)').remove();
+            
+            data.forEach(permission => {
+                if (permission.type === 'Module' || permission.type === 'Controller') {
+                    select.append(`<option value="${permission.id}">${permission.text}</option>`);
+                }
+            });
+        });
+}
+
+$('#permissionForm').on('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        Id: $('#permissionId').val() || 0,
+        Name: $('#permissionName').val(),
+        Path: $('#permissionPath').val(),
+        Description: $('#permissionDescription').val(),
+        ParentId: $('#parentPermission').val() || null,
+        Type: $('#permissionType').val(),
+        Icon: $('#permissionIcon').val(),
+        SortOrder: parseInt($('#sortOrder').val()) || 0,
+        HasViewPermission: $('#hasView').is(':checked'),
+        HasCreatePermission: $('#hasCreate').is(':checked'),
+        HasEditPermission: $('#hasEdit').is(':checked'),
+        HasDeletePermission: $('#hasDelete').is(':checked')
+    };
+    
+    const isEdit = formData.Id > 0;
+    const url = isEdit ? '@Url.Action("UpdatePermissionNode", "PermissionTree")' : '@Url.Action("CreatePermissionNode", "PermissionTree")';
+    
+    $.post(url, formData)
+        .done(function(response) {
+            if (response.success) {
+                showAlert(response.message, 'success');
+                closeModal();
+                loadPermissionTree();
+                loadQuickStats();
+                loadParentOptions();
+            } else {
+                showAlert(response.message, 'error');
+            }
+        })
+        .fail(function() {
+            showAlert(isEdit ? 'Yetki güncellenirken hata oluştu' : 'Yetki oluşturulurken hata oluştu', 'error');
+        });
+});
+
+function resetForm() {
+    $('#permissionForm')[0].reset();
+    $('#permissionId').val('');
+}
+
+function closeModal() {
+    $('#permissionModal').addClass('hidden');
+    resetForm();
+}
+
+function refreshTree() {
+    loadPermissionTree();
+    loadQuickStats();
+}
+
+function reseedPermissions() {
+    if (!confirm('Yetki ağacını yeniden oluşturmak istediğinizden emin misiniz? Bu işlem mevcut özel ayarları etkileyebilir.')) {
+        return;
+    }
+    
+    $.post('@Url.Action("ReseedPermissionTree", "PermissionTree")')
+        .done(function(response) {
+            if (response.success) {
+                showAlert(response.message, 'success');
+                loadPermissionTree();
+                loadQuickStats();
+            } else {
+                showAlert(response.message, 'error');
+            }
+        })
+        .fail(function() {
+            showAlert('Yetki ağacı yeniden oluşturulurken hata oluştu', 'error');
+        });
+}
+
+// Tree interaction functions
+$(document).on('click', '.toggle-icon', function(e) {
+    e.stopPropagation();
+    const $icon = $(this);
+    const $children = $icon.closest('.permission-node').find('> .permission-children');
+    
+    if ($children.hasClass('hidden')) {
+        $children.removeClass('hidden');
+        $icon.removeClass('bx-chevron-right').addClass('bx-chevron-down');
+    } else {
+        $children.addClass('hidden');
+        $icon.removeClass('bx-chevron-down').addClass('bx-chevron-right');
+    }
+});
+
+function toggleExpandAll() {
+    const expandAll = $('#expandAll').is(':checked');
+    
+    if (expandAll) {
+        $('.permission-children').removeClass('hidden');
+        $('.toggle-icon').removeClass('bx-chevron-right').addClass('bx-chevron-down');
+    } else {
+        $('.permission-children').addClass('hidden');
+        $('.toggle-icon').removeClass('bx-chevron-down').addClass('bx-chevron-right');
+    }
+}
+
+function filterByType() {
+    const selectedType = $('#filterType').val();
+    
+    if (!selectedType) {
+        $('.permission-node').show();
+        return;
+    }
+    
+    $('.permission-node').each(function() {
+        const nodeId = $(this).data('id');
+        const permission = findPermissionById(nodeId);
+        
+        if (permission && permission.type.toLowerCase() === selectedType) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+function searchInTree() {
+    const searchTerm = $('#searchTree').val().toLowerCase();
+    
+    if (!searchTerm) {
+        $('.permission-node').show();
+        return;
+    }
+    
+    $('.permission-node').each(function() {
+        const nodeId = $(this).data('id');
+        const permission = findPermissionById(nodeId);
+        
+        if (permission) {
+            const matches = permission.text.toLowerCase().includes(searchTerm) ||
+                          permission.data.path.toLowerCase().includes(searchTerm) ||
+                          (permission.data.description && permission.data.description.toLowerCase().includes(searchTerm));
+            
+            if (matches) {
+                $(this).show();
+                // Show parent nodes
+                $(this).parents('.permission-children').removeClass('hidden').prev().show();
+            } else {
+                $(this).hide();
+            }
+        }
+    });
+}
+
+function showAlert(message, type) {
+    const alertClass = type === 'success' ? 'bg-green-100 border-green-400 text-green-700' : 'bg-red-100 border-red-400 text-red-700';
+    const iconClass = type === 'success' ? 'bx-check-circle' : 'bx-error-circle';
+    
+    const alert = $(`
+        <div class="fixed top-4 right-4 z-50 ${alertClass} border px-4 py-3 rounded-lg shadow-lg" role="alert">
+            <div class="flex items-center">
+                <i class="bx ${iconClass} mr-2"></i>
+                <span>${message}</span>
+                <button class="ml-4 text-lg" onclick="$(this).parent().parent().remove()">&times;</button>
+            </div>
+        </div>
+    `);
+    
+    $('body').append(alert);
+    
+    setTimeout(() => {
+        alert.remove();
+    }, 5000);
+}
+</script>

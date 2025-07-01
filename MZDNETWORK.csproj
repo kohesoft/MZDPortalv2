@@ -292,6 +292,9 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SQLite, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Diagnostics.DiagnosticSource.9.0.6\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -469,10 +472,13 @@
     <Compile Include="Controllers\PermissionTreeController.cs" />
     <Compile Include="Controllers\RoleOrganizationController.cs" />
     <Compile Include="Controllers\RolePermissionController.cs" />
+    <Compile Include="Controllers\ServiceRouteController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TestPermissionController.cs" />
+    <Compile Include="Controllers\TileController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VisitorEntryController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\PermissionSeeder.cs" />
     <Compile Include="FilterConfig.cs" />
@@ -492,9 +498,17 @@
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202506261050272_dropcreatedatabase.cs" />
-    <Compile Include="Migrations\202506261050272_dropcreatedatabase.Designer.cs">
-      <DependentUpon>202506261050272_dropcreatedatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202506301145447_apppublish.cs" />
+    <Compile Include="Migrations\202506301145447_apppublish.Designer.cs">
+      <DependentUpon>202506301145447_apppublish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202507010554184_updatedatabase3333.cs" />
+    <Compile Include="Migrations\202507010554184_updatedatabase3333.Designer.cs">
+      <DependentUpon>202507010554184_updatedatabase3333.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202507010707318_updatedatabase33335.cs" />
+    <Compile Include="Migrations\202507010707318_updatedatabase33335.Designer.cs">
+      <DependentUpon>202507010707318_updatedatabase33335.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -514,6 +528,7 @@
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\ReservationStatus.cs" />
+    <Compile Include="Models\ServiceRoute.cs" />
     <Compile Include="Models\SuggestionComplaint.cs" />
     <Compile Include="Models\Survey.cs" />
     <Compile Include="Models\Task.cs" />
@@ -527,6 +542,8 @@
     <Compile Include="Models\PermissionNode.cs" />
     <Compile Include="Models\RolePermission.cs" />
     <Compile Include="Models\PermissionCache.cs" />
+    <Compile Include="Models\VisitorEntry.cs" />
+    <Compile Include="Models\VisitorEntryHeader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -554,8 +571,12 @@
     <Content Include="Content\gonderisil.css" />
     <Content Include="Content\homeindex.css" />
     <Content Include="Content\IKlayout.css" />
+    <Content Include="Content\images\marker-icon.png" />
+    <Content Include="Content\images\marker-shadow.png" />
+    <Content Include="Content\jquery.dataTables.min.css" />
     <Content Include="Content\kullaniciislemleri.css" />
     <Content Include="Content\kullaniciislemleriindex.css" />
+    <Content Include="Content\leaflet.css" />
     <Content Include="Content\Loading.css" />
     <Content Include="Content\merkezyemeklistesi.css" />
     <Content Include="Content\mola.css" />
@@ -577,6 +598,7 @@
     <Content Include="imgs\loader.png" />
     <Content Include="imgs\logo.ico" />
     <Content Include="imgs\logo.png" />
+    <Content Include="imgs\logo_form.png" />
     <Content Include="libman.json" />
     <Content Include="logo.ico" />
     <Content Include="Scripts\901ba758ee.js" />
@@ -591,10 +613,12 @@
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.signalR-2.4.3.js" />
     <Content Include="Scripts\jquery.signalR-2.4.3.min.js" />
     <Content Include="Scripts\json2.min.js" />
+    <Content Include="Scripts\leaflet.js" />
     <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\modernizr-3.4.0.js" />
     <Content Include="Scripts\modernizr-3.4.0.min.js" />
@@ -604,6 +628,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\signature_pad.umd.min.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -842,6 +867,7 @@
     <Content Include="Scripts\tinymce\themes\silver\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\togeojson.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -855,6 +881,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Mzdportal.pfx" />
+    <Content Include="Content\kml\dikmen.kml" />
+    <Content Include="Content\kml\pursaklar.kml" />
+    <Content Include="Content\kml\yenimahalle.kml" />
+    <Content Include="App_Data\ankara.mbtiles" />
+    <Content Include="Content\kml\eryaman-batikent.kml" />
+    <Content Include="Content\kml\karapurcak.kml" />
+    <Content Include="Content\kml\kecioren-ufuktepe.kml" />
+    <Content Include="Content\kml\mamak-1.kml" />
+    <Content Include="Content\kml\mamak-2.kml" />
+    <Content Include="Content\kml\mamak-3.kml" />
+    <Content Include="Content\kml\sincan-etimesgut.kml" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2540,9 +2577,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\MeetingRoom\Index.cshtml" />
     <Content Include="Views\Performance\Index.cshtml" />
-    <Content Include="Views\RoleManagement\Index.cshtml" />
-    <Content Include="Views\RoleManagement\UserRoles.cshtml" />
-    <Content Include="Views\RoleManagement\Roles.cshtml" />
     <Content Include="Views\LeaveRequest\AdminDashboard.cshtml" />
     <Content Include="Views\LeaveRequest\Create.cshtml" />
     <Content Include="Views\LeaveRequest\Details.cshtml" />
@@ -2555,9 +2589,15 @@
     <Content Include="Views\Home\TestSeeding.cshtml" />
     <Content Include="Views\RolePermission\Test.cshtml" />
     <Content Include="Views\TestPermission\Debug.cshtml" />
+    <Content Include="Views\PermissionTree\Test.cshtml" />
+    <Content Include="Views\VisitorEntry\Create.cshtml" />
+    <Content Include="Views\VisitorEntry\Header.cshtml" />
+    <Content Include="Views\VisitorEntry\Index.cshtml" />
+    <Content Include="Views\VisitorEntry\Print.cshtml" />
+    <Content Include="Views\ServiceRoute\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Content\tiles\" />
     <Folder Include="logs\" />
   </ItemGroup>
   <ItemGroup>
@@ -2569,8 +2609,14 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202506261050272_dropcreatedatabase.resx">
-      <DependentUpon>202506261050272_dropcreatedatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202506301145447_apppublish.resx">
+      <DependentUpon>202506301145447_apppublish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202507010554184_updatedatabase3333.resx">
+      <DependentUpon>202507010554184_updatedatabase3333.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202507010707318_updatedatabase33335.resx">
+      <DependentUpon>202507010707318_updatedatabase33335.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -2638,6 +2684,7 @@
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.21.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.21.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props'))" />
     <Error Condition="!Exists('packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.21.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.21.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets'))" />
+    <Error Condition="!Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
   </Target>
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Import Project="packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('packages\Microsoft.TypeScript.MSBuild.5.7.1\build\Microsoft.TypeScript.MSBuild.targets')" />
@@ -2645,6 +2692,7 @@
   <Import Project="packages\TinyMCE.7.6.1\build\TinyMCE.targets" Condition="Exists('packages\TinyMCE.7.6.1\build\TinyMCE.targets')" />
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.21.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets" Condition="Exists('packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.21.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" />
+  <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

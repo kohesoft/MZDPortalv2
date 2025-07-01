@@ -45,6 +45,8 @@ namespace MZDNETWORK.Data
         public DbSet<MeetingRoomReservation> MeetingRoomReservations { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<VisitorEntry> VisitorEntries { get; set; }
+        public DbSet<VisitorEntryHeader> VisitorEntryHeaders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

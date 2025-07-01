@@ -1,0 +1,59 @@
+﻿.login-form {
+    max-width: unset;
+}
+
+.flex-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.lf--label {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.lf--input {
+    flex: 1;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.lf--submit {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .lf--submit:hover {
+        background-color: #0056b3;
+    }
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.text-danger {
+    color: #a94442;
+}
+.single-line-textarea {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

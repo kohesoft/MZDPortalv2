@@ -1,0 +1,225 @@
+﻿@model List<Gonderi>
+@using System.Linq
+
+@{
+    ViewBag.Title = "Ana Sayfa";
+    Model.Reverse();
+    var imageFiles = ViewBag.ImageFiles as List<string>;
+}
+
+<head>
+    <link href="~/Content/boxicons.min.css" rel='stylesheet'>
+    <link rel="stylesheet" href="~/Content/homeindex.css" />
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/coursel.js"></script>
+</head>
+
+<body class="anasayfa-body">
+    <div class="anasayfa-container">
+        <div class="anasayfa-header">
+            <i class='bx bx-news anasayfa-header-icon'></i>
+            <h2 class="anasayfa-title">DUYURULAR</h2>
+        </div>
+
+        <div class="anasayfa-timeline" id="timeline">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var post in Model)
+                {
+                    <div class="anasayfa-timeline-item">
+                        <div class="anasayfa-timeline-dot">
+                            <i class='bx bxs-bell-ring'></i>
+                        </div>
+                        <div class="anasayfa-timeline-content">
+                            <div class="anasayfa-timeline-header">
+                                <h3 class="anasayfa-timeline-title">@post.Title</h3>
+                                <span class="anasayfa-timeline-date">
+                                    <i class='bx bx-calendar'></i>
+                                    @post.CreatedAt.ToString("g")
+                                </span>
+                            </div>
+                            <div class="anasayfa-timeline-body">
+                                @Html.Raw(post.Content)
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="anasayfa-empty-state">
+                    <i class='bx bx-info-circle anasayfa-empty-icon'></i>
+                    <p class="anasayfa-empty-text">Henüz duyuru bulunmamaktadır.</p>
+                </div>
+            }
+        </div>
+
+        <div class="anasayfa-loading" id="loading">
+            <i class='bx bx-loader-alt bx-spin'></i>
+            <span>Yükleniyor...</span>
+        </div>
+    </div>
+
+    <!-- Geri Bildirim Modal -->
+    <div class="anasayfa-modal" id="feedbackModal">
+        <div class="anasayfa-modal-overlay"></div>
+        <div class="anasayfa-modal-container">
+            <div class="anasayfa-modal-header">
+                <h5 class="anasayfa-modal-title">
+                    <i class='bx bx-message-square-detail'></i>
+                    Geri Bildirim
+                </h5>
+                <button type="button" class="anasayfa-modal-close" id="closeModal">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div class="anasayfa-modal-body">
+                <p class="anasayfa-modal-question">PortalÄ± beÄŸendiniz mi?</p>
+                <div class="anasayfa-modal-buttons">
+                    <button type="button" class="anasayfa-btn-like" id="likeButton">
+                        <i class='bx bxs-like'></i>
+                        Evet
+                    </button>
+                    <button type="button" class="anasayfa-btn-dislike" id="dislikeButton">
+                        <i class='bx bxs-dislike'></i>
+                        Hayır
+                    </button>
+                </div>
+                <div class="anasayfa-suggestion" id="suggestionDiv">
+                    <label for="suggestionInput" class="anasayfa-suggestion-label">
+                        <i class='bx bx-bulb'></i>
+                        Ne Önerirsiniz?
+                    </label>
+                    <input type="text" class="anasayfa-suggestion-input" id="suggestionInput" placeholder="Ã–nerinizi buraya yazÄ±n...">
+                </div>
+            </div>
+            <div class="anasayfa-modal-footer">
+                <button type="button" class="anasayfa-btn-submit" id="submitFeedbackButton">
+                    <i class='bx bx-send'></i>
+                    Gönder
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Modal iÅŸlemleri
+        const modal = document.getElementById('feedbackModal');
+        const closeModal = document.getElementById('closeModal');
+        const likeButton = document.getElementById('likeButton');
+        const dislikeButton = document.getElementById('dislikeButton');
+        const suggestionDiv = document.getElementById('suggestionDiv');
+        const submitButton = document.getElementById('submitFeedbackButton');
+
+        // Modal aÃ§ma fonksiyonu (ihtiyaca gÃ¶re kullanÄ±labilir)
+        function openFeedbackModal() {
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Modal kapatma
+        function closeFeedbackModal() {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // Kapatma butonuna tÄ±klama
+        if (closeModal) {
+            closeModal.addEventListener('click', closeFeedbackModal);
+        }
+
+        // Modal dÄ±ÅŸÄ±na tÄ±klama
+        window.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                closeFeedbackModal();
+            }
+        });
+
+        // BeÄŸenme/beÄŸenmeme butonlarÄ±
+        if (likeButton) {
+            likeButton.addEventListener('click', function () {
+                likeButton.classList.add('active');
+                dislikeButton.classList.remove('active');
+                suggestionDiv.style.display = 'none';
+                submitButton.style.display = 'flex';
+            });
+        }
+
+        if (dislikeButton) {
+            dislikeButton.addEventListener('click', function () {
+                dislikeButton.classList.add('active');
+                likeButton.classList.remove('active');
+                suggestionDiv.style.display = 'block';
+                submitButton.style.display = 'flex';
+            });
+        }
+
+        // GÃ¶nder butonu
+        if (submitButton) {
+            submitButton.addEventListener('click', function () {
+                // Burada geri bildirim gÃ¶nderme iÅŸlemi yapÄ±labilir
+                alert('Geri bildiriminiz iÃ§in teÅŸekkÃ¼r ederiz!');
+                closeFeedbackModal();
+            });
+        }
+
+        // Sonsuz kaydÄ±rma iÃ§in gerekirse kullanÄ±labilir
+        let page = 1;
+        let loading = false;
+        const loadingElement = document.getElementById('loading');
+
+        function loadMorePosts() {
+            if (loading) return;
+
+            loading = true;
+            loadingElement.style.display = 'flex';
+
+            // Burada AJAX ile daha fazla gÃ¶nderi yÃ¼klenebilir
+            // Ã–rnek:
+            /*
+            fetch(`/Home/LoadMorePosts?page=${page}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.posts && data.posts.length > 0) {
+                        // GÃ¶nderileri ekle
+                        const timeline = document.getElementById('timeline');
+                        data.posts.forEach(post => {
+                            const postElement = createPostElement(post);
+                            timeline.appendChild(postElement);
+                        });
+                        page++;
+                    } else {
+                        // Daha fazla gÃ¶nderi yoksa
+                        window.removeEventListener('scroll', scrollHandler);
+                    }
+                    loading = false;
+                    loadingElement.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error loading posts:', error);
+                    loading = false;
+                    loadingElement.style.display = 'none';
+                });
+            */
+
+            // SimÃ¼lasyon iÃ§in:
+            setTimeout(() => {
+                loading = false;
+                loadingElement.style.display = 'none';
+            }, 1000);
+        }
+
+        function scrollHandler() {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
+                loadMorePosts();
+            }
+        }
+
+        // Sonsuz kaydÄ±rma iÃ§in scroll event listener
+        // window.addEventListener('scroll', scrollHandler);
+    });
+</script>

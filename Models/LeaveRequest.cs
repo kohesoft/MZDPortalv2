@@ -89,13 +89,21 @@ namespace MZDNETWORK.Models
 
     public enum LeaveStatus
     {
-        [Display(Name = "Beklemede")]
-        Pending = 0,
+        // Çalışanın talebi ilk oluşturulduğunda şefin onayına gider
+        [Display(Name = "Şef Onayı Bekliyor")]
+        PendingSupervisor = 0,
+
         [Display(Name = "Onaylandı")]
         Approved = 1,
+
         [Display(Name = "Şartlı Onaylandı")]
         ConditionallyApproved = 2,
+
         [Display(Name = "Reddedildi")]
-        Rejected = 3
+        Rejected = 3,
+
+        // Şef onayladıktan sonra müdürün onayı beklenir (yeni durum)
+        [Display(Name = "Müdür Onayı Bekliyor")]
+        PendingManager = 4
     }
 } 
