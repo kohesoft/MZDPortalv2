@@ -4,20 +4,19 @@ namespace MZDNETWORK.Models
 {
     public class ChangePasswordViewModel
     {
-        [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Eski Þifre")]
+        [Display(Name = "Eski Åžifre (ilk kez belirliyorsanÄ±z boÅŸ bÄ±rakÄ±n)")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "{0} en az {2} karakter uzunluðunda olmalýdýr.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} en az {2} karakter uzunluÄŸunda olmalÄ±dÄ±r.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Yeni Þifre")]
+        [Display(Name = "Yeni Åžifre")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Yeni Þifreyi Onayla")]
-        [Compare("NewPassword", ErrorMessage = "Yeni þifre ve onay þifresi eþleþmiyor.")]
+        [Display(Name = "Yeni Åžifreyi Onayla")]
+        [Compare("NewPassword", ErrorMessage = "Yeni Åžifre ve onay Åžifresi eÅŸleÅŸmiyor.")]
         public string ConfirmPassword { get; set; }
     }
 }

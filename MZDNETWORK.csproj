@@ -464,10 +464,12 @@
     <Compile Include="Controllers\GonderiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsanKaynaklariController.cs" />
+    <Compile Include="Controllers\LateArrivalReportController.cs" />
     <Compile Include="Controllers\LeaveRequestController.cs" />
     <Compile Include="Controllers\MeetingRoomController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\OnlineUsersController.cs" />
+    <Compile Include="Controllers\PasswordResetRequestController.cs" />
     <Compile Include="Controllers\PerformanceController.cs" />
     <Compile Include="Controllers\PermissionTreeController.cs" />
     <Compile Include="Controllers\RoleOrganizationController.cs" />
@@ -498,18 +500,6 @@
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202506301145447_apppublish.cs" />
-    <Compile Include="Migrations\202506301145447_apppublish.Designer.cs">
-      <DependentUpon>202506301145447_apppublish.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202507010554184_updatedatabase3333.cs" />
-    <Compile Include="Migrations\202507010554184_updatedatabase3333.Designer.cs">
-      <DependentUpon>202507010554184_updatedatabase3333.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202507010707318_updatedatabase33335.cs" />
-    <Compile Include="Migrations\202507010707318_updatedatabase33335.Designer.cs">
-      <DependentUpon>202507010707318_updatedatabase33335.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerOption.cs" />
@@ -522,9 +512,12 @@
     <Compile Include="Models\Dokumantasyon.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Gonderi.cs" />
+    <Compile Include="Models\LateArrivalReport.cs" />
+    <Compile Include="Models\LateArrivalReportHeader.cs" />
     <Compile Include="Models\LeaveRequest.cs" />
     <Compile Include="Models\MeetingRoomReservation.cs" />
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\PasswordResetRequest.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\ReservationStatus.cs" />
@@ -2595,6 +2588,14 @@
     <Content Include="Views\VisitorEntry\Index.cshtml" />
     <Content Include="Views\VisitorEntry\Print.cshtml" />
     <Content Include="Views\ServiceRoute\Index.cshtml" />
+    <Content Include="Views\LateArrivalReport\Create.cshtml" />
+    <Content Include="Views\LateArrivalReport\Details.cshtml" />
+    <Content Include="Views\LateArrivalReport\Header.cshtml" />
+    <Content Include="Views\LateArrivalReport\Index.cshtml" />
+    <Content Include="Views\LateArrivalReport\Print.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\LateArrivalReport\PrintSingle.cshtml" />
+    <Content Include="Views\PasswordResetRequest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\tiles\" />
@@ -2609,15 +2610,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202506301145447_apppublish.resx">
-      <DependentUpon>202506301145447_apppublish.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507010554184_updatedatabase3333.resx">
-      <DependentUpon>202507010554184_updatedatabase3333.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507010707318_updatedatabase33335.resx">
-      <DependentUpon>202507010707318_updatedatabase33335.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

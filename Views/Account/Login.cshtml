@@ -204,7 +204,7 @@
                     <label class="lf--label" for="Password">
                         <i class="bx bx-lock"></i>
                     </label>
-                    <input id="Password" name="Password" class="lf--input" placeholder="Şifre" type="password" required />
+                    <input id="Password" name="Password" class="lf--input" placeholder="Şifre (onaylı sıfırlama varsa boş bırakabilirsiniz)" type="password" />
                     @Html.ValidationMessage("Password", "", new { @class = "text-danger" })
                 </div>
 
@@ -216,6 +216,9 @@
                 </div>
 
                 <button class="lf--submit" type="submit">Giriş Yap</button>
+                <div style="margin-top:10px; text-align:center;">
+                    <a href='@Url.Action("ForgotPassword", "Account")' style="color: var(--primary-color); font-size: 14px;">Şifremi Unuttum</a>
+                </div>
             </form>
         </div>
     </div>

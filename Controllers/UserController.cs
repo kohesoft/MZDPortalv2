@@ -44,7 +44,8 @@ namespace MZDNETWORK.Controllers
             var userInfo = db.UserInfos.Include("User").FirstOrDefault(u => u.User.Username == username);
             if (userInfo == null)
             {
-                return HttpNotFound();
+                // Kullanıcı için henüz UserInfo kaydı yoksa, boş bir model oluştur
+                userInfo = new UserInfo { UserId = user.Id };
             }
             return View(userInfo);
         }
@@ -60,7 +61,11 @@ namespace MZDNETWORK.Controllers
                 var existingUserInfo = db.UserInfos.Include("User").FirstOrDefault(u => u.UserId == userInfo.UserId);
                 if (existingUserInfo == null)
                 {
-                    return HttpNotFound();
+                    // İlk kez oluşturuluyor
+                    db.UserInfos.Add(userInfo);
+                    db.SaveChanges();
+                    TempData["SuccessMessage"] = "Kullanıcı bilgileri başarıyla kaydedildi.";
+                    return RedirectToAction("Index", "Home");
                 }
 
                 // UserInfo bilgilerini güncelle
@@ -122,6 +127,18 @@ namespace MZDNETWORK.Controllers
                     TempData["RedirectUrl"] = Url.Action("Edit", "User");
                     return RedirectToAction("ChangePassword");
                 }
+
+                // Eğer kullanıcı ilk kez şifre belirliyorsa eski şifre sorgusunu atla
+                if (!user.IsPasswordChanged && string.IsNullOrEmpty(model.OldPassword))
+                {
+                    user.Password = model.NewPassword;
+                    user.IsPasswordChanged = true;
+                    db.SaveChanges();
+                    TempData["SuccessMessage"] = "Şifreniz başarıyla belirlendi.";
+                    TempData["RedirectUrl"] = Url.Action("Index", "Home");
+                    return RedirectToAction("ChangePassword");
+                }
+
                 ModelState.AddModelError("", "Eski şifre yanlış.");
             }
             return View(model);
