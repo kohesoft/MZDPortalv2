@@ -24,18 +24,22 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                         <div>
                             <h5 class="text-sm font-medium text-gray-500 mb-2">İzin Türü</h5>
                             <p class="text-base font-medium text-gray-900">@MZDNETWORK.Helpers.EnumDisplayHelper.ToDisplayName(Model.LeaveType)</p>
                         </div>
                         <div>
                             <h5 class="text-sm font-medium text-gray-500 mb-2">Başlangıç Tarihi</h5>
-                            <p class="text-base font-medium text-gray-900">@Model.StartDate.ToShortDateString()</p>
+                            <p class="text-base font-medium text-gray-900">@Model.StartDate.ToString("dd.MM.yyyy HH:mm")</p>
                         </div>
                         <div>
                             <h5 class="text-sm font-medium text-gray-500 mb-2">Bitiş Tarihi</h5>
-                            <p class="text-base font-medium text-gray-900">@Model.EndDate.ToShortDateString()</p>
+                            <p class="text-base font-medium text-gray-900">@Model.EndDate.ToString("dd.MM.yyyy HH:mm")</p>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-500 mb-2">Süre</h5>
+                            <p class="text-base font-medium text-gray-900">@Model.DurationDisplay</p>
                         </div>
                     </div>
 
@@ -74,19 +78,42 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                        <div>
-                            <h5 class="text-sm font-medium text-gray-500 mb-2">Durum</h5>
-                            <span class="@GetStatusClasses(Model.Status)">
-                                @MZDNETWORK.Helpers.EnumDisplayHelper.ToDisplayName(Model.Status)
-                            </span>
-                        </div>
-                        @if (Model.Status != MZDNETWORK.Models.LeaveStatus.PendingSupervisor && Model.Status != MZDNETWORK.Models.LeaveStatus.PendingManager)
-                        {
-                            <div>
-                                <h5 class="text-sm font-medium text-gray-500 mb-2">Onaylayan/Reddeden</h5>
-                                <p class="text-base font-medium text-gray-900">@(Model.ApprovedBy?.Username ?? "-")</p>
-                            </div>
+                        @{
+                            var supervisorStatus = "";
+                            var managerStatus = "";
+                            switch(Model.Status)
+                            {
+                                case MZDNETWORK.Models.LeaveStatus.PendingSupervisor:
+                                    supervisorStatus = "Beklemede";
+                                    managerStatus = "Beklemede";
+                                    break;
+                                case MZDNETWORK.Models.LeaveStatus.PendingManager:
+                                    supervisorStatus = "Onaylandı";
+                                    managerStatus = "Beklemede";
+                                    break;
+                                case MZDNETWORK.Models.LeaveStatus.Approved:
+                                    supervisorStatus = "Onaylandı";
+                                    managerStatus = "Onaylandı";
+                                    break;
+                                case MZDNETWORK.Models.LeaveStatus.ConditionallyApproved:
+                                    supervisorStatus = "Onaylandı";
+                                    managerStatus = "Şartlı Onaylandı";
+                                    break;
+                                case MZDNETWORK.Models.LeaveStatus.Rejected:
+                                    supervisorStatus = "Reddedildi";
+                                    managerStatus = "Reddedildi";
+                                    break;
+                            }
                         }
+
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-500 mb-2">Şef Onayı</h5>
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">@supervisorStatus</span>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-500 mb-2">Müdür Onayı</h5>
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">@managerStatus</span>
+                        </div>
                     </div>
 
                     @if (!string.IsNullOrEmpty(Model.ApprovalReason))

@@ -17,8 +17,8 @@
 </head>
 <body>
     <div style="display:flex;align-items:center;justify-content:space-between">
-        <img src="/imgs/logo.png" style="height:80px" />
-        <div style="font-size:14px; font-weight:bold; text-align:center">Ziyaretçi Kayıtları</div>
+        <img src="/imgs/logo_form.png" style="height:80px" />
+        <div style="font-size:34px; font-weight:bold; text-align:center">Ziyaretçi Kayıtları</div>
         <div style="font-size:12px">
             @if(header!=null){
                 <div>@header.PrintableNote</div>
@@ -33,7 +33,7 @@
     <table>
         <thead>
             <tr>
-                <th>Sıra</th><th>Tarih</th><th>Ad Soyad</th><th>Organizasyon</th><th>Görevi</th><th>Kimlik No</th><th>TC Kimlik</th><th>Giriş</th><th>Çıkış</th><th>İmza</th>
+                <th>Sıra</th><th>Tarih</th><th>Ad Soyad</th><th>Geliş Sebebi</th><th>Firma</th><th>Görevi</th><th>Kimlik No</th><th>TC Kimlik</th><th>Giriş</th><th>Çıkış</th><th>İmza</th>
             </tr>
         </thead>
         <tbody>
@@ -44,6 +44,7 @@
                     <td>@i</td>
                     <td>@item.Date.ToString("dd.MM.yyyy")</td>
                     <td>@item.FullName</td>
+                    <td>@item.ArrivalReason</td>
                     <td>@item.Organization</td>
                     <td>@item.Duty</td>
                     <td>@item.IdentityNo</td>

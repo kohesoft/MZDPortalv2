@@ -30,6 +30,17 @@ namespace MZDNETWORK.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult MolaYukle()
+        {
+            var photoDirectory = HttpContext.Server.MapPath("~/UploadPhotosMola");
+            if (!Directory.Exists(photoDirectory))
+                Directory.CreateDirectory(photoDirectory);
+
+            var photos = Directory.GetFiles(photoDirectory).Select(Path.GetFileName).ToList();
+            return View(photos);
+        }
+
         [HttpPost]
         [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.FoodPhoto", Action = "Manage")]
         public ActionResult UploadPhotoMerkez(HttpPostedFileBase photo)
@@ -130,15 +141,6 @@ namespace MZDNETWORK.Controllers
                 TempData["Error"] = "Geçersiz dosya adı.";
             }
             return RedirectToAction("YemekYukle", "BilgiIslem");
-        }
-
-        [HttpPost]
-        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.BreakPhoto", Action = "Manage")]
-        public ActionResult MolaYukle()
-        {
-            var photoDirectory = HttpContext.Server.MapPath("~/UploadPhotosMola");
-            var photos = Directory.GetFiles(photoDirectory).Select(Path.GetFileName).ToList();
-            return View(photos);
         }
 
         [HttpPost]

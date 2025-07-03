@@ -223,6 +223,16 @@ namespace MZDNETWORK.Controllers
             bool canApprove = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Approve");
             bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Manage");
 
+            // Departman bazlı kısıtlama: Manage yetkisi olmayan şefler sadece kendi departmanındaki talepleri güncelleyebilir
+            var currentUser = db.Users.FirstOrDefault(u => u.Id == currentUserId);
+            if (!canManage && canApprove)
+            {
+                if (currentUser != null && leaveRequest.Department != currentUser?.Department)
+                {
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.Unauthorized);
+                }
+            }
+
             if (leaveRequest.UserId != currentUserId && !canApprove && !canManage)
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.Unauthorized);
@@ -251,6 +261,16 @@ namespace MZDNETWORK.Controllers
             const string approvePermissionPath = "Operational.LeaveRequest";
             bool canApprove = DynamicAuthorizeAttribute.CurrentUserHasPermission(approvePermissionPath, "Approve");
             bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission(approvePermissionPath, "Manage");
+
+            // Departman bazlı kısıtlama: Manage yetkisi olmayan şefler sadece kendi departmanındaki talepleri güncelleyebilir
+            var currentUser = db.Users.FirstOrDefault(u => u.Id == currentUserId);
+            if (!canManage && canApprove)
+            {
+                if (currentUser != null && leaveRequest.Department != currentUser?.Department)
+                {
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.Unauthorized);
+                }
+            }
 
             if (leaveRequest.UserId != currentUserId && !canApprove && !canManage)
             {
@@ -348,6 +368,15 @@ namespace MZDNETWORK.Controllers
                 .Include(l => l.RequestingUser)
                 .Include(l => l.ApprovedBy);
 
+            // Departman bazlı filtreleme: Manage yetkisi olmayan onaycılar sadece kendi departmanındaki talepleri görür
+            var currentUserName = User.Identity.Name;
+            var currentUser = db.Users.FirstOrDefault(u => u.Username == currentUserName);
+            bool currentCanManage = Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Manage");
+            if (!currentCanManage && currentUser != null && !string.IsNullOrEmpty(currentUser.Department))
+            {
+                query = query.Where(l => l.Department == currentUser.Department);
+            }
+
             var searchTerm = Request.QueryString["searchTerm"]; 
             var leaveTypeStr = Request.QueryString["leaveType"]; 
             var statusStr = Request.QueryString["status"]; 
@@ -434,7 +463,7 @@ namespace MZDNETWORK.Controllers
                 ws.Cells[1, 2].Value = "İzin Türü";
                 ws.Cells[1, 3].Value = "Başlangıç";
                 ws.Cells[1, 4].Value = "Bitiş";
-                ws.Cells[1, 5].Value = "Gün";
+                ws.Cells[1, 5].Value = "Süre";
                 ws.Cells[1, 6].Value = "Departman";
                 ws.Cells[1, 7].Value = "Vekil";
                 ws.Cells[1, 8].Value = "Durum";
@@ -445,9 +474,9 @@ namespace MZDNETWORK.Controllers
                 {
                     ws.Cells[row, 1].Value = r.RequestingUser?.Username;
                     ws.Cells[row, 2].Value = MZDNETWORK.Helpers.EnumDisplayHelper.ToDisplayName(r.LeaveType);
-                    ws.Cells[row, 3].Value = r.StartDate.ToShortDateString();
-                    ws.Cells[row, 4].Value = r.EndDate.ToShortDateString();
-                    ws.Cells[row, 5].Value = r.TotalDays;
+                    ws.Cells[row, 3].Value = r.StartDate.ToString("dd.MM.yyyy HH:mm");
+                    ws.Cells[row, 4].Value = r.EndDate.ToString("dd.MM.yyyy HH:mm");
+                    ws.Cells[row, 5].Value = r.DurationDisplay;
                     ws.Cells[row, 6].Value = r.Department;
                     ws.Cells[row, 7].Value = r.SubstituteName;
                     ws.Cells[row, 8].Value = MZDNETWORK.Helpers.EnumDisplayHelper.ToDisplayName(r.Status);

@@ -31,14 +31,14 @@
                                     <div>
                                         @Html.LabelFor(m => m.StartDate, new { @class = "block text-base font-semibold text-gray-900 mb-2" })
                                         <div class="relative">
-                                            @Html.EditorFor(m => m.StartDate, new { htmlAttributes = new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200", type = "date" } })
+                                            @Html.EditorFor(m => m.StartDate, new { htmlAttributes = new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200", type = "datetime-local" } })
                                             @Html.ValidationMessageFor(m => m.StartDate, "", new { @class = "mt-2 text-sm text-red-600 font-medium" })
                                         </div>
                                     </div>
                                     <div>
                                         @Html.LabelFor(m => m.EndDate, new { @class = "block text-base font-semibold text-gray-900 mb-2" })
                                         <div class="relative">
-                                            @Html.EditorFor(m => m.EndDate, new { htmlAttributes = new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200", type = "date" } })
+                                            @Html.EditorFor(m => m.EndDate, new { htmlAttributes = new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200", type = "datetime-local" } })
                                             @Html.ValidationMessageFor(m => m.EndDate, "", new { @class = "mt-2 text-sm text-red-600 font-medium" })
                                         </div>
                                     </div>

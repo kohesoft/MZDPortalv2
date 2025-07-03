@@ -14,7 +14,7 @@
 
             <div>
                 <label class="block text-sm font-medium mb-1">Tarih</label>
-                @Html.TextBoxFor(m=>m.Date, new { @class="form-input w-full border-2 border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none", type="date"})
+                @Html.TextBoxFor(m=>m.Date, "{0:yyyy-MM-dd}", new { @class="form-input w-full border-2 border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none", type="date", @readonly="readonly"})
                 @Html.ValidationMessageFor(m=>m.Date)
             </div>
             <div>
@@ -23,8 +23,12 @@
                 @Html.ValidationMessageFor(m=>m.FullName)
             </div>
             <div>
-                <label class="block text-sm font-medium mb-1">Organizasyon</label>
+                <label class="block text-sm font-medium mb-1">Firma</label>
                 @Html.TextBoxFor(m=>m.Organization, new { @class="form-input w-full border-2 border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"})
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Geliş Sebebi</label>
+                @Html.DropDownListFor(m=>m.ArrivalReason, new SelectList(new[]{ "Toplantı", "İş Görüşmesi", "Görüşme", "Tamir/Tadilat", "Diğer" }), "Seçiniz", new { @class="form-select w-full border-2 border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"})
             </div>
             <div>
                 <label class="block text-sm font-medium mb-1">Görev</label>
@@ -50,7 +54,7 @@
             </div>
             <div>
                 <label class="block text-sm font-medium mb-1">Giriş Saati</label>
-                @Html.TextBoxFor(m=>m.EntryTime, new { @class="form-input w-full", type="time"})
+                @Html.TextBoxFor(m=>m.EntryTime, "{0:hh\\:mm}", new { @class="form-input w-full", type="time", @readonly="readonly"})
             </div>
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg shadow">Kaydet</button>
             <a href="@Url.Action("Index")" class="text-gray-600 ml-2">İptal</a>

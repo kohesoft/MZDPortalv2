@@ -11,6 +11,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/popper")
+    <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
 </head>
 <body>
     @if (TempData["SuccessMessage"] != null)
@@ -95,7 +96,7 @@
                         </ul>
                     </li>
                 }
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("UserManagement.UserManagement"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InformationTechnology"))
                 {
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
@@ -132,11 +133,16 @@
                             {
                                 <li><a href="@Url.Action("SendNotification", "Notification")" class="nav-link">Anlık Bildirim</a></li>
                             }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("UserManagement.PasswordResetRequests"))
+                            {
+                                <li><a href="@Url.Action("Index", "PasswordResetRequest")" class="nav-link">Şifre Sıfırlama İstekleri</a></li>
+                            }
                         </ul>
                     </li>
                 }
 @* Güvenlik menüsü *@
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.VisitorEntry"))
+
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("HumanResources.VisitorEntry", "HumanResources.LateArrivalReport"))
                 {
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
@@ -167,6 +173,31 @@
                                     }
                                 </ul>
                             </li>
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.LateArrivalReport"))
+                            {
+                                <li class="dropdown">
+                                    <button class="dropdown-toggle nav-link" type="button">
+                                        <span class="nav-text">İşe Geç Gelme</span>
+                                        <i class='bx bx-chevron-down icon'></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("Index", "LateArrivalReport")" class="nav-link">Tutanaklar</a></li>
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.LateArrivalReport", "Create"))
+                                        {
+                                            <li><a href="@Url.Action("Create", "LateArrivalReport")" class="nav-link">Tutanak Ekle</a></li>
+                                        }
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.LateArrivalReport", "Manage"))
+                                        {
+                                            <li><a href="@Url.Action("Header", "LateArrivalReport")" class="nav-link">Üst Bilgi</a></li>
+                                        }
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.LateArrivalReport", "Export"))
+                                        {
+                                            <li><a href="@Url.Action("ExportExcel", "LateArrivalReport")" class="nav-link">Excel İndir</a></li>
+                                            <li><a href="@Url.Action("Print", "LateArrivalReport")" class="nav-link">Yazdır</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
                         </ul>
                     </li>
                 }
@@ -227,6 +258,12 @@
                     <a href="@Url.Action("Mola", "Home")" class="nav-link">
                         <i class='bx bx-time icon'></i>
                         <span class="nav-text">Mola Saatleri</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","ServiceRoute")" class="nav-link">
+                        <i class='bx bx-map icon'></i>
+                        <span class="nav-text">Servis Güzergâhları</span>
                     </a>
                 </li>
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Operational.Task"))
@@ -313,6 +350,11 @@
                                     </a>
                                 </li>
                             }
+                            <li>
+                                <a href="@Url.Action("ChangePassword", "User")" class="nav-link">
+                                    Şifre Değiştir
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 }
@@ -427,6 +469,7 @@
     <script src="~/Scripts/jquery-3.7.1.min.js"></script>
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
     <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
 
     <script>
       $(document).ready(function () {

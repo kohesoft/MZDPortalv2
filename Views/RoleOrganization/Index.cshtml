@@ -66,7 +66,7 @@
                 <h3 id="modalTitle" class="text-xl font-bold text-slate-800">Rolleri Düzenle</h3>
                 <button onclick="closeRoleModal()" class="text-slate-400 hover:text-slate-600"><i class='bx bx-x text-2xl'></i></button>
             </div>
-            <div class="p-6">
+            <div class="p-6" style="max-height:80vh; overflow:auto;">
                 <form id="roleAssignForm" class="space-y-4">
                     @Html.AntiForgeryToken()
                     <input type="hidden" id="modalUserId" />

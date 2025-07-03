@@ -56,6 +56,12 @@ namespace MZDNETWORK.Models
         [NotMapped]
         public int TotalDays => (EndDate - StartDate).Days + 1;
 
+        [NotMapped]
+        public double TotalHours => (EndDate - StartDate).TotalHours;
+
+        [NotMapped]
+        public string DurationDisplay => TotalHours >= 24 ? $"{TotalDays} gün" : $"{Math.Round(TotalHours, 1)} saat";
+
         [Display(Name = "İletişim Bilgisi")]
         [StringLength(200)]
         public string ContactInfo { get; set; }

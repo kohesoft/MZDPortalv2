@@ -15,6 +15,24 @@
                     <a href="@Url.Action("Create","VisitorEntry")" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow flex items-center gap-2">
                         <i class='bx bx-plus'></i>Yeni Kayıt
                     </a>
+                    <!-- Tarih Filtreleri -->
+                    <select id="yearFilter" class="form-select border border-gray-300 rounded px-2 py-1">
+                        <option value="">Yıl (Hepsi)</option>
+                        @{
+                            var years = Model.Select(m => m.Date.Year).Distinct().OrderByDescending(y => y);
+                            foreach (var y in years)
+                            {
+                                <option value="@y">@y</option>
+                            }
+                        }
+                    </select>
+                    <select id="monthFilter" class="form-select border border-gray-300 rounded px-2 py-1">
+                        <option value="">Ay (Hepsi)</option>
+                        @{ var monthNames = new[]{"Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"}; }
+                        @for(int m=1;m<=12;m++){
+                            <option value="@m">@monthNames[m-1]</option>
+                        }
+                    </select>
                 </div>
             </div>
             <div class="px-8 py-6 overflow-x-auto" style="max-height: 550px;">
@@ -24,7 +42,8 @@
                             <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Sıra</th>
                             <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Tarih</th>
                             <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Ad Soyad</th>
-                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Organizasyon</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Geliş Sebebi</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Firma</th>
                             <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Görevi</th>
                             <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Kimlik No</th>
                             <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">TC Kimlik</th>
@@ -40,6 +59,7 @@
                                 <td class="px-4 py-2">@i</td>
                                 <td class="px-4 py-2">@item.Date.ToString("dd.MM.yyyy")</td>
                                 <td class="px-4 py-2">@item.FullName</td>
+                                <td class="px-4 py-2">@item.ArrivalReason</td>
                                 <td class="px-4 py-2">@item.Organization</td>
                                 <td class="px-4 py-2">@item.Duty</td>
                                 <td class="px-4 py-2">@item.IdentityNo</td>
@@ -69,4 +89,56 @@
             </div>
         </div>
     </div>
-</section> 
+</section>
+
+<script>
+    $(document).ready(function () {
+        // DataTable ile arama, sıralama ve filtreleme aktif
+        var table = $('#entryTable').DataTable({
+            dom: "<'flex justify-between items-center mb-4'lf>rt<'flex justify-between items-center mt-4'ip>",
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Hepsi"]],
+            order: [[1, 'desc']], // Tarih sütunu varsayılan sıralama (yeniler üstte)
+            language: {
+                decimal: ",",
+                emptyTable: "Tabloda herhangi bir veri mevcut değil",
+                info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor",
+                infoEmpty: "Kayıt yok",
+                infoFiltered: "(_MAX_ kayıt içerisinden bulunan)",
+                thousands: ".",
+                lengthMenu: "Sayfada _MENU_ kayıt göster",
+                loadingRecords: "Yükleniyor...",
+                processing: "İşleniyor...",
+                search: "Ara:",
+                zeroRecords: "Eşleşen kayıt bulunamadı",
+                paginate: {
+                    first: "İlk",
+                    last: "Son",
+                    next: "Sonraki",
+                    previous: "Önceki"
+                },
+                aria: {
+                    sortAscending: ": artan sütun sıralamasını aktifleştir",
+                    sortDescending: ": azalan sütun sıralamasını aktifleştir"
+                }
+            }
+        });
+
+        // Özel tarih filtreleri
+        $.fn.dataTable.ext.search.push(function(settings, data, dataIndex){
+            var yearVal = $('#yearFilter').val();
+            var monthVal = $('#monthFilter').val();
+            var dateStr = data[1]; // "Tarih" sütunu
+            if(!dateStr) return true;
+            var parts = dateStr.split('.'); // dd.MM.yyyy
+            if(parts.length !== 3) return true;
+            var d = new Date(parts[2], parts[1]-1, parts[0]);
+            if(yearVal && d.getFullYear().toString() !== yearVal) return false;
+            if(monthVal && (d.getMonth()+1).toString() !== monthVal) return false;
+            return true;
+        });
+
+        $('#yearFilter, #monthFilter').on('change', function(){
+            table.draw();
+        });
+    });
+</script> 

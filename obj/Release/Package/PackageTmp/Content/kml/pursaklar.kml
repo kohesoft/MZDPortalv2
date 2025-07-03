@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Adsız katman</name>
+    <Style id="icon-1899-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-A52714-5456-nodesc-normal">
+      <LineStyle>
+        <color>ff1427a5</color>
+        <width>5.456</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-A52714-5456-nodesc-highlight">
+      <LineStyle>
+        <color>ff1427a5</color>
+        <width>8.184</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-A52714-5456-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-A52714-5456-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-A52714-5456-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>ŞÖLEN SİTESİ</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.8684129,40.052739,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Saray Loft Sitesi</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.894289,40.0696889,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Kılavuz Sokak</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.8787652,40.0475484,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Filiz Cd. No:10 D:5</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.88211,40.0433538,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Karacaören Toki Blokları F-7 blok</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.9222868,40.0255989,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>494. Cad. No:39 D:8</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.891753,39.990465,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>529. Sk. No:4 D:20</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.888226,39.9909343,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Beyit Sk. No:8 D:5</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.8624874,39.9769683,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Sanatoryum Cd. 70-1 D:15</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.860158,39.979678,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Duman Sk. No:71 D:6</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.88313,39.991118,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>523. Sk. No:4 D:1</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.8880453,39.9878288,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>İncirli - Akyurt süpermarket</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.8457877,39.9793628,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>ETLİK TİCARET MERKEZİ</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.8418922,39.9730644,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Etlik Cd No:62</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.8334014,39.9716777,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Çizgi 15</name>
+      <styleUrl>#line-A52714-5456-nodesc</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          32.8890579,39.9837691,0
+          32.8890149,39.9856599,0
+          32.8852384,39.9866956,0
+          32.8842943,39.9861202,0
+          32.8810756,39.9897535,0
+          32.8815906,39.9890959,0
+          32.8792302,39.9876163,0
+          32.8752857,39.9869572,0
+          32.8753715,39.9826167,0
+          32.8716808,39.978539,0
+          32.8674681,39.9779201,0
+          32.8663738,39.976802,0
+          32.8603656,39.9761114,0
+          32.8588636,39.984349,0
+          32.8542716,39.9845792,0
+          32.8538425,39.982672,0
+          32.8461606,39.9793507,0
+          32.8422983,39.9729707,0
+          32.8349168,39.9700436,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>Azık Sk. No:6 D:6</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.8378417,39.9758461,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

@@ -19,8 +19,8 @@ namespace MZDNETWORK.Controllers
                 new ServiceRoute { Title = "MZD-5 KARAPÜRÇEK", KmlPath = "~/Content/kml/karapurcek.kml" },
                 new ServiceRoute { Title = "MZD-6 SİNCAN-ETİMESGUT", KmlPath = "~/Content/kml/sincan_etimesgut.kml" },
                 new ServiceRoute { Title = "MZD-7 PURSAKLAR", KmlPath = "~/Content/kml/pursaklar.kml" },
-                new ServiceRoute { Title = "MZD-8 MAMAK-1 (BOĞAZİÇİ)", KmlPath = "~/Content/kml/mamak-1.kml" },
-                new ServiceRoute { Title = "MZD-9 MAMAK-2 (BAHÇELERÜSTÜ)", KmlPath = "~/Content/kml/mamak-2.kml" },
+                new ServiceRoute { Title = "MZD-8 MAMAK-1 (BAHÇELERÜSTÜ)", KmlPath = "~/Content/kml/mamak-1.kml" },
+                new ServiceRoute { Title = "MZD-9 MAMAK-2 (BOĞAZİÇİ)", KmlPath = "~/Content/kml/mamak-2.kml" },
                 new ServiceRoute { Title = "MZD-10 MAMAK-3 (KIBRISKÖY)", KmlPath = "~/Content/kml/mamak-3.kml" },
             };
 

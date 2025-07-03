@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>mamak.xlsx</name>
+    <Style id="icon-1899-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-A52714-10300-nodesc-normal">
+      <LineStyle>
+        <color>ff1427a5</color>
+        <width>10.3</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-A52714-10300-nodesc-highlight">
+      <LineStyle>
+        <color>ff1427a5</color>
+        <width>15.45</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-A52714-10300-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-A52714-10300-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-A52714-10300-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>şafaktepe altılı sok. 43/1 MAMAK</name>
+      <address>şafaktepe altılı sok. 43/1 MAMAK</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>HÜSEYİNGAZİ MAH. 212.SOK. D1/27 MAMAK</name>
+      <address>HÜSEYİNGAZİ MAH. 212.SOK. D1/27 MAMAK</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>BAHÇELERİÇİ MAH. 262.SOK. NO:1/25 MAMAK</name>
+      <address>BAHÇELERİÇİ MAH. 262.SOK. NO:1/25 MAMAK</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>MİSKET MAH.624. SK NO:8/3 MAMAK/ANKARA</name>
+      <address>MİSKET MAH.624. SK NO:8/3 MAMAK/ANKARA</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>ŞEHİT İDRİS YILMAZ CADDESİ NO:43/10 MAMAK</name>
+      <address>ŞEHİT İDRİS YILMAZ CADDESİ NO:43/10 MAMAK</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>DEMİRLİBAHÇE MAH.GÜZELTEPE SOKAK NO:9/24 MAMAK</name>
+      <address>DEMİRLİBAHÇE MAH.GÜZELTEPE SOKAK NO:9/24 MAMAK</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>HÜSEYİNGAZİ MAH. 212.SOK. D1/27 MAMAK</name>
+      <address>HÜSEYİNGAZİ MAH. 212.SOK. D1/27 MAMAK</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>ALTIAĞAÇ MAH. 202. SOK. B81B BLOK NO:6 MAMAK </name>
+      <address>ALTIAĞAÇ MAH. 202. SOK. B81B BLOK NO:6 MAMAK</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>MİSKET MAH. ANADOLU CD. NO:132/2 MAMAK</name>
+      <address>MİSKET MAH. ANADOLU CD. NO:132/2 MAMAK</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>HÜSEYİNGAZİ MAH. ŞEHİT MUSTAFA UÇAR SOK. 8/ 12 MAMAK</name>
+      <address>HÜSEYİNGAZİ MAH. ŞEHİT MUSTAFA UÇAR SOK. 8/ 12 MAMAK</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>ÇAĞLAYAN MAH.286. SOK OLAY APT. 6/14 MAMAK</name>
+      <address>ÇAĞLAYAN MAH.286. SOK OLAY APT. 6/14 MAMAK</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>BALKİRAZ MAH USLU CAD 30/2 MAMAK ANKARA</name>
+      <address>BALKİRAZ MAH USLU CAD 30/2 MAMAK ANKARA</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name/>
+      <styleUrl>#line-A52714-10300-nodesc</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          32.9085805,39.9284945,0
+          32.9093101,39.9278281,0
+          32.9096319,39.9277952,0
+          32.9099109,39.9271288,0
+          32.9095354,39.926232,0
+          32.9092671,39.9258041,0
+          32.9097607,39.9255244,0
+          32.910737,39.926487,0
+          32.9114022,39.9260345,0
+          32.9125931,39.9263142,0
+          32.9115202,39.9286673,0
+          32.911724,39.9301976,0
+          32.9100979,39.931322,0
+          32.9103554,39.9315606,0
+          32.9122329,39.9308202,0
+          32.9125977,39.9312315,0
+          32.9135633,39.9308366,0
+          32.9135633,39.9315112,0
+          32.9153765,39.9330085,0
+          32.9168356,39.9340862,0
+          32.9179299,39.9347773,0
+          32.918638,39.9381172,0
+          32.9187239,39.9389234,0
+          32.9185522,39.9411115,0
+          32.9160417,39.9402724,0
+          32.9150975,39.940256,0
+          32.9142392,39.9408482,0
+          32.9134667,39.9408153,0
+          32.9130805,39.9402889,0
+          32.9130376,39.9392195,0
+          32.9124582,39.9380678,0
+          32.9121149,39.9370971,0
+          32.9118574,39.9359783,0
+          32.9117501,39.9355177,0
+          32.9119218,39.9350076,0
+          32.911793,39.9341849,0
+          32.9110097,39.9335954,0
+          32.9109883,39.9332827,0
+          32.9102694,39.9332416,0
+          32.9086387,39.9335707,0
+          32.9075014,39.9326328,0
+          32.9060101,39.9325917,0
+          32.8978025,39.9348047,0
+          32.8955387,39.9353805,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name/>
+      <styleUrl>#line-A52714-10300-nodesc</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          32.8955387,39.9353805,0
+          32.8923791,39.9363819,0
+          32.8906195,39.936497,0
+          32.8884308,39.935296,0
+          32.8868001,39.9375829,0
+          32.8872078,39.9384549,0
+          32.8875725,39.9383068,0
+          32.8882806,39.9390965,0
+          32.8892033,39.9393269,0
+          32.8899114,39.9401166,0
+          32.8896325,39.9403633,0
+          32.8899543,39.9407417,0
+          32.8903406,39.9405772,0
+          32.8906624,39.9411201,0
+          32.8927009,39.939985,0
+          32.8950827,39.9417782,0
+          32.8962414,39.9423375,0
+          32.8968337,39.9424184,0
+          32.8945807,39.9448778,0
+          32.8952459,39.945248,0
+          32.8937975,39.9464653,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>
