@@ -500,6 +500,10 @@
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="LogActionFilter.cs" />
+    <Compile Include="Migrations\202507091313488_DatabaseCreate.cs" />
+    <Compile Include="Migrations\202507091313488_DatabaseCreate.Designer.cs">
+      <DependentUpon>202507091313488_DatabaseCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerOption.cs" />
@@ -2610,6 +2614,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\202507091313488_DatabaseCreate.resx">
+      <DependentUpon>202507091313488_DatabaseCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

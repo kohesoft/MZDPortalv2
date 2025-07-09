@@ -286,39 +286,26 @@ namespace MZDNETWORK.Controllers
 
             bool updateAllowed = false;
 
-            // Şef aşaması
-            if (previousStatus == LeaveStatus.PendingSupervisor)
+            // Herhangi bir onay yetkisi olan kişi (şef veya müdür) onayı bekleyen talebi sonuçlandırabilir
+            if (previousStatus == LeaveStatus.PendingSupervisor || previousStatus == LeaveStatus.PendingManager)
             {
-                if (!isSupervisor)
+                if (!canApprove && !canManage)
                     return new HttpStatusCodeResult(System.Net.HttpStatusCode.Unauthorized);
 
+                // Onay durumunu belirle
                 if (status == LeaveStatus.Rejected)
                 {
                     leaveRequest.Status = LeaveStatus.Rejected;
                 }
+                else if (status == LeaveStatus.ConditionallyApproved)
+                {
+                    leaveRequest.Status = LeaveStatus.ConditionallyApproved;
+                }
                 else
                 {
-                    // Tüm olumlu kararlar müdüre gider
-                    leaveRequest.Status = LeaveStatus.PendingManager;
-
-                    // Manage yetkisine sahip kullanıcıları bilgilendir (bildirim bloğu yukarıda mevcut)
-                }
-
-                updateAllowed = true;
-            }
-            // Müdür aşaması
-            else if (previousStatus == LeaveStatus.PendingManager)
-            {
-                if (!isManager)
-                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.Unauthorized);
-
-                // Müdür son kararı verir
-                if (status == LeaveStatus.Approved)
+                    // Tüm olumlu kararlar direkt onaylandı olur
                     leaveRequest.Status = LeaveStatus.Approved;
-                else if (status == LeaveStatus.ConditionallyApproved)
-                    leaveRequest.Status = LeaveStatus.ConditionallyApproved;
-                else if (status == LeaveStatus.Rejected)
-                    leaveRequest.Status = LeaveStatus.Rejected;
+                }
 
                 updateAllowed = true;
             }
@@ -479,7 +466,7 @@ namespace MZDNETWORK.Controllers
                     ws.Cells[row, 5].Value = r.DurationDisplay;
                     ws.Cells[row, 6].Value = r.Department;
                     ws.Cells[row, 7].Value = r.SubstituteName;
-                    ws.Cells[row, 8].Value = MZDNETWORK.Helpers.EnumDisplayHelper.ToDisplayName(r.Status);
+                    ws.Cells[row, 8].Value = GetSimplifiedStatusForExport(r.Status);
                     ws.Cells[row, 9].Value = r.CreatedAt.ToString("dd.MM.yyyy HH:mm");
                     row++;
                 }
@@ -543,6 +530,23 @@ namespace MZDNETWORK.Controllers
             return Json(substitutes, JsonRequestBehavior.AllowGet);
         }
 
+        private string GetSimplifiedStatusForExport(LeaveStatus status)
+        {
+            switch (status)
+            {
+                case LeaveStatus.Approved:
+                case LeaveStatus.ConditionallyApproved:
+                    return "Onaylandı";
+                case LeaveStatus.Rejected:
+                    return "Reddedildi";
+                case LeaveStatus.PendingSupervisor:
+                case LeaveStatus.PendingManager:
+                    return "Beklemede";
+                default:
+                    return "Beklemede";
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -552,4 +556,4 @@ namespace MZDNETWORK.Controllers
             base.Dispose(disposing);
         }
     }
-} 
+}
