@@ -504,10 +504,10 @@ C:\Users\berat\Documents\GitHub\MZDPortalv2\bin\tr\System.Web.WebPages.Razor.res
 C:\Users\berat\Documents\GitHub\MZDPortalv2\bin\tr\System.Web.Optimization.resources.dll
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.App.config
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.AssemblyReference.cache
+C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.DatabaseCreate.resources
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Properties.Resources.resources
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.GenerateResource.cache
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.CoreCompileInputs.cache
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.Up2Date
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.dll
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.pdb
-C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.DatabaseCreate.resources

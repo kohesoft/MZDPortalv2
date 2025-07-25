@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\.vs\\mzdnetwork\\config\\applicationhost.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:.vs\\mzdnetwork\\config\\applicationhost.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\content\\_layout.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:content\\_layout.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,14 +39,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "applicationhost.config",
-              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\.vs\\MZDNETWORK\\config\\applicationhost.config",
-              "RelativeDocumentMoniker": ".vs\\MZDNETWORK\\config\\applicationhost.config",
-              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\.vs\\MZDNETWORK\\config\\applicationhost.config",
-              "RelativeToolTip": ".vs\\MZDNETWORK\\config\\applicationhost.config",
-              "ViewState": "AgIAAPUDAAAAAAAAAAAEwA4EAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-07-09T17:58:35.933Z",
+              "Title": "_layout.css",
+              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Content\\_layout.css",
+              "RelativeDocumentMoniker": "Content\\_layout.css",
+              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Content\\_layout.css",
+              "RelativeToolTip": "Content\\_layout.css",
+              "ViewState": "AgIAAPkAAAAAAAAAAAAAAAoBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-07-25T12:53:56.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAJgCAAAAAAAAAAAEwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-25T12:35:36.189Z",
               "EditorCaption": ""
             }
           ]

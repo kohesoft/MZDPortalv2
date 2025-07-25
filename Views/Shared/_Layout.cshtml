@@ -385,169 +385,121 @@
         @RenderBody()
     </div>
 
-    <div id="toggleBox" class="toggle-box" style="display:none;">
-        <button id="closeChat" class="btn-close" type="button">×</button>
-        <div id="messages"></div>
-        <input type="text" id="messageInput" placeholder="Mesajınızı yazın..." />
+    <!-- Modern Chat Tasarımı Başlangıç -->
+<div id="toggleBox" class="fixed bottom-24 right-6 z-50 w-full max-w-md bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col" style="display:none;">
+    <div class="flex items-center justify-between px-4 py-3 border-b bg-gradient-to-r from-indigo-500 to-blue-500 rounded-t-2xl">
+        <div class="flex items-center gap-2">
+            <span class="font-bold text-white">Sohbet</span>
+        </div>
+        <button id="closeChat" class="text-white text-2xl hover:text-red-300" type="button">×</button>
+    </div>
+    <div id="messages" class="flex-1 overflow-y-auto px-4 py-3 space-y-2" style="max-height:320px;"></div>
+    <div class="px-4 py-3 border-t bg-white flex items-center gap-2">
+        <button id="emojiBtn" type="button" title="Emoji" class="text-2xl bg-transparent hover:bg-gray-100 rounded-full p-1">😊</button>
+        <input type="text" id="messageInput" placeholder="Mesajınızı yazın..." class="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring focus:ring-indigo-200 transition" />
         @if (User.Identity.IsAuthenticated)
         {
-            <button id="sendButton" class="btn-custom">Gönder</button>
+            <button id="sendButton" class="bg-indigo-500 hover:bg-indigo-600 text-white rounded-full px-5 py-2 font-semibold transition">Gönder</button>
         }
-        <div id="onlineUsersListContainer">
-            <ul id="onlineUsersList"></ul>
-        </div>
     </div>
-    <button id="toggleButton" class="toggle-button" type="button">
-        <i class='bx bx-message icon'></i>
-    </button>
-
-    <div id="notificationModal" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="notificationModalLabel" class="modal-title">Bildirim</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal">×</button>
-                </div>
-                <div class="modal-body">
-                    <p id="notificationMessage"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-custom secondary" data-dismiss="modal">Kapat</button>
-                </div>
-            </div>
-        </div>
+    <div id="emojiPicker" class="absolute bottom-24 right-8 bg-white border border-gray-200 rounded-xl shadow-lg p-2 flex flex-wrap gap-1" style="display:none; z-index:1100;">
+        <span class="emoji cursor-pointer text-xl">😀</span> <span class="emoji cursor-pointer text-xl">😁</span> <span class="emoji cursor-pointer text-xl">😂</span> <span class="emoji cursor-pointer text-xl">😅</span> <span class="emoji cursor-pointer text-xl">😊</span> <span class="emoji cursor-pointer text-xl">😍</span> <span class="emoji cursor-pointer text-xl">😎</span> <span class="emoji cursor-pointer text-xl">😢</span> <span class="emoji cursor-pointer text-xl">😡</span> <span class="emoji cursor-pointer text-xl">👍</span>
     </div>
-
-    <!-- Günlük Ruh Hali Modalı -->
-    <div id="dailyMoodModal" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Merhaba, gününüz nasıldı?</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal">×</button>
-                </div>
-                <div class="modal-body text-center">
-                    <div class="mood-options flex justify-around text-3xl mb-3">
-                        <label>
-                            <input type="radio" name="dailyMoodChoice" value="1" hidden />
-                            <span>😞</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="dailyMoodChoice" value="2" hidden />
-                            <span>🙁</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="dailyMoodChoice" value="3" hidden />
-                            <span>😐</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="dailyMoodChoice" value="4" hidden />
-                            <span>🙂</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="dailyMoodChoice" value="5" hidden />
-                            <span>😁</span>
-                        </label>
-                    </div>
-                    <textarea id="dailyMoodComment" class="form-control" placeholder="İsterseniz kısa bir yorum ekleyin (opsiyonel)"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button id="submitDailyMood" class="btn-custom">Gönder</button>
-                </div>
-            </div>
-        </div>
+    <div id="onlineUsersListContainer" class="px-4 py-2 border-t bg-gray-50">
+        <ul id="onlineUsersList" class="flex flex-wrap gap-2"></ul>
     </div>
+</div>
+<button id="toggleButton" class="fixed bottom-8 right-8 bg-indigo-500 hover:bg-indigo-600 text-white rounded-full shadow-lg p-4 text-2xl z-40" type="button">
+    <i class='bx bx-message icon'></i>
+</button>
+<!-- Modern Chat Tasarımı Son -->
 
-    <!-- Global Toast -->
-    <div id="globalToast" class="fixed top-4 right-4 bg-indigo-600 text-white px-4 py-3 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50"></div>
-
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/popper")
-    @RenderSection("scripts", required: false)
-
-    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
-    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
-    <script src="~/signalr/hubs"></script>
-    <script src="~/Scripts/jquery.dataTables.min.js"></script>
-
-    <script>
-      $(document).ready(function () {
+<script>
+$(document).ready(function () {
     // Sidebar kapama
     $('#closeSidebar').click(function () {
         $('.sidebar').removeClass('active');
     });
 
-    // Chat kutusu aç/kapa
+    // Chat aç/kapa
     $('#toggleButton').click(function () {
-        $('#toggleBox').show();
+        $('#toggleBox').fadeIn(200);
         $(this).hide();
+        loadOldMessages();
     });
     $('#closeChat').click(function () {
-        $('#toggleBox').hide();
+        $('#toggleBox').fadeOut(200);
         $('#toggleButton').show();
     });
 
-    // Enter ile mesaj gönder
-    $('#messageInput').keypress(function (e) {
-        if (e.which == 13) {
-            $('#sendButton').click();
-            return false;
+    // Emoji picker aç/kapa
+    $('#emojiBtn').click(function(){
+        $('#emojiPicker').toggle();
+    });
+    $(document).on('click', '.emoji', function(){
+        var val = $('#messageInput').val();
+        $('#messageInput').val(val + $(this).text()).focus();
+        $('#emojiPicker').hide();
+    });
+    $(document).on('click', function(e){
+        if (!$(e.target).closest('#emojiBtn, #emojiPicker').length) {
+            $('#emojiPicker').hide();
         }
     });
 
-    // Dropdown menü aç/kapa
-          $('.dropdown-toggle').on('click', function (e) {
-              e.preventDefault();
-              e.stopPropagation(); // parent dropdown'ların tetiklenmesini önle
+    // Modern mesaj balonu
+    function renderMessage(user, message, time, isMe, avatarUrl) {
+        var align = isMe ? 'justify-end' : 'justify-start';
+        var bubbleColor = isMe ? 'bg-indigo-100' : 'bg-white';
+        var border = isMe ? 'border-indigo-300' : 'border-gray-200';
+        var marginAuto = isMe ? 'ml-auto' : '';
+        var style = 'max-width:70%; min-width:120px; word-break:break-word;' + (isMe ? 'margin-left:auto;' : '');
+        var html = `<div class="flex ${align}">
+            <div class="flex items-end gap-2 ${marginAuto}">
+                <div class="${bubbleColor} border ${border} px-4 py-2 rounded-2xl shadow text-sm max-w-xs min-w-[120px] break-words" style="${style}">
+                    <div class="font-semibold text-indigo-700">${user}</div>
+                    <div>${message}</div>
+                    <div class="text-xs text-gray-400 mt-1">${time}</div>
+                </div>
+            </div>
+        </div>`;
+        $('#messages').append(html);
+        scrollToBottom();
+    }
 
-              var $menu = $(this).next('.dropdown-menu'); // sadece kendisine bağlı menü
+    // Eski mesajları yükle
+    function loadOldMessages() {
+        $.get('@Url.Action("GetChatMessages", "Chat")', function(data){
+            $('#messages').empty();
+            if (data && data.length) {
+                data.forEach(function(msg){
+                    var isMe = msg.UserName === '@User.Identity.Name';
+                    var avatar = msg.AvatarUrl || '/imgs/default-avatar.png';
+                    var time = msg.SentAt ? new Date(msg.SentAt).toLocaleTimeString() : '';
+                    renderMessage(msg.UserName, msg.Content, time, isMe, avatar);
+                });
+            }
+        });
+    }
 
-              // Kapatılacak diğer menüler (aynı seviyedeki)
-              $(this).closest('.dropdown').children('.dropdown-menu').not($menu).removeClass('show');
-
-              $menu.toggleClass('show');
-          });
-
-    // Dropdown dışına tıklayınca kapat
-    $(document).on('click', function (e) {
-        if (!$(e.target).closest('.dropdown').length) {
-            $('.dropdown-menu').removeClass('show');
-        }
-    });
-
-    // Modal kapama
-    $('[data-dismiss="modal"]').click(function () {
-        $(this).closest('.modal').removeClass('show');
-    });
-
-    // Loading overlay
-    $('#loadingOverlay').hide();
-    $('a').on('click', function (e) {
-        if (!$(this).hasClass('dropdown-toggle') && !$(this).hasClass('no-loading')) {
-            $('#loadingOverlay').show();
-        }
-    });
-
-    // SignalR Chat (Chat yetkisi olan kullanıcılar)
-
-        if ($.connection && $.connection.chatHub) {
-            var chat = $.connection.chatHub;
-            var notificationSound = new Audio('@Url.Content("~/Content/notification.mp3")');
-            chat.client.broadcastMessage = function (user, message) {
-                var timestamp = new Date().toLocaleTimeString();
-                $('#messages').append('<div><strong>' + user + '</strong> (' + timestamp + '): ' + message + '</div>');
-                scrollToBottom();
-                notificationSound.play();
-            };
-            $('#sendButton').click(function () {
-                var message = $('#messageInput').val();
-                chat.server.send('@User.Identity.Name', message);
-                $('#messageInput').val('').focus();
-            });
-        }
-    
-
+    // SignalR Chat
+    if ($.connection && $.connection.chatHub) {
+        var chat = $.connection.chatHub;
+        var notificationSound = new Audio('@Url.Content("~/Content/notification.mp3")');
+        chat.client.broadcastMessage = function (user, message) {
+            var isMe = user === '@User.Identity.Name';
+            var avatar = '/imgs/default-avatar.png';
+            var time = new Date().toLocaleTimeString();
+            renderMessage(user, message, time, isMe, avatar);
+            notificationSound.play();
+        };
+        $('#sendButton').click(function () {
+            var message = $('#messageInput').val();
+            if (!message) return;
+            chat.server.send('@User.Identity.Name', message);
+            $('#messageInput').val('').focus();
+        });
+    }
     // SignalR Online Users
     if ($.connection && $.connection.onlineUsersHub) {
         var onlineUsersHub = $.connection.onlineUsersHub;
