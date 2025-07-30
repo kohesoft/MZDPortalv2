@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MZDNETWORK.Models.ChatGroup>
+@{
+    ViewBag.Title = "Chat Grupları";
+}
+<h2>Chat Grupları</h2>
+<a href="@Url.Action("Create", "ChatGroup")" class="btn btn-success">Yeni Grup Ekle</a>
+<table class="table table-bordered table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th>Açıklama</th>
+            <th>Oluşturan</th>
+            <th>Oluşturulma</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var group in Model)
+        {
+            <tr>
+                <td>@group.Name</td>
+                <td>@group.Description</td>
+                <td>@group.CreatedBy</td>
+                <td>@group.CreatedAt.ToString("g")</td>
+                <td>
+                    <a href="@Url.Action("Edit", "ChatGroup", new { id = group.Id })" class="btn btn-primary btn-sm">Düzenle</a>
+                    @using (Html.BeginForm("Delete", "ChatGroup", new { id = group.Id }, FormMethod.Post, new { onsubmit = "return confirm('Silmek istediğinize emin misiniz?');" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

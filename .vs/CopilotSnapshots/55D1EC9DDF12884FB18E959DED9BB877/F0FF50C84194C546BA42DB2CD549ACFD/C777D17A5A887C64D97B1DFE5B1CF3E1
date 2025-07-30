@@ -1,0 +1,145 @@
+﻿@model IEnumerable<MZDNETWORK.Models.ChatGroup>
+@{
+    ViewBag.Title = "Sohbet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/chatpage.css" rel="stylesheet" />
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('sohbet-page');
+    });
+</script>
+
+<div class="modern-chat-container">
+    <div class="modern-chat-box">
+        <!-- Sidebar -->
+        <div class="modern-chat-sidebar">
+            <h1>Sohbet Grupları</h1>
+            <div class="modern-chat-group-list">
+                @foreach (var group in Model)
+                {
+                    <div class="modern-chat-group-item" data-group-id="@group.Id" data-group-name="@group.Name">
+                        <div class="modern-chat-group-avatar">@group.Name.Substring(0, 1).ToUpper()</div>
+                        <div class="modern-chat-group-info">
+                            <h3>@group.Name</h3>
+                            <p>Gruba tıkla</p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modern-chat-sidebar-footer">
+                <div class="flex items-center gap-2">
+                    <span style="display:inline-block;width:10px;height:10px;background:#22c55e;border-radius:50%;"></span>
+                    <span>@User.Identity.Name</span>
+                </div>
+            </div>
+        </div>
+        <!-- Main Chat Area -->
+        <div class="modern-chat-main">
+            <div id="chatHeader" class="modern-chat-header" style="display:none;">
+                <div class="modern-chat-header-avatar" id="groupAvatar"></div>
+                <div class="modern-chat-header-title" id="selectedGroupName"></div>
+                <button id="leaveGroup" class="ml-auto px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors" style="background:transparent;">Çık</button>
+            </div>
+            <div id="emptyState" class="flex-1 flex items-center justify-center">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.959 8.959 0 01-4.906-1.478l-3.077.82a.84.84 0 01-1.041-.816l.17-3.024A8 8 0 1121 12z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-700 mb-2">Sohbet Seçin</h3>
+                    <p class="text-gray-500 text-sm">Sol taraftan bir grup seçin</p>
+                </div>
+            </div>
+            <div id="chatArea" class="modern-chat-messages" style="display:none;"></div>
+            <div id="chatInputBar" class="modern-chat-input-bar" style="display:none;">
+                <input type="text" id="messageInputPage" class="modern-chat-input" placeholder="Mesaj yazın..." autocomplete="off" />
+                <button id="sendButtonPage" class="modern-chat-send-btn">Gönder</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script>
+document.body.classList.add('sohbet-page');
+$(function(){
+    var selectedGroupId = '';
+    var selectedGroupName = '';
+    // Grup seçimi
+    $('.modern-chat-group-item').on('click', function(){
+        $('.modern-chat-group-item').removeClass('selected');
+        $(this).addClass('selected');
+        selectedGroupId = $(this).data('group-id');
+        selectedGroupName = $(this).data('group-name');
+        $('#emptyState').hide();
+        $('#chatHeader').show();
+        $('#chatArea').show();
+        $('#chatInputBar').show();
+        $('#selectedGroupName').text(selectedGroupName);
+        $('#groupAvatar').text(selectedGroupName.substring(0, 1).toUpperCase());
+        loadGroupMessages(selectedGroupId);
+        $('#messageInputPage').focus();
+    });
+    // Gruptan ayrılma
+    $('#leaveGroup').on('click', function(){
+        $('.modern-chat-group-item').removeClass('selected');
+        selectedGroupId = '';
+        selectedGroupName = '';
+        $('#chatHeader').hide();
+        $('#chatArea').hide();
+        $('#chatInputBar').hide();
+        $('#emptyState').show();
+        $('#chatArea').empty();
+    });
+    // Mesaj gönderme
+    $('#sendButtonPage').on('click', sendMessage);
+    $('#messageInputPage').on('keypress', function(e){
+        if(e.which === 13) sendMessage();
+    });
+    function sendMessage(){
+        var message = $('#messageInputPage').val().trim();
+        if(!message || !selectedGroupId) return;
+        $.post('@Url.Action("SendMessage", "Chat")', { 
+            user: '@User.Identity.Name', 
+            message: message, 
+            groupId: selectedGroupId 
+        }, function(){
+            $('#messageInputPage').val('').focus();
+            loadGroupMessages(selectedGroupId);
+        });
+    }
+    function loadGroupMessages(groupId){
+        $.get('@Url.Action("GetGroupMessages", "Chat")', { groupId: groupId }, function(data){
+            $('#chatArea').empty();
+            if(data && data.length){
+                data.forEach(function(msg){
+                    var isMe = msg.UserName === '@User.Identity.Name';
+                    var time = msg.SentAt ? new Date(msg.SentAt).toLocaleTimeString('tr-TR', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }) : '';
+                    var html = `
+                    <div class="modern-chat-message-row${isMe ? ' me' : ''}">
+                        <div class="modern-chat-message-bubble">
+                            <div>${msg.Content}</div>
+                            <div class="modern-chat-message-meta">${msg.UserName} • ${time}</div>
+                        </div>
+                    </div>`;
+                    $('#chatArea').append(html);
+                });
+                $('#chatArea').scrollTop($('#chatArea')[0].scrollHeight);
+            }
+        });
+    }
+    setInterval(function(){
+        if(selectedGroupId){
+            loadGroupMessages(selectedGroupId);
+        }
+    }, 5000);
+});
+</script>
+
+}

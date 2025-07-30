@@ -1,0 +1,61 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using Microsoft.AspNet.SignalR;
+using MZDNETWORK.Hubs;
+using MZDNETWORK.Attributes;
+using MZDNETWORK.Models;
+using MZDNETWORK.Data;
+
+namespace MZDNETWORK.Controllers
+{
+    [DynamicAuthorize(Permission = "Operational.Chat")]
+    public class ChatController : Controller
+    {
+        private readonly IHubContext _hubContext;
+        private readonly MZDNETWORKContext _db = new MZDNETWORKContext();
+
+        public ChatController()
+        {
+            _hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
+        }
+
+        [HttpPost]
+        [DynamicAuthorize(Permission = "Operational.Chat", Action = "Create")]
+        public ActionResult SendMessage(string user, string message)
+        {
+            _hubContext.Clients.All.broadcastMessage(user, message);
+            return new HttpStatusCodeResult(200);
+        }
+
+        // Kullanıcının yetkili olduğu grupları döner
+        [HttpGet]
+        public ActionResult GetUserGroups()
+        {
+            var username = User.Identity.Name;
+            var user = _db.Users.FirstOrDefault(u => u.Username == username);
+            if (user == null) return Json(new List<object>(), JsonRequestBehavior.AllowGet);
+            var userRoleIds = user.UserRoles.Select(ur => ur.RoleId).ToList();
+            var groups = _db.ChatGroups.Where(g => g.IsActive && (
+                g.Members.Any(m => m.Id == user.Id) ||
+                g.AllowedRoles.Any(r => userRoleIds.Contains(r.Id))
+            )).Select(g => new { g.Id, g.Name, g.Description }).ToList();
+            return Json(groups, JsonRequestBehavior.AllowGet);
+        }
+
+        // Seçili gruba ait mesaj geçmişi
+        [HttpGet]
+        public ActionResult GetGroupMessages(int groupId)
+        {
+            var messages = _db.ChatMessages
+                .Where(m => m.ChatId == groupId && m.IsActive)
+                .OrderBy(m => m.SentAt)
+                .Select(m => new {
+                    UserName = m.User.Username,
+                    Content = m.Content,
+                    SentAt = m.SentAt
+                }).ToList();
+            return Json(messages, JsonRequestBehavior.AllowGet);
+        }
+    }
+}

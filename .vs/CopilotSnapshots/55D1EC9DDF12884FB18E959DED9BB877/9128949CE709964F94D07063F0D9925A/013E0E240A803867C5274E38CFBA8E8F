@@ -1,0 +1,31 @@
+﻿@model MZDNETWORK.Models.ChatGroup
+@{
+    ViewBag.Title = "Yeni Chat Grubu Ekle";
+}
+<h2>Yeni Chat Grubu Ekle</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label>Grup Adı</label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Açıklama</label>
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Yetkili Roller</label>
+        @Html.ListBox("allowedRoleIds", new MultiSelectList(ViewBag.Roles, "Id", "Name"), new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Yöneticiler</label>
+        @Html.ListBox("managerIds", new MultiSelectList(ViewBag.Users, "Id", "Username"), new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Üyeler</label>
+        @Html.ListBox("memberIds", new MultiSelectList(ViewBag.Users, "Id", "Username"), new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-success">Kaydet</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">İptal</a>
+}

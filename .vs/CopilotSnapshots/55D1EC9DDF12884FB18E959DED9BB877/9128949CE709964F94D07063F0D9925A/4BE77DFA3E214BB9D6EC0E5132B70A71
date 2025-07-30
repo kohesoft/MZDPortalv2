@@ -1,0 +1,32 @@
+﻿@model MZDNETWORK.Models.ChatGroup
+@{
+    ViewBag.Title = "Chat Grubu Düzenle";
+}
+<h2>Chat Grubu Düzenle</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        <label>Grup Adı</label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Açıklama</label>
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Yetkili Roller</label>
+        @Html.ListBox("allowedRoleIds", new MultiSelectList(ViewBag.Roles, "Id", "Name", Model.AllowedRoles.Select(r => r.Id)), new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Yöneticiler</label>
+        @Html.ListBox("managerIds", new MultiSelectList(ViewBag.Users, "Id", "Username", Model.Managers.Select(u => u.Id)), new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Üyeler</label>
+        @Html.ListBox("memberIds", new MultiSelectList(ViewBag.Users, "Id", "Username", Model.Members.Select(u => u.Id)), new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">İptal</a>
+}

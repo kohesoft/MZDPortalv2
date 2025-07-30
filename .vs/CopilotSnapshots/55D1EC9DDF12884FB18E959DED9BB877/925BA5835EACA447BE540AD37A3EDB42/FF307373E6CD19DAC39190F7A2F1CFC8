@@ -1,0 +1,88 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using MZDNETWORK.Models;
+using MZDNETWORK.Attributes;
+using MZDNETWORK.Data; // ApplicationDbContext için ekleniyor
+
+namespace MZDNETWORK.Controllers
+{
+    [DynamicAuthorize(Permission = "Operational.Chat", Action = "Manage")]
+    public class ChatGroupController : Controller
+    {
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+
+        // Grup listesi
+        public ActionResult Index()
+        {
+            var groups = _db.ChatGroups.Where(g => g.IsActive).ToList();
+            return View(groups);
+        }
+
+        // Grup oluşturma
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ChatGroup model, int[] allowedRoleIds, int[] managerIds, int[] memberIds)
+        {
+            if (ModelState.IsValid)
+            {
+                model.CreatedBy = /* Mevcut kullanıcı ID */ 1;
+                model.CreatedAt = System.DateTime.Now;
+                model.IsActive = true;
+                model.AllowedRoles = _db.Roles.Where(r => allowedRoleIds.Contains(r.Id)).ToList();
+                model.Managers = _db.Users.Where(u => managerIds.Contains(u.Id)).ToList();
+                model.Members = _db.Users.Where(u => memberIds.Contains(u.Id)).ToList();
+                _db.ChatGroups.Add(model);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        // Grup düzenleme
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var group = _db.ChatGroups.Find(id);
+            if (group == null) return HttpNotFound();
+            return View(group);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ChatGroup model, int[] allowedRoleIds, int[] managerIds, int[] memberIds)
+        {
+            var group = _db.ChatGroups.Find(model.Id);
+            if (group == null) return HttpNotFound();
+            if (ModelState.IsValid)
+            {
+                group.Name = model.Name;
+                group.Description = model.Description;
+                group.AllowedRoles = _db.Roles.Where(r => allowedRoleIds.Contains(r.Id)).ToList();
+                group.Managers = _db.Users.Where(u => managerIds.Contains(u.Id)).ToList();
+                group.Members = _db.Users.Where(u => memberIds.Contains(u.Id)).ToList();
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        // Grup silme
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            var group = _db.ChatGroups.Find(id);
+            if (group == null) return HttpNotFound();
+            group.IsActive = false;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+    }
+}

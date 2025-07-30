@@ -1,0 +1,235 @@
+﻿@model IEnumerable<MZDNETWORK.Models.ChatGroup>
+@{
+    ViewBag.Title = "Sohbet";
+}
+
+<div class="fixed inset-0 flex bg-gray-100" style="height: 100vh; overflow: hidden;">
+    <!-- Sol Panel - Grup Listesi -->
+    <div class="w-80 bg-white border-r border-gray-300 flex flex-col" style="height: 100vh; min-height: 100vh; max-height: 100vh;">
+        <!-- Header -->
+        <div class="px-6 py-4 border-b border-gray-200 bg-white flex-shrink-0">
+            <h1 class="text-gray-800 text-lg font-semibold">Sohbet Grupları</h1>
+        </div>
+        
+        <!-- Grup Listesi -->
+        <div class="flex-1 overflow-y-auto" style="max-height: calc(100vh - 140px);">
+            <div class="p-3">
+                @foreach (var group in Model)
+                {
+                    <div class="group-item cursor-pointer p-3 rounded-lg mb-2 transition-all duration-200 hover:bg-gray-50 border border-gray-200" 
+                         data-group-id="@group.Id" data-group-name="@group.Name">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-medium text-sm">
+                                @group.Name.Substring(0, 1).ToUpper()
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-medium text-gray-900 truncate text-sm">@group.Name</h3>
+                                <p class="text-xs text-gray-500">Tıklayın</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        <!-- Alt Bilgi -->
+        <div class="px-4 py-3 border-t border-gray-200 bg-gray-50 flex-shrink-0">
+            <div class="flex items-center space-x-2 text-xs text-gray-600">
+                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                <span>@User.Identity.Name</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sağ Panel - Sohbet Alanı -->
+    <div class="flex-1 flex flex-col" style="height: 100vh; min-height: 100vh; max-height: 100vh;">
+        <!-- Sohbet Header -->
+        <div id="chatHeader" class="hidden px-6 py-4 bg-white border-b border-gray-300 flex-shrink-0">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div id="groupAvatar" class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-medium text-sm"></div>
+                    <div>
+                        <h2 id="selectedGroupName" class="text-base font-semibold text-gray-900"></h2>
+                    </div>
+                </div>
+                <button id="leaveGroup" class="px-3 py-1 text-sm text-red-600 hover:bg-red-50 rounded transition-colors">
+                    Çık
+                </button>
+            </div>
+        </div>
+        
+        <!-- Boş Durum -->
+        <div id="emptyState" class="flex-1 flex items-center justify-center bg-gray-50">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.959 8.959 0 01-4.906-1.478l-3.077.82a.84.84 0 01-1.041-.816l.17-3.024A8 8 0 1121 12z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium text-gray-700 mb-2">Sohbet Seçin</h3>
+                <p class="text-gray-500 text-sm">Sol taraftan bir grup seçin</p>
+            </div>
+        </div>
+        
+        <!-- Sohbet Alanı -->
+        <div id="chatArea" class="hidden flex-1 flex flex-col bg-white">
+            <!-- Mesajlar -->
+            <div id="messagesPage" class="flex-1 overflow-y-auto p-4 space-y-3" style="height: calc(100vh - 140px);"></div>
+            
+            <!-- Mesaj Gönderme -->
+            <div class="px-4 py-3 bg-white border-t border-gray-300 flex-shrink-0">
+                <div class="flex space-x-3">
+                    <input type="text" id="messageInputPage" 
+                           placeholder="Mesaj yazın..." 
+                           class="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                    <button id="sendButtonPage" 
+                            class="bg-blue-500 hover:bg-blue-600 text-white rounded-full px-4 py-2 text-sm font-medium transition-colors">
+                        Gönder
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script>
+$(function(){
+    var selectedGroupId = '';
+    var selectedGroupName = '';
+    
+    // Grup seçimi
+    $('.group-item').on('click', function(){
+        // Önceki seçimi temizle
+        $('.group-item').removeClass('bg-blue-50 border-blue-500 text-blue-600');
+        
+        // Yeni seçimi işaretle
+        $(this).addClass('bg-blue-50 border-blue-500 text-blue-600');
+        
+        selectedGroupId = $(this).data('group-id');
+        selectedGroupName = $(this).data('group-name');
+        
+        // UI güncellemeleri
+        $('#emptyState').addClass('hidden');
+        $('#chatHeader').removeClass('hidden');
+        $('#chatArea').removeClass('hidden');
+        $('#selectedGroupName').text(selectedGroupName);
+        $('#groupAvatar').text(selectedGroupName.substring(0, 1).toUpperCase());
+        
+        // Mesajları yükle
+        loadGroupMessages(selectedGroupId);
+        $('#messageInputPage').focus();
+    });
+    
+    // Gruptan ayrılma
+    $('#leaveGroup').on('click', function(){
+        $('.group-item').removeClass('bg-blue-50 border-blue-500 text-blue-600');
+        selectedGroupId = '';
+        selectedGroupName = '';
+        
+        $('#chatHeader').addClass('hidden');
+        $('#chatArea').addClass('hidden');
+        $('#emptyState').removeClass('hidden');
+        $('#messagesPage').empty();
+    });
+    
+    // Mesaj gönderme
+    $('#sendButtonPage').on('click', sendMessage);
+    $('#messageInputPage').on('keypress', function(e){
+        if(e.which === 13) sendMessage();
+    });
+    
+    function sendMessage(){
+        var message = $('#messageInputPage').val().trim();
+        if(!message || !selectedGroupId) return;
+        
+        $.post('@Url.Action("SendMessage", "Chat")', { 
+            user: '@User.Identity.Name', 
+            message: message, 
+            groupId: selectedGroupId 
+        }, function(){
+            $('#messageInputPage').val('').focus();
+            loadGroupMessages(selectedGroupId);
+        });
+    }
+    
+    function loadGroupMessages(groupId){
+        $.get('@Url.Action("GetGroupMessages", "Chat")', { groupId: groupId }, function(data){
+            $('#messagesPage').empty();
+            if(data && data.length){
+                data.forEach(function(msg){
+                    var isMe = msg.UserName === '@User.Identity.Name';
+                    var time = msg.SentAt ? new Date(msg.SentAt).toLocaleTimeString('tr-TR', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }) : '';
+                    
+                    var html = `
+                    <div class="flex ${isMe ? 'justify-end' : 'justify-start'} mb-3">
+                        <div class="max-w-xs lg:max-w-sm">
+                            ${!isMe ? `<div class="flex items-center space-x-2 mb-1">
+                                <div class="w-5 h-5 bg-gray-400 rounded-full flex items-center justify-center text-white text-xs font-medium">
+                                    ${msg.UserName.substring(0, 1).toUpperCase()}
+                                </div>
+                                <span class="text-xs text-gray-600 font-medium">${msg.UserName}</span>
+                            </div>` : ''}
+                            <div class="${isMe ? 'bg-blue-500 text-white' : 'bg-gray-100 border border-gray-200'} 
+                                        px-3 py-2 rounded-lg shadow-sm text-sm">
+                                <div class="break-words">${msg.Content}</div>
+                                <div class="text-xs ${isMe ? 'text-blue-100' : 'text-gray-500'} mt-1 text-right">${time}</div>
+                            </div>
+                        </div>
+                    </div>`;
+                    $('#messagesPage').append(html);
+                });
+                
+                // En alta scroll
+                $('#messagesPage').scrollTop($('#messagesPage')[0].scrollHeight);
+            }
+        });
+    }
+    
+    // Otomatik mesaj yenileme (isteğe bağlı)
+    setInterval(function(){
+        if(selectedGroupId){
+            loadGroupMessages(selectedGroupId);
+        }
+    }, 5000);
+});
+</script>
+
+<style>
+/* Scrollbar stilleri */
+#messagesPage::-webkit-scrollbar {
+    width: 4px;
+}
+
+#messagesPage::-webkit-scrollbar-track {
+    background: #f8f9fa;
+}
+
+#messagesPage::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 2px;
+}
+
+#messagesPage::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Body overflow gizle */
+body {
+    overflow: hidden !important;
+}
+
+/* Grup hover efektleri */
+.group-item:hover {
+    background-color: #f3f4f6 !important;
+}
+
+.group-item.bg-blue-50 {
+    background-color: #eff6ff !important;
+    border-color: #3b82f6 !important;
+}
+</style>
+}

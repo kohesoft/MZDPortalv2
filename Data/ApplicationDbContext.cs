@@ -45,6 +45,7 @@ namespace MZDNETWORK.Data
         public DbSet<MeetingRoomReservation> MeetingRoomReservations { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<ChatGroup> ChatGroups { get; set; }
         public DbSet<VisitorEntry> VisitorEntries { get; set; }
         public DbSet<VisitorEntryHeader> VisitorEntryHeaders { get; set; }
         public DbSet<LateArrivalReport> LateArrivalReports { get; set; } // İşe Geç Gelme Tutanakları
@@ -132,9 +133,9 @@ namespace MZDNETWORK.Data
 
             // ChatMessage relationships
             modelBuilder.Entity<ChatMessage>()
-                .HasRequired(cm => cm.Chat)
-                .WithMany(c => c.Messages)
-                .HasForeignKey(cm => cm.ChatId)
+                .HasRequired(cm => cm.ChatGroup)
+                .WithMany(g => g.Messages)
+                .HasForeignKey(cm => cm.ChatGroupId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ChatMessage>()
@@ -142,6 +143,23 @@ namespace MZDNETWORK.Data
                 .WithMany()
                 .HasForeignKey(cm => cm.UserId)
                 .WillCascadeOnDelete(false);
+
+            // ChatGroup relationships
+            modelBuilder.Entity<ChatGroup>()
+                .HasMany(g => g.Managers)
+                .WithMany();
+
+            modelBuilder.Entity<ChatGroup>()
+                .HasMany(g => g.Members)
+                .WithMany();
+
+            modelBuilder.Entity<ChatGroup>()
+                .HasMany(g => g.AllowedRoles)
+                .WithMany();
+
+            modelBuilder.Entity<ChatGroup>()
+                .HasMany(g => g.Messages)
+                .WithOptional();
         }
 
         /// <summary>

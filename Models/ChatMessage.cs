@@ -13,10 +13,10 @@ namespace MZDNETWORK.Models
         public int Id { get; set; }
 
         [Required]
-        public int ChatId { get; set; }
+        public int ChatGroupId { get; set; }
 
-        [ForeignKey("ChatId")]
-        public virtual Chat Chat { get; set; }
+        [ForeignKey("ChatGroupId")]
+        public virtual ChatGroup ChatGroup { get; set; }
 
         [Required]
         public int UserId { get; set; }

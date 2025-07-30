@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MZDNETWORK.Models
+{
+    /// <summary>
+    /// Chat grubu modeli
+    /// </summary>
+    public class ChatGroup
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        [Display(Name = "Grup Adý")]
+        public string Name { get; set; }
+
+        [StringLength(500)]
+        [Display(Name = "Açýklama")]
+        public string Description { get; set; }
+
+        [Display(Name = "Oluþturan Kullanýcý")]
+        public int CreatedBy { get; set; }
+
+        [ForeignKey("CreatedBy")]
+        public virtual User Creator { get; set; }
+
+        [Display(Name = "Oluþturulma Tarihi")]
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        [Display(Name = "Aktif mi?")]
+        public bool IsActive { get; set; } = true;
+
+        // Grup yöneticileri
+        public virtual ICollection<User> Managers { get; set; }
+
+        // Grup üyeleri
+        public virtual ICollection<User> Members { get; set; }
+
+        // Yetkili roller
+        public virtual ICollection<Role> AllowedRoles { get; set; }
+
+        // Grup mesajlarý
+        public virtual ICollection<ChatMessage> Messages { get; set; }
+
+        public ChatGroup()
+        {
+            Managers = new HashSet<User>();
+            Members = new HashSet<User>();
+            AllowedRoles = new HashSet<Role>();
+            Messages = new HashSet<ChatMessage>();
+        }
+    }
+}
