@@ -1,0 +1,191 @@
+﻿@model IEnumerable<MZDNETWORK.Models.ChatGroup>
+@{
+    ViewBag.Title = "Sohbet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/chatpage.css" rel="stylesheet" />
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.body.classList.add('sohbet-page');
+    });
+</script>
+
+<div class="modern-chat-container min-h-screen flex flex-col md:flex-row bg-gray-50">
+    @Html.AntiForgeryToken()
+
+    <div class="modern-chat-box flex flex-1">
+        <!-- Sidebar -->
+        <div class="modern-chat-sidebar w-full md:w-80 bg-white border-r border-gray-200 flex flex-col">
+            <h1 class="text-xl font-bold p-4 border-b border-gray-100">Sohbet Grupları</h1>
+            <div class="modern-chat-group-list flex-1 overflow-y-auto">
+                @foreach (var group in Model)
+                {
+                    <div class="modern-chat-group-item cursor-pointer flex items-center gap-3 px-4 py-3 border-b hover:bg-gray-100 transition" data-group-id="@group.Id" data-group-name="@group.Name">
+                        <div class="modern-chat-group-avatar w-10 h-10 bg-indigo-500 text-white flex items-center justify-center rounded-full font-bold">@group.Name.Substring(0, 1).ToUpper()</div>
+                        <div class="modern-chat-group-info">
+                            <h3 class="font-semibold">@group.Name</h3>
+                            <p class="text-xs text-gray-500">Gruba tıkla</p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modern-chat-sidebar-footer p-4 border-t bg-gray-50">
+                <div class="flex items-center gap-2">
+                    <span class="inline-block w-3 h-3 bg-green-500 rounded-full"></span>
+                    <span class="font-medium">@User.Identity.Name</span>
+                </div>
+            </div>
+        </div>
+        <!-- Main Chat Area -->
+        <div class="modern-chat-main flex-1 flex flex-col">
+            <div id="chatHeader" class="modern-chat-header flex items-center gap-3 px-4 py-3 border-b bg-white" style="display:none;">
+                <div class="modern-chat-header-avatar w-10 h-10 bg-indigo-500 text-white flex items-center justify-center rounded-full font-bold" id="groupAvatar"></div>
+                <div class="modern-chat-header-title font-semibold text-lg" id="selectedGroupName"></div>
+                <button id="leaveGroup" class="ml-auto px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors bg-transparent">Çık</button>
+            </div>
+            <div id="emptyState" class="flex-1 flex items-center justify-center">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.959 8.959 0 01-4.906-1.478l-3.077.82a.84.84 0 01-1.041-.816l.17-3.024A8 8 0 1121 12z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-700 mb-2">Sohbet Seçin</h3>
+                    <p class="text-gray-500 text-sm">Sol taraftan bir grup seçin</p>
+                </div>
+            </div>
+            <div id="chatArea" class="modern-chat-messages flex-1 overflow-y-auto px-4 py-2 space-y-2 bg-gray-50" style="display:none;"></div>
+            <div id="chatInputBar" class="modern-chat-input-bar flex items-center gap-2 px-4 py-3 border-t bg-white" style="display:none;">
+                <input type="text" id="messageInputPage" class="modern-chat-input flex-1 border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-200" placeholder="Mesaj yazın..." autocomplete="off" />
+                <label class="flex items-center cursor-pointer">
+                    <input type="file" id="fileInputPage" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt,.zip,.rar" capture="environment" class="hidden" />
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-indigo-50 hover:bg-indigo-100 transition">
+                        <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.586-6.586a2 2 0 10-2.828-2.828z"></path></svg>
+                    </span>
+                </label>
+                <button id="sendButtonPage" class="modern-chat-send-btn bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded transition">Gönder</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+document.body.classList.add('sohbet-page');
+$(function(){
+    var selectedGroupId = '';
+    var selectedGroupName = '';
+    var canWrite = true;
+    // Grup seçimi
+    $('.modern-chat-group-item').on('click', function(){
+        $('.modern-chat-group-item').removeClass('selected');
+        $(this).addClass('selected');
+        selectedGroupId = $(this).data('group-id');
+        selectedGroupName = $(this).data('group-name');
+        $('#emptyState').hide();
+        $('#chatHeader').show();
+        $('#chatArea').show();
+        $('#chatInputBar').show();
+        $('#selectedGroupName').text(selectedGroupName);
+        $('#groupAvatar').text(selectedGroupName.substring(0, 1).toUpperCase());
+        // Yetki kontrolü
+        $.get('@Url.Action("GetUserGroups", "Chat")', function(groups){
+            var group = groups.find(g => g.Id == selectedGroupId);
+            // Sunucuya ek olarak, burada canWrite kontrolü yapılabilir (gerekirse backend'den döndürülür)
+            canWrite = true; // Gelişmiş için backend'den alınmalı
+            $('#messageInputPage').prop('disabled', !canWrite);
+            $('#sendButtonPage').prop('disabled', !canWrite);
+            $('#fileInputPage').prop('disabled', !canWrite);
+        });
+        loadGroupMessages(selectedGroupId);
+        $('#messageInputPage').focus();
+    });
+    // Gruptan ayrılma
+    $('#leaveGroup').on('click', function(){
+        $('.modern-chat-group-item').removeClass('selected');
+        selectedGroupId = '';
+        selectedGroupName = '';
+        $('#chatHeader').hide();
+        $('#chatArea').hide();
+        $('#chatInputBar').hide();
+        $('#emptyState').show();
+        $('#chatArea').empty();
+    });
+    // Mesaj gönderme
+    $('#sendButtonPage').on('click', sendMessage);
+    $('#messageInputPage').on('keypress', function(e){
+        if(e.which === 13) sendMessage();
+    });
+    function sendMessage(){
+        var message = $('#messageInputPage').val().trim();
+        if(!message || !selectedGroupId || !canWrite) return;
+        $.post('@Url.Action("SendMessage", "Chat")', {
+            user: '@User.Identity.Name',
+            message: message,
+            groupId: selectedGroupId
+        }, function(){
+            $('#messageInputPage').val('').focus();
+            loadGroupMessages(selectedGroupId);
+        });
+    }
+    // Dosya/fotoğraf gönderme
+    $('#fileInputPage').on('change', function(){
+        var file = this.files[0];
+        if(!file || !selectedGroupId || !canWrite) return;
+        var formData = new FormData();
+        formData.append('groupId', selectedGroupId);
+        formData.append('file', file);
+        $.ajax({
+            url: '@Url.Action("UploadFile", "Chat")',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: { 'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() },
+            success: function(res){
+                $('#fileInputPage').val('');
+                loadGroupMessages(selectedGroupId);
+            },
+            error: function(){
+                alert('Dosya gönderilemedi.');
+            }
+        });
+    });
+    function loadGroupMessages(groupId){
+        $.get('@Url.Action("GetGroupMessages", "Chat")', { groupId: groupId }, function(data){
+            $('#chatArea').empty();
+            if(data && data.length){
+                data.forEach(function(msg){
+                    var isMe = msg.UserName === '@User.Identity.Name';
+                    var time = msg.SentAt ? new Date(msg.SentAt).toLocaleTimeString('tr-TR', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }) : '';
+                    var contentHtml = msg.MessageType === 'Image' && msg.FilePath ?
+                        `<a href='${msg.FilePath}' target='_blank'><img src='${msg.FilePath}' alt='${msg.FileName}' class='max-h-40 rounded shadow mb-1' /></a>` :
+                        (msg.MessageType === 'File' && msg.FilePath ?
+                        `<a href='${msg.FilePath}' target='_blank' class='text-indigo-600 underline'>${msg.FileName}</a>` :
+                        msg.Content);
+                    var html = `
+                    <div class="modern-chat-message-row${isMe ? ' me' : ''} flex ${isMe ? 'justify-end' : 'justify-start'}">
+                        <div class="modern-chat-message-bubble bg-white border rounded-lg px-4 py-2 shadow-sm max-w-xs">
+                            <div>${contentHtml}</div>
+                            <div class="modern-chat-message-meta text-xs text-gray-400 mt-1">${msg.UserName} • ${time}</div>
+                        </div>
+                    </div>`;
+                    $('#chatArea').append(html);
+                });
+                $('#chatArea').scrollTop($('#chatArea')[0].scrollHeight);
+            }
+        });
+    }
+    setInterval(function(){
+        if(selectedGroupId){
+            loadGroupMessages(selectedGroupId);
+        }
+    }, 5000);
+});
+    </script>
+
+}

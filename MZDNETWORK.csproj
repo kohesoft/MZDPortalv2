@@ -513,6 +513,10 @@
     <Compile Include="Migrations\202507281329444_GroupChatv2.Designer.cs">
       <DependentUpon>202507281329444_GroupChatv2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202507300714065_ChatGroupmembers.cs" />
+    <Compile Include="Migrations\202507300714065_ChatGroupmembers.Designer.cs">
+      <DependentUpon>202507300714065_ChatGroupmembers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerOption.cs" />
@@ -520,6 +524,7 @@
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\Chat.cs" />
     <Compile Include="Models\ChatGroup.cs" />
+    <Compile Include="Models\ChatGroupMember.cs" />
     <Compile Include="Models\ChatMessage.cs" />
     <Compile Include="Models\DailyMood.cs" />
     <Compile Include="Models\DilekOneri.cs" />
@@ -2637,6 +2642,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202507281329444_GroupChatv2.resx">
       <DependentUpon>202507281329444_GroupChatv2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202507300714065_ChatGroupmembers.resx">
+      <DependentUpon>202507300714065_ChatGroupmembers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -513,3 +513,4 @@ C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.dll
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.pdb
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.GroupChat.resources
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.GroupChatv2.resources
+C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.ChatGroupmembers.resources

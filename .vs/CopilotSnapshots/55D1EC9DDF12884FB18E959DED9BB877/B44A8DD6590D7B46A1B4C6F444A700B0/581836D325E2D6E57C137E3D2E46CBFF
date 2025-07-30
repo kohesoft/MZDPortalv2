@@ -1,0 +1,66 @@
+﻿@model MZDNETWORK.Models.ChatGroup
+@{
+    ViewBag.Title = "Chat Grubunu Düzenle";
+    var users = ViewBag.Users as List<MZDNETWORK.Models.User>;
+    var memberIds = Model.Members.Select(u => u.Id).ToList();
+    var canWriteDict = new Dictionary<int, bool>();
+    if (ViewBag.MemberCanWrite != null) { canWriteDict = ViewBag.MemberCanWrite as Dictionary<int, bool>; }
+}
+<h2 class="text-2xl font-bold mb-6 text-gray-800">Chat Grubunu Düzenle</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-1">Grup Adı</label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-200" })
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-1">Açıklama</label>
+        @Html.TextBoxFor(m => m.Description, new { @class = "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-200" })
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-1">Yetkili Roller</label>
+        @Html.ListBox("allowedRoleIds", new MultiSelectList(ViewBag.Roles, "Id", "Name", Model.AllowedRoles.Select(r => r.Id)), new { @class = "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-200" })
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-1">Yöneticiler</label>
+        @Html.ListBox("managerIds", new MultiSelectList(ViewBag.Users, "Id", "Username", Model.Managers.Select(u => u.Id)), new { @class = "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-200" })
+    </div>
+    <div class="mb-6">
+        <label class="block text-gray-700 font-semibold mb-1">Üyeler ve Yetkileri</label>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="py-2 px-4 text-left font-semibold text-gray-700">Kullanıcı</th>
+                        <th class="py-2 px-4 text-left font-semibold text-gray-700">Yazma Yetkisi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var user in users)
+                {
+                    var isMember = memberIds.Contains(user.Id);
+                    var canWrite = canWriteDict.ContainsKey(user.Id) ? canWriteDict[user.Id] : true;
+                    <tr class="border-t">
+                        <td class="py-2 px-4">
+                            <label>
+                                <input type="checkbox" name="memberIds" value="@user.Id" class="mr-2" @(isMember ? "checked" : "") />
+                                @user.Username
+                            </label>
+                        </td>
+                        <td class="py-2 px-4">
+                            <input type="checkbox" name="canWrite_@user.Id" value="true" @(canWrite ? "checked" : "") class="mr-2" />
+                            <span class="text-xs text-gray-600">Yazabilir</span>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="flex gap-2">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition">Kaydet</button>
+        <a href="@Url.Action("Index")" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded transition">İptal</a>
+    </div>
+}

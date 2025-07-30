@@ -51,6 +51,7 @@ namespace MZDNETWORK.Data
         public DbSet<LateArrivalReport> LateArrivalReports { get; set; } // İşe Geç Gelme Tutanakları
         public DbSet<LateArrivalReportHeader> LateArrivalReportHeaders { get; set; } // Üst bilgi
         public DbSet<PasswordResetRequest> PasswordResetRequests { get; set; }
+        public DbSet<ChatGroupMember> ChatGroupMembers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

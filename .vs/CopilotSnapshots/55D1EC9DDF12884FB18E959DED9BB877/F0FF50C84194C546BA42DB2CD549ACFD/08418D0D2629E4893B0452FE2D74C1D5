@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using Microsoft.AspNet.SignalR;
+using MZDNETWORK.Hubs;
+using MZDNETWORK.Attributes;
+using MZDNETWORK.Models;
+using MZDNETWORK.Data;
+
+namespace MZDNETWORK.Controllers
+{
+    [DynamicAuthorize(Permission = "Operational.Chat")]
+    public class ChatController : Controller
+    {
+        private readonly IHubContext _hubContext;
+        private readonly MZDNETWORKContext _db = new MZDNETWORKContext();
+
+        public ChatController()
+        {
+            _hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
+        }
+
+        [HttpPost]
+        [DynamicAuthorize(Permission = "Operational.Chat", Action = "Create")]
+        public ActionResult SendMessage(string user, string message, int groupId)
+        {
+            var dbUser = _db.Users.FirstOrDefault(u => u.Username == user);
+            if (dbUser == null) return new HttpStatusCodeResult(403);
+            var chatGroup = _db.ChatGroups.FirstOrDefault(g => g.Id == groupId);
+            if (chatGroup == null) return new HttpStatusCodeResult(404);
+            var chatMessage = new ChatMessage
+            {
+                ChatGroupId = groupId,
+                UserId = dbUser.Id,
+                Content = message,
+                SentAt = DateTime.Now,
+                IsActive = true
+            };
+            _db.ChatMessages.Add(chatMessage);
+            _db.SaveChanges();
+            _hubContext.Clients.Group(groupId.ToString()).broadcastMessage(user, message);
+            return new HttpStatusCodeResult(200);
+        }
+
+        public ActionResult ChatPage()
+        {
+            var username = User.Identity.Name;
+            var user = _db.Users.FirstOrDefault(u => u.Username == username);
+            if (user == null)
+                return View(new List<ChatGroup>());
+            var userRoleIds = user.UserRoles.Select(ur => ur.RoleId).ToList();
+            var groups = _db.ChatGroups.Where(g => g.IsActive && (
+                g.Members.Any(m => m.Id == user.Id) ||
+                g.AllowedRoles.Any(r => userRoleIds.Contains(r.Id))
+            )).ToList();
+            return View(groups);
+        }
+
+        // Kullanıcının yetkili olduğu grupları döner
+        [HttpGet]
+        public ActionResult GetUserGroups()
+        {
+            var username = User.Identity.Name;
+            var user = _db.Users.FirstOrDefault(u => u.Username == username);
+            if (user == null) return Json(new List<object>(), JsonRequestBehavior.AllowGet);
+            var userRoleIds = user.UserRoles.Select(ur => ur.RoleId).ToList();
+            var groups = _db.ChatGroups.Where(g => g.IsActive && (
+                g.Members.Any(m => m.Id == user.Id) ||
+                g.AllowedRoles.Any(r => userRoleIds.Contains(r.Id))
+            )).Select(g => new { g.Id, g.Name, g.Description }).ToList();
+            return Json(groups, JsonRequestBehavior.AllowGet);
+        }
+
+        // Seçili gruba ait mesaj geçmişi
+        [HttpGet]
+        public ActionResult GetGroupMessages(int groupId)
+        {
+            var messages = _db.ChatMessages
+                .Where(m => m.ChatGroupId == groupId && m.IsActive)
+                .OrderBy(m => m.SentAt)
+                .ToList()
+                .Select(m => new {
+                    UserName = m.User.Username,
+                    Content = m.Content,
+                    SentAt = m.SentAt.ToString("yyyy-MM-dd HH:mm:ss")
+                }).ToList();
+            return Json(messages, JsonRequestBehavior.AllowGet);
+        }
+    }
+}
