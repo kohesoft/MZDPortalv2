@@ -3,32 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\views\\chatgroup\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\chatgroup\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\views\\chat\\chatpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\chat\\chatpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\views\\chatgroup\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:views\\chatgroup\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\controllers\\chatgroupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\chatgroupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\models\\chatgroupmember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:models\\chatgroupmember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,93 +38,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "ChatGroupController.cs",
               "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ChatGroupController.cs",
               "RelativeDocumentMoniker": "Controllers\\ChatGroupController.cs",
               "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ChatGroupController.cs",
               "RelativeToolTip": "Controllers\\ChatGroupController.cs",
-              "ViewState": "AgIAAIUAAAAAAAAAAAAtwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAlwB0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-30T07:01:48.629Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Views\\ChatGroup\\Edit.cshtml",
-              "RelativeDocumentMoniker": "Views\\ChatGroup\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Views\\ChatGroup\\Edit.cshtml",
-              "RelativeToolTip": "Views\\ChatGroup\\Edit.cshtml",
-              "ViewState": "AgIAANEAAAAAAAAAAAAEwOoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-30T07:01:13.152Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Views\\ChatGroup\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\ChatGroup\\Create.cshtml",
-              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Views\\ChatGroup\\Create.cshtml",
-              "RelativeToolTip": "Views\\ChatGroup\\Create.cshtml",
-              "ViewState": "AgIAAKMAAAAAAAAAAAAEwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-30T07:00:54.861Z",
+              "WhenOpened": "2025-07-30T09:02:30.387Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ChatPage.cshtml",
-              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Views\\Chat\\ChatPage.cshtml",
-              "RelativeDocumentMoniker": "Views\\Chat\\ChatPage.cshtml",
-              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Views\\Chat\\ChatPage.cshtml",
-              "RelativeToolTip": "Views\\Chat\\ChatPage.cshtml",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAABoAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-30T06:59:31.157Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAMgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-30T06:57:01.666Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "ChatController.cs",
               "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ChatController.cs",
               "RelativeDocumentMoniker": "Controllers\\ChatController.cs",
               "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ChatController.cs",
               "RelativeToolTip": "Controllers\\ChatController.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAAAlwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-30T06:56:27.721Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ChatGroupMember.cs",
-              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Models\\ChatGroupMember.cs",
-              "RelativeDocumentMoniker": "Models\\ChatGroupMember.cs",
-              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Models\\ChatGroupMember.cs",
-              "RelativeToolTip": "Models\\ChatGroupMember.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-30T06:53:27.809Z",
+              "WhenOpened": "2025-07-30T09:02:18.927Z",
               "EditorCaption": ""
             }
           ]

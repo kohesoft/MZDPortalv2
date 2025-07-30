@@ -264,7 +264,6 @@ body {
 }
 
     #messages div {
-        background: var(--gray-light);
         padding: 0.5rem 0.8rem;
         border-radius: var(--radius);
         font-size: 0.95rem;
@@ -639,4 +638,7 @@ body {
     resize: vertical;
     margin-top: 1rem;
 }
-   
+
+/* Sohbet ekranı için özel override kaldırıldı, modern chat için ayrı dosya kullanılacak */
+/* body.sohbet-page, .sohbet-page .main-content, .sohbet-page .fixed, .sohbet-page .inset-0, .sohbet-page #chatArea, .sohbet-page #emptyState, .sohbet-page #chatHeader, .sohbet-page #messagesPage */
+/* Bu stiller chatpage.css dosyasına taşındı */

@@ -79,40 +79,34 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                         @{
-                            var supervisorStatus = "";
-                            var managerStatus = "";
+                            var statusDisplay = "";
+                            var statusClass = "";
                             switch(Model.Status)
                             {
                                 case MZDNETWORK.Models.LeaveStatus.PendingSupervisor:
-                                    supervisorStatus = "Beklemede";
-                                    managerStatus = "Beklemede";
-                                    break;
                                 case MZDNETWORK.Models.LeaveStatus.PendingManager:
-                                    supervisorStatus = "Onaylandı";
-                                    managerStatus = "Beklemede";
+                                    statusDisplay = "Beklemede";
+                                    statusClass = "bg-blue-100 text-blue-800";
                                     break;
                                 case MZDNETWORK.Models.LeaveStatus.Approved:
-                                    supervisorStatus = "Onaylandı";
-                                    managerStatus = "Onaylandı";
-                                    break;
                                 case MZDNETWORK.Models.LeaveStatus.ConditionallyApproved:
-                                    supervisorStatus = "Onaylandı";
-                                    managerStatus = "Şartlı Onaylandı";
+                                    statusDisplay = "Onaylandı";
+                                    statusClass = "bg-green-100 text-green-800";
                                     break;
                                 case MZDNETWORK.Models.LeaveStatus.Rejected:
-                                    supervisorStatus = "Reddedildi";
-                                    managerStatus = "Reddedildi";
+                                    statusDisplay = "Reddedildi";
+                                    statusClass = "bg-red-100 text-red-800";
                                     break;
                             }
                         }
 
                         <div>
-                            <h5 class="text-sm font-medium text-gray-500 mb-2">Şef Onayı</h5>
-                            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">@supervisorStatus</span>
+                            <h5 class="text-sm font-medium text-gray-500 mb-2">Talep Durumu</h5>
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium @statusClass">@statusDisplay</span>
                         </div>
                         <div>
-                            <h5 class="text-sm font-medium text-gray-500 mb-2">Müdür Onayı</h5>
-                            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">@managerStatus</span>
+                            <h5 class="text-sm font-medium text-gray-500 mb-2">Son Güncelleme</h5>
+                            <p class="text-base font-medium text-gray-900">@(Model.UpdatedAt?.ToString("dd.MM.yyyy HH:mm") ?? "Henüz güncellenmedi")</p>
                         </div>
                     </div>
 

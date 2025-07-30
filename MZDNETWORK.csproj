@@ -889,6 +889,7 @@
     <Content Include="UploadPhotosMerkez\Beni Oku.txt" />
     <Content Include="UploadPhotosMola\Beni Oku.txt" />
     <Content Include="UploadPhotosYerleske\Beni Oku.txt" />
+    <Content Include="Uploads\ChatFiles\benioku.txt" />
     <Content Include="Views\Gonderi\GonderiListele.cshtml" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

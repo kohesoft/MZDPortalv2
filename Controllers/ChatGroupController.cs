@@ -38,7 +38,13 @@ namespace MZDNETWORK.Controllers
             memberIds = memberIds ?? new int[0];
             if (ModelState.IsValid)
             {
-                model.CreatedBy = 1; // Mevcut kullanýcý ID
+                // Giriþ yapan kullanýcýyý bul
+                var username = User.Identity.Name;
+                var currentUser = _db.Users.FirstOrDefault(u => u.Username == username);
+                if (currentUser != null)
+                    model.CreatedBy = currentUser.Id;
+                else
+                    model.CreatedBy = 1; // fallback, sistem kullanýcýsý veya hata
                 model.CreatedAt = System.DateTime.Now;
                 model.IsActive = true;
                 model.AllowedRoles = new List<Role>();

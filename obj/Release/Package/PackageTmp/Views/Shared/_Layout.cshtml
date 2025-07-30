@@ -12,6 +12,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/popper")
     <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
+    @RenderSection("styles", required: false)
 </head>
 <body>
     @if (TempData["SuccessMessage"] != null)
@@ -136,6 +137,10 @@
                             @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("UserManagement.PasswordResetRequests"))
                             {
                                 <li><a href="@Url.Action("Index", "PasswordResetRequest")" class="nav-link">Şifre Sıfırlama İstekleri</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.Chat", "Manage"))
+                            {
+                                <li><a href="@Url.Action("Index", "ChatGroup")" class="nav-link">Chat Grupları</a></li>
                             }
                         </ul>
                     </li>
@@ -320,6 +325,12 @@
             <ul class="menu menu-links">
                 @if (User.Identity.IsAuthenticated)
                 {
+                    <li>
+                        <a href="@Url.Action("ChatPage", "Chat")" class="nav-link">
+                            <i class='bx bx-message icon'></i>
+                            <span class="nav-text">Sohbet</span>
+                        </a>
+                    </li>
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
                             <i class='bx bxs-inbox icon'></i>
@@ -383,254 +394,117 @@
             <div class="loader"></div>
         </div>
         @RenderBody()
+        @RenderSection("scripts", required: false)
     </div>
-
-    <div id="toggleBox" class="toggle-box" style="display:none;">
-        <button id="closeChat" class="btn-close" type="button">×</button>
-        <div id="messages"></div>
-        <input type="text" id="messageInput" placeholder="Mesajınızı yazın..." />
-        @if (User.Identity.IsAuthenticated)
-        {
-            <button id="sendButton" class="btn-custom">Gönder</button>
-        }
-        <div id="onlineUsersListContainer">
-            <ul id="onlineUsersList"></ul>
-        </div>
-    </div>
-    <button id="toggleButton" class="toggle-button" type="button">
-        <i class='bx bx-message icon'></i>
-    </button>
-
-    <div id="notificationModal" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="notificationModalLabel" class="modal-title">Bildirim</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal">×</button>
-                </div>
-                <div class="modal-body">
-                    <p id="notificationMessage"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-custom secondary" data-dismiss="modal">Kapat</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Günlük Ruh Hali Modalı -->
-    <div id="dailyMoodModal" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Merhaba, gününüz nasıldı?</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal">×</button>
-                </div>
-                <div class="modal-body text-center">
-                    <div class="mood-options flex justify-around text-3xl mb-3">
-                        <label>
-                            <input type="radio" name="dailyMoodChoice" value="1" hidden />
-                            <span>😞</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="dailyMoodChoice" value="2" hidden />
-                            <span>🙁</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="dailyMoodChoice" value="3" hidden />
-                            <span>😐</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="dailyMoodChoice" value="4" hidden />
-                            <span>🙂</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="dailyMoodChoice" value="5" hidden />
-                            <span>😁</span>
-                        </label>
-                    </div>
-                    <textarea id="dailyMoodComment" class="form-control" placeholder="İsterseniz kısa bir yorum ekleyin (opsiyonel)"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button id="submitDailyMood" class="btn-custom">Gönder</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Global Toast -->
-    <div id="globalToast" class="fixed top-4 right-4 bg-indigo-600 text-white px-4 py-3 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50"></div>
-
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/popper")
-    @RenderSection("scripts", required: false)
-
-    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
-    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
-    <script src="~/signalr/hubs"></script>
-    <script src="~/Scripts/jquery.dataTables.min.js"></script>
-
-    <script>
-      $(document).ready(function () {
+    </body>
+</html>
+<script>
+$(document).ready(function () {
     // Sidebar kapama
     $('#closeSidebar').click(function () {
         $('.sidebar').removeClass('active');
     });
 
-    // Chat kutusu aç/kapa
-    $('#toggleButton').click(function () {
-        $('#toggleBox').show();
-        $(this).hide();
-    });
-    $('#closeChat').click(function () {
-        $('#toggleBox').hide();
-        $('#toggleButton').show();
-    });
-
-    // Enter ile mesaj gönder
-    $('#messageInput').keypress(function (e) {
-        if (e.which == 13) {
-            $('#sendButton').click();
-            return false;
+    // Dropdown menü aç/kapat (nested destekli)
+    $(document).on('click', '.dropdown-toggle', function (e) {
+        e.stopPropagation();
+        var $dropdownMenu = $(this).next('.dropdown-menu');
+        var $parentDropdown = $(this).closest('.dropdown-menu');
+        if ($parentDropdown.length > 0) {
+            // Alt dropdown ise sadece kendi seviyesindekileri kapat
+            $parentDropdown.find('> .dropdown > .dropdown-menu').not($dropdownMenu).hide();
+        } else {
+            // Ana dropdown ise diğer tümünü kapat
+            $('.dropdown-menu').not($dropdownMenu).hide();
         }
+        $dropdownMenu.toggle();
     });
-
-    // Dropdown menü aç/kapa
-          $('.dropdown-toggle').on('click', function (e) {
-              e.preventDefault();
-              e.stopPropagation(); // parent dropdown'ların tetiklenmesini önle
-
-              var $menu = $(this).next('.dropdown-menu'); // sadece kendisine bağlı menü
-
-              // Kapatılacak diğer menüler (aynı seviyedeki)
-              $(this).closest('.dropdown').children('.dropdown-menu').not($menu).removeClass('show');
-
-              $menu.toggleClass('show');
-          });
-
-    // Dropdown dışına tıklayınca kapat
+    // Sayfa veya body'e tıklanınca menüleri kapat
     $(document).on('click', function (e) {
-        if (!$(e.target).closest('.dropdown').length) {
-            $('.dropdown-menu').removeClass('show');
+        if (!$(e.target).closest('.dropdown-toggle, .dropdown-menu').length) {
+            $('.dropdown-menu').hide();
         }
     });
-
-    // Modal kapama
-    $('[data-dismiss="modal"]').click(function () {
-        $(this).closest('.modal').removeClass('show');
+    // Sohbet sayfasına yönlendir
+    $('#openChatPage').click(function(e){
+        e.preventDefault();
+        window.location.href = '@Url.Action("ChatPage", "Chat")';
     });
 
-    // Loading overlay
-    $('#loadingOverlay').hide();
-    $('a').on('click', function (e) {
-        if (!$(this).hasClass('dropdown-toggle') && !$(this).hasClass('no-loading')) {
-            $('#loadingOverlay').show();
+    // Emoji picker aç/kapa
+    $('#emojiBtn').click(function(){
+        $('#emojiPicker').toggle();
+    });
+    $(document).on('click', '.emoji', function(){
+        var val = $('#messageInput').val();
+        $('#messageInput').val(val + $(this).text()).focus();
+        $('#emojiPicker').hide();
+    });
+    $(document).on('mousedown', function(e){
+        if (!$(e.target).closest('#emojiBtn, #emojiPicker').length) {
+            $('#emojiPicker').hide();
         }
     });
-
-    // SignalR Chat (Chat yetkisi olan kullanıcılar)
-
-        if ($.connection && $.connection.chatHub) {
-            var chat = $.connection.chatHub;
-            var notificationSound = new Audio('@Url.Content("~/Content/notification.mp3")');
-            chat.client.broadcastMessage = function (user, message) {
-                var timestamp = new Date().toLocaleTimeString();
-                $('#messages').append('<div><strong>' + user + '</strong> (' + timestamp + '): ' + message + '</div>');
-                scrollToBottom();
-                notificationSound.play();
-            };
-            $('#sendButton').click(function () {
-                var message = $('#messageInput').val();
-                chat.server.send('@User.Identity.Name', message);
-                $('#messageInput').val('').focus();
-            });
-        }
-    
-
-    // SignalR Online Users
-    if ($.connection && $.connection.onlineUsersHub) {
-        var onlineUsersHub = $.connection.onlineUsersHub;
-        onlineUsersHub.client.updateOnlineUsers = function (count) {
-            $('#onlineUsersCount').text(count);
-        };
-        onlineUsersHub.client.updateUserList = function (users) {
-            var usersList = $('#onlineUsersList');
-            usersList.empty();
-            users.forEach(function (user) {
-                usersList.append('<li class="online-user">' + user + '</li>');
-            });
-        };
-    }
 
     // Bildirimler (Notification)
-   function updateNotifications() {
-       $.get('@Url.Action("GetUnreadNotifications", "Notification")', function (data) {
-           var $notificationList = $('#notificationList');
-           var $notificationIcon = $('#notificationIcon');
-           var $notificationCount = $('#notificationCount');
-           $notificationList.empty();
-           if (data && data.length > 0) {
-               $notificationIcon.show();
-               $notificationCount.text(data.length).show();
-               $.each(data, function (i, notification) {
-                   $notificationList.append(
-                       '<li><a href="#" class="notification-link" data-id="' + notification.Id + '">' +
-                       notification.Message +
-                       '</a></li>'
-                   );
-               });
-           } else {
-               $notificationIcon.hide();
-               $notificationCount.hide();
-               $notificationList.append('<li><span class="text nav-text">Hiç Bildirim Yok</span></li>');
-           }
-       });
-   }
-
-updateNotifications();
-setInterval(updateNotifications, 60000);
+    function updateNotifications() {
+        $.get('@Url.Action("GetUnreadNotifications", "Notification")', function (data) {
+            var $notificationList = $('#notificationList');
+            var $notificationIcon = $('#notificationIcon');
+            var $notificationCount = $('#notificationCount');
+            $notificationList.empty();
+            if (data && data.length > 0) {
+                $notificationIcon.show();
+                $notificationCount.text(data.length).show();
+                $.each(data, function (i, notification) {
+                    $notificationList.append(
+                        '<li><a href="#" class="notification-link" data-id="' + notification.Id + '">' +
+                        notification.Message +
+                        '</a></li>'
+                    );
+                });
+            } else {
+                $notificationIcon.hide();
+                $notificationCount.hide();
+                $notificationList.append('<li><span class="text nav-text">Hiç Bildirim Yok</span></li>');
+            }
+        });
+    }
+    updateNotifications();
+    setInterval(updateNotifications, 60000);
 
     // Bildirime tıklayınca okundu yap ve yönlendir
-$(document).on('click', '.notification-link', function (e) {
-    e.preventDefault();
-    var id = $(this).data('id');
-    var message = $(this).text().toLowerCase();
-    var url = '#';
-    if (message.includes('anket')) {
-        url = '@Url.Action("Index", "Survey")';
-    } else if (message.includes('görev')) {
-        url = '@Url.Action("UserTasks", "Task")';
-    } else if (message.includes('dilek')) {
-        url = '@Url.Action("Bildirimlerim", "DilekOneri")';
-    }
-    $.post('@Url.Action("MarkAsRead", "Notification")', { id: id }, function (data) {
-        if (data.success) {
-            window.location.href = url;
+    $(document).on('click', '.notification-link', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var message = $(this).text().toLowerCase();
+        var url = '#';
+        if (message.includes('anket')) {
+            url = '@Url.Action("Index", "Survey")';
+        } else if (message.includes('görev')) {
+            url = '@Url.Action("UserTasks", "Task")';
+        } else if (message.includes('dilek')) {
+            url = '@Url.Action("Bildirimlerim", "DilekOneri")';
         }
+        $.post('@Url.Action("MarkAsRead", "Notification")', { id: id }, function (data) {
+            if (data.success) {
+                window.location.href = url;
+            }
+        });
     });
-});
-
 
     // Modal bildirimleri (SignalR NotificationHub)
     if ($.connection && $.connection.notificationHub) {
         var notificationHub = $.connection.notificationHub;
-        // message(string), duration(int ms), color(string), playSound(bool)
         notificationHub.client.showNotification = function (message, duration, color, playSound, soundPath) {
             showToast(message, color || 'info', duration || 4000, playSound, soundPath);
         };
     }
 
-    // Scroll to bottom for chat
-    function scrollToBottom() {
-        var messagesContainer = $('#messages');
-        messagesContainer.scrollTop(messagesContainer[0].scrollHeight);
-    }
-
     // Sayfa gerçekten değişmeden hemen önce overlay'i göster
     $(window).on('beforeunload', function () {
-        $('#loadingOverlay').show();          // display:block olur
-        $('#loadingOverlay').addClass('active'); // visibility + opacity
+        $('#loadingOverlay').show();
+        $('#loadingOverlay').addClass('active');
     });
 
     // Tarih & Saat
@@ -649,28 +523,20 @@ $(document).on('click', '.notification-link', function (e) {
     // Global toast helper
     function showToast(msg, type, duration, playSound, soundPath) {
         var $toast = $('#globalToast');
-
-        // Renk belirle
         var colorClass = 'bg-indigo-600';
         if (type === 'success') colorClass = 'bg-green-600';
         if (type === 'error') colorClass = 'bg-red-600';
         if (type === 'warning') colorClass = 'bg-yellow-600';
         if (type === 'info') colorClass = 'bg-indigo-600';
-
-        // Renkleri sıfırla ve yeni rengi ata
         $toast.removeClass('bg-indigo-600 bg-green-600 bg-red-600 bg-yellow-600')
               .addClass(colorClass)
               .html(msg)
               .removeClass('opacity-0')
               .addClass('opacity-100');
-
-        // İstenilen sürede kapat
         var hideAfter = typeof duration === 'number' && duration > 0 ? duration : 4000;
         setTimeout(function () {
             $toast.removeClass('opacity-100').addClass('opacity-0');
         }, hideAfter);
-
-        // Ses çal (isteğe bağlı)
         if (playSound) {
             var path = soundPath ? soundPath : '@Url.Content("~/Content/notification.mp3")';
             var toastSound = new Audio(path);
@@ -678,18 +544,23 @@ $(document).on('click', '.notification-link', function (e) {
         }
     }
 
-    // Günlük ruh hali modal zamanlayıcısı
-    function showDailyMoodModalIfNeeded() {
-        var now = new Date();
-        if (now.getHours() >= 17) {
-            var key = 'dailyMoodCompleted_' + now.toDateString();
-            if (localStorage.getItem(key) !== 'yes') {
-                $('#dailyMoodModal').addClass('show');
+    // Günlük ruh hali modal zamanlayıcısı (sadece giriş yapmış kullanıcılar için)
+    @if (User.Identity.IsAuthenticated)
+    {
+        <text>
+        function showDailyMoodModalIfNeeded() {
+            var now = new Date();
+            if (now.getHours() >= 17) {
+                var key = 'dailyMoodCompleted_' + now.toDateString();
+                if (localStorage.getItem(key) !== 'yes') {
+                    $('#dailyMoodModal').addClass('show');
+                }
             }
         }
+        showDailyMoodModalIfNeeded();
+        setInterval(showDailyMoodModalIfNeeded, 30000);
+        </text>
     }
-    showDailyMoodModalIfNeeded();
-    setInterval(showDailyMoodModalIfNeeded, 30000);
 
     // Emoji seçiminde vurgulama
     $(document).on('change', 'input[name="dailyMoodChoice"]', function () {
@@ -721,13 +592,9 @@ $(document).on('click', '.notification-link', function (e) {
         $.connection.hub.start();
     }
 });
+</script>
 
-    </script>
-
-    <!-- Mobilde menü açma düğmesi -->
-    <button id="openSidebar" class="sidebar-open-btn" type="button" aria-label="Menüyü Aç">
-        <i class='bx bx-menu'></i>
-    </button>
-
-</body>
-</html>
+<!-- Mobilde menü açma düğmesi -->
+<button id="openSidebar" class="sidebar-open-btn" type="button" aria-label="Menüyü Aç">
+    <i class='bx bx-menu'></i>
+</button>
