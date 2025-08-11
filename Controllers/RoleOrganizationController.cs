@@ -37,7 +37,11 @@ namespace MZDNETWORK.Controllers
             var model = new RoleOrganizationViewModel
             {
                 Roles = RoleHelper.GetAllRoles(),
-                Users = db.Users.ToList(),
+                // Entity Framework Include ile UserRoles ve Role ilişkilerini yükle
+                Users = db.Users
+                    .Include("UserRoles.Role")
+                    .OrderBy(u => u.Name)
+                    .ToList(),
                 AccessMatrix = GetAccessMatrix(),
                 ControllerPages = GetControllerPages(),
                 RoleStatistics = RoleHelper.GetRoleStatistics()
@@ -415,22 +419,106 @@ namespace MZDNETWORK.Controllers
         {
             try
             {
+                System.Diagnostics.Debug.WriteLine($"BulkUpdateUserRoles called: UserId={userId}, Roles={string.Join(",", selectedRoles ?? new List<string>())}");
+
+                // Kullanıcının var olup olmadığını kontrol et
+                var user = db.Users.Find(userId);
+                if (user == null)
+                {
+                    TempData["ErrorMessage"] = "Kullanıcı bulunamadı";
+                    System.Diagnostics.Debug.WriteLine($"User not found: {userId}");
+                    return RedirectToAction("Index");
+                }
+
+                // ÖNCESİNDE: Kullanıcının cache'ini temizle
+                System.Diagnostics.Debug.WriteLine($"Clearing cache for user {userId} before role update");
+                DynamicPermissionHelper.InvalidateUserCache(userId);
+
                 // Önce mevcut tüm rolleri kaldır
-                RoleHelper.RemoveAllRolesFromUser(userId);
+                System.Diagnostics.Debug.WriteLine("Removing all existing roles...");
+                bool removalSuccess = true;
+                try
+                {
+                    RoleHelper.RemoveAllRolesFromUser(userId);
+                    System.Diagnostics.Debug.WriteLine("All roles removed successfully");
+                }
+                catch (Exception removeEx)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error removing roles: {removeEx.Message}");
+                    removalSuccess = false;
+                }
 
                 // Sonra yeni rolleri ata
                 int successCount = 0;
-                foreach (var roleName in selectedRoles ?? new List<string>())
+                int failureCount = 0;
+                
+                if (selectedRoles != null && selectedRoles.Any())
                 {
-                    if (RoleHelper.AssignRoleToUser(userId, roleName))
-                        successCount++;
+                    foreach (var roleName in selectedRoles)
+                    {
+                        try
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Assigning role: {roleName} to user: {userId}");
+                            bool assigned = RoleHelper.AssignRoleToUser(userId, roleName);
+                            if (assigned)
+                            {
+                                successCount++;
+                                System.Diagnostics.Debug.WriteLine($"Successfully assigned role: {roleName}");
+                            }
+                            else
+                            {
+                                failureCount++;
+                                System.Diagnostics.Debug.WriteLine($"Failed to assign role: {roleName} (might already exist)");
+                            }
+                        }
+                        catch (Exception assignEx)
+                        {
+                            failureCount++;
+                            System.Diagnostics.Debug.WriteLine($"Exception assigning role {roleName}: {assignEx.Message}");
+                        }
+                    }
                 }
 
-                TempData["SuccessMessage"] = $"{successCount} rol başarıyla atandı";
+                // SONRASINDA: Kullanıcının cache'ini tekrar temizle
+                System.Diagnostics.Debug.WriteLine($"Clearing cache for user {userId} after role update");
+                DynamicPermissionHelper.InvalidateUserCache(userId);
+                
+                // Güvenlik için tüm cache'i de temizle
+                DynamicPermissionHelper.ClearPermissionCache();
+                System.Diagnostics.Debug.WriteLine("All permission cache cleared for security");
+
+                // Sonuç mesajları
+                if (successCount > 0)
+                {
+                    TempData["SuccessMessage"] = $"{successCount} rol başarıyla atandı";
+                    if (failureCount > 0)
+                    {
+                        TempData["WarningMessage"] = $"{failureCount} rol atanamadı";
+                    }
+                }
+                else if (selectedRoles == null || !selectedRoles.Any())
+                {
+                    TempData["SuccessMessage"] = "Tüm roller kaldırıldı";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Hiçbir rol atanamadı";
+                }
+
+                System.Diagnostics.Debug.WriteLine($"BulkUpdateUserRoles completed: Success={successCount}, Failures={failureCount}");
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"BulkUpdateUserRoles exception: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
                 TempData["ErrorMessage"] = $"Hata: {ex.Message}";
+                
+                // Hata durumunda da cache'i temizle
+                try
+                {
+                    DynamicPermissionHelper.ClearPermissionCache();
+                }
+                catch { }
             }
 
             return RedirectToAction("Index");
@@ -462,4 +550,4 @@ namespace MZDNETWORK.Controllers
         public string Description { get; set; }
         public string Category { get; set; }
     }
-} 
+}

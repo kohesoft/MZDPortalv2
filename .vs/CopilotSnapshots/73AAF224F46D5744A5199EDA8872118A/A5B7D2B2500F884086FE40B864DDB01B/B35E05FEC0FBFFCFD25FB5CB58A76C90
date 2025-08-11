@@ -1,0 +1,228 @@
+﻿@model MZDNETWORK.Controllers.PermissionDebugModel
+
+@{
+    ViewBag.Title = "Permission System Debug";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+    <link href='~/Content/boxicons.min.css' rel='stylesheet' />
+</head>
+<body class="min-h-screen bg-gray-100 p-4">
+    <div class="max-w-6xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6 bg-gradient-to-r from-purple-600 to-purple-800">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">Permission System Debug</h1>
+                        <p class="text-purple-100 mt-2">Yetki sistemini test ve debug etme sayfası</p>
+                    </div>
+                    <div class="flex gap-2">
+                        @Html.ActionLink("Cache Temizle", "ClearCache", null, new { @class = "bg-white text-purple-700 px-4 py-2 rounded-md font-medium hover:bg-purple-50 transition-colors" })
+                        @Html.ActionLink("Seeder Çalıştır", "RunSeeder", null, new { @class = "bg-yellow-500 text-white px-4 py-2 rounded-md font-medium hover:bg-yellow-600 transition-colors" })
+                        @Html.ActionLink("Admin Rolü Ata", "AssignAdminRole", null, new { @class = "bg-green-500 text-white px-4 py-2 rounded-md font-medium hover:bg-green-600 transition-colors" })
+                    </div>
+                </div>
+            </div>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative m-4">
+                    <span class="block sm:inline">@TempData["SuccessMessage"]</span>
+                </div>
+            }
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative m-4">
+                    <span class="block sm:inline">@TempData["ErrorMessage"]</span>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative m-4">
+                    <strong>System Error:</strong>
+                    <pre class="mt-2 text-sm">@Model.ErrorMessage</pre>
+                </div>
+            }
+
+            <div class="p-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <!-- Kullanıcı Bilgileri -->
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                            <i class='bx bx-user text-blue-600 mr-2'></i>
+                            Kullanıcı Bilgileri
+                        </h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="font-medium">Authenticated:</span>
+                                <span class="@(Model.IsAuthenticated ? "text-green-600" : "text-red-600")">
+                                    @(Model.IsAuthenticated ? "✓ Evet" : "✗ Hayır")
+                                </span>
+                            </div>
+                            
+                            @if (Model.IsAuthenticated)
+                            {
+                                <div class="flex justify-between">
+                                    <span class="font-medium">Username:</span>
+                                    <span>@Model.Username</span>
+                                </div>
+                                
+                                <div class="flex justify-between">
+                                    <span class="font-medium">User ID:</span>
+                                    <span>@Model.UserId</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Sistem İstatistikleri -->
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                            <i class='bx bx-bar-chart text-green-600 mr-2'></i>
+                            Sistem İstatistikleri
+                        </h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="font-medium">Permission Nodes:</span>
+                                <span class="text-blue-600 font-bold">@Model.PermissionNodesCount</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <span class="font-medium">Role Permissions:</span>
+                                <span class="text-green-600 font-bold">@Model.RolePermissionsCount</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kullanıcı Rolleri -->
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                            <i class='bx bx-group text-purple-600 mr-2'></i>
+                            Kullanıcı Rolleri
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2">Helper'dan Gelen Roller:</h4>
+                                @if (Model.UserRoles.Any())
+                                {
+                                    <div class="flex flex-wrap gap-2">
+                                        @foreach (var role in Model.UserRoles)
+                                        {
+                                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">@role</span>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="text-gray-500 italic">Rol bulunamadı</span>
+                                }
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2">Database'den Direkt Roller:</h4>
+                                @if (Model.DatabaseRoles.Any())
+                                {
+                                    <div class="flex flex-wrap gap-2">
+                                        @foreach (var role in Model.DatabaseRoles)
+                                        {
+                                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">@role</span>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="text-gray-500 italic">Rol bulunamadı</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Permission Testleri -->
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                            <i class='bx bx-shield-check text-orange-600 mr-2'></i>
+                            Permission Testleri
+                        </h3>
+                        
+                        <div class="space-y-3">
+                            @foreach (var test in Model.PermissionTests)
+                            {
+                                <div class="flex justify-between items-center p-2 border rounded">
+                                    <div>
+                                        <span class="font-medium">@test.Permission</span>
+                                        <span class="text-gray-500">(@test.Action)</span>
+                                    </div>
+                                    <span class="@(test.HasPermission ? "text-green-600" : "text-red-600") font-bold">
+                                        @(test.HasPermission ? "✓ Var" : "✗ Yok")
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layout Permission Testleri -->
+                <div class="mt-6 bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                        <i class='bx bx-layout text-indigo-600 mr-2'></i>
+                        Layout Permission Testleri
+                    </h3>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="p-3 border rounded">
+                            <div class="font-medium mb-2">UserManagement.View</div>
+                            <div class="@(MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("UserManagement", "View") ? "text-green-600" : "text-red-600")">
+                                @(MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("UserManagement", "View") ? "✓ Göster" : "✗ Gizle")
+                            </div>
+                        </div>
+                        
+                        <div class="p-3 border rounded">
+                            <div class="font-medium mb-2">HumanResources.View</div>
+                            <div class="@(MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources", "View") ? "text-green-600" : "text-red-600")">
+                                @(MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources", "View") ? "✓ Göster" : "✗ Gizle")
+                            </div>
+                        </div>
+                        
+                        <div class="p-3 border rounded">
+                            <div class="font-medium mb-2">IT.View</div>
+                            <div class="@(MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("IT", "View") ? "text-green-600" : "text-red-600")">
+                                @(MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("IT", "View") ? "✓ Göster" : "✗ Gizle")
+                            </div>
+                        </div>
+                        
+                        <div class="p-3 border rounded">
+                            <div class="font-medium mb-2">Documentation.View</div>
+                            <div class="@(MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Documentation", "View") ? "text-green-600" : "text-red-600")">
+                                @(MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Documentation", "View") ? "✓ Göster" : "✗ Gizle")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Debug Bilgileri -->
+                <div class="mt-6 bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Troubleshooting</h3>
+                    <div class="text-sm text-gray-600 space-y-2">
+                        <p><strong>1.</strong> Eğer tüm testler "Yok" çıkıyorsa: PermissionSeeder çalışmamış olabilir</p>
+                        <p><strong>2.</strong> Roller boşsa: UserRoles tablosunda kayıt yok demektir</p>
+                        <p><strong>3.</strong> Permission testleri farklı sonuç veriyorsa: Cache problemi olabilir</p>
+                        <p><strong>4.</strong> UI'da menüler gözükmüyorsa: Layout'taki permission string'leri yanlış olabilir</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

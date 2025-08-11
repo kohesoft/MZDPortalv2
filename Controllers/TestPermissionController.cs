@@ -180,6 +180,56 @@ namespace MZDNETWORK.Controllers
             return RedirectToAction("Debug");
         }
 
+        /// <summary>
+        /// Cache bilgilerini JSON olarak döndür
+        /// </summary>
+        public JsonResult GetCacheInfo()
+        {
+            try
+            {
+                var cacheStats = PermissionCacheService.GetCacheStatistics();
+                return Json(cacheStats, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// Tüm cache'i temizle (AJAX için)
+        /// </summary>
+        [HttpPost]
+        public JsonResult ClearAllCache()
+        {
+            try
+            {
+                DynamicPermissionHelper.InvalidateAllCache();
+                return Json(new { success = true, message = "Cache başarıyla temizlendi" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Cache temizlenirken hata: " + ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Belirli kullanıcının cache'ini temizle
+        /// </summary>
+        [HttpPost]
+        public JsonResult ClearUserCache(int userId)
+        {
+            try
+            {
+                DynamicPermissionHelper.InvalidateUserCache(userId);
+                return Json(new { success = true, message = $"Kullanıcı {userId} cache'i temizlendi" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Cache temizlenirken hata: " + ex.Message });
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -209,4 +259,4 @@ namespace MZDNETWORK.Controllers
         public string Action { get; set; }
         public bool HasPermission { get; set; }
     }
-} 
+}

@@ -1,0 +1,297 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using MZDNETWORK.Models;
+using MZDNETWORK.Data;
+using System;
+
+namespace MZDNETWORK.Helpers
+{
+    /// <summary>
+    /// Tamamen dinamik rol yönetimi sistemi
+    /// Artık hiçbir statik rol tanımı yok - tüm roller dinamik olarak oluşturulur
+    /// </summary>
+    public static class RoleHelper
+    {
+        /// <summary>
+        /// Kullanıcının sahip olduğu tüm rolleri string array olarak döndürür
+        /// </summary>
+        public static string[] GetUserRoles(int userId)
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                var user = context.Users
+                    .Include("UserRoles.Role")
+                    .FirstOrDefault(u => u.Id == userId);
+                
+                if (user != null)
+                {
+                    // UserRoles collection'ını kullan (multiple roles desteği)
+                    if (user.UserRoles != null && user.UserRoles.Any())
+                    {
+                        return user.UserRoles.Select(ur => ur.Role.Name).ToArray();
+                    }
+                    
+                    // Eski Role property artık desteklenmiyor - multiple roles kullan
+                }
+                
+                return new string[0];
+            }
+        }
+        
+        /// <summary>
+        /// Kullanıcının belirli bir rolü olup olmadığını kontrol eder
+        /// </summary>
+        public static bool UserHasRole(int userId, string roleName)
+        {
+            var roles = GetUserRoles(userId);
+            return roles.Contains(roleName);
+        }
+        
+        /// <summary>
+        /// Kullanıcının herhangi bir rolü olup olmadığını kontrol eder
+        /// </summary>
+        public static bool UserHasAnyRole(int userId, params string[] roleNames)
+        {
+            var userRoles = GetUserRoles(userId);
+            return roleNames.Any(role => userRoles.Contains(role));
+        }
+        
+        /// <summary>
+        /// Kullanıcıya yeni rol atar
+        /// </summary>
+        public static bool AssignRoleToUser(int userId, string roleName)
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                var user = context.Users.Find(userId);
+                var role = context.Roles.FirstOrDefault(r => r.Name == roleName);
+                
+                if (user == null)
+                    return false;
+                
+                // Eğer rol yoksa otomatik olarak oluştur
+                if (role == null)
+                {
+                    role = new Role
+                    {
+                        Name = roleName,
+                        Description = $"{roleName} rolü",
+                        IsActive = true,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = 0
+                    };
+                    context.Roles.Add(role);
+                    context.SaveChanges();
+                }
+                
+                // Kullanıcının bu rolü zaten var mı kontrol et
+                var existingUserRole = context.UserRoles
+                    .FirstOrDefault(ur => ur.UserId == userId && ur.RoleId == role.Id);
+                
+                if (existingUserRole == null)
+                {
+                    context.UserRoles.Add(new UserRole
+                    {
+                        UserId = userId,
+                        RoleId = role.Id
+                    });
+                    
+                    context.SaveChanges();
+                    return true;
+                }
+                
+                return false; // Rol zaten mevcut
+            }
+        }
+        
+        /// <summary>
+        /// Kullanıcıdan rol kaldırır
+        /// </summary>
+        public static bool RemoveRoleFromUser(int userId, string roleName)
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                var role = context.Roles.FirstOrDefault(r => r.Name == roleName);
+                if (role == null)
+                    return false;
+                
+                var userRole = context.UserRoles
+                    .FirstOrDefault(ur => ur.UserId == userId && ur.RoleId == role.Id);
+                
+                if (userRole != null)
+                {
+                    context.UserRoles.Remove(userRole);
+                    context.SaveChanges();
+                    return true;
+                }
+                
+                return false;
+            }
+        }
+        
+        /// <summary>
+        /// Kullanıcının tüm rollerini kaldırır
+        /// </summary>
+        public static void RemoveAllRolesFromUser(int userId)
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                var userRoles = context.UserRoles.Where(ur => ur.UserId == userId).ToList();
+                context.UserRoles.RemoveRange(userRoles);
+                context.SaveChanges();
+            }
+        }
+        
+        /// <summary>
+        /// Tüm rolleri getirir
+        /// </summary>
+        public static List<Role> GetAllRoles()
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                return context.Roles.OrderBy(r => r.Name).ToList();
+            }
+        }
+        
+        /// <summary>
+        /// Yeni rol oluşturur
+        /// </summary>
+        public static bool CreateRole(string roleName, string description = null)
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                var existingRole = context.Roles.FirstOrDefault(r => r.Name == roleName);
+                if (existingRole != null)
+                    return false; // Rol zaten mevcut
+                
+                context.Roles.Add(new Role
+                {
+                    Name = roleName,
+                    Description = description ?? $"{roleName} rolü",
+                    IsActive = true,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = 0
+                });
+                
+                context.SaveChanges();
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Rol günceller
+        /// </summary>
+        public static bool UpdateRole(int roleId, string newName = null, string newDescription = null)
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                var role = context.Roles.Find(roleId);
+                if (role == null)
+                    return false;
+
+                if (!string.IsNullOrEmpty(newName))
+                {
+                    // Aynı isimde başka rol var mı kontrol et
+                    var existingRole = context.Roles.FirstOrDefault(r => r.Name == newName && r.Id != roleId);
+                    if (existingRole != null)
+                        return false; // Aynı isimde rol zaten var
+
+                    role.Name = newName;
+                }
+
+                if (newDescription != null)
+                    role.Description = newDescription;
+
+                context.SaveChanges();
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Rol siler (sadece kullanımda olmayan rolleri)
+        /// </summary>
+        public static bool DeleteRole(int roleId)
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                var role = context.Roles.Find(roleId);
+                if (role == null)
+                    return false;
+
+                // Rol kullanımda mı kontrol et
+                var isInUse = context.UserRoles.Any(ur => ur.RoleId == roleId) ||
+                             context.RolePermissions.Any(rp => rp.RoleId == roleId);
+
+                if (isInUse)
+                    return false; // Rol kullanımda, silinemez
+
+                context.Roles.Remove(role);
+                context.SaveChanges();
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Rol ismine göre rol ID'sini getirir
+        /// </summary>
+        public static int? GetRoleIdByName(string roleName)
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                var role = context.Roles.FirstOrDefault(r => r.Name == roleName);
+                return role?.Id;
+            }
+        }
+
+        /// <summary>
+        /// Kullanıcı sayısına göre en çok kullanılan rolleri getirir
+        /// </summary>
+        public static List<Role> GetMostUsedRoles(int count = 10)
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                return context.Roles
+                    .GroupJoin(context.UserRoles, 
+                        role => role.Id, 
+                        userRole => userRole.RoleId, 
+                        (role, userRoles) => new { Role = role, UserCount = userRoles.Count() })
+                    .OrderByDescending(x => x.UserCount)
+                    .Take(count)
+                    .Select(x => x.Role)
+                    .ToList();
+            }
+        }
+
+        /// <summary>
+        /// Belirli bir role sahip kullanıcı sayısını getirir
+        /// </summary>
+        public static int GetRoleUserCount(string roleName)
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                var role = context.Roles.FirstOrDefault(r => r.Name == roleName);
+                if (role == null)
+                    return 0;
+
+                return context.UserRoles.Count(ur => ur.RoleId == role.Id);
+            }
+        }
+
+        /// <summary>
+        /// Rol istatistiklerini getirir
+        /// </summary>
+        public static Dictionary<string, int> GetRoleStatistics()
+        {
+            using (var context = new MZDNETWORKContext())
+            {
+                return context.Roles
+                    .GroupJoin(context.UserRoles,
+                        role => role.Id,
+                        userRole => userRole.RoleId,
+                        (role, userRoles) => new { RoleName = role.Name, UserCount = userRoles.Count() })
+                    .ToDictionary(x => x.RoleName, x => x.UserCount);
+            }
+        }
+    }
+} 

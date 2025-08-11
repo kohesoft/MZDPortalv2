@@ -4,6 +4,7 @@ using System.Web;
 using MZDNETWORK.Models;
 using MZDNETWORK.Data;
 using System;
+using System.Data.Entity;
 
 namespace MZDNETWORK.Helpers
 {
@@ -18,23 +19,41 @@ namespace MZDNETWORK.Helpers
         /// </summary>
         public static string[] GetUserRoles(int userId)
         {
-            using (var context = new MZDNETWORKContext())
+            try
             {
-                var user = context.Users
-                    .Include("UserRoles.Role")
-                    .FirstOrDefault(u => u.Id == userId);
-                
-                if (user != null)
+                using (var context = new MZDNETWORKContext())
                 {
-                    // UserRoles collection'ını kullan (multiple roles desteği)
-                    if (user.UserRoles != null && user.UserRoles.Any())
+                    System.Diagnostics.Debug.WriteLine($"GetUserRoles called for userId: {userId}");
+                    
+                    var user = context.Users
+                        .Include("UserRoles.Role")
+                        .FirstOrDefault(u => u.Id == userId);
+                    
+                    if (user != null)
                     {
-                        return user.UserRoles.Select(ur => ur.Role.Name).ToArray();
+                        // UserRoles collection'ını kullan (multiple roles desteği)
+                        if (user.UserRoles != null && user.UserRoles.Any())
+                        {
+                            var roles = user.UserRoles.Select(ur => ur.Role.Name).ToArray();
+                            System.Diagnostics.Debug.WriteLine($"Found {roles.Length} roles for user {userId}: {string.Join(", ", roles)}");
+                            return roles;
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine($"No roles found for user {userId}");
+                        }
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"User {userId} not found");
                     }
                     
-                    // Eski Role property artık desteklenmiyor - multiple roles kullan
+                    return new string[0];
                 }
-                
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in GetUserRoles: {ex.Message}");
                 return new string[0];
             }
         }
@@ -62,46 +81,82 @@ namespace MZDNETWORK.Helpers
         /// </summary>
         public static bool AssignRoleToUser(int userId, string roleName)
         {
-            using (var context = new MZDNETWORKContext())
+            try
             {
-                var user = context.Users.Find(userId);
-                var role = context.Roles.FirstOrDefault(r => r.Name == roleName);
-                
-                if (user == null)
-                    return false;
-                
-                // Eğer rol yoksa otomatik olarak oluştur
-                if (role == null)
+                using (var context = new MZDNETWORKContext())
                 {
-                    role = new Role
-                    {
-                        Name = roleName,
-                        Description = $"{roleName} rolü",
-                        IsActive = true,
-                        CreatedDate = DateTime.Now,
-                        CreatedBy = 0
-                    };
-                    context.Roles.Add(role);
-                    context.SaveChanges();
-                }
-                
-                // Kullanıcının bu rolü zaten var mı kontrol et
-                var existingUserRole = context.UserRoles
-                    .FirstOrDefault(ur => ur.UserId == userId && ur.RoleId == role.Id);
-                
-                if (existingUserRole == null)
-                {
-                    context.UserRoles.Add(new UserRole
-                    {
-                        UserId = userId,
-                        RoleId = role.Id
-                    });
+                    System.Diagnostics.Debug.WriteLine($"AssignRoleToUser: userId={userId}, roleName={roleName}");
                     
-                    context.SaveChanges();
-                    return true;
+                    var user = context.Users.Find(userId);
+                    var role = context.Roles.FirstOrDefault(r => r.Name == roleName);
+                    
+                    if (user == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"User {userId} not found");
+                        return false;
+                    }
+                    
+                    // Eğer rol yoksa otomatik olarak oluştur
+                    if (role == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Role {roleName} not found, creating...");
+                        role = new Role
+                        {
+                            Name = roleName,
+                            Description = $"{roleName} rolü",
+                            IsActive = true,
+                            CreatedDate = DateTime.Now,
+                            CreatedBy = 0
+                        };
+                        context.Roles.Add(role);
+                        context.SaveChanges();
+                        System.Diagnostics.Debug.WriteLine($"Role {roleName} created with ID {role.Id}");
+                    }
+                    
+                    // Kullanıcının bu rolü zaten var mı kontrol et
+                    var existingUserRole = context.UserRoles
+                        .FirstOrDefault(ur => ur.UserId == userId && ur.RoleId == role.Id);
+                    
+                    if (existingUserRole == null)
+                    {
+                        var userRole = new UserRole
+                        {
+                            UserId = userId,
+                            RoleId = role.Id,
+                            AssignedDate = DateTime.Now,
+                            AssignedBy = 0, // TODO: Get current user ID
+                            IsActive = true
+                        };
+                        context.UserRoles.Add(userRole);
+                        
+                        context.SaveChanges();
+                        System.Diagnostics.Debug.WriteLine($"UserRole created: UserId={userId}, RoleId={role.Id}");
+                        
+                        // CACHE TEMİZLE: Rol ataması yapıldıktan sonra
+                        try
+                        {
+                            DynamicPermissionHelper.InvalidateUserCache(userId);
+                            System.Diagnostics.Debug.WriteLine($"Cache cleared for user {userId} after role assignment");
+                        }
+                        catch (Exception cacheEx)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Cache clear error: {cacheEx.Message}");
+                        }
+                        
+                        return true;
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"UserRole already exists: UserId={userId}, RoleId={role.Id}");
+                        return false; // Rol zaten mevcut
+                    }
                 }
-                
-                return false; // Rol zaten mevcut
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in AssignRoleToUser: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
+                return false;
             }
         }
         
@@ -110,22 +165,51 @@ namespace MZDNETWORK.Helpers
         /// </summary>
         public static bool RemoveRoleFromUser(int userId, string roleName)
         {
-            using (var context = new MZDNETWORKContext())
+            try
             {
-                var role = context.Roles.FirstOrDefault(r => r.Name == roleName);
-                if (role == null)
-                    return false;
-                
-                var userRole = context.UserRoles
-                    .FirstOrDefault(ur => ur.UserId == userId && ur.RoleId == role.Id);
-                
-                if (userRole != null)
+                using (var context = new MZDNETWORKContext())
                 {
-                    context.UserRoles.Remove(userRole);
-                    context.SaveChanges();
-                    return true;
+                    System.Diagnostics.Debug.WriteLine($"RemoveRoleFromUser: userId={userId}, roleName={roleName}");
+                    
+                    var role = context.Roles.FirstOrDefault(r => r.Name == roleName);
+                    if (role == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Role {roleName} not found");
+                        return false;
+                    }
+                    
+                    var userRole = context.UserRoles
+                        .FirstOrDefault(ur => ur.UserId == userId && ur.RoleId == role.Id);
+                    
+                    if (userRole != null)
+                    {
+                        context.UserRoles.Remove(userRole);
+                        context.SaveChanges();
+                        System.Diagnostics.Debug.WriteLine($"UserRole removed: UserId={userId}, RoleId={role.Id}");
+                        
+                        // CACHE TEMİZLE: Rol kaldırıldıktan sonra
+                        try
+                        {
+                            DynamicPermissionHelper.InvalidateUserCache(userId);
+                            System.Diagnostics.Debug.WriteLine($"Cache cleared for user {userId} after role removal");
+                        }
+                        catch (Exception cacheEx)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Cache clear error: {cacheEx.Message}");
+                        }
+                        
+                        return true;
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"UserRole not found: UserId={userId}, RoleId={role.Id}");
+                        return false;
+                    }
                 }
-                
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in RemoveRoleFromUser: {ex.Message}");
                 return false;
             }
         }
@@ -135,11 +219,38 @@ namespace MZDNETWORK.Helpers
         /// </summary>
         public static void RemoveAllRolesFromUser(int userId)
         {
-            using (var context = new MZDNETWORKContext())
+            try
             {
-                var userRoles = context.UserRoles.Where(ur => ur.UserId == userId).ToList();
-                context.UserRoles.RemoveRange(userRoles);
-                context.SaveChanges();
+                using (var context = new MZDNETWORKContext())
+                {
+                    System.Diagnostics.Debug.WriteLine($"RemoveAllRolesFromUser: userId={userId}");
+                    
+                    var userRoles = context.UserRoles.Where(ur => ur.UserId == userId).ToList();
+                    System.Diagnostics.Debug.WriteLine($"Found {userRoles.Count} roles to remove for user {userId}");
+                    
+                    if (userRoles.Any())
+                    {
+                        context.UserRoles.RemoveRange(userRoles);
+                        context.SaveChanges();
+                        System.Diagnostics.Debug.WriteLine($"Removed {userRoles.Count} roles for user {userId}");
+                        
+                        // CACHE TEMİZLE: Tüm roller kaldırıldıktan sonra
+                        try
+                        {
+                            DynamicPermissionHelper.InvalidateUserCache(userId);
+                            System.Diagnostics.Debug.WriteLine($"Cache cleared for user {userId} after removing all roles");
+                        }
+                        catch (Exception cacheEx)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Cache clear error: {cacheEx.Message}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in RemoveAllRolesFromUser: {ex.Message}");
+                throw; // Re-throw to handle in caller
             }
         }
         
@@ -294,4 +405,4 @@ namespace MZDNETWORK.Helpers
             }
         }
     }
-} 
+}
