@@ -18,11 +18,29 @@ namespace MZDNETWORK.Controllers
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
 
+        public Kullanici_IslemleriController()
+        {
+            // Prodüksiyon ortamında daha güvenilir davranış için
+            db.Configuration.AutoDetectChangesEnabled = true;
+            db.Configuration.ValidateOnSaveEnabled = true;
+            db.Configuration.LazyLoadingEnabled = false; // Lazy loading'i devre dışı bırak
+        }
+
         // GET: IK_Kullanici
         [DynamicAuthorize(Permission = "UserManagement.UserManagement")]
         public ActionResult Index()
         {
-            return View(db.Users.Include(u => u.UserInfo).ToList());
+            // Fresh context ile temiz veri al - cache problemlerini önlemek için
+            using (var freshContext = new MZDNETWORKContext())
+            {
+                var users = freshContext.Users
+                    .Include(u => u.UserInfo)
+                    .Include(u => u.UserRoles.Select(ur => ur.Role))
+                    .AsNoTracking() // Read-only için tracking'i devre dışı bırak
+                    .ToList();
+                    
+                return View(users);
+            }
         }
 
         // GET: IK_Kullanici/Details/5
@@ -205,48 +223,126 @@ namespace MZDNETWORK.Controllers
         [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            try
+            using (var transaction = db.Database.BeginTransaction())
             {
-                User user = db.Users.Include(u => u.UserInfo).FirstOrDefault(u => u.Id == id);
-                if (user != null)
+                try
                 {
-                    // Eğer silinen kullanıcı aktif oturumu olan kullanıcıysa, oturumu sonlandır
-                    if (User.Identity.Name == user.Username)
+                    // Veritabanından fresh bir instance al
+                    User user = db.Users
+                        .Include(u => u.UserInfo)
+                        .Include(u => u.UserRoles)
+                        .FirstOrDefault(u => u.Id == id);
+                    
+                    if (user != null)
                     {
-                        System.Web.Security.FormsAuthentication.SignOut();
-                    }
-
-                    // İlişkili UserInfo kayıtlarını sil
-                    if (user.UserInfo != null)
-                    {
-                        foreach (var userInfo in user.UserInfo.ToList())
+                        // Eğer silinen kullanıcı aktif oturumu olan kullanıcıysa, oturumu sonlandır
+                        if (User.Identity.Name == user.Username)
                         {
-                            db.UserInfos.Remove(userInfo);
+                            System.Web.Security.FormsAuthentication.SignOut();
                         }
+
+                        // İlişkili diğer tabloları da kontrol et ve temizle
+                        
+                        // 1. PermissionCache kayıtlarını sil
+                        var permissionCaches = db.PermissionCaches.Where(pc => pc.UserId == id).ToList();
+                        foreach (var cache in permissionCaches)
+                        {
+                            db.PermissionCaches.Remove(cache);
+                        }
+
+                        // 2. Notification kayıtlarını sil
+                        var notifications = db.Notifications.Where(n => n.UserId == id.ToString()).ToList();
+                        foreach (var notification in notifications)
+                        {
+                            db.Notifications.Remove(notification);
+                        }
+
+                        // 3. ChatMessage kayıtlarını soft delete yap (silinmişe işaretle)
+                        var chatMessages = db.ChatMessages.Where(cm => cm.UserId == id).ToList();
+                        foreach (var message in chatMessages)
+                        {
+                            message.DeletedAt = DateTime.Now;
+                            message.DeletedBy = User.Identity.Name == user.Username ? (int?)null : id;
+                        }
+
+                        // 4. ChatGroup üyeliklerini temizle
+                        var chatGroupMemberships = db.ChatGroupMembers.Where(cgm => cgm.UserId == id).ToList();
+                        foreach (var membership in chatGroupMemberships)
+                        {
+                            db.ChatGroupMembers.Remove(membership);
+                        }
+
+                        // 5. Task kayıtlarını sil (UserId nullable olmadığı için)
+                        var userTasks = db.Tasks.Where(t => t.UserId == id).ToList();
+                        foreach (var task in userTasks)
+                        {
+                            // İlişkili TodoItems'ları da sil
+                            var todoItems = db.TodoItems.Where(ti => ti.TaskId == task.Id).ToList();
+                            foreach (var todoItem in todoItems)
+                            {
+                                db.TodoItems.Remove(todoItem);
+                            }
+                            
+                            // Task'ı sil
+                            db.Tasks.Remove(task);
+                        }
+
+                        // 6. UserRole kayıtlarını sil
+                        if (user.UserRoles != null && user.UserRoles.Any())
+                        {
+                            var userRolesToDelete = user.UserRoles.ToList();
+                            foreach (var userRole in userRolesToDelete)
+                            {
+                                db.UserRoles.Remove(userRole);
+                            }
+                        }
+
+                        // 7. UserInfo kayıtlarını sil
+                        if (user.UserInfo != null && user.UserInfo.Any())
+                        {
+                            var userInfosToDelete = user.UserInfo.ToList();
+                            foreach (var userInfo in userInfosToDelete)
+                            {
+                                db.UserInfos.Remove(userInfo);
+                            }
+                        }
+
+                        // 8. Ana kullanıcı kaydını sil
+                        db.Users.Remove(user);
+
+                        // Tüm değişiklikleri kaydet
+                        db.SaveChanges();
+                        
+                        // Transaction'ı commit et
+                        transaction.Commit();
+
+                        if (Request.IsAjaxRequest())
+                        {
+                            return new HttpStatusCodeResult(HttpStatusCode.OK);
+                        }
+
+                        TempData["SuccessMessage"] = "Kullanıcı ve tüm ilişkili kayıtları başarıyla silindi.";
                     }
-
-                    // Kullanıcıyı sil
-                    db.Users.Remove(user);
-                    db.SaveChanges();
-
+                    else
+                    {
+                        transaction.Rollback();
+                        TempData["ErrorMessage"] = "Silinecek kullanıcı bulunamadı.";
+                    }
+                    
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    
                     if (Request.IsAjaxRequest())
                     {
-                        return new HttpStatusCodeResult(HttpStatusCode.OK);
+                        return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
                     }
 
-                    TempData["SuccessMessage"] = "Kullanıcı başarıyla silindi.";
+                    TempData["ErrorMessage"] = "Kullanıcı silinirken bir hata oluştu: " + ex.Message;
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                if (Request.IsAjaxRequest())
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
-                }
-
-                TempData["ErrorMessage"] = "Kullanıcı silinirken bir hata oluştu: " + ex.Message;
-                return RedirectToAction("Index");
             }
         }
 

@@ -1,0 +1,334 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using MZDNETWORK.Models;
+using MZDNETWORK.Helpers;
+using MZDNETWORK.Data;
+using MZDNETWORK.Attributes;
+
+namespace MZDNETWORK.Controllers
+{
+    [DynamicAuthorize(Permission = "UserManagement.UserManagement")]
+    public class Kullanici_IslemleriController : Controller
+    {
+        private MZDNETWORKContext db = new MZDNETWORKContext();
+
+        // GET: IK_Kullanici
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement")]
+        public ActionResult Index()
+        {
+            return View(db.Users.Include(u => u.UserInfo).ToList());
+        }
+
+        // GET: IK_Kullanici/Details/5
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement")]
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Include(u => u.UserInfo).FirstOrDefault(u => u.Id == id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        // GET: IK_Kullanici/Create
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Create")]
+        public ActionResult Create()
+        {
+            // Tüm rolleri ViewBag'e ekle (dinamik olarak)
+            ViewBag.AvailableRoles = RoleHelper.GetAllRoles();
+            return View();
+        }
+
+        // POST: IK_Kullanici/Create
+        // Aşırı gönderim saldırılarından korunmak için, bağlamak istediğiniz belirli özellikleri etkinleştirin, 
+        // daha fazla bilgi için bkz. https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Create")]
+        public ActionResult Create([Bind(Include = "Id,Username,Password,Role,Name,Surname,Department,Position,Intercom,PhoneNumber,InternalEmail,ExternalEmail,Sicil")] User user, [Bind(Include = "Email,RealPhoneNumber,Adres,Adres2,Sehir,Ulke,Postakodu,KanGrubu,DogumTarihi,Cinsiyet,MedeniDurum")] UserInfo userInfo, string selectedRole)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    user.UserInfo = new List<UserInfo> { userInfo };
+                    db.Users.Add(user);
+                    db.SaveChanges();
+
+                    // Seçilen rolü kullanıcıya ata (yeni multiple roles sistemi)
+                    if (!string.IsNullOrEmpty(selectedRole))
+                    {
+                        bool roleAssigned = RoleHelper.AssignRoleToUser(user.Id, selectedRole);
+                        if (!roleAssigned)
+                        {
+                            TempData["ErrorMessage"] = $"Rol '{selectedRole}' atanamadı.";
+                        }
+                        else
+                        {
+                            TempData["SuccessMessage"] = "Kullanıcı başarıyla oluşturuldu ve rol atandı.";
+                        }
+                    }
+                    else
+                    {
+                        TempData["SuccessMessage"] = "Kullanıcı başarıyla oluşturuldu.";
+                    }
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Kullanıcı oluşturulurken bir hata oluştu: " + ex.Message);
+                }
+            }
+
+            // Hata durumunda rolleri tekrar yükle
+            ViewBag.AvailableRoles = RoleHelper.GetAllRoles();
+            return View(user);
+        }
+
+        // GET: IK_Kullanici/Edit/5
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Edit")]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Include(u => u.UserInfo).FirstOrDefault(u => u.Id == id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        // POST: IK_Kullanici/Edit/5
+        // Aşırı gönderim saldırılarından korunmak için, bağlamak istediğiniz belirli özellikleri etkinleştirin, 
+        // daha fazla bilgi için bkz. https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Edit")]
+        public ActionResult Edit([Bind(Include = "Id,Username,Password,Name,Surname,Department,Position,Intercom,PhoneNumber,InternalEmail,ExternalEmail,Sicil")] User user, [Bind(Include = "Id,Email,RealPhoneNumber,Adres,Adres2,Sehir,Ulke,Postakodu,KanGrubu,DogumTarihi,Cinsiyet,MedeniDurum")] UserInfo userInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Veritabanından mevcut kullanıcıyı al
+                    var existingUser = db.Users.Include(u => u.UserInfo).FirstOrDefault(u => u.Id == user.Id);
+                    if (existingUser == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    // User bilgilerini güncelle
+                    existingUser.Username = user.Username;
+                    existingUser.Password = user.Password;
+                    existingUser.Name = user.Name;
+                    existingUser.Surname = user.Surname;
+                    existingUser.Department = user.Department;
+                    existingUser.Position = user.Position;
+                    existingUser.Intercom = user.Intercom;
+                    existingUser.PhoneNumber = user.PhoneNumber;
+                    existingUser.InternalEmail = user.InternalEmail;
+                    existingUser.ExternalEmail = user.ExternalEmail;
+                    existingUser.Sicil = user.Sicil;
+
+                    // UserInfo varsa güncelle, yoksa oluştur
+                    var existingUserInfo = existingUser.UserInfo.FirstOrDefault();
+                    if (existingUserInfo != null)
+                    {
+                        // Mevcut UserInfo'yu güncelle
+                        existingUserInfo.Email = userInfo.Email;
+                        existingUserInfo.RealPhoneNumber = userInfo.RealPhoneNumber;
+                        existingUserInfo.Adres = userInfo.Adres;
+                        existingUserInfo.Adres2 = userInfo.Adres2;
+                        existingUserInfo.Sehir = userInfo.Sehir;
+                        existingUserInfo.Ulke = userInfo.Ulke;
+                        existingUserInfo.Postakodu = userInfo.Postakodu;
+                        existingUserInfo.KanGrubu = userInfo.KanGrubu;
+                        existingUserInfo.DogumTarihi = userInfo.DogumTarihi;
+                        existingUserInfo.Cinsiyet = userInfo.Cinsiyet;
+                        existingUserInfo.MedeniDurum = userInfo.MedeniDurum;
+                    }
+                    else
+                    {
+                        // Yeni UserInfo oluştur
+                        userInfo.UserId = user.Id;
+                        existingUser.UserInfo.Add(userInfo);
+                    }
+
+                    db.SaveChanges();
+                    TempData["SuccessMessage"] = "Kullanıcı bilgileri başarıyla güncellendi.";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    TempData["ErrorMessage"] = "Kullanıcı güncellenirken bir hata oluştu: " + ex.Message;
+                    return View(user);
+                }
+            }
+
+            return View(user);
+        }
+
+        // GET: IK_Kullanici/Delete/5
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Delete")]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Include(u => u.UserInfo).FirstOrDefault(u => u.Id == id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        // POST: IK_Kullanici/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    // Veritabanından fresh bir instance al
+                    User user = db.Users
+                        .Include(u => u.UserInfo)
+                        .Include(u => u.UserRoles)
+                        .FirstOrDefault(u => u.Id == id);
+                    
+                    if (user != null)
+                    {
+                        // Eğer silinen kullanıcı aktif oturumu olan kullanıcıysa, oturumu sonlandır
+                        if (User.Identity.Name == user.Username)
+                        {
+                            System.Web.Security.FormsAuthentication.SignOut();
+                        }
+
+                        // İlişkili diğer tabloları da kontrol et ve temizle
+                        
+                        // 1. PermissionCache kayıtlarını sil
+                        var permissionCaches = db.PermissionCaches.Where(pc => pc.UserId == id).ToList();
+                        foreach (var cache in permissionCaches)
+                        {
+                            db.PermissionCaches.Remove(cache);
+                        }
+
+                        // 2. Notification kayıtlarını sil
+                        var notifications = db.Notifications.Where(n => n.UserId == id.ToString()).ToList();
+                        foreach (var notification in notifications)
+                        {
+                            db.Notifications.Remove(notification);
+                        }
+
+                        // 3. ChatMessage kayıtlarını soft delete yap (silinmişe işaretle)
+                        var chatMessages = db.ChatMessages.Where(cm => cm.UserId == id).ToList();
+                        foreach (var message in chatMessages)
+                        {
+                            message.DeletedAt = DateTime.Now;
+                            message.DeletedBy = User.Identity.Name == user.Username ? (int?)null : id;
+                        }
+
+                        // 4. ChatGroup üyeliklerini temizle
+                        var chatGroupMemberships = db.ChatGroupMembers.Where(cgm => cgm.UserId == id).ToList();
+                        foreach (var membership in chatGroupMemberships)
+                        {
+                            db.ChatGroupMembers.Remove(membership);
+                        }
+
+                        // 5. Task kayıtlarını kontrol et
+                        var userTasks = db.Tasks.Where(t => t.UserId == id).ToList();
+                        foreach (var task in userTasks)
+                        {
+                            // Task'ı başka bir kullanıcıya ata veya sil
+                            task.UserId = null; // Orphan task haline getir
+                            task.Username = "Silinmiş Kullanıcı";
+                        }
+
+                        // 6. UserRole kayıtlarını sil
+                        if (user.UserRoles != null && user.UserRoles.Any())
+                        {
+                            var userRolesToDelete = user.UserRoles.ToList();
+                            foreach (var userRole in userRolesToDelete)
+                            {
+                                db.UserRoles.Remove(userRole);
+                            }
+                        }
+
+                        // 7. UserInfo kayıtlarını sil
+                        if (user.UserInfo != null && user.UserInfo.Any())
+                        {
+                            var userInfosToDelete = user.UserInfo.ToList();
+                            foreach (var userInfo in userInfosToDelete)
+                            {
+                                db.UserInfos.Remove(userInfo);
+                            }
+                        }
+
+                        // 8. Ana kullanıcı kaydını sil
+                        db.Users.Remove(user);
+
+                        // Tüm değişiklikleri kaydet
+                        db.SaveChanges();
+                        
+                        // Transaction'ı commit et
+                        transaction.Commit();
+
+                        if (Request.IsAjaxRequest())
+                        {
+                            return new HttpStatusCodeResult(HttpStatusCode.OK);
+                        }
+
+                        TempData["SuccessMessage"] = "Kullanıcı ve tüm ilişkili kayıtları başarıyla silindi.";
+                    }
+                    else
+                    {
+                        transaction.Rollback();
+                        TempData["ErrorMessage"] = "Silinecek kullanıcı bulunamadı.";
+                    }
+                    
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    
+                    if (Request.IsAjaxRequest())
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                    }
+
+                    TempData["ErrorMessage"] = "Kullanıcı silinirken bir hata oluştu: " + ex.Message;
+                    return RedirectToAction("Index");
+                }
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

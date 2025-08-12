@@ -229,6 +229,13 @@
                 const formData = new FormData(this);
                 // AntiForgeryToken'ı header olarak ekle
                 const token = this.querySelector('input[name="__RequestVerificationToken"]').value;
+                
+                // Submit butonunu devre dışı bırak
+                const submitBtn = document.getElementById('confirmDelete');
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Siliniyor...';
+                
                 fetch(`/Kullanici_Islemleri/Delete/${deleteUserId}`, {
                     method: 'POST',
                     headers: {
@@ -238,19 +245,39 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        document.querySelector(`.user-row[data-user-id="${deleteUserId}"]`).style.display = 'none';
-                        document.getElementById(`user-info-${deleteUserId}`).style.display = 'none';
+                        // Kullanıcı satırını ve detay satırını DOM'dan tamamen kaldır
+                        const userRow = document.querySelector(`.user-row[data-user-id="${deleteUserId}"]`);
+                        const infoRow = document.getElementById(`user-info-${deleteUserId}`);
+                        
+                        if (userRow) {
+                            userRow.remove();
+                        }
+                        if (infoRow) {
+                            infoRow.remove();
+                        }
+                        
                         const successMessage = document.createElement('div');
                         successMessage.className = 'mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative';
                         successMessage.innerHTML = '<span class="block sm:inline">Kullanıcı başarıyla silindi.</span>';
                         document.querySelector('.max-w-full').insertBefore(successMessage, document.querySelector('.max-w-full').firstChild);
                         setTimeout(() => successMessage.remove(), 3000);
+                        
+                        // Local storage'a silinen kullanıcı ID'sini kaydet
+                        let deletedUsers = JSON.parse(localStorage.getItem('deletedUsers') || '[]');
+                        if (!deletedUsers.includes(deleteUserId)) {
+                            deletedUsers.push(deleteUserId);
+                            localStorage.setItem('deletedUsers', JSON.stringify(deletedUsers));
+                        }
                     } else {
                         const errorMessage = document.createElement('div');
                         errorMessage.className = 'mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative';
                         errorMessage.innerHTML = '<span class="block sm:inline">Kullanıcı silinirken bir hata oluştu.</span>';
                         document.querySelector('.max-w-full').insertBefore(errorMessage, document.querySelector('.max-w-full').firstChild);
                         setTimeout(() => errorMessage.remove(), 3000);
+                        
+                        // Submit butonunu yeniden aktif et
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalText;
                     }
                 })
                 .catch(error => {
@@ -260,14 +287,28 @@
                     errorMessage.innerHTML = '<span class="block sm:inline">Kullanıcı silinirken bir hata oluştu.</span>';
                     document.querySelector('.max-w-full').insertBefore(errorMessage, document.querySelector('.max-w-full').firstChild);
                     setTimeout(() => errorMessage.remove(), 3000);
+                    
+                    // Submit butonunu yeniden aktif et
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
                 });
             }
             document.getElementById('deleteModal').classList.add('hidden');
         });
-        document.getElementById('deleteModal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                this.classList.add('hidden');
-            }
+        
+        // Sayfa yüklendiğinde silinen kullanıcıları kontrol et ve gizle
+        document.addEventListener('DOMContentLoaded', function() {
+            const deletedUsers = JSON.parse(localStorage.getItem('deletedUsers') || '[]');
+            deletedUsers.forEach(userId => {
+                const userRow = document.querySelector(`.user-row[data-user-id="${userId}"]`);
+                const infoRow = document.getElementById(`user-info-${userId}`);
+                if (userRow) {
+                    userRow.remove();
+                }
+                if (infoRow) {
+                    infoRow.remove();
+                }
+            });
         });
     </script>
 </body>
