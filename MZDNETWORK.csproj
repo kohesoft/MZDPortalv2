@@ -473,8 +473,11 @@
     <Compile Include="Controllers\PasswordResetRequestController.cs" />
     <Compile Include="Controllers\PerformanceController.cs" />
     <Compile Include="Controllers\PermissionTreeController.cs" />
+    <Compile Include="Controllers\PersonnelAssignmentController.cs" />
     <Compile Include="Controllers\RoleOrganizationController.cs" />
     <Compile Include="Controllers\RolePermissionController.cs" />
+    <Compile Include="Controllers\ServiceConfigurationController.cs" />
+    <Compile Include="Controllers\ServicePersonnelController.cs" />
     <Compile Include="Controllers\ServiceRouteController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
@@ -501,21 +504,9 @@
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202507091313488_DatabaseCreate.cs" />
-    <Compile Include="Migrations\202507091313488_DatabaseCreate.Designer.cs">
-      <DependentUpon>202507091313488_DatabaseCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202507281258260_GroupChat.cs" />
-    <Compile Include="Migrations\202507281258260_GroupChat.Designer.cs">
-      <DependentUpon>202507281258260_GroupChat.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202507281329444_GroupChatv2.cs" />
-    <Compile Include="Migrations\202507281329444_GroupChatv2.Designer.cs">
-      <DependentUpon>202507281329444_GroupChatv2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202507300714065_ChatGroupmembers.cs" />
-    <Compile Include="Migrations\202507300714065_ChatGroupmembers.Designer.cs">
-      <DependentUpon>202507300714065_ChatGroupmembers.cs</DependentUpon>
+    <Compile Include="Migrations\202508130822567_fixcascadeconflicts.cs" />
+    <Compile Include="Migrations\202508130822567_fixcascadeconflicts.Designer.cs">
+      <DependentUpon>202508130822567_fixcascadeconflicts.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -540,6 +531,8 @@
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\ReservationStatus.cs" />
+    <Compile Include="Models\ServiceConfiguration.cs" />
+    <Compile Include="Models\ServicePersonnel.cs" />
     <Compile Include="Models\ServiceRoute.cs" />
     <Compile Include="Models\SuggestionComplaint.cs" />
     <Compile Include="Models\Survey.cs" />
@@ -597,6 +590,7 @@
     <Content Include="Content\Dokumantasyon.css" />
     <Content Include="Content\notification.mp3" />
     <Content Include="Content\sendnotification.css" />
+    <Content Include="Content\serviceroute.css" />
     <Content Include="Content\Spinner.css" />
     <Content Include="Content\surveycreate.css" />
     <Content Include="Content\surveyresults.css" />
@@ -2526,6 +2520,8 @@
     <Content Include="svg\solid\bxs-zap.svg" />
     <Content Include="svg\solid\bxs-zoom-in.svg" />
     <Content Include="svg\solid\bxs-zoom-out.svg" />
+    <Content Include="Content\serviceconfig.css" />
+    <Content Include="Content\serviceperson.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2621,6 +2617,9 @@
     <Content Include="Views\ChatGroup\Create.cshtml" />
     <Content Include="Views\ChatGroup\Edit.cshtml" />
     <Content Include="Views\Chat\ChatPage.cshtml" />
+    <Content Include="Views\ServicePersonnel\Index.cshtml" />
+    <Content Include="Views\ServiceConfiguration\Index.cshtml" />
+    <Content Include="Views\PersonnelAssignment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\tiles\" />
@@ -2635,17 +2634,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202507091313488_DatabaseCreate.resx">
-      <DependentUpon>202507091313488_DatabaseCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507281258260_GroupChat.resx">
-      <DependentUpon>202507281258260_GroupChat.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507281329444_GroupChatv2.resx">
-      <DependentUpon>202507281329444_GroupChatv2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202507300714065_ChatGroupmembers.resx">
-      <DependentUpon>202507300714065_ChatGroupmembers.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202508130822567_fixcascadeconflicts.resx">
+      <DependentUpon>202508130822567_fixcascadeconflicts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

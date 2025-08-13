@@ -1,0 +1,466 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
+using MZDNETWORK.Attributes;
+using MZDNETWORK.Data;
+using MZDNETWORK.Models;
+using Newtonsoft.Json;
+
+namespace MZDNETWORK.Controllers
+{
+    [DynamicAuthorize(Permission = "ServiceManagement.Personnel")]
+    public class ServicePersonnelController : Controller
+    {
+        private MZDNETWORKContext db = new MZDNETWORKContext();
+
+        // GET: ServicePersonnel
+        [DynamicAuthorize(Permission = "ServiceManagement.Personnel", Action = "View")]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: ServicePersonnel/GetAll
+        [DynamicAuthorize(Permission = "ServiceManagement.Personnel", Action = "View")]
+        public JsonResult GetAll()
+        {
+            try
+            {
+                var personnel = db.ServicePersonnels
+                    .Include(sp => sp.User)
+                    .OrderBy(p => p.User.Name)
+                    .ToList();
+
+                // Manually load ServiceConfiguration for each personnel
+                var serviceCodes = personnel.Select(p => p.ServiceCode).Distinct().ToList();
+                var serviceConfigs = db.ServiceConfigurations
+                    .Where(sc => serviceCodes.Contains(sc.ServiceCode))
+                    .ToList();
+
+                var result = personnel.Select(p => {
+                    var serviceConfig = serviceConfigs.FirstOrDefault(sc => sc.ServiceCode == p.ServiceCode);
+                    return new
+                    {
+                        p.Id,
+                        p.UserId,
+                        FirstName = p.User.Name,
+                        LastName = p.User.Surname,
+                        Username = p.User.Username,
+                        Service = p.ServiceCode,
+                        ServiceName = serviceConfig?.ServiceName ?? p.ServiceCode,
+                        p.ShiftType,
+                        p.Status,
+                        p.CreatedDate
+                    };
+                });
+
+                return Json(new { success = true, data = result }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServicePersonnel/GetById/5
+        [DynamicAuthorize(Permission = "ServiceManagement.Personnel", Action = "View")]
+        public JsonResult GetById(int id)
+        {
+            try
+            {
+                var personnel = db.ServicePersonnels
+                    .Include(sp => sp.User)
+                    .FirstOrDefault(sp => sp.Id == id);
+
+                if (personnel == null)
+                {
+                    return Json(new { success = false, message = "Kayıt bulunamadı." }, JsonRequestBehavior.AllowGet);
+                }
+
+                // Manually load ServiceConfiguration
+                var serviceConfig = db.ServiceConfigurations.FirstOrDefault(sc => sc.ServiceCode == personnel.ServiceCode);
+
+                var result = new
+                {
+                    personnel.Id,
+                    personnel.UserId,
+                    FirstName = personnel.User.Name,
+                    LastName = personnel.User.Surname,
+                    Username = personnel.User.Username,
+                    Service = personnel.ServiceCode,
+                    ServiceName = serviceConfig?.ServiceName ?? personnel.ServiceCode,
+                    personnel.ShiftType,
+                    personnel.Status
+                };
+
+                return Json(new { success = true, data = result }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServicePersonnel/GetAvailableUsers
+        [DynamicAuthorize(Permission = "ServiceManagement.Personnel", Action = "View")]
+        public JsonResult GetAvailableUsers()
+        {
+            try
+            {
+                // Get users who are not already assigned to service personnel
+                var assignedUserIds = db.ServicePersonnels.Select(sp => sp.UserId).ToList();
+                
+                var availableUsers = db.Users
+                    .Where(u => !assignedUserIds.Contains(u.Id))
+                    .OrderBy(u => u.Name)
+                    .Select(u => new
+                    {
+                        u.Id,
+                        u.Username,
+                        Name = u.Name,
+                        Surname = u.Surname,
+                        FullName = (u.Name + " " + u.Surname).Trim(),
+                        u.Department
+                    })
+                    .ToList();
+
+                return Json(new { success = true, data = availableUsers }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServicePersonnel/GetAvailableServices
+        [DynamicAuthorize(Permission = "ServiceManagement.Personnel", Action = "View")]
+        public JsonResult GetAvailableServices()
+        {
+            try
+            {
+                var services = db.ServiceConfigurations
+                    .Where(s => s.IsActive)
+                    .OrderBy(s => s.SortOrder)
+                    .ThenBy(s => s.ServiceName)
+                    .Select(s => new
+                    {
+                        s.ServiceCode,
+                        s.ServiceName,
+                        s.Description,
+                        s.ColorCode,
+                        s.IconClass
+                    })
+                    .ToList();
+
+                return Json(new { success = true, data = services }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // POST: ServicePersonnel/Create
+        [HttpPost]
+        [DynamicAuthorize(Permission = "ServiceManagement.Personnel", Action = "Create")]
+        public JsonResult Create(ServicePersonnel model)
+        {
+            try
+            {
+                // Check if user is already assigned
+                var existingAssignment = db.ServicePersonnels.Any(sp => sp.UserId == model.UserId);
+                if (existingAssignment)
+                {
+                    return Json(new { success = false, message = "Bu kullanıcı zaten servis personeli olarak atanmış." });
+                }
+
+                // Validate user exists
+                var user = db.Users.Find(model.UserId);
+                if (user == null)
+                {
+                    return Json(new { success = false, message = "Geçerli bir kullanıcı seçiniz." });
+                }
+
+                // Validate service exists
+                var service = db.ServiceConfigurations.FirstOrDefault(s => s.ServiceCode == model.ServiceCode);
+                if (service == null)
+                {
+                    return Json(new { success = false, message = "Geçerli bir servis seçiniz." });
+                }
+
+                if (ModelState.IsValid)
+                {
+                    model.CreatedDate = DateTime.Now;
+                    db.ServicePersonnels.Add(model);
+                    db.SaveChanges();
+
+                    var result = new
+                    {
+                        model.Id,
+                        model.UserId,
+                        FirstName = user.Name,
+                        LastName = user.Surname,
+                        Username = user.Username,
+                        Service = model.ServiceCode,
+                        ServiceName = service.ServiceName,
+                        model.ShiftType,
+                        model.Status,
+                        model.CreatedDate
+                    };
+
+                    return Json(new { success = true, message = "Kayıt başarıyla oluşturuldu.", data = result });
+                }
+
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { success = false, message = "Doğrulama hatası.", errors = errors });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: ServicePersonnel/Edit
+        [HttpPost]
+        [DynamicAuthorize(Permission = "ServiceManagement.Personnel", Action = "Edit")]
+        public JsonResult Edit(ServicePersonnel model)
+        {
+            try
+            {
+                var existing = db.ServicePersonnels.Include(sp => sp.User).Include(sp => sp.ServiceConfiguration).FirstOrDefault(sp => sp.Id == model.Id);
+                if (existing == null)
+                {
+                    return Json(new { success = false, message = "Kayıt bulunamadı." });
+                }
+
+                // Check if user is already assigned to another service personnel record
+                var existingAssignment = db.ServicePersonnels.Any(sp => sp.UserId == model.UserId && sp.Id != model.Id);
+                if (existingAssignment)
+                {
+                    return Json(new { success = false, message = "Bu kullanıcı başka bir servis personeli kaydında zaten atanmış." });
+                }
+
+                // Validate user exists
+                var user = db.Users.Find(model.UserId);
+                if (user == null)
+                {
+                    return Json(new { success = false, message = "Geçerli bir kullanıcı seçiniz." });
+                }
+
+                // Validate service exists
+                var service = db.ServiceConfigurations.FirstOrDefault(s => s.ServiceCode == model.ServiceCode);
+                if (service == null)
+                {
+                    return Json(new { success = false, message = "Geçerli bir servis seçiniz." });
+                }
+
+                if (ModelState.IsValid)
+                {
+                    existing.UserId = model.UserId;
+                    existing.ServiceCode = model.ServiceCode;
+                    existing.ShiftType = model.ShiftType;
+                    existing.Status = model.Status;
+                    existing.UpdatedDate = DateTime.Now;
+
+                    db.Entry(existing).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    var result = new
+                    {
+                        existing.Id,
+                        existing.UserId,
+                        FirstName = user.Name,
+                        LastName = user.Surname,
+                        Username = user.Username,
+                        Service = existing.ServiceCode,
+                        ServiceName = service.ServiceName,
+                        existing.ShiftType,
+                        existing.Status,
+                        existing.UpdatedDate
+                    };
+
+                    return Json(new { success = true, message = "Kayıt başarıyla güncellendi.", data = result });
+                }
+
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { success = false, message = "Doğrulama hatası.", errors = errors });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: ServicePersonnel/Delete/5
+        [HttpPost]
+        [DynamicAuthorize(Permission = "ServiceManagement.Personnel", Action = "Delete")]
+        public JsonResult Delete(int id)
+        {
+            try
+            {
+                var personnel = db.ServicePersonnels.Find(id);
+                if (personnel == null)
+                {
+                    return Json(new { success = false, message = "Kayıt bulunamadı." });
+                }
+
+                db.ServicePersonnels.Remove(personnel);
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Kayıt başarıyla silindi." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // GET: ServicePersonnel/GetStats
+        [DynamicAuthorize(Permission = "ServiceManagement.Personnel", Action = "View")]
+        public JsonResult GetStats()
+        {
+            try
+            {
+                var allPersonnel = db.ServicePersonnels.Include(sp => sp.User).Include(sp => sp.ServiceConfiguration).ToList();
+                
+                var stats = new
+                {
+                    totalPersonnel = allPersonnel.Count,
+                    activeServices = allPersonnel.Select(p => p.ServiceCode).Distinct().Count(),
+                    pendingCount = allPersonnel.Count(p => p.Status == "Beklemede"),
+                    monthlyAdded = allPersonnel.Count(p => p.CreatedDate.Month == DateTime.Now.Month && p.CreatedDate.Year == DateTime.Now.Year)
+                };
+
+                return Json(new { success = true, data = stats }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServicePersonnel/Search
+        [DynamicAuthorize(Permission = "ServiceManagement.Personnel", Action = "View")]
+        public JsonResult Search(string term = "", string service = "", string status = "", string shiftType = "")
+        {
+            try
+            {
+                var query = db.ServicePersonnels.Include(sp => sp.User).Include(sp => sp.ServiceConfiguration).AsQueryable();
+
+                if (!string.IsNullOrEmpty(term))
+                {
+                    term = term.ToLower();
+                    query = query.Where(p => p.User.Name.ToLower().Contains(term) || 
+                                           p.User.Surname.ToLower().Contains(term) ||
+                                           p.User.Username.ToLower().Contains(term) ||
+                                           p.ServiceCode.ToLower().Contains(term) ||
+                                           p.ServiceConfiguration.ServiceName.ToLower().Contains(term));
+                }
+
+                if (!string.IsNullOrEmpty(service))
+                {
+                    query = query.Where(p => p.ServiceCode == service);
+                }
+
+                if (!string.IsNullOrEmpty(status))
+                {
+                    query = query.Where(p => p.Status == status);
+                }
+
+                if (!string.IsNullOrEmpty(shiftType))
+                {
+                    query = query.Where(p => p.ShiftType == shiftType);
+                }
+
+                var results = query.OrderBy(p => p.User.Name)
+                    .ToList()
+                    .Select(p => new
+                    {
+                        p.Id,
+                        p.UserId,
+                        FirstName = p.User.Name,
+                        LastName = p.User.Surname,
+                        Username = p.User.Username,
+                        Service = p.ServiceCode,
+                        ServiceName = p.ServiceConfiguration?.ServiceName ?? p.ServiceCode,
+                        p.ShiftType,
+                        p.Status,
+                        p.CreatedDate
+                    });
+
+                return Json(new { success = true, data = results }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServicePersonnel/CreateSampleData - For testing purposes
+        [DynamicAuthorize(Permission = "ServiceManagement.Personnel", Action = "Create")]
+        public ActionResult CreateSampleData()
+        {
+            try
+            {
+                // Only create sample data if no service personnel exist
+                if (db.ServicePersonnels.Any())
+                {
+                    return Json(new { success = false, message = "Zaten servis personeli kayıtları mevcut." }, JsonRequestBehavior.AllowGet);
+                }
+
+                // Ensure we have service configurations first
+                if (!db.ServiceConfigurations.Any())
+                {
+                    return Json(new { success = false, message = "Önce servis konfigürasyonları oluşturun." }, JsonRequestBehavior.AllowGet);
+                }
+
+                // Get some users from the database
+                var users = db.Users.Take(6).ToList();
+                if (users.Count < 6)
+                {
+                    return Json(new { success = false, message = "En az 6 kullanıcı gerekli. Lütfen önce kullanıcı kayıtları oluşturun." }, JsonRequestBehavior.AllowGet);
+                }
+
+                // Get available service codes
+                var serviceCodes = db.ServiceConfigurations.Where(s => s.IsActive).Select(s => s.ServiceCode).ToArray();
+                if (serviceCodes.Length == 0)
+                {
+                    return Json(new { success = false, message = "Aktif servis konfigürasyonu bulunamadı." }, JsonRequestBehavior.AllowGet);
+                }
+
+                var samplePersonnel = new List<ServicePersonnel>();
+                for (int i = 0; i < Math.Min(users.Count, serviceCodes.Length); i++)
+                {
+                    samplePersonnel.Add(new ServicePersonnel
+                    {
+                        UserId = users[i].Id,
+                        ServiceCode = serviceCodes[i % serviceCodes.Length],
+                        ShiftType = i % 2 == 0 ? "Mesai İçi" : "Mesai Sonrası",
+                        Status = i == 2 ? "Beklemede" : "Aktif"
+                    });
+                }
+
+                db.ServicePersonnels.AddRange(samplePersonnel);
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Örnek veriler başarıyla oluşturuldu." }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

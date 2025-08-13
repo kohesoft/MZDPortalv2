@@ -504,13 +504,10 @@ C:\Users\berat\Documents\GitHub\MZDPortalv2\bin\tr\System.Web.WebPages.Razor.res
 C:\Users\berat\Documents\GitHub\MZDPortalv2\bin\tr\System.Web.Optimization.resources.dll
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.App.config
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.AssemblyReference.cache
-C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.DatabaseCreate.resources
-C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.GroupChat.resources
-C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.GroupChatv2.resources
-C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.ChatGroupmembers.resources
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Properties.Resources.resources
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.GenerateResource.cache
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.CoreCompileInputs.cache
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.Up2Date
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.dll
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.pdb
+C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.fixcascadeconflicts.resources

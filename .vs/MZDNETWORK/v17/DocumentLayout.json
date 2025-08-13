@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\controllers\\kullanici_islemlericontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\kullanici_islemlericontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\controllers\\personnelassignmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\personnelassignmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\controllers\\servicepersonnelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\servicepersonnelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\content\\serviceroute.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:content\\serviceroute.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\controllers\\serviceconfigurationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:controllers\\serviceconfigurationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,15 +46,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Kullanici_IslemleriController.cs",
-              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\Kullanici_IslemleriController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Kullanici_IslemleriController.cs",
-              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\Kullanici_IslemleriController.cs",
-              "RelativeToolTip": "Controllers\\Kullanici_IslemleriController.cs",
+              "DocumentIndex": 3,
+              "Title": "ServiceConfigurationController.cs",
+              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ServiceConfigurationController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ServiceConfigurationController.cs",
+              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ServiceConfigurationController.cs",
+              "RelativeToolTip": "Controllers\\ServiceConfigurationController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T11:20:07.797Z",
+              "WhenOpened": "2025-08-13T12:30:16.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "serviceroute.css",
+              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Content\\serviceroute.css",
+              "RelativeDocumentMoniker": "Content\\serviceroute.css",
+              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Content\\serviceroute.css",
+              "RelativeToolTip": "Content\\serviceroute.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-08-13T12:30:16.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ServicePersonnelController.cs",
+              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ServicePersonnelController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ServicePersonnelController.cs",
+              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\ServicePersonnelController.cs",
+              "RelativeToolTip": "Controllers\\ServicePersonnelController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T12:30:16.587Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PersonnelAssignmentController.cs",
+              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\PersonnelAssignmentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PersonnelAssignmentController.cs",
+              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\Controllers\\PersonnelAssignmentController.cs",
+              "RelativeToolTip": "Controllers\\PersonnelAssignmentController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T12:30:16.535Z",
               "EditorCaption": ""
             }
           ]

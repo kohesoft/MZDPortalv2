@@ -53,6 +53,12 @@ namespace MZDNETWORK.Data
         public DbSet<PasswordResetRequest> PasswordResetRequests { get; set; }
         public DbSet<ChatGroupMember> ChatGroupMembers { get; set; }
 
+        // Servis Personel Yönetimi için yeni DbSet
+        public DbSet<ServicePersonnel> ServicePersonnels { get; set; }
+        
+        // Dinamik Servis Yönetimi için yeni DbSet
+        public DbSet<ServiceConfiguration> ServiceConfigurations { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -147,6 +153,12 @@ namespace MZDNETWORK.Data
 
             // ChatGroup relationships
             modelBuilder.Entity<ChatGroup>()
+                .HasRequired(cg => cg.Creator)
+                .WithMany()
+                .HasForeignKey(cg => cg.CreatedBy)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ChatGroup>()
                 .HasMany(g => g.Managers)
                 .WithMany();
 
@@ -161,6 +173,23 @@ namespace MZDNETWORK.Data
             modelBuilder.Entity<ChatGroup>()
                 .HasMany(g => g.Messages)
                 .WithOptional();
+
+            // Chat relationships
+            modelBuilder.Entity<Chat>()
+                .HasRequired(c => c.Creator)
+                .WithMany()
+                .HasForeignKey(c => c.CreatedBy)
+                .WillCascadeOnDelete(false);
+
+            // ServicePersonnel configurations
+            // Since ServiceConfiguration is marked as [NotMapped], we only need to configure basic properties
+            // No relationship configuration needed since we handle it manually in the controller
+            
+
+            // ServiceConfiguration unique index on ServiceCode
+            modelBuilder.Entity<ServiceConfiguration>()
+                .HasIndex(sc => sc.ServiceCode)
+                .IsUnique();
         }
 
         /// <summary>

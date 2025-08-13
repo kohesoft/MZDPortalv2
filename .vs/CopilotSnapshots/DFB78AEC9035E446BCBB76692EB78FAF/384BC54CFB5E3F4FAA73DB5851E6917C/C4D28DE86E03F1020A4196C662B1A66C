@@ -1,0 +1,210 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
+using MZDNETWORK.Data;
+using MZDNETWORK.Models;
+using Newtonsoft.Json;
+
+namespace MZDNETWORK.Controllers
+{
+    public class ServicePersonnelController : Controller
+    {
+        private MZDNETWORKContext db = new MZDNETWORKContext();
+
+        // GET: ServicePersonnel
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: ServicePersonnel/GetAll
+        public JsonResult GetAll()
+        {
+            try
+            {
+                var personnel = db.ServicePersonnels.OrderBy(p => p.FirstName).ToList();
+                return Json(new { success = true, data = personnel }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServicePersonnel/GetById/5
+        public JsonResult GetById(int id)
+        {
+            try
+            {
+                var personnel = db.ServicePersonnels.Find(id);
+                if (personnel == null)
+                {
+                    return Json(new { success = false, message = "Kayıt bulunamadı." }, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json(new { success = true, data = personnel }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // POST: ServicePersonnel/Create
+        [HttpPost]
+        public JsonResult Create(ServicePersonnel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    model.CreatedDate = DateTime.Now;
+                    db.ServicePersonnels.Add(model);
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Kayıt başarıyla oluşturuldu.", data = model });
+                }
+
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { success = false, message = "Doğrulama hatası.", errors = errors });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: ServicePersonnel/Edit
+        [HttpPost]
+        public JsonResult Edit(ServicePersonnel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var existing = db.ServicePersonnels.Find(model.Id);
+                    if (existing == null)
+                    {
+                        return Json(new { success = false, message = "Kayıt bulunamadı." });
+                    }
+
+                    existing.FirstName = model.FirstName;
+                    existing.LastName = model.LastName;
+                    existing.Service = model.Service;
+                    existing.ShiftType = model.ShiftType;
+                    existing.Status = model.Status;
+                    existing.UpdatedDate = DateTime.Now;
+
+                    db.Entry(existing).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Kayıt başarıyla güncellendi.", data = existing });
+                }
+
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { success = false, message = "Doğrulama hatası.", errors = errors });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: ServicePersonnel/Delete/5
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            try
+            {
+                var personnel = db.ServicePersonnels.Find(id);
+                if (personnel == null)
+                {
+                    return Json(new { success = false, message = "Kayıt bulunamadı." });
+                }
+
+                db.ServicePersonnels.Remove(personnel);
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Kayıt başarıyla silindi." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // GET: ServicePersonnel/GetStats
+        public JsonResult GetStats()
+        {
+            try
+            {
+                var allPersonnel = db.ServicePersonnels.ToList();
+                
+                var stats = new
+                {
+                    totalPersonnel = allPersonnel.Count,
+                    activeServices = allPersonnel.Select(p => p.Service).Distinct().Count(),
+                    pendingCount = allPersonnel.Count(p => p.Status == "Beklemede"),
+                    monthlyAdded = allPersonnel.Count(p => p.CreatedDate.Month == DateTime.Now.Month && p.CreatedDate.Year == DateTime.Now.Year)
+                };
+
+                return Json(new { success = true, data = stats }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServicePersonnel/Search
+        public JsonResult Search(string term = "", string service = "", string status = "", string shiftType = "")
+        {
+            try
+            {
+                var query = db.ServicePersonnels.AsQueryable();
+
+                if (!string.IsNullOrEmpty(term))
+                {
+                    term = term.ToLower();
+                    query = query.Where(p => p.FirstName.ToLower().Contains(term) || 
+                                           p.LastName.ToLower().Contains(term) || 
+                                           p.Service.ToLower().Contains(term));
+                }
+
+                if (!string.IsNullOrEmpty(service))
+                {
+                    query = query.Where(p => p.Service == service);
+                }
+
+                if (!string.IsNullOrEmpty(status))
+                {
+                    query = query.Where(p => p.Status == status);
+                }
+
+                if (!string.IsNullOrEmpty(shiftType))
+                {
+                    query = query.Where(p => p.ShiftType == shiftType);
+                }
+
+                var results = query.OrderBy(p => p.FirstName).ToList();
+                return Json(new { success = true, data = results }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

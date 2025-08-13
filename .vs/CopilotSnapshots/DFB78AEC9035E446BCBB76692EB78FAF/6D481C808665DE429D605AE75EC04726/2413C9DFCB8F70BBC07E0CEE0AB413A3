@@ -1,0 +1,763 @@
+﻿@{
+    ViewBag.Title = "Servis Yönetim Sistemi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<div class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Servis Yönetim Sistemi</h1>
+                    <p class="text-gray-600 mt-2">Personel servis atamalarını yönetin</p>
+                </div>
+                <div class="flex gap-3">
+                    <div class="flex bg-gray-100 rounded-lg p-1">
+                        <button id="cardViewBtn" onclick="switchView('cards')" class="px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 bg-blue-600 text-white">
+                            Kartlar
+                        </button>
+                        <button id="tableViewBtn" onclick="switchView('table')" class="px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 text-gray-600 hover:text-gray-900">
+                            Tablo
+                        </button>
+                    </div>
+                    <div class="flex bg-gray-100 rounded-lg p-1">
+                        <button id="workHoursBtn" onclick="switchShift('Mesai İçi')" class="px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 bg-green-600 text-white">
+                            Mesai İçi
+                        </button>
+                        <button id="afterHoursBtn" onclick="switchShift('Mesai Sonrası')" class="px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 text-gray-600 hover:text-gray-900">
+                            Mesai Sonrası
+                        </button>
+                    </div>
+                    <button onclick="openModal('add')" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-md hover:shadow-lg">
+                        <span class="mr-2">+</span>Yeni Kayıt
+                    </button>
+                    <a href="@Url.Action("Index", "ServiceConfiguration")" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-md hover:shadow-lg">
+                        <span class="mr-2">⚙️</span>Servis Ayarları
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Toplam Personel</p>
+                        <p class="text-2xl font-bold text-gray-900" id="totalPersonel">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Aktif Servisler</p>
+                        <p class="text-2xl font-bold text-gray-900" id="activeServices">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="bg-yellow-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Bekleyen</p>
+                        <p class="text-2xl font-bold text-gray-900" id="pendingCount">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="bg-purple-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Bu Ay Eklenen</p>
+                        <p class="text-2xl font-bold text-gray-900" id="monthlyAdded">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex-1">
+                    <input type="text" id="searchInput" placeholder="Ad, soyad, kullanıcı adı veya servis ara..." 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div class="md:w-48">
+                    <select id="serviceFilter" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Tüm Servisler</option>
+                        <!-- Dynamic options will be loaded here -->
+                    </select>
+                </div>
+                <div class="md:w-48">
+                    <select id="statusFilter" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Tüm Durumlar</option>
+                        <option value="Aktif">Aktif</option>
+                        <option value="Pasif">Pasif</option>
+                        <option value="Beklemede">Beklemede</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Cards View -->
+        <div id="cardsView" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic service cards will be inserted here -->
+        </div>
+
+        <!-- Table View -->
+        <div id="tableView" class="bg-white rounded-xl shadow-lg overflow-hidden hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Personel</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kullanıcı Adı</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Servis</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mesai</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durum</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
+                        <!-- Dynamic content will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Empty state -->
+            <div id="emptyState" class="text-center py-12 hidden">
+                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+                <h3 class="mt-2 text-sm font-medium text-gray-900">Kayıt bulunamadı</h3>
+                <p class="mt-1 text-sm text-gray-500">Yeni bir personel kaydı ekleyerek başlayın.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 z-50 hidden modal-overlay">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 slide-up">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="modalTitle" class="text-xl font-bold text-gray-900">Yeni Kayıt</h2>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <form id="personelForm" class="space-y-4">
+                    <input type="hidden" id="personnelId" value="0" />
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Kullanıcı</label>
+                        <select id="userId" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Kullanıcı Seçin</option>
+                        </select>
+                        <p class="text-xs text-gray-500 mt-1">Sadece henüz atanmamış kullanıcılar gösterilir</p>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Servis</label>
+                        <select id="service" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Servis Seçin</option>
+                            <!-- Dynamic options will be loaded here -->
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Mesai Durumu</label>
+                        <select id="shiftType" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="Mesai İçi">Mesai İçi</option>
+                            <option value="Mesai Sonrası">Mesai Sonrası</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Durum</label>
+                        <select id="status" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="Aktif">Aktif</option>
+                            <option value="Pasif">Pasif</option>
+                            <option value="Beklemede">Beklemede</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex gap-3 pt-4">
+                        <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200">
+                            Kaydet
+                        </button>
+                        <button type="button" onclick="closeModal()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg font-medium transition-colors duration-200">
+                            İptal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Global variables
+    let personelData = [];
+    let availableUsers = [];
+    let availableServices = [];
+    let editingId = null;
+    let currentView = 'cards';
+    let currentShift = 'Mesai İçi';
+
+    // Initialize
+    $(document).ready(function() {
+        loadPersonnelData();
+        loadAvailableUsers();
+        loadAvailableServices();
+        loadStats();
+        setupEventListeners();
+    });
+
+    function setupEventListeners() {
+        $('#searchInput').on('input', performSearch);
+        $('#serviceFilter').on('change', performSearch);
+        $('#statusFilter').on('change', performSearch);
+        $('#personelForm').on('submit', handleSubmit);
+    }
+
+    // Load personnel data from server
+    function loadPersonnelData() {
+        $.get('@Url.Action("GetAll", "ServicePersonnel")')
+            .done(function(response) {
+                if (response.success) {
+                    personelData = response.data;
+                    renderCurrentView();
+                } else {
+                    console.error('Error loading data:', response.message);
+                }
+            })
+            .fail(function(xhr, status, error) {
+                console.error('AJAX Error:', error);
+            });
+    }
+
+    // Load available users for selection
+    function loadAvailableUsers() {
+        $.get('@Url.Action("GetAvailableUsers", "ServicePersonnel")')
+            .done(function(response) {
+                if (response.success) {
+                    availableUsers = response.data;
+                    updateUserDropdown();
+                }
+            });
+    }
+
+    // Load available services for selection
+    function loadAvailableServices() {
+        $.get('@Url.Action("GetAvailableServices", "ServicePersonnel")')
+            .done(function(response) {
+                if (response.success) {
+                    availableServices = response.data;
+                    updateServiceDropdowns();
+                }
+            });
+    }
+
+    function updateUserDropdown() {
+        const userSelect = $('#userId');
+        userSelect.find('option:not(:first)').remove();
+        
+        availableUsers.forEach(user => {
+            userSelect.append(`<option value="${user.Id}">${user.FullName} (${user.Username})</option>`);
+        });
+    }
+
+    function updateServiceDropdowns() {
+        // Update modal service dropdown
+        const serviceSelect = $('#service');
+        serviceSelect.find('option:not(:first)').remove();
+        
+        // Update filter dropdown
+        const filterSelect = $('#serviceFilter');
+        filterSelect.find('option:not(:first)').remove();
+        
+        availableServices.forEach(service => {
+            serviceSelect.append(`<option value="${service.ServiceCode}">${service.ServiceName}</option>`);
+            filterSelect.append(`<option value="${service.ServiceCode}">${service.ServiceName}</option>`);
+        });
+    }
+
+    // Load statistics
+    function loadStats() {
+        $.get('@Url.Action("GetStats", "ServicePersonnel")')
+            .done(function(response) {
+                if (response.success) {
+                    updateStatsDisplay(response.data);
+                }
+            });
+    }
+
+    function updateStatsDisplay(stats) {
+        $('#totalPersonel').text(stats.totalPersonnel);
+        $('#activeServices').text(stats.activeServices);
+        $('#pendingCount').text(stats.pendingCount);
+        $('#monthlyAdded').text(stats.monthlyAdded);
+    }
+
+    function renderCurrentView() {
+        if (currentView === 'cards') {
+            renderCards();
+        } else {
+            renderTable();
+        }
+    }
+
+    function renderCards() {
+        const cardsContainer = $('#cardsView');
+        
+        // Filter by current shift and group personnel by service
+        const filteredData = personelData.filter(person => person.ShiftType === currentShift);
+        const serviceGroups = {};
+        filteredData.forEach(person => {
+            const serviceKey = person.Service || person.ServiceCode;
+            if (!serviceGroups[serviceKey]) {
+                serviceGroups[serviceKey] = [];
+            }
+            serviceGroups[serviceKey].push(person);
+        });
+
+        // Generate service cards
+        const cardsHTML = Object.keys(serviceGroups).map(serviceCode => {
+            const personnel = serviceGroups[serviceCode];
+            const activeCount = personnel.filter(p => p.Status === 'Aktif').length;
+            const serviceConfig = availableServices.find(s => s.ServiceCode === serviceCode);
+            const serviceName = serviceConfig ? serviceConfig.ServiceName : (personnel[0].ServiceName || serviceCode);
+            
+            return `
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden fade-in">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="p-3 rounded-full ${getServiceIconBg(serviceCode, serviceConfig)}">
+                                    ${getServiceIcon(serviceCode, serviceConfig)}
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-lg font-semibold text-gray-900">${serviceName}</h3>
+                                    <p class="text-sm text-gray-500">${personnel.length} personel • ${activeCount} aktif</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3 max-h-64 overflow-y-auto">
+                            ${personnel.map(person => `
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-150">
+                                    <div class="flex items-center">
+                                        <div class="h-8 w-8 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center text-white text-sm font-medium">
+                                            ${person.FirstName.charAt(0)}${person.LastName.charAt(0)}
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">${person.FirstName} ${person.LastName}</p>
+                                            <p class="text-xs text-gray-500">${person.Username} • ${person.ShiftType}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusBadgeClass(person.Status)}">
+                                            ${person.Status}
+                                        </span>
+                                        <div class="flex space-x-1">
+                                            <button onclick="editPersonel(${person.Id})" class="text-indigo-600 hover:text-indigo-900 text-xs">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                                </svg>
+                                            </button>
+                                            <button onclick="deletePersonel(${person.Id})" class="text-red-600 hover:text-red-900 text-xs">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        cardsContainer.html(cardsHTML);
+    }
+
+    function renderTable() {
+        const tbody = $('#tableBody');
+        const emptyState = $('#emptyState');
+        
+        // Filter by current shift
+        const filteredData = personelData.filter(person => person.ShiftType === currentShift);
+        
+        if (filteredData.length === 0) {
+            tbody.empty();
+            emptyState.removeClass('hidden');
+            return;
+        }
+        
+        emptyState.addClass('hidden');
+        
+        const tableHTML = filteredData.map(person => `
+            <tr class="hover:bg-gray-50 transition-colors duration-150 fade-in">
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 h-10 w-10">
+                            <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center text-white font-medium">
+                                ${person.FirstName.charAt(0)}${person.LastName.charAt(0)}
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-sm font-medium text-gray-900">${person.FirstName} ${person.LastName}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="text-sm text-gray-900">${person.Username}</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getServiceBadgeClass(person.Service)}">
+                        ${person.ServiceName || person.Service}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getShiftBadgeClass(person.ShiftType)}">
+                        ${person.ShiftType}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusBadgeClass(person.Status)}">
+                        ${person.Status}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <button onclick="editPersonel(${person.Id})" class="text-indigo-600 hover:text-indigo-900 mr-3 transition-colors duration-150">
+                        Düzenle
+                    </button>
+                    <button onclick="deletePersonel(${person.Id})" class="text-red-600 hover:text-red-900 transition-colors duration-150">
+                        Sil
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+
+        tbody.html(tableHTML);
+    }
+
+    // Helper functions for styling
+    function getServiceBadgeClass(serviceCode) {
+        const serviceConfig = availableServices.find(s => s.ServiceCode === serviceCode);
+        if (serviceConfig && serviceConfig.ColorCode) {
+            // Convert hex color to appropriate Tailwind classes
+            return `bg-gray-100 text-gray-800`; // Default styling, can be enhanced
+        }
+        
+        // Fallback to old logic for backward compatibility
+        const classes = {
+            'IT': 'bg-blue-100 text-blue-800',
+            'HR': 'bg-green-100 text-green-800',
+            'Finance': 'bg-yellow-100 text-yellow-800',
+            'Marketing': 'bg-purple-100 text-purple-800',
+            'Operations': 'bg-gray-100 text-gray-800'
+        };
+        return classes[serviceCode] || 'bg-gray-100 text-gray-800';
+    }
+
+    function getServiceIcon(serviceCode, serviceConfig) {
+        if (serviceConfig && serviceConfig.IconClass) {
+            // You can implement custom icon logic here based on IconClass
+            return `<div class="w-6 h-6 bg-current rounded"></div>`;
+        }
+        
+        // Fallback icons
+        const icons = {
+            'IT': '<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>',
+            'HR': '<svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>',
+            'default': '<svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>'
+        };
+        return icons[serviceCode] || icons['default'];
+    }
+
+    function getServiceIconBg(serviceCode, serviceConfig) {
+        if (serviceConfig && serviceConfig.ColorCode) {
+            // You can implement dynamic background colors here
+            return 'bg-gray-100';
+        }
+        
+        const backgrounds = {
+            'IT': 'bg-blue-100',
+            'HR': 'bg-green-100',
+            'Finance': 'bg-yellow-100',
+            'Marketing': 'bg-purple-100',
+            'Operations': 'bg-gray-100'
+        };
+        return backgrounds[serviceCode] || 'bg-gray-100';
+    }
+
+    function getStatusBadgeClass(status) {
+        const classes = {
+            'Aktif': 'bg-green-100 text-green-800',
+            'Pasif': 'bg-red-100 text-red-800',
+            'Beklemede': 'bg-yellow-100 text-yellow-800'
+        };
+        return classes[status] || 'bg-gray-100 text-gray-800';
+    }
+
+    function getShiftBadgeClass(shiftType) {
+        const classes = {
+            'Mesai İçi': 'bg-blue-100 text-blue-800',
+            'Mesai Sonrası': 'bg-orange-100 text-orange-800'
+        };
+        return classes[shiftType] || 'bg-gray-100 text-gray-800';
+    }
+
+    // View and shift switching functions
+    function switchView(view) {
+        currentView = view;
+        const cardsView = $('#cardsView');
+        const tableView = $('#tableView');
+        const cardBtn = $('#cardViewBtn');
+        const tableBtn = $('#tableViewBtn');
+
+        if (view === 'cards') {
+            cardsView.removeClass('hidden');
+            tableView.addClass('hidden');
+            cardBtn.addClass('bg-blue-600 text-white').removeClass('text-gray-600 hover:text-gray-900');
+            tableBtn.removeClass('bg-blue-600 text-white').addClass('text-gray-600 hover:text-gray-900');
+        } else {
+            cardsView.addClass('hidden');
+            tableView.removeClass('hidden');
+            tableBtn.addClass('bg-blue-600 text-white').removeClass('text-gray-600 hover:text-gray-900');
+            cardBtn.removeClass('bg-blue-600 text-white').addClass('text-gray-600 hover:text-gray-900');
+        }
+        renderCurrentView();
+    }
+
+    function switchShift(shift) {
+        currentShift = shift;
+        const workBtn = $('#workHoursBtn');
+        const afterBtn = $('#afterHoursBtn');
+
+        if (shift === 'Mesai İçi') {
+            workBtn.addClass('bg-green-600 text-white').removeClass('text-gray-600 hover:text-gray-900');
+            afterBtn.removeClass('bg-green-600 text-white').addClass('text-gray-600 hover:text-gray-900');
+        } else {
+            afterBtn.addClass('bg-green-600 text-white').removeClass('text-gray-600 hover:text-gray-900');
+            workBtn.removeClass('bg-green-600 text-white').addClass('text-gray-600 hover:text-gray-900');
+        }
+
+        renderCurrentView();
+        loadStats();
+    }
+
+    // Search functionality
+    function performSearch() {
+        const searchTerm = $('#searchInput').val();
+        const serviceFilter = $('#serviceFilter').val();
+        const statusFilter = $('#statusFilter').val();
+
+        $.get('@Url.Action("Search", "ServicePersonnel")', {
+            term: searchTerm,
+            service: serviceFilter,
+            status: statusFilter,
+            shiftType: currentShift
+        })
+        .done(function(response) {
+            if (response.success) {
+                personelData = response.data;
+                renderCurrentView();
+            }
+        });
+    }
+
+    // Modal functions
+    function openModal(mode, id = null) {
+        const modal = $('#modal');
+        const modalTitle = $('#modalTitle');
+        const form = $('#personelForm')[0];
+        
+        editingId = id;
+        
+        if (mode === 'add') {
+            modalTitle.text('Yeni Kayıt');
+            form.reset();
+            $('#personnelId').val('0');
+            $('#shiftType').val(currentShift);
+            loadAvailableUsers(); // Refresh available users
+        } else if (mode === 'edit' && id) {
+            modalTitle.text('Kayıt Düzenle');
+            
+            // Load personnel data for editing
+            const person = personelData.find(p => p.Id === id);
+            if (person) {
+                $('#personnelId').val(person.Id);
+                
+                // For editing, we need to include the current user in the dropdown
+                loadAvailableUsersForEdit(person.UserId);
+                
+                $('#service').val(person.Service);
+                $('#shiftType').val(person.ShiftType);
+                $('#status').val(person.Status);
+            }
+        }
+        
+        modal.removeClass('hidden');
+        $('body').css('overflow', 'hidden');
+    }
+
+    function loadAvailableUsersForEdit(currentUserId) {
+        $.get('@Url.Action("GetAvailableUsers", "ServicePersonnel")')
+            .done(function(response) {
+                if (response.success) {
+                    const userSelect = $('#userId');
+                    userSelect.find('option:not(:first)').remove();
+                    
+                    // Add current user first
+                    const currentUser = personelData.find(p => p.UserId === currentUserId);
+                    if (currentUser) {
+                        userSelect.append(`<option value="${currentUserId}" selected>${currentUser.FirstName} ${currentUser.LastName} (${currentUser.Username})</option>`);
+                    }
+                    
+                    // Add available users
+                    response.data.forEach(user => {
+                        userSelect.append(`<option value="${user.Id}">${user.FullName} (${user.Username})</option>`);
+                    });
+                }
+            });
+    }
+
+    function closeModal() {
+        $('#modal').addClass('hidden');
+        $('body').css('overflow', 'auto');
+        editingId = null;
+    }
+
+    // Form submission
+    function handleSubmit(e) {
+        e.preventDefault();
+        
+        const formData = {
+            Id: parseInt($('#personnelId').val()),
+            UserId: parseInt($('#userId').val()),
+            ServiceCode: $('#service').val(),
+            ShiftType: $('#shiftType').val(),
+            Status: $('#status').val()
+        };
+
+        const url = editingId ? '@Url.Action("Edit", "ServicePersonnel")' : '@Url.Action("Create", "ServicePersonnel")';
+        
+        $.post(url, formData)
+            .done(function(response) {
+                if (response.success) {
+                    closeModal();
+                    loadPersonnelData();
+                    loadAvailableUsers();
+                    loadStats();
+                    alert(response.message);
+                } else {
+                    alert('Hata: ' + response.message);
+                    if (response.errors) {
+                        console.log('Validation errors:', response.errors);
+                    }
+                }
+            })
+            .fail(function() {
+                alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+            });
+    }
+
+    // Edit and Delete functions
+    function editPersonel(id) {
+        openModal('edit', id);
+    }
+
+    function deletePersonel(id) {
+        if (confirm('Bu kaydı silmek istediğinizden emin misiniz?')) {
+            $.post('@Url.Action("Delete", "ServicePersonnel")', { id: id })
+                .done(function(response) {
+                    if (response.success) {
+                        loadPersonnelData();
+                        loadAvailableUsers();
+                        loadStats();
+                        alert(response.message);
+                    } else {
+                        alert('Hata: ' + response.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Silme işlemi sırasında bir hata oluştu.');
+                });
+        }
+    }
+
+    // Close modal when clicking outside or pressing Escape
+    $(document).on('click', '#modal', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+
+    $(document).on('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+</script>

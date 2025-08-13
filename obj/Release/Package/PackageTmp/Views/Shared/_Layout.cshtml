@@ -45,33 +45,33 @@
                     </a>
                 </li>
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Create"))
-                    {   
-                <li class="dropdown">
-                    <button class="dropdown-toggle nav-link" type="button">
-                        <i class='bx bx-calendar-check icon'></i>
-                        <span class="nav-text">İzin İşlemleri</span>
-                        <i class='bx bx-chevron-down icon'></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Approve"))
-                        {
-                            <li><a href="@Url.Action("AdminDashboard", "LeaveRequest")" class="nav-link">İzin Talebi Yönetimi</a></li>
-                        }
-                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Create"))
-                        {
-                            <li><a href="@Url.Action("Index", "LeaveRequest")" class="nav-link">İzin Talebi</a></li>
-                        }
-                    </ul>
-                </li>
-                    }
+                {
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
+                            <i class='bx bx-calendar-check icon'></i>
+                            <span class="nav-text">İzin İşlemleri</span>
+                            <i class='bx bx-chevron-down icon'></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Approve"))
+                            {
+                                <li><a href="@Url.Action("AdminDashboard", "LeaveRequest")" class="nav-link">İzin Talebi Yönetimi</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Create"))
+                            {
+                                <li><a href="@Url.Action("Index", "LeaveRequest")" class="nav-link">İzin Talebi</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SystemManagement.Performance"))
                 {
-                <li>
-                    <a href="@Url.Action("Index", "Performance")" class="nav-link">
-                        <i class='bx bx-line-chart icon'></i>
-                        <span class="nav-text">Performans</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Performance")" class="nav-link">
+                            <i class='bx bx-line-chart icon'></i>
+                            <span class="nav-text">Performans</span>
+                        </a>
+                    </li>
                 }
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.Suggestion"))
                 {
@@ -145,7 +145,7 @@
                         </ul>
                     </li>
                 }
-@* Güvenlik menüsü *@
+                @* Güvenlik menüsü *@
 
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("HumanResources.VisitorEntry", "HumanResources.LateArrivalReport"))
                 {
@@ -207,21 +207,21 @@
                     </li>
                 }
                 <!--
-                    <li class="dropdown">
-                        <button class="dropdown-toggle nav-link" type="button">
-                            <i class='bx bx-book-open icon'></i>
-                            <span class="nav-text">Dokümantasyon</span>
-                            <i class='bx bx-chevron-down icon'></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("Index", "Dokumantasyon")" class="nav-link">Stok Kartı</a></li>
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Documentation", "Manage"))
-                            {
-                                <li><a href="@Url.Action("Index_sorumlu", "Dokumantasyon")" class="nav-link">Gelen Talepler</a></li>
-                            }
-                        </ul>
-                    </li>
-                            -->
+        <li class="dropdown">
+            <button class="dropdown-toggle nav-link" type="button">
+                <i class='bx bx-book-open icon'></i>
+                <span class="nav-text">Dokümantasyon</span>
+                <i class='bx bx-chevron-down icon'></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="@Url.Action("Index", "Dokumantasyon")" class="nav-link">Stok Kartı</a></li>
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Documentation", "Manage"))
+                {
+                    <li><a href="@Url.Action("Index_sorumlu", "Dokumantasyon")" class="nav-link">Gelen Talepler</a></li>
+                }
+            </ul>
+        </li>
+                -->
 
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.Suggestion", "Create"))
                 {
@@ -265,12 +265,32 @@
                         <span class="nav-text">Mola Saatleri</span>
                     </a>
                 </li>
-                <li>
-                    <a href="@Url.Action("Index","ServiceRoute")" class="nav-link">
-                        <i class='bx bx-map icon'></i>
-                        <span class="nav-text">Servis Güzergâhları</span>
-                    </a>
-                </li>
+
+
+
+
+
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
+                            <i class='bx bx-map icon'></i>
+                            <span class="nav-text">Servis</span>
+                            <i class='bx bx-chevron-down icon'></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index","ServiceRoute")" class="nav-link">Servis Güzergahı</a></li>
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("ServiceManagement.Configuration", "Edit"))
+                            {
+                                <li><a href="@Url.Action("Index", "ServicePersonnel")" class="nav-link">Servis Ayarları</a></li>
+                                <li><a href="@Url.Action("Index", "PersonnelAssignment")" class="nav-link">Kolay Atama</a></li>
+                            }
+                        </ul>
+                    </li>
+                
+
+
+
+
+
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Operational.Task"))
                 {
                     <li class="dropdown">
@@ -291,7 +311,7 @@
                         </ul>
                     </li>
                 }
-                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom"))
                 {
                     <li>
                         <a href="@Url.Action("Index", "MeetingRoom")" class="nav-link">
@@ -309,7 +329,7 @@
                         </a>
                     </li>
                 }
-                
+
                 <li>
                     <a href="@Url.Action("TV", "BeyazTahta")" class="nav-link no-loading">
                         <i class='bx bx-tv icon'></i>

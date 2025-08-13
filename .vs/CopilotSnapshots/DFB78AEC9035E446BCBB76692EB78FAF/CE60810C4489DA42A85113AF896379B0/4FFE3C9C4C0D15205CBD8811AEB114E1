@@ -1,0 +1,313 @@
+﻿@{
+    ViewBag.Title = "Personel Atama";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+    <style>
+        .drag-item {
+            cursor: move;
+            transition: all 0.2s ease;
+        }
+        .drag-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .drag-over {
+            background-color: #f0f9ff !important;
+            border-color: #0ea5e9 !important;
+            border-width: 2px !important;
+        }
+        .drop-zone {
+            min-height: 200px;
+            transition: all 0.2s ease;
+        }
+        .personnel-card {
+            user-select: none;
+        }
+    </style>
+</head>
+
+<div class="min-h-screen bg-gray-50 p-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Personel Atama</h1>
+                    <p class="text-gray-600 mt-2">Sürükle-bırak ile kolay personel atama sistemi</p>
+                </div>
+                <div class="flex gap-3">
+                    <a href="@Url.Action("Index", "ServicePersonnel")" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
+                        <span class="mr-2">←</span>Yönetim Paneli
+                    </a>
+                    <button onclick="refreshData()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
+                        <span class="mr-2">🔄</span>Yenile
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-6 h-full">
+            <!-- Sol Panel - Tüm Personel -->
+            <div class="col-span-4">
+                <div class="bg-white rounded-xl shadow-lg h-full">
+                    <div class="p-4 border-b border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-800">Tüm Personel</h2>
+                        <p class="text-sm text-gray-600 mt-1">Personeli sağdaki servislere sürükleyerek atayın</p>
+                        
+                        <!-- Search -->
+                        <div class="mt-4">
+                            <input type="text" id="personnelSearch" placeholder="Personel ara..." 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+                        </div>
+                    </div>
+                    
+                    <div id="personnelList" class="p-4 space-y-2 max-h-96 overflow-y-auto">
+                        <!-- Personel listesi buraya gelecek -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sağ Panel - Servisler -->
+            <div class="col-span-8">
+                <div class="bg-white rounded-xl shadow-lg h-full">
+                    <div class="p-4 border-b border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-800">Servis Atamaları</h2>
+                        <p class="text-sm text-gray-600 mt-1">Soldaki personeli servislere sürükleyerek atayın</p>
+                    </div>
+                    
+                    <div id="servicesList" class="p-4 space-y-4 max-h-96 overflow-y-auto">
+                        <!-- Servis kartları buraya gelecek -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script>
+        let allUsers = [];
+        let assignedPersonnel = [];
+        let services = [];
+
+        $(document).ready(function() {
+            loadData();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            $('#personnelSearch').on('input', filterPersonnel);
+        }
+
+        function loadData() {
+            $.get('@Url.Action("GetPersonnelData", "PersonnelAssignment")')
+                .done(function(response) {
+                    if (response.success) {
+                        allUsers = response.data.allUsers;
+                        assignedPersonnel = response.data.assignedPersonnel;
+                        services = response.data.services;
+                        
+                        renderPersonnelList();
+                        renderServicesList();
+                    } else {
+                        alert('Veri yüklenirken hata: ' + response.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Veri yüklenirken hata oluştu.');
+                });
+        }
+
+        function renderPersonnelList() {
+            const container = $('#personnelList');
+            container.empty();
+
+            allUsers.forEach(user => {
+                const userCard = $(`
+                    <div class="personnel-card drag-item bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-3 cursor-move" 
+                         draggable="true" data-user-id="${user.Id}">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center text-white font-medium text-sm">
+                                ${user.FirstName ? user.FirstName.charAt(0) : '?'}${user.LastName ? user.LastName.charAt(0) : '?'}
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <p class="text-sm font-medium text-gray-900">${user.FirstName} ${user.LastName}</p>
+                                <p class="text-xs text-gray-500">${user.Username} • ${user.Department || 'Bilinmiyor'}</p>
+                            </div>
+                        </div>
+                    </div>
+                `);
+
+                // Drag events
+                userCard.on('dragstart', function(e) {
+                    e.originalEvent.dataTransfer.setData('text/plain', user.Id);
+                    $(this).addClass('opacity-50');
+                });
+
+                userCard.on('dragend', function(e) {
+                    $(this).removeClass('opacity-50');
+                });
+
+                container.append(userCard);
+            });
+        }
+
+        function renderServicesList() {
+            const container = $('#servicesList');
+            container.empty();
+
+            services.forEach(service => {
+                const serviceCard = $(`
+                    <div class="service-card bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
+                        <div class="p-4 bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
+                            <div class="flex items-center">
+                                <div class="p-2 rounded-full" style="background-color: ${service.ColorCode}20;">
+                                    <div class="w-6 h-6 rounded" style="background-color: ${service.ColorCode};"></div>
+                                </div>
+                                <h3 class="ml-3 text-lg font-semibold text-gray-900">${service.ServiceName}</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-0">
+                            <!-- Mesai İçi -->
+                            <div class="drop-zone border-r border-gray-200 p-4" data-service="${service.ServiceCode}" data-shift="Mesai İçi">
+                                <div class="text-center mb-3">
+                                    <h4 class="text-sm font-medium text-blue-700">Mesai İçi</h4>
+                                </div>
+                                <div class="space-y-2 min-h-32" id="assigned-${service.ServiceCode}-work">
+                                    <!-- Atanmış personeller buraya gelecek -->
+                                </div>
+                            </div>
+                            
+                            <!-- Mesai Sonrası -->
+                            <div class="drop-zone p-4" data-service="${service.ServiceCode}" data-shift="Mesai Sonrası">
+                                <div class="text-center mb-3">
+                                    <h4 class="text-sm font-medium text-orange-700">Mesai Sonrası</h4>
+                                </div>
+                                <div class="space-y-2 min-h-32" id="assigned-${service.ServiceCode}-after">
+                                    <!-- Atanmış personeller buraya gelecek -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+
+                // Drop zone events
+                serviceCard.find('.drop-zone').on('dragover', function(e) {
+                    e.preventDefault();
+                    $(this).addClass('drag-over');
+                });
+
+                serviceCard.find('.drop-zone').on('dragleave', function(e) {
+                    $(this).removeClass('drag-over');
+                });
+
+                serviceCard.find('.drop-zone').on('drop', function(e) {
+                    e.preventDefault();
+                    $(this).removeClass('drag-over');
+                    
+                    const userId = e.originalEvent.dataTransfer.getData('text/plain');
+                    const serviceCode = $(this).data('service');
+                    const shiftType = $(this).data('shift');
+                    
+                    assignPersonnel(parseInt(userId), serviceCode, shiftType);
+                });
+
+                container.append(serviceCard);
+            });
+
+            // Render assigned personnel
+            renderAssignedPersonnel();
+        }
+
+        function renderAssignedPersonnel() {
+            // Clear all assignment areas
+            $('[id^="assigned-"]').empty();
+
+            assignedPersonnel.forEach(person => {
+                const shiftId = person.ShiftType === 'Mesai İçi' ? 'work' : 'after';
+                const containerId = `#assigned-${person.ServiceCode}-${shiftId}`;
+                const container = $(containerId);
+
+                if (container.length) {
+                    const personCard = $(`
+                        <div class="assigned-person bg-gray-50 border border-gray-200 rounded-lg p-2 group">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center flex-1">
+                                    <div class="h-6 w-6 rounded-full bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center text-white text-xs font-medium">
+                                        ${person.FirstName ? person.FirstName.charAt(0) : '?'}${person.LastName ? person.LastName.charAt(0) : '?'}
+                                    </div>
+                                    <div class="ml-2 flex-1">
+                                        <p class="text-xs font-medium text-gray-900">${person.FirstName} ${person.LastName}</p>
+                                        <p class="text-xs text-gray-500">${person.Username}</p>
+                                    </div>
+                                </div>
+                                <button onclick="removePersonnel(${person.Id})" class="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity text-xs">
+                                    ✕
+                                </button>
+                            </div>
+                        </div>
+                    `);
+                    
+                    container.append(personCard);
+                }
+            });
+        }
+
+        function assignPersonnel(userId, serviceCode, shiftType) {
+            $.post('@Url.Action("AssignPersonnel", "PersonnelAssignment")', {
+                userId: userId,
+                serviceCode: serviceCode,
+                shiftType: shiftType
+            })
+            .done(function(response) {
+                if (response.success) {
+                    // Refresh data
+                    loadData();
+                } else {
+                    alert('Atama hatası: ' + response.message);
+                }
+            })
+            .fail(function() {
+                alert('Atama sırasında hata oluştu.');
+            });
+        }
+
+        function removePersonnel(personnelId) {
+            if (confirm('Bu personel atamasını kaldırmak istediğinizden emin misiniz?')) {
+                $.post('@Url.Action("RemovePersonnel", "PersonnelAssignment")', {
+                    personnelId: personnelId
+                })
+                .done(function(response) {
+                    if (response.success) {
+                        // Refresh data
+                        loadData();
+                    } else {
+                        alert('Kaldırma hatası: ' + response.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Kaldırma sırasında hata oluştu.');
+                });
+            }
+        }
+
+        function filterPersonnel() {
+            const searchTerm = $('#personnelSearch').val().toLowerCase();
+            $('.personnel-card').each(function() {
+                const card = $(this);
+                const text = card.text().toLowerCase();
+                const show = text.includes(searchTerm);
+                card.toggle(show);
+            });
+        }
+
+        function refreshData() {
+            loadData();
+        }
+    </script>
+}

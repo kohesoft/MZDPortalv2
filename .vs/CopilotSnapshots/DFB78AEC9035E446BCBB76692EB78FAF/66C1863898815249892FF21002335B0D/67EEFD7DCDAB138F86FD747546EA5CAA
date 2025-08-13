@@ -1,0 +1,243 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
+using MZDNETWORK.Attributes;
+using MZDNETWORK.Data;
+using MZDNETWORK.Models;
+using MZDNETWORK.Helpers;
+
+namespace MZDNETWORK.Controllers
+{
+    [DynamicAuthorize(Permission = "ServiceManagement.Configuration")]
+    public class ServiceConfigurationController : Controller
+    {
+        private MZDNETWORKContext db = new MZDNETWORKContext();
+
+        // GET: ServiceConfiguration
+        [DynamicAuthorize(Permission = "ServiceManagement.Configuration", Action = "View")]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: ServiceConfiguration/GetAll
+        [DynamicAuthorize(Permission = "ServiceManagement.Configuration", Action = "View")]
+        public JsonResult GetAll()
+        {
+            try
+            {
+                var services = db.ServiceConfigurations
+                    .OrderBy(s => s.SortOrder)
+                    .ThenBy(s => s.ServiceName)
+                    .ToList();
+
+                return Json(new { success = true, data = services }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServiceConfiguration/GetActive
+        public JsonResult GetActive()
+        {
+            try
+            {
+                var services = db.ServiceConfigurations
+                    .Where(s => s.IsActive)
+                    .OrderBy(s => s.SortOrder)
+                    .ThenBy(s => s.ServiceName)
+                    .Select(s => new
+                    {
+                        s.ServiceCode,
+                        s.ServiceName,
+                        s.Description,
+                        s.ColorCode,
+                        s.IconClass
+                    })
+                    .ToList();
+
+                return Json(new { success = true, data = services }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // POST: ServiceConfiguration/Create
+        [HttpPost]
+        [DynamicAuthorize(Permission = "ServiceManagement.Configuration", Action = "Create")]
+        public JsonResult Create(ServiceConfiguration model)
+        {
+            try
+            {
+                // Check if service code already exists
+                var existingService = db.ServiceConfigurations.Any(s => s.ServiceCode == model.ServiceCode);
+                if (existingService)
+                {
+                    return Json(new { success = false, message = "Bu servis kodu zaten kullanılıyor." });
+                }
+
+                if (ModelState.IsValid)
+                {
+                    // Get current user ID
+                    var currentUserId = GetCurrentUserId();
+                    model.CreatedBy = currentUserId;
+                    model.CreatedDate = DateTime.Now;
+
+                    db.ServiceConfigurations.Add(model);
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Servis konfigürasyonu başarıyla oluşturuldu.", data = model });
+                }
+
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { success = false, message = "Doğrulama hatası.", errors = errors });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: ServiceConfiguration/Edit
+        [HttpPost]
+        [DynamicAuthorize(Permission = "ServiceManagement.Configuration", Action = "Edit")]
+        public JsonResult Edit(ServiceConfiguration model)
+        {
+            try
+            {
+                var existing = db.ServiceConfigurations.Find(model.Id);
+                if (existing == null)
+                {
+                    return Json(new { success = false, message = "Kayıt bulunamadı." });
+                }
+
+                // Check if service code already exists (excluding current record)
+                var existingService = db.ServiceConfigurations.Any(s => s.ServiceCode == model.ServiceCode && s.Id != model.Id);
+                if (existingService)
+                {
+                    return Json(new { success = false, message = "Bu servis kodu başka bir kayıt tarafından kullanılıyor." });
+                }
+
+                if (ModelState.IsValid)
+                {
+                    existing.ServiceCode = model.ServiceCode;
+                    existing.ServiceName = model.ServiceName;
+                    existing.Description = model.Description;
+                    existing.ColorCode = model.ColorCode;
+                    existing.IconClass = model.IconClass;
+                    existing.IsActive = model.IsActive;
+                    existing.SortOrder = model.SortOrder;
+                    existing.UpdatedDate = DateTime.Now;
+
+                    db.Entry(existing).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Servis konfigürasyonu başarıyla güncellendi.", data = existing });
+                }
+
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { success = false, message = "Doğrulama hatası.", errors = errors });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: ServiceConfiguration/Delete
+        [HttpPost]
+        [DynamicAuthorize(Permission = "ServiceManagement.Configuration", Action = "Delete")]
+        public JsonResult Delete(int id)
+        {
+            try
+            {
+                var service = db.ServiceConfigurations.Find(id);
+                if (service == null)
+                {
+                    return Json(new { success = false, message = "Kayıt bulunamadı." });
+                }
+
+                // Check if service is being used by personnel
+                var personnelCount = db.ServicePersonnels.Count(sp => sp.ServiceCode == service.ServiceCode);
+                if (personnelCount > 0)
+                {
+                    return Json(new { success = false, message = $"Bu servis {personnelCount} personel tarafından kullanılıyor. Önce personel atamalarını kaldırın." });
+                }
+
+                db.ServiceConfigurations.Remove(service);
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Servis konfigürasyonu başarıyla silindi." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: ServiceConfiguration/CreateDefaultServices (make it public for test data creation)
+        [HttpPost]
+        public JsonResult CreateDefaultServices()
+        {
+            try
+            {
+                // Only create if no services exist
+                if (db.ServiceConfigurations.Any())
+                {
+                    return Json(new { success = false, message = "Zaten servis konfigürasyonları mevcut." });
+                }
+
+                var currentUserId = GetCurrentUserId();
+                var defaultServices = new List<ServiceConfiguration>
+                {
+                    new ServiceConfiguration { ServiceCode = "IT", ServiceName = "IT Departmanı", Description = "Bilgi işlem ve teknoloji departmanı", ColorCode = "#3B82F6", IconClass = "computer", SortOrder = 1, CreatedBy = currentUserId },
+                    new ServiceConfiguration { ServiceCode = "HR", ServiceName = "İnsan Kaynakları", Description = "İnsan kaynakları departmanı", ColorCode = "#10B981", IconClass = "users", SortOrder = 2, CreatedBy = currentUserId },
+                    new ServiceConfiguration { ServiceCode = "Finance", ServiceName = "Finans", Description = "Mali işler departmanı", ColorCode = "#F59E0B", IconClass = "money", SortOrder = 3, CreatedBy = currentUserId },
+                    new ServiceConfiguration { ServiceCode = "Marketing", ServiceName = "Pazarlama", Description = "Pazarlama ve satış departmanı", ColorCode = "#8B5CF6", IconClass = "megaphone", SortOrder = 4, CreatedBy = currentUserId },
+                    new ServiceConfiguration { ServiceCode = "Operations", ServiceName = "Operasyon", Description = "Operasyonel işlemler departmanı", ColorCode = "#6B7280", IconClass = "settings", SortOrder = 5, CreatedBy = currentUserId }
+                };
+
+                db.ServiceConfigurations.AddRange(defaultServices);
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Varsayılan servis konfigürasyonları oluşturuldu." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        private int GetCurrentUserId()
+        {
+            // Try to get user ID from session or identity
+            try
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    var username = User.Identity.Name;
+                    var user = db.Users.FirstOrDefault(u => u.Username == username);
+                    return user?.Id ?? 1; // Default to 1 if not found
+                }
+            }
+            catch { }
+            return 1; // Default user ID
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}}

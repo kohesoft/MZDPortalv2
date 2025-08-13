@@ -4,19 +4,15 @@
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using MZDNETWORK.Models;
-    using MZDNETWORK.Data;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MZDNETWORKContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<MZDNETWORK.Data.MZDNETWORKContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;  // Geçici olarak açalım
-            AutomaticMigrationDataLossAllowed = false;
-            ContextKey = "ApplicationDbContext";
+            AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(MZDNETWORKContext context)
+        protected override void Seed(MZDNETWORK.Data.MZDNETWORKContext context)
         {
             //  This method will be called after migrating to the latest version.
 

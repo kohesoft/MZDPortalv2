@@ -1,0 +1,378 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
+using MZDNETWORK.Data;
+using MZDNETWORK.Models;
+using Newtonsoft.Json;
+
+namespace MZDNETWORK.Controllers
+{
+    public class ServicePersonnelController : Controller
+    {
+        private MZDNETWORKContext db = new MZDNETWORKContext();
+
+        // GET: ServicePersonnel
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: ServicePersonnel/GetAll
+        public JsonResult GetAll()
+        {
+            try
+            {
+                var personnel = db.ServicePersonnels
+                    .Include(sp => sp.User)
+                    .OrderBy(p => p.User.Name)
+                    .ToList()
+                    .Select(p => new
+                    {
+                        p.Id,
+                        p.UserId,
+                        FirstName = p.User.Name,
+                        LastName = p.User.Surname,
+                        Username = p.User.Username,
+                        p.Service,
+                        p.ShiftType,
+                        p.Status,
+                        p.CreatedDate
+                    });
+
+                return Json(new { success = true, data = personnel }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServicePersonnel/GetById/5
+        public JsonResult GetById(int id)
+        {
+            try
+            {
+                var personnel = db.ServicePersonnels
+                    .Include(sp => sp.User)
+                    .Where(sp => sp.Id == id)
+                    .Select(p => new
+                    {
+                        p.Id,
+                        p.UserId,
+                        FirstName = p.User.Name,
+                        LastName = p.User.Surname,
+                        Username = p.User.Username,
+                        p.Service,
+                        p.ShiftType,
+                        p.Status
+                    })
+                    .FirstOrDefault();
+
+                if (personnel == null)
+                {
+                    return Json(new { success = false, message = "Kayıt bulunamadı." }, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json(new { success = true, data = personnel }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServicePersonnel/GetAvailableUsers
+        public JsonResult GetAvailableUsers()
+        {
+            try
+            {
+                // Get users who are not already assigned to service personnel
+                var assignedUserIds = db.ServicePersonnels.Select(sp => sp.UserId).ToList();
+                
+                var availableUsers = db.Users
+                    .Where(u => !assignedUserIds.Contains(u.Id))
+                    .OrderBy(u => u.Name)
+                    .Select(u => new
+                    {
+                        u.Id,
+                        u.Username,
+                        Name = u.Name,
+                        Surname = u.Surname,
+                        FullName = (u.Name + " " + u.Surname).Trim(),
+                        u.Department
+                    })
+                    .ToList();
+
+                return Json(new { success = true, data = availableUsers }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // POST: ServicePersonnel/Create
+        [HttpPost]
+        public JsonResult Create(ServicePersonnel model)
+        {
+            try
+            {
+                // Check if user is already assigned
+                var existingAssignment = db.ServicePersonnels.Any(sp => sp.UserId == model.UserId);
+                if (existingAssignment)
+                {
+                    return Json(new { success = false, message = "Bu kullanıcı zaten servis personeli olarak atanmış." });
+                }
+
+                // Validate user exists
+                var user = db.Users.Find(model.UserId);
+                if (user == null)
+                {
+                    return Json(new { success = false, message = "Geçerli bir kullanıcı seçiniz." });
+                }
+
+                if (ModelState.IsValid)
+                {
+                    model.CreatedDate = DateTime.Now;
+                    db.ServicePersonnels.Add(model);
+                    db.SaveChanges();
+
+                    var result = new
+                    {
+                        model.Id,
+                        model.UserId,
+                        FirstName = user.Name,
+                        LastName = user.Surname,
+                        Username = user.Username,
+                        model.Service,
+                        model.ShiftType,
+                        model.Status,
+                        model.CreatedDate
+                    };
+
+                    return Json(new { success = true, message = "Kayıt başarıyla oluşturuldu.", data = result });
+                }
+
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { success = false, message = "Doğrulama hatası.", errors = errors });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: ServicePersonnel/Edit
+        [HttpPost]
+        public JsonResult Edit(ServicePersonnel model)
+        {
+            try
+            {
+                var existing = db.ServicePersonnels.Include(sp => sp.User).FirstOrDefault(sp => sp.Id == model.Id);
+                if (existing == null)
+                {
+                    return Json(new { success = false, message = "Kayıt bulunamadı." });
+                }
+
+                // Check if user is already assigned to another service personnel record
+                var existingAssignment = db.ServicePersonnels.Any(sp => sp.UserId == model.UserId && sp.Id != model.Id);
+                if (existingAssignment)
+                {
+                    return Json(new { success = false, message = "Bu kullanıcı başka bir servis personeli kaydında zaten atanmış." });
+                }
+
+                // Validate user exists
+                var user = db.Users.Find(model.UserId);
+                if (user == null)
+                {
+                    return Json(new { success = false, message = "Geçerli bir kullanıcı seçiniz." });
+                }
+
+                if (ModelState.IsValid)
+                {
+                    existing.UserId = model.UserId;
+                    existing.Service = model.Service;
+                    existing.ShiftType = model.ShiftType;
+                    existing.Status = model.Status;
+                    existing.UpdatedDate = DateTime.Now;
+
+                    db.Entry(existing).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    var result = new
+                    {
+                        existing.Id,
+                        existing.UserId,
+                        FirstName = user.Name,
+                        LastName = user.Surname,
+                        Username = user.Username,
+                        existing.Service,
+                        existing.ShiftType,
+                        existing.Status,
+                        existing.UpdatedDate
+                    };
+
+                    return Json(new { success = true, message = "Kayıt başarıyla güncellendi.", data = result });
+                }
+
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { success = false, message = "Doğrulama hatası.", errors = errors });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: ServicePersonnel/Delete/5
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            try
+            {
+                var personnel = db.ServicePersonnels.Find(id);
+                if (personnel == null)
+                {
+                    return Json(new { success = false, message = "Kayıt bulunamadı." });
+                }
+
+                db.ServicePersonnels.Remove(personnel);
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Kayıt başarıyla silindi." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // GET: ServicePersonnel/GetStats
+        public JsonResult GetStats()
+        {
+            try
+            {
+                var allPersonnel = db.ServicePersonnels.Include(sp => sp.User).ToList();
+                
+                var stats = new
+                {
+                    totalPersonnel = allPersonnel.Count,
+                    activeServices = allPersonnel.Select(p => p.Service).Distinct().Count(),
+                    pendingCount = allPersonnel.Count(p => p.Status == "Beklemede"),
+                    monthlyAdded = allPersonnel.Count(p => p.CreatedDate.Month == DateTime.Now.Month && p.CreatedDate.Year == DateTime.Now.Year)
+                };
+
+                return Json(new { success = true, data = stats }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServicePersonnel/Search
+        public JsonResult Search(string term = "", string service = "", string status = "", string shiftType = "")
+        {
+            try
+            {
+                var query = db.ServicePersonnels.Include(sp => sp.User).AsQueryable();
+
+                if (!string.IsNullOrEmpty(term))
+                {
+                    term = term.ToLower();
+                    query = query.Where(p => p.User.Name.ToLower().Contains(term) || 
+                                           p.User.Surname.ToLower().Contains(term) ||
+                                           p.User.Username.ToLower().Contains(term) ||
+                                           p.Service.ToLower().Contains(term));
+                }
+
+                if (!string.IsNullOrEmpty(service))
+                {
+                    query = query.Where(p => p.Service == service);
+                }
+
+                if (!string.IsNullOrEmpty(status))
+                {
+                    query = query.Where(p => p.Status == status);
+                }
+
+                if (!string.IsNullOrEmpty(shiftType))
+                {
+                    query = query.Where(p => p.ShiftType == shiftType);
+                }
+
+                var results = query.OrderBy(p => p.User.Name)
+                    .ToList()
+                    .Select(p => new
+                    {
+                        p.Id,
+                        p.UserId,
+                        FirstName = p.User.Name,
+                        LastName = p.User.Surname,
+                        Username = p.User.Username,
+                        p.Service,
+                        p.ShiftType,
+                        p.Status,
+                        p.CreatedDate
+                    });
+
+                return Json(new { success = true, data = results }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // GET: ServicePersonnel/CreateSampleData - For testing purposes
+        public ActionResult CreateSampleData()
+        {
+            try
+            {
+                // Only create sample data if no service personnel exist
+                if (db.ServicePersonnels.Any())
+                {
+                    return Json(new { success = false, message = "Zaten servis personeli kayıtları mevcut." }, JsonRequestBehavior.AllowGet);
+                }
+
+                // Get some users from the database
+                var users = db.Users.Take(6).ToList();
+                if (users.Count < 6)
+                {
+                    return Json(new { success = false, message = "En az 6 kullanıcı gerekli. Lütfen önce kullanıcı kayıtları oluşturun." }, JsonRequestBehavior.AllowGet);
+                }
+
+                var samplePersonnel = new List<ServicePersonnel>
+                {
+                    new ServicePersonnel { UserId = users[0].Id, Service = "IT", ShiftType = "Mesai İçi", Status = "Aktif" },
+                    new ServicePersonnel { UserId = users[1].Id, Service = "HR", ShiftType = "Mesai İçi", Status = "Aktif" },
+                    new ServicePersonnel { UserId = users[2].Id, Service = "Finance", ShiftType = "Mesai Sonrası", Status = "Beklemede" },
+                    new ServicePersonnel { UserId = users[3].Id, Service = "Marketing", ShiftType = "Mesai İçi", Status = "Aktif" },
+                    new ServicePersonnel { UserId = users[4].Id, Service = "IT", ShiftType = "Mesai Sonrası", Status = "Aktif" },
+                    new ServicePersonnel { UserId = users[5].Id, Service = "Operations", ShiftType = "Mesai İçi", Status = "Aktif" }
+                };
+
+                db.ServicePersonnels.AddRange(samplePersonnel);
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Örnek veriler başarıyla oluşturuldu." }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

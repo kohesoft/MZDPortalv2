@@ -1,0 +1,155 @@
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web.Mvc;
+using MZDNETWORK.Data;
+using MZDNETWORK.Models;
+using MZDNETWORK.Attributes;
+
+namespace MZDNETWORK.Controllers
+{
+    [DynamicAuthorize(Permission = "ServiceManagement.Configuration", Action = "Edit")]
+    public class PersonnelAssignmentController : Controller
+    {
+        private MZDNETWORKContext db = new MZDNETWORKContext();
+
+        // GET: PersonnelAssignment
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: PersonnelAssignment/GetPersonnelData
+        public JsonResult GetPersonnelData()
+        {
+            try
+            {
+                // Tüm kullanýcýlarý al
+                var allUsers = db.Users
+                    .Select(u => new
+                    {
+                        u.Id,
+                        u.Username,
+                        FirstName = u.Name,
+                        LastName = u.Surname,
+                        u.Department
+                    })
+                    .ToList();
+
+                // Atanmýþ personelleri al
+                var assignedPersonnel = db.ServicePersonnels
+                    .Include(sp => sp.User)
+                    .Select(sp => new
+                    {
+                        sp.Id,
+                        sp.UserId,
+                        sp.ServiceCode,
+                        sp.ShiftType,
+                        sp.Status,
+                        FirstName = sp.User.Name,
+                        LastName = sp.User.Surname,
+                        Username = sp.User.Username,
+                        Department = sp.User.Department
+                    })
+                    .ToList();
+
+                // Servisleri al
+                var services = db.ServiceConfigurations
+                    .Where(s => s.IsActive)
+                    .OrderBy(s => s.SortOrder)
+                    .Select(s => new
+                    {
+                        s.ServiceCode,
+                        s.ServiceName,
+                        s.ColorCode,
+                        s.IconClass
+                    })
+                    .ToList();
+
+                return Json(new 
+                { 
+                    success = true, 
+                    data = new 
+                    {
+                        allUsers = allUsers,
+                        assignedPersonnel = assignedPersonnel,
+                        services = services
+                    }
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // POST: PersonnelAssignment/AssignPersonnel
+        [HttpPost]
+        public JsonResult AssignPersonnel(int userId, string serviceCode, string shiftType)
+        {
+            try
+            {
+                // Ayný kullanýcý, servis ve vardiya kombinasyonu var mý kontrol et
+                var existingAssignment = db.ServicePersonnels
+                    .FirstOrDefault(sp => sp.UserId == userId && sp.ServiceCode == serviceCode && sp.ShiftType == shiftType);
+
+                if (existingAssignment != null)
+                {
+                    return Json(new { success = false, message = "Bu kullanýcý zaten bu serviste bu vardiyaya atanmýþ." });
+                }
+
+                // Yeni atama oluþtur
+                var newAssignment = new ServicePersonnel
+                {
+                    UserId = userId,
+                    ServiceCode = serviceCode,
+                    ShiftType = shiftType,
+                    Status = "Aktif",
+                    CreatedDate = DateTime.Now
+                };
+
+                db.ServicePersonnels.Add(newAssignment);
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Personel baþarýyla atandý." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: PersonnelAssignment/RemovePersonnel
+        [HttpPost]
+        public JsonResult RemovePersonnel(int personnelId)
+        {
+            try
+            {
+                var personnel = db.ServicePersonnels.Find(personnelId);
+                if (personnel == null)
+                {
+                    return Json(new { success = false, message = "Personel kaydý bulunamadý." });
+                }
+
+                db.ServicePersonnels.Remove(personnel);
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Personel atama baþarýyla kaldýrýldý." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

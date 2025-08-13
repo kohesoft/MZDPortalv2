@@ -1,0 +1,68 @@
+﻿/* Service Route page specific styles */
+.route-btn {
+    transition: all 0.2s ease-in-out;
+}
+
+.route-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.map-box {
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+/* Personnel cards styling */
+.personnel-card {
+    transition: all 0.3s ease;
+}
+
+.personnel-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Smooth transitions for shift buttons */
+.shift-btn {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Stats cards */
+.stats-card {
+    transition: all 0.2s ease-in-out;
+}
+
+.stats-card:hover {
+    transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .personnel-card {
+        margin-bottom: 1rem;
+    }
+    
+    .route-btn {
+        margin-bottom: 0.5rem;
+        width: 100%;
+    }
+}
+
+/* Custom scrollbar for personnel lists */
+.personnel-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.personnel-list::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 2px;
+}
+
+.personnel-list::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 2px;
+}
+
+.personnel-list::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}

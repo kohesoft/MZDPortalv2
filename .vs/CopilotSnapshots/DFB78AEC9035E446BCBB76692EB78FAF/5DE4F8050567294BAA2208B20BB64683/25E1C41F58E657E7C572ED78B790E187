@@ -1,0 +1,135 @@
+﻿        function renderPersonnelList() {
+            const container = $('#personnelList');
+            container.empty();
+
+            allUsers.forEach(user => {
+                const userCard = $(`
+                    <div class="personnel-card drag-item bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-md p-2 cursor-move" 
+                         draggable="true" data-user-id="${user.Id}">
+                        <div class="flex items-center">
+                            <div class="h-8 w-8 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center text-white font-medium text-xs">
+                                ${user.FirstName ? user.FirstName.charAt(0) : '?'}${user.LastName ? user.LastName.charAt(0) : '?'}
+                            </div>
+                            <div class="ml-2 flex-1 min-w-0">
+                                <p class="text-xs font-medium text-gray-900 truncate">${user.FirstName} ${user.LastName}</p>
+                                <p class="text-xs text-gray-500 truncate">${user.Username}</p>
+                            </div>
+                        </div>
+                    </div>
+                `);
+
+                // Drag events
+                userCard.on('dragstart', function(e) {
+                    e.originalEvent.dataTransfer.setData('text/plain', user.Id);
+                    $(this).addClass('opacity-50');
+                });
+
+                userCard.on('dragend', function(e) {
+                    $(this).removeClass('opacity-50');
+                });
+
+                container.append(userCard);
+            });
+        }
+
+        function renderServicesList() {
+            const container = $('#servicesList');
+            container.empty();
+
+            services.forEach(service => {
+                const serviceCard = $(`
+                    <div class="service-card bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="p-3 bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
+                            <div class="flex items-center">
+                                <div class="p-1 rounded-full" style="background-color: ${service.ColorCode}20;">
+                                    <div class="w-4 h-4 rounded" style="background-color: ${service.ColorCode};"></div>
+                                </div>
+                                <h3 class="ml-2 text-md font-semibold text-gray-900">${service.ServiceName}</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-0">
+                            <!-- Mesai İçi -->
+                            <div class="drop-zone border-r border-gray-200 p-3" data-service="${service.ServiceCode}" data-shift="Mesai İçi">
+                                <div class="text-center mb-2">
+                                    <h4 class="text-xs font-medium text-blue-700">Mesai İçi</h4>
+                                </div>
+                                <div class="space-y-1 min-h-24" id="assigned-${service.ServiceCode}-work">
+                                    <!-- Atanmış personeller buraya gelecek -->
+                                </div>
+                            </div>
+                            
+                            <!-- Mesai Sonrası -->
+                            <div class="drop-zone p-3" data-service="${service.ServiceCode}" data-shift="Mesai Sonrası">
+                                <div class="text-center mb-2">
+                                    <h4 class="text-xs font-medium text-orange-700">Mesai Sonrası</h4>
+                                </div>
+                                <div class="space-y-1 min-h-24" id="assigned-${service.ServiceCode}-after">
+                                    <!-- Atanmış personeller buraya gelecek -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+
+                // Drop zone events
+                serviceCard.find('.drop-zone').on('dragover', function(e) {
+                    e.preventDefault();
+                    $(this).addClass('drag-over');
+                });
+
+                serviceCard.find('.drop-zone').on('dragleave', function(e) {
+                    $(this).removeClass('drag-over');
+                });
+
+                serviceCard.find('.drop-zone').on('drop', function(e) {
+                    e.preventDefault();
+                    $(this).removeClass('drag-over');
+                    
+                    const userId = e.originalEvent.dataTransfer.getData('text/plain');
+                    const serviceCode = $(this).data('service');
+                    const shiftType = $(this).data('shift');
+                    
+                    assignPersonnel(parseInt(userId), serviceCode, shiftType);
+                });
+
+                container.append(serviceCard);
+            });
+
+            // Render assigned personnel
+            renderAssignedPersonnel();
+        }
+
+        function renderAssignedPersonnel() {
+            // Clear all assignment areas
+            $('[id^="assigned-"]').empty();
+
+            assignedPersonnel.forEach(person => {
+                const shiftId = person.ShiftType === 'Mesai İçi' ? 'work' : 'after';
+                const containerId = `#assigned-${person.ServiceCode}-${shiftId}`;
+                const container = $(containerId);
+
+                if (container.length) {
+                    const personCard = $(`
+                        <div class="assigned-person bg-gray-50 border border-gray-200 rounded-md p-1.5 group">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center flex-1 min-w-0">
+                                    <div class="h-5 w-5 rounded-full bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center text-white text-xs font-medium">
+                                        ${person.FirstName ? person.FirstName.charAt(0) : '?'}${person.LastName ? person.LastName.charAt(0) : '?'}
+                                    </div>
+                                    <div class="ml-1.5 flex-1 min-w-0">
+                                        <p class="text-xs font-medium text-gray-900 truncate">${person.FirstName} ${person.LastName}</p>
+                                        <p class="text-xs text-gray-500 truncate">${person.Username}</p>
+                                    </div>
+                                </div>
+                                <button onclick="removePersonnel(${person.Id})" class="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity text-xs ml-1">
+                                    ✕
+                                </button>
+                            </div>
+                        </div>
+                    `);
+                    
+                    container.append(personCard);
+                }
+            });
+        }
