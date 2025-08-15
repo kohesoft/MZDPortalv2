@@ -58,6 +58,12 @@ namespace MZDNETWORK.Data
         
         // Dinamik Servis Yönetimi için yeni DbSet
         public DbSet<ServiceConfiguration> ServiceConfigurations { get; set; }
+        
+        // Mesai Servisi için yeni DbSet
+        public DbSet<OvertimeServicePersonnel> OvertimeServicePersonnels { get; set; }
+        
+        // Servis Rotaları için güncellenen DbSet  
+        public DbSet<ServiceRoute> ServiceRoutes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -181,14 +187,35 @@ namespace MZDNETWORK.Data
                 .HasForeignKey(c => c.CreatedBy)
                 .WillCascadeOnDelete(false);
 
-            // ServicePersonnel configurations
-            // Since ServiceConfiguration is marked as [NotMapped], we only need to configure basic properties
-            // No relationship configuration needed since we handle it manually in the controller
-            
+            // ServicePersonnel relationships
+            modelBuilder.Entity<ServicePersonnel>()
+                .HasRequired(sp => sp.User)
+                .WithMany()
+                .HasForeignKey(sp => sp.UserId)
+                .WillCascadeOnDelete(false);
 
-            // ServiceConfiguration unique index on ServiceCode
+            modelBuilder.Entity<ServicePersonnel>()
+                .HasRequired(sp => sp.ServiceConfiguration)
+                .WithMany(sc => sc.ServicePersonnels)
+                .HasForeignKey(sp => sp.ServiceConfigurationId)
+                .WillCascadeOnDelete(false);
+
+            // OvertimeServicePersonnel relationships
+            modelBuilder.Entity<OvertimeServicePersonnel>()
+                .HasRequired(osp => osp.User)
+                .WithMany()
+                .HasForeignKey(osp => osp.UserId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<OvertimeServicePersonnel>()
+                .HasRequired(osp => osp.ServiceConfiguration)
+                .WithMany(sc => sc.OvertimeServicePersonnels)
+                .HasForeignKey(osp => osp.ServiceConfigurationId)
+                .WillCascadeOnDelete(false);
+
+            // ServiceConfiguration unique index on ServiceName
             modelBuilder.Entity<ServiceConfiguration>()
-                .HasIndex(sc => sc.ServiceCode)
+                .HasIndex(sc => sc.ServiceName)
                 .IsUnique();
         }
 

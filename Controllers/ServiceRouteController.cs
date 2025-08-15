@@ -1,11 +1,20 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
+using MZDNETWORK.Data;
 using MZDNETWORK.Models;
 
 namespace MZDNETWORK.Controllers
 {
     public class ServiceRouteController : Controller
     {
+        private readonly MZDNETWORKContext _context;
+
+        public ServiceRouteController()
+        {
+            _context = new MZDNETWORKContext();
+        }
+
         // GET: /ServiceRoute
         public ActionResult Index()
         {
@@ -25,6 +34,33 @@ namespace MZDNETWORK.Controllers
             };
 
             return View(routes);
+        }
+
+        // GET: ServiceRoute/Personnel - Çalışanların hangi servise bineceğini gösteren sayfa
+        public ActionResult Personnel()
+        {
+            return View();
+        }
+
+        // GET: ServiceRoute/OvertimePersonnel - Mesaiye kalan çalışanların servis bilgileri
+        public ActionResult OvertimePersonnel()
+        {
+            return View();
+        }
+
+        // GET: ServiceRoute/Admin - Admin paneli
+        public ActionResult Admin()
+        {
+            return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context?.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 } 

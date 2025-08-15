@@ -46,6 +46,18 @@ namespace MZDNETWORK
                 // Production'da bu hata nedeniyle uygulama çökmemeli
                 // Sadece log'a kaydedip devam ediyoruz
             }
+
+            // **YENİ: Overtime Service Scheduler**
+            try
+            {
+                Logger.Info("Starting overtime service scheduler...");
+                OvertimeServiceScheduler.Start();
+                Logger.Info("Overtime service scheduler started successfully");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Overtime service scheduler failed to start");
+            }
         }
       
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -141,6 +153,20 @@ namespace MZDNETWORK
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
             MZDNETWORK.Helpers.HourlyRequestCounter.Increment();
+        }
+
+        protected void Application_End()
+        {
+            try
+            {
+                Logger.Info("Application ending - stopping overtime service scheduler...");
+                OvertimeServiceScheduler.Stop();
+                Logger.Info("Overtime service scheduler stopped successfully");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Error stopping overtime service scheduler");
+            }
         }
     }
 

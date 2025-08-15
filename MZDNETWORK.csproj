@@ -473,7 +473,6 @@
     <Compile Include="Controllers\PasswordResetRequestController.cs" />
     <Compile Include="Controllers\PerformanceController.cs" />
     <Compile Include="Controllers\PermissionTreeController.cs" />
-    <Compile Include="Controllers\PersonnelAssignmentController.cs" />
     <Compile Include="Controllers\RoleOrganizationController.cs" />
     <Compile Include="Controllers\RolePermissionController.cs" />
     <Compile Include="Controllers\ServiceConfigurationController.cs" />
@@ -494,6 +493,7 @@
     <Compile Include="Helpers\DynamicPermissionHelper.cs" />
     <Compile Include="Helpers\EnumDisplayHelper.cs" />
     <Compile Include="Helpers\HourlyRequestCounter.cs" />
+    <Compile Include="Helpers\OvertimeServiceScheduler.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />
     <Compile Include="Helpers\PermissionHelper.cs" />
     <Compile Include="Helpers\PermissionCacheService.cs" />
@@ -504,9 +504,13 @@
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202508130822567_fixcascadeconflicts.cs" />
-    <Compile Include="Migrations\202508130822567_fixcascadeconflicts.Designer.cs">
-      <DependentUpon>202508130822567_fixcascadeconflicts.cs</DependentUpon>
+    <Compile Include="Migrations\202508150609529_AABC.cs" />
+    <Compile Include="Migrations\202508150609529_AABC.Designer.cs">
+      <DependentUpon>202508150609529_AABC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202508150656097_AABC2.cs" />
+    <Compile Include="Migrations\202508150656097_AABC2.Designer.cs">
+      <DependentUpon>202508150656097_AABC2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -527,6 +531,7 @@
     <Compile Include="Models\LeaveRequest.cs" />
     <Compile Include="Models\MeetingRoomReservation.cs" />
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\OvertimeServicePersonnel.cs" />
     <Compile Include="Models\PasswordResetRequest.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Reservation.cs" />
@@ -2617,9 +2622,11 @@
     <Content Include="Views\ChatGroup\Create.cshtml" />
     <Content Include="Views\ChatGroup\Edit.cshtml" />
     <Content Include="Views\Chat\ChatPage.cshtml" />
-    <Content Include="Views\ServicePersonnel\Index.cshtml" />
     <Content Include="Views\ServiceConfiguration\Index.cshtml" />
     <Content Include="Views\PersonnelAssignment\Index.cshtml" />
+    <Content Include="Views\ServiceRoute\OvertimePersonnel.cshtml" />
+    <Content Include="Views\ServiceRoute\Personnel.cshtml" />
+    <Content Include="Views\ServicePersonnel\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\tiles\" />
@@ -2634,8 +2641,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202508130822567_fixcascadeconflicts.resx">
-      <DependentUpon>202508130822567_fixcascadeconflicts.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202508150609529_AABC.resx">
+      <DependentUpon>202508150609529_AABC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202508150656097_AABC2.resx">
+      <DependentUpon>202508150656097_AABC2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

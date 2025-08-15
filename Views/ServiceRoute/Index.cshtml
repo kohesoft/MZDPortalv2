@@ -513,7 +513,14 @@ ${data.SamplePersonnel.map(p => `• ${p.UserName} (${p.FirstName} ${p.LastName}
 
         // Shift switching function
         function switchShift(shift) {
-            currentShift = shift;
+            console.log('🔄 Switching to shift:', shift);
+            
+            if (shift === 'Mesai İçi') {
+                currentShift = 'normal';
+            } else {
+                currentShift = 'overtime';
+            }
+            
             const workBtn = $('#workHoursBtn');
             const afterBtn = $('#afterHoursBtn');
 
@@ -525,7 +532,8 @@ ${data.SamplePersonnel.map(p => `• ${p.UserName} (${p.FirstName} ${p.LastName}
                 workBtn.removeClass('bg-green-600 text-white').addClass('text-gray-600 hover:text-gray-900');
             }
 
-            renderPersonnelCards();
+            // Reload data for the new shift
+            loadPersonnelData();
             loadStats();
         }
 
