@@ -150,6 +150,38 @@
         $('#currentDate').text(today.toLocaleDateString('tr-TR', options));
     }
 
+    // Güncel gün bilgisini al (haftanın günü)
+    function getCurrentDayShift() {
+        const now = new Date();
+        const dayOfWeek = now.getDay(); // 0 = Pazar, 1 = Pazartesi, ..., 6 = Cumartesi
+        
+        const dayNames = [
+            "Pazar Mesaisi",
+            "Pazartesi Mesaisi", 
+            "Salı Mesaisi",
+            "Çarşamba Mesaisi",
+            "Perşembe Mesaisi",
+            "Cuma Mesaisi",
+            "Cumartesi Mesaisi"
+        ];
+
+        const dayIcons = [
+            "fas fa-star",      // Pazar
+            "fas fa-briefcase", // Pazartesi  
+            "fas fa-briefcase", // Salı
+            "fas fa-briefcase", // Çarşamba
+            "fas fa-briefcase", // Perşembe
+            "fas fa-briefcase", // Cuma
+            "fas fa-moon"       // Cumartesi
+        ];
+
+        return {
+            name: dayNames[dayOfWeek],
+            icon: dayIcons[dayOfWeek],
+            dayName: dayNames[dayOfWeek].split(' ')[0] // Sadece gün adı
+        };
+    }
+
     function loadOvertimePersonnelData() {
         $.get('@Url.Action("GetOvertimeData", "ServicePersonnel")')
             .done(function(response) {
@@ -198,6 +230,9 @@
 
         // Group by service
         const groupedData = groupByService(filteredData);
+        
+        // Güncel gün bilgisini al
+        const currentDayShift = getCurrentDayShift();
         
         container.empty();
         Object.keys(groupedData).forEach(serviceName => {
@@ -255,10 +290,10 @@
                                 </div>` : ''}
                                 
                                 <div class="flex items-center">
-                                    <i class="fas fa-moon mr-2 text-green-200"></i>
+                                    <i class="${currentDayShift.icon} mr-2 text-green-200"></i>
                                     <div>
                                         <span class="text-green-200">Mesai Saati:</span><br>
-                                        <span class="font-medium">Akşam Vardiyası</span>
+                                        <span class="font-medium">${currentDayShift.name}</span>
                                     </div>
                                 </div>
                             </div>

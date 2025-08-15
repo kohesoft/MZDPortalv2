@@ -11,6 +11,8 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/popper")
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
     <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
     @RenderSection("styles", required: false)
 </head>
@@ -419,6 +421,21 @@
         @RenderBody()
         @RenderSection("scripts", required: false)
     </div>
+
+    <!-- Global Toast Notification -->
+    <div id="globalToast" class="fixed top-4 right-4 z-50 opacity-0 transition-opacity duration-300 ease-in-out transform max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-none">
+        <div class="p-4">
+            <div class="flex items-start">
+                <div class="flex-shrink-0">
+                    <i class="bx bx-info-circle text-xl mr-3"></i>
+                </div>
+                <div class="ml-3 w-0 flex-1">
+                    <p class="text-sm font-medium text-white" id="toastMessage"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     </body>
 </html>
 <script>
@@ -518,10 +535,14 @@ $(document).ready(function () {
 
     // Modal bildirimleri (SignalR NotificationHub)
     if ($.connection && $.connection.notificationHub) {
+        console.log('NotificationHub bağlantısı mevcut');
         var notificationHub = $.connection.notificationHub;
         notificationHub.client.showNotification = function (message, duration, color, playSound, soundPath) {
+            console.log('Bildirim alındı:', message, duration, color, playSound, soundPath);
             showToast(message, color || 'info', duration || 4000, playSound, soundPath);
         };
+    } else {
+        console.log('NotificationHub bağlantısı bulunamadı:', !!$.connection, $.connection ? !!$.connection.notificationHub : 'connection yok');
     }
 
     // Sayfa gerçekten değişmeden hemen önce overlay'i göster
@@ -545,21 +566,35 @@ $(document).ready(function () {
 
     // Global toast helper
     function showToast(msg, type, duration, playSound, soundPath) {
+        console.log('showToast çağrıldı:', msg, type, duration, playSound, soundPath);
         var $toast = $('#globalToast');
+        var $toastMessage = $('#toastMessage');
+        
+        console.log('Toast element sayısı:', $toast.length);
+        console.log('Toast message element sayısı:', $toastMessage.length);
+        
         var colorClass = 'bg-indigo-600';
         if (type === 'success') colorClass = 'bg-green-600';
         if (type === 'error') colorClass = 'bg-red-600';
         if (type === 'warning') colorClass = 'bg-yellow-600';
         if (type === 'info') colorClass = 'bg-indigo-600';
+        
         $toast.removeClass('bg-indigo-600 bg-green-600 bg-red-600 bg-yellow-600')
-              .addClass(colorClass)
-              .html(msg)
-              .removeClass('opacity-0')
-              .addClass('opacity-100');
+              .addClass(colorClass);
+        
+        $toastMessage.html(msg);
+        
+        $toast.removeClass('opacity-0')
+              .addClass('opacity-100 pointer-events-auto');
+              
+        console.log('Toast gösterildi');
+              
         var hideAfter = typeof duration === 'number' && duration > 0 ? duration : 4000;
         setTimeout(function () {
-            $toast.removeClass('opacity-100').addClass('opacity-0');
+            $toast.removeClass('opacity-100 pointer-events-auto').addClass('opacity-0 pointer-events-none');
+            console.log('Toast gizlendi');
         }, hideAfter);
+        
         if (playSound) {
             var path = soundPath ? soundPath : '@Url.Content("~/Content/notification.mp3")';
             var toastSound = new Audio(path);
@@ -612,7 +647,18 @@ $(document).ready(function () {
 
     // Start SignalR connection once
     if ($.connection && $.connection.hub && $.connection.hub.state === $.signalR.connectionState.disconnected) {
-        $.connection.hub.start();
+        $.connection.hub.start().done(function () {
+            console.log('SignalR bağlantısı başarılı');
+        }).fail(function (error) {
+            console.log('SignalR bağlantı hatası:', error);
+        });
+    }
+    
+    // SignalR bağlantı durumunu kontrol et
+    if ($.connection && $.connection.hub) {
+        $.connection.hub.stateChanged(function (change) {
+            console.log('SignalR durumu:', change.oldState, '->', change.newState);
+        });
     }
 });
 </script>

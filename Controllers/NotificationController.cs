@@ -6,9 +6,12 @@ using MZDNETWORK.Data;
 using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
 using Ganss.Xss;
 using MZDNETWORK.Attributes;
+using MZDNETWORK.Hubs;
 
-[DynamicAuthorize(Permission = "SystemManagement.Notification")]
-public class NotificationController : Controller
+namespace MZDNETWORK.Controllers
+{
+    [DynamicAuthorize(Permission = "SystemManagement.Notification")]
+    public class NotificationController : Controller
 {
     private readonly MZDNETWORKContext db;
 
@@ -62,5 +65,6 @@ public class NotificationController : Controller
             .Select(n => new { n.Id, n.Message })
             .ToList();
         return Json(notifications, JsonRequestBehavior.AllowGet);
+    }
     }
 }

@@ -2,16 +2,19 @@ using Ganss.Xss;
 using Microsoft.AspNet.SignalR;
 using MZDNETWORK.Attributes;
 
-[DynamicAuthorize(Permission = "SystemManagement.Notification", Action = "Create")]
-public class NotificationHub : Hub
+namespace MZDNETWORK.Hubs
 {
-    /// <summary>
-    /// İstemcilere bildirim gönderir. Ek olarak; mesajın ekranda kalma süresi (ms), renk tipi ve ses ayarı da gönderilebilir.
-    /// </summary>
-    public void SendNotification(string message, int duration = 4000, string color = "info", bool playSound = false, string sound = null)
+    [DynamicAuthorize(Permission = "SystemManagement.Notification", Action = "Create")]
+    public class NotificationHub : Hub
     {
-        var sanitizer = new HtmlSanitizer();
-        var sanitizedMessage = sanitizer.Sanitize(message);
-        Clients.All.showNotification(sanitizedMessage, duration, color, playSound, sound);
+        /// <summary>
+        /// İstemcilere bildirim gönderir. Ek olarak; mesajın ekranda kalma süresi (ms), renk tipi ve ses ayarı da gönderilebilir.
+        /// </summary>
+        public void SendNotification(string message, int duration = 4000, string color = "info", bool playSound = false, string sound = null)
+        {
+            var sanitizer = new HtmlSanitizer();
+            var sanitizedMessage = sanitizer.Sanitize(message);
+            Clients.All.showNotification(sanitizedMessage, duration, color, playSound, sound);
+        }
     }
 }
