@@ -278,10 +278,13 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="@Url.Action("Index","ServiceRoute")" class="nav-link">Servis Güzergahı</a></li>
+                            <li><a href="@Url.Action("Personnel","ServiceRoute")" class="nav-link">Personel Servis Listesi</a></li>
+                            <li><a href="@Url.Action("OvertimePersonnel","ServiceRoute")" class="nav-link">Mesai Servis Listesi</a></li>
                             @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("ServiceManagement.Configuration", "Edit"))
                             {
-                                <li><a href="@Url.Action("Index", "ServicePersonnel")" class="nav-link">Servis Ayarları</a></li>
-                                <li><a href="@Url.Action("Index", "PersonnelAssignment")" class="nav-link">Kolay Atama</a></li>
+                                <li><a href="@Url.Action("Index", "ServiceConfiguration")" class="nav-link">Servis Ayarları</a></li>
+                                <li><a href="@Url.Action("Admin", "ServicePersonnel")" class="nav-link">Personel Ayarları</a></li>
+                                <li><a href="@Url.Action("Index", "OvertimeServiceManager")" class="nav-link">Kolay Mesai</a></li>
                             }
                         </ul>
                     </li>

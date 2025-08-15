@@ -470,6 +470,7 @@
     <Compile Include="Controllers\MeetingRoomController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\OnlineUsersController.cs" />
+    <Compile Include="Controllers\OvertimeServiceManagerController.cs" />
     <Compile Include="Controllers\PasswordResetRequestController.cs" />
     <Compile Include="Controllers\PerformanceController.cs" />
     <Compile Include="Controllers\PermissionTreeController.cs" />
@@ -594,6 +595,7 @@
     <Content Include="Content\molayukle.css" />
     <Content Include="Content\Dokumantasyon.css" />
     <Content Include="Content\notification.mp3" />
+    <Content Include="Content\overtimeservicepersonel.css" />
     <Content Include="Content\sendnotification.css" />
     <Content Include="Content\serviceroute.css" />
     <Content Include="Content\Spinner.css" />
@@ -2623,10 +2625,10 @@
     <Content Include="Views\ChatGroup\Edit.cshtml" />
     <Content Include="Views\Chat\ChatPage.cshtml" />
     <Content Include="Views\ServiceConfiguration\Index.cshtml" />
-    <Content Include="Views\PersonnelAssignment\Index.cshtml" />
     <Content Include="Views\ServiceRoute\OvertimePersonnel.cshtml" />
     <Content Include="Views\ServiceRoute\Personnel.cshtml" />
     <Content Include="Views\ServicePersonnel\Admin.cshtml" />
+    <Content Include="Views\OvertimeServiceManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\tiles\" />

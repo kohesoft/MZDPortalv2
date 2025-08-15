@@ -254,12 +254,6 @@ C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\obj\Debug\MZDNETWORK.pdb
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\System.Data.SQLite.dll
 C:\Users\berat-oksuz\Documents\GitHub\MZDPortalv2\bin\System.Data.SQLite.xml
-C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.App.config
-C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.AssemblyReference.cache
-C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.AABC.resources
-C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.Properties.Resources.resources
-C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.GenerateResource.cache
-C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.CoreCompileInputs.cache
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\bin\NLog.config
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\bin\MZDNETWORK.dll.config
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\bin\MZDNETWORK.dll
@@ -508,7 +502,13 @@ C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\bin\tr\System.Web.WebPag
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\bin\tr\System.Web.WebPages.Deployment.resources.dll
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\bin\tr\System.Web.WebPages.Razor.resources.dll
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\bin\tr\System.Web.Optimization.resources.dll
+C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.App.config
+C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.AssemblyReference.cache
+C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.AABC.resources
+C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.AABC2.resources
+C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.Properties.Resources.resources
+C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.GenerateResource.cache
+C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.CoreCompileInputs.cache
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.csproj.Up2Date
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.dll
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.pdb
-C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Debug\MZDNETWORK.Migrations.AABC2.resources

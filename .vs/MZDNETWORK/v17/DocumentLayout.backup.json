@@ -1,24 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\mzdportalv2\\migrations\\202508150656097_aabc2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:migrations\\202508150656097_aabc2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\mzdportalv2\\models\\servicepersonnel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:models\\servicepersonnel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\mzdportalv2\\models\\overtimeservicepersonnel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:models\\overtimeservicepersonnel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\mzdportalv2\\models\\serviceconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:models\\serviceconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -26,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -43,58 +26,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "202508150656097_AABC2.cs",
-              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\Migrations\\202508150656097_AABC2.cs",
-              "RelativeDocumentMoniker": "Migrations\\202508150656097_AABC2.cs",
-              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\Migrations\\202508150656097_AABC2.cs",
-              "RelativeToolTip": "Migrations\\202508150656097_AABC2.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-15T06:56:16.242Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ServicePersonnel.cs",
-              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\Models\\ServicePersonnel.cs",
-              "RelativeDocumentMoniker": "Models\\ServicePersonnel.cs",
-              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\Models\\ServicePersonnel.cs",
-              "RelativeToolTip": "Models\\ServicePersonnel.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAzwCMAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-15T06:55:56.774Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OvertimeServicePersonnel.cs",
-              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\Models\\OvertimeServicePersonnel.cs",
-              "RelativeDocumentMoniker": "Models\\OvertimeServicePersonnel.cs",
-              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\Models\\OvertimeServicePersonnel.cs",
-              "RelativeToolTip": "Models\\OvertimeServicePersonnel.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAzwCUAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-15T06:55:55.077Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ServiceConfiguration.cs",
-              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\Models\\ServiceConfiguration.cs",
-              "RelativeDocumentMoniker": "Models\\ServiceConfiguration.cs",
-              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\Models\\ServiceConfiguration.cs",
-              "RelativeToolTip": "Models\\ServiceConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-15T06:55:52.704Z",
-              "EditorCaption": ""
             }
           ]
         },
