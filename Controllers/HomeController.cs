@@ -12,11 +12,11 @@ using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [AllowAnonymous]
     public class HomeController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext(); // Veritabanı context'i  
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             List<Gonderi> model = GetGonderiler(); // Ensure this method returns a valid list      
@@ -28,6 +28,7 @@ namespace MZDNETWORK.Controllers
             return db.Gonderiler.ToList(); // Veritabanından Gonderi listesini al  
         }
 
+        [AllowAnonymous]
         public ActionResult LoadMorePosts(int skip, int take)
         {
             var posts = GetGonderiler().Skip(skip).Take(take).ToList();
@@ -43,12 +44,21 @@ namespace MZDNETWORK.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
         public ActionResult Mola()
         {
             return View();
         }
 
+        // Permission debug sayfası
+        [AllowAnonymous]
+        public ActionResult PermissionDebug()
+        {
+            return View();
+        }
+
         // Manual seeding test action  
+        [AllowAnonymous]
         public ActionResult TestSeeding()
         {
             try

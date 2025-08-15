@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|c:\\users\\berat\\documents\\github\\mzdportalv2\\mzdportalv2\\.vs\\mzdnetwork\\config\\applicationhost.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{74A72F7C-97AB-4993-B841-263969A9A589}|MZDNETWORK.csproj|solutionrelative:.vs\\mzdnetwork\\config\\applicationhost.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +14,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "applicationhost.config",
+              "DocumentMoniker": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\.vs\\MZDNETWORK\\config\\applicationhost.config",
+              "RelativeDocumentMoniker": ".vs\\MZDNETWORK\\config\\applicationhost.config",
+              "ToolTip": "C:\\Users\\berat\\Documents\\GitHub\\MZDPortalv2\\MZDPortalv2\\.vs\\MZDNETWORK\\config\\applicationhost.config",
+              "RelativeToolTip": ".vs\\MZDNETWORK\\config\\applicationhost.config",
+              "ViewState": "AgIAAPYDAAAAAAAAAAAMwA8EAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-08-15T11:11:15.732Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
