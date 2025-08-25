@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="flex justify-end">
+    <div class="flex justify-end space-x-4">
         <button type="button" id="sendNotification" class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">Gönder</button>
     </div>
 </div>
@@ -84,6 +84,14 @@
                 .fail(function () {
                     showToast('Gönderim sırasında hata oluştu.', true);
                 });
+        });
+
+        $('#testToast').click(function () {
+            if (typeof showToast === 'function') {
+                showToast('Test bildirimi!', 'success', 5000, false);
+            } else {
+                alert('showToast fonksiyonu bulunamadı!');
+            }
         });
     });
 

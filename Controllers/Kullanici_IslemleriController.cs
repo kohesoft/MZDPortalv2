@@ -10,6 +10,7 @@ using MZDNETWORK.Models;
 using MZDNETWORK.Helpers;
 using MZDNETWORK.Data;
 using MZDNETWORK.Attributes;
+using static MZDNETWORK.Helpers.DynamicPermissionHelper;
 
 namespace MZDNETWORK.Controllers
 {
@@ -304,7 +305,130 @@ namespace MZDNETWORK.Controllers
                             db.ServicePersonnels.Remove(servicePersonnel);
                         }
 
-                        // 8. UserInfo kayıtlarını sil
+                        // 8. DilekOneri kayıtlarını sil (Username ile eşleşen)
+                        var dilekOneriler = db.DilekOneriler.Where(d => d.Username == user.Username).ToList();
+                        foreach (var dilekOneri in dilekOneriler)
+                        {
+                            db.DilekOneriler.Remove(dilekOneri);
+                        }
+
+                        // 9. Survey Answers kayıtlarını sil (UserID ile eşleşen)
+                        var userAnswers = db.Answers.Where(a => a.UserID == id).ToList();
+                        foreach (var answer in userAnswers)
+                        {
+                            // Answer'a bağlı AnswerOption'ları da sil
+                            var answerOptions = db.Set<AnswerOption>().Where(ao => ao.AnswerId == answer.ID).ToList();
+                            foreach (var option in answerOptions)
+                            {
+                                db.Set<AnswerOption>().Remove(option);
+                            }
+                            
+                            db.Answers.Remove(answer);
+                        }
+
+                        // 10. Reservation kayıtlarını sil
+                        var reservations = db.Reservations.Where(r => r.UserId == id).ToList();
+                        foreach (var reservation in reservations)
+                        {
+                            db.Reservations.Remove(reservation);
+                        }
+
+                        // 11. DailyMood kayıtlarını sil
+                        var dailyMoods = db.DailyMoods.Where(dm => dm.UserId == id).ToList();
+                        foreach (var mood in dailyMoods)
+                        {
+                            db.DailyMoods.Remove(mood);
+                        }
+
+                        // 12. LeaveRequest kayıtlarını sil
+                        var leaveRequests = db.LeaveRequests.Where(lr => lr.UserId == id).ToList();
+                        foreach (var leaveRequest in leaveRequests)
+                        {
+                            db.LeaveRequests.Remove(leaveRequest);
+                        }
+
+                        // 13. MeetingRoomReservation kayıtlarını sil
+                        var meetingRoomReservations = db.MeetingRoomReservations.Where(mrr => mrr.UserId == id).ToList();
+                        foreach (var reservation in meetingRoomReservations)
+                        {
+                            db.MeetingRoomReservations.Remove(reservation);
+                        }
+
+                        // 14. BeyazTahtaEntry kayıtlarını sil
+                        var beyazTahtaEntries = db.BeyazTahtaEntries.Where(bte => bte.UserId == id).ToList();
+                        foreach (var entry in beyazTahtaEntries)
+                        {
+                            db.BeyazTahtaEntries.Remove(entry);
+                        }
+
+                        // 15. SuggestionComplaint kayıtlarını sil
+                        var suggestionComplaints = db.SuggestionComplaints.Where(sc => sc.UserId == id).ToList();
+                        foreach (var complaint in suggestionComplaints)
+                        {
+                            db.SuggestionComplaints.Remove(complaint);
+                        }
+
+                        // 16. VisitorEntry kayıtlarını sil (FullName ile eşleşen)
+                        try
+                        {
+                            var visitorEntries = db.VisitorEntries.Where(ve => ve.FullName.Contains(user.Name) && ve.FullName.Contains(user.Surname)).ToList();
+                            foreach (var entry in visitorEntries)
+                            {
+                                db.VisitorEntries.Remove(entry);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // VisitorEntry temizleme hatası
+                            System.Diagnostics.Debug.WriteLine($"VisitorEntry temizleme hatası: {ex.Message}");
+                        }
+
+                        // 17. LateArrivalReport kayıtlarını sil (FullName ile eşleşen)
+                        try
+                        {
+                            var lateArrivalReports = db.LateArrivalReports.Where(lar => lar.FullName.Contains(user.Name) && lar.FullName.Contains(user.Surname)).ToList();
+                            foreach (var report in lateArrivalReports)
+                            {
+                                db.LateArrivalReports.Remove(report);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // LateArrivalReport temizleme hatası
+                            System.Diagnostics.Debug.WriteLine($"LateArrivalReport temizleme hatası: {ex.Message}");
+                        }
+
+                        // 18. OvertimeServicePersonnel kayıtlarını sil
+                        var overtimeServicePersonnels = db.OvertimeServicePersonnels.Where(osp => osp.UserId == id).ToList();
+                        foreach (var personnel in overtimeServicePersonnels)
+                        {
+                            db.OvertimeServicePersonnels.Remove(personnel);
+                        }
+
+                        // 19. Chat kayıtlarını güncelle (CreatedBy field'ını temizle)
+                        var createdChats = db.Chats.Where(c => c.CreatedBy == id).ToList();
+                        foreach (var chat in createdChats)
+                        {
+                            // Chat'i sil veya sahipliği başka birine devret
+                            db.Chats.Remove(chat);
+                        }
+
+                        // 20. ChatGroup kayıtlarını güncelle
+                        var createdChatGroups = db.ChatGroups.Where(cg => cg.CreatedBy == id).ToList();
+                        foreach (var chatGroup in createdChatGroups)
+                        {
+                            // ChatGroup'u sil veya sahipliği başka birine devret
+                            db.ChatGroups.Remove(chatGroup);
+                        }
+
+                        // 21. PasswordResetRequest kayıtlarını sil
+                        var passwordResetRequests = db.PasswordResetRequests.Where(prr => prr.UserId == id).ToList();
+                        foreach (var request in passwordResetRequests)
+                        {
+                            db.PasswordResetRequests.Remove(request);
+                        }
+
+                        // 22. UserInfo kayıtlarını sil
                         if (user.UserInfo != null && user.UserInfo.Any())
                         {
                             var userInfosToDelete = user.UserInfo.ToList();
@@ -314,7 +438,7 @@ namespace MZDNETWORK.Controllers
                             }
                         }
 
-                        // 9. Ana kullanıcı kaydını sil
+                        // 23. Ana kullanıcı kaydını sil
                         db.Users.Remove(user);
 
                         // Tüm değişiklikleri kaydet
@@ -322,6 +446,21 @@ namespace MZDNETWORK.Controllers
                         
                         // Transaction'ı commit et
                         transaction.Commit();
+
+                        // Cache'i temizle - Kullanıcı silindikten sonra tüm cache'i temizle
+                        try
+                        {
+                            // Belirli kullanıcının cache'ini temizle
+                            InvalidateUserCache(id);
+                            
+                            // Güvenlik için tüm cache'i de temizle (kullanıcı silme işlemi kritik)
+                            InvalidateAllCache();
+                        }
+                        catch (Exception cacheEx)
+                        {
+                            // Cache temizleme hatası kritik değil, log et ama işlemi devam ettir
+                            System.Diagnostics.Debug.WriteLine($"Cache temizleme hatası: {cacheEx.Message}");
+                        }
 
                         if (Request.IsAjaxRequest())
                         {

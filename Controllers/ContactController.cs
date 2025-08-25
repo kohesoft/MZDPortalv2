@@ -7,6 +7,7 @@ using MZDNETWORK.Models;
 using MZDNETWORK.Data;
 using OfficeOpenXml;
 using MZDNETWORK.Attributes;
+using System.Data.Entity;
 
 namespace MZDNETWORK.Controllers
 {
@@ -15,10 +16,28 @@ namespace MZDNETWORK.Controllers
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
 
+        public ContactController()
+        {
+            // Cache problemlerini önlemek için
+            db.Configuration.AutoDetectChangesEnabled = true;
+            db.Configuration.ValidateOnSaveEnabled = true;
+            db.Configuration.LazyLoadingEnabled = false;
+        }
+
         public ActionResult Index()
         {
-            var users = db.Users.ToList();
-            return View(users);
+            // Fresh context ile temiz veri al - cache problemlerini önlemek için
+            using (var freshContext = new MZDNETWORKContext())
+            {
+                var users = freshContext.Users
+                    .AsNoTracking() // Read-only için tracking'i devre dýþý býrak
+                    .OrderBy(u => u.Department)
+                    .ThenBy(u => u.Name)
+                    .ThenBy(u => u.Surname)
+                    .ToList();
+                    
+                return View(users);
+            }
         }
 
         [DynamicAuthorize(Permission = "Operational.Contact", Action = "Export")]
@@ -34,13 +53,26 @@ namespace MZDNETWORK.Controllers
             using (var package = new ExcelPackage())
             {
                 var worksheet = package.Workbook.Worksheets.Add("KullaniciListesi");
+                
+                // Header'larý ekle
+                string[] headers = { "Sicil", "Adý", "Soyadý", "Departman ve Pozisyon", "Dahili", "Cep Tel", "Ýç mail", "Dýþ mail" };
+                for (int i = 0; i < headers.Length; i++)
+                {
+                    worksheet.Cells[1, i + 1].Value = headers[i];
+                    worksheet.Cells[1, i + 1].Style.Font.Bold = true;
+                }
+                
+                // Veri satýrlarýný ekle
                 for (int i = 0; i < data.Count; i++)
                 {
-                    for (int j = 0; j < data[i].Count; j++)
+                    for (int j = 0; j < data[i].Count && j < headers.Length; j++)
                     {
-                        worksheet.Cells[i + 1, j + 1].Value = data[i][j];
+                        worksheet.Cells[i + 2, j + 1].Value = data[i][j]; // i + 2 çünkü header satýrý var
                     }
                 }
+
+                // Auto-fit columns
+                worksheet.Cells.AutoFitColumns();
 
                 var stream = new MemoryStream();
                 package.SaveAs(stream);
@@ -49,6 +81,14 @@ namespace MZDNETWORK.Controllers
             }
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
 
