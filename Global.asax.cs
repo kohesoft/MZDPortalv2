@@ -142,17 +142,17 @@ namespace MZDNETWORK
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            SessionTracker.Increment();
+            //SessionTracker.Increment();
         }
 
         protected void Session_End(object sender, EventArgs e)
         {
-            SessionTracker.Decrement();
+            //SessionTracker.Decrement();
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            MZDNETWORK.Helpers.HourlyRequestCounter.Increment();
+            //MZDNETWORK.Helpers.HourlyRequestCounter.Increment();
         }
 
         protected void Application_End()

@@ -493,13 +493,11 @@
     </Compile>
     <Compile Include="Helpers\DynamicPermissionHelper.cs" />
     <Compile Include="Helpers\EnumDisplayHelper.cs" />
-    <Compile Include="Helpers\HourlyRequestCounter.cs" />
     <Compile Include="Helpers\OvertimeServiceScheduler.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />
     <Compile Include="Helpers\PermissionHelper.cs" />
     <Compile Include="Helpers\PermissionCacheService.cs" />
     <Compile Include="Helpers\PermissionTreeBuilder.cs" />
-    <Compile Include="Helpers\SessionTracker.cs" />
     <Compile Include="Attributes\DynamicAuthorizeAttribute.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Hubs\NotificationHub.cs" />
@@ -901,12 +899,12 @@
     <Content Include="Content\kml\yenimahalle.kml" />
     <Content Include="App_Data\ankara.mbtiles" />
     <Content Include="Content\kml\eryaman-batikent.kml" />
-    <Content Include="Content\kml\karapurcak.kml" />
+    <Content Include="Content\kml\karapurcek.kml" />
     <Content Include="Content\kml\kecioren-ufuktepe.kml" />
     <Content Include="Content\kml\mamak-1.kml" />
     <Content Include="Content\kml\mamak-2.kml" />
     <Content Include="Content\kml\mamak-3.kml" />
-    <Content Include="Content\kml\sincan-etimesgut.kml" />
+    <Content Include="Content\kml\sincan_etimesgut.kml" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

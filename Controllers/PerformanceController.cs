@@ -11,7 +11,6 @@ using MZDNETWORK.Data;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Net;
-using MZDNETWORK.Helpers;
 using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
@@ -21,6 +20,7 @@ namespace MZDNETWORK.Controllers
     {
         private static PerformanceCounter cpuCounter;
         private static PerformanceCounter availableMemoryCounter;
+        private static PerformanceCounter activeSessionsCounter;
         // Aktif oturum sayısı SessionTracker üzerinden yönetiliyor
         private static PerformanceCounter requestsPerSecCounter;
         private static PerformanceCounter requestExecutionTimeCounter;
@@ -52,8 +52,8 @@ namespace MZDNETWORK.Controllers
                         WebServer = true, // if this code runs, web server is up
                         Database = CheckDatabaseStatus(),
                         Cache = CheckCacheStatus()
-                    },
-                    Traffic = Helpers.HourlyRequestCounter.GetSnapshot()
+                    }
+                    //Traffic = Helpers.HourlyRequestCounter.GetSnapshot()
                 };
 
                 return Json(performanceData, JsonRequestBehavior.AllowGet);
@@ -362,7 +362,25 @@ namespace MZDNETWORK.Controllers
         // Aktif oturum sayısını döndürür  
         private int GetActiveSessionCount()
         {
-            return SessionTracker.Current; // SessionTracker kullan
+            try
+            {
+                if (activeSessionsCounter == null)
+                {
+                    string instanceName = GetAspNetInstanceName();
+                    if (!PerformanceCounterCategory.CounterExists("Sessions Active", "ASP.NET Applications"))
+                    {
+                        throw new InvalidOperationException("'Sessions Active' performance counter bulunamadı.");
+                    }
+                    activeSessionsCounter = new PerformanceCounter("ASP.NET Applications", "Sessions Active", instanceName, readOnly: true);
+                    activeSessionsCounter.NextValue();
+                }
+                return (int)activeSessionsCounter.NextValue();
+            }
+            catch (Exception)
+            {
+                // Hata logla ve varsayılan değer döndür
+                return 0;
+            }
         }
 
         // Performans metriklerini döndürür  

@@ -510,7 +510,6 @@ C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.CoreCo
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.csproj.Up2Date
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.dll
 C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.pdb
-C:\Users\berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.fixcascadeconflicts.resources
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\bin\NLog.config
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\bin\MZDNETWORK.dll.config
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\bin\MZDNETWORK.dll
@@ -769,3 +768,5 @@ C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Release\MZDNETWORK.c
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Release\MZDNETWORK.csproj.Up2Date
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Release\MZDNETWORK.dll
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Release\MZDNETWORK.pdb
+C:\Users\Berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.AABC.resources
+C:\Users\Berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.AABC2.resources

@@ -1,0 +1,41 @@
+﻿namespace MZDNETWORK.Helpers
+{
+    /// <summary>
+    /// Thread-safe helper that keeps track of the number of active ASP.NET sessions.
+    /// </summary>
+    public static class SessionTracker
+    {
+        private static int _activeSessions;
+        private static readonly object _lock = new object();
+
+        public static void Increment()
+        {
+            lock (_lock)
+            {
+                _activeSessions++;
+            }
+        }
+
+        public static void Decrement()
+        {
+            lock (_lock)
+            {
+                if (_activeSessions > 0)
+                {
+                    _activeSessions--;
+                }
+            }
+        }
+
+        public static int Current
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    return _activeSessions;
+                }
+            }
+        }
+    }
+} 
