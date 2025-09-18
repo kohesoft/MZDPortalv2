@@ -1,0 +1,234 @@
+﻿@model MZDNETWORK.Models.ChatGroup
+@{
+    ViewBag.Title = "Chat Grubunu Düzenle";
+    var users = ViewBag.Users as List<MZDNETWORK.Models.User>;
+    var memberIds = Model.Members.Select(u => u.Id).ToList();
+    var canWriteDict = new Dictionary<int, bool>();
+    if (ViewBag.MemberCanWrite != null) { canWriteDict = ViewBag.MemberCanWrite as Dictionary<int, bool>; }
+    var departments = users.Select(u => u.Department).Distinct().OrderBy(d => d).ToList();
+    var roles = ViewBag.Roles as List<MZDNETWORK.Models.Role>;
+    var selectedRoleIds = Model.AllowedRoles.Select(r => r.Id).ToList();
+    var selectedManagerIds = Model.Managers.Select(u => u.Id).ToList();
+}
+<h2 class="text-2xl font-bold mb-6 text-gray-800">Chat Grubunu Düzenle</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-1">Grup Adı</label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-200" })
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-1">Açıklama</label>
+        @Html.TextBoxFor(m => m.Description, new { @class = "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-200" })
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-1">Yetkili Roller</label>
+        <div id="roleMultiSelect" class="w-full border border-gray-300 rounded px-3 py-2 bg-white">
+            <div id="selectedRoles" class="flex flex-wrap gap-2 mb-2">
+                @foreach (var role in roles.Where(r => selectedRoleIds.Contains(r.Id)))
+                {
+                    <span class="inline-flex items-center bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm font-medium role-chip" data-role-id="@role.Id">
+                        @role.Name
+                        <input type="hidden" name="allowedRoleIds" value="@role.Id" />
+                        <button type="button" class="remove-role ml-2 text-green-500 hover:text-red-500" data-role-id="@role.Id" tabindex="-1">&times;</button>
+                    </span>
+                }
+            </div>
+            <input type="text" id="roleSearch" class="border rounded px-2 py-1 w-full mb-2" placeholder="Rol ara..." autocomplete="off" />
+            <div id="roleList" class="max-h-40 overflow-y-auto">
+                @foreach (var role in roles)
+                {
+                    if (!selectedRoleIds.Contains(role.Id))
+                    {
+                        <div class="flex items-center justify-between px-2 py-1 hover:bg-green-50 rounded cursor-pointer role-row" data-role-name="@role.Name.ToLower()" data-role-id="@role.Id">
+                            <span>@role.Name <span class="text-xs text-gray-400">@role.Description</span></span>
+                            <button type="button" class="add-role bg-green-100 text-green-700 rounded px-2 py-0.5 text-xs font-semibold" data-role-id="@role.Id">Ekle</button>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-1">Yöneticiler</label>
+        <div id="managerMultiSelect" class="w-full border border-gray-300 rounded px-3 py-2 bg-white">
+            <div id="selectedManagers" class="flex flex-wrap gap-2 mb-2">
+                @foreach (var user in users.Where(u => selectedManagerIds.Contains(u.Id)))
+                {
+                    <span class="inline-flex items-center bg-blue-100 text-blue-700 rounded-full px-3 py-1 text-sm font-medium manager-chip" data-manager-id="@user.Id">
+                        @user.Username <span class='text-xs text-gray-400'>(@user.Department)</span>
+                        <input type="hidden" name="managerIds" value="@user.Id" />
+                        <button type="button" class="remove-manager ml-2 text-blue-500 hover:text-red-500" data-manager-id="@user.Id" tabindex="-1">&times;</button>
+                    </span>
+                }
+            </div>
+            <input type="text" id="managerSearch" class="border rounded px-2 py-1 w-full mb-2" placeholder="Yönetici ara..." autocomplete="off" />
+            <div id="managerList" class="max-h-40 overflow-y-auto">
+                @foreach (var user in users)
+                {
+                    if (!selectedManagerIds.Contains(user.Id))
+                    {
+                        <div class="flex items-center justify-between px-2 py-1 hover:bg-blue-50 rounded cursor-pointer manager-row" data-manager-name="@user.Username.ToLower()" data-manager-id="@user.Id">
+                            <span>@user.Username <span class='text-xs text-gray-400'>(@user.Department)</span></span>
+                            <button type="button" class="add-manager bg-blue-100 text-blue-700 rounded px-2 py-0.5 text-xs font-semibold" data-manager-id="@user.Id">Ekle</button>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="mb-6">
+        <label class="block text-gray-700 font-semibold mb-1">Üyeler ve Yetkileri</label>
+        <div class="flex flex-col md:flex-row gap-4 mb-2">
+            <select id="departmentFilter" class="border rounded px-2 py-1">
+                <option value="">Tüm Departmanlar</option>
+                @foreach (var dep in departments)
+                {
+                    <option value="@dep">@dep</option>
+                }
+            </select>
+            <input type="text" id="userSearch" class="border rounded px-2 py-1 flex-1" placeholder="Kullanıcı ara..." />
+        </div>
+        <div id="selectedMembers" class="flex flex-wrap gap-2 mb-4">
+            @foreach (var user in users.Where(u => Model.Members.Select(m => m.Id).Contains(u.Id)))
+            {
+                <span class="inline-flex items-center bg-indigo-100 text-indigo-700 rounded-full px-3 py-1 text-sm font-medium">
+                    @user.Username <span class='text-xs text-gray-400'>(@user.Department)</span>
+                    <input type="hidden" name="memberIds" value="@user.Id" />
+                    <input type="checkbox" name="canWrite_@user.Id" value="true" checked class="ml-2 align-middle" title="Yazma Yetkisi" />
+                    <button type="button" class="remove-member ml-2 text-indigo-500 hover:text-red-500" data-user-id="@user.Id" tabindex="-1">&times;</button>
+                </span>
+            }
+        </div>
+        <div id="userList" class="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-64 overflow-y-auto border rounded p-2 bg-gray-50">
+            @foreach (var user in users)
+            {
+                if (!Model.Members.Select(m => m.Id).Contains(user.Id))
+                {
+                    <div class="flex items-center justify-between px-2 py-1 hover:bg-indigo-50 rounded cursor-pointer user-row" data-username="@user.Username.ToLower()" data-department="@user.Department" data-user-id="@user.Id">
+                        <span>@user.Username <span class="text-xs text-gray-400">(@user.Department)</span></span>
+                        <button type="button" class="add-member bg-green-100 text-green-700 rounded px-2 py-0.5 text-xs font-semibold" data-user-id="@user.Id">Ekle</button>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="flex gap-2">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition">Kaydet</button>
+        <a href="@Url.Action("Index")" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded transition">İptal</a>
+    </div>
+}
+@section scripts {
+<script>
+    var usersJs = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(users.Select(u => new { u.Id, u.Username, u.Department })));
+    var rolesJs = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(roles.Select(r => new { r.Id, r.Name, r.Description })));
+    $(function(){
+        // Yetkili Roller: Chip ve arama destekli multi-select
+        $('#roleSearch').on('input', function(){
+            var search = $(this).val().toLowerCase();
+            $('#roleList .role-row').each(function(){
+                var roleName = $(this).data('role-name');
+                var show = !search || roleName.indexOf(search) !== -1;
+                $(this).toggle(show);
+            });
+        });
+        $('#roleList').on('click', '.add-role', function(){
+            var roleId = $(this).data('role-id');
+            var roleObj = rolesJs.find(r => r.Id == roleId);
+            if(!roleObj) return;
+            var chip = `<span class="inline-flex items-center bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm font-medium role-chip" data-role-id="${roleObj.Id}">
+                ${roleObj.Name}
+                <input type="hidden" name="allowedRoleIds" value="${roleObj.Id}" />
+                <button type="button" class="remove-role ml-2 text-green-500 hover:text-red-500" data-role-id="${roleObj.Id}" tabindex="-1">&times;</button>
+            </span>`;
+            $('#selectedRoles').append(chip);
+            $(this).closest('.role-row').remove();
+        });
+        $('#selectedRoles').on('click', '.remove-role', function(){
+            var roleId = $(this).data('role-id');
+            var chip = $(this).closest('span');
+            var roleObj = rolesJs.find(r => r.Id == roleId);
+            if(!roleObj) { chip.remove(); return; }
+            var roleRow = `<div class="flex items-center justify-between px-2 py-1 hover:bg-green-50 rounded cursor-pointer role-row" data-role-name="${roleObj.Name.toLowerCase()}" data-role-id="${roleObj.Id}">
+                <span>${roleObj.Name} <span class="text-xs text-gray-400">${roleObj.Description}</span></span>
+                <button type="button" class="add-role bg-green-100 text-green-700 rounded px-2 py-0.5 text-xs font-semibold" data-role-id="${roleObj.Id}">Ekle</button>
+            </div>`;
+            $('#roleList').append(roleRow);
+            chip.remove();
+        });
+        // Yöneticiler: Chip ve arama destekli multi-select
+        $('#managerSearch').on('input', function(){
+            var search = $(this).val().toLowerCase();
+            $('#managerList .manager-row').each(function(){
+                var managerName = $(this).data('manager-name');
+                var show = !search || managerName.indexOf(search) !== -1;
+                $(this).toggle(show);
+            });
+        });
+        $('#managerList').on('click', '.add-manager', function(){
+            var managerId = $(this).data('manager-id');
+            var userObj = usersJs.find(u => u.Id == managerId);
+            if(!userObj) return;
+            var chip = `<span class="inline-flex items-center bg-blue-100 text-blue-700 rounded-full px-3 py-1 text-sm font-medium manager-chip" data-manager-id="${userObj.Id}">
+                ${userObj.Username} <span class='text-xs text-gray-400'>(${userObj.Department})</span>
+                <input type="hidden" name="managerIds" value="${userObj.Id}" />
+                <button type="button" class="remove-manager ml-2 text-blue-500 hover:text-red-500" data-manager-id="${userObj.Id}" tabindex="-1">&times;</button>
+            </span>`;
+            $('#selectedManagers').append(chip);
+            $(this).closest('.manager-row').remove();
+        });
+        $('#selectedManagers').on('click', '.remove-manager', function(){
+            var managerId = $(this).data('manager-id');
+            var chip = $(this).closest('span');
+            var userObj = usersJs.find(u => u.Id == managerId);
+            if(!userObj) { chip.remove(); return; }
+            var managerRow = `<div class="flex items-center justify-between px-2 py-1 hover:bg-blue-50 rounded cursor-pointer manager-row" data-manager-name="${userObj.Username.toLowerCase()}" data-manager-id="${userObj.Id}">
+                <span>${userObj.Username} <span class='text-xs text-gray-400'>(${userObj.Department})</span></span>
+                <button type="button" class="add-manager bg-blue-100 text-blue-700 rounded px-2 py-0.5 text-xs font-semibold" data-manager-id="${userObj.Id}">Ekle</button>
+            </div>`;
+            $('#managerList').append(managerRow);
+            chip.remove();
+        });
+        // Kullanıcı filtreleme ve ekleme/çıkarma
+        $('#departmentFilter, #userSearch').on('input change', function(){
+            var dep = $('#departmentFilter').val().toLowerCase();
+            var search = $('#userSearch').val().toLowerCase();
+            $('#userList .user-row').each(function(){
+                var username = $(this).data('username');
+                var department = ($(this).data('department') || '').toLowerCase();
+                var show = true;
+                if(dep && department !== dep) show = false;
+                if(search && username.indexOf(search) === -1) show = false;
+                $(this).toggle(show);
+            });
+        });
+        $('#userList').on('click', '.add-member', function(){
+            var userId = $(this).data('user-id');
+            var userObj = usersJs.find(u => u.Id == userId);
+            if(!userObj) return;
+            var chip = `<span class="inline-flex items-center bg-indigo-100 text-indigo-700 rounded-full px-3 py-1 text-sm font-medium">
+                ${userObj.Username} <span class='text-xs text-gray-400'>(${userObj.Department})</span>
+                <input type="hidden" name="memberIds" value="${userObj.Id}" />
+                <input type="checkbox" name="canWrite_${userObj.Id}" value="true" checked class="ml-2 align-middle" title="Yazma Yetkisi" />
+                <button type="button" class="remove-member ml-2 text-indigo-500 hover:text-red-500" data-user-id="${userObj.Id}" tabindex="-1">&times;</button>
+            </span>`;
+            $('#selectedMembers').append(chip);
+            $(this).remove();
+        });
+        $('#selectedMembers').on('click', '.remove-member', function(){
+            var userId = $(this).data('user-id');
+            var chip = $(this).closest('span');
+            var userObj = usersJs.find(u => u.Id == userId);
+            if(!userObj) { chip.remove(); return; }
+            var userRow = `<div class="flex items-center justify-between px-2 py-1 hover:bg-indigo-50 rounded cursor-pointer user-row" data-username="${userObj.Username.toLowerCase()}" data-department="${userObj.Department}" data-user-id="${userObj.Id}">
+                <span>${userObj.Username} <span class="text-xs text-gray-400">(${userObj.Department})</span></span>
+                <button type="button" class="add-member bg-green-100 text-green-700 rounded px-2 py-0.5 text-xs font-semibold" data-user-id="${userObj.Id}">Ekle</button>
+            </div>`;
+            $('#userList').append(userRow);
+            chip.remove();
+        });
+    });
+</script>
+}

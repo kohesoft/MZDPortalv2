@@ -1,0 +1,5 @@
+﻿Menu yüklemek için aşağıdaki formatı kullanarak menü fotoğrafınızı yükleyebilirsiniz:
+// Fotoğrafın adını "menu_YYYYMMDD.jpg" formatında belirleyin.
+// Örnek:
+
+menu_20250526.jpg

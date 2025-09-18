@@ -1,0 +1,162 @@
+﻿body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.container {
+    width: 100%;
+    min-width: 900px;
+}
+
+.dilek-istek-form {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-out;
+}
+
+    .dilek-istek-form::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.flex-row {
+    margin-bottom: 1.25rem;
+}
+
+.lf--label {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: #334155;
+}
+
+.lf--input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s;
+    color: #1e293b;
+    background-color: #f8fafc;
+}
+
+textarea.lf--input {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.lf--input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    background-color: white;
+}
+
+.lf--submit {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+}
+
+    .lf--submit:hover {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        transform: translateY(-1px);
+    }
+
+    .lf--submit:active {
+        transform: translateY(0);
+    }
+
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.alert-danger {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+.text-danger {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+    .checkbox-wrapper input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin-right: 0.5rem;
+        accent-color: #3b82f6;
+    }
+
+.input-icon {
+    display: flex;
+    align-items: center;
+}
+
+    .input-icon i {
+        font-size: 1.25rem;
+        margin-right: 0.75rem;
+        color: #64748b;
+    }
+
+.form-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

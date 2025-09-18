@@ -1,0 +1,549 @@
+﻿@model MZDNETWORK.Models.Dokumantasyon
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.form-group').hide();
+            $('.common-fields').show();
+
+            $('#category').change(function () {
+                var selectedCategory = $(this).val();
+                $('.form-group').hide();
+                $('.common-fields').show();
+                $('.' + selectedCategory).show();
+            });
+        });</script>
+
+    <link href="~/Content/Dokumantasyon.css" rel='stylesheet'>
+
+    <style>
+        .single-line-textarea {
+            white-space: break-spaces;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body style="color:black;">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal login-form">
+            <h4>Stok Kartı Talep Formu</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+            <div class="row">
+
+                <div class="col">
+
+                    <div class="flex-row common-fields">
+                        <label class="lf--label" for="TalepAdSoyad">
+                            <i class='bx bx-id-card'></i>
+                        </label>
+                        @Html.EditorFor(model => model.TalepAdSoyad, new { htmlAttributes = new { @class = "lf--input", placeholder = "Ad Soyadınızı Girin" } })
+                        @Html.ValidationMessageFor(model => model.TalepAdSoyad, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="flex-row common-fields">
+                        <label class="lf--label" for="TalepBirim">
+                            <i class='bx bx-building'></i>
+                        </label>
+                        @Html.EditorFor(model => model.TalepBirim, new { htmlAttributes = new { @class = "lf--input", placeholder = "Biriminizi Girin" } })
+                        @Html.ValidationMessageFor(model => model.TalepBirim, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="flex-row common-fields">
+                        <label class="lf--label" for="TalepUnvan">
+                            <i class='bx bx-briefcase'></i>
+                        </label>
+                        @Html.EditorFor(model => model.TalepUnvan, new { htmlAttributes = new { @class = "lf--input", placeholder = "Ünvanınızı Girin" } })
+                        @Html.ValidationMessageFor(model => model.TalepUnvan, "", new { @class = "text-danger" })
+                    </div>
+
+
+
+
+
+                   
+
+
+                    <div class="flex-row common-fields">
+                        <label class="lf--label" for="DokumantasyonSorumlu">
+                            <i class='bx bx-category'></i>
+                        </label>
+                        @Html.TextAreaFor(model => model.DokumantasyonSorumlu, new { @class = "form-control single-line-textarea", placeholder = "Dokumantasyon sorumlusu tarafından verilecek kod" })
+                        @Html.ValidationMessageFor(model => model.DokumantasyonSorumlu, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="flex-row common-fields">
+                        <label class="lf--label" for="DokumantasyonTarih">
+                            <i class='bx bx-user'></i>
+                        </label>
+                        @Html.EditorFor(model => model.DokumantasyonTarih, new { htmlAttributes = new { @class = "lf--input", placeholder = "Dokumantasyon Tarih", id = "DokumantasyonTarih" } })
+                        @Html.ValidationMessageFor(model => model.DokumantasyonTarih, "", new { @class = "text-danger" })
+                        <button type="button" class="btn btn-primary" id="setCurrentDate">Güncel Tarih</button>
+                    </div>
+
+                    <script>
+                        $(document).ready(function () {
+                            $('#setCurrentDate').click(function () {
+                                var currentDate = new Date();
+                                var day = String(currentDate.getDate()).padStart(2, '0');
+                                var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+                                var year = currentDate.getFullYear();
+                                $('#DokumantasyonTarih').val(day + '-' + month + '-' + year); // dd-mm-yyyy format
+                            });
+                        });
+                    </script>
+
+
+
+
+                    
+
+
+
+
+                    <div class="flex-row common-fields">
+                        <label class="lf--label" for="category">
+                            <i class='bx bx-category'></i>
+                        </label>
+                        <select id="category" class="lf--input">
+                            <option value="">Seçiniz</option>
+                            <option value="Hammade">Hammadde</option>
+                            <option value="MamulveYari">Mamul ve Yarı Mamül</option>
+                            <option value="UretimDokumani">Üretim Dokümanı</option>
+                            <option value="KablajTahtasi">Kablaj Tahtası</option>
+                            <option value="EpoksiKalibi">Epoksi Kalıbı</option>
+                            <option value="MakineKalibi">Makine Kalıbı</option>
+                            <option value="TestJigi">Test Jigi</option>
+                            <option value="EpoksiHavuzu">Epoksi Havuzu</option>
+                        </select>
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="col">
+
+
+
+
+
+
+                    <div class="form-group Hammade">
+                        Üretici Parça No
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.HamUreticiParcaNo, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.HamUreticiParcaNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group Hammade">
+                        Datasheet
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.HamDatasheet, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.HamDatasheet, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group Hammade">
+                        Tür
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.HamHammaddeTuru, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.HamHammaddeTuru, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group Hammade">
+                        Stok Birimi
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.HamStokBirimi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.HamStokBirimi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <!-- Diğer Hammade alanları buraya eklenir -->
+
+                    <div class="form-group MamulveYari">
+                        Firma Adı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.MamulFirmaAdi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.MamulFirmaAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group MamulveYari">
+                        Mamul Kodu
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.MamulMamulKodu, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.MamulMamulKodu, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group MamulveYari">
+                        Mamul Tür
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.MamulMamulTuru, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.MamulMamulTuru, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group MamulveYari">
+                        Mamul Stok Tanımı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.MamulStokTanimi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.MamulStokTanimi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group MamulveYari">
+                        Yarı Mamul Firma Adı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.YariMamulFirmaAdi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.YariMamulFirmaAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group MamulveYari">
+                        Yarı Mamul Türü
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.YariMamulYarimamulTuru, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.YariMamulYarimamulTuru, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group MamulveYari">
+                        Yarı Mamul Stok Tanımı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.YariMamulStokTanimi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.YariMamulStokTanimi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group MamulveYari">
+                        Yarı Mamul Bağlı Olduğu Mamul Kodu
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.YarimamulBagliMamulKodu, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.YarimamulBagliMamulKodu, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <!-- Diğer Mamul ve Yarı Mamul alanları buraya eklenir -->
+
+                    <div class="form-group UretimDokumani">
+                        Firma Adı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.UretimDokFirmaAdi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.UretimDokFirmaAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group UretimDokumani">
+                        Tür
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.UretimDokTur, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.UretimDokTur, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group UretimDokumani">
+                        Stok Tanımı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.UretimDokStokTanimi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.UretimDokStokTanimi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group UretimDokumani">
+                        Bağlı Olduğu Mamul Kodu
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.UretimDokBagliMamulKodu, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.UretimDokBagliMamulKodu, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <!-- Diğer Üretim Dokümanı alanları buraya eklenir -->
+
+                    <div class="form-group KablajTahtasi">
+                        Firma Adı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.KablajTahtasiFirmaAdi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.KablajTahtasiFirmaAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group KablajTahtasi">
+                        Tür
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.KablajTahtasiTuru, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.KablajTahtasiTuru, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group KablajTahtasi">
+                        Stok Tanımı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.KablajTahtasiStokTanimi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.KablajTahtasiStokTanimi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group KablajTahtasi">
+                        Bağlı Olduğu Kod
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.KablajTahtasiBagliKod, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.KablajTahtasiBagliKod, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <!-- Diğer Kablaj Tahtası alanları buraya eklenir -->
+
+                    <div class="form-group EpoksiKalibi">
+                        Firma Adı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiFirmaAdi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiFirmaAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group EpoksiKalibi">
+                        Hammadde Paça Kodu
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiHammadeParcaNo, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiHammadeParcaNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group EpoksiKalibi">
+                        Yükseklik
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiYukseklik, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiYukseklik, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group EpoksiKalibi">
+                        Tür
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiTur, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiTur, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group EpoksiKalibi">
+                        Stok Tanımı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiStokTanimi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiStokTanimi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group EpoksiKalibi">
+                        Bağlı Olduğu Kod
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiBagliKod, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiBagliKod, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="form-group MakineKalibi">
+                        Firma Adı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.MakinaFirmaAdi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.MakinaFirmaAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group MakineKalibi">
+                        Makine Yatırım No
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.MakinaYatirimNo, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.MakinaYatirimNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group MakineKalibi">
+                        Hamma Parça No
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.MakinaHammadeParcaNo, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.MakinaHammadeParcaNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group MakineKalibi">
+                        Tür
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.MakinaTur, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.MakinaTur, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group MakineKalibi">
+                        Stok Tanımı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.MakinaStokTanimi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.MakinaStokTanimi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="form-group TestJigi">
+                        Konnektör Türü
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.TestKonnektorTur, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.TestKonnektorTur, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group TestJigi">
+                        Hammadde Parça No
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.TestHammadeParcaNo, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.TestHammadeParcaNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group TestJigi">
+                        MZD Jig No - Sıra No
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.TestJigNoSiraNo, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.TestJigNoSiraNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group TestJigi">
+                        Parça Kodu Açıklama
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.TestParcaAciklama, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.TestParcaAciklama, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group TestJigi">
+                        Stok Tanımı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.TestStokTanimi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.TestStokTanimi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group EpoksiHavuzu">
+                        Firma Adı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiHavFirmaAdi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiHavFirmaAdi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group EpoksiHavuzu">
+                        Hammadde Parça No
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiHavHammadeParcaNo, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiHavHammadeParcaNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group EpoksiHavuzu">
+                        En
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiHavEn, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiHavEn, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group EpoksiHavuzu">
+                        Boy
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiHavBoy, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiHavBoy, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group EpoksiHavuzu">
+                        Derinlik
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiHavDerinlik, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiHavDerinlik, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group EpoksiHavuzu">
+                        Tür
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiHavTur, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiHavTur, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group EpoksiHavuzu">
+                        Stok Tanımı
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiHavStokTanimi, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiHavStokTanimi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group EpoksiHavuzu">
+                        Bağlı Olduğu Kod
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.EpoksiHavBagliKod, new { @class = "form-control single-line-textarea"})
+                            @Html.ValidationMessageFor(model => model.EpoksiHavBagliKod, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group common-fields">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Kaydet" class="btn btn-success" />
+                            @Html.ActionLink("Geri Dön", "Index_sorumlu", null, new { @class = "btn btn-secondary" })
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    }
+
+    <div>
+
+    </div>
+</body>
+</html>

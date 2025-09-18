@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "Performans İzleme";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Mevcut layout'unuza göre değiştirin
+}
+
+<div class="container mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-8">Sistem Performans İzleme</h1>
+
+    <!-- Ana Dashboard Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- CPU Kullanımı Kartı -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-700">CPU Kullanımı</h2>
+                <span class="cpu-usage text-2xl font-bold text-blue-600">0%</span>
+            </div>
+            <div class="relative pt-1">
+                <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200">
+                    <div id="cpu-bar" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <canvas id="cpuChart" height="150"></canvas>
+            </div>
+        </div>
+
+        <!-- RAM Kullanımı Kartı -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-700">RAM Kullanımı</h2>
+                <span class="ram-usage text-2xl font-bold text-green-600">0 MB / 0 GB</span>
+            </div>
+            <div class="relative pt-1">
+                <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-green-200">
+                    <div id="ram-bar" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <canvas id="ramChart" height="150"></canvas>
+            </div>
+        </div>
+
+        <!-- Disk Kullanımı Kartı -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-700">Disk Kullanımı</h2>
+                <span class="disk-usage text-2xl font-bold text-purple-600">0 GB / 0 GB</span>
+            </div>
+            <div class="relative pt-1">
+                <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-purple-200">
+                    <div id="disk-bar" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-500" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <canvas id="diskChart" height="150"></canvas>
+            </div>
+        </div>
+
+        <!-- Aktif Oturumlar Kartı -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-700">Aktif Oturumlar</h2>
+                <span class="active-sessions text-2xl font-bold text-yellow-600">0</span>
+            </div>
+            <div class="mt-4">
+                <canvas id="sessionsChart" height="150"></canvas>
+            </div>
+        </div>
+
+        <!-- Sayfa Yükleme Süresi Kartı -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-700">Sayfa Yükleme Süresi</h2>
+                <span class="load-time text-2xl font-bold text-red-600">0 ms</span>
+            </div>
+            <div class="mt-4">
+                <canvas id="loadTimeChart" height="150"></canvas>
+            </div>
+        </div>
+
+        <!-- Anlık İstek Sayısı Kartı -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-700">Anlık İstek Sayısı</h2>
+                <span class="requests-count text-2xl font-bold text-indigo-600">0 / sn</span>
+            </div>
+            <div class="mt-4">
+                <canvas id="requestsChart" height="150"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Sistem Durumu ve Servisler -->
+    <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">Sistem Durumu</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-gray-100 p-4 rounded">
+                <div class="flex items-center">
+                    <div id="server-status-indicator" class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                    <span class="text-gray-700">Web Sunucusu</span>
+                    <span id="server-status" class="ml-auto text-green-500 font-medium">Çalışıyor</span>
+                </div>
+            </div>
+            <div class="bg-gray-100 p-4 rounded">
+                <div class="flex items-center">
+                    <div id="db-status-indicator" class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                    <span class="text-gray-700">Veritabanı</span>
+                    <span id="db-status" class="ml-auto text-green-500 font-medium">Çalışıyor</span>
+                </div>
+            </div>
+            <div class="bg-gray-100 p-4 rounded">
+                <div class="flex items-center">
+                    <div id="cache-status-indicator" class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                    <span class="text-gray-700">Önbellek Sistemi</span>
+                    <span id="cache-status" class="ml-auto text-green-500 font-medium">Çalışıyor</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Günlük Trafik İstatistikleri -->
+    <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">Günlük Trafik İstatistikleri</h2>
+        <canvas id="trafficChart" height="100" style="max-height: 300px; height: 300px; width: 100%;"></canvas>
+    </div>
+
+    <!-- Sunucu Bilgileri -->
+    <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">Sunucu Bilgileri</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <div class="mb-2">
+                    <span class="text-gray-600 font-medium">Sunucu Adı:</span>
+                    <span id="server-name" class="text-gray-800 ml-2">-</span>
+                </div>
+                <div class="mb-2">
+                    <span class="text-gray-600 font-medium">İşletim Sistemi:</span>
+                    <span id="server-os" class="text-gray-800 ml-2">-</span>
+                </div>
+                <div class="mb-2">
+                    <span class="text-gray-600 font-medium">Çalışma Süresi:</span>
+                    <span id="server-uptime" class="text-gray-800 ml-2">-</span>
+                </div>
+            </div>
+            <div>
+                <div class="mb-2">
+                    <span class="text-gray-600 font-medium">IP Adresi:</span>
+                    <span id="server-ip" class="text-gray-800 ml-2">-</span>
+                </div>
+                <div class="mb-2">
+                    <span class="text-gray-600 font-medium">CPU:</span>
+                    <span id="server-cpu" class="text-gray-800 ml-2">-</span>
+                </div>
+                <div class="mb-2">
+                    <span class="text-gray-600 font-medium">Toplam RAM:</span>
+                    <span id="server-ram" class="text-gray-800 ml-2">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/chart.js"></script>
+    <script src="~/Scripts/performance-monitor.js"></script>
+}

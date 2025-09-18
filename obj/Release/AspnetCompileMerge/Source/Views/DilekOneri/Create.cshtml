@@ -1,0 +1,86 @@
+@model MZDNETWORK.Models.DilekOneri
+
+@{
+    ViewBag.Title = "Yeni Dilek ve Öneri";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dilek ve Öneri Formu</title>
+    <link href="~/Content/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/dilekcreate.css" />
+</head>
+
+<body>
+    <div class="container">
+        <form id="dilekForm" class="dilek-istek-form" action="@Url.Action("Create", "DilekOneri")" method="post">
+            <h2 class="form-title">
+                <i class='bx bx-bulb' style="color: #3b82f6;"></i>
+                Dilek ve Öneri Formu
+            </h2>
+            @Html.AntiForgeryToken()
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.ErrorMessage
+                </div>
+            }
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="Anonymous" name="Anonymous" onclick="toggleUsername()">
+                <label for="Anonymous">İsimsiz Gönder</label>
+            </div>
+
+            <div class="flex-row" id="usernameRow">
+                <div class="input-icon">
+                    <i class='bx bx-id-card'></i>
+                    @Html.TextBoxFor(model => model.Username, new { @class = "lf--input", value = User.Identity.Name, @readonly = "readonly", id = "Username" })
+                </div>
+            </div>
+
+
+            @Html.HiddenFor(model => model.IsAnonymous, new { id = "IsAnonymous" })
+
+            <div class="flex-row">
+                <div class="input-icon">
+                    <i class='bx bx-message-dots'></i>
+                    @Html.TextAreaFor(model => model.Mesaj, new { @class = "lf--input", placeholder = "Dilek ve önerileriniz", rows = "5" })
+                </div>
+                @Html.ValidationMessageFor(model => model.Mesaj, "", new { @class = "text-danger", id = "MesajError" })
+            </div>
+
+            <input class="lf--submit" type="submit" value="Gönder">
+
+            <div class="form-footer">
+                Dilek ve önerileriniz bizim için değerlidir.
+            </div>
+        </form>
+    </div>
+    <script>
+        function toggleUsername() {
+            var usernameRow = document.getElementById("usernameRow");
+            var anonymousCheckbox = document.getElementById("Anonymous");
+            var isAnonymousField = document.getElementById("IsAnonymous");
+
+            usernameRow.style.display = anonymousCheckbox.checked ? 'none' : '';
+            isAnonymousField.value = anonymousCheckbox.checked;
+        }
+    </script>
+</body>

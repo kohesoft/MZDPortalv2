@@ -1,0 +1,109 @@
+﻿@model MZDNETWORK.Models.Survey
+
+<link rel="stylesheet" href="~/Content/tailwind.min.css" />
+
+<h2 class="text-2xl font-bold mb-6">Yeni Anket Oluştur</h2>
+<form method="post" class="space-y-6">
+    <div>
+        <label class="block font-medium mb-1">Anket Başlığı</label>
+        <input type="text" class="form-input w-1/2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" name="Title" required />
+    </div>
+
+    <div>
+        <label class="block font-medium mb-1">Açıklama</label>
+        <textarea class="form-input w-1/2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" name="Description"></textarea>
+    </div>
+
+    <div>
+        <label class="block font-medium mb-1">Süre (dakika)</label>
+        <div class="flex flex-wrap gap-2 mb-2">
+            <button type="button" class="duration-button px-3 py-1 rounded border border-red-500 text-red-500 hover:bg-red-50 text-sm" data-minutes="30">30 Dakika</button>
+            <button type="button" class="duration-button px-3 py-1 rounded border border-red-500 text-red-500 hover:bg-red-50 text-sm" data-minutes="60">1 Saat</button>
+            <button type="button" class="duration-button px-3 py-1 rounded border border-red-500 text-red-500 hover:bg-red-50 text-sm" data-minutes="600">10 Saat</button>
+            <button type="button" class="duration-button px-3 py-1 rounded border border-red-500 text-red-500 hover:bg-red-50 text-sm" data-minutes="1440">1 Gün</button>
+        </div>
+        <input type="number" class="form-input w-1/2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" id="duration-input" name="Duration" required placeholder="Butonlardan süre ekleyebilir yada düzenleme yapabilisiniz" />
+    </div>
+
+    <h3 class="text-xl font-semibold mt-8 mb-2">Sorular</h3>
+    <div id="questions-container" class="space-y-4">
+        <!-- Sorular buraya eklenecek -->
+    </div>
+
+    <div class="flex gap-4 mt-6">
+        <button type="button" id="add-question" class="px-4 py-2 rounded bg-yellow-400 text-white hover:bg-yellow-500 font-semibold">Soru Ekle</button>
+        <button type="submit" class="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700 font-semibold">Kaydet</button>
+    </div>
+</form>
+
+@section scripts {
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script>
+        var questionIndex = 0;
+
+        $("#add-question").click(function () {
+            var html = `
+                    <div class="question-item border border-gray-200 rounded p-4 bg-gray-50">
+                        <hr class="my-2">
+                        <label class="block font-medium mb-1">Soru Metni</label>
+                        <input type="text" class="form-input w-1/2 border border-gray-300 rounded px-3 py-2 mb-2" name="Questions[${questionIndex}].QuestionText" required />
+
+                        <label class="block font-medium mb-1">Soru Tipi</label>
+                        <select class="form-input w-1/2 border border-gray-300 rounded px-3 py-2 mb-2 question-type" name="Questions[${questionIndex}].Type">
+                            <option value="Text">Serbest Metin</option>
+                            <option value="Radio">Tek Seçenek (Radio)</option>
+                            <option value="Checkbox">Çoklu Seçenek (Checkbox)</option>
+                        </select>
+
+                        <div class="answer-options mt-2" data-index="${questionIndex}" style="display:none;">
+                            <h4 class="font-semibold mb-2">Seçenekler</h4>
+                            <div class="options-container space-y-2"></div>
+                            <button type="button" class="add-option px-2 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300 text-xs">Seçenek Ekle</button>
+                        </div>
+                        <button type="button" class="remove-question px-2 py-1 rounded bg-red-500 text-white hover:bg-red-600 text-xs mt-2">Soru Sil</button>
+                    </div>`;
+
+            $("#questions-container").append(html);
+            questionIndex++;
+        });
+
+        $(document).on("change", ".question-type", function () {
+            var parent = $(this).closest(".question-item");
+            var answerOptionsDiv = parent.find(".answer-options");
+
+            if ($(this).val() == "Radio" || $(this).val() == "Checkbox") {
+                answerOptionsDiv.show();
+            } else {
+                answerOptionsDiv.hide();
+            }
+        });
+
+        $(document).on("click", ".add-option", function () {
+            var container = $(this).siblings(".options-container");
+            var index = $(this).closest(".answer-options").data("index");
+            var optionIndex = container.children().length;
+
+            var optionHtml = `
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="form-input w-1/2 border border-gray-300 rounded px-3 py-1" name="Questions[${index}].AnswerOptions[${optionIndex}].OptionText" required />
+                        <button type="button" class="remove-option px-2 py-1 rounded bg-red-400 text-white hover:bg-red-500 text-xs">Sil</button>
+                    </div>`;
+
+            container.append(optionHtml);
+        });
+
+        $(document).on("click", ".remove-option", function () {
+            $(this).parent().remove();
+        });
+
+        $(document).on("click", ".remove-question", function () {
+            $(this).closest(".question-item").remove();
+        });
+
+        $(".duration-button").click(function () {
+            var minutesToAdd = parseInt($(this).data("minutes"));
+            var currentDuration = parseInt($("#duration-input").val()) || 0;
+            $("#duration-input").val(currentDuration + minutesToAdd);
+        });
+    </script>
+}

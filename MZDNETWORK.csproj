@@ -82,6 +82,15 @@
     <Reference Include="EPPlus.System.Drawing, Version=7.5.0.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
       <HintPath>packages\EPPlus.System.Drawing.7.5.0\lib\net462\EPPlus.System.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="Hangfire.AspNet, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Hangfire.AspNet.0.3.0\lib\net45\Hangfire.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.8.21.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Hangfire.Core.1.8.21\lib\net46\Hangfire.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer, Version=1.8.21.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Hangfire.SqlServer.1.8.21\lib\net451\Hangfire.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlSanitizer, Version=9.0.0.0, Culture=neutral, PublicKeyToken=61c49a1a9e79cc28, processorArchitecture=MSIL">
       <HintPath>packages\HtmlSanitizer.9.0.886\lib\net47\HtmlSanitizer.dll</HintPath>
     </Reference>
@@ -905,10 +914,11 @@
     <Content Include="Content\kml\mamak-2.kml" />
     <Content Include="Content\kml\mamak-3.kml" />
     <Content Include="Content\kml\sincan_etimesgut.kml" />
+    <Content Include="Dockerfile" />
+    <Content Include=".dockerignore" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\PublishProfiles\MzdPortal.pubxml" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
@@ -2631,6 +2641,7 @@
   <ItemGroup>
     <Folder Include="Content\tiles\" />
     <Folder Include="logs\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

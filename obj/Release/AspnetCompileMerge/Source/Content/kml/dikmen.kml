@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>digerleri.xlsx</name>
+    <Style id="icon-1899-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-A52714-8944-nodesc-normal">
+      <LineStyle>
+        <color>ff1427a5</color>
+        <width>8.944</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-A52714-8944-nodesc-highlight">
+      <LineStyle>
+        <color>ff1427a5</color>
+        <width>13.416</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-A52714-8944-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-A52714-8944-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-A52714-8944-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>HARBİYE MAH. SALKIM SÖĞÜT CAD. NO:19/18 ÇANKAYA</name>
+      <address>HARBİYE MAH. SALKIM SÖĞÜT CAD. NO:19/18 ÇANKAYA</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>HUZUR MAH. 1112 CAD 18/3 ÖZGE APART ANKARA ÇANKAYA</name>
+      <address>HUZUR MAH. 1112 CAD 18/3 ÖZGE APART ANKARA ÇANKAYA</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>MUHSİN ERTUĞRUL MAH. BALLIBABA SOKAK 50.YIL APT. 121B/ 24  ÇANKAYA</name>
+      <address>MUHSİN ERTUĞRUL MAH. BALLIBABA SOKAK 50.YIL APT. 121B/ 24  ÇANKAYA</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>KAVAKLIDERE MAH. BAĞIŞ SK.NEDİM MERİÇ APT. NO:5/3</name>
+      <address>KAVAKLIDERE MAH. BAĞIŞ SK.NEDİM MERİÇ APT. NO:5/3</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>NAMDAR SOKAK İLKADIM MAH. AYFER APART. NO:12 DİKMEN</name>
+      <address>NAMDAR SOKAK İLKADIM MAH. AYFER APART. NO:12 DİKMEN</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>KIRKKONAKLAR MAH. ŞEMŞETTİN GÜNALTAY CAD. 302 SOK. 14/6 </name>
+      <address>KIRKKONAKLAR MAH. ŞEMŞETTİN GÜNALTAY CAD. 302 SOK. 14/6</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>ETLİK MAH. VARTO CAD. NO:5/9 ETLİK</name>
+      <address>ETLİK MAH. VARTO CAD. NO:5/9 ETLİK</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>SEYRANBAĞLARI 140. CAD 8/1</name>
+      <address>SEYRANBAĞLARI 140. CAD 8/1</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>SERHAT MAH. MEHMET ZAHİT KOTKU CADDESİ ŞEYMA KENT SİTESİ D/18 </name>
+      <address>SERHAT MAH. MEHMET ZAHİT KOTKU CADDESİ ŞEYMA KENT SİTESİ D/18</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>BARIŞTEPE MAH.ÇAMLIDERE CADDESİ 737. SOKAK NO: 23 KARAKAYA APT. ŞENTEPE</name>
+      <address>BARIŞTEPE MAH.ÇAMLIDERE CADDESİ 737. SOKAK NO: 23 KARAKAYA APT. ŞENTEPE</address>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>Lizbon Cd. No:81 D:19</name>
+      <styleUrl>#icon-1899-A52714-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.8239991,39.8821269,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name/>
+      <styleUrl>#line-A52714-8944-nodesc</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          32.8705188,39.9182242,0
+          32.8682014,39.9185862,0
+          32.8651115,39.9204294,0
+          32.8636524,39.9219434,0
+          32.8628584,39.919047,0
+          32.8631588,39.9172532,0
+          32.8622362,39.915377,0
+          32.862086,39.910423,0
+          32.8610131,39.9108181,0
+          32.859554,39.9104395,0
+          32.8574297,39.9103078,0
+          32.8580734,39.9089746,0
+          32.8564855,39.9085631,0
+          32.8549191,39.9083985,0
+          32.8548547,39.907806,0
+          32.8527304,39.9075262,0
+          32.8528163,39.9051559,0
+          32.8471967,39.9052363,0
+          32.8465959,39.9054668,0
+          32.8423258,39.8971538,0
+          32.8394076,39.8844767,0
+          32.8394076,39.8813812,0
+          32.8242585,39.886222,0
+          32.8125426,39.8871441,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>

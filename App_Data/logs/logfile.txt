@@ -1,0 +1,1038 @@
+2025-09-15 07:33:15.8929|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-15 07:33:18.3478|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-15 07:33:25.3909|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-15 07:33:25.3909|INFO|MZDNETWORK.MvcApplication|Starting overtime service scheduler...|
+2025-09-15 07:33:25.3909|INFO|MZDNETWORK.MvcApplication|Overtime service scheduler started successfully|
+2025-09-15 07:33:25.3909|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-15 07:33:25.6964|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:25.6964|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:25.6964|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:25.6964|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:25.7014|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:25.7014|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:25.8454|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:25.8454|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:25.8786|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:25.8786|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:29.6869|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.6869|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:29.7029|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7029|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7029|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7029|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7029|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7029|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7029|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7029|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7029|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7029|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7029|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7029|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7029|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7029|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7029|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7029|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7029|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7129|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7129|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7129|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7129|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7129|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7129|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7129|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7279|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7279|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7279|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7279|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7279|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7279|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:29.7479|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7479|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:29.7479|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7479|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:29.7479|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7479|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:29.7479|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7479|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:29.7479|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7479|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:29.7479|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.7479|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:29.8339|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.8339|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:29.8976|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.8976|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:29.9616|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:29.9616|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:30.0230|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:30.0230|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:32.7510|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:32.7510|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:32.7970|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:32.7970|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:34.5168|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:34.5168|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:34.6440|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:34.6440|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:34.6440|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:34.6440|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:34.6440|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:34.6440|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:34.6440|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:34.6440|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:34.6440|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:34.6440|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:34.6440|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:34.6440|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:34.6860|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:34.6860|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:34.7303|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:34.7303|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:34.7303|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:34.7303|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:34.7303|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:34.7303|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:35.0184|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:35.0184|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:35.0184|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:35.0184|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:35.1891|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:35.1891|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:35.1981|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:35.1981|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:35.2798|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:35.2798|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:36.4770|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:36.4770|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:37.9103|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:37.9103|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:37.9176|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:37.9176|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:37.9176|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:37.9176|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:37.9176|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:37.9176|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:38.0092|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:38.0092|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:38.0092|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:38.0092|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:38.0444|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:38.0444|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:38.0444|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:38.0444|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:38.0629|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:38.0629|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:38.7480|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:38.7480|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:39.3933|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:39.3933|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:39.4099|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:39.4099|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:39.4099|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:39.4099|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:39.4099|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:39.4156|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:39.5088|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:39.5088|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:39.5148|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:39.5148|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:39.5361|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:39.5361|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:39.5435|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:39.5435|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:39.5563|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:39.5563|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:41.0226|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:41.0226|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:41.1517|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:41.1517|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:41.1517|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:41.1517|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:41.1517|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:41.1517|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:41.1517|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:41.1517|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:41.2194|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:41.2194|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:41.2497|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:41.2497|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:41.2849|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:41.2849|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:41.2909|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:41.2909|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:41.3194|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:41.3194|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:41.9662|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:41.9662|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:42.0904|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:42.0904|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:42.0904|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:42.0904|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:42.1441|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:42.1441|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:42.1659|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:42.1659|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:42.1822|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:42.1822|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-15 07:33:42.1822|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:42.1822|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:42.2001|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:42.2001|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-15 07:33:44.5851|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-15 07:33:44.5851|WARN|MZDNETWORK.MvcApplication|FormsIdentity is null|
+2025-09-18 08:28:02.1893|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 08:28:04.5633|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 08:28:09.2705|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 08:28:09.2705|INFO|MZDNETWORK.MvcApplication|Starting overtime service scheduler...|
+2025-09-18 08:28:09.2705|INFO|MZDNETWORK.MvcApplication|Overtime service scheduler started successfully|
+2025-09-18 08:28:09.2705|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 08:28:27.3647|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 08:28:27.4790|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 08:28:32.4202|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 08:28:32.4202|INFO|MZDNETWORK.MvcApplication|Starting overtime service scheduler...|
+2025-09-18 08:28:32.4202|INFO|MZDNETWORK.MvcApplication|Overtime service scheduler started successfully|
+2025-09-18 08:28:32.4202|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 08:28:37.5733|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:37.5733|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:37.5733|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:37.5733|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:37.5733|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:37.5733|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:37.7583|INFO|MZDNETWORK.MvcApplication|Application_Error called|
+2025-09-18 08:28:37.7694|ERROR|MZDNETWORK.MvcApplication|Unhandled exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 08:28:44.4198|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4198|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4265|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4265|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4265|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4265|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4265|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4265|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4265|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4265|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4415|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4415|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4415|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4415|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4415|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4415|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4415|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4415|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4415|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4415|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4415|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4415|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4415|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4415|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.4870|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.4870|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.8630|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.8630|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.8630|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.8630|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:44.9193|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:44.9193|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:45.0803|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:45.0803|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:28:45.2185|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:28:45.2185|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:44.8927|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:44.8927|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:51.3638|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:51.3638|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:52.0183|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:52.0183|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:52.0512|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:52.0512|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:52.0512|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:52.0512|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:52.0869|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:52.0869|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:52.2238|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:52.2238|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:52.2507|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:52.2507|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:52.2726|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:52.2726|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:52.2871|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:52.2871|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:54.0502|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:54.0502|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:54.1112|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:54.1112|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:54.1245|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:54.1245|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:54.1812|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:54.1812|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:54.2088|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:54.2088|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:54.2226|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:54.2226|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:54.2226|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:54.2226|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:55.8970|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:55.8970|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:56.4366|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:56.4366|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:56.4462|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:56.4462|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:56.4462|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:56.4462|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:56.5382|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:56.5382|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:56.5382|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:56.5382|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:57.5519|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:57.5519|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:57.5788|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:57.5788|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:29:57.5956|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:29:57.5956|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:23.7494|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:23.7494|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:23.8193|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:23.8193|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:23.8193|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:23.8193|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:23.8688|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:23.8688|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:23.8993|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:23.8993|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:23.9200|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:23.9200|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:23.9330|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:23.9330|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:24.5444|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:24.5444|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:24.6059|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:24.6059|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:24.6059|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:24.6059|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:24.6439|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:24.6439|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:24.6698|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:24.6698|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:24.6975|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:24.6975|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:24.7089|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:24.7089|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:25.8724|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:25.8724|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:25.9283|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:25.9283|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:25.9283|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:25.9283|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:25.9828|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:25.9828|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.0081|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.0081|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.0329|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.0329|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.0449|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.0449|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.4342|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.4342|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.5083|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.5083|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.5083|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.5083|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.5551|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.5551|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.5737|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.5737|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.6052|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.6052|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.6155|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.6155|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.9389|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.9389|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:26.9974|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:26.9974|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.0101|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.0101|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.0531|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.0531|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.0855|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.0855|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.0980|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.0980|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.0980|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.0980|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.5588|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.5588|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.6179|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.6179|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.6317|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.6317|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.6780|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.6780|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.7097|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.7097|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.7238|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.7238|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:30:27.7238|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:30:27.7238|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:28.3954|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:28.3954|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.1601|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.1601|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.2640|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.2640|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.2770|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.2770|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.4306|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.4306|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.4673|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.4673|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.4852|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.4852|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.4975|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.4975|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.6722|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.6722|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.7385|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.7385|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.7385|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.7385|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.8005|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.8005|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.8300|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.8300|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.8452|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.8452|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:35.8572|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:35.8572|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:36.5862|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:36.5862|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:36.6528|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:36.6528|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:36.6626|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:36.6626|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:36.7112|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:36.7112|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:36.7112|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:36.7112|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:36.7519|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:36.7519|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:31:36.7669|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:31:36.7669|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:07.8834|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:07.8834|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:07.9633|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:07.9633|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:07.9721|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:07.9721|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:08.0175|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:08.0175|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:08.0382|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:08.0382|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:08.0602|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:08.0602|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:08.0829|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:08.0829|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:08.5858|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:08.5858|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:08.6707|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:08.6707|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:08.6879|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:08.6879|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:08.8407|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:08.8407|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:08.8943|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:08.8943|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:08.8943|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:08.8943|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:08.9183|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:08.9183|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:09.3079|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:09.3079|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:09.3816|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:09.3816|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:09.3816|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:09.3816|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:09.4551|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:09.4551|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:09.4754|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:09.4754|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:09.4934|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:09.4934|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:09.5065|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:09.5065|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:32:16.6567|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:32:16.6567|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:20.2560|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 08:45:22.5642|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 08:45:26.9790|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 08:45:26.9790|INFO|MZDNETWORK.MvcApplication|Starting recurring job setup with Hangfire...|
+2025-09-18 08:45:27.0030|ERROR|MZDNETWORK.MvcApplication|Failed to set up recurring job with Hangfire|System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For NET Framework applications please use GlobalConfiguration.UseXXXStorage method, where XXX is the storage type, like `UseSqlServerStorage`.
+   konum: Hangfire.JobStorage.get_Current() C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs içinde: satır 42
+   konum: Hangfire.RecurringJob.<>c.<.cctor>b__66_0() C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 28
+   konum: Hangfire.RecurringJob.AddOrUpdate(String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 270
+   konum: MZDNETWORK.MvcApplication.Application_Start() C:\Users\Berat\Documents\GitHub\MZDPortalv2\Global.asax.cs içinde: satır 59
+2025-09-18 08:45:27.0720|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 08:45:27.5485|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Start installing Hangfire SQL objects...|
+2025-09-18 08:45:28.3662|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Hangfire SQL objects installed.|
+2025-09-18 08:45:28.4122|INFO|Hangfire.BackgroundJobServer|Starting Hangfire Server using job storage: 'SQL Server: 192.168.1.102,1433@MZDPORTAL_DBV2'|
+2025-09-18 08:45:28.4122|INFO|Hangfire.BackgroundJobServer|Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.|
+2025-09-18 08:45:28.4122|INFO|Hangfire.BackgroundJobServer|Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15|
+2025-09-18 08:45:28.4412|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.StopListening shutdown trigger initialized successfully.|
+2025-09-18 08:45:28.4412|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop BackgroundServerProcess:c83c05aa has started in 13,7522 ms|
+2025-09-18 08:45:28.4412|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.ShutdownReason shutdown trigger initialized successfully.|
+2025-09-18 08:45:28.4412|DEBUG|Hangfire.Server.AspNetShutdownDetector|HttpRuntime._disposingHttpRuntime shutdown trigger initialized successfully.|
+2025-09-18 08:45:28.6216|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:28.6216|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:28.6216|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:28.6216|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:28.6216|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:28.6216|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:28.7139|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:6052:5656711b successfully announced in 261,8464 ms|
+2025-09-18 08:45:28.7240|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:6052:5656711b is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, SqlServerHeartbeatProcess, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...|
+2025-09-18 08:45:28.7240|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerHeartbeatProcess:e732fadf has started in 11,1581 ms|
+2025-09-18 08:45:28.7394|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerWatchdog:50a930b2 has started in 14,4888 ms|
+2025-09-18 08:45:28.7394|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerJobCancellationWatcher:67d1131a has started in 15,1209 ms|
+2025-09-18 08:45:28.7609|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop SqlServerHeartbeatProcess:11ed5cdb has started in 17,2648 ms|
+2025-09-18 08:45:28.7699|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ExpirationManager:87d64778 has started in 13,6202 ms|
+2025-09-18 08:45:28.7849|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'AggregatedCounter' table...|
+2025-09-18 08:45:28.7849|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:58807278 has started in 9,9422 ms|
+2025-09-18 08:45:28.7849|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop CountersAggregator:db6c67d1 has started in 19,9476 ms|
+2025-09-18 08:45:28.7849|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 08:45:28.7849|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:9b978f20 has started in 19,2022 ms|
+2025-09-18 08:45:28.8059|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:ca9255cd has started in 30,8317 ms|
+2025-09-18 08:45:28.8059|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:335ead0b has started in 36,9777 ms|
+2025-09-18 08:45:28.8179|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:169b819b has started in 43,3007 ms|
+2025-09-18 08:45:28.8179|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:78d6788a has started in 53,5723 ms|
+2025-09-18 08:45:28.8339|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:afadf63b has started in 58,6725 ms|
+2025-09-18 08:45:28.8339|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:185f7595 has started in 65,3707 ms|
+2025-09-18 08:45:28.8479|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:dc10de95 has started in 73,1283 ms|
+2025-09-18 08:45:28.8479|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:4aaf0774 has started in 80,6213 ms|
+2025-09-18 08:45:28.8479|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Job' table...|
+2025-09-18 08:45:28.8629|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:7c9c2cf2 has started in 87,6303 ms|
+2025-09-18 08:45:28.8629|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:e361406b has started in 94,2812 ms|
+2025-09-18 08:45:28.8629|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:22e9e307 has started in 100,926 ms|
+2025-09-18 08:45:28.8849|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:d13d30ae has started in 110,3884 ms|
+2025-09-18 08:45:28.8849|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'List' table...|
+2025-09-18 08:45:28.8939|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:df0dbbb8 has started in 118,9563 ms|
+2025-09-18 08:45:28.8939|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:e1efd80c has started in 125,8097 ms|
+2025-09-18 08:45:28.8939|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:452ebc2c has started in 131,9678 ms|
+2025-09-18 08:45:28.9179|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:f8da6a2d has started in 143,3763 ms|
+2025-09-18 08:45:28.9179|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Set' table...|
+2025-09-18 08:45:28.9179|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:213d3406 has started in 150,0664 ms|
+2025-09-18 08:45:28.9308|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Hash' table...|
+2025-09-18 08:45:28.9308|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:dcb8c0fd has started in 162,6629 ms|
+2025-09-18 08:45:28.9489|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop DelayedJobScheduler:bbadd229 has started in 17,4231 ms|
+2025-09-18 08:45:28.9489|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:6052:5656711b all the dispatchers started|
+2025-09-18 08:45:28.9589|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop RecurringJobScheduler:bf367fb9 has started in 18,9966 ms|
+2025-09-18 08:45:29.0149|INFO|MZDNETWORK.MvcApplication|Application_Error called|
+2025-09-18 08:45:29.0149|ERROR|MZDNETWORK.MvcApplication|Unhandled exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 08:45:33.0421|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:33.0421|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:33.2105|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:33.2105|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:33.2374|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:33.2374|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:33.3376|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:33.3376|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:33.4830|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:33.4830|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:46.2665|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:46.2665|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:46.8406|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:46.8406|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:46.8686|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:46.8686|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:46.9587|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:46.9587|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:46.9587|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:46.9587|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:46.9947|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:46.9947|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:47.0067|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:47.0067|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:47.5531|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:47.5531|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:47.6278|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:47.6288|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:47.6288|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:47.6288|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:47.6895|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:47.6895|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:47.7185|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:47.7185|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:47.7315|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:47.7315|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:47.7434|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:47.7434|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:48.3646|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:48.3646|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:48.4416|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:48.4416|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:48.4416|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:48.4416|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:48.4416|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:48.4416|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:48.4566|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:48.4566|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:48.5322|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:48.5322|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:48.5442|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:48.5442|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:48.5642|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:48.5642|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:48.5782|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:48.5782|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:48.9451|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:48.9451|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:49.0111|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:49.0111|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:49.0221|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:49.0221|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:49.0571|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:49.0571|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:49.0812|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:49.0812|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:49.1091|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:49.1091|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:49.1231|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:45:49.1231|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:45:58.7964|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:6052:5656711b heartbeat successfully sent|
+2025-09-18 08:46:28.8093|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:6052:5656711b heartbeat successfully sent|
+2025-09-18 08:46:49.4001|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:46:49.4001|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:46:58.8178|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:6052:5656711b heartbeat successfully sent|
+2025-09-18 08:47:27.6706|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 08:47:27.7807|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 08:47:32.7156|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 08:47:32.7156|INFO|MZDNETWORK.MvcApplication|Starting recurring job setup with Hangfire...|
+2025-09-18 08:47:32.7378|ERROR|MZDNETWORK.MvcApplication|Failed to set up recurring job with Hangfire|System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For NET Framework applications please use GlobalConfiguration.UseXXXStorage method, where XXX is the storage type, like `UseSqlServerStorage`.
+   konum: Hangfire.JobStorage.get_Current() C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs içinde: satır 42
+   konum: Hangfire.RecurringJob.<>c.<.cctor>b__66_0() C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 28
+   konum: Hangfire.RecurringJob.AddOrUpdate(String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 270
+   konum: MZDNETWORK.MvcApplication.Application_Start() C:\Users\Berat\Documents\GitHub\MZDPortalv2\Global.asax.cs içinde: satır 59
+2025-09-18 08:47:32.7991|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 08:47:38.4535|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Start installing Hangfire SQL objects...|
+2025-09-18 08:47:38.8491|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Hangfire SQL objects installed.|
+2025-09-18 08:47:38.9010|INFO|Hangfire.BackgroundJobServer|Starting Hangfire Server using job storage: 'SQL Server: 192.168.1.102,1433@MZDPORTAL_DBV2'|
+2025-09-18 08:47:38.9010|INFO|Hangfire.BackgroundJobServer|Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.|
+2025-09-18 08:47:38.9010|INFO|Hangfire.BackgroundJobServer|Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15|
+2025-09-18 08:47:38.9320|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.StopListening shutdown trigger initialized successfully.|
+2025-09-18 08:47:38.9320|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop BackgroundServerProcess:6d07ec9d has started in 12,7341 ms|
+2025-09-18 08:47:38.9320|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.ShutdownReason shutdown trigger initialized successfully.|
+2025-09-18 08:47:38.9320|DEBUG|Hangfire.Server.AspNetShutdownDetector|HttpRuntime._disposingHttpRuntime shutdown trigger initialized successfully.|
+2025-09-18 08:47:39.1384|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:47:39.1384|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:47:39.1384|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:47:39.1384|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:47:39.1384|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:47:39.1384|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:47:39.2357|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:4240:2bbc384c successfully announced in 292,286 ms|
+2025-09-18 08:47:39.2497|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:4240:2bbc384c is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, SqlServerHeartbeatProcess, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...|
+2025-09-18 08:47:39.2497|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerHeartbeatProcess:bade1674 has started in 12,3596 ms|
+2025-09-18 08:47:39.2607|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerWatchdog:70ebd5a5 has started in 7,7314 ms|
+2025-09-18 08:47:39.2607|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerJobCancellationWatcher:89c399ce has started in 12,1374 ms|
+2025-09-18 08:47:39.2777|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop SqlServerHeartbeatProcess:c8bff463 has started in 15,1271 ms|
+2025-09-18 08:47:39.2867|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ExpirationManager:8b2447a0 has started in 12,3771 ms|
+2025-09-18 08:47:39.2867|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop CountersAggregator:2375f107 has started in 13,909 ms|
+2025-09-18 08:47:39.2867|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'AggregatedCounter' table...|
+2025-09-18 08:47:39.2867|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 08:47:39.3067|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:2ea92d8e has started in 14,7721 ms|
+2025-09-18 08:47:39.3067|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:32d06e31 has started in 22,0539 ms|
+2025-09-18 08:47:39.3217|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:9de23902 has started in 30,3791 ms|
+2025-09-18 08:47:39.3217|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:d3bba863 has started in 37,2595 ms|
+2025-09-18 08:47:39.3366|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:d0138687 has started in 45,0173 ms|
+2025-09-18 08:47:39.3487|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:8c7b237c has started in 57,5322 ms|
+2025-09-18 08:47:39.3487|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:36ec05f3 has started in 57,6306 ms|
+2025-09-18 08:47:39.3487|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:f014bd98 has started in 64,2485 ms|
+2025-09-18 08:47:39.3627|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:5fda6612 has started in 70,7902 ms|
+2025-09-18 08:47:39.3627|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:27865a93 has started in 79,9258 ms|
+2025-09-18 08:47:39.3803|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:c7d49f02 has started in 88,7748 ms|
+2025-09-18 08:47:39.3803|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:eda6e1ee has started in 96,2404 ms|
+2025-09-18 08:47:39.3803|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Job' table...|
+2025-09-18 08:47:39.3943|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:f626defa has started in 102,51 ms|
+2025-09-18 08:47:39.3943|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:508a9dfd has started in 110,0212 ms|
+2025-09-18 08:47:39.4133|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:eae6b360 has started in 121,4142 ms|
+2025-09-18 08:47:39.4133|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:327fe9c0 has started in 130,5221 ms|
+2025-09-18 08:47:39.4333|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:4ea88096 has started in 141,8928 ms|
+2025-09-18 08:47:39.4333|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:220d7ff1 has started in 142,6639 ms|
+2025-09-18 08:47:39.4333|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:ebe82270 has started in 148,0314 ms|
+2025-09-18 08:47:39.4583|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:0dd3aa81 has started in 166,8597 ms|
+2025-09-18 08:47:39.4583|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'List' table...|
+2025-09-18 08:47:39.4763|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop DelayedJobScheduler:fa3e2617 has started in 48,4937 ms|
+2025-09-18 08:47:39.4763|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:4240:2bbc384c all the dispatchers started|
+2025-09-18 08:47:39.4763|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Set' table...|
+2025-09-18 08:47:39.4763|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop RecurringJobScheduler:78fc9856 has started in 14,7619 ms|
+2025-09-18 08:47:39.4763|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Hash' table...|
+2025-09-18 08:47:39.5680|INFO|MZDNETWORK.MvcApplication|Application_Error called|
+2025-09-18 08:47:39.5680|ERROR|MZDNETWORK.MvcApplication|Unhandled exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 08:47:40.7502|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:47:40.7502|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:47:42.9793|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:47:42.9793|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:47:42.9993|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:47:42.9993|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:47:43.1370|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:47:43.1370|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:47:43.2850|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:47:43.2850|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:09.2933|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:4240:2bbc384c heartbeat successfully sent|
+2025-09-18 08:48:14.4977|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:14.4977|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:14.7309|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:14.7309|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:14.7569|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:14.7569|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:14.9796|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:14.9796|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:14.9796|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:14.9796|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:14.9966|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:14.9966|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:15.0075|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:15.0075|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:15.4981|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:15.4981|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:15.5879|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:15.5879|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:15.6059|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:15.6059|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:15.7486|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:15.7486|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:15.7896|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:15.7896|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:15.8056|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:15.8056|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:15.8206|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:15.8206|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:16.2104|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:16.2104|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:16.2874|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:16.2874|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:16.2874|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:16.2874|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:16.4004|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:16.4004|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:16.4114|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:16.4114|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:16.4264|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:16.4264|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:16.4264|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:16.4264|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.0887|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.0887|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.1648|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.1648|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.1778|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.1778|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.2206|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.2206|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.2206|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.2226|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.2836|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.2836|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.2956|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.2956|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.6562|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.6562|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.7302|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.7302|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.7302|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.7302|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.8012|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.8012|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.8012|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.8012|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.8562|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.8562|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:22.8722|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:22.8722|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:23.1006|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:23.1006|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:23.1707|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:23.1707|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:23.1776|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:23.1776|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:23.2157|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:23.2157|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:23.2387|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:23.2387|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:23.2697|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:23.2697|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:23.2847|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:23.2847|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:26.5703|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:26.5703|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:26.6511|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:26.6511|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:26.6511|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:26.6511|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:26.7041|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:26.7041|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:26.7261|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:26.7261|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:26.7501|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:26.7501|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:26.7721|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:26.7721|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:26.9712|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:26.9712|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:27.0463|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:27.0463|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:27.0550|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:27.0550|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:27.0891|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:27.0891|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:27.1084|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:27.1084|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:27.1324|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:27.1324|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:27.1444|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:27.1444|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:27.9048|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:27.9048|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:27.9677|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:27.9677|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:27.9786|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:27.9786|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:28.0276|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:28.0276|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:28.0507|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:28.0507|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:28.0507|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:28.0507|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:28.0787|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:48:28.0787|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:48:39.2981|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:4240:2bbc384c heartbeat successfully sent|
+2025-09-18 08:49:09.3066|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:4240:2bbc384c heartbeat successfully sent|
+2025-09-18 08:49:10.0218|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.0218|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.1156|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.1156|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.1156|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.1156|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.1576|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.1576|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.1781|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.1781|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.2117|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.2117|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.2265|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.2265|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.4310|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.4310|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.5344|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.5344|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.5624|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.5624|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.7269|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.7269|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.7698|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.7698|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.7698|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.7698|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:10.7925|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:10.7925|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:42.8244|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 08:49:42.9331|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 08:49:47.9147|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 08:49:47.9147|INFO|MZDNETWORK.MvcApplication|Starting recurring job setup with Hangfire...|
+2025-09-18 08:49:47.9371|ERROR|MZDNETWORK.MvcApplication|Failed to set up recurring job with Hangfire|System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For NET Framework applications please use GlobalConfiguration.UseXXXStorage method, where XXX is the storage type, like `UseSqlServerStorage`.
+   konum: Hangfire.JobStorage.get_Current() C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs içinde: satır 42
+   konum: Hangfire.RecurringJob.<>c.<.cctor>b__66_0() C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 28
+   konum: Hangfire.RecurringJob.AddOrUpdate(String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 270
+   konum: MZDNETWORK.MvcApplication.Application_Start() C:\Users\Berat\Documents\GitHub\MZDPortalv2\Global.asax.cs içinde: satır 59
+2025-09-18 08:49:48.0000|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 08:49:53.8071|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Start installing Hangfire SQL objects...|
+2025-09-18 08:49:54.1986|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Hangfire SQL objects installed.|
+2025-09-18 08:49:54.2536|INFO|Hangfire.BackgroundJobServer|Starting Hangfire Server using job storage: 'SQL Server: 192.168.1.102,1433@MZDPORTAL_DBV2'|
+2025-09-18 08:49:54.2536|INFO|Hangfire.BackgroundJobServer|Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.|
+2025-09-18 08:49:54.2536|INFO|Hangfire.BackgroundJobServer|Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15|
+2025-09-18 08:49:54.2866|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.StopListening shutdown trigger initialized successfully.|
+2025-09-18 08:49:54.2866|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop BackgroundServerProcess:87483d6b has started in 15,1186 ms|
+2025-09-18 08:49:54.2866|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.ShutdownReason shutdown trigger initialized successfully.|
+2025-09-18 08:49:54.2866|DEBUG|Hangfire.Server.AspNetShutdownDetector|HttpRuntime._disposingHttpRuntime shutdown trigger initialized successfully.|
+2025-09-18 08:49:54.5156|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:54.5156|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:54.5156|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:54.5156|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:54.6053|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:11048:39c11a22 successfully announced in 305,7438 ms|
+2025-09-18 08:49:54.6153|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:11048:39c11a22 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, SqlServerHeartbeatProcess, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...|
+2025-09-18 08:49:54.6153|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerHeartbeatProcess:8727e9ac has started in 11,4753 ms|
+2025-09-18 08:49:54.6293|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerWatchdog:f413df7e has started in 11,6504 ms|
+2025-09-18 08:49:54.6293|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerJobCancellationWatcher:6227d352 has started in 16,0784 ms|
+2025-09-18 08:49:54.6483|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop SqlServerHeartbeatProcess:3afc93c3 has started in 12,908 ms|
+2025-09-18 08:49:54.6483|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ExpirationManager:d0052c04 has started in 14,7301 ms|
+2025-09-18 08:49:54.6683|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop CountersAggregator:3a8ce0d7 has started in 14,4229 ms|
+2025-09-18 08:49:54.6683|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 08:49:54.6683|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'AggregatedCounter' table...|
+2025-09-18 08:49:54.6783|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:74e702ae has started in 14,9976 ms|
+2025-09-18 08:49:54.6783|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:2d3b2584 has started in 23,4831 ms|
+2025-09-18 08:49:54.6783|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:aea57adb has started in 27,2283 ms|
+2025-09-18 08:49:54.6943|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:c8dcd7c4 has started in 31,4323 ms|
+2025-09-18 08:49:54.6943|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:88f4f63e has started in 38,5581 ms|
+2025-09-18 08:49:54.7073|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:ce7be187 has started in 44,6414 ms|
+2025-09-18 08:49:54.7073|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:970f61fb has started in 49,3829 ms|
+2025-09-18 08:49:54.7073|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:55a5b01d has started in 58,5597 ms|
+2025-09-18 08:49:54.7443|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:cfe441a0 has started in 81,6644 ms|
+2025-09-18 08:49:54.7443|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:a7837aef has started in 85,5469 ms|
+2025-09-18 08:49:54.7563|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:bfc03a15 has started in 93,5388 ms|
+2025-09-18 08:49:54.7563|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:69b4e2e6 has started in 102,723 ms|
+2025-09-18 08:49:54.7712|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:8a591145 has started in 108,5615 ms|
+2025-09-18 08:49:54.7712|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Job' table...|
+2025-09-18 08:49:54.7712|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:6fa7e730 has started in 114,1683 ms|
+2025-09-18 08:49:54.7883|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:71fa73cd has started in 125,558 ms|
+2025-09-18 08:49:54.7883|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:89202631 has started in 133,1548 ms|
+2025-09-18 08:49:54.8073|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:ad7dda84 has started in 144,7146 ms|
+2025-09-18 08:49:54.8073|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:393c2f4e has started in 150,7147 ms|
+2025-09-18 08:49:54.8193|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:2330b582 has started in 156,5721 ms|
+2025-09-18 08:49:54.8193|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'List' table...|
+2025-09-18 08:49:54.8193|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:031b1dda has started in 167,1649 ms|
+2025-09-18 08:49:54.8193|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Set' table...|
+2025-09-18 08:49:54.8393|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop DelayedJobScheduler:54cd7f17 has started in 16,5181 ms|
+2025-09-18 08:49:54.8393|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Hash' table...|
+2025-09-18 08:49:54.8483|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:11048:39c11a22 all the dispatchers started|
+2025-09-18 08:49:54.8483|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop RecurringJobScheduler:213a12e3 has started in 15,5236 ms|
+2025-09-18 08:49:54.9459|INFO|MZDNETWORK.MvcApplication|Application_Error called|
+2025-09-18 08:49:54.9459|ERROR|MZDNETWORK.MvcApplication|Unhandled exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 08:49:55.1338|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:49:55.1338|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:49:55.1338|INFO|MZDNETWORK.MvcApplication|Application_Error called|
+2025-09-18 08:49:55.1338|ERROR|MZDNETWORK.MvcApplication|Unhandled exception, URL: https://localhost:44318/Views/Shared/Error.cshtml?aspxerrorpath=/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Shared/Error.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 08:50:02.5614|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:02.5614|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:02.7890|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:02.7890|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:05.0258|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:05.0258|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:05.0348|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:05.0348|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:05.1421|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:05.1421|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:05.2797|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:05.2797|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:13.8678|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:13.8678|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:14.1778|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:14.1778|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:14.2068|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:14.2068|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:14.2068|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:14.2068|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:14.2068|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:14.2068|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:15.3387|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:15.3387|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:17.3515|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:17.3515|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:19.4237|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:19.4237|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:21.4631|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:21.4631|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:23.5057|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:23.5057|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:24.6948|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:11048:39c11a22 heartbeat successfully sent|
+2025-09-18 08:50:25.5361|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:25.5361|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:27.5703|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:27.5703|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:29.6003|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:29.6003|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:31.6307|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:31.6307|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:33.6635|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:33.6635|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:35.6957|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:35.6957|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:37.7386|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:37.7386|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:39.7820|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:39.7820|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:40.5098|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:40.5098|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:41.1792|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:41.1792|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:41.9469|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:41.9469|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:42.7405|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:42.7405|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:44.8767|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:44.8767|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:46.9003|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:46.9003|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:47.3668|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:47.3668|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:47.7557|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:47.7557|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:48.1319|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:48.1319|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:48.6458|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:48.6458|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:50.7240|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:50.7240|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:51.6255|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:51.6255|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:52.7296|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:52.7296|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:53.4750|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:53.4750|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:54.7344|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:11048:39c11a22 heartbeat successfully sent|
+2025-09-18 08:50:55.5693|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:55.5693|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:57.6080|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:57.6080|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:50:59.6416|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:50:59.6416|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:01.6883|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:01.6883|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:01.6973|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:01.6973|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:03.7718|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:03.7718|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:05.8121|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:05.8121|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:07.8460|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:07.8460|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:09.4559|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:09.4559|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:09.5555|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:09.5555|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:09.6749|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:09.6749|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:09.7137|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:09.7137|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:09.7328|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:09.7328|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:09.7454|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:09.7454|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 08:51:14.5134|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 08:51:14.5134|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|

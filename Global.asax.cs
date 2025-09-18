@@ -12,6 +12,9 @@ using System.Web.Http;
 using MZDNETWORK.Helpers;
 using MZDNETWORK.Data;
 using OfficeOpenXml;
+using Hangfire;
+using Hangfire.SqlServer;
+using System.Configuration;
 
 
 [assembly: OwinStartup(typeof(MZDNETWORK.Startup))]
@@ -24,39 +27,52 @@ namespace MZDNETWORK
 
         protected void Application_Start()
         {
-            Logger.Info("Application started");
-            AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            // EPPlus 5+ gereği lisans bağlamını belirle
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
-            // **YENİ: Dynamic Permission System Seeding**
             try
             {
-                Logger.Info("Starting database seeding...");
-                MZDNETWORKContext.SeedDatabase();
-                Logger.Info("Database seeding completed successfully");
+                Logger.Info("Application starting...");
+                AreaRegistration.RegisterAllAreas();
+                FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+                RouteConfig.RegisterRoutes(RouteTable.Routes);
+                BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+                // EPPlus 5+ gereği lisans bağlamını belirle
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+                // **YENİ: Dynamic Permission System Seeding**
+                try
+                {
+                    Logger.Info("Starting database seeding...");
+                    MZDNETWORKContext.SeedDatabase();
+                    Logger.Info("Database seeding completed successfully");
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "Database seeding failed");
+                    // Production'da bu hata nedeniyle uygulama çökmemeli
+                    // Sadece log'a kaydedip devam ediyoruz
+                }
+
+                // **YENİ: Overtime Service Scheduler**
+                try
+                {
+                    Logger.Info("Starting recurring job setup with Hangfire...");
+                    RecurringJob.AddOrUpdate("daily-overtime-cleanup", () => OvertimeServiceScheduler.ResetOvertimeData(null), Cron.Daily);
+                    Logger.Info("Recurring job setup with Hangfire completed successfully");
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "Failed to set up recurring job with Hangfire");
+                }
+                Logger.Info("Application started successfully.");
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "Database seeding failed");
-                // Production'da bu hata nedeniyle uygulama çökmemeli
-                // Sadece log'a kaydedip devam ediyoruz
-            }
-
-            // **YENİ: Overtime Service Scheduler**
-            try
-            {
-                Logger.Info("Starting overtime service scheduler...");
-                OvertimeServiceScheduler.Start();
-                Logger.Info("Overtime service scheduler started successfully");
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "Overtime service scheduler failed to start");
+                Logger.Fatal(ex, "A fatal error occurred during Application_Start, causing the application to shut down.");
+                // Uygulamanın çökmesini önlemek için hatayı yutabiliriz,
+                // ancak bu genellikle altta yatan ciddi bir sorunu gizler.
+                // En azından loglayarak sorunu görünür kılıyoruz.
+                throw; // Hatayı yeniden fırlatarak IIS'in durumu bilmesini sağlayın,
+                       // bu da olay günlüğüne kaydedilmesine yardımcı olabilir.
             }
         }
       
@@ -159,13 +175,12 @@ namespace MZDNETWORK
         {
             try
             {
-                Logger.Info("Application ending - stopping overtime service scheduler...");
-                OvertimeServiceScheduler.Stop();
-                Logger.Info("Overtime service scheduler stopped successfully");
+                Logger.Info("Application ending...");
+                // OvertimeServiceScheduler.Stop() was here. Hangfire manages its own lifecycle.
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "Error stopping overtime service scheduler");
+                Logger.Error(ex, "Error during Application_End");
             }
         }
     }
@@ -175,6 +190,26 @@ namespace MZDNETWORK
         public void Configuration(IAppBuilder app)
         {
             app.MapSignalR();
+
+            // Configure Hangfire
+            var connectionString = ConfigurationManager.ConnectionStrings["MZDNETWORKContext"].ConnectionString;
+            Hangfire.GlobalConfiguration.Configuration.UseSqlServerStorage(connectionString, new SqlServerStorageOptions
+            {
+                CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                QueuePollInterval = TimeSpan.Zero,
+                UseRecommendedIsolationLevel = true,
+                DisableGlobalLocks = true // For SQL Server 2012 or higher
+            });
+
+            // Enable Hangfire Dashboard (optional, based on web.config)
+            if (ConfigurationManager.AppSettings["Hangfire_Dashboard_Enabled"] == "true")
+            {
+                app.UseHangfireDashboard("/hangfire");
+            }
+
+            // Start Hangfire server
+            app.UseHangfireServer();
         }
     }
 }

@@ -1,0 +1,82 @@
+﻿@model MZDNETWORK.Models.User
+
+@{
+    ViewBag.Title = "Kullanıcı Sil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mx-auto text-white p-4">
+    <div class="container">
+        <h3 style="color:red;">Bu kullanıcıyı silmek istediğinizden emin misiniz?</h3>
+        <div class="dilek-istek-form login-form">
+            <dl class="dl-horizontal">
+                <div class="detail-row">
+                    <dt>@Html.DisplayNameFor(model => model.Username)</dt>
+                    <dd>@Html.DisplayFor(model => model.Username)</dd>
+                </div>
+                <div class="detail-row">
+                    <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+                    <dd>@Html.DisplayFor(model => model.Name)</dd>
+                </div>
+                <div class="detail-row">
+                    <dt>@Html.DisplayNameFor(model => model.Surname)</dt>
+                    <dd>@Html.DisplayFor(model => model.Surname)</dd>
+                </div>
+                <div class="detail-row">
+                    <dt>@Html.DisplayNameFor(model => model.Sicil)</dt>
+                    <dd>@Html.DisplayFor(model => model.Sicil)</dd>
+                </div>
+            </dl>
+        </div>
+        @using (Html.BeginForm("Delete", "Kullanici_Islemleri", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <button type="submit" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded">Kullanıcıyı Sil</button>
+                <a href="@Url.Action("Index", "Kullanici_Islemleri")" class="ml-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded">İptal</a>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .login-form {
+        width: 100%;
+        margin: 0 auto;
+        overflow: auto;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+        border: 1px solid #ddd;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    dt {
+        font-weight: bold;
+        color: #333;
+        flex: 1;
+    }
+
+    dd {
+        margin-left: 0;
+        color: #555;
+        word-break: break-all;
+    }
+
+    .form-group {
+        margin-top: 20px;
+    }
+
+    .login-form {
+        max-width: 30em;
+    }
+
+    ol, ul {
+        padding-left: 0rem;
+    }
+</style>

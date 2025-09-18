@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>yeni mahalle.xlsx</name>
+    <Style id="icon-1899-424242-nodesc-normal">
+      <IconStyle>
+        <color>ff424242</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-424242-nodesc-highlight">
+      <IconStyle>
+        <color>ff424242</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-424242-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-424242-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-424242-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-424242-7781-nodesc-normal">
+      <LineStyle>
+        <color>ff424242</color>
+        <width>7.781</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-424242-7781-nodesc-highlight">
+      <LineStyle>
+        <color>ff424242</color>
+        <width>11.6715</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-424242-7781-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-424242-7781-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-424242-7781-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>AŞAĞIYAHYALAR MAH.978. CAD. NO:14/9 YENİMAHALLE</name>
+      <address>AŞAĞIYAHYALAR MAH.978. CAD. NO:14/9 YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>YUKARIYAHYALAR MAH. 958. SOK. NO:16 YENİMAHALLE</name>
+      <address>YUKARIYAHYALAR MAH. 958. SOK. NO:16 YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>DEMETEVLER MAH. 12.CAD 403 SK.NO: 7 YENİMAHALLE</name>
+      <address>DEMETEVLER MAH. 12.CAD 403 SK.NO: 7 YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>DEMETEVLER MAH. PROF DR. TURAN CAD. NO:4 YENİMAHALLE</name>
+      <address>DEMETEVLER MAH. PROF DR. TURAN CAD. NO:4 YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>BURÇ MAH SEVAL CAD. NO:72/17 YENİMAHALLE </name>
+      <address>BURÇ MAH SEVAL CAD. NO:72/17 YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>KARŞIYAKA MAH. 520 SOK. NO : 29 DAİRE 1 YENİMAHALLE</name>
+      <address>KARŞIYAKA MAH. 520 SOK. NO : 29 DAİRE 1 YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>BARIŞTEPE MAH. 734. SOK. DOĞAN APT. 9/ 19 YENİMAHALLE</name>
+      <address>BARIŞTEPE MAH. 734. SOK. DOĞAN APT. 9/ 19 YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>DEMETGÜL MAH. 412. SOK 44/7 YENİMAHALLE</name>
+      <address>DEMETGÜL MAH. 412. SOK 44/7 YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>YEŞİLEVLER MAH. 913 CAD BARBAROS APRT. NO 9/31 YENİMAHALLE</name>
+      <address>YEŞİLEVLER MAH. 913 CAD BARBAROS APRT. NO 9/31 YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>DEMETEVLER MAH. 403. SOK. GELİŞİM APT. NO:3 DAİRE 25 YENİMAHALLE</name>
+      <address>DEMETEVLER MAH. 403. SOK. GELİŞİM APT. NO:3 DAİRE 25 YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>YAKACIK MAH. 3577.CAD. NO18/2 YENİMAHALLE</name>
+      <address>YAKACIK MAH. 3577.CAD. NO18/2 YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>GÜVENTEPE MAH. 593 SOK 15/17 ŞENTEPE YENİMAHALLE</name>
+      <address>GÜVENTEPE MAH. 593 SOK 15/17 ŞENTEPE YENİMAHALLE</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>ERGENEKON MAHALLESİ BEYAZKÖY SOKAK 26/8 YENİMAHALLE ANKARA</name>
+      <address>ERGENEKON MAHALLESİ BEYAZKÖY SOKAK 26/8 YENİMAHALLE ANKARA</address>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+    </Placemark>
+    <Placemark>
+      <name>Evim Şahane Şentepe</name>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.8007877,39.9883231,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name/>
+      <styleUrl>#line-424242-7781-nodesc</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          32.8012167,39.9876653,0
+          32.8026799,39.9865251,0
+          32.8046969,39.9860977,0
+          32.8051261,39.9835657,0
+          32.8058127,39.9792251,0
+          32.805169,39.977252,0
+          32.8060273,39.9766929,0
+          32.8095892,39.9763312,0
+          32.8107908,39.975509,0
+          32.8109625,39.9736345,0
+          32.8115633,39.9719572,0
+          32.8102329,39.9712007,0
+          32.8046111,39.9704443,0
+          32.8006629,39.9704114,0
+          32.8067997,39.9678954,0
+          32.7997187,39.9699839,0
+          32.7983884,39.9640964,0
+          32.7855998,39.9695234,0
+          32.7783471,39.980376,0
+          32.7766083,39.9833702,0
+          32.7763079,39.984554,0
+          32.7720808,39.9841265,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>1727. Sk. No:7 D:11</name>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.8032156,39.9903073,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>3. Cd. No:61 D:10</name>
+      <styleUrl>#icon-1899-424242-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          32.7903469,39.9631685,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

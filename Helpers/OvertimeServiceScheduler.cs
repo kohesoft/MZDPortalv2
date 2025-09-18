@@ -1,53 +1,18 @@
 using System;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using MZDNETWORK.Data;
 
 namespace MZDNETWORK.Helpers
 {
     public class OvertimeServiceScheduler
     {
-        private static Timer _timer;
         private static readonly object _lock = new object();
 
-        public static void Start()
-        {
-            lock (_lock)
-            {
-                if (_timer != null)
-                    return;
-
-                // Calculate time until next midnight
-                var now = DateTime.Now;
-                var nextMidnight = now.Date.AddDays(1); // Tomorrow at 00:00
-                var timeUntilMidnight = nextMidnight - now;
-
-                Console.WriteLine($"⏰ OvertimeServiceScheduler: Starting scheduler. Next cleanup at {nextMidnight}");
-
-                // Set timer to trigger at midnight, then every 24 hours
-                _timer = new Timer(ResetOvertimeData, null, timeUntilMidnight, TimeSpan.FromDays(1));
-            }
-        }
-
-        public static void Stop()
-        {
-            lock (_lock)
-            {
-                if (_timer != null)
-                {
-                    _timer.Dispose();
-                    _timer = null;
-                    Console.WriteLine("⏰ OvertimeServiceScheduler: Scheduler stopped.");
-                }
-            }
-        }
-
-        private static void ResetOvertimeData(object state)
+        public static void ResetOvertimeData(object state)
         {
             try
             {
-                Console.WriteLine($"🧹 OvertimeServiceScheduler: Starting daily cleanup at {DateTime.Now}");
+                Console.WriteLine($"🧹 Hangfire Job: Starting daily cleanup at {DateTime.Now}");
                 
                 using (var context = new MZDNETWORKContext())
                 {
@@ -67,40 +32,42 @@ namespace MZDNETWORK.Helpers
                         }
 
                         context.SaveChanges();
-                        Console.WriteLine($"🧹 OvertimeServiceScheduler: {oldOvertimeRecords.Count} eski mesai kaydı temizlendi.");
+                        Console.WriteLine($"🧹 Hangfire Job: {oldOvertimeRecords.Count} eski mesai kaydı temizlendi.");
                     }
                     else
                     {
-                        Console.WriteLine("🧹 OvertimeServiceScheduler: Temizlenecek eski kayıt bulunamadı.");
+                        Console.WriteLine("🧹 Hangfire Job: Temizlenecek eski kayıt bulunamadı.");
                     }
 
                     // Bugün için aktif mesai kaydı sayısını logla
                     var todayCount = context.OvertimeServicePersonnels
                         .Count(osp => osp.ServiceDate == DateTime.Today && osp.IsActive);
                     
-                    Console.WriteLine($"📊 OvertimeServiceScheduler: Bugün için {todayCount} aktif mesai kaydı bulunuyor.");
+                    Console.WriteLine($"📊 Hangfire Job: Bugün için {todayCount} aktif mesai kaydı bulunuyor.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ OvertimeServiceScheduler: Error during cleanup: {ex.Message}");
-                Console.WriteLine($"❌ OvertimeServiceScheduler: Stack trace: {ex.StackTrace}");
+                Console.WriteLine($"❌ Hangfire Job: Error during cleanup: {ex.Message}");
+                Console.WriteLine($"❌ Hangfire Job: Stack trace: {ex.StackTrace}");
+                // Re-throw the exception to let Hangfire know the job failed
+                throw;
             }
         }
 
         // Manual cleanup method for testing
         public static void ManualCleanup()
         {
-            Console.WriteLine("🔧 OvertimeServiceScheduler: Manual cleanup triggered.");
+            Console.WriteLine("🔧 Manual cleanup triggered via Hangfire.");
             ResetOvertimeData(null);
         }
 
-        // Get next cleanup time for debugging
-        public static DateTime GetNextCleanupTime()
+        // Get next cleanup time for debugging - No longer relevant with Hangfire
+        public static DateTime? GetNextCleanupTime()
         {
-            var now = DateTime.Now;
-            var nextMidnight = now.Date.AddDays(1);
-            return nextMidnight;
+            // Hangfire manages this, so we can't easily predict the next run time here.
+            // You can check the Hangfire dashboard for this information.
+            return null;
         }
 
         // Get current stats
@@ -127,8 +94,8 @@ namespace MZDNETWORK.Helpers
                         TodayActive = todayActive,
                         YesterdayActive = yesterdayActive,
                         TotalInactive = totalInactive,
-                        NextCleanupTime = GetNextCleanupTime(),
-                        IsRunning = _timer != null
+                        NextCleanupTime = "Managed by Hangfire",
+                        IsRunning = "Managed by Hangfire"
                     };
                 }
             }
@@ -137,8 +104,8 @@ namespace MZDNETWORK.Helpers
                 return new
                 {
                     Error = ex.Message,
-                    NextCleanupTime = GetNextCleanupTime(),
-                    IsRunning = _timer != null
+                    NextCleanupTime = "Managed by Hangfire",
+                    IsRunning = "Managed by Hangfire"
                 };
             }
         }
