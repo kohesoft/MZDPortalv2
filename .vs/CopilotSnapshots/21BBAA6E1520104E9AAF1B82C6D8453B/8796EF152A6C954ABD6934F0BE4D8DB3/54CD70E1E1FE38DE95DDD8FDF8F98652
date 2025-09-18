@@ -1,0 +1,88 @@
+﻿// SignalR Connection Manager - Single instance management
+(function () {
+    'use strict';
+
+    window.SignalRManager = window.SignalRManager || {
+        connection: null,
+        isConnecting: false,
+        connectionPromise: null,
+        
+        // Initialize connection if not already done
+        init: function() {
+            if (this.connection && this.connection.state === $.signalR.connectionState.connected) {
+                return Promise.resolve(this.connection);
+            }
+            
+            if (this.isConnecting && this.connectionPromise) {
+                return this.connectionPromise;
+            }
+            
+            this.isConnecting = true;
+            
+            // Configure connection with optimized settings
+            $.connection.hub.connectionSlow(function () {
+                console.log('SignalR connection is slow');
+            });
+            
+            $.connection.hub.reconnecting(function () {
+                console.log('SignalR reconnecting...');
+            });
+            
+            $.connection.hub.reconnected(function () {
+                console.log('SignalR reconnected');
+            });
+            
+            $.connection.hub.disconnected(function () {
+                console.log('SignalR disconnected');
+                // Auto-reconnect after 5 seconds
+                setTimeout(function() {
+                    if ($.connection.hub.state === $.signalR.connectionState.disconnected) {
+                        SignalRManager.init();
+                    }
+                }, 5000);
+            });
+            
+            // Start connection with optimized transport
+            this.connectionPromise = $.connection.hub.start({
+                transport: ['webSockets', 'serverSentEvents', 'longPolling'], // Prefer WebSockets
+                waitForPageLoad: false
+            }).done(function () {
+                console.log('SignalR connection established successfully');
+                SignalRManager.connection = $.connection.hub;
+                SignalRManager.isConnecting = false;
+            }).fail(function (error) {
+                console.error('SignalR connection failed:', error);
+                SignalRManager.isConnecting = false;
+            });
+            
+            return this.connectionPromise;
+        },
+        
+        // Get current connection state
+        getState: function() {
+            return this.connection ? this.connection.state : 'disconnected';
+        },
+        
+        // Disconnect and cleanup
+        disconnect: function() {
+            if (this.connection) {
+                this.connection.stop();
+                this.connection = null;
+                this.isConnecting = false;
+                this.connectionPromise = null;
+            }
+        }
+    };
+
+    // Initialize on page load
+    $(document).ready(function() {
+        SignalRManager.init();
+    });
+
+    // Cleanup on page unload
+    $(window).on('beforeunload', function() {
+        // Don't disconnect on navigation - reuse connection
+        // SignalRManager.disconnect();
+    });
+
+})();

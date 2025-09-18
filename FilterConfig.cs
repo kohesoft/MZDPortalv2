@@ -4,7 +4,10 @@ public class FilterConfig
 {
     public static void RegisterGlobalFilters(GlobalFilterCollection filters)
     {
-        filters.Add(new HandleErrorAttribute());
+        filters.Add(new HandleErrorAttribute
+        {
+            View = "~/Views/Shared/Error.cshtml"
+        });
         filters.Add(new LogActionFilter()); // LogActionFilter'ý ekleyin
     }
 }

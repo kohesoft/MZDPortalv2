@@ -1036,3 +1036,1313 @@
 2025-09-18 08:51:09.7454|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
 2025-09-18 08:51:14.5134|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
 2025-09-18 08:51:14.5134|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:52:25.5501|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 13:52:27.9918|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 13:52:32.6598|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 13:52:32.6598|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 13:52:32.9758|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:52:32.9758|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:52:32.9758|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:52:32.9758|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:52:33.1427|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 13:52:33.2811|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:52:33.2811|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:52:42.2739|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:52:42.2739|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:52:43.6401|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:52:43.6401|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:52:45.5691|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:52:45.5691|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:52:49.0254|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:52:49.0254|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:52:49.0254|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: |System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 13:52:49.4569|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:52:49.4569|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:56:07.5508|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 13:56:07.6661|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 13:56:12.7336|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 13:56:12.7336|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 13:56:18.5146|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:56:18.5146|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:56:18.5146|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:56:18.5146|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:56:18.5146|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:56:18.5146|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:56:18.7166|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 13:56:21.2749|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:56:21.2749|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:56:24.0441|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:56:24.0441|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:56:24.1620|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:56:24.1620|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:56:24.3281|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:56:24.3281|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:56:26.6273|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 13:56:26.6273|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 13:56:26.6372|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: |System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:01:05.7257|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 14:01:05.8358|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 14:01:10.9123|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 14:01:10.9123|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 14:01:16.7508|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:01:16.7508|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:01:16.7508|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:01:16.7508|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:01:16.7508|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:01:16.7508|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:01:16.9537|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:01:19.4888|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:01:19.4888|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:01:19.4888|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:01:19.4888|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:01:21.7546|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:01:21.7546|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:01:22.2441|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:01:22.2441|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:01:22.3589|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:01:22.3589|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:01:22.5249|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:01:22.5249|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:02:21.7517|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:02:21.7517|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:03:21.7512|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:03:21.7512|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:03:22.4478|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:03:22.4478|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:03:22.4478|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: |System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:04:50.5131|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 14:04:50.6232|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 14:04:55.6728|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 14:04:55.6728|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 14:05:01.9678|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:05:01.9678|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:05:01.9678|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:05:01.9678|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:05:01.9678|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:05:01.9678|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:05:02.1798|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:05:03.5878|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:05:03.5878|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:05:05.8302|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:05:05.8302|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:05:06.3272|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:05:06.3272|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:05:06.4642|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:05:06.4642|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:05:06.6319|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:05:06.6319|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:05:08.2716|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:05:08.2716|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:05:08.3055|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: |System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:08:14.3666|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 14:08:14.4792|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 14:08:19.5183|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 14:08:19.5183|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 14:08:25.3452|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:08:25.3452|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:08:25.3452|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:08:25.3452|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:08:25.3452|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:08:25.3452|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:08:25.5463|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:08:27.0407|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:08:27.0407|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:08:27.0715|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:08:27.0715|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:08:29.2626|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:08:29.2626|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:08:30.3942|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:08:30.3942|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:08:30.5211|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:08:30.5211|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:08:30.7023|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:08:30.7023|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:08:38.1511|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:08:38.1511|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:08:38.1821|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: |System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:08:42.3385|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:08:42.3385|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:13.0784|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 14:11:15.5486|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 14:11:20.2337|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 14:11:20.2337|INFO|MZDNETWORK.MvcApplication|Configuring Hangfire recurring jobs...|
+2025-09-18 14:11:20.2607|ERROR|MZDNETWORK.MvcApplication|Failed to set up recurring jobs with Hangfire|System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For NET Framework applications please use GlobalConfiguration.UseXXXStorage method, where XXX is the storage type, like `UseSqlServerStorage`.
+   konum: Hangfire.JobStorage.get_Current() C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs içinde: satır 42
+   konum: Hangfire.RecurringJob.<>c.<.cctor>b__66_0() C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 28
+   konum: Hangfire.RecurringJob.AddOrUpdate(String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 270
+   konum: MZDNETWORK.MvcApplication.Application_Start() C:\Users\Berat\Documents\GitHub\MZDPortalv2\Global.asax.cs içinde: satır 60
+2025-09-18 14:11:20.3287|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 14:11:20.8263|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Start installing Hangfire SQL objects...|
+2025-09-18 14:11:21.2188|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Hangfire SQL objects installed.|
+2025-09-18 14:11:21.2668|INFO|Hangfire.BackgroundJobServer|Starting Hangfire Server using job storage: 'SQL Server: 192.168.1.102,1433@MZDPORTAL_DBV2'|
+2025-09-18 14:11:21.2668|INFO|Hangfire.BackgroundJobServer|Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.|
+2025-09-18 14:11:21.2668|INFO|Hangfire.BackgroundJobServer|Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15|
+2025-09-18 14:11:21.3000|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.StopListening shutdown trigger initialized successfully.|
+2025-09-18 14:11:21.3000|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop BackgroundServerProcess:e7d2eb51 has started in 15,7097 ms|
+2025-09-18 14:11:21.3010|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.ShutdownReason shutdown trigger initialized successfully.|
+2025-09-18 14:11:21.3010|DEBUG|Hangfire.Server.AspNetShutdownDetector|HttpRuntime._disposingHttpRuntime shutdown trigger initialized successfully.|
+2025-09-18 14:11:21.3010|INFO|MZDNETWORK.Startup|Hangfire server started|
+2025-09-18 14:11:21.5168|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:21.5168|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:21.5168|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:21.5168|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:21.5198|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:21.5198|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:21.6178|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:15016:4c9baf97 successfully announced in 307,8525 ms|
+2025-09-18 14:11:21.6178|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:15016:4c9baf97 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, SqlServerHeartbeatProcess, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...|
+2025-09-18 14:11:21.6328|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerHeartbeatProcess:1cb1a721 has started in 11,8368 ms|
+2025-09-18 14:11:21.6328|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerWatchdog:c8932caa has started in 14,4788 ms|
+2025-09-18 14:11:21.6558|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerJobCancellationWatcher:a22feab0 has started in 16,571 ms|
+2025-09-18 14:11:21.6608|INFO|Hangfire.Server.ServerWatchdog|3 servers were removed due to timeout|
+2025-09-18 14:11:21.6608|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop SqlServerHeartbeatProcess:a5a4ca6d has started in 13,671 ms|
+2025-09-18 14:11:21.6758|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ExpirationManager:0433d221 has started in 15,426 ms|
+2025-09-18 14:11:21.6758|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop CountersAggregator:cd3957dd has started in 17,7862 ms|
+2025-09-18 14:11:21.6918|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 14:11:21.6918|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'AggregatedCounter' table...|
+2025-09-18 14:11:21.6918|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:fe38ae65 has started in 18,0169 ms|
+2025-09-18 14:11:21.6918|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:733c1381 has started in 25,873 ms|
+2025-09-18 14:11:21.7118|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:2a8a9fc1 has started in 33,9993 ms|
+2025-09-18 14:11:21.7238|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:1ddc6cf9 has started in 45,4733 ms|
+2025-09-18 14:11:21.7408|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:ab31724f has started in 62,5095 ms|
+2025-09-18 14:11:21.7408|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Job' table...|
+2025-09-18 14:11:21.7538|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:7f5a4c6d has started in 75,3886 ms|
+2025-09-18 14:11:21.7538|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:980e229b has started in 80,8313 ms|
+2025-09-18 14:11:21.7538|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:d875ad2a has started in 90,2233 ms|
+2025-09-18 14:11:21.7698|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'List' table...|
+2025-09-18 14:11:21.7698|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:7bcd3d7e has started in 97,8237 ms|
+2025-09-18 14:11:21.7878|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:a520a39b has started in 109,9092 ms|
+2025-09-18 14:11:21.7878|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Set' table...|
+2025-09-18 14:11:21.8068|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:1be46228 has started in 129,1521 ms|
+2025-09-18 14:11:21.8218|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:9510fc1b has started in 143,7261 ms|
+2025-09-18 14:11:21.8318|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:89f8265e has started in 153,6796 ms|
+2025-09-18 14:11:21.8318|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Hash' table...|
+2025-09-18 14:11:21.8318|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:c1ed97a2 has started in 159,534 ms|
+2025-09-18 14:11:21.8318|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:7f1e5795 has started in 166,5704 ms|
+2025-09-18 14:11:21.8568|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:5689524c has started in 179,1571 ms|
+2025-09-18 14:11:21.8668|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:97147f47 has started in 188,8064 ms|
+2025-09-18 14:11:21.8788|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:e1ade6f3 has started in 201,0103 ms|
+2025-09-18 14:11:21.8788|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:a25d6679 has started in 214,1489 ms|
+2025-09-18 14:11:21.8788|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:9ceb1243 has started in 214,1562 ms|
+2025-09-18 14:11:21.8968|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:15016:4c9baf97 all the dispatchers started|
+2025-09-18 14:11:21.8968|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop DelayedJobScheduler:83a3e87b has started in 21,5213 ms|
+2025-09-18 14:11:21.9138|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop RecurringJobScheduler:210eef8a has started in 19,4466 ms|
+2025-09-18 14:11:21.9547|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:11:25.3526|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:25.3526|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:25.5848|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:25.5848|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:26.0710|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:26.0710|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:26.1357|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:26.1357|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:26.3115|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:26.3115|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:28.8650|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:28.8650|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:28.8650|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: |System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:11:31.9953|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:31.9953|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:32.0263|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:32.0263|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:32.0823|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:32.0823|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:32.1739|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:32.1739|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:32.6519|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:32.6519|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:32.6689|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:32.6689|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:32.6809|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:32.6809|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:41.7054|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:41.7054|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:11:42.0650|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:42.3349|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/User/ChangePassword|
+2025-09-18 14:11:43.6666|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:43.6866|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=uU03fOvnW%2BiOSBSIXK%2F2tDZM0Y0UPrPFEZEv%2FbQVluU8Li26wOC4Z87SBn4%2BuTP4dol8K0IzVi9wzFgEZE3P4ZE5CFEQDE8R9ePFJId5TPkv2CPv&connectionData=%5B%5D|
+2025-09-18 14:11:43.6866|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:43.7086|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:11:43.8144|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:43.8374|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:11:44.2607|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:44.2829|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758193903665|
+2025-09-18 14:11:44.2929|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:44.3144|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=VyU7LBHAg0DvFQp8NvKSpdUvySc7aSxAmICvJe1g%2Bh4EMhP5dz5MF%2FxMPsweMr7bRT1poA6jq7QsJGUxKKhw1LwdsnzOj4fmDBJDUx3JKrAY5xNf&connectionData=%5B%5D&tid=1|
+2025-09-18 14:11:44.3264|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:44.3482|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=VyU7LBHAg0DvFQp8NvKSpdUvySc7aSxAmICvJe1g%2Bh4EMhP5dz5MF%2FxMPsweMr7bRT1poA6jq7QsJGUxKKhw1LwdsnzOj4fmDBJDUx3JKrAY5xNf&connectionData=%5B%5D&_=1758193903666|
+2025-09-18 14:11:51.6585|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:15016:4c9baf97 heartbeat successfully sent|
+2025-09-18 14:11:53.1936|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:53.2146|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Chat/ChatPage|
+2025-09-18 14:11:53.9984|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:54.0064|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:54.0064|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:54.0314|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:11:54.0424|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=VyU7LBHAg0DvFQp8NvKSpdUvySc7aSxAmICvJe1g%2Bh4EMhP5dz5MF%2FxMPsweMr7bRT1poA6jq7QsJGUxKKhw1LwdsnzOj4fmDBJDUx3JKrAY5xNf&connectionData=%5B%5D|
+2025-09-18 14:11:54.0534|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Content/chatpage.css|
+2025-09-18 14:11:54.1010|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:54.1220|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:11:54.6026|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:54.6256|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758193913988|
+2025-09-18 14:11:54.6386|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:54.6596|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=Q%2BV9Wgdti4sTtdLYf5dEG36gzUUNdjg7VkujRoshXBKvI6rHOK%2BV14bW1AsYwyl%2BR5axQiPGMOhrIcWbyvxGZoc7tegy76%2F7kRP%2F0wqvUesHTq6K&connectionData=%5B%5D&tid=1|
+2025-09-18 14:11:54.6596|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:54.6926|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=Q%2BV9Wgdti4sTtdLYf5dEG36gzUUNdjg7VkujRoshXBKvI6rHOK%2BV14bW1AsYwyl%2BR5axQiPGMOhrIcWbyvxGZoc7tegy76%2F7kRP%2F0wqvUesHTq6K&connectionData=%5B%5D&_=1758193913989|
+2025-09-18 14:11:57.5700|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:57.5916|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/InsanKaynaklari/DilekIstek_IK|
+2025-09-18 14:11:58.3306|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:58.3466|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:58.3496|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=Q%2BV9Wgdti4sTtdLYf5dEG36gzUUNdjg7VkujRoshXBKvI6rHOK%2BV14bW1AsYwyl%2BR5axQiPGMOhrIcWbyvxGZoc7tegy76%2F7kRP%2F0wqvUesHTq6K&connectionData=%5B%5D|
+2025-09-18 14:11:58.3496|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:58.3496|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:58.3896|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:11:58.3986|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/xlsx.full.min.js|
+2025-09-18 14:11:58.3986|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Content/dilekistekik.css|
+2025-09-18 14:11:58.5765|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:11:58.5985|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:12:00.8928|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:00.9138|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/ChatGroup|
+2025-09-18 14:12:01.9899|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:02.0090|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:12:02.0369|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:02.0579|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:12:02.5381|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:02.5607|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758193921960|
+2025-09-18 14:12:02.5738|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:02.5940|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=NeNW4jdjwKGtu6HMWNS7bcsbbKhUu02hQyqnD%2B9U2aqpwfCuoYely2Z43UOTXDKYBUaWzHB2Nup97U86iEcQRP28Vue43KWzYm89gB8DNV%2Bd4U3x&connectionData=%5B%5D&tid=2|
+2025-09-18 14:12:02.6130|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:02.6340|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=NeNW4jdjwKGtu6HMWNS7bcsbbKhUu02hQyqnD%2B9U2aqpwfCuoYely2Z43UOTXDKYBUaWzHB2Nup97U86iEcQRP28Vue43KWzYm89gB8DNV%2Bd4U3x&connectionData=%5B%5D&_=1758193921961|
+2025-09-18 14:12:02.7980|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:02.8177|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/ChatGroup/Create|
+2025-09-18 14:12:03.0824|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:03.0824|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:03.1094|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:12:03.1294|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=NeNW4jdjwKGtu6HMWNS7bcsbbKhUu02hQyqnD%2B9U2aqpwfCuoYely2Z43UOTXDKYBUaWzHB2Nup97U86iEcQRP28Vue43KWzYm89gB8DNV%2Bd4U3x&connectionData=%5B%5D|
+2025-09-18 14:12:03.1664|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:03.1864|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:12:03.6594|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:03.6823|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758193923068|
+2025-09-18 14:12:03.6973|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:03.7193|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=MVuaKdWfdsg4U%2B0nDJf2hsgLatJG6E0EOhwd%2BGOA8cJyr0bJHFAqNKEO8u%2FCS32OZTqcyQIReAxHQlYdhtdqu82P1F06y3bXAIcO%2FKvONwFIqFq5&connectionData=%5B%5D&tid=9|
+2025-09-18 14:12:03.7492|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:03.7693|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=MVuaKdWfdsg4U%2B0nDJf2hsgLatJG6E0EOhwd%2BGOA8cJyr0bJHFAqNKEO8u%2FCS32OZTqcyQIReAxHQlYdhtdqu82P1F06y3bXAIcO%2FKvONwFIqFq5&connectionData=%5B%5D&_=1758193923069|
+2025-09-18 14:12:15.2999|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:15.3217|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/ChatGroup/Create|
+2025-09-18 14:12:15.4957|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:15.5176|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/ChatGroup|
+2025-09-18 14:12:15.7197|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:15.7317|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:15.7507|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=MVuaKdWfdsg4U%2B0nDJf2hsgLatJG6E0EOhwd%2BGOA8cJyr0bJHFAqNKEO8u%2FCS32OZTqcyQIReAxHQlYdhtdqu82P1F06y3bXAIcO%2FKvONwFIqFq5&connectionData=%5B%5D|
+2025-09-18 14:12:15.7597|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:12:15.7867|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:15.8077|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:12:16.2929|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:16.3133|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758193935713|
+2025-09-18 14:12:16.3242|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:16.3453|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=45DcJBZCE0rjGxMuBBce0C0r5oNuYlhkRH5sF%2FVsvqFrhYB8HcqKmstWqWEZNOippwsvAfYj6dcYf3QpKEAO%2FpCOSyjlu9KjcV2Wb%2BQwUVKcSp1D&connectionData=%5B%5D&tid=7|
+2025-09-18 14:12:16.3572|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:16.3772|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=45DcJBZCE0rjGxMuBBce0C0r5oNuYlhkRH5sF%2FVsvqFrhYB8HcqKmstWqWEZNOippwsvAfYj6dcYf3QpKEAO%2FpCOSyjlu9KjcV2Wb%2BQwUVKcSp1D&connectionData=%5B%5D&_=1758193935714|
+2025-09-18 14:12:17.4626|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:17.4856|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Chat/ChatPage|
+2025-09-18 14:12:17.7364|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:17.7394|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:17.7664|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=45DcJBZCE0rjGxMuBBce0C0r5oNuYlhkRH5sF%2FVsvqFrhYB8HcqKmstWqWEZNOippwsvAfYj6dcYf3QpKEAO%2FpCOSyjlu9KjcV2Wb%2BQwUVKcSp1D&connectionData=%5B%5D|
+2025-09-18 14:12:17.7744|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:12:17.8244|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:17.8474|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:12:18.3235|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:18.3435|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758193937724|
+2025-09-18 14:12:18.3585|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:18.3815|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=73krt%2FpAn8%2BEy8pZPz%2BJu3KPHLLOBYN%2FzqXx%2FC5NRWKd6lxXNIJ6BwtDGKo1gsCoApjTSTWyl8NKTaFFtvR9o1Nm3t0vnBrGaIB6usyyMlUjLtLa&connectionData=%5B%5D&tid=3|
+2025-09-18 14:12:18.3815|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:18.4145|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=73krt%2FpAn8%2BEy8pZPz%2BJu3KPHLLOBYN%2FzqXx%2FC5NRWKd6lxXNIJ6BwtDGKo1gsCoApjTSTWyl8NKTaFFtvR9o1Nm3t0vnBrGaIB6usyyMlUjLtLa&connectionData=%5B%5D&_=1758193937725|
+2025-09-18 14:12:18.4805|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:18.4885|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:18.5096|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Chat/GetUserGroups|
+2025-09-18 14:12:18.5246|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Chat/GetGroupMessages?groupId=1|
+2025-09-18 14:12:20.0340|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:20.0861|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Chat/SendMessage|
+2025-09-18 14:12:20.2835|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:20.3055|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Chat/GetGroupMessages?groupId=1|
+2025-09-18 14:12:21.6815|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:15016:4c9baf97 heartbeat successfully sent|
+2025-09-18 14:12:22.8225|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:22.8436|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Chat/GetGroupMessages?groupId=1|
+2025-09-18 14:12:26.7472|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:26.7692|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:12:27.3278|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.3278|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.3438|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.3648|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:12:27.3648|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=73krt%2FpAn8%2BEy8pZPz%2BJu3KPHLLOBYN%2FzqXx%2FC5NRWKd6lxXNIJ6BwtDGKo1gsCoApjTSTWyl8NKTaFFtvR9o1Nm3t0vnBrGaIB6usyyMlUjLtLa&connectionData=%5B%5D|
+2025-09-18 14:12:27.3828|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/tinymce.min.js|
+2025-09-18 14:12:27.5288|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.5418|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.5418|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.5418|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.5768|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.5838|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.5838|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.5838|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.5838|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.5838|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:27.6078|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/themes/silver/theme.min.js|
+2025-09-18 14:12:27.6698|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:12:27.6808|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/icons/default/icons.min.js|
+2025-09-18 14:12:27.6808|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/plugins/link/plugin.min.js|
+2025-09-18 14:12:27.6958|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/plugins/lists/plugin.min.js|
+2025-09-18 14:12:27.6958|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/plugins/preview/plugin.min.js|
+2025-09-18 14:12:27.7168|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/plugins/advlist/plugin.min.js|
+2025-09-18 14:12:27.7268|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/plugins/autolink/plugin.min.js|
+2025-09-18 14:12:27.7268|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/models/dom/model.min.js|
+2025-09-18 14:12:27.7418|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/plugins/charmap/plugin.min.js|
+2025-09-18 14:12:27.9838|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:28.0058|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/skins/ui/oxide/skin.min.css|
+2025-09-18 14:12:28.0458|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:28.0458|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:28.0728|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/skins/content/default/content.min.css|
+2025-09-18 14:12:28.0728|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/skins/ui/oxide/content.min.css|
+2025-09-18 14:12:28.0908|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:28.1128|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758193947324|
+2025-09-18 14:12:28.1298|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:28.1518|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=sWiKRMiBh9yvfCvdTLiDI3gsX6hI%2BH9VeWGFpkP1KRCCB3uI87rwptvlobfqze%2Bxawp3G6hR8qcjfnFYjeWyut1hNoNJZNIun8RaI%2BgjuJPNClSu&connectionData=%5B%5D&tid=9|
+2025-09-18 14:12:28.1708|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:28.1908|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=sWiKRMiBh9yvfCvdTLiDI3gsX6hI%2BH9VeWGFpkP1KRCCB3uI87rwptvlobfqze%2Bxawp3G6hR8qcjfnFYjeWyut1hNoNJZNIun8RaI%2BgjuJPNClSu&connectionData=%5B%5D&_=1758193947325|
+2025-09-18 14:12:30.2736|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:30.2956|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:12:34.5808|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:34.6038|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json|
+2025-09-18 14:12:34.6038|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: admin|System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:12:35.1211|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:35.1211|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:35.1411|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:35.1601|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/skins/ui/oxide/content.min.css.map|
+2025-09-18 14:12:35.1601|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/skins/ui/oxide/skin.min.css.map|
+2025-09-18 14:12:35.1801|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/skins/content/default/content.min.css.map|
+2025-09-18 14:12:40.0425|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:40.0634|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:12:48.3177|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:48.3397|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:12:49.6039|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:49.6240|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Contact|
+2025-09-18 14:12:50.3276|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:50.3486|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=sWiKRMiBh9yvfCvdTLiDI3gsX6hI%2BH9VeWGFpkP1KRCCB3uI87rwptvlobfqze%2Bxawp3G6hR8qcjfnFYjeWyut1hNoNJZNIun8RaI%2BgjuJPNClSu&connectionData=%5B%5D|
+2025-09-18 14:12:50.3796|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:50.3966|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:50.3966|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json|
+2025-09-18 14:12:50.3966|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: admin|System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:12:50.4175|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:12:50.7145|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:50.7356|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:12:51.1679|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:51.1881|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758193970393|
+2025-09-18 14:12:51.2010|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:51.2210|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=LGTbmahacDEV%2B7Lz2LvFL3sDQLIcKh%2BBgnWNJbYuOEVehIj%2B0Ml%2BuHFTmHkmGvfd3MP3hjdFUQpjYT0GvO%2BOEujvGUhUWfNRjNGjc1HXDu9LXoiV&connectionData=%5B%5D&tid=9|
+2025-09-18 14:12:51.2350|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:51.2560|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=LGTbmahacDEV%2B7Lz2LvFL3sDQLIcKh%2BBgnWNJbYuOEVehIj%2B0Ml%2BuHFTmHkmGvfd3MP3hjdFUQpjYT0GvO%2BOEujvGUhUWfNRjNGjc1HXDu9LXoiV&connectionData=%5B%5D&_=1758193970394|
+2025-09-18 14:12:51.6150|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:51.6360|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/|
+2025-09-18 14:12:51.7200|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:15016:4c9baf97 heartbeat successfully sent|
+2025-09-18 14:12:51.8360|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:51.8360|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:51.8667|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json|
+2025-09-18 14:12:51.8667|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: admin|System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:12:51.8787|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=LGTbmahacDEV%2B7Lz2LvFL3sDQLIcKh%2BBgnWNJbYuOEVehIj%2B0Ml%2BuHFTmHkmGvfd3MP3hjdFUQpjYT0GvO%2BOEujvGUhUWfNRjNGjc1HXDu9LXoiV&connectionData=%5B%5D|
+2025-09-18 14:12:51.8787|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:51.9007|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:12:52.1327|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:52.1727|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:12:52.6446|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:52.6666|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758193971875|
+2025-09-18 14:12:52.6806|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:52.7016|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=Yji8uyrz7TMHqJUcHn0w6Z3FApJAAwNpyr1b6JD9bsftMp8FMJzLa4WcerlPqRK36Ng3quK2s%2Bwfv7cm%2FPdYEMkUSWMJ5rkp4bYty7v%2F7xDvTfWk&connectionData=%5B%5D&tid=10|
+2025-09-18 14:12:52.7177|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:52.7397|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=Yji8uyrz7TMHqJUcHn0w6Z3FApJAAwNpyr1b6JD9bsftMp8FMJzLa4WcerlPqRK36Ng3quK2s%2Bwfv7cm%2FPdYEMkUSWMJ5rkp4bYty7v%2F7xDvTfWk&connectionData=%5B%5D&_=1758193971876|
+2025-09-18 14:12:55.2004|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:12:55.2204|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=Yji8uyrz7TMHqJUcHn0w6Z3FApJAAwNpyr1b6JD9bsftMp8FMJzLa4WcerlPqRK36Ng3quK2s%2Bwfv7cm%2FPdYEMkUSWMJ5rkp4bYty7v%2F7xDvTfWk&connectionData=%5B%5D|
+2025-09-18 14:15:33.3359|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 14:15:35.7770|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 14:15:40.5058|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 14:15:40.5058|INFO|MZDNETWORK.MvcApplication|Configuring Hangfire recurring jobs...|
+2025-09-18 14:15:40.5309|ERROR|MZDNETWORK.MvcApplication|Failed to set up recurring jobs with Hangfire|System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For NET Framework applications please use GlobalConfiguration.UseXXXStorage method, where XXX is the storage type, like `UseSqlServerStorage`.
+   konum: Hangfire.JobStorage.get_Current() C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs içinde: satır 42
+   konum: Hangfire.RecurringJob.<>c.<.cctor>b__66_0() C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 28
+   konum: Hangfire.RecurringJob.AddOrUpdate(String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 270
+   konum: MZDNETWORK.MvcApplication.Application_Start() C:\Users\Berat\Documents\GitHub\MZDPortalv2\Global.asax.cs içinde: satır 60
+2025-09-18 14:15:40.6016|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 14:15:41.1163|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Start installing Hangfire SQL objects...|
+2025-09-18 14:15:41.5119|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Hangfire SQL objects installed.|
+2025-09-18 14:15:41.5590|INFO|Hangfire.BackgroundJobServer|Starting Hangfire Server using job storage: 'SQL Server: 192.168.1.102,1433@MZDPORTAL_DBV2'|
+2025-09-18 14:15:41.5590|INFO|Hangfire.BackgroundJobServer|Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.|
+2025-09-18 14:15:41.5590|INFO|Hangfire.BackgroundJobServer|Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15|
+2025-09-18 14:15:41.5912|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.StopListening shutdown trigger initialized successfully.|
+2025-09-18 14:15:41.5912|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop BackgroundServerProcess:24d8ed2e has started in 15,3296 ms|
+2025-09-18 14:15:41.5912|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.ShutdownReason shutdown trigger initialized successfully.|
+2025-09-18 14:15:41.5912|DEBUG|Hangfire.Server.AspNetShutdownDetector|HttpRuntime._disposingHttpRuntime shutdown trigger initialized successfully.|
+2025-09-18 14:15:41.5999|INFO|MZDNETWORK.Startup|Hangfire server started|
+2025-09-18 14:15:41.7729|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:41.7729|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:41.7729|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:41.7729|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:41.8629|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:3064:b55b5d19 successfully announced in 260,9445 ms|
+2025-09-18 14:15:41.8629|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:3064:b55b5d19 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, SqlServerHeartbeatProcess, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...|
+2025-09-18 14:15:41.8629|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerHeartbeatProcess:44cea08e has started in 10,5579 ms|
+2025-09-18 14:15:41.8868|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerWatchdog:6b3c6b59 has started in 13,6878 ms|
+2025-09-18 14:15:41.8959|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerJobCancellationWatcher:930f33ce has started in 14,7551 ms|
+2025-09-18 14:15:41.8959|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop SqlServerHeartbeatProcess:45b6a716 has started in 17,7271 ms|
+2025-09-18 14:15:41.9149|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ExpirationManager:76c12d5f has started in 14,3009 ms|
+2025-09-18 14:15:41.9149|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'AggregatedCounter' table...|
+2025-09-18 14:15:41.9149|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop CountersAggregator:66b35bb5 has started in 19,821 ms|
+2025-09-18 14:15:41.9279|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 14:15:41.9279|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:3db9f5c9 has started in 17,2331 ms|
+2025-09-18 14:15:41.9449|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:72486f0b has started in 25,4181 ms|
+2025-09-18 14:15:41.9449|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:0ee890f9 has started in 30,5457 ms|
+2025-09-18 14:15:41.9599|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:17a6d94f has started in 40,2497 ms|
+2025-09-18 14:15:41.9599|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:b6e6e64e has started in 50,5923 ms|
+2025-09-18 14:15:41.9789|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Job' table...|
+2025-09-18 14:15:41.9789|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:4b19a157 has started in 60,4216 ms|
+2025-09-18 14:15:41.9789|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:85c7d3b7 has started in 65,2308 ms|
+2025-09-18 14:15:41.9909|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:c59381f0 has started in 71,6007 ms|
+2025-09-18 14:15:41.9909|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:0ab66a16 has started in 80,5644 ms|
+2025-09-18 14:15:42.0079|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:0b3f6e4a has started in 88,8801 ms|
+2025-09-18 14:15:42.0079|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:0990ed22 has started in 96,0923 ms|
+2025-09-18 14:15:42.0229|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:b893d922 has started in 103,2584 ms|
+2025-09-18 14:15:42.0229|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'List' table...|
+2025-09-18 14:15:42.0229|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:8fa570ca has started in 110,8277 ms|
+2025-09-18 14:15:42.0229|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Set' table...|
+2025-09-18 14:15:42.0389|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:941acb6c has started in 119,9381 ms|
+2025-09-18 14:15:42.0389|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Hash' table...|
+2025-09-18 14:15:42.0389|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:26a6e670 has started in 125,0719 ms|
+2025-09-18 14:15:42.0559|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:f3441e60 has started in 136,5507 ms|
+2025-09-18 14:15:42.0699|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:ec8f2a8b has started in 150,7711 ms|
+2025-09-18 14:15:42.0699|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:35e99460 has started in 161,5991 ms|
+2025-09-18 14:15:42.0869|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:5af36bc4 has started in 167,9578 ms|
+2025-09-18 14:15:42.0869|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop DelayedJobScheduler:2694638f has started in 21,9697 ms|
+2025-09-18 14:15:42.1039|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:62f03b5e has started in 184,8838 ms|
+2025-09-18 14:15:42.1039|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:3064:b55b5d19 all the dispatchers started|
+2025-09-18 14:15:42.1219|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop RecurringJobScheduler:b48202f1 has started in 31,0647 ms|
+2025-09-18 14:15:42.1739|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:15:43.5557|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:43.5557|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:45.0728|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:45.0728|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:45.0728|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:45.0728|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:45.2788|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:45.2788|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:45.7821|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:45.7821|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:45.8462|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:45.8462|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:46.0132|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:46.0132|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:48.2118|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:48.2118|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:48.2118|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: |System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:15:57.8383|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:57.8383|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:57.9056|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:57.9056|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:57.9206|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:57.9206|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:58.0233|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:58.0233|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:58.5048|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:58.5048|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:58.5048|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:58.5048|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:15:58.5320|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:15:58.5320|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:16:02.4204|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:02.4204|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:16:02.7191|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:02.9826|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/User/ChangePassword|
+2025-09-18 14:16:04.6576|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:04.6796|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=Yft1snIcbpQU9im%2FMUOEIf1B1evlxStadBcXGPdKyIoKmfFnihdvGArd3%2Bp6%2FRF6U7KlyVXSizJTsn9WA%2FaD7QsdaJ6Pl8m6vqnS4Sxy5r1SIBpa&connectionData=%5B%5D|
+2025-09-18 14:16:04.6796|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:04.7046|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:16:04.8116|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:04.8346|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:16:05.2602|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:05.2832|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758194164649|
+2025-09-18 14:16:05.2932|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:05.3143|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=xpSf1xzh9ImmWkFm8X5XnrLqmDYoIPJvsVDx3CzRTDEne%2F2JAQ9Vz6HruvOAyidY%2BlHsNl0oM0C4HGJq7GITDpUVZwonAK2Vid5wOzBRM1JDjPsd&connectionData=%5B%5D&tid=1|
+2025-09-18 14:16:05.3252|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:05.3469|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=xpSf1xzh9ImmWkFm8X5XnrLqmDYoIPJvsVDx3CzRTDEne%2F2JAQ9Vz6HruvOAyidY%2BlHsNl0oM0C4HGJq7GITDpUVZwonAK2Vid5wOzBRM1JDjPsd&connectionData=%5B%5D&_=1758194164650|
+2025-09-18 14:16:11.4693|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:11.4918|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:16:11.9080|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:3064:b55b5d19 heartbeat successfully sent|
+2025-09-18 14:16:12.5674|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:12.5674|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:12.5970|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=xpSf1xzh9ImmWkFm8X5XnrLqmDYoIPJvsVDx3CzRTDEne%2F2JAQ9Vz6HruvOAyidY%2BlHsNl0oM0C4HGJq7GITDpUVZwonAK2Vid5wOzBRM1JDjPsd&connectionData=%5B%5D|
+2025-09-18 14:16:12.5970|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:16:12.7061|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:12.7271|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:16:13.1871|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:13.2085|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758194172566|
+2025-09-18 14:16:13.2085|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:13.2423|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=EMKLng6dic2QKaR5HfTf4dek4NA%2FWD9eOVu3PScQlp8x6Bo%2FA2EqYuZxvUFwsDFCdlKA3RmCm6B4lW8rfDUmymXj0mmHQBBhgeyjDSC%2Baxd%2F2Y5e&connectionData=%5B%5D&tid=7|
+2025-09-18 14:16:13.2583|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:13.2803|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=EMKLng6dic2QKaR5HfTf4dek4NA%2FWD9eOVu3PScQlp8x6Bo%2FA2EqYuZxvUFwsDFCdlKA3RmCm6B4lW8rfDUmymXj0mmHQBBhgeyjDSC%2Baxd%2F2Y5e&connectionData=%5B%5D&_=1758194172567|
+2025-09-18 14:16:14.6876|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:14.7098|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:16:19.2117|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:19.2338|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/|
+2025-09-18 14:16:19.9938|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:20.0158|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:16:20.2448|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:20.2668|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:16:21.3961|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:21.4171|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758194180121|
+2025-09-18 14:16:21.4311|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:21.4531|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=ToY3jQ60qZXpMl769N8FgMcpB7bnCX5Jt%2B14WCIp55m%2BBYQCIUxm1Ie02%2BbZJ%2FC0gE4gKf9FkYe8RpcYvfBbSzeWYLbygMWDFf71e1ia%2FsXXmo%2Fe&connectionData=%5B%5D&tid=5|
+2025-09-18 14:16:21.4661|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:21.4871|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=ToY3jQ60qZXpMl769N8FgMcpB7bnCX5Jt%2B14WCIp55m%2BBYQCIUxm1Ie02%2BbZJ%2FC0gE4gKf9FkYe8RpcYvfBbSzeWYLbygMWDFf71e1ia%2FsXXmo%2Fe&connectionData=%5B%5D&_=1758194180122|
+2025-09-18 14:16:22.7106|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:22.7326|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:16:28.6465|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:28.6695|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json|
+2025-09-18 14:16:28.6755|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: admin|System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:16:33.6222|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:16:33.6452|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=ToY3jQ60qZXpMl769N8FgMcpB7bnCX5Jt%2B14WCIp55m%2BBYQCIUxm1Ie02%2BbZJ%2FC0gE4gKf9FkYe8RpcYvfBbSzeWYLbygMWDFf71e1ia%2FsXXmo%2Fe&connectionData=%5B%5D|
+2025-09-18 14:17:22.3778|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 14:17:22.4969|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 14:17:27.6560|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 14:17:27.6560|INFO|MZDNETWORK.MvcApplication|Configuring Hangfire recurring jobs...|
+2025-09-18 14:17:27.6800|ERROR|MZDNETWORK.MvcApplication|Failed to set up recurring jobs with Hangfire|System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For NET Framework applications please use GlobalConfiguration.UseXXXStorage method, where XXX is the storage type, like `UseSqlServerStorage`.
+   konum: Hangfire.JobStorage.get_Current() C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs içinde: satır 42
+   konum: Hangfire.RecurringJob.<>c.<.cctor>b__66_0() C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 28
+   konum: Hangfire.RecurringJob.AddOrUpdate(String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 270
+   konum: MZDNETWORK.MvcApplication.Application_Start() C:\Users\Berat\Documents\GitHub\MZDPortalv2\Global.asax.cs içinde: satır 60
+2025-09-18 14:17:27.7460|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 14:17:33.7640|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Start installing Hangfire SQL objects...|
+2025-09-18 14:17:34.1569|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Hangfire SQL objects installed.|
+2025-09-18 14:17:34.2089|INFO|Hangfire.BackgroundJobServer|Starting Hangfire Server using job storage: 'SQL Server: 192.168.1.102,1433@MZDPORTAL_DBV2'|
+2025-09-18 14:17:34.2089|INFO|Hangfire.BackgroundJobServer|Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.|
+2025-09-18 14:17:34.2089|INFO|Hangfire.BackgroundJobServer|Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15|
+2025-09-18 14:17:34.2419|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.StopListening shutdown trigger initialized successfully.|
+2025-09-18 14:17:34.2419|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop BackgroundServerProcess:ebb211fe has started in 14,9141 ms|
+2025-09-18 14:17:34.2419|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.ShutdownReason shutdown trigger initialized successfully.|
+2025-09-18 14:17:34.2419|DEBUG|Hangfire.Server.AspNetShutdownDetector|HttpRuntime._disposingHttpRuntime shutdown trigger initialized successfully.|
+2025-09-18 14:17:34.2419|INFO|MZDNETWORK.Startup|Hangfire server started|
+2025-09-18 14:17:34.4536|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:34.4536|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:34.4536|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:34.4536|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:34.4536|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:34.4536|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:34.5452|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:10408:330ac905 successfully announced in 290,8491 ms|
+2025-09-18 14:17:34.5572|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:10408:330ac905 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, SqlServerHeartbeatProcess, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...|
+2025-09-18 14:17:34.5572|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerHeartbeatProcess:86acf2ef has started in 13,035 ms|
+2025-09-18 14:17:34.5732|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerWatchdog:8d4a7698 has started in 14,7493 ms|
+2025-09-18 14:17:34.5822|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerJobCancellationWatcher:94110096 has started in 15,4659 ms|
+2025-09-18 14:17:34.5822|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop SqlServerHeartbeatProcess:de96e81e has started in 10,1268 ms|
+2025-09-18 14:17:34.6032|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ExpirationManager:fcc1f81a has started in 16,5876 ms|
+2025-09-18 14:17:34.6142|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop CountersAggregator:a56783c6 has started in 16,5985 ms|
+2025-09-18 14:17:34.6142|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'AggregatedCounter' table...|
+2025-09-18 14:17:34.6142|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 14:17:34.6142|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:26b1e7cb has started in 16,4633 ms|
+2025-09-18 14:17:34.6292|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:8558b538 has started in 22,291 ms|
+2025-09-18 14:17:34.6292|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:4434064e has started in 33,6127 ms|
+2025-09-18 14:17:34.6482|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:d426b5fa has started in 41,0118 ms|
+2025-09-18 14:17:34.6482|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:94cb08f6 has started in 47,5181 ms|
+2025-09-18 14:17:34.6602|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:a267c2f3 has started in 53,39 ms|
+2025-09-18 14:17:34.6602|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:0f58f2e4 has started in 67,0362 ms|
+2025-09-18 14:17:34.6602|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:4e1158a5 has started in 67,1345 ms|
+2025-09-18 14:17:34.6752|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:3e6c44ea has started in 67,9868 ms|
+2025-09-18 14:17:34.6752|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Job' table...|
+2025-09-18 14:17:34.6752|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:1ea3d734 has started in 78,6889 ms|
+2025-09-18 14:17:34.6982|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:5aff2120 has started in 91,7273 ms|
+2025-09-18 14:17:34.6982|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:c3764f84 has started in 99,7798 ms|
+2025-09-18 14:17:34.7132|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:554fc668 has started in 106,831 ms|
+2025-09-18 14:17:34.7262|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:c18535b3 has started in 118,6237 ms|
+2025-09-18 14:17:34.7262|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'List' table...|
+2025-09-18 14:17:34.7262|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:cf6411a5 has started in 124,8983 ms|
+2025-09-18 14:17:34.7432|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:a78ca7a3 has started in 136,8128 ms|
+2025-09-18 14:17:34.7432|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Set' table...|
+2025-09-18 14:17:34.7552|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:4f5d331c has started in 148,2208 ms|
+2025-09-18 14:17:34.7552|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Hash' table...|
+2025-09-18 14:17:34.7552|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:08a27523 has started in 154,9079 ms|
+2025-09-18 14:17:34.7712|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:2ad19395 has started in 164,7684 ms|
+2025-09-18 14:17:34.7712|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:71ee8f49 has started in 173,0764 ms|
+2025-09-18 14:17:34.7912|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop DelayedJobScheduler:2dc780a8 has started in 25,1705 ms|
+2025-09-18 14:17:34.8072|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:10408:330ac905 all the dispatchers started|
+2025-09-18 14:17:34.8072|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop RecurringJobScheduler:814434b1 has started in 24,9464 ms|
+2025-09-18 14:17:34.9178|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: |System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:17:36.0852|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:36.0852|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:38.3731|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:38.3731|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:38.8586|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:38.8586|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:38.9606|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:38.9606|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:39.1337|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:39.1337|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:40.8404|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:40.8404|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:40.8804|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: |System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:17:49.0901|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:49.0901|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:49.1951|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:49.1951|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:49.1951|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:49.1951|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:49.1951|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: |System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:17:49.2171|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:49.2171|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:49.6202|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:49.6202|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:50.0601|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:50.0601|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:50.0731|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:50.0731|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:50.0861|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:50.0861|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:54.7300|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:54.7300|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:17:55.0285|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:55.2943|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/User/ChangePassword|
+2025-09-18 14:17:56.4049|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:56.4259|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=ed6G9v%2FA%2BRJe%2FDooPwbu4mYjXKFhy7YulNV0sXrGyeupDeKnDu2%2BH38sw%2Bdw4Z1TvTdbIzjldRxKsmOT0BpGff8A0nTUgC2lFjV33T6%2FMh9IBnzx&connectionData=%5B%5D|
+2025-09-18 14:17:56.4469|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:56.4699|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json|
+2025-09-18 14:17:56.4699|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:56.4809|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: admin|System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:17:56.4919|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:17:56.7899|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:56.8109|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:17:57.1807|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:57.2027|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758194276457|
+2025-09-18 14:17:57.2347|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:57.2557|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=Yl4OUVQ%2B7GEN1gvhoK4ZbhdUgv6bscbsOSC1I%2Bjqs1wLkzuVpAhh01280xcUK3JcHKQtLwZVsBGvSbEOq6WPV%2FzInQjvlBHp0Khzt6OEoBOjX7yC&connectionData=%5B%5D&tid=2|
+2025-09-18 14:17:57.2697|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:57.2916|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=Yl4OUVQ%2B7GEN1gvhoK4ZbhdUgv6bscbsOSC1I%2Bjqs1wLkzuVpAhh01280xcUK3JcHKQtLwZVsBGvSbEOq6WPV%2FzInQjvlBHp0Khzt6OEoBOjX7yC&connectionData=%5B%5D&_=1758194276458|
+2025-09-18 14:17:59.0730|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:17:59.0950|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/InsanKaynaklari/DilekIstek_IK|
+2025-09-18 14:18:00.7470|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:00.7690|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=Yl4OUVQ%2B7GEN1gvhoK4ZbhdUgv6bscbsOSC1I%2Bjqs1wLkzuVpAhh01280xcUK3JcHKQtLwZVsBGvSbEOq6WPV%2FzInQjvlBHp0Khzt6OEoBOjX7yC&connectionData=%5B%5D|
+2025-09-18 14:18:00.7690|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:00.7960|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json|
+2025-09-18 14:18:00.8010|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: admin|System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:18:00.8010|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:00.8230|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:18:01.5189|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:01.5389|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:18:01.8767|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:01.8993|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Performance|
+2025-09-18 14:18:03.2011|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:03.2221|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json|
+2025-09-18 14:18:03.2221|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: admin|System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:18:03.2501|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:03.2601|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:03.2601|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:03.2891|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/chart.js|
+2025-09-18 14:18:03.2891|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:18:03.3071|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/performance-monitor.js|
+2025-09-18 14:18:03.4834|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:03.5064|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/chart.umd.js.map|
+2025-09-18 14:18:03.5064|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/Scripts/chart.umd.js.map, User: admin|System.Web.HttpException (0x80004005): '/Scripts/chart.umd.js.map' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:18:03.5894|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:03.6024|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:03.6024|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Performance/GetPerformanceData|
+2025-09-18 14:18:03.6304|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:18:04.0886|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:04.1116|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758194283217|
+2025-09-18 14:18:04.1286|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:04.1526|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=b8zxcCbhKS5fi5BkgvrJFLsveJmbejNC4e%2F0OAn8wBwBAMrYNTsxyDpWld%2FKG4DA%2FWra%2BpvkP%2BVv1QhnSo37zAcX%2Fx3FA7wc%2BVr8SUiZew%2BQsg20&connectionData=%5B%5D&tid=4|
+2025-09-18 14:18:04.1736|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:04.1976|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=b8zxcCbhKS5fi5BkgvrJFLsveJmbejNC4e%2F0OAn8wBwBAMrYNTsxyDpWld%2FKG4DA%2FWra%2BpvkP%2BVv1QhnSo37zAcX%2Fx3FA7wc%2BVr8SUiZew%2BQsg20&connectionData=%5B%5D&_=1758194283218|
+2025-09-18 14:18:04.6159|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10408:330ac905 heartbeat successfully sent|
+2025-09-18 14:18:05.5667|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:05.5877|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:18:08.3804|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:08.4004|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=b8zxcCbhKS5fi5BkgvrJFLsveJmbejNC4e%2F0OAn8wBwBAMrYNTsxyDpWld%2FKG4DA%2FWra%2BpvkP%2BVv1QhnSo37zAcX%2Fx3FA7wc%2BVr8SUiZew%2BQsg20&connectionData=%5B%5D|
+2025-09-18 14:18:08.4104|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:08.4314|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json|
+2025-09-18 14:18:08.4314|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/.well-known/appspecific/com.chrome.devtools.json, User: admin|System.Web.HttpException (0x80004005): '/.well-known/appspecific/com.chrome.devtools.json' yolunun denetleyicisi bulunamadı veya IController'ı uygulamıyor.
+   konum: System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   konum: System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   konum: System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:18:08.4314|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:08.4604|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:18:08.8076|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:08.8296|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:18:09.0473|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:09.0713|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/skins/ui/oxide/skin.min.css.map|
+2025-09-18 14:18:09.0713|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:09.0713|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:09.1049|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/skins/content/default/content.min.css.map|
+2025-09-18 14:18:09.1151|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/tinymce/skins/ui/oxide/content.min.css.map|
+2025-09-18 14:18:09.2790|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:09.3010|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%5D&_=1758194288409|
+2025-09-18 14:18:09.3171|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:09.3391|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=PB6Eh0QGHUxm8ZEpC5%2FyLwoW3molDCVAjRg72W3ywmB9Ta%2BK0jiXt5Xm2T83csb0ktx0uCAh9O59jZxd5f8r64T9KuqSdDFjJXBg75xXSz6yLptZ&connectionData=%5B%5D&tid=5|
+2025-09-18 14:18:09.4198|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:09.4408|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=PB6Eh0QGHUxm8ZEpC5%2FyLwoW3molDCVAjRg72W3ywmB9Ta%2BK0jiXt5Xm2T83csb0ktx0uCAh9O59jZxd5f8r64T9KuqSdDFjJXBg75xXSz6yLptZ&connectionData=%5B%5D&_=1758194288410|
+2025-09-18 14:18:15.4316|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:18:15.4551|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:20:39.3852|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 14:20:41.8921|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 14:20:46.5417|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 14:20:46.5417|INFO|MZDNETWORK.MvcApplication|Configuring Hangfire recurring jobs...|
+2025-09-18 14:20:46.5685|ERROR|MZDNETWORK.MvcApplication|Failed to set up recurring jobs with Hangfire|System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For NET Framework applications please use GlobalConfiguration.UseXXXStorage method, where XXX is the storage type, like `UseSqlServerStorage`.
+   konum: Hangfire.JobStorage.get_Current() C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs içinde: satır 42
+   konum: Hangfire.RecurringJob.<>c.<.cctor>b__66_0() C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 28
+   konum: Hangfire.RecurringJob.AddOrUpdate(String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 270
+   konum: MZDNETWORK.MvcApplication.Application_Start() C:\Users\Berat\Documents\GitHub\MZDPortalv2\Global.asax.cs içinde: satır 60
+2025-09-18 14:20:46.6367|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 14:20:47.1317|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Start installing Hangfire SQL objects...|
+2025-09-18 14:20:47.5168|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Hangfire SQL objects installed.|
+2025-09-18 14:20:47.5650|INFO|Hangfire.BackgroundJobServer|Starting Hangfire Server using job storage: 'SQL Server: 192.168.1.102,1433@MZDPORTAL_DBV2'|
+2025-09-18 14:20:47.5650|INFO|Hangfire.BackgroundJobServer|Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.|
+2025-09-18 14:20:47.5650|INFO|Hangfire.BackgroundJobServer|Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15|
+2025-09-18 14:20:47.5956|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.StopListening shutdown trigger initialized successfully.|
+2025-09-18 14:20:47.5956|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop BackgroundServerProcess:57642283 has started in 14,7118 ms|
+2025-09-18 14:20:47.5976|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.ShutdownReason shutdown trigger initialized successfully.|
+2025-09-18 14:20:47.5976|DEBUG|Hangfire.Server.AspNetShutdownDetector|HttpRuntime._disposingHttpRuntime shutdown trigger initialized successfully.|
+2025-09-18 14:20:47.5976|INFO|MZDNETWORK.Startup|Hangfire server started|
+2025-09-18 14:20:47.7878|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:20:47.7878|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:20:47.8368|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:20:47.8368|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:20:47.8969|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:10044:d1a22cb3 successfully announced in 289,8002 ms|
+2025-09-18 14:20:47.9098|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:10044:d1a22cb3 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, SqlServerHeartbeatProcess, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...|
+2025-09-18 14:20:47.9098|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerHeartbeatProcess:50bd4d5a has started in 11,2484 ms|
+2025-09-18 14:20:47.9098|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerWatchdog:ed4da2c4 has started in 13,2407 ms|
+2025-09-18 14:20:47.9368|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerJobCancellationWatcher:858f9992 has started in 18,1671 ms|
+2025-09-18 14:20:47.9438|INFO|Hangfire.Server.ServerWatchdog|1 servers were removed due to timeout|
+2025-09-18 14:20:47.9438|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop SqlServerHeartbeatProcess:39981a5b has started in 13,6655 ms|
+2025-09-18 14:20:47.9438|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ExpirationManager:0b5a5f7b has started in 17,646 ms|
+2025-09-18 14:20:47.9638|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop CountersAggregator:9f47c50f has started in 15,8435 ms|
+2025-09-18 14:20:47.9638|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 14:20:47.9638|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'AggregatedCounter' table...|
+2025-09-18 14:20:47.9748|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:f19961cd has started in 17,3722 ms|
+2025-09-18 14:20:47.9748|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:7d624dfa has started in 25,3732 ms|
+2025-09-18 14:20:47.9898|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:261211c7 has started in 33,0163 ms|
+2025-09-18 14:20:47.9898|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:aa1bf931 has started in 43,6581 ms|
+2025-09-18 14:20:48.0098|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:bb7800d5 has started in 52,0973 ms|
+2025-09-18 14:20:48.0098|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Job' table...|
+2025-09-18 14:20:48.0208|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:3a237101 has started in 63,102 ms|
+2025-09-18 14:20:48.0208|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:86264920 has started in 71,3203 ms|
+2025-09-18 14:20:48.0448|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:2ce20cad has started in 87,5392 ms|
+2025-09-18 14:20:48.0528|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:a444d9f0 has started in 95,0329 ms|
+2025-09-18 14:20:48.0528|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'List' table...|
+2025-09-18 14:20:48.0668|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:e9451d9b has started in 109,8116 ms|
+2025-09-18 14:20:48.0668|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:29b1f86e has started in 122,4381 ms|
+2025-09-18 14:20:48.0848|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:17746800 has started in 127,5975 ms|
+2025-09-18 14:20:48.0848|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:c1861c34 has started in 137,4225 ms|
+2025-09-18 14:20:48.1008|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:2076fafe has started in 143,4498 ms|
+2025-09-18 14:20:48.1008|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Set' table...|
+2025-09-18 14:20:48.1128|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:d6f8987f has started in 155,0088 ms|
+2025-09-18 14:20:48.1128|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:79ac50f1 has started in 164,3444 ms|
+2025-09-18 14:20:48.1128|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Hash' table...|
+2025-09-18 14:20:48.1288|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:eb96a4ce has started in 171,7186 ms|
+2025-09-18 14:20:48.1288|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:6a430d0a has started in 182,2155 ms|
+2025-09-18 14:20:48.1468|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:97efdde1 has started in 189,955 ms|
+2025-09-18 14:20:48.1468|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:7abbb47d has started in 196,9745 ms|
+2025-09-18 14:20:48.1628|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop DelayedJobScheduler:b4feb1ef has started in 20,1008 ms|
+2025-09-18 14:20:48.1628|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:10044:d1a22cb3 all the dispatchers started|
+2025-09-18 14:20:48.1628|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop RecurringJobScheduler:90898aa5 has started in 17,9392 ms|
+2025-09-18 14:20:48.5549|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Views/Home/Index.cshtml|
+2025-09-18 14:20:48.5549|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/|
+2025-09-18 14:20:48.5986|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: admin|System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:20:52.7403|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:20:52.7593|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:20:52.9694|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:20:52.9898|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:20:53.4655|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:20:53.4945|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758194452872|
+2025-09-18 14:20:53.5386|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:20:53.5593|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=ukYzpYrloXhudN97YEPnmexDlBVVxbMD4bcdQc9H%2Bqrcunt08Ba0Qfh2UKuZZ5z5OpaM%2Fq6qqWFaVMoaYGzTwvClvqABXGZQeflppGKsJRG7WTzi&connectionData=%5B{"name"%3A"notificationhub"}%5D&tid=5|
+2025-09-18 14:20:53.6805|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:20:53.7005|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=ukYzpYrloXhudN97YEPnmexDlBVVxbMD4bcdQc9H%2Bqrcunt08Ba0Qfh2UKuZZ5z5OpaM%2Fq6qqWFaVMoaYGzTwvClvqABXGZQeflppGKsJRG7WTzi&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758194452873|
+2025-09-18 14:21:17.9515|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:21:47.9699|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:21:52.9649|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:21:52.9859|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:22:17.9797|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:22:48.0005|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:22:52.9679|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:22:52.9889|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:23:18.0044|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:23:48.0246|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:23:52.9776|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:23:52.9996|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:24:18.0551|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:24:48.0678|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:24:52.9753|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:24:52.9973|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:25:18.0871|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:25:49.0588|INFO|Hangfire.Server.ServerWatchdog|2 servers were removed due to timeout|
+2025-09-18 14:25:49.1198|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 14:25:49.2000|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:25:54.0687|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:25:54.0887|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:25:54.8389|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:25:54.8589|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/ping?_=1758194452874|
+2025-09-18 14:26:19.2158|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:26:49.2225|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:26:54.0669|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:26:54.0919|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:27:19.2390|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:27:49.2607|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:27:54.0648|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:27:54.0868|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:28:19.2743|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:28:49.2951|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:28:54.0659|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:28:54.0859|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:29:19.3090|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:29:49.3320|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:29:54.0719|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:29:54.0959|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:30:19.3518|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:30:49.1279|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 14:30:49.3680|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:30:54.0749|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:30:54.0968|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:30:54.8410|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:30:54.8621|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/ping?_=1758194452875|
+2025-09-18 14:31:19.3918|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:31:49.4138|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:31:54.0581|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:31:54.0811|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:32:19.4291|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:32:49.4376|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:32:54.0654|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:32:54.0875|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:33:19.4700|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:33:49.4826|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:33:54.0693|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:33:54.0913|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:34:19.5066|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:34:49.5259|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:34:54.0667|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:34:54.0867|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:35:19.5493|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:35:49.1459|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 14:35:49.5776|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:35:54.0681|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:35:54.0901|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:35:54.8286|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:35:54.8506|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/ping?_=1758194452876|
+2025-09-18 14:36:19.6028|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:36:49.6227|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:36:54.0734|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:36:54.0943|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:37:19.6398|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:37:49.6564|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:37:54.0665|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:37:54.0875|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:38:19.6637|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:38:49.6706|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:38:54.0681|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:38:54.0891|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:39:19.6907|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:39:49.7024|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:39:54.0622|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:39:54.0832|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:40:19.7243|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:40:49.1705|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 14:40:49.7499|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:40:54.0659|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:40:54.0888|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:40:54.8418|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:40:54.8647|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/ping?_=1758194452877|
+2025-09-18 14:41:19.7667|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:41:49.7858|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:41:54.0658|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:41:54.0878|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:42:19.8048|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:42:39.3224|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:39.3492|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:42:43.2186|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:43.2406|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=ukYzpYrloXhudN97YEPnmexDlBVVxbMD4bcdQc9H%2Bqrcunt08Ba0Qfh2UKuZZ5z5OpaM%2Fq6qqWFaVMoaYGzTwvClvqABXGZQeflppGKsJRG7WTzi&connectionData=%5B{"name"%3A"notificationhub"}%5D|
+2025-09-18 14:42:43.2606|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:43.2606|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:43.2886|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/signalr-manager.js|
+2025-09-18 14:42:43.2886|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:42:43.4916|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:43.5146|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:42:43.9730|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:43.9946|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758195763373|
+2025-09-18 14:42:44.0066|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:44.0286|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=tIGUYhmXdJwVhI7HXzWyh42A73DIrGFdCiE1WnRGfxu9J%2F5CjCNoS6RCUnD1PRPKMcRsz6OYseDPjdt0%2BEjiEJIeRzBn5MD47vb3B3N7vKZ0lX8d&connectionData=%5B{"name"%3A"notificationhub"}%5D&tid=5|
+2025-09-18 14:42:44.0406|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:44.0636|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=tIGUYhmXdJwVhI7HXzWyh42A73DIrGFdCiE1WnRGfxu9J%2F5CjCNoS6RCUnD1PRPKMcRsz6OYseDPjdt0%2BEjiEJIeRzBn5MD47vb3B3N7vKZ0lX8d&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758195763374|
+2025-09-18 14:42:46.8774|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:46.8999|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:42:47.5390|INFO|MZDNETWORK.Controllers.NotificationController|SignalR showNotification broadcasted. Color=info, Duration=5000, PlaySound=False|
+2025-09-18 14:42:49.6330|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:49.6561|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/|
+2025-09-18 14:42:49.8544|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:49.8544|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:10044:d1a22cb3 heartbeat successfully sent|
+2025-09-18 14:42:49.8704|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:49.8796|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=tIGUYhmXdJwVhI7HXzWyh42A73DIrGFdCiE1WnRGfxu9J%2F5CjCNoS6RCUnD1PRPKMcRsz6OYseDPjdt0%2BEjiEJIeRzBn5MD47vb3B3N7vKZ0lX8d&connectionData=%5B{"name"%3A"notificationhub"}%5D|
+2025-09-18 14:42:49.8972|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:42:49.9409|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:49.9639|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:42:50.4353|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:50.4580|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758195769847|
+2025-09-18 14:42:50.4580|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:50.4903|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=dEZmC9kJoMlwkzRmeHMnGGQUYWvFXc5cG28Cjq6U6bT3IUE%2Bl0S9ibjHajnAWAs1y0zMiEubQDku0mLgLpjPCYX%2FL%2Bq9hPgPjviQ3HpB9qTs5%2FJL&connectionData=%5B{"name"%3A"notificationhub"}%5D&tid=8|
+2025-09-18 14:42:50.4903|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:50.5273|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=dEZmC9kJoMlwkzRmeHMnGGQUYWvFXc5cG28Cjq6U6bT3IUE%2Bl0S9ibjHajnAWAs1y0zMiEubQDku0mLgLpjPCYX%2FL%2Bq9hPgPjviQ3HpB9qTs5%2FJL&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758195769848|
+2025-09-18 14:42:52.6606|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:52.6816|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:42:52.9940|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:53.0160|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:42:53.1899|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:53.2129|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:42:53.6418|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:53.6626|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758195773012|
+2025-09-18 14:42:53.6626|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:53.6959|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=WYwKHZ0AjEqDRdJ16ufuT%2F0aCK8iPBC7uVBxeY0mTKpSb3iBf1VEas2bndRQ%2Bh%2FS1dDF69BZC6em5UQP%2FBRJGxUlE%2B4Z5xZcctOUOGopeazapqTJ&connectionData=%5B{"name"%3A"notificationhub"}%5D&tid=4|
+2025-09-18 14:42:53.7109|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:53.7319|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=WYwKHZ0AjEqDRdJ16ufuT%2F0aCK8iPBC7uVBxeY0mTKpSb3iBf1VEas2bndRQ%2Bh%2FS1dDF69BZC6em5UQP%2FBRJGxUlE%2B4Z5xZcctOUOGopeazapqTJ&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758195773013|
+2025-09-18 14:42:54.8236|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:42:54.8454|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:42:54.8514|INFO|MZDNETWORK.Controllers.NotificationController|SignalR showNotification broadcasted. Color=info, Duration=5000, PlaySound=False|
+2025-09-18 14:43:01.0877|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:43:01.1112|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:43:01.1172|INFO|MZDNETWORK.Controllers.NotificationController|SignalR showNotification broadcasted. Color=warning, Duration=5000, PlaySound=False|
+2025-09-18 14:43:03.2675|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:43:03.2895|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=WYwKHZ0AjEqDRdJ16ufuT%2F0aCK8iPBC7uVBxeY0mTKpSb3iBf1VEas2bndRQ%2Bh%2FS1dDF69BZC6em5UQP%2FBRJGxUlE%2B4Z5xZcctOUOGopeazapqTJ&connectionData=%5B{"name"%3A"notificationhub"}%5D|
+2025-09-18 14:43:03.9126|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:43:03.9336|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=dEZmC9kJoMlwkzRmeHMnGGQUYWvFXc5cG28Cjq6U6bT3IUE%2Bl0S9ibjHajnAWAs1y0zMiEubQDku0mLgLpjPCYX%2FL%2Bq9hPgPjviQ3HpB9qTs5%2FJL&connectionData=%5B{"name"%3A"notificationhub"}%5D|
+2025-09-18 14:46:43.6452|INFO|MZDNETWORK.MvcApplication|Application starting...|
+2025-09-18 14:46:43.7675|INFO|MZDNETWORK.MvcApplication|Starting database seeding...|
+2025-09-18 14:46:48.8908|INFO|MZDNETWORK.MvcApplication|Database seeding completed successfully|
+2025-09-18 14:46:48.8908|INFO|MZDNETWORK.MvcApplication|Configuring Hangfire recurring jobs...|
+2025-09-18 14:46:48.9119|ERROR|MZDNETWORK.MvcApplication|Failed to set up recurring jobs with Hangfire|System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For NET Framework applications please use GlobalConfiguration.UseXXXStorage method, where XXX is the storage type, like `UseSqlServerStorage`.
+   konum: Hangfire.JobStorage.get_Current() C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs içinde: satır 42
+   konum: Hangfire.RecurringJob.<>c.<.cctor>b__66_0() C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 28
+   konum: Hangfire.RecurringJob.AddOrUpdate(String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs içinde: satır 270
+   konum: MZDNETWORK.MvcApplication.Application_Start() C:\Users\Berat\Documents\GitHub\MZDPortalv2\Global.asax.cs içinde: satır 60
+2025-09-18 14:46:48.9769|INFO|MZDNETWORK.MvcApplication|Application started successfully.|
+2025-09-18 14:46:54.8341|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Start installing Hangfire SQL objects...|
+2025-09-18 14:46:55.2249|INFO|Hangfire.SqlServer.SqlServerObjectsInstaller|Hangfire SQL objects installed.|
+2025-09-18 14:46:55.2759|INFO|Hangfire.BackgroundJobServer|Starting Hangfire Server using job storage: 'SQL Server: 192.168.1.102,1433@MZDPORTAL_DBV2'|
+2025-09-18 14:46:55.2759|INFO|Hangfire.BackgroundJobServer|Using the following options for SQL Server job storage: Queue poll interval: 00:00:00.|
+2025-09-18 14:46:55.2759|INFO|Hangfire.BackgroundJobServer|Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15|
+2025-09-18 14:46:55.3089|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.StopListening shutdown trigger initialized successfully.|
+2025-09-18 14:46:55.3089|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop BackgroundServerProcess:02c400ef has started in 13,8778 ms|
+2025-09-18 14:46:55.3089|DEBUG|Hangfire.Server.AspNetShutdownDetector|HostingEnvironment.ShutdownReason shutdown trigger initialized successfully.|
+2025-09-18 14:46:55.3089|DEBUG|Hangfire.Server.AspNetShutdownDetector|HttpRuntime._disposingHttpRuntime shutdown trigger initialized successfully.|
+2025-09-18 14:46:55.3189|INFO|MZDNETWORK.Startup|Hangfire server started|
+2025-09-18 14:46:55.5179|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:46:55.5179|WARN|MZDNETWORK.MvcApplication|User is not authenticated or HttpContext.Current.User is null|
+2025-09-18 14:46:55.6281|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:46:55.6281|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:46:55.6791|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:14724:90a07ded successfully announced in 355,6225 ms|
+2025-09-18 14:46:55.6961|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:14724:90a07ded is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, SqlServerHeartbeatProcess, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...|
+2025-09-18 14:46:55.6961|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerHeartbeatProcess:99215dc7 has started in 11,4644 ms|
+2025-09-18 14:46:55.6961|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerWatchdog:0213b436 has started in 9,336 ms|
+2025-09-18 14:46:55.7181|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ServerJobCancellationWatcher:86298785 has started in 17,3596 ms|
+2025-09-18 14:46:55.7261|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop SqlServerHeartbeatProcess:b7632ebc has started in 10,6509 ms|
+2025-09-18 14:46:55.7261|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop ExpirationManager:a8005dc6 has started in 12,2328 ms|
+2025-09-18 14:46:55.7461|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop CountersAggregator:ecc81062 has started in 16,0608 ms|
+2025-09-18 14:46:55.7461|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'AggregatedCounter' table...|
+2025-09-18 14:46:55.7461|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 14:46:55.7571|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:acc231b7 has started in 16,2068 ms|
+2025-09-18 14:46:55.7571|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:00cc4c6a has started in 23,8145 ms|
+2025-09-18 14:46:55.7571|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:6f781b2a has started in 29,171 ms|
+2025-09-18 14:46:55.7781|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:dce4ecca has started in 37,1098 ms|
+2025-09-18 14:46:55.7871|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:65e09ee2 has started in 45,9401 ms|
+2025-09-18 14:46:55.7871|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:8239f78f has started in 56,8514 ms|
+2025-09-18 14:46:55.8071|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:df9ce548 has started in 66,5794 ms|
+2025-09-18 14:46:55.8071|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:5da7be23 has started in 71,1324 ms|
+2025-09-18 14:46:55.8231|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:01b4fe42 has started in 82,1458 ms|
+2025-09-18 14:46:55.8231|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Job' table...|
+2025-09-18 14:46:55.8231|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:1101af91 has started in 88,821 ms|
+2025-09-18 14:46:55.8421|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:20ada296 has started in 100,8783 ms|
+2025-09-18 14:46:55.8501|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:e0a73d62 has started in 109,6891 ms|
+2025-09-18 14:46:55.8501|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:5a648e3b has started in 119,5693 ms|
+2025-09-18 14:46:55.8801|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:e379537e has started in 139,3174 ms|
+2025-09-18 14:46:55.8801|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:70353c2f has started in 144,9019 ms|
+2025-09-18 14:46:55.8961|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:90dca999 has started in 154,989 ms|
+2025-09-18 14:46:55.8961|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'List' table...|
+2025-09-18 14:46:55.8961|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:31e7adbf has started in 162,2425 ms|
+2025-09-18 14:46:55.8961|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Set' table...|
+2025-09-18 14:46:55.8961|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:d27f5bb2 has started in 167,6212 ms|
+2025-09-18 14:46:55.9141|DEBUG|Hangfire.SqlServer.ExpirationManager|Removing outdated records from the 'Hash' table...|
+2025-09-18 14:46:55.9141|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:2a9fae6c has started in 176,9911 ms|
+2025-09-18 14:46:55.9281|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop Worker:21d16d36 has started in 186,9123 ms|
+2025-09-18 14:46:55.9281|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop DelayedJobScheduler:b724089e has started in 18,2089 ms|
+2025-09-18 14:46:55.9428|INFO|Hangfire.Server.BackgroundServerProcess|Server desktop-g7qo4sn:14724:90a07ded all the dispatchers started|
+2025-09-18 14:46:55.9428|DEBUG|Hangfire.Processing.BackgroundExecution|Execution loop RecurringJobScheduler:07a3034f has started in 18,0631 ms|
+2025-09-18 14:46:56.3428|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/|
+2025-09-18 14:46:56.3428|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Views/Home/Index.cshtml|
+2025-09-18 14:46:56.3958|DEBUG|MZDNETWORK.MvcApplication|Ignorable exception, URL: https://localhost:44318/Views/Home/Index.cshtml, User: admin|System.Web.HttpException (0x80004005): '/Views/Home/Index.cshtml' yolu bulunamadı.
+   konum: System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   konum: System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   konum: System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   konum: System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2025-09-18 14:46:59.5570|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:46:59.5770|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:47:01.9120|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:01.9330|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:47:02.4139|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:02.4408|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758196019683|
+2025-09-18 14:47:02.4848|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:02.5058|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=S9GbROEgrgiVp96bf54jFhtIN%2FhbOq9XJSJ3SeGMKfDoMJiEnJQvapPxS%2F7brurOHSocznEdOoPLwdxbeDpKGf3SVDLiTqHmuIQH0sEolSAAXUFk&connectionData=%5B{"name"%3A"notificationhub"}%5D&tid=1|
+2025-09-18 14:47:02.6338|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:02.6537|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=S9GbROEgrgiVp96bf54jFhtIN%2FhbOq9XJSJ3SeGMKfDoMJiEnJQvapPxS%2F7brurOHSocznEdOoPLwdxbeDpKGf3SVDLiTqHmuIQH0sEolSAAXUFk&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758196019684|
+2025-09-18 14:47:25.7538|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:47:29.1958|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:29.2178|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:47:29.9987|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:30.0217|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=S9GbROEgrgiVp96bf54jFhtIN%2FhbOq9XJSJ3SeGMKfDoMJiEnJQvapPxS%2F7brurOHSocznEdOoPLwdxbeDpKGf3SVDLiTqHmuIQH0sEolSAAXUFk&connectionData=%5B{"name"%3A"notificationhub"}%5D|
+2025-09-18 14:47:30.0217|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:30.0447|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:47:30.2157|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:30.2377|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:47:30.7039|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:30.7249|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758196050115|
+2025-09-18 14:47:30.7249|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:30.7588|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=rWeGE9t7LJv1iIRIxpnZsidmtsPYVmZq66J2X5p75EWwR1oqqtmBCBEvSsDh7m1P%2Fb%2B8IOH6xfiEkfHmbRk5IEBpjnMOMOHoTZo5gsZfAKEosOoa&connectionData=%5B{"name"%3A"notificationhub"}%5D&tid=9|
+2025-09-18 14:47:30.7708|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:30.7908|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=rWeGE9t7LJv1iIRIxpnZsidmtsPYVmZq66J2X5p75EWwR1oqqtmBCBEvSsDh7m1P%2Fb%2B8IOH6xfiEkfHmbRk5IEBpjnMOMOHoTZo5gsZfAKEosOoa&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758196050116|
+2025-09-18 14:47:34.4840|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:47:34.5050|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:47:35.1685|INFO|MZDNETWORK.Controllers.NotificationController|SignalR showNotification broadcasted. Color=info, Duration=5000, PlaySound=False|
+2025-09-18 14:47:55.7751|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:48:25.7821|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:48:30.2028|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:48:30.2258|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:48:55.7892|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:49:25.8012|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:49:30.2007|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:49:30.2237|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:49:48.1401|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:49:48.1614|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:49:48.1959|INFO|MZDNETWORK.Controllers.NotificationController|SignalR showNotification broadcasted. Color=info, Duration=5000, PlaySound=False|
+2025-09-18 14:49:54.9167|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:49:54.9365|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:49:54.9707|INFO|MZDNETWORK.Controllers.NotificationController|SignalR showNotification broadcasted. Color=warning, Duration=5000, PlaySound=False|
+2025-09-18 14:49:55.8176|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:50:01.4350|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:50:01.4578|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:50:01.4898|INFO|MZDNETWORK.Controllers.NotificationController|SignalR showNotification broadcasted. Color=error, Duration=5000, PlaySound=False|
+2025-09-18 14:50:13.4681|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:50:13.4891|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/SendNotification|
+2025-09-18 14:50:13.5233|INFO|MZDNETWORK.Controllers.NotificationController|SignalR showNotification broadcasted. Color=error, Duration=5000, PlaySound=False|
+2025-09-18 14:50:25.8263|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:50:30.2041|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:50:30.2266|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:50:55.8361|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:51:25.8489|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:51:30.2078|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:51:30.2297|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:51:55.7539|INFO|Hangfire.Server.ServerWatchdog|1 servers were removed due to timeout|
+2025-09-18 14:51:55.8099|DEBUG|Hangfire.SqlServer.CountersAggregator|Aggregating records in 'Counter' table...|
+2025-09-18 14:51:55.8639|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:52:25.8762|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:52:30.2089|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:52:30.2409|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:52:30.8109|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:52:30.8309|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/ping?_=1758196050117|
+2025-09-18 14:52:55.8911|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:53:25.9050|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:53:30.2107|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:53:30.2317|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:53:55.9241|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:54:25.9389|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:54:30.2350|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:54:30.2570|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:54:55.9479|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:55:25.9563|DEBUG|Hangfire.Server.ServerHeartbeatProcess|Server desktop-g7qo4sn:14724:90a07ded heartbeat successfully sent|
+2025-09-18 14:55:30.2012|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:30.2223|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:55:43.2320|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:43.2530|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/|
+2025-09-18 14:55:44.0108|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:44.0228|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:44.0228|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:44.0368|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=rWeGE9t7LJv1iIRIxpnZsidmtsPYVmZq66J2X5p75EWwR1oqqtmBCBEvSsDh7m1P%2Fb%2B8IOH6xfiEkfHmbRk5IEBpjnMOMOHoTZo5gsZfAKEosOoa&connectionData=%5B{"name"%3A"notificationhub"}%5D|
+2025-09-18 14:55:44.0568|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Scripts/signalr-manager.js|
+2025-09-18 14:55:44.0568|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:55:44.1689|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:44.1899|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:55:44.6806|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:44.7016|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758196544135|
+2025-09-18 14:55:44.7126|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:44.7338|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=M3v6TkIKX5PRJ2teEg4fvloWe0dJSUQpOYad1BKJqURykyFir8wMTUe%2B%2Fh19ygZwEePYBXlqjPJZQtwx1jr8mFN%2F%2FA7C7YVipcxuwZj6r83m5iJ%2F&connectionData=%5B{"name"%3A"notificationhub"}%5D&tid=4|
+2025-09-18 14:55:44.7438|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:44.7638|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=M3v6TkIKX5PRJ2teEg4fvloWe0dJSUQpOYad1BKJqURykyFir8wMTUe%2B%2Fh19ygZwEePYBXlqjPJZQtwx1jr8mFN%2F%2FA7C7YVipcxuwZj6r83m5iJ%2F&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758196544136|
+2025-09-18 14:55:47.9580|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:47.9790|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Contact|
+2025-09-18 14:55:49.3690|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:49.3690|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:49.4000|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/hubs|
+2025-09-18 14:55:49.4000|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=M3v6TkIKX5PRJ2teEg4fvloWe0dJSUQpOYad1BKJqURykyFir8wMTUe%2B%2Fh19ygZwEePYBXlqjPJZQtwx1jr8mFN%2F%2FA7C7YVipcxuwZj6r83m5iJ%2F&connectionData=%5B{"name"%3A"notificationhub"}%5D|
+2025-09-18 14:55:49.4942|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:49.5142|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/Notification/GetUnreadNotifications|
+2025-09-18 14:55:49.9682|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:49.9906|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/negotiate?clientProtocol=2.1&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758196549360|
+2025-09-18 14:55:49.9906|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:50.0232|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/connect?transport=webSockets&clientProtocol=2.1&connectionToken=wwXgzGxI2TFIQ1ppilN%2FFDDWZQmK19BtNL7OTPLJR5Naita1a%2Bgm%2FGnjpUk0cgEX0s%2B047lIMgqQ8hE5W4yI4bB%2B55yQXQ1rQnLUvhA9WI9O0JfU&connectionData=%5B{"name"%3A"notificationhub"}%5D&tid=2|
+2025-09-18 14:55:50.0363|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:50.0577|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/start?transport=webSockets&clientProtocol=2.1&connectionToken=wwXgzGxI2TFIQ1ppilN%2FFDDWZQmK19BtNL7OTPLJR5Naita1a%2Bgm%2FGnjpUk0cgEX0s%2B047lIMgqQ8hE5W4yI4bB%2B55yQXQ1rQnLUvhA9WI9O0JfU&connectionData=%5B{"name"%3A"notificationhub"}%5D&_=1758196549361|
+2025-09-18 14:55:53.7011|INFO|MZDNETWORK.MvcApplication|Application_AuthenticateRequest called|
+2025-09-18 14:55:53.7221|INFO|MZDNETWORK.MvcApplication|User authenticated: admin, Roles: SuperAdmin, IP: ::1, URL: https://localhost:44318/signalr/abort?transport=webSockets&clientProtocol=2.1&connectionToken=wwXgzGxI2TFIQ1ppilN%2FFDDWZQmK19BtNL7OTPLJR5Naita1a%2Bgm%2FGnjpUk0cgEX0s%2B047lIMgqQ8hE5W4yI4bB%2B55yQXQ1rQnLUvhA9WI9O0JfU&connectionData=%5B{"name"%3A"notificationhub"}%5D|

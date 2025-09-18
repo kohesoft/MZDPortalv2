@@ -3,12 +3,15 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Berat\Desktop\Yeni klasör</_PublishTargetUrl>
-    <History>True|2025-09-18T05:52:44.1506787Z||;</History>
+    <History>True|2025-09-18T09:03:13.5030050Z||;True|2025-09-18T08:52:44.1506787+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include=".dockerignore">
       <publishTime>09/12/2025 16:00:14</publishTime>
+    </File>
+    <File Include="App_Data/ankara.mbtiles">
+      <publishTime>09/11/2025 08:49:18</publishTime>
     </File>
     <File Include="bin/AngleSharp.Css.dll">
       <publishTime>09/11/2025 08:49:21</publishTime>
@@ -233,10 +236,10 @@
       <publishTime>09/11/2025 08:49:23</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.dll">
-      <publishTime>09/18/2025 08:52:33</publishTime>
+      <publishTime>09/18/2025 15:10:09</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.pdb">
-      <publishTime>09/18/2025 08:52:33</publishTime>
+      <publishTime>09/18/2025 15:10:09</publishTime>
     </File>
     <File Include="bin/nb/Hangfire.Core.resources.dll">
       <publishTime>08/12/2025 09:07:20</publishTime>
@@ -740,7 +743,7 @@
       <publishTime>09/11/2025 08:49:18</publishTime>
     </File>
     <File Include="Scripts/coursel.js">
-      <publishTime>09/11/2025 08:49:18</publishTime>
+      <publishTime>09/18/2025 14:04:29</publishTime>
     </File>
     <File Include="Scripts/esm/popper-utils.js">
       <publishTime>09/11/2025 08:49:18</publishTime>
@@ -864,6 +867,9 @@
     </File>
     <File Include="Scripts/README.md">
       <publishTime>09/11/2025 08:49:18</publishTime>
+    </File>
+    <File Include="Scripts/signalr-manager.js">
+      <publishTime>09/18/2025 13:06:18</publishTime>
     </File>
     <File Include="Scripts/signature_pad.umd.min.js">
       <publishTime>09/11/2025 08:49:18</publishTime>
@@ -6623,7 +6629,7 @@
       <publishTime>09/11/2025 08:49:19</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>09/11/2025 08:49:19</publishTime>
+      <publishTime>09/18/2025 14:45:54</publishTime>
     </File>
     <File Include="Views/Survey/Create.cshtml">
       <publishTime>09/11/2025 08:49:19</publishTime>
@@ -6680,7 +6686,7 @@
       <publishTime>09/11/2025 08:49:19</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/18/2025 08:52:37</publishTime>
+      <publishTime>09/18/2025 15:10:12</publishTime>
     </File>
   </ItemGroup>
 </Project>

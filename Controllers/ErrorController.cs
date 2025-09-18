@@ -1,0 +1,29 @@
+using System.Web.Mvc;
+
+namespace MZDNETWORK.Controllers
+{
+    public class ErrorController : Controller
+    {
+        // GET: /Error or /Error/Index
+        public ActionResult Index()
+        {
+            // Generic error page
+            Response.StatusCode = Response.StatusCode == 200 ? 500 : Response.StatusCode;
+            return View("~/Views/Shared/Error.cshtml");
+        }
+
+        // GET: /Error/NotFound
+        public ActionResult NotFound()
+        {
+            Response.StatusCode = 404;
+            return View("~/Views/Shared/Error.cshtml");
+        }
+
+        // GET: /Error/ServerError
+        public ActionResult ServerError()
+        {
+            Response.StatusCode = 500;
+            return View("~/Views/Shared/Error.cshtml");
+        }
+    }
+}

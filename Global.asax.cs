@@ -38,7 +38,7 @@ namespace MZDNETWORK
                 // EPPlus 5+ gereği lisans bağlamını belirle
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-                // **YENİ: Dynamic Permission System Seeding**
+                // Seed
                 try
                 {
                     Logger.Info("Starting database seeding...");
@@ -48,31 +48,35 @@ namespace MZDNETWORK
                 catch (Exception ex)
                 {
                     Logger.Error(ex, "Database seeding failed");
-                    // Production'da bu hata nedeniyle uygulama çökmemeli
-                    // Sadece log'a kaydedip devam ediyoruz
                 }
 
-                // **YENİ: Overtime Service Scheduler**
-                try
+                // Hangfire recurring jobs (conditional)
+                bool hangfireEnabled = string.Equals(ConfigurationManager.AppSettings["Hangfire_Enabled"], "true", StringComparison.OrdinalIgnoreCase);
+                if (hangfireEnabled)
                 {
-                    Logger.Info("Starting recurring job setup with Hangfire...");
-                    RecurringJob.AddOrUpdate("daily-overtime-cleanup", () => OvertimeServiceScheduler.ResetOvertimeData(null), Cron.Daily);
-                    Logger.Info("Recurring job setup with Hangfire completed successfully");
+                    try
+                    {
+                        Logger.Info("Configuring Hangfire recurring jobs...");
+                        RecurringJob.AddOrUpdate("daily-overtime-cleanup", () => OvertimeServiceScheduler.ResetOvertimeData(null), Cron.Daily);
+                        RecurringJob.AddOrUpdate("hourly-connection-cleanup", () => ConnectionPoolManager.ClearConnectionPools(), Cron.Hourly);
+                        Logger.Info("Hangfire recurring jobs configured");
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex, "Failed to set up recurring jobs with Hangfire");
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Logger.Error(ex, "Failed to set up recurring job with Hangfire");
+                    Logger.Info("Hangfire is disabled by configuration (Hangfire_Enabled=false)");
                 }
+
                 Logger.Info("Application started successfully.");
             }
             catch (Exception ex)
             {
                 Logger.Fatal(ex, "A fatal error occurred during Application_Start, causing the application to shut down.");
-                // Uygulamanın çökmesini önlemek için hatayı yutabiliriz,
-                // ancak bu genellikle altta yatan ciddi bir sorunu gizler.
-                // En azından loglayarak sorunu görünür kılıyoruz.
-                throw; // Hatayı yeniden fırlatarak IIS'in durumu bilmesini sağlayın,
-                       // bu da olay günlüğüne kaydedilmesine yardımcı olabilir.
+                throw;
             }
         }
       
@@ -100,20 +104,18 @@ namespace MZDNETWORK
                                 roles = MZDNETWORK.Helpers.RoleHelper.GetUserRoles(userIdInt);
                                 if (roles.Length == 0)
                                 {
-                                    // Backward compatibility - eski userData formatı kontrol et
                                     if (userData.Length >= 3)
                                     {
-                                        roles = new[] { userData[2] }; // Eski role format
+                                        roles = new[] { userData[2] };
                                     }
                                     else
                                     {
-                                        roles = new[] { "Default" }; // Fallback
+                                        roles = new[] { "Default" };
                                     }
                                 }
                             }
                             else
                             {
-                                // Eski format: username|role
                                 var role = userData[1];
                                 roles = new[] { role };
                             }
@@ -144,39 +146,61 @@ namespace MZDNETWORK
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            Logger.Info("Application_Error called");
             Exception exception = Server.GetLastError();
             if (exception != null)
             {
-                Logger.Error(exception, $"Unhandled exception, URL: {HttpContext.Current.Request.Url}, User: {HttpContext.Current.User?.Identity?.Name ?? "Anonymous"}");
+                if (IsIgnorableException(exception))
+                {
+                    Logger.Debug(exception, $"Ignorable exception, URL: {HttpContext.Current?.Request?.Url}, User: {HttpContext.Current?.User?.Identity?.Name ?? "Anonymous"}");
+                    Server.ClearError();
+                    return;
+                }
+
+                Logger.Error(exception, $"Unhandled exception, URL: {HttpContext.Current?.Request?.Url}, User: {HttpContext.Current?.User?.Identity?.Name ?? "Anonymous"}");
             }
             else
             {
-                Logger.Warn("Exception is null");
+                Logger.Warn("Exception is null in Application_Error");
             }
         }
 
-        protected void Session_Start(object sender, EventArgs e)
+        private bool IsIgnorableException(Exception exception)
         {
-            //SessionTracker.Increment();
+            if (exception is HttpException httpEx)
+            {
+                // Ignore client disconnect errors (0x800704CD is ERROR_CONNECTION_ABORTED)
+                if (httpEx.ErrorCode == -2147023667) // 0x800704CD
+                {
+                    return true;
+                }
+                
+                // Ignore other common client-side errors
+                if (httpEx.GetHttpCode() == 404 || httpEx.GetHttpCode() == 400)
+                {
+                    return true;
+                }
+            }
+
+            // Check if it's a SignalR ping timeout or similar
+            if (exception.Message.Contains("ping") || 
+                exception.Message.Contains("Connection aborted") ||
+                exception.Message.Contains("Uzak ana bilgisayar bağlantıyı kapattı"))
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        protected void Session_End(object sender, EventArgs e)
-        {
-            //SessionTracker.Decrement();
-        }
-
-        protected void Application_BeginRequest(object sender, EventArgs e)
-        {
-            //MZDNETWORK.Helpers.HourlyRequestCounter.Increment();
-        }
+        protected void Session_Start(object sender, EventArgs e) { }
+        protected void Session_End(object sender, EventArgs e) { }
+        protected void Application_BeginRequest(object sender, EventArgs e) { }
 
         protected void Application_End()
         {
             try
             {
                 Logger.Info("Application ending...");
-                // OvertimeServiceScheduler.Stop() was here. Hangfire manages its own lifecycle.
             }
             catch (Exception ex)
             {
@@ -189,27 +213,48 @@ namespace MZDNETWORK
     {
         public void Configuration(IAppBuilder app)
         {
-            app.MapSignalR();
-
-            // Configure Hangfire
-            var connectionString = ConfigurationManager.ConnectionStrings["MZDNETWORKContext"].ConnectionString;
-            Hangfire.GlobalConfiguration.Configuration.UseSqlServerStorage(connectionString, new SqlServerStorageOptions
+            // SignalR
+            app.MapSignalR("/signalr", new Microsoft.AspNet.SignalR.HubConfiguration()
             {
-                CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-                SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-                QueuePollInterval = TimeSpan.Zero,
-                UseRecommendedIsolationLevel = true,
-                DisableGlobalLocks = true // For SQL Server 2012 or higher
+                EnableDetailedErrors = true,
+                EnableJavaScriptProxies = true
             });
 
-            // Enable Hangfire Dashboard (optional, based on web.config)
-            if (ConfigurationManager.AppSettings["Hangfire_Dashboard_Enabled"] == "true")
+            // Hangfire (conditional)
+            bool hangfireEnabled = string.Equals(ConfigurationManager.AppSettings["Hangfire_Enabled"], "true", StringComparison.OrdinalIgnoreCase);
+            if (hangfireEnabled)
             {
-                app.UseHangfireDashboard("/hangfire");
-            }
+                var logger = LogManager.GetCurrentClassLogger();
+                try
+                {
+                    var connectionString = ConfigurationManager.ConnectionStrings["MZDNETWORKContext"].ConnectionString;
+                    Hangfire.GlobalConfiguration.Configuration.UseSqlServerStorage(connectionString, new SqlServerStorageOptions
+                    {
+                        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                        QueuePollInterval = TimeSpan.Zero,
+                        UseRecommendedIsolationLevel = true,
+                        DisableGlobalLocks = true
+                    });
 
-            // Start Hangfire server
-            app.UseHangfireServer();
+                    if (string.Equals(ConfigurationManager.AppSettings["Hangfire_Dashboard_Enabled"], "true", StringComparison.OrdinalIgnoreCase))
+                    {
+                        app.UseHangfireDashboard("/hangfire");
+                    }
+
+                    app.UseHangfireServer();
+                    logger.Info("Hangfire server started");
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, "Failed to start Hangfire");
+                }
+            }
+            else
+            {
+                var logger = LogManager.GetCurrentClassLogger();
+                logger.Info("Hangfire is disabled by configuration (Hangfire_Enabled=false)");
+            }
         }
     }
 }

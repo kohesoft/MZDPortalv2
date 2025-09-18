@@ -4,6 +4,8 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using NLog;
+using System.Configuration;
+
 namespace MZDNETWORK.Hubs
 {
     public class OnlineUsersHub : Hub
@@ -13,45 +15,80 @@ namespace MZDNETWORK.Hubs
 
         public override Task OnConnected()
         {
-            var user = Context.User.Identity.Name ?? "Anonymous";
-            var connectionId = Context.ConnectionId;
+            try
+            {
+                var user = Context.User?.Identity?.Name ?? "Anonymous";
+                var connectionId = Context.ConnectionId;
 
-            connectedUsers.TryAdd(connectionId, user);
+                connectedUsers.TryAdd(connectionId, user);
 
-            // Loglama
-            Logger.Info($"{user} kullanýcýsý baðlandý. Baðlantý ID: {connectionId}");
+                if (ConfigurationManager.AppSettings["LogSignalRErrors"] != "false")
+                {
+                    Logger.Info($"{user} kullanýcýsý baðlandý. Baðlantý ID: {connectionId}");
+                }
 
-            Clients.All.updateOnlineUsers(connectedUsers.Count);
-            Clients.All.updateUserList(connectedUsers.Values);
+                Clients.All.updateOnlineUsers(connectedUsers.Count);
+                Clients.All.updateUserList(connectedUsers.Values);
 
-            return base.OnConnected();
+                return base.OnConnected();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"Error in OnConnected for connection {Context.ConnectionId}");
+                return base.OnConnected();
+            }
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            var connectionId = Context.ConnectionId;
-
-            if (connectedUsers.TryRemove(connectionId, out var user))
+            try
             {
-                // Loglama
-                Logger.Info($"{user} kullanýcýsý ayrýldý. Baðlantý ID: {connectionId}");
+                var connectionId = Context.ConnectionId;
 
-                Clients.All.updateOnlineUsers(connectedUsers.Count);
-                Clients.All.updateUserList(connectedUsers.Values);
+                if (connectedUsers.TryRemove(connectionId, out var user))
+                {
+                    if (ConfigurationManager.AppSettings["LogSignalRErrors"] != "false")
+                    {
+                        Logger.Info($"{user} kullanýcýsý ayrýldý. Baðlantý ID: {connectionId}");
+                    }
+
+                    Clients.All.updateOnlineUsers(connectedUsers.Count);
+                    Clients.All.updateUserList(connectedUsers.Values);
+                }
+
+                return base.OnDisconnected(stopCalled);
             }
-
-            return base.OnDisconnected(stopCalled);
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"Error in OnDisconnected for connection {Context.ConnectionId}");
+                return base.OnDisconnected(stopCalled);
+            }
         }
 
         public void SendTestMessage(string message)
         {
-            Clients.All.testMessage(message);
+            try
+            {
+                Clients.All.testMessage(message);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Error in SendTestMessage");
+            }
         }
 
         // Çevrimiçi kullanýcý sayýsýný döndüren statik metot
         public static int GetOnlineUsersCount()
         {
             return connectedUsers.Count;
+        }
+
+        // Cleanup method for periodic maintenance
+        public static void CleanupStaleConnections()
+        {
+            // This method can be called periodically to clean up any stale connections
+            // For now, we'll just log the current count
+            Logger.Debug($"Current online users count: {connectedUsers.Count}");
         }
     }
 }

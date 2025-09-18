@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="utf-8" />
     <title>MZD Portal</title>
@@ -11,11 +12,14 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/popper")
+    <!-- SignalR scripts loaded separately to ensure proper order -->
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
     <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/signalr-manager.js"></script>
     <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
     @RenderSection("styles", required: false)
 </head>
+
 <body>
     @if (TempData["SuccessMessage"] != null)
     {
@@ -127,9 +131,6 @@
                             @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InformationTechnology.BilgiIslem"))
                             {
                                 <li><a href="@Url.Action("YemekYukle", "BilgiIslem")" class="nav-link">Yemek Yükle/Sil</a></li>
-                            }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InformationTechnology.BilgiIslem"))
-                            {
                                 <li><a href="@Url.Action("MolaYukle", "BilgiIslem")" class="nav-link">Mola Yükle/Sil</a></li>
                             }
                             @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SystemManagement.Notification", "Create"))
@@ -268,33 +269,24 @@
                     </a>
                 </li>
 
-
-
-
-
-                    <li class="dropdown">
-                        <button class="dropdown-toggle nav-link" type="button">
-                            <i class='bx bx-map icon'></i>
-                            <span class="nav-text">Servis</span>
-                            <i class='bx bx-chevron-down icon'></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("Index","ServiceRoute")" class="nav-link">Servis Güzergahı</a></li>
-                            <li><a href="@Url.Action("Personnel","ServiceRoute")" class="nav-link">Personel Servis Listesi</a></li>
-                            <li><a href="@Url.Action("OvertimePersonnel","ServiceRoute")" class="nav-link">Mesai Servis Listesi</a></li>
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("ServiceManagement.Configuration", "Edit"))
-                            {
-                                <li><a href="@Url.Action("Index", "ServiceConfiguration")" class="nav-link">Servis Ayarları</a></li>
-                                <li><a href="@Url.Action("Admin", "ServicePersonnel")" class="nav-link">Personel Ayarları</a></li>
-                                <li><a href="@Url.Action("Index", "OvertimeServiceManager")" class="nav-link">Kolay Mesai</a></li>
-                            }
-                        </ul>
-                    </li>
-                
-
-
-
-
+                <li class="dropdown">
+                    <button class="dropdown-toggle nav-link" type="button">
+                        <i class='bx bx-map icon'></i>
+                        <span class="nav-text">Servis</span>
+                        <i class='bx bx-chevron-down icon'></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("Index","ServiceRoute")" class="nav-link">Servis Güzergahı</a></li>
+                        <li><a href="@Url.Action("Personnel","ServiceRoute")" class="nav-link">Personel Servis Listesi</a></li>
+                        <li><a href="@Url.Action("OvertimePersonnel","ServiceRoute")" class="nav-link">Mesai Servis Listesi</a></li>
+                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("ServiceManagement.Configuration", "Edit"))
+                        {
+                            <li><a href="@Url.Action("Index", "ServiceConfiguration")" class="nav-link">Servis Ayarları</a></li>
+                            <li><a href="@Url.Action("Admin", "ServicePersonnel")" class="nav-link">Personel Ayarları</a></li>
+                            <li><a href="@Url.Action("Index", "OvertimeServiceManager")" class="nav-link">Kolay Mesai</a></li>
+                        }
+                    </ul>
+                </li>
 
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Operational.Task"))
                 {
@@ -422,244 +414,210 @@
         @RenderSection("scripts", required: false)
     </div>
 
-    <!-- Global Toast Notification -->
-    <div id="globalToast" class="fixed top-4 right-4 z-50 opacity-0 transition-opacity duration-300 ease-in-out transform max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-none">
-        <div class="p-4">
-            <div class="flex items-start">
-                <div class="flex-shrink-0">
-                    <i class="bx bx-info-circle text-xl mr-3"></i>
-                </div>
-                <div class="ml-3 w-0 flex-1">
-                    <p class="text-sm font-medium text-white" id="toastMessage"></p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Global Toast Container (stacked) -->
+    <div id="globalToastContainer" class="fixed top-5 right-5 z-50 space-y-3 pointer-events-none"></div>
 
-    </body>
+</body>
+
 </html>
 <script>
 $(document).ready(function () {
-    // Sidebar kapama
-    $('#closeSidebar').click(function () {
-        $('.sidebar').removeClass('active');
+    console.log('Layout JavaScript starting');
+
+    window.addEventListener('unhandledrejection', function (event) {
+        try {
+            var reason = event.reason;
+            var msg = (reason && (reason.message || reason.toString())) || '';
+            if (msg && msg.indexOf('Receiving end does not exist') !== -1) {
+                event.preventDefault();
+                console.warn('Ignored external extension error:', msg);
+            }
+        } catch (e) { }
     });
 
-    // Dropdown menü aç/kapat (nested destekli)
+    function safeExecute(func, context) { try { return func.call(context); } catch (error) { console.error('Error in function:', error); return null; } }
+
+    // Sidebar
+    $('#closeSidebar').on('click', function () { safeExecute(function () { $('.sidebar').removeClass('active'); }); });
+    $('#openSidebar').on('click', function () { safeExecute(function () { $('.sidebar').addClass('active'); }); });
+
+    // Dropdowns
     $(document).on('click', '.dropdown-toggle', function (e) {
-        e.stopPropagation();
-        var $dropdownMenu = $(this).next('.dropdown-menu');
-        var $parentDropdown = $(this).closest('.dropdown-menu');
-        if ($parentDropdown.length > 0) {
-            // Alt dropdown ise sadece kendi seviyesindekileri kapat
-            $parentDropdown.find('> .dropdown > .dropdown-menu').not($dropdownMenu).hide();
-        } else {
-            // Ana dropdown ise diğer tümünü kapat
-            $('.dropdown-menu').not($dropdownMenu).hide();
-        }
-        $dropdownMenu.toggle();
+        safeExecute(function () {
+            e.stopPropagation();
+            var $dropdownMenu = $(this).next('.dropdown-menu');
+            var $parentDropdown = $(this).closest('.dropdown-menu');
+            if ($parentDropdown.length > 0) { $parentDropdown.find('> .dropdown > .dropdown-menu').not($dropdownMenu).hide(); }
+            else { $('.dropdown-menu').not($dropdownMenu).hide(); }
+            $dropdownMenu.toggle();
+        }.bind(this));
     });
-    // Sayfa veya body'e tıklanınca menüleri kapat
-    $(document).on('click', function (e) {
-        if (!$(e.target).closest('.dropdown-toggle, .dropdown-menu').length) {
-            $('.dropdown-menu').hide();
-        }
-    });
-    // Sohbet sayfasına yönlendir
-    $('#openChatPage').click(function(e){
-        e.preventDefault();
-        window.location.href = '@Url.Action("ChatPage", "Chat")';
-    });
+    $(document).on('click', function (e) { safeExecute(function () { if (!$(e.target).closest('.dropdown-toggle, .dropdown-menu').length) { $('.dropdown-menu').hide(); } }); });
 
-    // Emoji picker aç/kapa
-    $('#emojiBtn').click(function(){
-        $('#emojiPicker').toggle();
-    });
-    $(document).on('click', '.emoji', function(){
-        var val = $('#messageInput').val();
-        $('#messageInput').val(val + $(this).text()).focus();
-        $('#emojiPicker').hide();
-    });
-    $(document).on('mousedown', function(e){
-        if (!$(e.target).closest('#emojiBtn, #emojiPicker').length) {
-            $('#emojiPicker').hide();
-        }
-    });
-
-    // Bildirimler (Notification)
-    function updateNotifications() {
-        $.get('@Url.Action("GetUnreadNotifications", "Notification")', function (data) {
-            var $notificationList = $('#notificationList');
-            var $notificationIcon = $('#notificationIcon');
-            var $notificationCount = $('#notificationCount');
-            $notificationList.empty();
-            if (data && data.length > 0) {
-                $notificationIcon.show();
-                $notificationCount.text(data.length).show();
-                $.each(data, function (i, notification) {
-                    $notificationList.append(
-                        '<li><a href="#" class="notification-link" data-id="' + notification.Id + '">' +
-                        notification.Message +
-                        '</a></li>'
-                    );
-                });
-            } else {
-                $notificationIcon.hide();
-                $notificationCount.hide();
-                $notificationList.append('<li><span class="text nav-text">Hiç Bildirim Yok</span></li>');
-            }
-        });
-    }
-    updateNotifications();
-    setInterval(updateNotifications, 60000);
-
-    // Bildirime tıklayınca okundu yap ve yönlendir
-    $(document).on('click', '.notification-link', function (e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        var message = $(this).text().toLowerCase();
-        var url = '#';
-        if (message.includes('anket')) {
-            url = '@Url.Action("Index", "Survey")';
-        } else if (message.includes('görev')) {
-            url = '@Url.Action("UserTasks", "Task")';
-        } else if (message.includes('dilek')) {
-            url = '@Url.Action("Bildirimlerim", "DilekOneri")';
-        }
-        $.post('@Url.Action("MarkAsRead", "Notification")', { id: id }, function (data) {
-            if (data.success) {
-                window.location.href = url;
-            }
-        });
-    });
-
-    // Modal bildirimleri (SignalR NotificationHub)
-    if ($.connection && $.connection.notificationHub) {
-        console.log('NotificationHub bağlantısı mevcut');
-        var notificationHub = $.connection.notificationHub;
-        notificationHub.client.showNotification = function (message, duration, color, playSound, soundPath) {
-            console.log('Bildirim alındı:', message, duration, color, playSound, soundPath);
-            showToast(message, color || 'info', duration || 4000, playSound, soundPath);
-        };
-    } else {
-        console.log('NotificationHub bağlantısı bulunamadı:', !!$.connection, $.connection ? !!$.connection.notificationHub : 'connection yok');
-    }
-
-    // Sayfa gerçekten değişmeden hemen önce overlay'i göster
-    $(window).on('beforeunload', function () {
-        $('#loadingOverlay').show();
-        $('#loadingOverlay').addClass('active');
-    });
-
-    // Tarih & Saat
+    // Date & Time
     function updateDateTime() {
-        var now = new Date();
-        var options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-        document.getElementById('dateTime').textContent = now.toLocaleString('tr-TR', options);
+        safeExecute(function () {
+            var now = new Date();
+            var options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+            var dateTimeElement = document.getElementById('dateTime');
+            if (dateTimeElement) { dateTimeElement.textContent = now.toLocaleString('tr-TR', options); }
+        });
     }
-    updateDateTime();
-    setInterval(updateDateTime, 60000);
+    updateDateTime(); setInterval(updateDateTime, 60000);
 
-    $('#openSidebar').click(function(){
-        $('.sidebar').addClass('active');
+    // Corporate toast helper (stacked)
+    function showToast(msg, type, duration, playSound, soundPath) {
+        safeExecute(function () {
+            var $container = $('#globalToastContainer');
+            if ($container.length === 0) return;
+
+            var t = (type || 'info').toLowerCase();
+            var map = {
+                success: { color: 'bg-green-600', icon: 'bx-check-circle' },
+                error:   { color: 'bg-red-600',   icon: 'bx-x-circle' },
+                warning: { color: 'bg-yellow-600',icon: 'bx-error' },
+                info:    { color: 'bg-indigo-600',icon: 'bx-info-circle' }
+            };
+            var m = map[t] || map.info;
+
+            var id = 'toast-' + Date.now();
+            var $toast = $('<div>', {
+                id: id,
+                class: 'pointer-events-auto max-w-sm w-96 shadow-xl rounded-lg border border-gray-200 bg-white ring-1 ring-black/5 overflow-hidden transform transition ease-out duration-300 translate-y-2 opacity-0',
+                role: 'alert',
+                'aria-live': 'assertive'
+            });
+
+            var $bar = $('<div>', { class: m.color + ' h-1 w-full' });
+            var $body = $('<div>', { class: 'p-4 flex items-start' });
+            var $iconWrap = $('<div>', { class: 'flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ' + m.color + ' text-white mr-3' })
+                               .append($('<i>', { class: 'bx ' + m.icon + ' text-xl' }));
+            var $content = $('<div>', { class: 'flex-1 text-sm text-gray-800 leading-snug' }).html(msg || 'Bildirim');
+            var $close = $('<button>', {
+                class: 'ml-4 text-gray-400 hover:text-gray-600 focus:outline-none',
+                'aria-label': 'Kapat',
+                html: '<i class="bx bx-x text-xl"></i>'
+            });
+
+            $close.on('click', function () { dismiss(); });
+            $body.append($iconWrap, $content, $close);
+            $toast.append($bar, $body);
+            $container.append($toast);
+
+            // Animate in
+            setTimeout(function(){ $toast.removeClass('translate-y-2 opacity-0').addClass('translate-y-0 opacity-100'); }, 10);
+
+            // Auto dismiss
+            var hideAfter = (typeof duration === 'number' && duration > 0) ? duration : 4000;
+            var timer = setTimeout(dismiss, hideAfter);
+
+            function dismiss(){
+                clearTimeout(timer);
+                $toast.addClass('opacity-0 translate-y-2').removeClass('opacity-100');
+                setTimeout(function(){ $toast.remove(); }, 250);
+            }
+
+            if (playSound) {
+                try { new Audio(soundPath || '@Url.Content("~/Content/notification.mp3")').play(); } catch (e) { }
+            }
+        });
+    }
+
+    // Notifications (list)
+    function updateNotifications() {
+        safeExecute(function () {
+            $.get('@Url.Action("GetUnreadNotifications", "Notification")')
+                .done(function (data) {
+                    var $list = $('#notificationList');
+                    var $icon = $('#notificationIcon');
+                    var $count = $('#notificationCount');
+                    if ($list.length === 0) return;
+                    $list.empty();
+                    if (data && data.length > 0) {
+                        $icon.show(); $count.text(data.length).show();
+                        $.each(data, function (i, n) { $list.append('<li><a href="#" class="notification-link" data-id="' + n.Id + '">' + (n.Message || 'Bildirim') + '</a></li>'); });
+                    } else {
+                        $icon.hide(); $count.hide();
+                        $list.append('<li><span class="text nav-text">Hiç Bildirim Yok</span></li>');
+                    }
+                })
+                .fail(function () { /* ignore */ });
+        });
+    }
+    updateNotifications(); setInterval(updateNotifications, 60000);
+
+    $(document).on('click', '.notification-link', function (e) {
+        safeExecute(function () {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var message = ($(this).text() || '').toLowerCase();
+            var url = '#';
+            if (message.includes('anket')) url = '@Url.Action("Index", "Survey")';
+            else if (message.includes('görev')) url = '@Url.Action("UserTasks", "Task")';
+            else if (message.includes('dilek')) url = '@Url.Action("Bildirimlerim", "DilekOneri")';
+            $.post('@Url.Action("MarkAsRead", "Notification")', { id: id }).done(function (d) { if (d && d.success) window.location.href = url; });
+        }.bind(this));
     });
 
-    // Global toast helper
-    function showToast(msg, type, duration, playSound, soundPath) {
-        console.log('showToast çağrıldı:', msg, type, duration, playSound, soundPath);
-        var $toast = $('#globalToast');
-        var $toastMessage = $('#toastMessage');
-        
-        console.log('Toast element sayısı:', $toast.length);
-        console.log('Toast message element sayısı:', $toastMessage.length);
-        
-        var colorClass = 'bg-indigo-600';
-        if (type === 'success') colorClass = 'bg-green-600';
-        if (type === 'error') colorClass = 'bg-red-600';
-        if (type === 'warning') colorClass = 'bg-yellow-600';
-        if (type === 'info') colorClass = 'bg-indigo-600';
-        
-        $toast.removeClass('bg-indigo-600 bg-green-600 bg-red-600 bg-yellow-600')
-              .addClass(colorClass);
-        
-        $toastMessage.html(msg);
-        
-        $toast.removeClass('opacity-0')
-              .addClass('opacity-100 pointer-events-auto');
-              
-        console.log('Toast gösterildi');
-              
-        var hideAfter = typeof duration === 'number' && duration > 0 ? duration : 4000;
-        setTimeout(function () {
-            $toast.removeClass('opacity-100 pointer-events-auto').addClass('opacity-0 pointer-events-none');
-            console.log('Toast gizlendi');
-        }, hideAfter);
-        
-        if (playSound) {
-            var path = soundPath ? soundPath : '@Url.Content("~/Content/notification.mp3")';
-            var toastSound = new Audio(path);
-            toastSound.play();
-        }
-    }
+    // SignalR
+    function initializeSignalR() {
+        if (typeof $ === 'undefined' || typeof $.connection === 'undefined') return;
+        try {
+            if ($.connection && $.connection.notificationHub) {
+                $.connection.notificationHub.client.showNotification = function (message, duration, color, playSound, soundPath) {
+                    console.log('[NotificationHub] showNotification received', { message, duration, color, playSound, soundPath });
+                    showToast(message || 'Bildirim', color || 'info', duration || 4000, playSound, soundPath);
+                };
+                console.log('[NotificationHub] client handler attached (early)');
+            }
+        } catch (e) { console.warn('Failed to attach early notification handler', e); }
 
-    // Günlük ruh hali modal zamanlayıcısı (sadece giriş yapmış kullanıcılar için)
-    @if (User.Identity.IsAuthenticated)
-    {
-        <text>
-        function showDailyMoodModalIfNeeded() {
-            var now = new Date();
-            if (now.getHours() >= 17) {
-                var key = 'dailyMoodCompleted_' + now.toDateString();
-                if (localStorage.getItem(key) !== 'yes') {
-                    $('#dailyMoodModal').addClass('show');
+        if (window.SignalRManager && typeof window.SignalRManager.init === 'function') {
+            window.SignalRManager.init().then(function(){ console.log('[SignalR] Manager init resolved'); setupHubHandlers(); })
+                .catch(function(err){ console.warn('[SignalR] Manager init failed, trying direct', err); tryDirectConnection(); });
+        } else { tryDirectConnection(); }
+    }
+    function tryDirectConnection() {
+        try {
+            if ($.connection && $.connection.hub) {
+                if ($.connection.hub.state === $.signalR.connectionState.disconnected) {
+                    console.log('[SignalR] Starting hub...');
+                    $.connection.hub.start().done(function(){ console.log('[SignalR] Hub started'); setupHubHandlers(); });
+                } else if ($.connection.hub.state === $.signalR.connectionState.connected) {
+                    console.log('[SignalR] Hub already connected');
+                    setupHubHandlers();
                 }
             }
-        }
-        showDailyMoodModalIfNeeded();
-        setInterval(showDailyMoodModalIfNeeded, 30000);
-        </text>
+        } catch (e) { console.warn('Direct SignalR connection error', e); }
     }
-
-    // Emoji seçiminde vurgulama
-    $(document).on('change', 'input[name="dailyMoodChoice"]', function () {
-        $('.mood-options label').removeClass('selected');
-        $(this).closest('label').addClass('selected');
-    });
-
-    // Günlük ruh hali gönder
-    $('#submitDailyMood').click(function () {
-        var mood = $('input[name="dailyMoodChoice"]:checked').val();
-        if (!mood) {
-            showToast('Lütfen bir emoji seçin.', 'warning', 4000, false);
-            return;
-        }
-        var comment = $('#dailyMoodComment').val();
-        $.post('@Url.Action("Submit", "DailyMood")', { mood: mood, comment: comment }, function (r) {
-            if (r && r.success) {
-                localStorage.setItem('dailyMoodCompleted_' + new Date().toDateString(), 'yes');
-                $('#dailyMoodModal').removeClass('show');
-                showToast('Teşekkür ederiz!', 'success', 4000, false);
-            } else {
-                showToast('Bir hata oluştu.', 'error', 4000, false);
+    function setupHubHandlers() {
+        try {
+            if ($.connection && $.connection.hubs && $.connection.hub) {
+                $.connection.hub.stateChanged(function (c) { console.log('SignalR state:', c.oldState, '->', c.newState); });
             }
-        });
-    });
+            if ($.connection && $.connection.notificationHub) {
+                if (!$.connection.notificationHub.client.showNotification) {
+                    $.connection.notificationHub.client.showNotification = function (message, duration, color, playSound, soundPath) {
+                        console.log('[NotificationHub] showNotification received (post-start)', { message, duration, color, playSound, soundPath });
+                        showToast(message || 'Bildirim', color || 'info', duration || 4000, playSound, soundPath);
+                    };
+                    console.log('[NotificationHub] client handler attached (post-start)');
+                }
+            } else { console.warn('[NotificationHub] proxy not found on $.connection'); }
+            if ($.connection && $.connection.onlineUsersHub) {
+                $.connection.onlineUsersHub.client.updateOnlineUsers = function (count) { $('#onlineUsersCount').text(count || 0); };
+            }
+        } catch (e) { console.warn('setupHubHandlers error', e); }
+    }
+    setTimeout(initializeSignalR, 500);
 
-    // Start SignalR connection once
-    if ($.connection && $.connection.hub && $.connection.hub.state === $.signalR.connectionState.disconnected) {
-        $.connection.hub.start().done(function () {
-            console.log('SignalR bağlantısı başarılı');
-        }).fail(function (error) {
-            console.log('SignalR bağlantı hatası:', error);
-        });
-    }
-    
-    // SignalR bağlantı durumunu kontrol et
-    if ($.connection && $.connection.hub) {
-        $.connection.hub.stateChanged(function (change) {
-            console.log('SignalR durumu:', change.oldState, '->', change.newState);
-        });
-    }
+    // Page loading overlay
+    $(window).on('beforeunload', function () { safeExecute(function () { $('#loadingOverlay').show().addClass('active'); }); });
+
+    // Global error handler
+    window.onerror = function (msg, url, lineNo, columnNo, error) { console.error('Global error:', msg, 'at', url, ':', lineNo); return false; };
+
+    console.log('Layout JavaScript initialized');
 });
 </script>
 

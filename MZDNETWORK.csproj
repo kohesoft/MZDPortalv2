@@ -470,6 +470,7 @@
     <Compile Include="Controllers\DilekOneriController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DokumantasyonController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\GonderiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -500,6 +501,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ConnectionPoolManager.cs" />
     <Compile Include="Helpers\DynamicPermissionHelper.cs" />
     <Compile Include="Helpers\EnumDisplayHelper.cs" />
     <Compile Include="Helpers\OvertimeServiceScheduler.cs" />
@@ -649,6 +651,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\signalr-manager.js" />
     <Content Include="Scripts\signature_pad.umd.min.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />

@@ -6,10 +6,12 @@ const Carousel = (() => {
     const getLastSlide = () =>
         document.querySelector(".carousel__slider")?.lastElementChild || null;
 
-    const getSiblingSlide = (slide, direction) =>
-        direction === "prev"
+    const getSiblingSlide = (slide, direction) => {
+        if (!slide) return null;
+        return direction === "prev"
             ? slide.previousElementSibling
             : slide.nextElementSibling;
+    };
 
     const getNewActiveSlide = (key, activeSlide) => {
         const actions = {
@@ -22,19 +24,21 @@ const Carousel = (() => {
     };
 
     const updateScreen = (activeSlide) => {
+        if (!activeSlide) return;
         const carouselScreen = document.querySelector(".image-display .screen");
+        if (!carouselScreen) return;
         const img = activeSlide.querySelector("img");
         if (img) {
             const clonedImg = img.cloneNode(true);
             carouselScreen.innerHTML = "";
             carouselScreen.appendChild(clonedImg);
-        } else {
-            console.error("Active slide does not contain an image.");
         }
     };
 
     const scrollToActiveSlide = (activeSlide) => {
+        if (!activeSlide) return;
         const carouselSlider = document.querySelector(".carousel__slider");
+        if (!carouselSlider) return;
         const { offsetLeft, offsetWidth } = activeSlide;
         const { clientWidth } = carouselSlider;
 
@@ -45,32 +49,37 @@ const Carousel = (() => {
     };
 
     const updateActiveSlideClass = (activeSlide) => {
+        if (!activeSlide) return;
         document
             .querySelectorAll(".carousel__slide.active")
             .forEach((slide) => slide.classList.remove("active"));
         activeSlide.classList.add("active");
     };
 
+    const updateButtonStates = (activeSlide) => {
+        const prevButton = document.querySelector(".carousel__btn.prev");
+        const nextButton = document.querySelector(".carousel__btn.next");
+        if (!prevButton || !nextButton) return;
+        const hasPrev = !!getSiblingSlide(activeSlide, "prev");
+        const hasNext = !!getSiblingSlide(activeSlide, "next");
+        prevButton.disabled = !hasPrev;
+        nextButton.disabled = !hasNext;
+    };
+
     const updateCarousel = (activeSlide) => {
+        if (!activeSlide) return;
         updateActiveSlideClass(activeSlide);
         updateScreen(activeSlide);
         scrollToActiveSlide(activeSlide);
         updateButtonStates(activeSlide);
     };
 
-    const updateButtonStates = (activeSlide) => {
-        const prevButton = document.querySelector(".carousel__btn.prev");
-        const nextButton = document.querySelector(".carousel__btn.next");
-
-        prevButton.disabled = !getSiblingSlide(activeSlide, "prev");
-        nextButton.disabled = !getSiblingSlide(activeSlide, "next");
-    };
-
     const handleKeydown = (e) => {
-        if (!e.target.closest(".carousel__slider")) return;
-        const activeSlide = getActiveSlide();
+        const slider = document.querySelector(".carousel__slider");
+        if (!slider || !e.target.closest(".carousel__slider")) return;
+        let activeSlide = getActiveSlide() || getFirstSlide();
+        if (!activeSlide) return;
         const newActiveSlide = getNewActiveSlide(e.key, activeSlide);
-
         if (newActiveSlide) {
             e.preventDefault();
             updateCarousel(newActiveSlide);
@@ -78,12 +87,12 @@ const Carousel = (() => {
     };
 
     const handleButtonClick = (e) => {
-        const activeSlide = getActiveSlide();
+        let activeSlide = getActiveSlide() || getFirstSlide();
+        if (!activeSlide) return;
         const newActiveSlide = getSiblingSlide(
             activeSlide,
             e.currentTarget.classList.contains("prev") ? "prev" : "next"
         );
-
         if (newActiveSlide) {
             updateCarousel(newActiveSlide);
         }
@@ -101,29 +110,28 @@ const Carousel = (() => {
         const prevButton = document.querySelector(".carousel__btn.prev");
         const nextButton = document.querySelector(".carousel__btn.next");
 
+        if (!carouselSlider) {
+            // Carousel yoksa hiçbir þey yapma
+            return;
+        }
+
         const firstSlide = getFirstSlide();
         if (firstSlide) {
             updateCarousel(firstSlide);
         }
 
-        if (carouselSlider) {
-            document.addEventListener("keydown", handleKeydown);
-            carouselSlider.addEventListener("click", handleCarouselClick);
-        }
+        document.addEventListener("keydown", handleKeydown);
+        carouselSlider.addEventListener("click", handleCarouselClick);
 
-        if (prevButton) {
-            prevButton.addEventListener("click", handleButtonClick);
-        }
-
-        if (nextButton) {
-            nextButton.addEventListener("click", handleButtonClick);
-        }
+        if (prevButton) prevButton.addEventListener("click", handleButtonClick);
+        if (nextButton) nextButton.addEventListener("click", handleButtonClick);
 
         const slideInterval = 30000; // 30 saniye
         setInterval(() => {
-            const activeSlide = getActiveSlide();
+            let activeSlide = getActiveSlide() || getFirstSlide();
+            if (!activeSlide) return;
             const nextSlide = getSiblingSlide(activeSlide, "next") || getFirstSlide();
-            updateCarousel(nextSlide);
+            if (nextSlide) updateCarousel(nextSlide);
         }, slideInterval);
     };
 

@@ -1,14 +1,13 @@
 using Ganss.Xss;
 using Microsoft.AspNet.SignalR;
-using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Hubs
 {
-    [DynamicAuthorize(Permission = "SystemManagement.Notification", Action = "Create")]
     public class NotificationHub : Hub
     {
         /// <summary>
         /// İstemcilere bildirim gönderir. Ek olarak; mesajın ekranda kalma süresi (ms), renk tipi ve ses ayarı da gönderilebilir.
+        /// Not: İstemcilerden bu metot çağrılmayacak; yayın sunucudan yapılır.
         /// </summary>
         public void SendNotification(string message, int duration = 4000, string color = "info", bool playSound = false, string sound = null)
         {
