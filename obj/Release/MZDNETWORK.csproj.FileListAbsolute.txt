@@ -768,8 +768,6 @@ C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Release\MZDNETWORK.c
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Release\MZDNETWORK.csproj.Up2Date
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Release\MZDNETWORK.dll
 C:\Users\berat\Documents\GitHub\MZDPortalv2\MZDPortalv2\obj\Release\MZDNETWORK.pdb
-C:\Users\Berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.AABC.resources
-C:\Users\Berat\Documents\GitHub\MZDPortalv2\obj\Release\MZDNETWORK.Migrations.AABC2.resources
 C:\Users\Berat\Documents\GitHub\MZDPortalv2\bin\Hangfire.AspNet.dll
 C:\Users\Berat\Documents\GitHub\MZDPortalv2\bin\Hangfire.Core.dll
 C:\Users\Berat\Documents\GitHub\MZDPortalv2\bin\Hangfire.SqlServer.dll

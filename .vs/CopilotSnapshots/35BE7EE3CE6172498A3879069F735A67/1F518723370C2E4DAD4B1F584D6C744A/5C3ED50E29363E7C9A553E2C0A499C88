@@ -1,0 +1,293 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using MZDNETWORK.Models;
+using MZDNETWORK.Data;
+using MZDNETWORK.Attributes;
+
+
+namespace MZDNETWORK.Controllers
+{
+    // Dinamik yetki kontrolü – İnsan Kaynakları Duyuruları
+    // Görüntüleme için class seviyesinde View izni yeterli
+    [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+    public class GonderiController : Controller
+    {
+        private MZDNETWORKContext db = new MZDNETWORKContext(); // Veritabanı context'i
+
+        // Yeni duyuru oluşturma formu
+        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+        public ActionResult GonderiOlustur()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        [DynamicAuthorize(Permission = "HumanResources.Announcements", Action = "Create")]
+        public ActionResult GonderiOlustur(Gonderi model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    model.CreatedAt = DateTime.Now; // Kayıt zamanını ayarlayın
+                    db.Gonderiler.Add(model); // Gonderiler, veritabanı context'inde Gonderi tablosuna karşılık gelir
+                    db.SaveChanges();
+
+                    TempData["Message"] = "Duyuru başarıyla oluşturuldu.";
+                    return RedirectToAction("GonderiListele"); // Kayıt başarılı olursa yönlendirilecek sayfa
+                }
+            }
+            catch (Exception ex)
+            {
+                // Hata mesajını loglayabilir veya kullanıcıya gösterebilirsiniz
+                ModelState.AddModelError("", "Bir hata oluştu: " + ex.Message);
+            }
+
+            return View(model);
+        }
+
+        // Temporarily remove file processing methods
+        /*
+        // Dosya eklerini işleme metodu
+        private void ProcessAttachments(int gonderiId, IEnumerable<HttpPostedFileBase> attachments)
+        {
+            var uploadsPath = Server.MapPath("~/Uploads/Announcements");
+            if (!Directory.Exists(uploadsPath))
+                Directory.CreateDirectory(uploadsPath);
+
+            foreach (var file in attachments.Where(f => f != null && f.ContentLength > 0))
+            {
+                // Güvenli dosya adı oluştur
+                var originalFileName = Path.GetFileName(file.FileName);
+                var fileExtension = Path.GetExtension(originalFileName);
+                var safeFileName = $"{Guid.NewGuid()}{fileExtension}";
+                var filePath = Path.Combine(uploadsPath, safeFileName);
+
+                // Dosyayı kaydet
+                file.SaveAs(filePath);
+
+                // Veritabanına kaydet
+                var gonderiEk = new GonderiEk
+                {
+                    GonderiId = gonderiId,
+                    FileName = safeFileName,
+                    OriginalFileName = originalFileName,
+                    FilePath = $"~/Uploads/Announcements/{safeFileName}",
+                    FileType = file.ContentType,
+                    FileSize = file.ContentLength,
+                    UploadedAt = DateTime.Now,
+                    IsActive = true
+                };
+
+                db.GonderiEkler.Add(gonderiEk);
+            }
+            db.SaveChanges();
+        }
+
+        // Dosya indirme
+        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+        public ActionResult DownloadFile(int id)
+        {
+            var attachment = db.GonderiEkler.Find(id);
+            if (attachment == null || !attachment.IsActive)
+            {
+                return HttpNotFound("Dosya bulunamadı.");
+            }
+
+            var filePath = Server.MapPath(attachment.FilePath);
+            if (!System.IO.File.Exists(filePath))
+            {
+                return HttpNotFound("Fiziksel dosya bulunamadı.");
+            }
+
+            // İndirme sayısını artır
+            attachment.DownloadCount++;
+            db.SaveChanges();
+
+            return File(filePath, "application/octet-stream", attachment.OriginalFileName);
+        }
+
+        // Dosyayı görüntüleme (resimler için)
+        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+        public ActionResult ViewFile(int id)
+        {
+            var attachment = db.GonderiEkler.Find(id);
+            if (attachment == null || !attachment.IsActive)
+            {
+                return HttpNotFound("Dosya bulunamadı.");
+            }
+
+            var filePath = Server.MapPath(attachment.FilePath);
+            if (!System.IO.File.Exists(filePath))
+            {
+                return HttpNotFound("Fiziksel dosya bulunamadı.");
+            }
+
+            return File(filePath, attachment.FileType, attachment.OriginalFileName);
+        }
+        */
+
+        // Test database connection and table existence
+        [AllowAnonymous]
+        public ActionResult TestDatabase()
+        {
+            try
+            {
+                // Test basic connection
+                var gonderiCount = db.Gonderiler.Count();
+                ViewBag.GonderiCount = gonderiCount;
+                ViewBag.Message = "Database connection successful";
+
+                // Temporarily comment out GonderiEkler test
+                // try
+                // {
+                //     var eklerCount = db.GonderiEkler.Count();
+                //     ViewBag.EklerCount = eklerCount;
+                //     ViewBag.EklerTableExists = true;
+                // }
+                // catch (Exception ex)
+                // {
+                //     ViewBag.EklerTableExists = false;
+                //     ViewBag.EklerError = ex.Message;
+                // }
+
+                return Json(new
+                {
+                    Success = true,
+                    GonderiCount = gonderiCount,
+                    EklerTableExists = false,  // Temporarily set to false
+                    EklerCount = 0,
+                    EklerError = "Temporarily disabled for testing"
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    Success = false,
+                    Error = ex.Message,
+                    InnerError = ex.InnerException?.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // Simplified GonderiListele for testing
+        [AllowAnonymous]
+        public ActionResult TestGonderiListele()
+        {
+            try
+            {
+                // Very basic test without any complex queries
+                ViewBag.Message = "Test page loaded successfully";
+                ViewBag.GonderiCount = 0;
+                
+                // Try to get simple count first
+                var count = db.Database.SqlQuery<int>("SELECT COUNT(*) FROM Gonderis").FirstOrDefault();
+                ViewBag.GonderiCount = count;
+
+                return Content($"Success! Found {count} announcements. Database connection working.");
+            }
+            catch (Exception ex)
+            {
+                return Content($"Error: {ex.Message}. Inner: {ex.InnerException?.Message}");
+            }
+        }
+
+        // Duyuru listeleme
+        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+        public ActionResult GonderiListele()
+        {
+            try
+            {
+                // Temporarily remove Include to test if that's causing issues
+                var gonderiler = db.Gonderiler.OrderByDescending(g => g.CreatedAt).ToList();
+                return View(gonderiler);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Duyurular yüklenirken hata oluştu: " + ex.Message;
+                return View(new List<Gonderi>();
+            }
+        }
+
+        // Duyuru detayı
+        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+        public ActionResult GonderiDetay(int id)
+        {
+            try
+            {
+                var gonderi = db.Gonderiler.FirstOrDefault(g => g.Id == id);
+                if (gonderi == null)
+                {
+                    return HttpNotFound();
+                }
+                
+                // Temporarily remove attachment loading
+                // if (gonderi.Ekler == null)
+                // {
+                //     gonderi.Ekler = db.GonderiEkler.Where(e => e.GonderiId == id).ToList();
+                // }
+                
+                return View(gonderi);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Duyuru detayları yüklenirken hata oluştu: " + ex.Message;
+                return View(new Gonderi { Title = "Hata", Content = "Duyuru yüklenemedi." });
+            }
+        }
+
+        // Duyuru silme – onay sayfası
+        [DynamicAuthorize(Permission = "HumanResources.Announcements", Action = "Delete")]
+        [HttpGet]
+        public ActionResult GonderiSil(int id)
+        {
+            var gonderi = db.Gonderiler.Find(id);
+            if (gonderi == null)
+            {
+                return HttpNotFound();
+            }
+            return View(gonderi);
+        }
+
+        [HttpPost, ActionName("GonderiSil")]
+        [ValidateAntiForgeryToken]
+        [DynamicAuthorize(Permission = "HumanResources.Announcements", Action = "Delete")]
+        public ActionResult GonderiSilConfirmed(int id)
+        {
+            var gonderi = db.Gonderiler.FirstOrDefault(g => g.Id == id);
+            if (gonderi != null)
+            {
+                // Temporarily remove file deletion
+                // foreach (var ek in gonderi.Ekler)
+                // {
+                //     var filePath = Server.MapPath(ek.FilePath);
+                //     if (System.IO.File.Exists(filePath))
+                //     {
+                //         System.IO.File.Delete(filePath);
+                //     }
+                // }
+
+                db.Gonderiler.Remove(gonderi);
+                db.SaveChanges();
+                TempData["Message"] = "Duyuru başarıyla silindi.";
+            }
+            return RedirectToAction("GonderiListele");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

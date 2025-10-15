@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace MZDNETWORK.Models
+{ 
+public class Gonderi
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+    public DateTime CreatedAt { get; internal set; }
+    
+    // Temporarily comment out to test if this is causing the issue
+    // Navigation property for attachments
+    // public virtual ICollection<GonderiEk> Ekler { get; set; }
+    
+    // public Gonderi()
+    // {
+    //     Ekler = new HashSet<GonderiEk>();
+    // }
+}
+}

@@ -1,4 +1,3 @@
-
 @using MZDNETWORK.Models
 @model Gonderi
 
@@ -26,7 +25,7 @@
             </div>
 
             <div class="gonderiForm-card-body">
-                <form class='gonderiForm-form' action="@Url.Action("GonderiOlustur", "Gonderi")" method="post">
+                <form class='gonderiForm-form' action="@Url.Action("GonderiOlustur", "Gonderi")" method="post" enctype="multipart/form-data">
                     @Html.AntiForgeryToken()
 
                     <div class="gonderiForm-input-group">
@@ -63,8 +62,39 @@
                         </div>
                     </div>
 
+                    <div class="gonderiForm-input-group">
+                        <label class="gonderiForm-label" for="FileUpload">
+                            <i class='bx bx-file gonderiForm-label-icon'></i>
+                            Dosya Yükle
+                        </label>
+                        <div class="gonderiForm-input-wrapper">
+                            <input type="file" name="FileUpload" class="gonderiForm-file-input" accept=".jpg,.jpeg,.png,.doc,.docx,.pdf" />
+                            <span class="gonderiForm-file-text">JPG, PNG, DOC, DOCX, PDF (Maks. 5MB)</span>
+                        </div>
+                    </div>
+
+                    <div class="gonderiForm-input-group">
+                        <label class="gonderiForm-label" for="attachments">
+                            <i class='bx bx-paperclip gonderiForm-label-icon'></i>
+                            Dosya Ekleri
+                        </label>
+                        <div class="gonderiForm-input-wrapper">
+                            <div class="gonderiForm-file-upload">
+                                <input type="file" name="attachments" id="attachments" multiple 
+                                       class="gonderiForm-file-input" 
+                                       accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.jpg,.jpeg,.png,.gif,.zip,.rar" />
+                                <label for="attachments" class="gonderiForm-file-label">
+                                    <i class='bx bx-cloud-upload gonderiForm-upload-icon'></i>
+                                    <span class="gonderiForm-upload-text">Dosya seçin veya sürükleyip bırakın</span>
+                                    <span class="gonderiForm-upload-hint">PDF, Word, Excel, PowerPoint, Resim ve Arşiv dosyaları desteklenir</span>
+                                </label>
+                            </div>
+                            <div id="selectedFiles" class="gonderiForm-selected-files"></div>
+                        </div>
+                    </div>
+
                     <div class="gonderiForm-actions">
-                        <a href="@Url.Action("Index", "Gonderi")" class="gonderiForm-btn-cancel">
+                        <a href="@Url.Action("GonderiListele", "Gonderi")" class="gonderiForm-btn-cancel">
                             <i class='bx bx-arrow-back gonderiForm-btn-icon'></i>
                             Geri Dön
                         </a>
@@ -80,6 +110,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            // TinyMCE initialization
             tinymce.init({
                 selector: 'textarea.gonderiForm-textarea',
                 plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
@@ -95,6 +126,207 @@
                     });
                 }
             });
+
+            // File upload functionality
+            const fileInput = document.getElementById('attachments');
+            const selectedFilesDiv = document.getElementById('selectedFiles');
+            const fileLabel = document.querySelector('.gonderiForm-file-label');
+
+            if (fileInput && selectedFilesDiv && fileLabel) {
+                fileInput.addEventListener('change', function(e) {
+                    displaySelectedFiles(e.target.files);
+                });
+
+                // Drag and drop functionality
+                fileLabel.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.classList.add('gonderiForm-drag-over');
+                });
+
+                fileLabel.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.classList.remove('gonderiForm-drag-over');
+                });
+
+                fileLabel.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.classList.remove('gonderiForm-drag-over');
+                    
+                    const files = e.dataTransfer.files;
+                    fileInput.files = files;
+                    displaySelectedFiles(files);
+                });
+
+                function displaySelectedFiles(files) {
+                    selectedFilesDiv.innerHTML = '';
+                    
+                    if (files.length === 0) return;
+
+                    const fileList = document.createElement('div');
+                    fileList.className = 'gonderiForm-file-list';
+                    
+                    Array.from(files).forEach(function(file, index) {
+                        const fileItem = document.createElement('div');
+                        fileItem.className = 'gonderiForm-file-item';
+                        
+                        const fileInfo = document.createElement('div');
+                        fileInfo.className = 'gonderiForm-file-info';
+                        
+                        const fileName = document.createElement('span');
+                        fileName.className = 'gonderiForm-file-name';
+                        fileName.textContent = file.name;
+                        
+                        const fileSize = document.createElement('span');
+                        fileSize.className = 'gonderiForm-file-size';
+                        fileSize.textContent = formatFileSize(file.size);
+                        
+                        const removeBtn = document.createElement('button');
+                        removeBtn.type = 'button';
+                        removeBtn.className = 'gonderiForm-file-remove';
+                        removeBtn.innerHTML = '<i class="bx bx-x"></i>';
+                        removeBtn.onclick = function() {
+                            removeFile(index);
+                        };
+                        
+                        fileInfo.appendChild(fileName);
+                        fileInfo.appendChild(fileSize);
+                        fileItem.appendChild(fileInfo);
+                        fileItem.appendChild(removeBtn);
+                        fileList.appendChild(fileItem);
+                    });
+                    
+                    selectedFilesDiv.appendChild(fileList);
+                }
+
+                function formatFileSize(bytes) {
+                    if (bytes === 0) return '0 Bytes';
+                    const k = 1024;
+                    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                    const i = Math.floor(Math.log(bytes) / Math.log(k));
+                    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+                }
+
+                function removeFile(index) {
+                    const dt = new DataTransfer();
+                    const files = fileInput.files;
+                    
+                    for (let i = 0; i < files.length; i++) {
+                        if (i !== index) {
+                            dt.items.add(files[i]);
+                        }
+                    }
+                    
+                    fileInput.files = dt.files;
+                    displaySelectedFiles(dt.files);
+                }
+            }
         });
     </script>
+
+    <style>
+        .gonderiForm-file-upload {
+            position: relative;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .gonderiForm-file-upload:hover,
+        .gonderiForm-file-upload.gonderiForm-drag-over {
+            border-color: #007bff;
+            background: #f8f9ff;
+        }
+
+        .gonderiForm-file-input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .gonderiForm-file-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            pointer-events: none;
+        }
+
+        .gonderiForm-upload-icon {
+            font-size: 2.5rem;
+            color: #007bff;
+        }
+
+        .gonderiForm-upload-text {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .gonderiForm-upload-hint {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .gonderiForm-selected-files {
+            margin-top: 1rem;
+        }
+
+        .gonderiForm-file-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .gonderiForm-file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+        }
+
+        .gonderiForm-file-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .gonderiForm-file-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .gonderiForm-file-size {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .gonderiForm-file-remove {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .gonderiForm-file-remove:hover {
+            background: #c82333;
+        }
+    </style>
 </body>

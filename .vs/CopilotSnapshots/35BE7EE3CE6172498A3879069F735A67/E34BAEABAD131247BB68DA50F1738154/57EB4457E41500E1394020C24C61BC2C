@@ -1,0 +1,128 @@
+﻿@using MZDNETWORK.Models
+@model Gonderi
+
+@{
+    ViewBag.Title = "Duyuru Detayı";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='~/Content/boxicons.css' rel='stylesheet'>
+    <style>
+        .gonderiDetay-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .gonderiDetay-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .gonderiDetay-card-header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 2rem;
+        }
+
+        .gonderiDetay-title {
+            margin: 0 0 1rem 0;
+            font-size: 1.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .gonderiDetay-icon {
+            font-size: 2rem;
+        }
+
+        .gonderiDetay-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0.9;
+        }
+
+        .gonderiDetay-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .gonderiDetay-card-body {
+            padding: 2rem;
+        }
+
+        .gonderiDetay-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .gonderiDetay-card-footer {
+            padding: 1.5rem 2rem;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .gonderiDetay-btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .gonderiDetay-btn-back:hover {
+            background: #545b62;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gonderiDetay-container">
+        <div class="gonderiDetay-card">
+            <div class="gonderiDetay-card-header">
+                <h1 class="gonderiDetay-title">
+                    <i class='bx bx-news gonderiDetay-icon'></i>
+                    @Model.Title
+                </h1>
+                <div class="gonderiDetay-meta">
+                    <span class="gonderiDetay-date">
+                        <i class='bx bx-calendar'></i>
+                        @Model.CreatedAt.ToString("dd MMMM yyyy, HH:mm", new System.Globalization.CultureInfo("tr-TR"))
+                    </span>
+                </div>
+            </div>
+
+            <div class="gonderiDetay-card-body">
+                <div class="gonderiDetay-content">
+                    @Html.Raw(Model.Content)
+                </div>
+            </div>
+
+            <div class="gonderiDetay-card-footer">
+                <a href="@Url.Action("GonderiListele", "Gonderi")" class="gonderiDetay-btn-back">
+                    <i class='bx bx-arrow-back'></i>
+                    Geri Dön
+                </a>
+            </div>
+        </div>
+    </div>
+</body>

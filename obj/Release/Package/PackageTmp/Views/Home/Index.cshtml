@@ -42,6 +42,44 @@
                             <div class="anasayfa-timeline-body">
                                 @Html.Raw(post.Content)
                             </div>
+                            
+                            @* Show attachment count and download links *@
+                            @if (post.Ekler != null && post.Ekler.Any(e => e.IsActive))
+                            {
+                                <div class="anasayfa-timeline-attachments">
+                                    <div class="anasayfa-attachment-header">
+                                        <i class='bx bx-paperclip anasayfa-attachment-icon'></i>
+                                        <span class="anasayfa-attachment-count">@post.Ekler.Count(e => e.IsActive) Ek Dosya</span>
+                                    </div>
+                                    <div class="anasayfa-attachment-list">
+                                        @foreach (var ek in post.Ekler.Where(e => e.IsActive).Take(3))
+                                        {
+                                            <div class="anasayfa-attachment-item">
+                                                <span class="anasayfa-attachment-name">@ek.OriginalFileName</span>
+                                                <a href="@Url.Action("DownloadFile", "Gonderi", new { id = ek.Id })" 
+                                                   class="anasayfa-attachment-download">
+                                                    <i class='bx bx-download'></i>
+                                                </a>
+                                            </div>
+                                        }
+                                        @if (post.Ekler.Count(e => e.IsActive) > 3)
+                                        {
+                                            <div class="anasayfa-attachment-more">
+                                                ve @(post.Ekler.Count(e => e.IsActive) - 3) dosya daha...
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            
+                            @* Detail link *@
+                            <div class="anasayfa-timeline-actions">
+                                <a href="@Url.Action("GonderiDetay", "Gonderi", new { id = post.Id })" 
+                                   class="anasayfa-detail-link">
+                                    <i class='bx bx-detail'></i>
+                                    Detayları Görüntüle
+                                </a>
+                            </div>
                         </div>
                     </div>
                 }
@@ -104,10 +142,9 @@
     </div>
 </body>
 
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Modal iÅŸlemleri
+        // Modal işlemleri
         const modal = document.getElementById('feedbackModal');
         const closeModal = document.getElementById('closeModal');
         const likeButton = document.getElementById('likeButton');
@@ -115,7 +152,7 @@
         const suggestionDiv = document.getElementById('suggestionDiv');
         const submitButton = document.getElementById('submitFeedbackButton');
 
-        // Modal aÃ§ma fonksiyonu (ihtiyaca gÃ¶re kullanÄ±labilir)
+        // Modal açma fonksiyonu (ihtiyaca göre kullanılabilir)
         function openFeedbackModal() {
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
@@ -127,19 +164,19 @@
             document.body.style.overflow = '';
         }
 
-        // Kapatma butonuna tÄ±klama
+        // Kapatma butonuna tıklama
         if (closeModal) {
             closeModal.addEventListener('click', closeFeedbackModal);
         }
 
-        // Modal dÄ±ÅŸÄ±na tÄ±klama
+        // Modal dışına tıklama
         window.addEventListener('click', function (event) {
             if (event.target === modal) {
                 closeFeedbackModal();
             }
         });
 
-        // BeÄŸenme/beÄŸenmeme butonlarÄ±
+        // Beğenme/beğenmeme butonları
         if (likeButton) {
             likeButton.addEventListener('click', function () {
                 likeButton.classList.add('active');
@@ -158,16 +195,16 @@
             });
         }
 
-        // GÃ¶nder butonu
+        // Gönder butonu
         if (submitButton) {
             submitButton.addEventListener('click', function () {
-                // Burada geri bildirim gÃ¶nderme iÅŸlemi yapÄ±labilir
-                alert('Geri bildiriminiz iÃ§in teÅŸekkÃ¼r ederiz!');
+                // Burada geri bildirim gönderme işlemi yapılabilir
+                alert('Geri bildiriminiz için teşekkür ederiz!');
                 closeFeedbackModal();
             });
         }
 
-        // Sonsuz kaydÄ±rma iÃ§in gerekirse kullanÄ±labilir
+        // Sonsuz kaydırma için gerekirse kullanılabilir
         let page = 1;
         let loading = false;
         const loadingElement = document.getElementById('loading');
@@ -178,14 +215,14 @@
             loading = true;
             loadingElement.style.display = 'flex';
 
-            // Burada AJAX ile daha fazla gÃ¶nderi yÃ¼klenebilir
-            // Ã–rnek:
+            // Burada AJAX ile daha fazla gönderi yüklenebilir
+            // Örnek:
             /*
             fetch(`/Home/LoadMorePosts?page=${page}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.posts && data.posts.length > 0) {
-                        // GÃ¶nderileri ekle
+                        // Gönderileri ekle
                         const timeline = document.getElementById('timeline');
                         data.posts.forEach(post => {
                             const postElement = createPostElement(post);
@@ -193,7 +230,7 @@
                         });
                         page++;
                     } else {
-                        // Daha fazla gÃ¶nderi yoksa
+                        // Daha fazla gönderi yoksa
                         window.removeEventListener('scroll', scrollHandler);
                     }
                     loading = false;
@@ -206,7 +243,7 @@
                 });
             */
 
-            // SimÃ¼lasyon iÃ§in:
+            // Simülasyon için:
             setTimeout(() => {
                 loading = false;
                 loadingElement.style.display = 'none';
@@ -219,7 +256,122 @@
             }
         }
 
-        // Sonsuz kaydÄ±rma iÃ§in scroll event listener
+        // Sonsuz kaydırma için scroll event listener
         // window.addEventListener('scroll', scrollHandler);
     });
 </script>
+
+<style>
+    /* Detail link styles */
+    .anasayfa-detail-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    .anasayfa-detail-link:hover {
+        background: #0056b3;
+        color: white;
+        text-decoration: none;
+        transform: translateY(-1px);
+    }
+
+    /* Attachment styles for home page */
+    .anasayfa-timeline-attachments {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+    }
+
+    .anasayfa-attachment-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .anasayfa-attachment-icon {
+        color: #007bff;
+        font-size: 1.1rem;
+    }
+
+    .anasayfa-attachment-count {
+        font-size: 0.9rem;
+    }
+
+    .anasayfa-attachment-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .anasayfa-attachment-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 0.75rem;
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 6px;
+        transition: all 0.2s;
+    }
+
+    .anasayfa-attachment-item:hover {
+        border-color: #007bff;
+        background: #f8f9ff;
+    }
+
+    .anasayfa-attachment-name {
+        font-size: 0.875rem;
+        color: #495057;
+        font-weight: 500;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-right: 0.5rem;
+    }
+
+    .anasayfa-attachment-download {
+        color: #007bff;
+        text-decoration: none;
+        padding: 0.25rem;
+        border-radius: 4px;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .anasayfa-attachment-download:hover {
+        background: #007bff;
+        color: white;
+        text-decoration: none;
+    }
+
+    .anasayfa-attachment-more {
+        font-size: 0.8rem;
+        color: #6c757d;
+        font-style: italic;
+        text-align: center;
+        padding: 0.25rem;
+    }
+
+    .anasayfa-timeline-actions {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e9ecef;
+    }
+</style>

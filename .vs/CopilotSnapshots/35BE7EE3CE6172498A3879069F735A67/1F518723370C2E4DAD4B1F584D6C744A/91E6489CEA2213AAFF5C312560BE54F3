@@ -1,0 +1,361 @@
+﻿@using MZDNETWORK.Models
+@model Gonderi
+
+@{
+    ViewBag.Title = "Duyuru Detayı";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='~/Content/boxicons.css' rel='stylesheet'>
+    <link rel="stylesheet" href="~/Content/gonderidetay.css" />
+</head>
+
+<body>
+    <div class="gonderiDetay-container">
+        <div class="gonderiDetay-card">
+            <div class="gonderiDetay-card-header">
+                <h1 class="gonderiDetay-title">
+                    <i class='bx bx-news gonderiDetay-icon'></i>
+                    @Model.Title
+                </h1>
+                <div class="gonderiDetay-meta">
+                    <span class="gonderiDetay-date">
+                        <i class='bx bx-calendar gonderiDetay-meta-icon'></i>
+                        @Model.CreatedAt.ToString("dd MMMM yyyy, HH:mm", new System.Globalization.CultureInfo("tr-TR"))
+                    </span>
+                </div>
+            </div>
+
+            <div class="gonderiDetay-card-body">
+                <div class="gonderiDetay-content">
+                    @Html.Raw(Model.Content)
+                </div>
+
+                @if (Model.Ekler != null && Model.Ekler.Any())
+                {
+                    <div class="gonderiDetay-attachments">
+                        <h3 class="gonderiDetay-attachments-title">
+                            <i class='bx bx-paperclip gonderiDetay-attachments-icon'></i>
+                            Ekler (@Model.Ekler.Count())
+                        </h3>
+                        
+                        <div class="gonderiDetay-attachments-list">
+                            @foreach (var ek in Model.Ekler.Where(e => e.IsActive))
+                            {
+                                <div class="gonderiDetay-attachment-item">
+                                    <div class="gonderiDetay-attachment-info">
+                                        <div class="gonderiDetay-attachment-icon">
+                                            @{
+                                                var extension = System.IO.Path.GetExtension(ek.OriginalFileName).ToLower();
+                                                string iconClass = "bx-file";
+                                                
+                                                if (new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp" }.Contains(extension))
+                                                    iconClass = "bx-image";
+                                                else if (new[] { ".pdf" }.Contains(extension))
+                                                    iconClass = "bx-file-pdf";
+                                                else if (new[] { ".doc", ".docx" }.Contains(extension))
+                                                    iconClass = "bx-file-doc";
+                                                else if (new[] { ".xls", ".xlsx" }.Contains(extension))
+                                                    iconClass = "bx-spreadsheet";
+                                                else if (new[] { ".ppt", ".pptx" }.Contains(extension))
+                                                    iconClass = "bx-slideshow";
+                                                else if (new[] { ".zip", ".rar", ".7z" }.Contains(extension))
+                                                    iconClass = "bx-archive";
+                                            }
+                                            <i class='bx @iconClass'></i>
+                                        </div>
+                                        <div class="gonderiDetay-attachment-details">
+                                            <span class="gonderiDetay-attachment-name">@ek.OriginalFileName</span>
+                                            <span class="gonderiDetay-attachment-meta">
+                                                @{
+                                                    var fileSize = ek.FileSize;
+                                                    string sizeText = fileSize < 1024 ? $"{fileSize} B" :
+                                                                     fileSize < 1024 * 1024 ? $"{fileSize / 1024:F1} KB" :
+                                                                     $"{fileSize / (1024 * 1024):F1} MB";
+                                                }
+                                                @sizeText
+                                                @if (ek.DownloadCount > 0)
+                                                {
+                                                    <span class="gonderiDetay-download-count">• @ek.DownloadCount indirme</span>
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="gonderiDetay-attachment-actions">
+                                        @if (new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp" }.Contains(extension))
+                                        {
+                                            <a href="@Url.Action("ViewFile", "Gonderi", new { id = ek.Id })" 
+                                               target="_blank" 
+                                               class="gonderiDetay-btn gonderiDetay-btn-view">
+                                                <i class='bx bx-show'></i>
+                                                Görüntüle
+                                            </a>
+                                        }
+                                        <a href="@Url.Action("DownloadFile", "Gonderi", new { id = ek.Id })" 
+                                           class="gonderiDetay-btn gonderiDetay-btn-download">
+                                            <i class='bx bx-download'></i>
+                                            İndir
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="gonderiDetay-card-footer">
+                <a href="@Url.Action("GonderiListele", "Gonderi")" class="gonderiDetay-btn-back">
+                    <i class='bx bx-arrow-back'></i>
+                    Geri Dön
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+<style>
+    .gonderiDetay-container {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .gonderiDetay-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .gonderiDetay-card-header {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        padding: 2rem;
+    }
+
+    .gonderiDetay-title {
+        margin: 0 0 1rem 0;
+        font-size: 1.75rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .gonderiDetay-icon {
+        font-size: 2rem;
+    }
+
+    .gonderiDetay-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        opacity: 0.9;
+    }
+
+    .gonderiDetay-date {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .gonderiDetay-meta-icon {
+        font-size: 1.1rem;
+    }
+
+    .gonderiDetay-card-body {
+        padding: 2rem;
+    }
+
+    .gonderiDetay-content {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: #333;
+        margin-bottom: 2rem;
+    }
+
+    .gonderiDetay-attachments {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 2px solid #f1f3f4;
+    }
+
+    .gonderiDetay-attachments-title {
+        margin: 0 0 1.5rem 0;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .gonderiDetay-attachments-icon {
+        color: #007bff;
+        font-size: 1.4rem;
+    }
+
+    .gonderiDetay-attachments-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .gonderiDetay-attachment-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        transition: all 0.2s;
+    }
+
+    .gonderiDetay-attachment-item:hover {
+        background: #e9ecef;
+        border-color: #007bff;
+    }
+
+    .gonderiDetay-attachment-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex: 1;
+    }
+
+    .gonderiDetay-attachment-icon {
+        width: 48px;
+        height: 48px;
+        background: #007bff;
+        color: white;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .gonderiDetay-attachment-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .gonderiDetay-attachment-name {
+        font-weight: 600;
+        color: #333;
+        font-size: 1rem;
+    }
+
+    .gonderiDetay-attachment-meta {
+        font-size: 0.875rem;
+        color: #666;
+    }
+
+    .gonderiDetay-download-count {
+        color: #28a745;
+        font-weight: 500;
+    }
+
+    .gonderiDetay-attachment-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .gonderiDetay-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.875rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s;
+        border: none;
+        cursor: pointer;
+    }
+
+    .gonderiDetay-btn-view {
+        background: #28a745;
+        color: white;
+    }
+
+    .gonderiDetay-btn-view:hover {
+        background: #218838;
+        color: white;
+        text-decoration: none;
+    }
+
+    .gonderiDetay-btn-download {
+        background: #007bff;
+        color: white;
+    }
+
+    .gonderiDetay-btn-download:hover {
+        background: #0056b3;
+        color: white;
+        text-decoration: none;
+    }
+
+    .gonderiDetay-card-footer {
+        padding: 1.5rem 2rem;
+        background: #f8f9fa;
+        border-top: 1px solid #e9ecef;
+    }
+
+    .gonderiDetay-btn-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: #6c757d;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    .gonderiDetay-btn-back:hover {
+        background: #545b62;
+        color: white;
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        .gonderiDetay-container {
+            margin: 1rem auto;
+            padding: 0 0.5rem;
+        }
+
+        .gonderiDetay-card-header {
+            padding: 1.5rem;
+        }
+
+        .gonderiDetay-title {
+            font-size: 1.4rem;
+        }
+
+        .gonderiDetay-card-body {
+            padding: 1.5rem;
+        }
+
+        .gonderiDetay-attachment-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .gonderiDetay-attachment-actions {
+            width: 100%;
+            justify-content: flex-end;
+        }
+    }
+</style>

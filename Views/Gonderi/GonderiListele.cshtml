@@ -68,6 +68,14 @@
                                         <i class='bx bx-text gonderi-th-icon'></i>
                                         İçerik
                                     </th>
+                                    <th class="gonderi-th-attachments">
+                                        <i class='bx bx-paperclip gonderi-th-icon'></i>
+                                        Ekler
+                                    </th>
+                                    <th class="gonderi-th-date">
+                                        <i class='bx bx-calendar gonderi-th-icon'></i>
+                                        Tarih
+                                    </th>
                                     <th class="gonderi-th-actions">
                                         <i class='bx bx-cog gonderi-th-icon'></i>
                                         İşlemler
@@ -78,13 +86,47 @@
                                 @foreach (var gonderi in Model)
                                 {
                                     <tr class="gonderi-data-row">
-                                        <td class="gonderi-td-title">@gonderi.Title</td>
-                                        <td class="gonderi-td-content">@gonderi.Content</td>
+                                        <td class="gonderi-td-title">
+                                            <strong>@gonderi.Title</strong>
+                                        </td>
+                                        <td class="gonderi-td-content">
+                                            <div class="gonderi-content-preview">
+                                                @{
+                                                    var contentText = System.Text.RegularExpressions.Regex.Replace(gonderi.Content ?? "", "<.*?>", "");
+                                                    var shortContent = contentText.Length > 100 ? contentText.Substring(0, 100) + "..." : contentText;
+                                                }
+                                                @shortContent
+                                            </div>
+                                        </td>
+                                        <td class="gonderi-td-attachments">
+                                            @if (gonderi.Ekler != null && gonderi.Ekler.Any(e => e.IsActive))
+                                            {
+                                                <div class="gonderi-attachment-info">
+                                                    <i class='bx bx-paperclip gonderi-attachment-icon'></i>
+                                                    <span class="gonderi-attachment-count">@gonderi.Ekler.Count(e => e.IsActive)</span>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <span class="gonderi-no-attachments">-</span>
+                                            }
+                                        </td>
+                                        <td class="gonderi-td-date">
+                                            @gonderi.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+                                        </td>
                                         <td class="gonderi-td-actions">
-                                            <button type="button" class="gonderi-btn-delete" onclick="openDeleteModal(@gonderi.Id, '@gonderi.Title')">
-                                                <i class='bx bx-trash gonderi-icon-delete'></i>
-                                                Sil
-                                            </button>
+                                            <div class="gonderi-action-buttons">
+                                                <a href="@Url.Action("GonderiDetay", "Gonderi", new { id = gonderi.Id })" 
+                                                   class="gonderi-btn-view" title="Detayları Görüntüle">
+                                                    <i class='bx bx-show gonderi-icon-view'></i>
+                                                    Görüntüle
+                                                </a>
+                                                <button type="button" class="gonderi-btn-delete" 
+                                                        onclick="openDeleteModal(@gonderi.Id, '@gonderi.Title')" title="Duyuru Sil">
+                                                    <i class='bx bx-trash gonderi-icon-delete'></i>
+                                                    Sil
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                 }
@@ -175,3 +217,97 @@
         }
     }
 </script>
+
+<style>
+    /* Additional styles for attachments and actions */
+    .gonderi-th-attachments,
+    .gonderi-th-date {
+        width: 120px;
+        text-align: center;
+    }
+
+    .gonderi-td-attachments,
+    .gonderi-td-date {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .gonderi-attachment-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        color: #007bff;
+        font-weight: 600;
+    }
+
+    .gonderi-attachment-icon {
+        font-size: 1.1rem;
+    }
+
+    .gonderi-attachment-count {
+        font-size: 0.9rem;
+    }
+
+    .gonderi-no-attachments {
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    .gonderi-content-preview {
+        max-width: 300px;
+        line-height: 1.4;
+    }
+
+    .gonderi-action-buttons {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .gonderi-btn-view {
+        padding: 0.4rem 0.8rem;
+        background: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        transition: all 0.2s;
+        border: none;
+    }
+
+    .gonderi-btn-view:hover {
+        background: #218838;
+        color: white;
+        text-decoration: none;
+        transform: translateY(-1px);
+    }
+
+    .gonderi-btn-delete {
+        padding: 0.4rem 0.8rem;
+        background: #dc3545;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        transition: all 0.2s;
+        border: none;
+        cursor: pointer;
+    }
+
+    .gonderi-btn-delete:hover {
+        background: #c82333;
+        color: white;
+        text-decoration: none;
+        transform: translateY(-1px);
+    }
+</style>

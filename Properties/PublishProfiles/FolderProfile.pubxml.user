@@ -3,7 +3,7 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Berat\Desktop\Yeni klasör</_PublishTargetUrl>
-    <History>True|2025-09-18T09:03:13.5030050Z||;True|2025-09-18T08:52:44.1506787+03:00||;</History>
+    <History>True|2025-10-15T08:47:58.6378516Z||;True|2025-09-18T12:03:13.5030050+03:00||;True|2025-09-18T08:52:44.1506787+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -236,10 +236,10 @@
       <publishTime>09/11/2025 08:49:23</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.dll">
-      <publishTime>09/18/2025 15:10:09</publishTime>
+      <publishTime>10/15/2025 11:47:48</publishTime>
     </File>
     <File Include="bin/MZDNETWORK.pdb">
-      <publishTime>09/18/2025 15:10:09</publishTime>
+      <publishTime>10/15/2025 11:47:48</publishTime>
     </File>
     <File Include="bin/nb/Hangfire.Core.resources.dll">
       <publishTime>08/12/2025 09:07:20</publishTime>
@@ -570,6 +570,9 @@
     </File>
     <File Include="Content/Dokumantasyon.css">
       <publishTime>09/11/2025 08:49:18</publishTime>
+    </File>
+    <File Include="Content/gonderidetay.css">
+      <publishTime>10/15/2025 11:45:50</publishTime>
     </File>
     <File Include="Content/gonderilistele.css">
       <publishTime>09/11/2025 08:49:18</publishTime>
@@ -1626,6 +1629,12 @@
     </File>
     <File Include="Scripts/xlsx.full.min.js">
       <publishTime>09/11/2025 08:49:18</publishTime>
+    </File>
+    <File Include="SQL_GonderiEk_Table_Creation.sql">
+      <publishTime>10/15/2025 10:32:37</publishTime>
+    </File>
+    <File Include="SQL_User_Delete_Script.sql">
+      <publishTime>10/15/2025 10:20:43</publishTime>
     </File>
     <File Include="svg/logos/bxl-500px.svg">
       <publishTime>09/11/2025 08:49:25</publishTime>
@@ -6427,6 +6436,12 @@
     <File Include="svg/solid/bxs-zoom-out.svg">
       <publishTime>09/11/2025 08:49:26</publishTime>
     </File>
+    <File Include="Test_Database_Setup.sql">
+      <publishTime>10/15/2025 11:08:26</publishTime>
+    </File>
+    <File Include="Troubleshooting_500_Error.md">
+      <publishTime>10/15/2025 11:09:51</publishTime>
+    </File>
     <File Include="UploadPhotosMerkez/Beni Oku.txt">
       <publishTime>09/11/2025 08:49:26</publishTime>
     </File>
@@ -6502,22 +6517,28 @@
     <File Include="Views/Dokumantasyon/Index_sorumlu.cshtml">
       <publishTime>09/11/2025 08:49:19</publishTime>
     </File>
+    <File Include="Views/Gonderi/GonderiDetay.cshtml">
+      <publishTime>10/15/2025 11:43:10</publishTime>
+    </File>
     <File Include="Views/Gonderi/GonderiListele.cshtml">
-      <publishTime>09/11/2025 08:49:19</publishTime>
+      <publishTime>10/15/2025 11:30:38</publishTime>
     </File>
     <File Include="Views/Gonderi/GonderiOlustur.cshtml">
-      <publishTime>09/11/2025 08:49:19</publishTime>
+      <publishTime>10/15/2025 11:29:55</publishTime>
     </File>
     <File Include="Views/Gonderi/GonderiSil.cshtml">
       <publishTime>09/11/2025 08:49:19</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>09/11/2025 08:49:19</publishTime>
+      <publishTime>10/15/2025 11:31:25</publishTime>
     </File>
     <File Include="Views/Home/MerkezYemekListesi.cshtml">
       <publishTime>09/11/2025 08:49:19</publishTime>
     </File>
     <File Include="Views/Home/Mola.cshtml">
+      <publishTime>09/11/2025 08:49:19</publishTime>
+    </File>
+    <File Include="Views/Home/PermissionDebug.cshtml">
       <publishTime>09/11/2025 08:49:19</publishTime>
     </File>
     <File Include="Views/Home/TestSeeding.cshtml">
@@ -6686,7 +6707,10 @@
       <publishTime>09/11/2025 08:49:19</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/18/2025 15:10:12</publishTime>
+      <publishTime>10/15/2025 11:47:51</publishTime>
+    </File>
+    <File Include="WebConfigFileUploadSettings.txt">
+      <publishTime>10/15/2025 10:33:51</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -514,15 +514,6 @@
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="LogActionFilter.cs" />
-    <Compile Include="Migrations\202508150609529_AABC.cs" />
-    <Compile Include="Migrations\202508150609529_AABC.Designer.cs">
-      <DependentUpon>202508150609529_AABC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202508150656097_AABC2.cs" />
-    <Compile Include="Migrations\202508150656097_AABC2.Designer.cs">
-      <DependentUpon>202508150656097_AABC2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerOption.cs" />
     <Compile Include="Models\BeyazTahtaEntry.cs" />
@@ -536,6 +527,7 @@
     <Compile Include="Models\Dokumantasyon.cs" />
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Gonderi.cs" />
+    <Compile Include="Models\GonderiEk.cs" />
     <Compile Include="Models\LateArrivalReport.cs" />
     <Compile Include="Models\LateArrivalReportHeader.cs" />
     <Compile Include="Models\LeaveRequest.cs" />
@@ -587,6 +579,7 @@
     <Content Include="Content\DilekIstek.css" />
     <Content Include="Content\dilekistekik.css" />
     <Content Include="Content\ding.mp3" />
+    <Content Include="Content\gonderidetay.css" />
     <Content Include="Content\gonderilistele.css" />
     <Content Include="Content\gonderiolustur.css" />
     <Content Include="Content\gonderisil.css" />
@@ -897,6 +890,9 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\xlsx.full.min.js" />
+    <Content Include="SQL_GonderiEk_Table_Creation.sql" />
+    <Content Include="SQL_User_Delete_Script.sql" />
+    <Content Include="Test_Database_Setup.sql" />
     <Content Include="UploadPhotosMerkez\Beni Oku.txt" />
     <Content Include="UploadPhotosMola\Beni Oku.txt" />
     <Content Include="UploadPhotosYerleske\Beni Oku.txt" />
@@ -919,6 +915,7 @@
     <Content Include="Content\kml\sincan_etimesgut.kml" />
     <Content Include="Dockerfile" />
     <Content Include=".dockerignore" />
+    <Content Include="WebConfigFileUploadSettings.txt" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2640,11 +2637,15 @@
     <Content Include="Views\ServiceRoute\Personnel.cshtml" />
     <Content Include="Views\ServicePersonnel\Admin.cshtml" />
     <Content Include="Views\OvertimeServiceManager\Index.cshtml" />
+    <Content Include="Views\Home\PermissionDebug.cshtml" />
+    <Content Include="Views\Gonderi\GonderiDetay.cshtml" />
+    <Content Include="Troubleshooting_500_Error.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\tiles\" />
     <Folder Include="logs\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Uploads\Announcements\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -2655,12 +2656,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202508150609529_AABC.resx">
-      <DependentUpon>202508150609529_AABC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202508150656097_AABC2.resx">
-      <DependentUpon>202508150656097_AABC2.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

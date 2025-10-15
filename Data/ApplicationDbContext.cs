@@ -17,6 +17,7 @@ namespace MZDNETWORK.Data
         public DbSet<UserInfo> UserInfos { get; set; }
         public DbSet<DilekOneri> DilekOneriler { get; set; }
         public DbSet<Gonderi> Gonderiler { get; set; }
+        public DbSet<GonderiEk> GonderiEkler { get; set; }
         public DbSet<Dokumantasyon> Dokumantasyons { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Task> Tasks { get; set; }
@@ -217,6 +218,13 @@ namespace MZDNETWORK.Data
             modelBuilder.Entity<ServiceConfiguration>()
                 .HasIndex(sc => sc.ServiceName)
                 .IsUnique();
+            
+            // Gonderi and GonderiEk relationship
+            modelBuilder.Entity<GonderiEk>()
+                .HasRequired(ge => ge.Gonderi)
+                .WithMany(g => g.Ekler)
+                .HasForeignKey(ge => ge.GonderiId)
+                .WillCascadeOnDelete(true);
         }
 
         /// <summary>
