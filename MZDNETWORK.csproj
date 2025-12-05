@@ -503,7 +503,11 @@
     </Compile>
     <Compile Include="Helpers\ConnectionPoolManager.cs" />
     <Compile Include="Helpers\DynamicPermissionHelper.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\EmailService.cs" />
     <Compile Include="Helpers\EnumDisplayHelper.cs" />
+    <Compile Include="Helpers\MeetingReminderService.cs" />
+    <Compile Include="Helpers\NotificationService.cs" />
     <Compile Include="Helpers\OvertimeServiceScheduler.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />
     <Compile Include="Helpers\PermissionHelper.cs" />
@@ -514,6 +518,11 @@
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\OnlineUsersHub.cs" />
     <Compile Include="LogActionFilter.cs" />
+    <Compile Include="Migrations\202512050439037_AddMeetingRoomSystem.cs" />
+    <Compile Include="Migrations\202512050439037_AddMeetingRoomSystem.Designer.cs">
+      <DependentUpon>202512050439037_AddMeetingRoomSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerOption.cs" />
     <Compile Include="Models\BeyazTahtaEntry.cs" />
@@ -531,12 +540,15 @@
     <Compile Include="Models\LateArrivalReport.cs" />
     <Compile Include="Models\LateArrivalReportHeader.cs" />
     <Compile Include="Models\LeaveRequest.cs" />
+    <Compile Include="Models\MeetingDecision.cs" />
+    <Compile Include="Models\MeetingReminderLog.cs" />
     <Compile Include="Models\MeetingRoomReservation.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\OvertimeServicePersonnel.cs" />
     <Compile Include="Models\PasswordResetRequest.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\ReservationAttendee.cs" />
     <Compile Include="Models\ReservationStatus.cs" />
     <Compile Include="Models\ServiceConfiguration.cs" />
     <Compile Include="Models\ServicePersonnel.cs" />
@@ -890,9 +902,6 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\xlsx.full.min.js" />
-    <Content Include="SQL_GonderiEk_Table_Creation.sql" />
-    <Content Include="SQL_User_Delete_Script.sql" />
-    <Content Include="Test_Database_Setup.sql" />
     <Content Include="UploadPhotosMerkez\Beni Oku.txt" />
     <Content Include="UploadPhotosMola\Beni Oku.txt" />
     <Content Include="UploadPhotosYerleske\Beni Oku.txt" />
@@ -924,6 +933,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="plan.md" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -2640,6 +2650,10 @@
     <Content Include="Views\Home\PermissionDebug.cshtml" />
     <Content Include="Views\Gonderi\GonderiDetay.cshtml" />
     <Content Include="Troubleshooting_500_Error.md" />
+    <Content Include="Views\MeetingRoom\EmailTest.cshtml" />
+    <Content Include="Views\MeetingRoom\Edit.cshtml" />
+    <Content Include="Views\MeetingRoom\MyMeetings.cshtml" />
+    <Content Include="Views\MeetingRoom\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\tiles\" />
@@ -2656,6 +2670,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\202512050439037_AddMeetingRoomSystem.resx">
+      <DependentUpon>202512050439037_AddMeetingRoomSystem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

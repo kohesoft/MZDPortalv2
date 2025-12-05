@@ -14,6 +14,7 @@ using MZDNETWORK.Data;
 using OfficeOpenXml;
 using Hangfire;
 using Hangfire.SqlServer;
+using Hangfire.Dashboard;
 using System.Configuration;
 
 
@@ -21,6 +22,31 @@ using System.Configuration;
 
 namespace MZDNETWORK
 {
+    // Hangfire Dashboard için yetkilendirme filtresi
+    public class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
+    {
+        public bool Authorize(DashboardContext context)
+        {
+            // HttpContext'e System.Web üzerinden eriş
+            var httpContext = System.Web.HttpContext.Current;
+            
+            if (httpContext == null || httpContext.User == null || !httpContext.User.Identity.IsAuthenticated)
+            {
+                return false;
+            }
+
+            // Sadece admin kullanıcılar erişebilir
+            try
+            {
+                return Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom", "Manage");
+            }
+            catch
+            {
+                return false;
+            }
+        }
+    }
+
     public class MvcApplication : System.Web.HttpApplication
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -48,27 +74,6 @@ namespace MZDNETWORK
                 catch (Exception ex)
                 {
                     Logger.Error(ex, "Database seeding failed");
-                }
-
-                // Hangfire recurring jobs (conditional)
-                bool hangfireEnabled = string.Equals(ConfigurationManager.AppSettings["Hangfire_Enabled"], "true", StringComparison.OrdinalIgnoreCase);
-                if (hangfireEnabled)
-                {
-                    try
-                    {
-                        Logger.Info("Configuring Hangfire recurring jobs...");
-                        RecurringJob.AddOrUpdate("daily-overtime-cleanup", () => OvertimeServiceScheduler.ResetOvertimeData(null), Cron.Daily);
-                        RecurringJob.AddOrUpdate("hourly-connection-cleanup", () => ConnectionPoolManager.ClearConnectionPools(), Cron.Hourly);
-                        Logger.Info("Hangfire recurring jobs configured");
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Error(ex, "Failed to set up recurring jobs with Hangfire");
-                    }
-                }
-                else
-                {
-                    Logger.Info("Hangfire is disabled by configuration (Hangfire_Enabled=false)");
                 }
 
                 Logger.Info("Application started successfully.");
@@ -239,11 +244,23 @@ namespace MZDNETWORK
 
                     if (string.Equals(ConfigurationManager.AppSettings["Hangfire_Dashboard_Enabled"], "true", StringComparison.OrdinalIgnoreCase))
                     {
-                        app.UseHangfireDashboard("/hangfire");
+                        var dashboardOptions = new DashboardOptions
+                        {
+                            Authorization = new[] { new HangfireAuthorizationFilter() },
+                            AppPath = "/", // Ana sayfaya dön butonu için
+                            DisplayStorageConnectionString = false
+                        };
+                        app.UseHangfireDashboard("/hangfire", dashboardOptions);
                     }
 
                     app.UseHangfireServer();
                     logger.Info("Hangfire server started");
+                    
+                    // Recurring job'ları server başladıktan sonra tanımla
+                    RecurringJob.AddOrUpdate("daily-overtime-cleanup", () => OvertimeServiceScheduler.ResetOvertimeData(null), Cron.Daily);
+                    RecurringJob.AddOrUpdate("hourly-connection-cleanup", () => ConnectionPoolManager.ClearConnectionPools(), Cron.Hourly);
+                    RecurringJob.AddOrUpdate("meeting-reminders", () => new MeetingReminderService().CheckAndSendReminders(), "*/5 * * * *");
+                    logger.Info("Hangfire recurring jobs configured");
                 }
                 catch (Exception ex)
                 {

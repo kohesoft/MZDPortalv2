@@ -11,7 +11,8 @@ namespace MZDNETWORK.Data
     {
         public MZDNETWORKContext() : base("MZDNETWORKContext")
         {
-            Database.SetInitializer<MZDNETWORKContext>(new CreateDatabaseIfNotExists<MZDNETWORKContext>());
+            // Otomatik migration'ı etkinleştir
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MZDNETWORKContext, MZDNETWORK.Migrations.Configuration>());
         }
         public DbSet<User> Users { get; set; }
         public DbSet<UserInfo> UserInfos { get; set; }
@@ -29,6 +30,9 @@ namespace MZDNETWORK.Data
         public DbSet<BeyazTahtaEntry> BeyazTahtaEntries { get; set; }
         public DbSet<TvHeader> TvHeaders { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<ReservationAttendee> ReservationAttendees { get; set; }
+        public DbSet<MeetingDecision> MeetingDecisions { get; set; }
+        public DbSet<MeetingReminderLog> MeetingReminderLogs { get; set; }
         public DbSet<DailyMood> DailyMoods { get; set; }
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
         
@@ -224,6 +228,26 @@ namespace MZDNETWORK.Data
                 .HasRequired(ge => ge.Gonderi)
                 .WithMany(g => g.Ekler)
                 .HasForeignKey(ge => ge.GonderiId)
+                .WillCascadeOnDelete(true);
+
+            // ReservationAttendee relationships
+            modelBuilder.Entity<ReservationAttendee>()
+                .HasRequired(ra => ra.Reservation)
+                .WithMany(r => r.ReservationAttendees)
+                .HasForeignKey(ra => ra.ReservationId)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<ReservationAttendee>()
+                .HasRequired(ra => ra.User)
+                .WithMany()
+                .HasForeignKey(ra => ra.UserId)
+                .WillCascadeOnDelete(false);
+
+            // MeetingDecision relationships
+            modelBuilder.Entity<MeetingDecision>()
+                .HasRequired(md => md.Reservation)
+                .WithMany(r => r.MeetingDecisions)
+                .HasForeignKey(md => md.ReservationId)
                 .WillCascadeOnDelete(true);
         }
 

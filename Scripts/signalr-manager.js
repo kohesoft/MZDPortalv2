@@ -41,6 +41,12 @@
             init: function() {
                 var self = this;
                 
+                // Check if SignalR is available
+                if (!$ || !$.connection || !$.signalR) {
+                    console.warn('SignalR not available, skipping initialization');
+                    return Promise.resolve(null);
+                }
+                
                 if (this.initialized && this.connection && this.connection.state === $.signalR.connectionState.connected) {
                     console.log('SignalR already connected');
                     return Promise.resolve(this.connection);

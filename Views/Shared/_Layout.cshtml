@@ -10,12 +10,6 @@
     <link href="~/Content/_layout.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/popper")
-    <!-- SignalR scripts loaded separately to ensure proper order -->
-    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
-    <script src="~/signalr/hubs"></script>
-    <script src="~/Scripts/signalr-manager.js"></script>
     <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
     @RenderSection("styles", required: false)
 </head>
@@ -411,16 +405,26 @@
             <div class="loader"></div>
         </div>
         @RenderBody()
-        @RenderSection("scripts", required: false)
     </div>
 
     <!-- Global Toast Container (stacked) -->
     <div id="globalToastContainer" class="fixed top-5 right-5 z-50 space-y-3 pointer-events-none"></div>
 
-</body>
+    <!-- jQuery and dependencies -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/popper")
+    
+    <!-- Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+    <!-- SignalR -->
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/signalr-manager.js"></script>
 
-</html>
-<script>
+    @RenderSection("scripts", required: false)
+
+    <script>
 $(document).ready(function () {
     console.log('Layout JavaScript starting');
 
@@ -555,6 +559,7 @@ $(document).ready(function () {
             if (message.includes('anket')) url = '@Url.Action("Index", "Survey")';
             else if (message.includes('görev')) url = '@Url.Action("UserTasks", "Task")';
             else if (message.includes('dilek')) url = '@Url.Action("Bildirimlerim", "DilekOneri")';
+            else if (message.includes('toplantı') || message.includes('davet')) url = '@Url.Action("Index", "MeetingRoom")';
             $.post('@Url.Action("MarkAsRead", "Notification")', { id: id }).done(function (d) { if (d && d.success) window.location.href = url; });
         }.bind(this));
     });
@@ -625,3 +630,6 @@ $(document).ready(function () {
 <button id="openSidebar" class="sidebar-open-btn" type="button" aria-label="Menüyü Aç">
     <i class='bx bx-menu'></i>
 </button>
+
+</body>
+</html>

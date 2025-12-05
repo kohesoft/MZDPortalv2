@@ -11,6 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toplantı Salonu Rezervasyon Sistemi</title>
     <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -44,6 +46,46 @@
             color: #4f46e5;
             border-bottom: 2px solid #4f46e5;
         }
+
+        /* Select2 Customization */
+        .select2-container--default .select2-selection--multiple {
+            border-color: #d1d5db !important;
+            border-radius: 0.375rem !important;
+            padding: 0.25rem !important;
+            min-height: 42px !important;
+        }
+
+        .select2-container--default.select2-container--focus .select2-selection--multiple {
+            border-color: #6366f1 !important;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2) !important;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #4f46e5 !important;
+            border-color: #4338ca !important;
+            color: white !important;
+            border-radius: 0.25rem !important;
+            padding: 0.25rem 0.5rem !important;
+            margin-top: 0.25rem !important;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            color: white !important;
+            margin-right: 0.25rem !important;
+        }
+
+            .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+                color: #fecaca !important;
+            }
+
+        .select2-dropdown {
+            border-color: #d1d5db !important;
+            border-radius: 0.375rem !important;
+        }
+
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: #4f46e5 !important;
+        }
     </style>
 </head>
 <body>
@@ -54,6 +96,7 @@
             <div class="container mx-auto px-4 py-3 flex justify-between items-center">
                 <h1 class="text-xl md:text-2xl font-bold">Toplantı Salonu Rezervasyon</h1>
                 <div class="flex space-x-2">
+                    <a href="@Url.Action("MyMeetings", "MeetingRoom")" class="px-3 py-1 bg-indigo-700 hover:bg-indigo-800 rounded-md text-sm transition">Benim Toplantılarım</a>
                     <button id="historyBtn" class="px-3 py-1 bg-indigo-700 hover:bg-indigo-800 rounded-md text-sm transition">Geçmiş</button>
                     @if (isAdmin)
                     {
@@ -131,7 +174,15 @@
                             </div>
 
                             <div class="mb-6">
-                                <h3 class="font-medium text-gray-800 mb-3">Tarih Seçin</h3>
+                                <div class="flex justify-between items-center mb-3">
+                                    <button id="prevMonthBtn" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md transition">
+                                        ◀ Önceki Ay
+                                    </button>
+                                    <h3 id="currentMonthYear" class="font-medium text-gray-800"></h3>
+                                    <button id="nextMonthBtn" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md transition">
+                                        Sonraki Ay ▶
+                                    </button>
+                                </div>
                                 <div id="calendar" class="grid grid-cols-7 gap-1 text-center">
                                     <div class="text-sm font-medium text-gray-500 py-1">Pzt</div>
                                     <div class="text-sm font-medium text-gray-500 py-1">Sal</div>
@@ -183,8 +234,12 @@
                                         <textarea id="meetingDesc" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
                                     </div>
                                     <div>
-                                        <label for="attendees" class="block text-sm font-medium text-gray-700 mb-1">Katılımcılar (virgülle ayırın)</label>
-                                        <input type="text" id="attendees" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                        <label for="attendees" class="block text-sm font-medium text-gray-700 mb-1">
+                                            Katılımcılar
+                                            <span class="text-xs text-gray-500 ml-1">(Aramaya başlayın)</span>
+                                        </label>
+                                        <select id="attendees" class="w-full" multiple="multiple"></select>
+                                        <p class="text-xs text-gray-500 mt-1">Kullanıcı ara ve seç. Birden fazla katılımcı ekleyebilirsiniz.</p>
                                     </div>
                                     <div class="flex justify-end">
                                         <button id="confirmBtn" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">Rezervasyon Talebi Oluştur</button>
@@ -260,6 +315,8 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Salon</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Başlık</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durum</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">İşlem</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Detaylar</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200" id="historyTableBody">
@@ -292,7 +349,7 @@
 
         <!-- Rezervasyon Detay Modal -->
         <div id="reservationDetailModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-            <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full">
+            <div class="bg-white rounded-lg shadow-xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-lg font-medium text-gray-900">Rezervasyon Detayları</h3>
                     <button id="closeDetailBtn" class="text-gray-500 hover:text-gray-700">
@@ -312,21 +369,90 @@
         </div>
     </div>
 
+@section scripts {
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         // Değişkenler
         let isAdmin = @(MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom", "Manage") ? "true" : "false") === "true";
         var isDayViewRole = @(MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Operational.MeetingRoom.Manage", "Operational.MeetingRoom.View") ? "true" : "false");
 
-console.log("isAdmin:", isAdmin);
-console.log("isDayViewRole:", isDayViewRole);
-      let selectedRoom = null;
+        console.log("isAdmin:", isAdmin);
+        console.log("isDayViewRole:", isDayViewRole);
+
+        let selectedRoom = null;
         let selectedDate = null;
         let selectedTime = null;
         let selectedStartTime = null;
         let selectedEndTime = null;
         let selectedReservationId = null;
         let reservations = [];
+        let allUsers = []; // Tüm kullanıcılar
+
+        var currentUser = {
+            id: '@User.Identity.GetUserId()',
+            name: '@User.Identity.Name'
+        };
+
+        // Kullanıcıları yükle
+        function loadUsers() {
+            fetch('/MeetingRoom/GetActiveUsers')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Kullanıcı yükleme hatası:', data.error);
+                        return;
+                    }
+                    allUsers = data;
+                    initializeAttendeeSelect();
+                })
+                .catch(err => {
+                    console.error('Kullanıcı yükleme hatası:', err);
+                });
+        }
+
+        // Select2 initialize et
+        function initializeAttendeeSelect() {
+            if (typeof $.fn.select2 === 'undefined') {
+                console.error('Select2 kütüphanesi yüklenmemiş!');
+                setTimeout(initializeAttendeeSelect, 100); // Tekrar dene
+                return;
+            }
+            $('#attendees').select2({
+                data: allUsers.map(u => ({
+                    id: u.id,
+                    text: u.name + (u.department ? ` (${u.department})` : ''),
+                    username: u.username,
+                    email: u.email,
+                    department: u.department,
+                    position: u.position
+                })),
+                placeholder: 'Katılımcı seçin veya ara...',
+                allowClear: true,
+                width: '100%',
+                templateResult: formatUserOption,
+                templateSelection: formatUserSelection
+            });
+        }
+
+        // Select2 option formatı
+        function formatUserOption(user) {
+            if (!user.id) return user.text;
+            
+            var $user = $(
+                '<div class="flex items-center py-1">' +
+                    '<div class="flex-1">' +
+                        '<div class="font-medium text-sm">' + user.text + '</div>' +
+                        (user.position ? '<div class="text-xs text-gray-500">' + user.position + '</div>' : '') +
+                    '</div>' +
+                '</div>'
+            );
+            return $user;
+        }
+
+        // Select2 seçili eleman formatı
+        function formatUserSelection(user) {
+            return user.text;
+        }
 
         var currentUser = {
             id: '@User.Identity.GetUserId()',
@@ -375,6 +501,13 @@ console.log("isDayViewRole:", isDayViewRole);
         const approveBtn = document.getElementById('approveBtn');
         const rejectBtn = document.getElementById('rejectBtn');
         const closeDetailBtn = document.getElementById('closeDetailBtn');
+        const prevMonthBtn = document.getElementById('prevMonthBtn');
+        const nextMonthBtn = document.getElementById('nextMonthBtn');
+        const currentMonthYearEl = document.getElementById('currentMonthYear');
+
+        // Takvim için ay ve yıl değişkenleri
+        let currentCalendarMonth = new Date().getMonth();
+        let currentCalendarYear = new Date().getFullYear();
 
         document.getElementById('startTime').addEventListener('change', function () {
             selectedStartTime = this.value;
@@ -387,9 +520,15 @@ console.log("isDayViewRole:", isDayViewRole);
 
         // Takvim oluştur
         function generateCalendar() {
+            const monthNames = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 
+                               'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+            
+            currentMonthYearEl.textContent = `${monthNames[currentCalendarMonth]} ${currentCalendarYear}`;
+            
+            const daysInMonth = new Date(currentCalendarYear, currentCalendarMonth + 1, 0).getDate();
+            const firstDay = new Date(currentCalendarYear, currentCalendarMonth, 1).getDay();
             const today = new Date();
-            const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-            const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+            
             while (calendarEl.children.length > 7) {
                 calendarEl.removeChild(calendarEl.lastChild);
             }
@@ -399,14 +538,18 @@ console.log("isDayViewRole:", isDayViewRole);
                 calendarEl.appendChild(emptyDay);
             }
             for (let day = 1; day <= daysInMonth; day++) {
-                const date = new Date(today.getFullYear(), today.getMonth(), day);
+                const date = new Date(currentCalendarYear, currentCalendarMonth, day);
                 const dayEl = document.createElement('div');
                 dayEl.className = 'calendar-day h-10 w-10 mx-auto flex items-center justify-center rounded-full cursor-pointer';
-                if (date < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
+                
+                // Geçmiş tarihleri devre dışı bırak
+                const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                if (date < todayStart) {
                     dayEl.className += ' bg-gray-200 text-gray-400 cursor-not-allowed';
                 }
+                
                 dayEl.textContent = day;
-                dayEl.dataset.date = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                dayEl.dataset.date = `${currentCalendarYear}-${(currentCalendarMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
                 dayEl.addEventListener('click', function () {
                     console.log("Takvim günü tıklandı. isDayViewRole:", isDayViewRole, "Seçilen gün:", this.dataset.date);
                     if (!this.classList.contains('bg-gray-200')) {
@@ -437,6 +580,26 @@ console.log("isDayViewRole:", isDayViewRole);
             }
             colorCalendarDays();
         }
+
+        // Önceki ay butonuna event listener
+        prevMonthBtn.addEventListener('click', function() {
+            currentCalendarMonth--;
+            if (currentCalendarMonth < 0) {
+                currentCalendarMonth = 11;
+                currentCalendarYear--;
+            }
+            generateCalendar();
+        });
+
+        // Sonraki ay butonuna event listener
+        nextMonthBtn.addEventListener('click', function() {
+            currentCalendarMonth++;
+            if (currentCalendarMonth > 11) {
+                currentCalendarMonth = 0;
+                currentCalendarYear++;
+            }
+            generateCalendar();
+        });
 
         // Rezervasyon durumuna göre rozet döndüren yardımcı fonksiyon
         function getStatusBadge(status) {
@@ -568,7 +731,11 @@ console.log("isDayViewRole:", isDayViewRole);
         confirmBtn.addEventListener('click', function () {
             const title = document.getElementById('meetingTitle').value;
             const desc = document.getElementById('meetingDesc').value;
-            const attendees = document.getElementById('attendees').value;
+            
+            // Select2'den seçili kullanıcıları al
+            const selectedAttendees = $('#attendees').select2('data');
+            const attendeeNames = selectedAttendees.map(u => u.text).join(', ');
+            const attendeeIds = selectedAttendees.map(u => u.id).join(',');
 
             // Saat kontrolü
             if (!selectedStartTime || !selectedEndTime) {
@@ -584,6 +751,7 @@ console.log("isDayViewRole:", isDayViewRole);
                 alert('Lütfen toplantı başlığı girin.');
                 return;
             }
+
             const params = new URLSearchParams({
                 userId: currentUser.id,
                 userName: currentUser.name,
@@ -593,7 +761,8 @@ console.log("isDayViewRole:", isDayViewRole);
                 endTime: selectedEndTime,
                 title: title,
                 description: desc,
-                attendees: attendees,
+                attendees: attendeeNames, // İsimler (backward compatibility)
+                attendeeIds: attendeeIds, // ID'ler (yeni sistem)
                 __RequestVerificationToken: getToken()
             });
 
@@ -638,7 +807,7 @@ console.log("isDayViewRole:", isDayViewRole);
             document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
             document.getElementById('meetingTitle').value = '';
             document.getElementById('meetingDesc').value = '';
-            document.getElementById('attendees').value = '';
+            $('#attendees').val(null).trigger('change'); // Select2 temizle
             document.getElementById('startTime').selectedIndex = 0;
             document.getElementById('endTime').selectedIndex = 0;
             timeSelectionEl.classList.add('hidden');
@@ -745,6 +914,37 @@ console.log("isDayViewRole:", isDayViewRole);
                 `;
                 adminActionsEl.classList.add('hidden');
             }
+
+            // Katılımcı listesi oluştur
+            let attendeeListHtml = '';
+            if (reservation.attendeeList && reservation.attendeeList.length > 0) {
+                attendeeListHtml = `
+                    <div class="mt-3">
+                        <strong class="text-gray-700">Katılımcılar (${reservation.attendeeCount}):</strong>
+                        <div class="mt-2 space-y-2 max-h-40 overflow-y-auto">
+                            ${reservation.attendeeList.map(att => `
+                                <div class="flex items-center justify-between p-2 bg-gray-50 rounded border border-gray-200">
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm text-gray-900">${att.name}</div>
+                                        ${att.department ? `<div class="text-xs text-gray-500">${att.department}</div>` : ''}
+                                    </div>
+                                    ${att.responseDate ? `
+                                        <div class="text-xs text-gray-500">
+                                            ${att.hasAccepted ? '<span class="text-green-600">✓ Kabul</span>' : ''}
+                                            ${att.hasDeclined ? '<span class="text-red-600">✗ Red</span>' : ''}
+                                            ${!att.hasAccepted && !att.hasDeclined ? '<span class="text-yellow-600">⏳ Bekliyor</span>' : ''}
+                                        </div>
+                                    ` : '<span class="text-xs text-yellow-600">⏳ Bekliyor</span>'}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (reservation.attendees) {
+                // Eski sistem - sadece isimler varsa
+                attendeeListHtml = `<p class="text-gray-600"><strong>Katılımcılar:</strong> ${reservation.attendees}</p>`;
+            }
+
             modalReservationDetailsEl.innerHTML = `
                 <div class="flex justify-between">
                     <h4 class="font-medium">${reservation.title}</h4>
@@ -752,9 +952,10 @@ console.log("isDayViewRole:", isDayViewRole);
                 </div>
                 <p class="text-gray-600"><strong>Talep Eden:</strong> ${reservation.userName}</p>
                 <p class="text-gray-600"><strong>Salon:</strong> ${reservation.room}</p>
-<p class="text-gray-600"><strong>Tarih/Saat:</strong> ${reservation.date} ${reservation.startTime} - ${reservation.endTime}</p>                <p class="text-gray-600"><strong>Açıklama:</strong> ${reservation.description || 'Belirtilmedi'}</p>
-                <p class="text-gray-600"><strong>Katılımcılar:</strong> ${reservation.attendees || 'Belirtilmedi'}</p>
-                <p class="text-gray-600"><strong>Oluşturulma Tarihi:</strong> ${reservation.createdAt || ''}</p>
+                <p class="text-gray-600"><strong>Tarih/Saat:</strong> ${reservation.date} ${reservation.startTime} - ${reservation.endTime}</p>
+                <p class="text-gray-600"><strong>Açıklama:</strong> ${reservation.description || 'Belirtilmedi'}</p>
+                ${attendeeListHtml}
+                <p class="text-gray-600 mt-2"><strong>Oluşturulma Tarihi:</strong> ${reservation.createdAt || ''}</p>
             `;
             reservationDetailModal.classList.remove('hidden');
         }
@@ -787,7 +988,7 @@ console.log("isDayViewRole:", isDayViewRole);
                     const userId = currentUser.id;
                     const userReservations = reservations.filter(r => r.userId == userId);
                     historyTableBody.innerHTML = userReservations.length === 0
-                        ? '<tr><td colspan="5" class="text-center text-gray-500 py-4">Geçmiş rezervasyon bulunamadı.</td></tr>'
+                        ? '<tr><td colspan="7" class="text-center text-gray-500 py-4">Geçmiş rezervasyon bulunamadı.</td></tr>'
                         : userReservations.map(r => `
                     <tr>
                         <td class="px-6 py-2 whitespace-nowrap">${r.date}</td>
@@ -795,6 +996,16 @@ console.log("isDayViewRole:", isDayViewRole);
                         <td class="px-6 py-2 whitespace-nowrap">${r.room}</td>
                         <td class="px-6 py-2 whitespace-nowrap">${r.title}</td>
                         <td class="px-6 py-2 whitespace-nowrap">${getStatusBadge(r.status)}</td>
+                        <td class="px-6 py-2 whitespace-nowrap">
+                            ${r.status.toLowerCase() === 'pending' ? 
+                                `<button class="cancel-reservation px-2 py-1 bg-red-500 text-white text-xs rounded hover:bg-red-600" data-id="${r.id}">İptal</button>` : 
+                                ''}
+                        </td>
+                        <td class="px-6 py-2 whitespace-nowrap">
+                            <a href="/MeetingRoom/Details/${r.id}" class="px-2 py-1 bg-indigo-600 text-white text-xs rounded hover:bg-indigo-700">
+                                📋 Detaylar
+                            </a>
+                        </td>
                     </tr>
                 `).join('');
                     historyModal.classList.remove('hidden');
@@ -802,6 +1013,17 @@ console.log("isDayViewRole:", isDayViewRole);
                     setTimeout(function () {
                         historyModal.querySelector('.overflow-x-auto').scrollTop = 0;
                     }, 100);
+
+                    // İptal butonlarına event listener ekle
+                    document.querySelectorAll('.cancel-reservation').forEach(btn => {
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const resId = parseInt(this.dataset.id);
+                            if (confirm('Bu rezervasyonu iptal etmek istediğinizden emin misiniz?')) {
+                                cancelReservation(resId);
+                            }
+                        });
+                    });
                 });
             });
         }
@@ -836,6 +1058,30 @@ console.log("isDayViewRole:", isDayViewRole);
             }
         });
 
+        // Rezervasyon iptal (kullanıcı tarafından)
+        function cancelReservation(reservationId) {
+            const params = new URLSearchParams({
+                id: reservationId,
+                __RequestVerificationToken: getToken()
+            });
+            fetch('/MeetingRoom/CancelReservation', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.success) {
+                        alert(data.message);
+                        return;
+                    }
+                    alert('Rezervasyon başarıyla iptal edildi.');
+                    historyModal.classList.add('hidden');
+                    fetchReservations();
+                })
+                .catch(err => alert('Bir hata oluştu: ' + err.message));
+        }
+
         closeDetailBtn.addEventListener('click', function () {
             reservationDetailModal.classList.add('hidden');
         });
@@ -857,12 +1103,26 @@ console.log("isDayViewRole:", isDayViewRole);
             });
         }
 
-        // Sayfa ilk açıldığında rezervasyonları çek
+        // SignalR bildirimleri dinle
+        function setupSignalRNotifications() {
+            if (typeof $ !== 'undefined' && $.connection && $.connection.notificationHub) {
+                $.connection.notificationHub.client.refreshMeetings = function() {
+                    console.log('[Index] SignalR: Toplantılar güncelleniyor...');
+                    fetchReservations();
+                    updatePendingCount();
+                };
+                console.log('[Index] SignalR bildirim dinleyicisi kuruldu');
+            }
+        }
+
+        // SignalR'ı başlat
+        setupSignalRNotifications();
+
+        // Sayfa ilk açıldığında rezervasyonları ve kullanıcıları çek
         generateCalendar();
         fetchReservations();
         updatePendingCount();
+        loadUsers(); // Kullanıcıları yükle
     });
     </script>
-
-</body>
-</html>
+}

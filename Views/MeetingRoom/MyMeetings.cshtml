@@ -1,0 +1,382 @@
+@{
+    ViewBag.Title = "Benim Toplantılarım";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benim Toplantılarım</title>
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    @Html.AntiForgeryToken()
+    
+    <div class="min-h-screen">
+        <!-- Üst Menü -->
+        <nav class="bg-indigo-600 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <h1 class="text-xl md:text-2xl font-bold">Benim Toplantılarım</h1>
+                <a href="@Url.Action("Index", "MeetingRoom")" class="px-3 py-1 bg-indigo-700 hover:bg-indigo-800 rounded-md text-sm transition">
+                    Geri Dön
+                </a>
+            </div>
+        </nav>
+
+        <!-- Ana İçerik -->
+        <div class="container mx-auto px-4 py-8">
+            
+            <!-- Arama ve Filtreleme -->
+            <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                <!-- Arama Kutusu -->
+                <div class="mb-4">
+                    <input type="text" id="searchInput" placeholder="Toplantı ara... (başlık, organizatör, salon)" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                
+                <!-- Filtreleme Tabs -->
+                <div class="flex border-b">
+                    <button id="allMeetingsTab" class="tab-active px-4 py-2 font-medium border-b-2 border-indigo-600 text-indigo-600">
+                        Tümü
+                    </button>
+                    <button id="pendingResponseTab" class="px-4 py-2 font-medium text-gray-600 hover:text-indigo-600">
+                        Cevap Bekleyen
+                    </button>
+                    <button id="acceptedTab" class="px-4 py-2 font-medium text-gray-600 hover:text-indigo-600">
+                        Kabul Ettiklerim
+                    </button>
+                    <button id="declinedTab" class="px-4 py-2 font-medium text-gray-600 hover:text-indigo-600">
+                        Reddettiğim
+                    </button>
+                </div>
+            </div>
+
+            <!-- Toplantı Listesi -->
+            <div id="meetingsList" class="space-y-4">
+                <!-- JavaScript ile doldurulacak -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    
+    <!-- SignalR -->
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    
+    <script>
+    $(document).ready(function() {
+        let allMeetings = [];
+        let currentFilter = 'all';
+        
+        // Anti-forgery token
+        function getToken() {
+            return $('input[name="__RequestVerificationToken"]').val();
+        }
+
+        // SignalR bildirimleri dinle
+        function setupSignalRNotifications() {
+            console.log('[MyMeetings] SignalR kurulumu başlatılıyor...');
+            
+            // SignalR bağlantısını başlat
+            if (typeof $ !== 'undefined' && $.connection && $.connection.notificationHub) {
+                $.connection.notificationHub.client.refreshMeetings = function() {
+                    console.log('[MyMeetings] SignalR: Toplantılar güncelleniyor...');
+                    loadMyMeetings();
+                };
+                
+                // SignalR bağlantısını başlat
+                if ($.connection.hub.state === $.signalR.connectionState.disconnected) {
+                    $.connection.hub.start()
+                        .done(function() {
+                            console.log('[MyMeetings] SignalR bağlantısı kuruldu');
+                        })
+                        .fail(function(err) {
+                            console.error('[MyMeetings] SignalR bağlantı hatası:', err);
+                        });
+                } else {
+                    console.log('[MyMeetings] SignalR zaten bağlı');
+                }
+            } else {
+                console.warn('[MyMeetings] SignalR mevcut değil');
+            }
+        }
+
+        // Arama fonksiyonu
+        $('#searchInput').on('keyup', function() {
+            applyFilters();
+        });
+
+        // Toplantıları yükle
+        function loadMyMeetings() {
+            $.get('/MeetingRoom/GetMyMeetings', function(data) {
+                console.log('GetMyMeetings response:', data);
+                
+                // Hata kontrolü
+                if (data && data.error) {
+                    console.error('API Error:', data.error);
+                    $('#meetingsList').html('<div class="text-center text-red-500 py-8">Hata: ' + data.error + '</div>');
+                    return;
+                }
+                
+                // Data bir array olmalı
+                if (!Array.isArray(data)) {
+                    console.error('Data is not an array:', data);
+                    allMeetings = [];
+                } else {
+                    allMeetings = data;
+                }
+                
+                filterMeetings('all');
+            }).fail(function(err) {
+                console.error('Toplantılar yüklenemedi:', err);
+                $('#meetingsList').html('<div class="text-center text-red-500 py-8">Toplantılar yüklenirken hata oluştu</div>');
+            });
+        }
+
+        // Toplantıları filtrele ve ara
+        function applyFilters() {
+            let searchTerm = $('#searchInput').val().toLowerCase();
+            let filtered = allMeetings;
+            
+            // Durum filtreleme
+            if (currentFilter === 'pending') {
+                filtered = filtered.filter(m => !m.hasAccepted && !m.hasDeclined);
+            } else if (currentFilter === 'accepted') {
+                filtered = filtered.filter(m => m.hasAccepted);
+            } else if (currentFilter === 'declined') {
+                filtered = filtered.filter(m => m.hasDeclined);
+            }
+            
+            // Arama filtresi
+            if (searchTerm) {
+                filtered = filtered.filter(m => {
+                    return (m.title && m.title.toLowerCase().includes(searchTerm)) ||
+                           (m.organizer && m.organizer.toLowerCase().includes(searchTerm)) ||
+                           (m.room && m.room.toLowerCase().includes(searchTerm));
+                });
+            }
+            
+            displayMeetings(filtered);
+        }
+        
+        function filterMeetings(filter) {
+            currentFilter = filter;
+            applyFilters();
+        }
+
+        // Toplantıları görüntüle
+        function displayMeetings(meetings) {
+            if (meetings.length === 0) {
+                $('#meetingsList').html('<div class="text-center text-gray-500 py-8">Toplantı bulunamadı</div>');
+                return;
+            }
+
+            let html = '';
+            meetings.forEach(function(meeting) {
+                let statusBadge = getStatusBadge(meeting.status);
+                let responseBadge = getResponseBadge(meeting);
+                let actionButtons = getActionButtons(meeting);
+                
+                html += `
+                    <div class="bg-white rounded-lg shadow-md p-6 border-l-4 ${getBorderColor(meeting)}">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-gray-900">${meeting.title}</h3>
+                                <p class="text-sm text-gray-600 mt-1">
+                                    <span class="font-medium">Organizatör:</span> ${meeting.organizer}
+                                </p>
+                                <div class="mt-3 space-y-2">
+                                    <p class="text-sm text-gray-700">
+                                        📅 <strong>Tarih:</strong> ${formatDate(meeting.date)}
+                                    </p>
+                                    <p class="text-sm text-gray-700">
+                                        🕐 <strong>Saat:</strong> ${meeting.startTime} - ${meeting.endTime}
+                                    </p>
+                                    <p class="text-sm text-gray-700">
+                                        🏢 <strong>Salon:</strong> ${meeting.room}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end space-y-2">
+                                ${statusBadge}
+                                ${responseBadge}
+                            </div>
+                        </div>
+                        ${actionButtons}
+                    </div>
+                `;
+            });
+            
+            $('#meetingsList').html(html);
+            
+            // Event listeners ekle
+            $('.accept-meeting').click(function() {
+                acceptMeeting($(this).data('id'));
+            });
+            
+            $('.decline-meeting').click(function() {
+                declineMeeting($(this).data('id'));
+            });
+        }
+
+        // Durum badge'i
+        function getStatusBadge(status) {
+            let badges = {
+                'pending': '<span class="px-3 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">Onay Bekliyor</span>',
+                'approved': '<span class="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">Onaylandı</span>',
+                'rejected': '<span class="px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800">Reddedildi</span>',
+                'cancelled': '<span class="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800">İptal Edildi</span>'
+            };
+            return badges[status.toLowerCase()] || '';
+        }
+
+        // Yanıt badge'i
+        function getResponseBadge(meeting) {
+            if (meeting.hasAccepted) {
+                return '<span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">✓ Katılacağım</span>';
+            } else if (meeting.hasDeclined) {
+                return '<span class="px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800">✗ Katılmayacağım</span>';
+            } else {
+                return '<span class="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800">⏳ Cevap Bekleniyor</span>';
+            }
+        }
+
+        // Border rengi
+        function getBorderColor(meeting) {
+            if (meeting.hasAccepted) return 'border-blue-500';
+            if (meeting.hasDeclined) return 'border-red-500';
+            return 'border-yellow-500';
+        }
+
+        // Aksiyon butonları
+        function getActionButtons(meeting) {
+            let buttons = '';
+            
+            // Detaylar butonu (her zaman göster)
+            buttons += `
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <a href="/MeetingRoom/Details/${meeting.reservationId}" class="block w-full px-4 py-2 bg-indigo-600 text-white text-center rounded-md hover:bg-indigo-700 transition">
+                        📋 Toplantı Detayları (Notlar, Kararlar, Aksiyonlar)
+                    </a>
+                </div>
+            `;
+            
+            // Sadece onaylanmış ve cevap verilmemiş toplantılar için kabul/red butonları göster
+            if (meeting.status.toLowerCase() === 'approved' && !meeting.hasAccepted && !meeting.hasDeclined) {
+                buttons += `
+                    <div class="mt-3 flex space-x-3">
+                        <button class="accept-meeting flex-1 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition" data-id="${meeting.reservationId}">
+                            ✓ Katılacağım
+                        </button>
+                        <button class="decline-meeting flex-1 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition" data-id="${meeting.reservationId}">
+                            ✗ Katılmayacağım
+                        </button>
+                    </div>
+                `;
+            }
+            
+            if (meeting.responseDate) {
+                buttons += `
+                    <div class="mt-3">
+                        <p class="text-xs text-gray-500">Yanıt tarihi: ${formatDateTime(meeting.responseDate)}</p>
+                    </div>
+                `;
+            }
+            
+            return buttons;
+        }
+
+        // Tarih formatla
+        function formatDate(dateStr) {
+            let date = new Date(dateStr);
+            return date.toLocaleDateString('tr-TR', { day: '2-digit', month: 'long', year: 'numeric' });
+        }
+
+        // Tarih-saat formatla
+        function formatDateTime(dateStr) {
+            if (!dateStr) return '';
+            let date = new Date(dateStr);
+            return date.toLocaleString('tr-TR');
+        }
+
+        // Toplantıyı kabul et
+        function acceptMeeting(reservationId) {
+            if (!confirm('Bu toplantıya katılacağınızı onaylıyor musunuz?')) return;
+            
+            $.ajax({
+                url: '/MeetingRoom/AcceptMeeting',
+                type: 'POST',
+                data: {
+                    reservationId: reservationId,
+                    __RequestVerificationToken: getToken()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Toplantı katılımınız kaydedildi!');
+                        loadMyMeetings();
+                    } else {
+                        alert('Hata: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('İşlem sırasında bir hata oluştu');
+                }
+            });
+        }
+
+        // Toplantıyı reddet
+        function declineMeeting(reservationId) {
+            if (!confirm('Bu toplantıya katılmayacağınızı onaylıyor musunuz?')) return;
+            
+            $.ajax({
+                url: '/MeetingRoom/DeclineMeeting',
+                type: 'POST',
+                data: {
+                    reservationId: reservationId,
+                    __RequestVerificationToken: getToken()
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Toplantı reddiniz kaydedildi');
+                        loadMyMeetings();
+                    } else {
+                        alert('Hata: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('İşlem sırasında bir hata oluştu');
+                }
+            });
+        }
+
+        // Tab switching
+        $('.flex button').click(function() {
+            $('.flex button').removeClass('tab-active border-b-2 border-indigo-600 text-indigo-600').addClass('text-gray-600');
+            $(this).addClass('tab-active border-b-2 border-indigo-600 text-indigo-600').removeClass('text-gray-600');
+            
+            let filter = 'all';
+            if ($(this).attr('id') === 'pendingResponseTab') filter = 'pending';
+            else if ($(this).attr('id') === 'acceptedTab') filter = 'accepted';
+            else if ($(this).attr('id') === 'declinedTab') filter = 'declined';
+            
+            filterMeetings(filter);
+        });
+
+        // SignalR bildirimlerini başlat
+        setupSignalRNotifications();
+
+        // Sayfa yüklendiğinde toplantıları getir
+        loadMyMeetings();
+    });
+    </script>
+</body>
+</html>

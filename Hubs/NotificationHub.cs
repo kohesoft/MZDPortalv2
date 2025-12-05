@@ -15,5 +15,13 @@ namespace MZDNETWORK.Hubs
             var sanitizedMessage = sanitizer.Sanitize(message);
             Clients.All.showNotification(sanitizedMessage, duration, color, playSound, sound);
         }
+
+        /// <summary>
+        /// Tüm istemcilere toplantı listesini yenilemeleri için sinyal gönderir
+        /// </summary>
+        public void NotifyMeetingUpdate()
+        {
+            Clients.All.refreshMeetings();
+        }
     }
 }

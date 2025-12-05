@@ -1,0 +1,239 @@
+@model MZDNETWORK.Models.Reservation
+@{
+    ViewBag.Title = "Rezervasyon D�zenle";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+    <link href='~/Content/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #f3f4f6; }
+        .edit-container { max-width: 900px; margin: 2rem auto; padding: 2rem; }
+        .edit-card { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 2rem; }
+        .edit-header { border-bottom: 2px solid #4f46e5; padding-bottom: 1rem; margin-bottom: 2rem; }
+        .edit-title { font-size: 1.8rem; font-weight: 700; color: #1f2937; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1f2937; font-size: 0.95rem; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 0.75rem; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 1rem;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .room-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .room-option { padding: 1rem; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s; text-align: center; }
+        .room-option:hover { border-color: #4f46e5; background: #f0f0ff; }
+        .room-option.selected { border-color: #4f46e5; background: #e0e7ff; }
+        .btn-primary { background: #4f46e5; color: white; padding: 0.75rem 2rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .btn-primary:hover { background: #4338ca; }
+        .btn-secondary { background: #6b7280; color: white; padding: 0.75rem 2rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .btn-secondary:hover { background: #4b5563; }
+        .action-buttons { display: flex; gap: 1rem; margin-top: 2rem; }
+        .select2-container--default .select2-selection--multiple { border-color: #e5e7eb !important; border-radius: 8px !important; padding: 0.5rem !important; min-height: 50px !important; }
+        .select2-container--default.select2-container--focus .select2-selection--multiple { border-color: #4f46e5 !important; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important; }
+    </style>
+</head>
+<body>
+    @Html.AntiForgeryToken()
+    
+    <div class="edit-container">
+        <div class="edit-card">
+            <div class="edit-header">
+                <h1 class="edit-title">
+                    <i class='bx bx-edit'></i> Rezervasyon D�zenle
+                </h1>
+                <p style="color: #6b7280; margin-top: 0.5rem;">Toplant� bilgilerini g�ncelleyin</p>
+            </div>
+
+            <form id="editForm">
+                <!-- Salon Se�imi -->
+                <div class="form-group">
+                    <label>Toplant� Salonu *</label>
+                    <div class="room-selector">
+                        <div class="room-option @(Model.Room == "B�y�k Toplant� Salonu" ? "selected" : "")" data-room="B�y�k Toplant� Salonu">
+                            <i class='bx bx-door-open' style="font-size: 2rem; color: #7c3aed;"></i>
+                            <p style="margin-top: 0.5rem; font-weight: 600;">B�y�k Salon</p>
+                            <p style="font-size: 0.85rem; color: #6b7280;">15 ki�i</p>
+                        </div>
+                        <div class="room-option @(Model.Room == "K���k Toplant� Salonu" ? "selected" : "")" data-room="K���k Toplant� Salonu">
+                            <i class='bx bx-door-open' style="font-size: 2rem; color: #3b82f6;"></i>
+                            <p style="margin-top: 0.5rem; font-weight: 600;">K���k Salon</p>
+                            <p style="font-size: 0.85rem; color: #6b7280;">6 ki�i</p>
+                        </div>
+                        <div class="room-option @(Model.Room == "Orta Toplant� Salonu" ? "selected" : "")" data-room="Orta Toplant� Salonu">
+                            <i class='bx bx-door-open' style="font-size: 2rem; color: #10b981;"></i>
+                            <p style="margin-top: 0.5rem; font-weight: 600;">Orta Salon</p>
+                            <p style="font-size: 0.85rem; color: #6b7280;">10 ki�i</p>
+                        </div>
+                    </div>
+                    <input type="hidden" id="selectedRoom" value="@Model.Room" />
+                </div>
+
+                <!-- Tarih -->
+                <div class="form-group">
+                    <label>Tarih *</label>
+                    <input type="date" id="reservationDate" value="@Model.Date.ToString("yyyy-MM-dd")" required />
+                </div>
+
+                <!-- Saat -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Ba�lang�� Saati *</label>
+                        <input type="time" id="startTime" value="@Model.StartTime.ToString(@"hh\:mm")" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Biti� Saati *</label>
+                        <input type="time" id="endTime" value="@Model.EndTime.ToString(@"hh\:mm")" required />
+                    </div>
+                </div>
+
+                <!-- Ba�l�k -->
+                <div class="form-group">
+                    <label>Toplant� Ba�l��� *</label>
+                    <input type="text" id="meetingTitle" value="@Model.Title" placeholder="�rn: Proje Planlama Toplant�s�" required />
+                </div>
+
+                <!-- A��klama -->
+                <div class="form-group">
+                    <label>A��klama</label>
+                    <textarea id="meetingDescription" placeholder="Toplant� hakk�nda detayl� bilgi...">@Model.Description</textarea>
+                </div>
+
+                <!-- Kat�l�mc�lar -->
+                <div class="form-group">
+                    <label>
+                        Kat�l�mc�lar
+                        <span style="font-weight: normal; font-size: 0.85rem; color: #6b7280;">(Aramaya ba�lay�n)</span>
+                    </label>
+                    <select id="attendees" class="w-full" multiple="multiple"></select>
+                    <p style="font-size: 0.85rem; color: #6b7280; margin-top: 0.5rem;">
+                        Birden fazla kat�l�mc� se�ebilirsiniz
+                    </p>
+                </div>
+
+                <!-- Butonlar -->
+                <div class="action-buttons">
+                    <button type="button" class="btn-primary" onclick="updateReservation()">
+                        <i class='bx bx-save'></i> Kaydet
+                    </button>
+                    <a href="@Url.Action("Details", "MeetingRoom", new { id = Model.Id })" class="btn-secondary">
+                        <i class='bx bx-x'></i> �ptal
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        let allUsers = [];
+        const reservationId = @Model.Id;
+
+        $(document).ready(function () {
+            loadUsers();
+            initRoomSelector();
+        });
+
+        // Kullan�c�lar� y�kle
+        function loadUsers() {
+            $.get('/MeetingRoom/GetActiveUsers')
+                .done(function (data) {
+                    if (data.error) {
+                        console.error('Kullan�c� y�kleme hatas�:', data.error);
+                        return;
+                    }
+                    allUsers = data;
+                    initializeAttendeeSelect();
+                })
+                .fail(function () {
+                    console.error('Kullan�c� y�kleme hatas�');
+                });
+        }
+
+        // Select2 ba�lat ve mevcut kat�l�mc�lar� se�
+        function initializeAttendeeSelect() {
+            const currentAttendees = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ReservationAttendees.Select(a => a.UserId)));
+            
+            $('#attendees').select2({
+                data: allUsers.map(u => ({
+                    id: u.id,
+                    text: u.name + (u.department ? ` (${u.department})` : '')
+                })),
+                placeholder: 'Kat�l�mc� se�in veya ara...',
+                allowClear: true,
+                width: '100%'
+            });
+
+            // Mevcut kat�l�mc�lar� se�
+            $('#attendees').val(currentAttendees).trigger('change');
+        }
+
+        // Salon se�ici
+        function initRoomSelector() {
+            $('.room-option').click(function () {
+                $('.room-option').removeClass('selected');
+                $(this).addClass('selected');
+                $('#selectedRoom').val($(this).data('room'));
+            });
+        }
+
+        // Rezervasyon g�ncelle
+        function updateReservation() {
+            const room = $('#selectedRoom').val();
+            const date = $('#reservationDate').val();
+            const startTime = $('#startTime').val();
+            const endTime = $('#endTime').val();
+            const title = $('#meetingTitle').val();
+            const description = $('#meetingDescription').val();
+            const attendeeIds = $('#attendees').val() ? $('#attendees').val().join(',') : '';
+
+            // Validasyon
+            if (!room) {
+                alert('L�tfen bir salon se�in');
+                return;
+            }
+            if (!date || !startTime || !endTime) {
+                alert('L�tfen tarih ve saat bilgilerini girin');
+                return;
+            }
+            if (!title) {
+                alert('L�tfen toplant� ba�l��� girin');
+                return;
+            }
+
+            const data = {
+                id: reservationId,
+                room: room,
+                date: date,
+                startTime: startTime,
+                endTime: endTime,
+                title: title,
+                description: description,
+                attendeeIds: attendeeIds,
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            };
+
+            $.post('/MeetingRoom/UpdateReservation', data)
+                .done(function (result) {
+                    if (result.success) {
+                        alert('Rezervasyon ba�ar�yla g�ncellendi!');
+                        window.location.href = '/MeetingRoom/Details/' + reservationId;
+                    } else {
+                        alert(result.message || 'Bir hata olu�tu');
+                    }
+                })
+                .fail(function () {
+                    alert('G�ncelleme s�ras�nda hata olu�tu');
+                });
+        }
+    </script>
+</body>
+</html>
