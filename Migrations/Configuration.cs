@@ -17,8 +17,43 @@
         {
             //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
+            // Toplantı odaları seed data
+            context.MeetingRooms.AddOrUpdate(
+                r => r.Name,
+                new Models.MeetingRoom
+                {
+                    Name = "Yerleşke Büyük Toplantı Salonu",
+                    Location = "Yerleşke",
+                    Capacity = 15,
+                    Features = "Projeksiyon, Beyaz Tahta, Video Konferans",
+                    ColorCode = "purple",
+                    IsActive = true,
+                    OrderIndex = 1,
+                    CreatedAt = DateTime.Now
+                },
+                new Models.MeetingRoom
+                {
+                    Name = "Yerleşke Küçük Toplantı Salonu",
+                    Location = "Yerleşke",
+                    Capacity = 6,
+                    Features = "Projeksiyon",
+                    ColorCode = "blue",
+                    IsActive = true,
+                    OrderIndex = 2,
+                    CreatedAt = DateTime.Now
+                },
+                new Models.MeetingRoom
+                {
+                    Name = "Merkez Toplantı Salonu",
+                    Location = "Merkez",
+                    Capacity = 10,
+                    Features = "Projeksiyon, Beyaz Tahta",
+                    ColorCode = "green",
+                    IsActive = true,
+                    OrderIndex = 3,
+                    CreatedAt = DateTime.Now
+                }
+            );
         }
     }
 }

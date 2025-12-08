@@ -10,9 +10,6 @@
 <head>
     <link href="~/Content/boxicons.min.css" rel='stylesheet'>
     <link rel="stylesheet" href="~/Content/homeindex.css" />
-    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
-    <script src="~/signalr/hubs"></script>
-    <script src="~/Scripts/coursel.js"></script>
 </head>
 
 <body class="anasayfa-body">
@@ -142,6 +139,9 @@
     </div>
 </body>
 
+@section scripts {
+    <script src="~/Scripts/coursel.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Modal işlemleri
@@ -260,6 +260,7 @@
         // window.addEventListener('scroll', scrollHandler);
     });
 </script>
+}
 
 <style>
     /* Detail link styles */

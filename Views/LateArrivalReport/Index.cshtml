@@ -68,52 +68,59 @@
     </div>
 </section>
 
-<script>
-    $(document).ready(function(){
-        var table = $('#reportTable').DataTable({
-            dom: "<'flex justify-between items-center mb-4'lf>rt<'flex justify-between items-center mt-4'ip>",
-            lengthMenu: [[10,25,50,100,-1],[10,25,50,100,"Hepsi"]],
-            order:[[0,'desc']],
-            language: {
-                decimal: ",",
-                emptyTable: "Tabloda herhangi bir veri mevcut değil",
-                info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor",
-                infoEmpty: "Kayıt yok",
-                infoFiltered: "(_MAX_ kayıt içerisinden bulunan)",
-                thousands: ".",
-                lengthMenu: "Sayfada _MENU_ kayıt göster",
-                loadingRecords: "Yükleniyor...",
-                processing: "İşleniyor...",
-                search: "Ara:",
-                zeroRecords: "Eşleşen kayıt bulunamadı",
-                paginate: {
-                    first: "İlk",
-                    last: "Son",
-                    next: "Sonraki",
-                    previous: "Önceki"
-                },
-                aria: {
-                    sortAscending: ": artan sütun sıralamasını aktifleştir",
-                    sortDescending: ": azalan sütun sıralamasını aktifleştir"
+@section styles {
+    <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
+}
+
+@section scripts {
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var table = $('#reportTable').DataTable({
+                dom: "<'flex justify-between items-center mb-4'lf>rt<'flex justify-between items-center mt-4'ip>",
+                lengthMenu: [[10,25,50,100,-1],[10,25,50,100,"Hepsi"]],
+                order:[[0,'desc']],
+                language: {
+                    decimal: ",",
+                    emptyTable: "Tabloda herhangi bir veri mevcut değil",
+                    info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor",
+                    infoEmpty: "Kayıt yok",
+                    infoFiltered: "(_MAX_ kayıt içerisinden bulunan)",
+                    thousands: ".",
+                    lengthMenu: "Sayfada _MENU_ kayıt göster",
+                    loadingRecords: "Yükleniyor...",
+                    processing: "İşleniyor...",
+                    search: "Ara:",
+                    zeroRecords: "Eşleşen kayıt bulunamadı",
+                    paginate: {
+                        first: "İlk",
+                        last: "Son",
+                        next: "Sonraki",
+                        previous: "Önceki"
+                    },
+                    aria: {
+                        sortAscending: ": artan sütun sıralamasını aktifleştir",
+                        sortDescending: ": azalan sütun sıralamasını aktifleştir"
+                    }
                 }
-            }
-        });
+            });
 
-        $.fn.dataTable.ext.search.push(function(settings,data,dataIndex){
-            var yearVal = $('#yearFilter').val();
-            var monthVal = $('#monthFilter').val();
-            var dateStr = data[0]; // ilk sütun Tarih
-            if(!dateStr) return true;
-            var parts = dateStr.split('.');
-            if(parts.length!==3) return true;
-            var d = new Date(parts[2], parts[1]-1, parts[0]);
-            if(yearVal && d.getFullYear().toString()!==yearVal) return false;
-            if(monthVal && (d.getMonth()+1).toString()!==monthVal) return false;
-            return true;
-        });
+            $.fn.dataTable.ext.search.push(function(settings,data,dataIndex){
+                var yearVal = $('#yearFilter').val();
+                var monthVal = $('#monthFilter').val();
+                var dateStr = data[0]; // ilk sütun Tarih
+                if(!dateStr) return true;
+                var parts = dateStr.split('.');
+                if(parts.length!==3) return true;
+                var d = new Date(parts[2], parts[1]-1, parts[0]);
+                if(yearVal && d.getFullYear().toString()!==yearVal) return false;
+                if(monthVal && (d.getMonth()+1).toString()!==monthVal) return false;
+                return true;
+            });
 
-        $('#yearFilter, #monthFilter').on('change', function(){
-            table.draw();
+            $('#yearFilter, #monthFilter').on('change', function(){
+                table.draw();
+            });
         });
-    });
-</script> 
+    </script>
+}

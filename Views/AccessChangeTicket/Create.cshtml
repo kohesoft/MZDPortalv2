@@ -1,0 +1,259 @@
+@model MZDNETWORK.Models.AccessChangeTicketViewModel
+@using MZDNETWORK.Models
+@{
+    ViewBag.Title = "Erişim Talebi Oluştur";
+    var users = ViewBag.Users as IEnumerable<AccessChangeUserListItem> ?? new List<AccessChangeUserListItem>();
+    var roles = ViewBag.Roles as IEnumerable<Role> ?? new List<Role>();
+    var permissions = ViewBag.PermissionNodes as IEnumerable<PermissionNode> ?? new List<PermissionNode>();
+    var userInfoMapJson = ViewBag.UserInfoMap as string ?? "[]";
+}
+
+<div class="max-w-6xl mx-auto bg-white shadow-2xl rounded-2xl p-6 md:p-8 mt-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
+        <div>
+            <p class="text-sm text-gray-500">Erişim / rol / kullanıcı bilgisi değişiklik talebi</p>
+            <h2 class="text-2xl font-semibold text-gray-900">Talep Oluştur</h2>
+        </div>
+        <a href="@Url.Action("Index")" class="text-sm text-gray-500 hover:text-gray-700">Taleplerime dön</a>
+    </div>
+
+    @using (Html.BeginForm("Create", "AccessChangeTicket", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <div class="lg:col-span-2 bg-gray-50 border border-gray-100 rounded-xl p-4">
+                <h3 class="text-sm font-semibold text-gray-800 mb-3">Talep Tipi</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <label class="flex items-center space-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 cursor-pointer hover:border-indigo-200">
+                        <input type="radio" name="RequestType" value="PermissionChange" @(Model.RequestType == AccessChangeRequestType.PermissionChange ? "checked" : "") class="form-radio text-indigo-600" />
+                        <div>
+                            <div class="text-sm font-medium text-gray-800">Yetki Değişikliği</div>
+                            <div class="text-xs text-gray-500">Controller/aksiyon bazlı</div>
+                        </div>
+                    </label>
+                    <label class="flex items-center space-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 cursor-pointer hover:border-indigo-200">
+                        <input type="radio" name="RequestType" value="RoleChange" @(Model.RequestType == AccessChangeRequestType.RoleChange ? "checked" : "") class="form-radio text-indigo-600" />
+                        <div>
+                            <div class="text-sm font-medium text-gray-800">Rol Değişikliği</div>
+                            <div class="text-xs text-gray-500">Rol ekle/çıkar</div>
+                        </div>
+                    </label>
+                    <label class="flex items-center space-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 cursor-pointer hover:border-indigo-200">
+                        <input type="radio" name="RequestType" value="UserInfoChange" @(Model.RequestType == AccessChangeRequestType.UserInfoChange ? "checked" : "") class="form-radio text-indigo-600" />
+                        <div>
+                            <div class="text-sm font-medium text-gray-800">Kullanıcı Bilgisi</div>
+                            <div class="text-xs text-gray-500">Ad, mail, departman…</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                <label class="block text-sm font-semibold text-gray-800 mb-2">Hedef Kullanıcı</label>
+                <select name="TargetUserId" id="targetUser" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                    <option value="">Seçin</option>
+                    @foreach (var u in users)
+                    {
+                        <option value="@u.Id" @(Model.TargetUserId == u.Id ? "selected" : "")>@u.Username - @u.Name @u.Surname</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(m => m.TargetUserId, "", new { @class = "text-red-600 text-sm" })
+
+                <div id="currentInfo" class="bg-white border border-gray-200 rounded-lg p-3 mt-3 hidden">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-xs font-semibold text-gray-700">Mevcut Bilgiler</h4>
+                    </div>
+                    <div class="grid grid-cols-1 gap-1 text-xs text-gray-700" id="currentInfoGrid">
+                        <div><strong>Ad Soyad:</strong> <span id="ciName"></span></div>
+                        <div><strong>Kullanıcı Adı:</strong> <span id="ciUsername"></span></div>
+                        <div><strong>Departman:</strong> <span id="ciDepartment"></span></div>
+                        <div><strong>Ünvan:</strong> <span id="ciTitle"></span></div>
+                        <div><strong>İç E-posta:</strong> <span id="ciInternalEmail"></span></div>
+                        <div><strong>Dış E-posta:</strong> <span id="ciExternalEmail"></span></div>
+                        <div><strong>Telefon:</strong> <span id="ciPhone"></span></div>
+                        <div><strong>Dahili:</strong> <span id="ciIntercom"></span></div>
+                        <div class="flex items-center gap-2">
+                            <strong>Roller:</strong> <span id="ciRoles"></span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <strong>Yetkiler:</strong> <span id="ciPerms"></span>
+                            <button type="button" id="permModalBtn" class="text-[11px] text-indigo-600 hover:underline hidden">Detay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div id="section-role" class="hidden bg-gray-50 border border-gray-100 rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-sm font-semibold text-gray-800">İstenen Roller</h3>
+                    <span class="text-xs text-gray-500">Çoklu seçim</span>
+                </div>
+                <select name="RequestedRoleIds" multiple class="w-full border rounded-lg px-3 py-2 min-h-[160px] focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                    @foreach (var r in roles)
+                    {
+                        <option value="@r.Id">@r.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div id="section-permission" class="hidden bg-gray-50 border border-gray-100 rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-sm font-semibold text-gray-800">İstenen Yetkiler</h3>
+                    <span class="text-xs text-gray-500">Controller/aksiyon</span>
+                </div>
+                <select name="RequestedPermissionPaths" multiple class="w-full border rounded-lg px-3 py-2 min-h-[200px] text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                    @foreach (var p in permissions)
+                    {
+                        <option value="@p.Path">@p.Path</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div id="section-userinfo" class="hidden bg-gray-50 border border-gray-100 rounded-xl p-4 mb-6">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-semibold text-gray-800">Kullanıcı Bilgisi Güncelleme</h3>
+                <span class="text-xs text-gray-500">Sadece doldurduklarınız değişir</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Ad</label>
+                    <input name="RequestedUserInfo.Name" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Soyad</label>
+                    <input name="RequestedUserInfo.Surname" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Kullanıcı Adı</label>
+                    <input name="RequestedUserInfo.Username" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Departman</label>
+                    <input name="RequestedUserInfo.Department" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Ünvan</label>
+                    <input name="RequestedUserInfo.Title" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">İç E-posta</label>
+                    <input name="RequestedUserInfo.InternalEmail" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Dış E-posta</label>
+                    <input name="RequestedUserInfo.ExternalEmail" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+                    <input name="RequestedUserInfo.PhoneNumber" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Dahili</label>
+                    <input name="RequestedUserInfo.Intercom" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 mb-6">
+            <label class="block text-sm font-semibold text-gray-800 mb-2">Açıklama</label>
+            <textarea name="Description" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" rows="4">@Model.Description</textarea>
+            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-red-600 text-sm" })
+        </div>
+
+        <div class="flex justify-end gap-3">
+            <a href="@Url.Action("Index")" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100">İptal</a>
+            <button type="submit" class="px-5 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700">Kaydet</button>
+        </div>
+    }
+</div>
+
+@section scripts {
+    <script>
+        const userInfoMap = @Html.Raw(userInfoMapJson);
+
+        function toggleSections() {
+            const type = document.querySelector('input[name="RequestType"]:checked');
+            const roleSection = document.getElementById('section-role');
+            const permSection = document.getElementById('section-permission');
+            const infoSection = document.getElementById('section-userinfo');
+            [roleSection, permSection, infoSection].forEach(s => s.classList.add('hidden'));
+            if (!type) return;
+            if (type.value === 'RoleChange') roleSection.classList.remove('hidden');
+            if (type.value === 'PermissionChange') permSection.classList.remove('hidden');
+            if (type.value === 'UserInfoChange') infoSection.classList.remove('hidden');
+        }
+
+        function fillCurrentInfo() {
+            const targetId = document.getElementById('targetUser').value;
+            const infoBox = document.getElementById('currentInfo');
+            if (!targetId) { infoBox.classList.add('hidden'); return; }
+            const data = userInfoMap.find(u => u.Id == targetId);
+            if (!data) { infoBox.classList.add('hidden'); return; }
+            infoBox.classList.remove('hidden');
+            document.getElementById('ciName').textContent = `${data.Name || ''} ${data.Surname || ''}`.trim();
+            document.getElementById('ciUsername').textContent = data.Username || '';
+            document.getElementById('ciDepartment').textContent = data.Department || '';
+            document.getElementById('ciTitle').textContent = data.Title || '';
+            document.getElementById('ciInternalEmail').textContent = data.InternalEmail || '';
+            document.getElementById('ciExternalEmail').textContent = data.ExternalEmail || '';
+            document.getElementById('ciPhone').textContent = data.PhoneNumber || '';
+            document.getElementById('ciIntercom').textContent = data.Intercom || '';
+            document.getElementById('ciRoles').textContent = (data.Roles && data.Roles.length) ? data.Roles.join(', ') : '—';
+            const permText = (data.Permissions && data.Permissions.length) ? data.Permissions.slice(0, 5).join(', ') + (data.Permissions.length > 5 ? ` +${data.Permissions.length - 5}` : '') : '—';
+            document.getElementById('ciPerms').textContent = permText;
+            const permBtn = document.getElementById('permModalBtn');
+            permBtn.classList.toggle('hidden', !(data.Permissions && data.Permissions.length));
+            permBtn.onclick = function () {
+                openPermModal(data.Roles || [], data.Permissions || []);
+            };
+        }
+
+        function openPermModal(roles, perms) {
+            const modal = document.getElementById('permModal');
+            const body = document.getElementById('permModalBody');
+            const roleBadges = (roles && roles.length) ? roles.map(r => `<span class="inline-flex px-2 py-1 bg-indigo-50 text-indigo-700 rounded text-xs mr-1 mb-1">${r}</span>`).join('') : '—';
+            const permBadges = (perms && perms.length) ? perms.map(p => `<span class="inline-flex px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs mr-1 mb-1">${p}</span>`).join('') : '—';
+            body.innerHTML = `
+                <div class="mb-3">
+                    <div class="text-xs text-gray-500 mb-1">Mevcut Roller</div>
+                    <div class="flex flex-wrap">${roleBadges}</div>
+                </div>
+                <div>
+                    <div class="text-xs text-gray-500 mb-1">Mevcut Yetkiler</div>
+                    <div class="flex flex-wrap">${permBadges}</div>
+                </div>`;
+            modal.classList.remove('hidden');
+        }
+
+        function wirePermModalClose() {
+            const modal = document.getElementById('permModal');
+            const closeBtn = document.getElementById('permModalClose');
+            closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.add('hidden');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('input[name="RequestType"]').forEach(r => {
+                r.addEventListener('change', toggleSections);
+            });
+            document.getElementById('targetUser').addEventListener('change', fillCurrentInfo);
+            toggleSections();
+            fillCurrentInfo();
+            wirePermModalClose();
+        });
+    </script>
+}
+
+<div id="permModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[80vh] overflow-y-auto p-6 relative">
+        <button type="button" id="permModalClose" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">✕</button>
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Mevcut Rol ve Yetkiler</h3>
+        <div id="permModalBody" class="space-y-3"></div>
+    </div>
+</div>

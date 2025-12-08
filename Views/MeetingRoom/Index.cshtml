@@ -12,7 +12,7 @@
     <title>Toplantı Salonu Rezervasyon Sistemi</title>
     <link rel="stylesheet" href="~/Content/tailwind.min.css" />
     <!-- Select2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/select2.min.css" rel="stylesheet" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -130,35 +130,8 @@
                     <!-- Toplantı Salonları -->
                     <div class="w-full md:w-1/3">
                         <h2 class="text-xl font-semibold mb-4 text-gray-800">Toplantı Salonları</h2>
-                        <div class="space-y-4">
-
-                            <div id="largeRoom" class="room-card bg-white p-4 rounded-lg shadow-md border-l-4 border-purple-500 cursor-pointer">
-                                <div class="flex justify-between items-center">
-                                    <h3 class="font-medium text-lg">Yerleşke Büyük Toplantı Salonu</h3>
-                                    <span class="text-sm px-2 py-1 bg-green-100 text-green-800 rounded-full">Müsait</span>
-                                </div>
-                                <p class="text-gray-600 mt-2">Kapasite: 15 kişi</p>
-                                <p class="text-gray-600">Özellikler: Projeksiyon, Beyaz Tahta, Video Konferans</p>
-                            </div>
-
-                            <div id="smallRoom" class="room-card bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-500 cursor-pointer">
-                                <div class="flex justify-between items-center">
-                                    <h3 class="font-medium text-lg">Yerleşke Küçük Toplantı Salonu</h3>
-                                    <span class="text-sm px-2 py-1 bg-green-100 text-green-800 rounded-full">Müsait</span>
-                                </div>
-                                <p class="text-gray-600 mt-2">Kapasite: 6 kişi</p>
-                                <p class="text-gray-600">Özellikler: Projeksiyon</p>
-                            </div>
-
-                            <div id="mediumRoom" class="room-card bg-white p-4 rounded-lg shadow-md border-l-4 border-green-500 cursor-pointer">
-                                <div class="flex justify-between items-center">
-                                    <h3 class="font-medium text-lg">Merkez Toplantı Salonu</h3>
-                                    <span class="text-sm px-2 py-1 bg-green-100 text-green-800 rounded-full">Müsait</span>
-                                </div>
-                                <p class="text-gray-600 mt-2">Kapasite: 10 kişi</p>
-                                <p class="text-gray-600">Özellikler: Projeksiyon, Beyaz Tahta</p>
-                            </div>
-
+                        <div id="roomsContainer" class="space-y-4">
+                            <!-- Odalar buraya dinamik yüklenecek -->
                         </div>
                     </div>
 
@@ -197,28 +170,16 @@
 
                             <div id="timeSelection" class="mb-6 hidden">
                                 <h3 class="font-medium text-gray-800 mb-3">Saat Seçin</h3>
-                                <div class="flex gap-2">
-                                    <select id="startTime" class="border rounded-md px-2 py-1">
-                                        <option>09:00</option>
-                                        <option>10:00</option>
-                                        <option>11:00</option>
-                                        <option>12:00</option>
-                                        <option>13:00</option>
-                                        <option>14:00</option>
-                                        <option>15:00</option>
-                                        <option>16:00</option>
-                                    </select>
-                                    <span class="self-center">-</span>
-                                    <select id="endTime" class="border rounded-md px-2 py-1">
-                                        <option>10:00</option>
-                                        <option>11:00</option>
-                                        <option>12:00</option>
-                                        <option>13:00</option>
-                                        <option>14:00</option>
-                                        <option>15:00</option>
-                                        <option>16:00</option>
-                                        <option>17:00</option>
-                                    </select>
+                                <div class="flex gap-4 items-center">
+                                    <div class="flex-1">
+                                        <label for="startTime" class="block text-sm font-medium text-gray-700 mb-1">Başlangıç</label>
+                                        <input type="time" id="startTime" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" value="09:00" step="900">
+                                    </div>
+                                    <span class="self-end pb-2 text-gray-500">-</span>
+                                    <div class="flex-1">
+                                        <label for="endTime" class="block text-sm font-medium text-gray-700 mb-1">Bitiş</label>
+                                        <input type="time" id="endTime" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" value="10:00" step="900">
+                                    </div>
                                 </div>
                             </div>
 
@@ -362,7 +323,15 @@
                     <!-- Rezervasyon detayları buraya eklenecek -->
                 </div>
                 <div id="adminActions" class="flex justify-between mt-6">
-                    <button id="rejectBtn" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition">Reddet</button>
+                    <div class="flex gap-2">
+                        <button id="rejectBtn" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition">Reddet</button>
+                        <button id="deleteReservationBtn" class="px-4 py-2 bg-red-800 text-white rounded-md hover:bg-red-900 transition hidden">
+                            <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                            Rezervasyonu Sil
+                        </button>
+                    </div>
                     <button id="approveBtn" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">Onayla</button>
                 </div>
             </div>
@@ -387,11 +356,84 @@
         let selectedReservationId = null;
         let reservations = [];
         let allUsers = []; // Tüm kullanıcılar
+        let meetingRooms = []; // Toplantı odaları
 
         var currentUser = {
             id: '@User.Identity.GetUserId()',
             name: '@User.Identity.Name'
         };
+
+        // Toplantı odalarını yükle
+        function loadRooms() {
+            fetch('/MeetingRoom/GetMeetingRooms')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Oda yükleme hatası:', data.error);
+                        return;
+                    }
+                    meetingRooms = data;
+                    renderRooms();
+                })
+                .catch(err => {
+                    console.error('Oda yükleme hatası:', err);
+                });
+        }
+
+        // Odaları render et
+        function renderRooms() {
+            const container = document.getElementById('roomsContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+
+            meetingRooms.forEach(room => {
+                const roomCard = document.createElement('div');
+                roomCard.className = `room-card bg-white p-4 rounded-lg shadow-md border-l-4 cursor-pointer hover:shadow-lg transition-shadow`;
+                roomCard.style.borderLeftColor = room.colorCode || '#3B82F6';
+                roomCard.dataset.roomId = room.id;
+                roomCard.dataset.roomName = room.name;
+                
+                console.log('Salon render:', room); // Debug için
+                
+                const descriptionHtml = room.description 
+                    ? `<p class="text-gray-500 text-sm mb-1"><strong>Açıklama:</strong> ${room.description}</p>` 
+                    : '';
+                
+                const featuresHtml = room.features 
+                    ? `<p class="text-gray-500 text-sm mt-1"><strong>Özellikler:</strong> ${room.features}</p>` 
+                    : '';
+                
+                roomCard.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full" style="background-color: ${room.colorCode || '#3B82F6'}"></div>
+                            <h3 class="font-semibold text-lg text-gray-800">${room.name}</h3>
+                        </div>
+                        <span class="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">Aktif</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-1">Kapasite: ${room.capacity} kişi</p>
+                    ${room.location ? `<p class="text-gray-500 text-sm mb-1">Konum: ${room.location}</p>` : ''}
+                    ${descriptionHtml}
+                    ${featuresHtml}
+                `;
+                
+                roomCard.addEventListener('click', function () {
+                    selectedRoom = room.name;
+                    selectedRoomEl.textContent = room.name;
+                    document.querySelectorAll('.room-card').forEach(c => {
+                        c.classList.remove('ring-2', 'ring-blue-500');
+                    });
+                    roomCard.classList.add('ring-2', 'ring-blue-500');
+                    updateProgress();
+                    if (selectedDate) {
+                        timeSelectionEl.classList.remove('hidden');
+                    }
+                });
+                
+                container.appendChild(roomCard);
+            });
+        }
 
         // Kullanıcıları yükle
         function loadUsers() {
@@ -418,6 +460,7 @@
                 return;
             }
             $('#attendees').select2({
+                language: 'tr',
                 data: allUsers.map(u => ({
                     id: u.id,
                     text: u.name + (u.department ? ` (${u.department})` : ''),
@@ -509,11 +552,14 @@
         let currentCalendarMonth = new Date().getMonth();
         let currentCalendarYear = new Date().getFullYear();
 
-        document.getElementById('startTime').addEventListener('change', function () {
+        const startTimeEl = document.getElementById('startTime');
+        const endTimeEl = document.getElementById('endTime');
+        
+        if (startTimeEl) startTimeEl.addEventListener('change', function () {
             selectedStartTime = this.value;
             updateProgress();
         });
-        document.getElementById('endTime').addEventListener('change', function () {
+        if (endTimeEl) endTimeEl.addEventListener('change', function () {
             selectedEndTime = this.value;
             updateProgress();
         });
@@ -582,7 +628,7 @@
         }
 
         // Önceki ay butonuna event listener
-        prevMonthBtn.addEventListener('click', function() {
+        if (prevMonthBtn) prevMonthBtn.addEventListener('click', function() {
             currentCalendarMonth--;
             if (currentCalendarMonth < 0) {
                 currentCalendarMonth = 11;
@@ -592,7 +638,7 @@
         });
 
         // Sonraki ay butonuna event listener
-        nextMonthBtn.addEventListener('click', function() {
+        if (nextMonthBtn) nextMonthBtn.addEventListener('click', function() {
             currentCalendarMonth++;
             if (currentCalendarMonth > 11) {
                 currentCalendarMonth = 0;
@@ -655,40 +701,47 @@
         }
 
         // Oda seçimi
-        smallRoomEl.addEventListener('click', function () {
-            selectedRoom = 'Küçük Toplantı Salonu';
-            selectedRoomEl.textContent = selectedRoom;
-            smallRoomEl.classList.add('ring-2', 'ring-blue-500');
-            largeRoomEl.classList.remove('ring-2', 'ring-purple-500');
-            mediumRoomEl.classList.remove('ring-2', 'ring-green-500');
-            updateProgress();
-            if (selectedDate) {
-                timeSelectionEl.classList.remove('hidden');
-            }
-        });
+        if (smallRoomEl) {
+            smallRoomEl.addEventListener('click', function () {
+                selectedRoom = 'Küçük Toplantı Salonu';
+                selectedRoomEl.textContent = selectedRoom;
+                smallRoomEl.classList.add('ring-2', 'ring-blue-500');
+                largeRoomEl.classList.remove('ring-2', 'ring-purple-500');
+                mediumRoomEl.classList.remove('ring-2', 'ring-green-500');
+                updateProgress();
+                if (selectedDate) {
+                    timeSelectionEl.classList.remove('hidden');
+                }
+            });
+        }
 
-        largeRoomEl.addEventListener('click', function () {
-            selectedRoom = 'Büyük Toplantı Salonu';
-            selectedRoomEl.textContent = selectedRoom;
-            largeRoomEl.classList.add('ring-2', 'ring-purple-500');
-            smallRoomEl.classList.remove('ring-2', 'ring-blue-500');
-            mediumRoomEl.classList.remove('ring-2', 'ring-green-500');
-            updateProgress();
-            if (selectedDate) {
-                timeSelectionEl.classList.remove('hidden');
-            }
-        });
-        mediumRoomEl.addEventListener('click', function () {
-            selectedRoom = 'Orta Toplantı Salonu';
-            selectedRoomEl.textContent = selectedRoom;
-            mediumRoomEl.classList.add('ring-2', 'ring-green-500');
-            smallRoomEl.classList.remove('ring-2', 'ring-blue-500');
-            largeRoomEl.classList.remove('ring-2', 'ring-purple-500');
-            updateProgress();
-            if (selectedDate) {
-                timeSelectionEl.classList.remove('hidden');
-            }
-        });
+        if (largeRoomEl) {
+            largeRoomEl.addEventListener('click', function () {
+                selectedRoom = 'Büyük Toplantı Salonu';
+                selectedRoomEl.textContent = selectedRoom;
+                largeRoomEl.classList.add('ring-2', 'ring-purple-500');
+                smallRoomEl.classList.remove('ring-2', 'ring-blue-500');
+                mediumRoomEl.classList.remove('ring-2', 'ring-green-500');
+                updateProgress();
+                if (selectedDate) {
+                    timeSelectionEl.classList.remove('hidden');
+                }
+            });
+        }
+        
+        if (mediumRoomEl) {
+            mediumRoomEl.addEventListener('click', function () {
+                selectedRoom = 'Orta Toplantı Salonu';
+                selectedRoomEl.textContent = selectedRoom;
+                mediumRoomEl.classList.add('ring-2', 'ring-green-500');
+                smallRoomEl.classList.remove('ring-2', 'ring-blue-500');
+                largeRoomEl.classList.remove('ring-2', 'ring-purple-500');
+                updateProgress();
+                if (selectedDate) {
+                    timeSelectionEl.classList.remove('hidden');
+                }
+            });
+        }
 
         // Rezervasyonları sunucudan çeken fonksiyon
         function fetchReservations(callback) {
@@ -707,6 +760,9 @@
             if (isAdmin) {
                 userInterface.classList.add('hidden');
                 adminInterface.classList.remove('hidden');
+                // Admin arayüzüne geçildiğinde pending rezervasyonları yükle
+                setActiveTab(pendingTab);
+                loadAdminReservations('pending');
             } else {
                 userInterface.classList.remove('hidden');
                 adminInterface.classList.add('hidden');
@@ -719,16 +775,16 @@
             if (selectedRoom) progress += 33;
             if (selectedDate) progress += 33;
             if (selectedStartTime && selectedEndTime) progress += 34;
-            progressBarEl.style.width = `${progress}%`;
+            if (progressBarEl) progressBarEl.style.width = `${progress}%`;
             if (selectedRoom && selectedDate && selectedStartTime && selectedEndTime) {
-                detailsFormEl.classList.remove('hidden');
+                if (detailsFormEl) detailsFormEl.classList.remove('hidden');
             } else {
-                detailsFormEl.classList.add('hidden');
+                if (detailsFormEl) detailsFormEl.classList.add('hidden');
             }
         }
 
         // Rezervasyon oluştur (CSRF korumalı)
-        confirmBtn.addEventListener('click', function () {
+        if (confirmBtn) confirmBtn.addEventListener('click', function () {
             const title = document.getElementById('meetingTitle').value;
             const desc = document.getElementById('meetingDesc').value;
             
@@ -777,15 +833,17 @@
                         alert(res.message);
                         return;
                     }
-                    reservationDetailsEl.innerHTML = `
+                    if (reservationDetailsEl) {
+                        reservationDetailsEl.innerHTML = `
 <p><strong>Salon:</strong> ${res.reservation.Room}</p>
 <p><strong>Tarih:</strong> ${res.reservation.Date}</p>
 <p><strong>Saat:</strong> ${res.reservation.StartTime} - ${res.reservation.EndTime}</p>
 <p><strong>Başlık:</strong> ${res.reservation.Title}</p>
 <p><strong>Durum:</strong> ${getStatusBadge(res.reservation.Status)}</p>
 `;
+                    }
 
-                    successModal.classList.remove('hidden');
+                    if (successModal) successModal.classList.remove('hidden');
                     fetchReservations();
                     resetForm();
                 })
@@ -799,19 +857,19 @@
             selectedTime = null;
             selectedStartTime = null;
             selectedEndTime = null;
-            selectedRoomEl.textContent = 'Seçilmedi';
-            progressBarEl.style.width = '0%';
-            smallRoomEl.classList.remove('ring-2', 'ring-blue-500');
-            largeRoomEl.classList.remove('ring-2', 'ring-purple-500');
-            mediumRoomEl.classList.remove('ring-2', 'ring-green-500');
+            if (selectedRoomEl) selectedRoomEl.textContent = 'Seçilmedi';
+            if (progressBarEl) progressBarEl.style.width = '0%';
+            document.querySelectorAll('.room-card').forEach(c => c.classList.remove('ring-2', 'ring-blue-500'));
             document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
-            document.getElementById('meetingTitle').value = '';
-            document.getElementById('meetingDesc').value = '';
-            $('#attendees').val(null).trigger('change'); // Select2 temizle
-            document.getElementById('startTime').selectedIndex = 0;
-            document.getElementById('endTime').selectedIndex = 0;
-            timeSelectionEl.classList.add('hidden');
-            detailsFormEl.classList.add('hidden');
+            const titleEl = document.getElementById('meetingTitle');
+            const descEl = document.getElementById('meetingDesc');
+            if (titleEl) titleEl.value = '';
+            if (descEl) descEl.value = '';
+            if (window.$ && $('#attendees').length) $('#attendees').val(null).trigger('change'); // Select2 temizle
+            if (startTimeEl) startTimeEl.value = '09:00';
+            if (endTimeEl) endTimeEl.value = '10:00';
+            if (timeSelectionEl) timeSelectionEl.classList.add('hidden');
+            if (detailsFormEl) detailsFormEl.classList.add('hidden');
         }
 
         // Rol değiştirme
@@ -830,10 +888,10 @@
         }
 
         // Yönetici sekmelerini yönet
-        pendingTab.addEventListener('click', function () { setActiveTab(pendingTab); loadAdminReservations('pending'); });
-        approvedTab.addEventListener('click', function () { setActiveTab(approvedTab); loadAdminReservations('approved'); });
-        rejectedTab.addEventListener('click', function () { setActiveTab(rejectedTab); loadAdminReservations('rejected'); });
-        allTab.addEventListener('click', function () { setActiveTab(allTab); loadAdminReservations('all'); });
+        if (pendingTab) pendingTab.addEventListener('click', function () { setActiveTab(pendingTab); loadAdminReservations('pending'); });
+        if (approvedTab) approvedTab.addEventListener('click', function () { setActiveTab(approvedTab); loadAdminReservations('approved'); });
+        if (rejectedTab) rejectedTab.addEventListener('click', function () { setActiveTab(rejectedTab); loadAdminReservations('rejected'); });
+        if (allTab) allTab.addEventListener('click', function () { setActiveTab(allTab); loadAdminReservations('all'); });
 
         function setActiveTab(activeTab) {
             [pendingTab, approvedTab, rejectedTab, allTab].forEach(tab => tab.classList.remove('tab-active'));
@@ -896,23 +954,29 @@
             const reservation = reservations.find(r => r.id === id);
             if (!reservation) return;
             selectedReservationId = id;
+            
+            const deleteBtn = document.getElementById('deleteReservationBtn');
+            
             let statusInfo = '';
             if ((reservation.status || '').toLowerCase() === 'pending') {
                 statusInfo = getStatusBadge(reservation.status);
-                adminActionsEl.classList.remove('hidden');
+                if (adminActionsEl) adminActionsEl.classList.remove('hidden');
+                if (deleteBtn) deleteBtn.classList.add('hidden');
             } else if ((reservation.status || '').toLowerCase() === 'approved') {
                 statusInfo = `
                     ${getStatusBadge(reservation.status)}
                     <p class="text-sm text-gray-500 mt-1">Onay Tarihi: ${reservation.approvedAt || ''}</p>
                 `;
-                adminActionsEl.classList.add('hidden');
+                if (adminActionsEl) adminActionsEl.classList.add('hidden');
+                if (deleteBtn) deleteBtn.classList.remove('hidden');
             } else if ((reservation.status || '').toLowerCase() === 'rejected') {
                 statusInfo = `
                     ${getStatusBadge(reservation.status)}
                     <p class="text-sm text-gray-500 mt-1">Red Tarihi: ${reservation.rejectedAt || ''}</p>
                     <p class="text-sm text-gray-700 mt-1">Red Nedeni: ${reservation.rejectionReason || 'Belirtilmedi'}</p>
                 `;
-                adminActionsEl.classList.add('hidden');
+                if (adminActionsEl) adminActionsEl.classList.add('hidden');
+                if (deleteBtn) deleteBtn.classList.add('hidden');
             }
 
             // Katılımcı listesi oluştur
@@ -930,11 +994,11 @@
                                     </div>
                                     ${att.responseDate ? `
                                         <div class="text-xs text-gray-500">
-                                            ${att.hasAccepted ? '<span class="text-green-600">✓ Kabul</span>' : ''}
-                                            ${att.hasDeclined ? '<span class="text-red-600">✗ Red</span>' : ''}
-                                            ${!att.hasAccepted && !att.hasDeclined ? '<span class="text-yellow-600">⏳ Bekliyor</span>' : ''}
+                                            ${att.hasAccepted ? '<span class="text-green-600">Kabul</span>' : ''}
+                                            ${att.hasDeclined ? '<span class="text-red-600">Red</span>' : ''}
+                                            ${!att.hasAccepted && !att.hasDeclined ? '<span class="text-yellow-600">Bekliyor</span>' : ''}
                                         </div>
-                                    ` : '<span class="text-xs text-yellow-600">⏳ Bekliyor</span>'}
+                                    ` : '<span class="text-xs text-yellow-600">Bekliyor</span>'}
                                 </div>
                             `).join('')}
                         </div>
@@ -945,23 +1009,25 @@
                 attendeeListHtml = `<p class="text-gray-600"><strong>Katılımcılar:</strong> ${reservation.attendees}</p>`;
             }
 
-            modalReservationDetailsEl.innerHTML = `
-                <div class="flex justify-between">
-                    <h4 class="font-medium">${reservation.title}</h4>
-                    <div>${statusInfo}</div>
-                </div>
-                <p class="text-gray-600"><strong>Talep Eden:</strong> ${reservation.userName}</p>
-                <p class="text-gray-600"><strong>Salon:</strong> ${reservation.room}</p>
-                <p class="text-gray-600"><strong>Tarih/Saat:</strong> ${reservation.date} ${reservation.startTime} - ${reservation.endTime}</p>
-                <p class="text-gray-600"><strong>Açıklama:</strong> ${reservation.description || 'Belirtilmedi'}</p>
-                ${attendeeListHtml}
-                <p class="text-gray-600 mt-2"><strong>Oluşturulma Tarihi:</strong> ${reservation.createdAt || ''}</p>
-            `;
-            reservationDetailModal.classList.remove('hidden');
+            if (modalReservationDetailsEl) {
+                modalReservationDetailsEl.innerHTML = `
+                    <div class="flex justify-between">
+                        <h4 class="font-medium">${reservation.title}</h4>
+                        <div>${statusInfo}</div>
+                    </div>
+                    <p class="text-gray-600"><strong>Talep Eden:</strong> ${reservation.userName}</p>
+                    <p class="text-gray-600"><strong>Salon:</strong> ${reservation.room}</p>
+                    <p class="text-gray-600"><strong>Tarih/Saat:</strong> ${reservation.date} ${reservation.startTime} - ${reservation.endTime}</p>
+                    <p class="text-gray-600"><strong>Açıklama:</strong> ${reservation.description || 'Belirtilmedi'}</p>
+                    ${attendeeListHtml}
+                    <p class="text-gray-600 mt-2"><strong>Oluşturulma Tarihi:</strong> ${reservation.createdAt || ''}</p>
+                `;
+            }
+            if (reservationDetailModal) reservationDetailModal.classList.remove('hidden');
         }
 
         // Rezervasyon onayla (CSRF korumalı)
-        approveBtn.addEventListener('click', function () {
+        if (approveBtn) approveBtn.addEventListener('click', function () {
             const params = new URLSearchParams({
                 id: selectedReservationId,
                 __RequestVerificationToken: getToken()
@@ -974,7 +1040,7 @@
                 .then(res => res.json())
                 .then(data => {
                     if (!data.success) { alert(data.message); return; }
-                    reservationDetailModal.classList.add('hidden');
+                    if (reservationDetailModal) reservationDetailModal.classList.add('hidden');
                     fetchReservations();
                     loadAdminReservations('pending');
                 })
@@ -982,7 +1048,7 @@
         });
 
         if (historyBtn) {
-            historyBtn.addEventListener('click', function () {
+            if (historyBtn) historyBtn.addEventListener('click', function () {
                 fetchReservations(function () {
                     // Sadece giriş yapan kullanıcının geçmişi gösterilsin
                     const userId = currentUser.id;
@@ -1003,7 +1069,7 @@
                         </td>
                         <td class="px-6 py-2 whitespace-nowrap">
                             <a href="/MeetingRoom/Details/${r.id}" class="px-2 py-1 bg-indigo-600 text-white text-xs rounded hover:bg-indigo-700">
-                                📋 Detaylar
+                                Detaylar
                             </a>
                         </td>
                     </tr>
@@ -1028,13 +1094,13 @@
             });
         }
         if (closeHistoryBtn) {
-            closeHistoryBtn.addEventListener('click', function () {
+            if (closeHistoryBtn) closeHistoryBtn.addEventListener('click', function () {
                 historyModal.classList.add('hidden');
             });
         }
 
         // Rezervasyon reddet (CSRF korumalı)
-        rejectBtn.addEventListener('click', function () {
+        if (rejectBtn) rejectBtn.addEventListener('click', function () {
             const reason = prompt('Red nedenini girin:');
             if (reason !== null) {
                 const params = new URLSearchParams({
@@ -1050,7 +1116,7 @@
                     .then(res => res.json())
                     .then(data => {
                         if (!data.success) { alert(data.message); return; }
-                        reservationDetailModal.classList.add('hidden');
+                        if (reservationDetailModal) reservationDetailModal.classList.add('hidden');
                         fetchReservations();
                         loadAdminReservations('pending');
                     })
@@ -1082,8 +1148,43 @@
                 .catch(err => alert('Bir hata oluştu: ' + err.message));
         }
 
-        closeDetailBtn.addEventListener('click', function () {
-            reservationDetailModal.classList.add('hidden');
+        if (closeDetailBtn) closeDetailBtn.addEventListener('click', function () {
+            if (reservationDetailModal) reservationDetailModal.classList.add('hidden');
+        });
+
+        // Rezervasyon sil butonu
+        const deleteReservationBtn = document.getElementById('deleteReservationBtn');
+        if (deleteReservationBtn) deleteReservationBtn.addEventListener('click', function () {
+            if (!selectedReservationId) return;
+            
+            const reservation = reservations.find(r => r.id === selectedReservationId);
+            if (!reservation) return;
+            
+            if (!confirm(`"${reservation.title}" toplantısını kalıcı olarak silmek istediğinize emin misiniz?\n\nKatılımcılara bildirim gönderilecektir.`)) return;
+            
+            const params = new URLSearchParams();
+            params.append('id', selectedReservationId);
+            params.append('__RequestVerificationToken', document.querySelector('input[name="__RequestVerificationToken"]').value);
+
+            fetch('/MeetingRoom/DeleteReservation', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.success) {
+                        alert(data.message);
+                        return;
+                    }
+                    alert(data.message);
+                    if (reservationDetailModal) reservationDetailModal.classList.add('hidden');
+                    fetchReservations(() => {
+                        generateCalendar();
+                        loadAdminReservations('approved');
+                    });
+                })
+                .catch(err => alert('Bir hata oluştu: ' + err.message));
         });
 
         // Takvimi oluştur
@@ -1091,27 +1192,38 @@
 
         // Modal dışına tıklayınca kapat
         window.addEventListener('click', function (event) {
-            if (event.target === historyModal) historyModal.classList.add('hidden');
-            if (event.target === successModal) successModal.classList.add('hidden');
-            if (event.target === reservationDetailModal) reservationDetailModal.classList.add('hidden');
+            if (historyModal && event.target === historyModal) historyModal.classList.add('hidden');
+            if (successModal && event.target === successModal) successModal.classList.add('hidden');
+            if (reservationDetailModal && event.target === reservationDetailModal) reservationDetailModal.classList.add('hidden');
         });
 
         // Başarılı modalı kapat
-        if (closeSuccessBtn) {
-            closeSuccessBtn.addEventListener('click', function () {
-                successModal.classList.add('hidden');
-            });
-        }
+        if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', function () {
+            if (successModal) successModal.classList.add('hidden');
+        });
 
         // SignalR bildirimleri dinle
         function setupSignalRNotifications() {
+            console.log('[Index] SignalR kurulumu başlatılıyor...');
+            
             if (typeof $ !== 'undefined' && $.connection && $.connection.notificationHub) {
+                // Bildirim metodunu tanımla
                 $.connection.notificationHub.client.refreshMeetings = function() {
                     console.log('[Index] SignalR: Toplantılar güncelleniyor...');
                     fetchReservations();
                     updatePendingCount();
                 };
+                
                 console.log('[Index] SignalR bildirim dinleyicisi kuruldu');
+                
+                // Hub'ın durumunu kontrol et
+                if ($.connection.hub.state === $.signalR.connectionState.connected) {
+                    console.log('[Index] SignalR zaten bağlı. Connection ID: ' + $.connection.hub.id);
+                } else {
+                    console.log('[Index] SignalR henüz bağlı değil, _Layout başlatacak. State:', $.connection.hub.state);
+                }
+            } else {
+                console.warn('[Index] SignalR mevcut değil');
             }
         }
 
@@ -1122,6 +1234,7 @@
         generateCalendar();
         fetchReservations();
         updatePendingCount();
+        loadRooms(); // Toplantı odalarını yükle
         loadUsers(); // Kullanıcıları yükle
     });
     </script>

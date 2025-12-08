@@ -459,6 +459,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccessChangeTicketController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
     <Compile Include="Controllers\BeyazTahtaController.cs" />
@@ -509,6 +510,7 @@
     <Compile Include="Helpers\MeetingReminderService.cs" />
     <Compile Include="Helpers\NotificationService.cs" />
     <Compile Include="Helpers\OvertimeServiceScheduler.cs" />
+    <Compile Include="Helpers\PermissionPathTranslator.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />
     <Compile Include="Helpers\PermissionHelper.cs" />
     <Compile Include="Helpers\PermissionCacheService.cs" />
@@ -523,6 +525,9 @@
       <DependentUpon>202512050439037_AddMeetingRoomSystem.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccessChangeTicket.cs" />
+    <Compile Include="Models\AccessChangeTicketViewModel.cs" />
+    <Compile Include="Models\AccessChangeUserListItem.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\AnswerOption.cs" />
     <Compile Include="Models\BeyazTahtaEntry.cs" />
@@ -540,8 +545,10 @@
     <Compile Include="Models\LateArrivalReport.cs" />
     <Compile Include="Models\LateArrivalReportHeader.cs" />
     <Compile Include="Models\LeaveRequest.cs" />
+    <Compile Include="Models\MeetingAction.cs" />
     <Compile Include="Models\MeetingDecision.cs" />
     <Compile Include="Models\MeetingReminderLog.cs" />
+    <Compile Include="Models\MeetingRoom.cs" />
     <Compile Include="Models\MeetingRoomReservation.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\OvertimeServicePersonnel.cs" />
@@ -610,6 +617,7 @@
     <Content Include="Content\Dokumantasyon.css" />
     <Content Include="Content\notification.mp3" />
     <Content Include="Content\overtimeservicepersonel.css" />
+    <Content Include="Content\select2.min.css" />
     <Content Include="Content\sendnotification.css" />
     <Content Include="Content\serviceroute.css" />
     <Content Include="Content\Spinner.css" />
@@ -656,6 +664,8 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\select2-tr.js" />
+    <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\signalr-manager.js" />
     <Content Include="Scripts\signature_pad.umd.min.js" />
     <Content Include="Scripts\src\index.js" />
@@ -933,7 +943,6 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="plan.md" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -2649,11 +2658,13 @@
     <Content Include="Views\OvertimeServiceManager\Index.cshtml" />
     <Content Include="Views\Home\PermissionDebug.cshtml" />
     <Content Include="Views\Gonderi\GonderiDetay.cshtml" />
-    <Content Include="Troubleshooting_500_Error.md" />
-    <Content Include="Views\MeetingRoom\EmailTest.cshtml" />
     <Content Include="Views\MeetingRoom\Edit.cshtml" />
     <Content Include="Views\MeetingRoom\MyMeetings.cshtml" />
     <Content Include="Views\MeetingRoom\Details.cshtml" />
+    <Content Include="Views\MeetingRoom\ManageRooms.cshtml" />
+    <Content Include="Views\AccessChangeTicket\AdminList.cshtml" />
+    <Content Include="Views\AccessChangeTicket\Create.cshtml" />
+    <Content Include="Views\AccessChangeTicket\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\tiles\" />

@@ -6,7 +6,6 @@
 
 <link rel="stylesheet" href="~/Content/tailwind.min.css" />
 <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
-<script src="~/Scripts/jquery.dataTables.min.js"></script>
 
 <h2 class="text-2xl font-semibold mb-6">Şifre Sıfırlama İstekleri</h2>
 
@@ -56,8 +55,11 @@
     </tbody>
 </table>
 
-<script>
-    $(document).ready(function () {
-        $('#resetTable').DataTable({"order":[[2,"desc"]], "language": {"url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json" }});
-    });
-</script> 
+@section scripts {
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#resetTable').DataTable({"order":[[2,"desc"]], "language": {"url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json" }});
+        });
+    </script>
+}

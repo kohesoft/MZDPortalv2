@@ -32,7 +32,9 @@ namespace MZDNETWORK.Data
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<ReservationAttendee> ReservationAttendees { get; set; }
         public DbSet<MeetingDecision> MeetingDecisions { get; set; }
+        public DbSet<MeetingAction> MeetingActions { get; set; }
         public DbSet<MeetingReminderLog> MeetingReminderLogs { get; set; }
+        public DbSet<MeetingRoom> MeetingRooms { get; set; }
         public DbSet<DailyMood> DailyMoods { get; set; }
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
         
@@ -57,6 +59,9 @@ namespace MZDNETWORK.Data
         public DbSet<LateArrivalReportHeader> LateArrivalReportHeaders { get; set; } // Üst bilgi
         public DbSet<PasswordResetRequest> PasswordResetRequests { get; set; }
         public DbSet<ChatGroupMember> ChatGroupMembers { get; set; }
+
+        // Erişim değişikliği talepleri
+        public DbSet<AccessChangeTicket> AccessChangeTickets { get; set; }
 
         // Servis Personel Yönetimi için yeni DbSet
         public DbSet<ServicePersonnel> ServicePersonnels { get; set; }
@@ -249,6 +254,19 @@ namespace MZDNETWORK.Data
                 .WithMany(r => r.MeetingDecisions)
                 .HasForeignKey(md => md.ReservationId)
                 .WillCascadeOnDelete(true);
+
+            // AccessChangeTicket relationships
+            modelBuilder.Entity<AccessChangeTicket>()
+                .HasRequired(t => t.Requester)
+                .WithMany()
+                .HasForeignKey(t => t.RequesterUserId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AccessChangeTicket>()
+                .HasRequired(t => t.TargetUser)
+                .WithMany()
+                .HasForeignKey(t => t.TargetUserId)
+                .WillCascadeOnDelete(false);
         }
 
         /// <summary>

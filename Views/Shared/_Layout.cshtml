@@ -44,6 +44,24 @@
                         <span class="nav-text">Rehber</span>
                     </a>
                 </li>
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SystemManagement.Performance"))
+                {
+                    <li>
+                        <a href="@Url.Action("AdminList", "AccessChangeTicket")" class="nav-link">
+                            <i class='bx bx-id-card icon'></i>
+                            <span class="nav-text">Erişim / Rol Talepleri</span>
+                        </a>
+                    </li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a href="@Url.Action("Create", "AccessChangeTicket")" class="nav-link">
+                            <i class='bx bx-id-card icon'></i>
+                            <span class="nav-text">Erişim / Rol Talebi</span>
+                        </a>
+                    </li>
+                }
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Create"))
                 {
                     <li class="dropdown">
@@ -121,6 +139,10 @@
                             @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("RoleManagement.PermissionTree"))
                             {
                                 <li><a href="@Url.Action("Index", "PermissionTree")" class="nav-link">Yetki Ağacı</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("UserManagement.AccessChange", "Manage"))
+                            {
+                                <li><a href="@Url.Action("AdminList", "AccessChangeTicket")" class="nav-link">Erişim Talepleri</a></li>
                             }
                             @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InformationTechnology.BilgiIslem"))
                             {
@@ -304,11 +326,19 @@
                 }
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom"))
                 {
-                    <li>
-                        <a href="@Url.Action("Index", "MeetingRoom")" class="nav-link">
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
                             <i class='bx bx-calendar icon'></i>
                             <span class="nav-text">Toplantı</span>
-                        </a>
+                            <i class='bx bx-chevron-down icon'></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index", "MeetingRoom")" class="nav-link">Rezervasyon</a></li>
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom", "Manage"))
+                            {
+                                <li><a href="@Url.Action("ManageRooms", "MeetingRoom")" class="nav-link">Salon Yönetimi</a></li>
+                            }
+                        </ul>
                     </li>
                 }
                 @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.WhiteBoard.Entry"))
@@ -377,6 +407,11 @@
                                     Şifre Değiştir
                                 </a>
                             </li>
+                            <li>
+                                <a href="@Url.Action("Create", "AccessChangeTicket")" class="nav-link">
+                                    Erişim / Rol Talebi
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 }
@@ -415,7 +450,8 @@
     @Scripts.Render("~/bundles/popper")
     
     <!-- Select2 -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
+    <script src="~/Scripts/select2-tr.js"></script>
     
     <!-- SignalR -->
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
@@ -468,6 +504,25 @@ $(document).ready(function () {
         });
     }
     updateDateTime(); setInterval(updateDateTime, 60000);
+
+    var desktopPermissionRequested = false;
+    function requestDesktopPermission() {
+        if (!('Notification' in window)) return;
+        if (Notification.permission === 'default' && !desktopPermissionRequested) {
+            desktopPermissionRequested = true;
+            Notification.requestPermission();
+        }
+    }
+
+    function pushDesktopNotification(message, type) {
+        if (!('Notification' in window)) return;
+        if (Notification.permission === 'granted') {
+            var icon = type === 'success' ? '@Url.Content("~/imgs/logo.png")' : '@Url.Content("~/imgs/logo.png")';
+            new Notification('MZD Portal', { body: message || 'Bildirim', icon: icon });
+        } else if (Notification.permission === 'default') {
+            requestDesktopPermission();
+        }
+    }
 
     // Corporate toast helper (stacked)
     function showToast(msg, type, duration, playSound, soundPath) {
@@ -524,6 +579,9 @@ $(document).ready(function () {
             if (playSound) {
                 try { new Audio(soundPath || '@Url.Content("~/Content/notification.mp3")').play(); } catch (e) { }
             }
+
+            // Masaüstü bildirimi
+            pushDesktopNotification(msg, t);
         });
     }
 
@@ -618,6 +676,9 @@ $(document).ready(function () {
 
     // Page loading overlay
     $(window).on('beforeunload', function () { safeExecute(function () { $('#loadingOverlay').show().addClass('active'); }); });
+
+    // Desktop notification iznini erken iste
+    requestDesktopPermission();
 
     // Global error handler
     window.onerror = function (msg, url, lineNo, columnNo, error) { console.error('Global error:', msg, 'at', url, ':', lineNo); return false; };

@@ -1,0 +1,261 @@
+@model List<MZDNETWORK.Models.MeetingRoom>
+@{
+    ViewBag.Title = "Toplantı Salonları Yönetimi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">Toplantı Salonları Yönetimi</h1>
+        <button id="addRoomBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            Yeni Salon Ekle
+        </button>
+    </div>
+
+    <!-- Salon Listesi -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="roomsList">
+        @foreach (var room in Model)
+        {
+            <div class="bg-white rounded-lg shadow-md p-6 @(room.IsActive ? "" : "opacity-50") border-l-4" 
+                 style="border-left-color: @(room.ColorCode ?? "#3B82F6")" data-room-id="@room.Id">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 rounded-full" style="background-color: @(room.ColorCode ?? "#3B82F6")"></div>
+                        <h3 class="text-xl font-bold text-gray-800">@room.Name</h3>
+                    </div>
+                    @if (!room.IsActive)
+                    {
+                        <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Devre Dışı</span>
+                    }
+                </div>
+                <p class="text-gray-600 mb-2">
+                    <strong>Kapasite:</strong> @room.Capacity kişi
+                </p>
+                @if (!string.IsNullOrEmpty(room.Description))
+                {
+                    <p class="text-gray-500 text-sm mb-2"><strong>Açıklama:</strong> @room.Description</p>
+                }
+                @if (!string.IsNullOrEmpty(room.Features))
+                {
+                    <p class="text-gray-500 text-sm mb-2"><strong>Özellikler:</strong> @room.Features</p>
+                }
+                @if (!string.IsNullOrEmpty(room.ColorCode))
+                {
+                    <p class="text-gray-500 text-sm mb-4"><strong>Renk:</strong> <span class="inline-block w-6 h-6 rounded border align-middle" style="background-color: @room.ColorCode"></span> @room.ColorCode</p>
+                }
+                <div class="flex gap-2 mt-4">
+                @if (room.IsActive)
+                {
+                        <button class="edit-room-btn flex-1 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm"
+                                data-id="@room.Id" data-name="@room.Name" data-capacity="@room.Capacity" 
+                                data-description="@room.Description" data-features="@room.Features" data-color="@room.ColorCode">
+                            Düzenle
+                        </button>
+                        <button class="delete-room-btn flex-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm"
+                                data-id="@room.Id" data-name="@room.Name">
+                            Devre Dışı Bırak
+                        </button>
+                }
+                else
+                {
+                        <button class="activate-room-btn flex-1 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-sm"
+                                data-id="@room.Id" data-name="@room.Name">
+                            Aktif Et
+                        </button>
+                        <button class="edit-room-btn flex-1 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm"
+                                data-id="@room.Id" data-name="@room.Name" data-capacity="@room.Capacity" 
+                                data-description="@room.Description" data-features="@room.Features" data-color="@room.ColorCode">
+                            Düzenle
+                        </button>
+                }
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-12 bg-gray-50 rounded-lg">
+            <p class="text-gray-500">Henüz toplantı salonu eklenmemiş.</p>
+        </div>
+    }
+</div>
+
+<!-- Yeni/Düzenle Salon Modal -->
+<div id="roomModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h2 id="modalTitle" class="text-2xl font-bold text-gray-800">Yeni Salon Ekle</h2>
+            <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <form id="roomForm">
+            <input type="hidden" id="roomId" value="">
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2">Salon Adı *</label>
+                <input type="text" id="roomName" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                       placeholder="Örn: Büyük Toplantı Salonu" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2">Kapasite (kişi) *</label>
+                <input type="number" id="roomCapacity" min="1" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                       placeholder="Örn: 20" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2">Açıklama</label>
+                <textarea id="roomDescription" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                          placeholder="Projeksiyon, beyaz tahta, vb."></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2">Özellikler</label>
+                <textarea id="roomFeatures" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" 
+                          placeholder="Projeksiyon, video konferans, akıllı tahta..."></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2">Renk Kodu</label>
+                <div class="flex gap-2 items-center">
+                    <input type="color" id="roomColorCode" class="h-10 w-20 border rounded cursor-pointer" value="#3B82F6">
+                    <span class="text-sm text-gray-500">Takvimde gösterilecek renk</span>
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button type="submit" id="saveRoomBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+                    Kaydet
+                </button>
+                <button type="button" id="cancelBtn" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg">
+                    İptal
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const roomModal = $('#roomModal');
+            const roomForm = $('#roomForm');
+
+            // Modal aç/kapa
+            $('#addRoomBtn').click(function () {
+                $('#modalTitle').text('Yeni Salon Ekle');
+                $('#roomId').val('');
+                $('#roomName').val('');
+                $('#roomCapacity').val('');
+                $('#roomDescription').val('');
+                $('#roomFeatures').val('');
+                $('#roomColorCode').val('#3B82F6');
+                roomModal.removeClass('hidden');
+            });
+
+            $('#closeModal, #cancelBtn').click(function () {
+                roomModal.addClass('hidden');
+            });
+
+            // Düzenle
+            $(document).on('click', '.edit-room-btn', function () {
+                const id = $(this).data('id');
+                const name = $(this).data('name');
+                const capacity = $(this).data('capacity');
+                const description = $(this).data('description');
+                const features = $(this).data('features') || '';
+                const colorCode = $(this).data('color') || '#3B82F6';
+
+                $('#modalTitle').text('Salonu Düzenle');
+                $('#roomId').val(id);
+                $('#roomName').val(name);
+                $('#roomCapacity').val(capacity);
+                $('#roomDescription').val(description);
+                $('#roomFeatures').val(features);
+                $('#roomColorCode').val(colorCode);
+                roomModal.removeClass('hidden');
+            });
+
+            // Form submit
+            roomForm.submit(function (e) {
+                e.preventDefault();
+
+                const id = $('#roomId').val();
+                const name = $('#roomName').val().trim();
+                const capacity = parseInt($('#roomCapacity').val());
+                const description = $('#roomDescription').val().trim();
+                const features = $('#roomFeatures').val().trim();
+                const colorCode = $('#roomColorCode').val();
+
+                console.log('Form gönderiliyor:', { id, name, capacity, description, features, colorCode });
+
+                if (!name || capacity <= 0) {
+                    alert('Lütfen tüm gerekli alanları doldurun');
+                    return;
+                }
+
+                const url = id ? '/MeetingRoom/UpdateRoom' : '/MeetingRoom/AddRoom';
+                const data = { id, name, capacity, description, features, colorCode };
+
+                $.post(url, data, function (res) {
+                    console.log('Sunucu yanıtı:', res);
+                    if (res.success) {
+                        alert(res.message);
+                        location.reload();
+                    } else {
+                        alert(res.message);
+                    }
+                }).fail(function () {
+                    alert('Bir hata oluştu');
+                });
+            });
+
+            // Sil / Devre Dışı Bırak
+            $(document).on('click', '.delete-room-btn', function () {
+                const id = $(this).data('id');
+                const name = $(this).data('name');
+
+                if (!confirm(`"${name}" salonunu devre dışı bırakmak istediğinize emin misiniz?`)) return;
+
+                $.post('/MeetingRoom/DeleteRoom', { id }, function (res) {
+                    if (res.success) {
+                        alert(res.message);
+                        location.reload();
+                    } else {
+                        alert(res.message);
+                    }
+                }).fail(function () {
+                    alert('Bir hata oluştu');
+                });
+            });
+
+            // Aktif Et
+            $(document).on('click', '.activate-room-btn', function () {
+                const id = $(this).data('id');
+                const name = $(this).data('name');
+
+                if (!confirm(`"${name}" salonunu tekrar aktif etmek istediğinize emin misiniz?`)) return;
+
+                $.post('/MeetingRoom/ActivateRoom', { id }, function (res) {
+                    if (res.success) {
+                        alert(res.message);
+                        location.reload();
+                    } else {
+                        alert(res.message);
+                    }
+                }).fail(function () {
+                    alert('Bir hata oluştu');
+                });
+            });
+        });
+    </script>
+}

@@ -414,7 +414,7 @@
                     }
                     else
                     {
-                        <span class="response-badge response-pending">⏳ Yanıt Bekliyor</span>
+                        <span class="response-badge response-pending">Yanıt Bekliyor</span>
                     }
 
                     @if (isCurrentUser && !attendee.HasAccepted && !attendee.HasDeclined && Model.Status == MZDNETWORK.Models.ReservationStatus.Approved)
@@ -433,14 +433,15 @@
         </div>
     </div>
 
-    <!-- Kararlar (Sadece y�netici veya organizat�r g�rs�n) -->
+    <!-- Kararlar ve Aksiyonlar (Sadece yönetici veya organizatör görsün) -->
     @if (ViewBag.IsAdmin || Model.UserId.ToString() == ViewBag.CurrentUserId)
     {
+        <!-- Kararlar Bölümü -->
         <div class="detail-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                 <h2 style="font-size: 1.5rem; font-weight: 700; margin: 0;">
                     <i class='bx bx-task' style="margin-right: 0.5rem;"></i>
-                    Toplantı Kararları ve Aksiyonlar
+                    Toplantı Kararları
                 </h2>
                 <button class="btn-primary" onclick="openDecisionModal()">
                     <i class='bx bx-plus'></i> Karar Ekle
@@ -451,19 +452,44 @@
                 <p style="text-align: center; color: #6b7280; padding: 2rem;">Henüz karar eklenmemiş</p>
             </div>
         </div>
+
+        <!-- Aksiyonlar Bölümü -->
+        <div class="detail-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin: 0;">
+                    <i class='bx bx-list-check' style="margin-right: 0.5rem;"></i>
+                    Aksiyon Maddeleri
+                </h2>
+                <button class="btn-primary" onclick="openActionModal()">
+                    <i class='bx bx-plus'></i> Aksiyon Ekle
+                </button>
+            </div>
+
+            <div id="actionsList">
+                <p style="text-align: center; color: #6b7280; padding: 2rem;">Henüz aksiyon eklenmemiş</p>
+            </div>
+        </div>
     }
 
     <div class="action-buttons">
-        @* Sadece kendi rezervasyonunu d�zenleyebilir (Pending durumda) *@
+        @* Sadece kendi rezervasyonunu düzenleyebilir (Pending durumda) *@
         @if (Model.UserId.ToString() == ViewBag.CurrentUserId && Model.Status == MZDNETWORK.Models.ReservationStatus.Pending)
         {
             <a href="@Url.Action("Edit", "MeetingRoom", new { id = Model.Id })" class="btn-primary">
                 <i class='bx bx-edit'></i> Düzenle
             </a>
+        }
+        
+        @* Kullanıcı kendi toplantısını iptal edebilir (Pending veya Approved) *@
+        @* Admin tüm toplantıları iptal edebilir *@
+        @if ((Model.UserId.ToString() == ViewBag.CurrentUserId || ViewBag.IsAdmin) && 
+             (Model.Status == MZDNETWORK.Models.ReservationStatus.Pending || Model.Status == MZDNETWORK.Models.ReservationStatus.Approved))
+        {
             <button class="btn-danger" onclick="cancelReservation(@Model.Id)">
                 <i class='bx bx-x-circle'></i> İptal Et
             </button>
         }
+        
         <a href="@Url.Action("Index", "MeetingRoom")" class="btn-secondary">
             <i class='bx bx-arrow-back'></i> Geri Dön
         </a>
@@ -473,7 +499,7 @@
 <!-- Karar Ekleme Modal -->
 <div id="decisionModal" class="modal">
     <div class="modal-content">
-        <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 700;">Yeni Karar/Aksiyon Ekle</h3>
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 700;">Yeni Karar Ekle</h3>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
@@ -512,13 +538,55 @@
     </div>
 </div>
 
+<!-- Aksiyon Ekleme Modal -->
+<div id="actionModal" class="modal">
+    <div class="modal-content">
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 700;">Yeni Aksiyon Ekle</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label>Başlık *</label>
+                <input type="text" id="actionTitle" required placeholder="Örn: Tasarım dokümanı hazırla" />
+            </div>
+
+            <div class="form-group">
+                <label>Açıklama *</label>
+                <textarea id="actionDescription" required placeholder="Detaylı açıklama..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Sorumlu Kişi(ler)</label>
+                <input type="text" id="actionResponsible" placeholder="Örn: Berat Yılmaz, Ahmet Demir" />
+            </div>
+
+            <div class="form-group">
+                <label>Hedef Tarih</label>
+                <input type="date" id="actionDueDate" />
+            </div>
+
+            <div class="form-group">
+                <label>Notlar</label>
+                <textarea id="actionNotes" rows="3" placeholder="Ek notlar (opsiyonel)"></textarea>
+            </div>
+
+            <div class="action-buttons">
+                <button type="button" class="btn-primary" onclick="saveAction()">
+                    <i class='bx bx-save'></i> Kaydet
+                </button>
+                <button type="button" class="btn-secondary" onclick="closeActionModal()">İptal</button>
+            </div>
+        }
+    </div>
+</div>
+
 @section scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const reservationId = @Model.Id;
 
         $(document).ready(function () {
             loadDecisions();
+            loadActions();
             setupSignalRNotifications();
         });
 
@@ -675,7 +743,147 @@
             });
         }
 
-        // Kat�l�mc� onay/red
+        // ======== AKSIYON FONKSİYONLARI ========
+
+        // Aksiyonları yükle
+        function loadActions() {
+            $.get('@Url.Action("GetMeetingActions", "MeetingRoom")', { reservationId: reservationId })
+                .done(function (data) {
+                    if (data && data.length > 0) {
+                        let html = '';
+                        data.forEach(function (action) {
+                            const isCompleted = action.status === 'completed';
+                            const statusClass = isCompleted ? 'response-accepted' :
+                                action.status === 'inprogress' ? 'response-pending' :
+                                    action.status === 'cancelled' ? 'response-declined' : 'response-pending';
+
+                            const statusText = isCompleted ? 'Tamamlandı' :
+                                action.status == 'inprogress' ? 'Devam Ediyor' :
+                                    action.status == 'cancelled' ? 'İptal' : 'Beklemede';
+
+                            html += `
+                                <div class="decision-item">
+                                    <div class="decision-header">
+                                        <div class="decision-title-area">
+                                            <input type="checkbox" class="decision-checkbox"
+                                                   ${isCompleted ? 'checked' : ''}
+                                                   onchange="toggleAction(${action.id}, this.checked)" />
+                                            <div class="decision-title ${isCompleted ? 'completed' : ''}">
+                                                ${action.orderIndex}. ${action.title}
+                                            </div>
+                                        </div>
+                                        <span class="decision-status ${statusClass}">${statusText}</span>
+                                    </div>
+                                    <p style="margin: 0.5rem 0 0.5rem 2rem; color: #4b5563;">${action.description}</p>
+                                    ${action.responsiblePerson ? '<p style="margin: 0.5rem 0 0.5rem 2rem; color: #6b7280;"><strong>Sorumlu:</strong> ' + action.responsiblePerson + '</p>' : ''}
+                                    ${action.dueDate ? '<p style="margin: 0.5rem 0 0.5rem 2rem; color: #6b7280;"><strong>Hedef:</strong> ' + new Date(action.dueDate).toLocaleDateString('tr-TR') + '</p>' : ''}
+                                    ${action.notes ? '<p style="margin: 0.5rem 0 0.5rem 2rem; font-style: italic; color: #6b7280;">' + action.notes + '</p>' : ''}
+                                    <div style="margin-top: 1rem; margin-left: 2rem; display: flex; gap: 0.5rem;">
+                                        <button class="btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;" onclick="deleteAction(${action.id})">
+                                            <i class='bx bx-trash'></i> Sil
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        $('#actionsList').html(html);
+                    }
+                })
+                .fail(function () {
+                    console.error('Aksiyonlar yüklenemedi');
+                });
+        }
+
+        // Checkbox toggle - aksiyon tamamlandı/beklemede
+        function toggleAction(id, isChecked) {
+            const status = isChecked ? 2 : 0; // 2 = Completed, 0 = Pending
+            $.post('@Url.Action("UpdateActionStatus", "MeetingRoom")', {
+                id: id,
+                status: status,
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            })
+            .done(function (result) {
+                if (result.success) {
+                    loadActions();
+                } else {
+                    alert(result.message || 'Bir hata oluştu');
+                    loadActions(); // Revert
+                }
+            })
+            .fail(function () {
+                alert('Durum güncellenirken hata oluştu');
+                loadActions(); // Revert
+            });
+        }
+
+        // Modal aç/kapat
+        function openActionModal() {
+            $('#actionModal').addClass('show');
+        }
+
+        function closeActionModal() {
+            $('#actionModal').removeClass('show');
+            $('#actionTitle, #actionDescription, #actionResponsible, #actionDueDate, #actionNotes').val('');
+        }
+
+        // Aksiyon kaydet
+        function saveAction() {
+            const title = $('#actionTitle').val();
+            const description = $('#actionDescription').val();
+
+            if (!title || !description) {
+                alert('Başlık ve açıklama zorunludur');
+                return;
+            }
+
+            const data = {
+                reservationId: reservationId,
+                title: title,
+                description: description,
+                responsiblePerson: $('#actionResponsible').val(),
+                dueDate: $('#actionDueDate').val() || null,
+                notes: $('#actionNotes').val(),
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            };
+
+            $.post('@Url.Action("AddAction", "MeetingRoom")', data)
+                .done(function (result) {
+                    if (result.success) {
+                        closeActionModal();
+                        loadActions();
+                        alert('Aksiyon başarıyla eklendi');
+                    } else {
+                        alert(result.message || 'Bir hata oluştu');
+                    }
+                })
+                .fail(function () {
+                    alert('Aksiyon eklenirken hata oluştu');
+                });
+        }
+
+        // Aksiyon sil
+        function deleteAction(id) {
+            if (!confirm('Bu aksiyonu silmek istediğinize emin misiniz?')) return;
+
+            $.post('@Url.Action("DeleteAction", "MeetingRoom")', {
+                id: id,
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            })
+            .done(function (result) {
+                if (result.success) {
+                    loadActions();
+                    alert('Aksiyon silindi');
+                } else {
+                    alert(result.message || 'Bir hata oluştu');
+                }
+            })
+            .fail(function () {
+                alert('Aksiyon silinirken hata oluştu');
+            });
+        }
+
+        // ======== KATILIMCI FONKSİYONLARI ========
+
         function acceptMeeting(reservationId) {
             $.post('@Url.Action("AcceptMeeting", "MeetingRoom")', {
                 reservationId: reservationId,

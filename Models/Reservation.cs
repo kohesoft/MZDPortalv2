@@ -11,6 +11,12 @@ namespace MZDNETWORK.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public string UserName { get; set; }
+        
+        // Dinamik salon seçimi için
+        public int? RoomId { get; set; }
+        public virtual MeetingRoom MeetingRoom { get; set; }
+        
+        // Eski statik oda ismi (geriye dönük uyumluluk için)
         public string Room { get; set; }
         public DateTime Date { get; set; }
         [Display(Name = "Başlangıç Saati")]

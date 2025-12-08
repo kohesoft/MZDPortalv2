@@ -128,7 +128,12 @@
     </div>
 </div>
 
-@section Scripts {
+@section styles {
+    <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
+}
+
+@section scripts {
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#leaveRequestsTable').DataTable({

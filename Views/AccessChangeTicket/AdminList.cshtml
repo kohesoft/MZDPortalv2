@@ -1,0 +1,291 @@
+@model IEnumerable<MZDNETWORK.Models.AccessChangeTicket>
+@using MZDNETWORK.Models
+@using Newtonsoft.Json
+@using System.Web
+@{
+    ViewBag.Title = "Erişim Talepleri (Admin)";
+
+    var roles = (ViewBag.Roles as IEnumerable<Role> ?? Enumerable.Empty<Role>()).ToDictionary(r => r.Id, r => r.Name);
+
+    string TypeLabel(AccessChangeRequestType type)
+    {
+        switch (type)
+        {
+            case AccessChangeRequestType.PermissionChange: return "Yetki";
+            case AccessChangeRequestType.RoleChange: return "Rol";
+            case AccessChangeRequestType.UserInfoChange: return "Kullanıcı Bilgisi";
+            default: return type.ToString();
+        }
+    }
+
+    string StatusBadge(AccessChangeStatus status)
+    {
+        switch (status)
+        {
+            case AccessChangeStatus.Pending: return "bg-amber-100 text-amber-800";
+            case AccessChangeStatus.Approved: return "bg-blue-100 text-blue-800";
+            case AccessChangeStatus.Applied: return "bg-emerald-100 text-emerald-800";
+            case AccessChangeStatus.Rejected: return "bg-rose-100 text-rose-800";
+            default: return "bg-gray-100 text-gray-800";
+        }
+    }
+
+    string StatusText(AccessChangeStatus status)
+    {
+        switch (status)
+        {
+            case AccessChangeStatus.Pending: return "Onay Bekliyor";
+            case AccessChangeStatus.Approved: return "Onaylandı";
+            case AccessChangeStatus.Applied: return "Uygulandı";
+            case AccessChangeStatus.Rejected: return "Reddedildi";
+            default: return status.ToString();
+        }
+    }
+
+    string JoinPreview(IEnumerable<string> items, int take = 3)
+    {
+        var list = (items ?? Enumerable.Empty<string>()).Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
+        if (!list.Any()) return "—";
+        var head = list.Take(take).ToList();
+        return head.Count == list.Count ? string.Join(", ", head) : string.Join(", ", head) + $" +{list.Count - head.Count}";
+    }
+
+    string Summarize(AccessChangeTicket t)
+    {
+        try
+        {
+            switch (t.RequestType)
+            {
+                case AccessChangeRequestType.RoleChange:
+                    var currentRoles = JsonConvert.DeserializeObject<List<string>>(t.CurrentRolesJson ?? "[]") ?? new List<string>();
+                    var requestedRoleIds = JsonConvert.DeserializeObject<List<int>>(t.RequestedRolesJson ?? "[]") ?? new List<int>();
+                    var requestedNames = requestedRoleIds.Select(id => roles.ContainsKey(id) ? roles[id] : $"Rol #{id}");
+                    return $"Roller: {JoinPreview(currentRoles)} → {JoinPreview(requestedNames)}";
+                case AccessChangeRequestType.PermissionChange:
+                    var currentPerms = JsonConvert.DeserializeObject<List<string>>(t.CurrentPermissionsJson ?? "[]") ?? new List<string>();
+                    var requestedPerms = JsonConvert.DeserializeObject<List<string>>(t.RequestedPermissionsJson ?? "[]") ?? new List<string>();
+                    return $"Yetki: {JoinPreview(currentPerms)} → {JoinPreview(requestedPerms)}";
+                case AccessChangeRequestType.UserInfoChange:
+                    var cur = JsonConvert.DeserializeObject<AccessChangeUserInfoDto>(t.CurrentUserInfoJson ?? "{}") ?? new AccessChangeUserInfoDto();
+                    var req = JsonConvert.DeserializeObject<AccessChangeUserInfoDto>(t.RequestedUserInfoJson ?? "{}") ?? new AccessChangeUserInfoDto();
+                    var diffs = new List<string>();
+                    if (!string.IsNullOrWhiteSpace(req.Name) && req.Name != cur.Name) diffs.Add($"Ad: {cur.Name} → {req.Name}");
+                    if (!string.IsNullOrWhiteSpace(req.Surname) && req.Surname != cur.Surname) diffs.Add($"Soyad: {cur.Surname} → {req.Surname}");
+                    if (!string.IsNullOrWhiteSpace(req.Username) && req.Username != cur.Username) diffs.Add($"Kullanıcı: {cur.Username} → {req.Username}");
+                    if (!string.IsNullOrWhiteSpace(req.Department) && req.Department != cur.Department) diffs.Add($"Departman: {cur.Department} → {req.Department}");
+                    if (!string.IsNullOrWhiteSpace(req.Title) && req.Title != cur.Title) diffs.Add($"Ünvan: {cur.Title} → {req.Title}");
+                    if (!string.IsNullOrWhiteSpace(req.InternalEmail) && req.InternalEmail != cur.InternalEmail) diffs.Add($"İç e-posta: {cur.InternalEmail} → {req.InternalEmail}");
+                    if (!string.IsNullOrWhiteSpace(req.ExternalEmail) && req.ExternalEmail != cur.ExternalEmail) diffs.Add($"Dış e-posta: {cur.ExternalEmail} → {req.ExternalEmail}");
+                    if (!string.IsNullOrWhiteSpace(req.PhoneNumber) && req.PhoneNumber != cur.PhoneNumber) diffs.Add($"Telefon: {cur.PhoneNumber} → {req.PhoneNumber}");
+                    if (!string.IsNullOrWhiteSpace(req.Intercom) && req.Intercom != cur.Intercom) diffs.Add($"Dahili: {cur.Intercom} → {req.Intercom}");
+                    return diffs.Any() ? string.Join(" • ", diffs.Take(3)) + (diffs.Count > 3 ? $" +{diffs.Count - 3}" : string.Empty) : "Bilgi güncelleme";
+                default:
+                    return "—";
+            }
+        }
+        catch
+        {
+            return "—";
+        }
+    }
+
+    string Safe(string text) => string.IsNullOrWhiteSpace(text) ? "—" : text;
+
+    string ToJsonData(object obj)
+    {
+        var json = JsonConvert.SerializeObject(obj);
+        return HttpUtility.JavaScriptStringEncode(json, true);
+    }
+}
+
+<div class="max-w-7xl mx-auto bg-white shadow-xl rounded-2xl p-6 md:p-8 mt-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
+        <div>
+            <p class="text-sm text-gray-500">Onay bekleyen erişim / rol / kullanıcı bilgisi talepleri</p>
+            <h2 class="text-2xl font-semibold text-gray-900">Erişim Talepleri (Admin)</h2>
+        </div>
+    </div>
+
+    <div class="overflow-hidden border border-gray-100 rounded-xl">
+        <table id="ticketTable" class="min-w-full text-sm display stripe hover">
+            <thead class="bg-gray-50 text-gray-700">
+                <tr>
+                    <th>#</th>
+                    <th>Tip</th>
+                    <th>Talep Eden</th>
+                    <th>Hedef Kullanıcı</th>
+                    <th>Durum</th>
+                    <th>Özet</th>
+                    <th>Oluşturma</th>
+                    <th>Admin Notu</th>
+                    <th>Detay</th>
+                    <th>Aksiyon</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in Model ?? Enumerable.Empty<AccessChangeTicket>())
+                {
+                    var detail = new
+                    {
+                        Id = t.Id,
+                        Tip = TypeLabel(t.RequestType),
+                        Durum = StatusText(t.Status),
+                        TalepEden = Safe(t.Requester?.Username),
+                        Hedef = Safe(t.TargetUser?.Username),
+                        Aciklama = Safe(t.Description),
+                        AdminNotu = Safe(t.AdminNote),
+                        Olusturma = t.CreatedAt.ToString("dd.MM.yyyy HH:mm"),
+                        MevcutRoller = JsonConvert.DeserializeObject<List<string>>(t.CurrentRolesJson ?? "[]") ?? new List<string>(),
+                        IstenenRoller = JsonConvert.DeserializeObject<List<int>>(t.RequestedRolesJson ?? "[]")?.Select(id => roles.ContainsKey(id) ? roles[id] : $"Rol #{id}") ?? new List<string>(),
+                        MevcutYetkiler = JsonConvert.DeserializeObject<List<string>>(t.CurrentPermissionsJson ?? "[]") ?? new List<string>(),
+                        IstenenYetkiler = JsonConvert.DeserializeObject<List<string>>(t.RequestedPermissionsJson ?? "[]") ?? new List<string>(),
+                        MevcutBilgi = JsonConvert.DeserializeObject<AccessChangeUserInfoDto>(t.CurrentUserInfoJson ?? "{}") ?? new AccessChangeUserInfoDto(),
+                        IstenenBilgi = JsonConvert.DeserializeObject<AccessChangeUserInfoDto>(t.RequestedUserInfoJson ?? "{}") ?? new AccessChangeUserInfoDto()
+                    };
+                    <tr>
+                        <td class="font-semibold text-gray-800">@t.Id</td>
+                        <td>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full bg-indigo-50 text-indigo-800 text-xs font-semibold">@TypeLabel(t.RequestType)</span>
+                        </td>
+                        <td>@Safe(t.Requester?.Username)</td>
+                        <td>@Safe(t.TargetUser?.Username)</td>
+                        <td>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold @StatusBadge(t.Status)">@StatusText(t.Status)</span>
+                        </td>
+                        <td class="text-gray-700">@Summarize(t)</td>
+                        <td class="text-gray-700">@t.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td class="text-gray-600">@Safe(t.AdminNote)</td>
+                        <td>
+                            <button type="button" class="inline-flex items-center px-3 py-1.5 rounded bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-800 detail-btn" data-detail="@ToJsonData(detail)">Detay</button>
+                        </td>
+                        <td class="space-x-2 whitespace-nowrap">
+                            @if (t.Status == AccessChangeStatus.Pending)
+                            {
+                                <form action="@Url.Action("Approve")" method="post" class="inline approve-form">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@t.Id" />
+                                    <input type="hidden" name="adminNote" class="admin-note-input" />
+                                    <button type="button" class="inline-flex items-center px-3 py-1.5 rounded bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-semibold approve-btn">Onayla</button>
+                                </form>
+                                <form action="@Url.Action("Reject")" method="post" class="inline reject-form">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@t.Id" />
+                                    <input type="hidden" name="adminNote" class="admin-note-input" />
+                                    <button type="button" class="inline-flex items-center px-3 py-1.5 rounded bg-rose-50 text-rose-700 hover:bg-rose-100 text-xs font-semibold reject-btn">Reddet</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="text-gray-400">—</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
+}
+
+@section scripts {
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = $('#ticketTable').DataTable({
+                order: [[0, 'desc']],
+                language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json' },
+                columnDefs: [
+                    { targets: [0], width: '50px' },
+                    { targets: [4, 6, 7, 8, 9], orderable: false }
+                ]
+            });
+
+            function handleAction(btnSelector, message) {
+                $(document).on('click', btnSelector, function (e) {
+                    e.preventDefault();
+                    const note = prompt('Admin notu (opsiyonel):');
+                    const form = $(this).closest('form');
+                    form.find('.admin-note-input').val(note || '');
+                    if (confirm(message)) {
+                        form.trigger('submit');
+                    }
+                });
+            }
+
+            handleAction('.approve-btn', 'Onaylayıp uygulamak istiyor musunuz?');
+            handleAction('.reject-btn', 'Reddetmek istiyor musunuz?');
+
+            const modal = document.getElementById('detailModal');
+            const body = document.getElementById('detailBody');
+            const closeBtn = document.getElementById('detailClose');
+
+            function line(label, value) {
+                return `<div class="flex flex-col sm:flex-row sm:items-center sm:gap-2"><span class="text-gray-500 text-sm w-40">${label}</span><span class="text-gray-800 text-sm">${value || '—'}</span></div>`;
+            }
+
+            function list(label, items) {
+                const content = (items && items.length) ? items.map(i => `<span class="inline-flex px-2 py-1 bg-gray-100 rounded text-xs text-gray-800 mr-1 mb-1">${i}</span>`).join('') : '—';
+                return `<div class="flex flex-col sm:flex-row sm:gap-2"><span class="text-gray-500 text-sm w-40">${label}</span><div class="flex flex-wrap">${content}</div></div>`;
+            }
+
+            function userInfo(label, info) {
+                if (!info) return line(label, '—');
+                const rows = [
+                    info.Name ? `${info.Name} ${info.Surname || ''}`.trim() : '',
+                    info.Username,
+                    info.Department,
+                    info.Title,
+                    info.InternalEmail,
+                    info.ExternalEmail,
+                    info.PhoneNumber,
+                    info.Intercom
+                ].filter(Boolean);
+                return list(label, rows);
+            }
+
+            $(document).on('click', '.detail-btn', function () {
+                const raw = $(this).attr('data-detail') || '{}';
+                try {
+                    const data = JSON.parse(raw);
+                    const sections = [
+                        line('Talep No', data.Id),
+                        line('Tip', data.Tip),
+                        line('Durum', data.Durum),
+                        line('Talep Eden', data.TalepEden),
+                        line('Hedef', data.Hedef),
+                        line('Oluşturma', data.Olusturma),
+                        line('Açıklama', data.Aciklama),
+                        line('Admin Notu', data.AdminNotu),
+                        list('Mevcut Roller', data.MevcutRoller),
+                        list('İstenen Roller', data.IstenenRoller),
+                        list('Mevcut Yetkiler', data.MevcutYetkiler),
+                        list('İstenen Yetkiler', data.IstenenYetkiler),
+                        userInfo('Mevcut Bilgi', data.MevcutBilgi),
+                        userInfo('İstenen Bilgi', data.IstenenBilgi)
+                    ];
+                    body.innerHTML = sections.join('');
+                    modal.classList.remove('hidden');
+                } catch (err) {
+                    console.error('Detail parse error', err);
+                    alert('Detay yüklenemedi.');
+                }
+            });
+
+            closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.add('hidden');
+            });
+        });
+    </script>
+}
+
+<div id="detailModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[80vh] overflow-y-auto p-6 relative">
+        <button type="button" id="detailClose" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">✕</button>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Talep Detayı</h3>
+        <div class="space-y-3" id="detailBody"></div>
+    </div>
+</div>

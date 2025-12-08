@@ -11,7 +11,7 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/Content/tailwind.min.css" />
     <link href='~/Content/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/select2.min.css" rel="stylesheet" />
     <style>
         body { font-family: 'Poppins', sans-serif; background: #f3f4f6; }
         .edit-container { max-width: 900px; margin: 2rem auto; padding: 2rem; }
@@ -131,8 +131,9 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
+    <script src="~/Scripts/select2-tr.js"></script>
     <script>
         let allUsers = [];
         const reservationId = @Model.Id;
@@ -163,11 +164,12 @@
             const currentAttendees = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ReservationAttendees.Select(a => a.UserId)));
             
             $('#attendees').select2({
+                language: 'tr',
                 data: allUsers.map(u => ({
                     id: u.id,
                     text: u.name + (u.department ? ` (${u.department})` : '')
                 })),
-                placeholder: 'Kat�l�mc� se�in veya ara...',
+                placeholder: 'Katılımcı seçin veya ara...',
                 allowClear: true,
                 width: '100%'
             });

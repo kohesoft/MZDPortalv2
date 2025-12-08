@@ -1,0 +1,194 @@
+@model IEnumerable<MZDNETWORK.Models.AccessChangeTicket>
+@using MZDNETWORK.Models
+@using Newtonsoft.Json
+@using System.Web
+@{
+    ViewBag.Title = "Taleplerim";
+
+    var roles = (ViewBag.Roles as IEnumerable<Role> ?? Enumerable.Empty<Role>()).ToDictionary(r => r.Id, r => r.Name);
+
+    string TypeLabel(AccessChangeRequestType type)
+    {
+        switch (type)
+        {
+            case AccessChangeRequestType.PermissionChange: return "Yetki Değişikliği";
+            case AccessChangeRequestType.RoleChange: return "Rol Değişikliği";
+            case AccessChangeRequestType.UserInfoChange: return "Kullanıcı Bilgisi";
+            default: return type.ToString();
+        }
+    }
+
+    string StatusBadge(AccessChangeStatus status)
+    {
+        switch (status)
+        {
+            case AccessChangeStatus.Pending: return "bg-amber-100 text-amber-800";
+            case AccessChangeStatus.Approved: return "bg-blue-100 text-blue-800";
+            case AccessChangeStatus.Applied: return "bg-emerald-100 text-emerald-800";
+            case AccessChangeStatus.Rejected: return "bg-rose-100 text-rose-800";
+            default: return "bg-gray-100 text-gray-800";
+        }
+    }
+
+    string StatusText(AccessChangeStatus status)
+    {
+        switch (status)
+        {
+            case AccessChangeStatus.Pending: return "Onay Bekliyor";
+            case AccessChangeStatus.Approved: return "Onaylandı";
+            case AccessChangeStatus.Applied: return "Uygulandı";
+            case AccessChangeStatus.Rejected: return "Reddedildi";
+            default: return status.ToString();
+        }
+    }
+
+    string Safe(string text) => string.IsNullOrWhiteSpace(text) ? "—" : text;
+
+    IEnumerable<string> NamesFromRoleIds(IEnumerable<int> ids)
+    {
+        foreach (var id in ids ?? Enumerable.Empty<int>())
+            yield return roles.ContainsKey(id) ? roles[id] : $"Rol #{id}";
+    }
+
+    string ToJsonData(object obj)
+    {
+        var json = JsonConvert.SerializeObject(obj);
+        return HttpUtility.JavaScriptStringEncode(json, true);
+    }
+}
+
+<div class="max-w-6xl mx-auto bg-white shadow-xl rounded-2xl p-6 md:p-8 mt-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
+        <div>
+            <p class="text-sm text-gray-500">Erişim / rol / kullanıcı bilgisi talepleriniz</p>
+            <h2 class="text-2xl font-semibold text-gray-900">Taleplerim</h2>
+        </div>
+        <a href="@Url.Action("Create")" class="inline-flex items-center px-4 py-2.5 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
+            <i class='bx bx-plus-circle mr-2 text-lg'></i> Yeni Talep
+        </a>
+    </div>
+
+    <div class="overflow-hidden border border-gray-100 rounded-xl">
+        <table class="min-w-full text-sm">
+            <thead class="bg-gray-50 text-gray-700">
+                <tr>
+                    <th class="px-4 py-3 text-left">#</th>
+                    <th class="px-4 py-3 text-left">Tip</th>
+                    <th class="px-4 py-3 text-left">Hedef</th>
+                    <th class="px-4 py-3 text-left">Durum</th>
+                    <th class="px-4 py-3 text-left">Oluşturma</th>
+                    <th class="px-4 py-3 text-left">Admin Notu</th>
+                    <th class="px-4 py-3 text-left">Detay</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 bg-white">
+                @foreach (var t in Model ?? Enumerable.Empty<AccessChangeTicket>())
+                {
+                    var detail = new
+                    {
+                        Id = t.Id,
+                        Tip = TypeLabel(t.RequestType),
+                        Durum = StatusText(t.Status),
+                        TalepEden = Safe(t.Requester?.Username),
+                        Hedef = Safe(t.TargetUser?.Username),
+                        Aciklama = Safe(t.Description),
+                        AdminNotu = Safe(t.AdminNote),
+                        Olusturma = t.CreatedAt.ToString("dd.MM.yyyy HH:mm"),
+                        MevcutRoller = JsonConvert.DeserializeObject<List<string>>(t.CurrentRolesJson ?? "[]") ?? new List<string>(),
+                        IstenenRoller = NamesFromRoleIds(JsonConvert.DeserializeObject<List<int>>(t.RequestedRolesJson ?? "[]") ?? new List<int>()),
+                        MevcutYetkiler = JsonConvert.DeserializeObject<List<string>>(t.CurrentPermissionsJson ?? "[]") ?? new List<string>(),
+                        IstenenYetkiler = JsonConvert.DeserializeObject<List<string>>(t.RequestedPermissionsJson ?? "[]") ?? new List<string>(),
+                        MevcutBilgi = JsonConvert.DeserializeObject<AccessChangeUserInfoDto>(t.CurrentUserInfoJson ?? "{}") ?? new AccessChangeUserInfoDto(),
+                        IstenenBilgi = JsonConvert.DeserializeObject<AccessChangeUserInfoDto>(t.RequestedUserInfoJson ?? "{}") ?? new AccessChangeUserInfoDto()
+                    };
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-4 py-3 font-medium text-gray-800">@t.Id</td>
+                        <td class="px-4 py-3">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full bg-indigo-50 text-indigo-800 text-xs font-semibold">@TypeLabel(t.RequestType)</span>
+                        </td>
+                        <td class="px-4 py-3 text-gray-800">@Safe(t.TargetUser?.Username)</td>
+                        <td class="px-4 py-3">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold @StatusBadge(t.Status)">@StatusText(t.Status)</span>
+                        </td>
+                        <td class="px-4 py-3 text-gray-700">@t.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td class="px-4 py-3 text-gray-600">@Safe(t.AdminNote)</td>
+                        <td class="px-4 py-3">
+                            <button type="button" class="inline-flex items-center px-3 py-1.5 rounded bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-800 detail-btn" data-detail="@ToJsonData(detail)">
+                                Detay
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="detailModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[80vh] overflow-y-auto p-6 relative">
+        <button type="button" id="detailClose" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">✕</button>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4">Talep Detayı</h3>
+        <div class="space-y-3" id="detailBody"></div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        const modal = document.getElementById('detailModal');
+        const body = document.getElementById('detailBody');
+        const closeBtn = document.getElementById('detailClose');
+
+        function line(label, value) {
+            return `<div class="flex flex-col sm:flex-row sm:items-center sm:gap-2"><span class="text-gray-500 text-sm w-40">${label}</span><span class="text-gray-800 text-sm">${value || '—'}</span></div>`;
+        }
+
+        function list(label, items) {
+            const content = (items && items.length) ? items.map(i => `<span class="inline-flex px-2 py-1 bg-gray-100 rounded text-xs text-gray-800 mr-1 mb-1">${i}</span>`).join('') : '—';
+            return `<div class="flex flex-col sm:flex-row sm:gap-2"><span class="text-gray-500 text-sm w-40">${label}</span><div class="flex flex-wrap">${content}</div></div>`;
+        }
+
+        function userInfo(label, info) {
+            if (!info) return line(label, '—');
+            const rows = [
+                info.Name ? `${info.Name} ${info.Surname || ''}`.trim() : '',
+                info.Username,
+                info.Department,
+                info.Title,
+                info.InternalEmail,
+                info.ExternalEmail,
+                info.PhoneNumber,
+                info.Intercom
+            ].filter(Boolean);
+            return list(label, rows);
+        }
+
+        document.querySelectorAll('.detail-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const data = JSON.parse(btn.dataset.detail || '{}');
+                const sections = [
+                    line('Talep No', data.Id),
+                    line('Tip', data.Tip),
+                    line('Durum', data.Durum),
+                    line('Talep Eden', data.TalepEden),
+                    line('Hedef', data.Hedef),
+                    line('Oluşturma', data.Olusturma),
+                    line('Açıklama', data.Aciklama),
+                    line('Admin Notu', data.AdminNotu),
+                    list('Mevcut Roller', data.MevcutRoller),
+                    list('İstenen Roller', data.IstenenRoller),
+                    list('Mevcut Yetkiler', data.MevcutYetkiler),
+                    list('İstenen Yetkiler', data.IstenenYetkiler),
+                    userInfo('Mevcut Bilgi', data.MevcutBilgi),
+                    userInfo('İstenen Bilgi', data.IstenenBilgi)
+                ];
+                body.innerHTML = sections.join('');
+                modal.classList.remove('hidden');
+            });
+        });
+
+        closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.add('hidden');
+        });
+    })();
+</script>

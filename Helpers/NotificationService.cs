@@ -53,6 +53,36 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
+        /// Kullanıcıya detaylı bildirim oluşturur (başlık, mesaj, tip ve ilişkili ID ile)
+        /// </summary>
+        public bool CreateNotification(string userId, string title, string message, string type = "Info", string relatedId = null)
+        {
+            try
+            {
+                var notification = new Notification
+                {
+                    UserId = userId,
+                    Message = message,
+                    IsRead = false,
+                    CreatedDate = DateTime.Now
+                    // Title, Type, RelatedId alanları varsa ekleyin:
+                    // Title = title,
+                    // Type = type,
+                    // RelatedId = relatedId
+                };
+
+                _context.Notifications.Add(notification);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Bildirim oluşturma hatası: {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Toplantı rezervasyonu oluşturulduğunda bildirim gönderir
         /// </summary>
         public void SendMeetingCreatedNotification(Reservation reservation)

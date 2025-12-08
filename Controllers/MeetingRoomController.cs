@@ -110,6 +110,36 @@ namespace MZDNETWORK.Controllers
                 return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "View")]
+        [HttpGet]
+        public JsonResult GetMeetingRooms()
+        {
+            try
+            {
+                var rooms = db.MeetingRooms
+                    .Where(r => r.IsActive)
+                    .OrderBy(r => r.OrderIndex)
+                    .Select(r => new
+                    {
+                        id = r.Id,
+                        name = r.Name,
+                        location = r.Location,
+                        capacity = r.Capacity,
+                        description = r.Description,
+                        features = r.Features,
+                        colorCode = r.ColorCode
+                    })
+                    .ToList();
+
+                return Json(rooms, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -625,7 +655,8 @@ namespace MZDNETWORK.Controllers
                         status = a.Reservation.Status.ToString().ToLower(),
                         hasAccepted = a.HasAccepted,
                         hasDeclined = a.HasDeclined,
-                        responseDate = a.ResponseDate.HasValue ? a.ResponseDate.Value.ToString("yyyy-MM-dd HH:mm") : null
+                        responseDate = a.ResponseDate.HasValue ? a.ResponseDate.Value.ToString("yyyy-MM-dd HH:mm") : null,
+                        isOrganizer = a.Reservation.UserId == user.Id
                     })
                     .ToList();
 
@@ -823,5 +854,383 @@ namespace MZDNETWORK.Controllers
                 return Json(new { success = false, message = "Bir hata oluştu" });
             }
         }
+
+        #region Meeting Actions
+
+        [HttpGet]
+        public JsonResult GetMeetingActions(int reservationId)
+        {
+            try
+            {
+                var actions = db.MeetingActions
+                    .Where(a => a.ReservationId == reservationId)
+                    .OrderBy(a => a.OrderIndex)
+                    .Select(a => new
+                    {
+                        id = a.Id,
+                        title = a.Title,
+                        description = a.Description,
+                        responsiblePerson = a.ResponsiblePerson,
+                        dueDate = a.DueDate,
+                        status = a.Status.ToString().ToLower(),
+                        orderIndex = a.OrderIndex,
+                        createdBy = a.CreatedByUserName,
+                        createdAt = a.CreatedAt,
+                        completedAt = a.CompletedAt,
+                        notes = a.Notes
+                    })
+                    .ToList();
+
+                return Json(actions, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult AddAction(
+            int reservationId,
+            string title,
+            string description,
+            string responsiblePerson,
+            DateTime? dueDate,
+            string notes)
+        {
+            try
+            {
+                var username = User.Identity.Name;
+                if (string.IsNullOrEmpty(username))
+                    return Json(new { success = false, message = "Kullanıcı bulunamadı" });
+
+                var currentUser = db.Users.FirstOrDefault(u => u.Username == username);
+                if (currentUser == null)
+                    return Json(new { success = false, message = "Kullanıcı veritabanında bulunamadı" });
+
+                var reservation = db.Reservations.Find(reservationId);
+                if (reservation == null)
+                    return Json(new { success = false, message = "Toplantı bulunamadı" });
+
+                // Son sıra numarasını bul
+                var maxOrder = db.MeetingActions
+                    .Where(a => a.ReservationId == reservationId)
+                    .Max(a => (int?)a.OrderIndex) ?? 0;
+
+                var action = new MeetingAction
+                {
+                    ReservationId = reservationId,
+                    Title = title,
+                    Description = description,
+                    ResponsiblePerson = responsiblePerson,
+                    DueDate = dueDate,
+                    Notes = notes,
+                    Status = ActionStatus.Pending,
+                    OrderIndex = maxOrder + 1,
+                    CreatedByUserId = currentUser.Id,
+                    CreatedByUserName = $"{currentUser.Name} {currentUser.Surname}",
+                    CreatedAt = DateTime.Now
+                };
+
+                db.MeetingActions.Add(action);
+                db.SaveChanges();
+
+                // SignalR ile tüm istemcilere bildir
+                try
+                {
+                    var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<MZDNETWORK.Hubs.NotificationHub>();
+                    hubContext.Clients.All.refreshMeetings();
+                }
+                catch { /* SignalR hatası görmezden gelinir */ }
+
+                return Json(new { success = true, message = "Aksiyon başarıyla eklendi" });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Aksiyon ekleme hatası: {ex.Message}");
+                return Json(new { success = false, message = "Bir hata oluştu" });
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult UpdateActionStatus(int id, int status)
+        {
+            try
+            {
+                var action = db.MeetingActions.Find(id);
+                if (action == null)
+                    return Json(new { success = false, message = "Aksiyon bulunamadı" });
+
+                action.Status = (ActionStatus)status;
+                action.UpdatedAt = DateTime.Now;
+
+                if (status == (int)ActionStatus.Completed)
+                {
+                    action.CompletedAt = DateTime.Now;
+                }
+
+                db.SaveChanges();
+
+                // SignalR ile tüm istemcilere bildir
+                try
+                {
+                    var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<MZDNETWORK.Hubs.NotificationHub>();
+                    hubContext.Clients.All.refreshMeetings();
+                }
+                catch { /* SignalR hatası görmezden gelinir */ }
+
+                return Json(new { success = true, message = "Durum güncellendi" });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Durum güncelleme hatası: {ex.Message}");
+                return Json(new { success = false, message = "Bir hata oluştu" });
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult DeleteAction(int id)
+        {
+            try
+            {
+                var action = db.MeetingActions.Find(id);
+                if (action == null)
+                    return Json(new { success = false, message = "Aksiyon bulunamadı" });
+
+                db.MeetingActions.Remove(action);
+                db.SaveChanges();
+
+                // SignalR ile tüm istemcilere bildir
+                try
+                {
+                    var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<MZDNETWORK.Hubs.NotificationHub>();
+                    hubContext.Clients.All.refreshMeetings();
+                }
+                catch { /* SignalR hatası görmezden gelinir */ }
+
+                return Json(new { success = true, message = "Aksiyon silindi" });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Aksiyon silme hatası: {ex.Message}");
+                return Json(new { success = false, message = "Bir hata oluştu" });
+            }
+        }
+
+        #endregion
+
+        #region Yönetim İşlemleri
+
+        /// <summary>
+        /// Toplantı salonu yönetim sayfası
+        /// </summary>
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        public ActionResult ManageRooms()
+        {
+            var rooms = db.MeetingRooms.OrderBy(r => r.Name).ToList();
+            return View(rooms);
+        }
+
+        /// <summary>
+        /// Yeni toplantı salonu ekleme
+        /// </summary>
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        [HttpPost]
+        public JsonResult AddRoom(string name, int capacity, string description, string features = null, string colorCode = null)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(name))
+                    return Json(new { success = false, message = "Salon adı gereklidir" });
+
+                if (capacity <= 0)
+                    return Json(new { success = false, message = "Kapasite 0'dan büyük olmalıdır" });
+
+                // Aynı isimde salon var mı kontrol et
+                if (db.MeetingRooms.Any(r => r.Name == name))
+                    return Json(new { success = false, message = "Bu isimde bir salon zaten mevcut" });
+
+                var room = new MeetingRoom
+                {
+                    Name = name,
+                    Capacity = capacity,
+                    Description = description ?? "",
+                    Features = features ?? "",
+                    ColorCode = colorCode ?? "#3B82F6",
+                    IsActive = true
+                };
+
+                db.MeetingRooms.Add(room);
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Salon başarıyla eklendi", room = new { room.Id, room.Name, room.Capacity, room.Description } });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Salon ekleme hatası: {ex.Message}");
+                return Json(new { success = false, message = "Bir hata oluştu" });
+            }
+        }
+
+        /// <summary>
+        /// Toplantı salonu güncelleme
+        /// </summary>
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        [HttpPost]
+        public JsonResult UpdateRoom(int id, string name, int capacity, string description, string features = null, string colorCode = null)
+        {
+            try
+            {
+                var room = db.MeetingRooms.Find(id);
+                if (room == null)
+                    return Json(new { success = false, message = "Salon bulunamadı" });
+
+                if (string.IsNullOrWhiteSpace(name))
+                    return Json(new { success = false, message = "Salon adı gereklidir" });
+
+                if (capacity <= 0)
+                    return Json(new { success = false, message = "Kapasite 0'dan büyük olmalıdır" });
+
+                // Başka salon aynı ismi kullanıyor mu kontrol et
+                if (db.MeetingRooms.Any(r => r.Name == name && r.Id != id))
+                    return Json(new { success = false, message = "Bu isimde bir salon zaten mevcut" });
+
+                room.Name = name;
+                room.Capacity = capacity;
+                room.Description = description ?? "";
+                room.Features = features ?? "";
+                room.ColorCode = colorCode ?? "#3B82F6";
+                room.UpdatedAt = DateTime.Now;
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Salon güncellendi" });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Salon güncelleme hatası: {ex.Message}");
+                return Json(new { success = false, message = "Bir hata oluştu" });
+            }
+        }
+
+        /// <summary>
+        /// Toplantı salonu silme (soft delete)
+        /// </summary>
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        [HttpPost]
+        public JsonResult DeleteRoom(int id)
+        {
+            try
+            {
+                var room = db.MeetingRooms.Find(id);
+                if (room == null)
+                    return Json(new { success = false, message = "Salon bulunamadı" });
+
+                // Gelecekteki rezervasyonlar var mı kontrol et
+                var futureReservations = db.Reservations
+                    .Where(r => r.RoomId == id && r.Date >= DateTime.Today)
+                    .Count();
+
+                if (futureReservations > 0)
+                    return Json(new { success = false, message = $"Bu salonda {futureReservations} adet gelecek rezervasyon var. Önce bunları iptal edin." });
+
+                // Soft delete
+                room.IsActive = false;
+                room.UpdatedAt = DateTime.Now;
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Salon devre dışı bırakıldı" });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Salon silme hatası: {ex.Message}");
+                return Json(new { success = false, message = "Bir hata oluştu" });
+            }
+        }
+
+        /// <summary>
+        /// Devre dışı salonu tekrar aktif etme
+        /// </summary>
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        [HttpPost]
+        public JsonResult ActivateRoom(int id)
+        {
+            try
+            {
+                var room = db.MeetingRooms.Find(id);
+                if (room == null)
+                    return Json(new { success = false, message = "Salon bulunamadı" });
+
+                room.IsActive = true;
+                room.UpdatedAt = DateTime.Now;
+                db.SaveChanges();
+
+                return Json(new { success = true, message = "Salon aktif edildi" });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Salon aktif etme hatası: {ex.Message}");
+                return Json(new { success = false, message = "Bir hata oluştu" });
+            }
+        }
+
+        /// <summary>
+        /// Onaylanan rezervasyonu silme (admin)
+        /// </summary>
+        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        [HttpPost]
+        public JsonResult DeleteReservation(int id)
+        {
+            try
+            {
+                var reservation = db.Reservations
+                    .Include(r => r.ReservationAttendees.Select(ra => ra.User))
+                    .FirstOrDefault(r => r.Id == id);
+
+                if (reservation == null)
+                    return Json(new { success = false, message = "Rezervasyon bulunamadı" });
+
+                var attendees = reservation.ReservationAttendees.ToList();
+                var organizerName = User.Identity.GetUserName();
+
+                // Katılımcılara bildirim gönder
+                foreach (var attendee in attendees)
+                {
+                    if (attendee.User != null)
+                    {
+                        _notificationService.CreateNotification(
+                            userId: attendee.UserId.ToString(),
+                            title: "Toplantı İptal Edildi",
+                            message: $"{reservation.Title} toplantısı yönetici tarafından iptal edildi.",
+                            type: "MeetingCancelled",
+                            relatedId: reservation.Id.ToString()
+                        );
+                    }
+                }
+
+                // Rezervasyonu sil
+                db.Reservations.Remove(reservation);
+                db.SaveChanges();
+
+                // SignalR ile tüm istemcilere bildir
+                try
+                {
+                    var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<MZDNETWORK.Hubs.NotificationHub>();
+                    hubContext.Clients.All.refreshMeetings();
+                }
+                catch { /* SignalR hatası görmezden gelinir */ }
+
+                return Json(new { success = true, message = "Rezervasyon silindi ve katılımcılara bildirim gönderildi" });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Rezervasyon silme hatası: {ex.Message}");
+                return Json(new { success = false, message = "Bir hata oluştu" });
+            }
+        }
+
+        #endregion
     }
 }

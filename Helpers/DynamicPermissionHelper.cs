@@ -25,18 +25,21 @@ namespace MZDNETWORK.Helpers
         {
             try
             {
+                var variants = PermissionPathTranslator.GetPathVariants(permissionPath).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+                if (!variants.Any()) return false;
+
                 // Cache'den kontrol et
                 var cachedPermissions = PermissionCacheService.GetUserPermissions(userId);
                 if (cachedPermissions != null)
                 {
-                    return CheckPermissionFromCache(cachedPermissions, permissionPath, action);
+                    return variants.Any(pathVariant => CheckPermissionFromCache(cachedPermissions, pathVariant, action));
                 }
 
                 // Cache'de yoksa veritabanından al ve cache'le
                 var permissions = GetUserPermissionsFromDatabase(userId);
                 PermissionCacheService.CacheUserPermissions(userId, permissions);
 
-                return CheckPermissionFromData(permissions, permissionPath, action);
+                return variants.Any(pathVariant => CheckPermissionFromData(permissions, pathVariant, action));
             }
             catch (Exception ex)
             {
