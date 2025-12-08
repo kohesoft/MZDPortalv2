@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,18 +9,18 @@ using Newtonsoft.Json;
 namespace MZDNETWORK.Helpers
 {
     /// <summary>
-    /// Dinamik yetki sistemi için ana helper sınıfı
-    /// Hiyerarşik yetki kontrolü, cache yönetimi ve inheritance logic
+    /// Dinamik yetki sistemi iÃ§in ana helper sÄ±nÄ±fÄ±
+    /// HiyerarÅŸik yetki kontrolÃ¼, cache yÃ¶netimi ve inheritance logic
     /// </summary>
     public static class DynamicPermissionHelper
     {
         /// <summary>
-        /// Kullanıcının belirtilen yetki yoluna erişimi olup olmadığını kontrol eder
+        /// KullanÄ±cÄ±nÄ±n belirtilen yetki yoluna eriÅŸimi olup olmadÄ±ÄŸÄ±nÄ± kontrol eder
         /// </summary>
-        /// <param name="userId">Kullanıcı ID</param>
-        /// <param name="permissionPath">Yetki yolu (örn: "UserManagement.Create")</param>
+        /// <param name="userId">KullanÄ±cÄ± ID</param>
+        /// <param name="permissionPath">Yetki yolu (Ã¶rn: "KullaniciYonetimi.Create")</param>
         /// <param name="action">CRUD aksiyonu (View, Create, Edit, Delete, Manage)</param>
-        /// <returns>Yetki var mı</returns>
+        /// <returns>Yetki var mÄ±</returns>
         public static bool CheckPermission(int userId, string permissionPath, string action = "View")
         {
             try
@@ -35,7 +35,7 @@ namespace MZDNETWORK.Helpers
                     return variants.Any(pathVariant => CheckPermissionFromCache(cachedPermissions, pathVariant, action));
                 }
 
-                // Cache'de yoksa veritabanından al ve cache'le
+                // Cache'de yoksa veritabanÄ±ndan al ve cache'le
                 var permissions = GetUserPermissionsFromDatabase(userId);
                 PermissionCacheService.CacheUserPermissions(userId, permissions);
 
@@ -58,7 +58,7 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// Username ile yetki kontrolü (backward compatibility)
+        /// Username ile yetki kontrolÃ¼ (backward compatibility)
         /// </summary>
         public static bool CheckPermission(string username, string permissionPath, string action = "View")
         {
@@ -67,7 +67,7 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// Kullanıcının tüm yetki bilgilerini veritabanından alır
+        /// KullanÄ±cÄ±nÄ±n tÃ¼m yetki bilgilerini veritabanÄ±ndan alÄ±r
         /// </summary>
         private static UserPermissionData GetUserPermissionsFromDatabase(int userId)
         {
@@ -86,21 +86,21 @@ namespace MZDNETWORK.Helpers
                     LastUpdated = DateTime.Now
                 };
 
-                // Kullanıcının rollerini al (hem yeni hem eski sistem)
+                // KullanÄ±cÄ±nÄ±n rollerini al (hem yeni hem eski sistem)
                 var userRoles = GetUserRoles(userId);
                 userPermissionData.Roles.AddRange(userRoles);
 
-                // SuperAdmin kontrolü
+                // SuperAdmin kontrolÃ¼
                 userPermissionData.IsSuperAdmin = userRoles.Contains("SuperAdmin") || userRoles.Contains("Sys");
 
                 if (userPermissionData.IsSuperAdmin)
                 {
-                    // SuperAdmin tüm yetkilere sahip
+                    // SuperAdmin tÃ¼m yetkilere sahip
                     userPermissionData.Permissions = GetAllPermissions();
                 }
                 else
                 {
-                    // Normal kullanıcı için rol bazlı yetkileri al
+                    // Normal kullanÄ±cÄ± iÃ§in rol bazlÄ± yetkileri al
                     userPermissionData.Permissions = GetRoleBasedPermissions(userRoles.ToList(), context);
                 }
 
@@ -109,7 +109,7 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// Cache'den yetki kontrolü
+        /// Cache'den yetki kontrolÃ¼
         /// </summary>
         private static bool CheckPermissionFromCache(UserPermissionData permissions, string permissionPath, string action)
         {
@@ -117,13 +117,13 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// UserPermissionData'dan yetki kontrolü (inheritance logic ile)
+        /// UserPermissionData'dan yetki kontrolÃ¼ (inheritance logic ile)
         /// </summary>
         private static bool CheckPermissionFromData(UserPermissionData permissions, string permissionPath, string action)
         {
             if (permissions == null) return false;
 
-            // SuperAdmin kontrolü
+            // SuperAdmin kontrolÃ¼
             if (permissions.IsSuperAdmin) return true;
 
             // 1) Exact match for base path
@@ -132,7 +132,7 @@ namespace MZDNETWORK.Helpers
                 return CheckActionPermission(permissions.Permissions[permissionPath], action);
             }
 
-            // 2) Exact match for action-suffixed path (e.g. "Operational.LeaveRequest.Edit")
+            // 2) Exact match for action-suffixed path (e.g. "Operasyon.IzinTalebi.Edit")
             if (!string.Equals(action, "View", StringComparison.OrdinalIgnoreCase))
             {
                 var actionAppendedPath = $"{permissionPath}.{action}";
@@ -142,19 +142,19 @@ namespace MZDNETWORK.Helpers
                 }
             }
 
-            // Inheritance kontrolü (parent yetkileri)
+            // Inheritance kontrolÃ¼ (parent yetkileri)
             return CheckInheritedPermission(permissions.Permissions, permissionPath, action);
         }
 
         /// <summary>
-        /// Parent yetki kontrolü (inheritance logic)
-        /// UserManagement.Create → UserManagement → Portal
+        /// Parent yetki kontrolÃ¼ (inheritance logic)
+        /// KullaniciYonetimi.Create â†’ KullaniciYonetimi â†’ Portal
         /// </summary>
         private static bool CheckInheritedPermission(Dictionary<string, PermissionDetails> permissions, string permissionPath, string action)
         {
             var pathParts = permissionPath.Split('.');
             
-            // Yukarıdan aşağıya parent path'leri kontrol et
+            // YukarÄ±dan aÅŸaÄŸÄ±ya parent path'leri kontrol et
             for (int i = pathParts.Length - 1; i > 0; i--)
             {
                 var parentPath = string.Join(".", pathParts.Take(i));
@@ -165,7 +165,7 @@ namespace MZDNETWORK.Helpers
                         return true;
                 }
 
-                // Wildcard kontrolü (UserManagement.*)
+                // Wildcard kontrolÃ¼ (KullaniciYonetimi.*)
                 var wildcardPath = parentPath + ".*";
                 if (permissions.ContainsKey(wildcardPath))
                 {
@@ -198,7 +198,7 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// Kullanıcının tüm rollerini al (backward compatibility ile)
+        /// KullanÄ±cÄ±nÄ±n tÃ¼m rollerini al (backward compatibility ile)
         /// </summary>
         public static string[] GetUserRoles(int userId)
         {
@@ -237,7 +237,7 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// Tüm yetkileri al (SuperAdmin için)
+        /// TÃ¼m yetkileri al (SuperAdmin iÃ§in)
         /// </summary>
         private static Dictionary<string, PermissionDetails> GetAllPermissions()
         {
@@ -270,7 +270,7 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// Rol bazlı yetkileri al
+        /// Rol bazlÄ± yetkileri al
         /// </summary>
         private static Dictionary<string, PermissionDetails> GetRoleBasedPermissions(List<string> userRoles, MZDNETWORKContext context)
         {
@@ -322,7 +322,7 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// Kullanıcının belirli bir role sahip olup olmadığını kontrol et
+        /// KullanÄ±cÄ±nÄ±n belirli bir role sahip olup olmadÄ±ÄŸÄ±nÄ± kontrol et
         /// </summary>
         public static bool UserHasRole(int userId, string roleName)
         {
@@ -331,7 +331,7 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// Kullanıcının herhangi bir rolü olup olmadığını kontrol et
+        /// KullanÄ±cÄ±nÄ±n herhangi bir rolÃ¼ olup olmadÄ±ÄŸÄ±nÄ± kontrol et
         /// </summary>
         public static bool UserHasAnyRole(int userId, params string[] roleNames)
         {
@@ -340,7 +340,7 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// Cache'i temizle (rol değişikliklerinde kullan)
+        /// Cache'i temizle (rol deÄŸiÅŸikliklerinde kullan)
         /// </summary>
         public static void InvalidateUserCache(int userId)
         {
@@ -348,7 +348,7 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// Tüm cache'i temizle (sistem güncellemelerinde)
+        /// TÃ¼m cache'i temizle (sistem gÃ¼ncellemelerinde)
         /// </summary>
         public static void InvalidateAllCache()
         {
@@ -356,7 +356,7 @@ namespace MZDNETWORK.Helpers
         }
 
         /// <summary>
-        /// Cache'i temizler (Permission değişikliklerinden sonra)
+        /// Cache'i temizler (Permission deÄŸiÅŸikliklerinden sonra)
         /// </summary>
         public static void ClearPermissionCache()
         {

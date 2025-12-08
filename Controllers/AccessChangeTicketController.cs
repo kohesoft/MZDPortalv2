@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -37,7 +37,7 @@ namespace MZDNETWORK.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            PopulateLists();
+            PopulateLists(onlyCurrentUser: true);
             return View(new AccessChangeTicketViewModel());
         }
 
@@ -47,7 +47,7 @@ namespace MZDNETWORK.Controllers
         {
             if (!ModelState.IsValid)
             {
-                PopulateLists();
+                PopulateLists(onlyCurrentUser: true);
                 return View(vm);
             }
 
@@ -56,7 +56,7 @@ namespace MZDNETWORK.Controllers
             if (targetUser == null)
             {
                 ModelState.AddModelError("TargetUserId", "Hedef kullanıcı bulunamadı.");
-                PopulateLists();
+                PopulateLists(onlyCurrentUser: true);
                 return View(vm);
             }
 
@@ -84,15 +84,15 @@ namespace MZDNETWORK.Controllers
             _db.AccessChangeTickets.Add(ticket);
             _db.SaveChanges();
 
-            _notificationService.CreateNotification(targetUser.Id.ToString(), "📝 Yeni erişim talebi oluşturuldu.");
-            _notificationService.CreateNotification(requesterId.ToString(), "✅ Talebiniz kaydedildi ve yönetici onayına gönderildi.");
+            _notificationService.CreateNotification(targetUser.Id.ToString(), "Yeni erişim talebi oluşturuldu.");
+            _notificationService.CreateNotification(requesterId.ToString(), "Talebiniz kaydedildi ve yönetici onayına gönderildi.");
 
             return RedirectToAction("Index");
         }
 
         // Admin listesi
         [HttpGet]
-        [DynamicAuthorize(Permission = "UserManagement.AccessChange", Action = "Manage")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.YetkiDegisikligi", Action = "Manage")]
         public ActionResult AdminList()
         {
             var tickets = _db.AccessChangeTickets
@@ -101,13 +101,13 @@ namespace MZDNETWORK.Controllers
                 .OrderByDescending(t => t.CreatedAt)
                 .ToList();
             BackfillSnapshots(tickets);
-            PopulateLists();
+            PopulateLists(onlyCurrentUser: true);
             return View(tickets);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DynamicAuthorize(Permission = "UserManagement.AccessChange", Action = "Manage")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.YetkiDegisikligi", Action = "Manage")]
         public ActionResult Approve(int id, string adminNote)
         {
             var ticket = _db.AccessChangeTickets.Find(id);
@@ -119,7 +119,7 @@ namespace MZDNETWORK.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DynamicAuthorize(Permission = "UserManagement.AccessChange", Action = "Manage")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.YetkiDegisikligi", Action = "Manage")]
         public ActionResult Reject(int id, string adminNote)
         {
             var ticket = _db.AccessChangeTickets.Find(id);
@@ -250,7 +250,6 @@ namespace MZDNETWORK.Controllers
         {
             user.Name = newInfo.Name;
             user.Surname = newInfo.Surname;
-            user.Username = newInfo.Username ?? user.Username;
             user.InternalEmail = newInfo.InternalEmail;
             user.ExternalEmail = newInfo.ExternalEmail;
             user.Department = newInfo.Department;
@@ -266,13 +265,13 @@ namespace MZDNETWORK.Controllers
             var targetId = ticket.TargetUserId.ToString();
             if (approved)
             {
-                _notificationService.CreateNotification(requesterId, "🎉 Talebiniz onaylandı ve uygulandı.");
-                _notificationService.CreateNotification(targetId, "✅ Erişim değişikliğiniz uygulandı.");
+                _notificationService.CreateNotification(requesterId, "Talebiniz onaylandı ve uygulandı.");
+                _notificationService.CreateNotification(targetId, "Erişim değişikliğiniz uygulandı.");
             }
             else
             {
-                _notificationService.CreateNotification(requesterId, "❌ Talebiniz reddedildi.");
-                _notificationService.CreateNotification(targetId, "❌ Erişim değişikliği talebi reddedildi.");
+                _notificationService.CreateNotification(requesterId, "Talebiniz reddedildi.");
+                _notificationService.CreateNotification(targetId, "Erişim değişikliği talebi reddedildi.");
             }
         }
 
@@ -348,9 +347,29 @@ namespace MZDNETWORK.Controllers
             }
         }
 
-        private void PopulateLists()
+        private void PopulateLists(bool onlyCurrentUser = false)
         {
-            ViewBag.Users = _db.Users
+            var currentUserId = GetCurrentUserId();
+            var currentUsername = User?.Identity?.Name;
+
+            var usersQuery = _db.Users.AsQueryable();
+            if (onlyCurrentUser)
+            {
+                if (currentUserId > 0)
+                {
+                    usersQuery = usersQuery.Where(u => u.Id == currentUserId);
+                }
+                else if (!string.IsNullOrWhiteSpace(currentUsername))
+                {
+                    usersQuery = usersQuery.Where(u => u.Username == currentUsername);
+                }
+                else
+                {
+                    usersQuery = usersQuery.Where(u => false);
+                }
+            }
+
+            ViewBag.Users = usersQuery
                 .OrderBy(u => u.Username)
                 .Select(u => new AccessChangeUserListItem
                 {
@@ -394,3 +413,4 @@ namespace MZDNETWORK.Controllers
         }
     }
 }
+

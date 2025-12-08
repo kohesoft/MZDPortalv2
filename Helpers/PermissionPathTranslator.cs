@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,13 +12,13 @@ namespace MZDNETWORK.Helpers
     {
         private static readonly Dictionary<string, string> RootMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
-            { "UserManagement", "KullaniciYonetimi" },
-            { "RoleManagement", "RolYonetimi" },
-            { "SystemManagement", "SistemYonetimi" },
-            { "Operational", "Operasyon" },
-            { "HumanResources", "InsanKaynaklari" },
-            { "InformationTechnology", "BilgiIslem" },
-            { "Food", "Yemek" }
+            { "KullaniciYonetimi", "KullaniciYonetimi" },
+            { "RolYonetimi", "RolYonetimi" },
+            { "SistemYonetimi", "SistemYonetimi" },
+            { "Operasyon", "Operasyon" },
+            { "InsanKaynaklari", "InsanKaynaklari" },
+            { "BilgiIslem", "BilgiIslem" },
+            { "Yemek", "Yemek" }
         };
 
         private static readonly Dictionary<string, string> SegmentMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -26,10 +26,10 @@ namespace MZDNETWORK.Helpers
             { "AccessChange", "YetkiDegisikligi" },
             { "PasswordResetRequests", "SifreSifirlamaTalepleri" },
             { "UserInfo", "KullaniciBilgisi" },
-            { "UserManagement", "KullaniciIslemleri" },
+            { "KullaniciYonetimi", "KullaniciIslemleri" },
             { "RolePermission", "RolYetkileri" },
             { "PermissionTree", "YetkiAgaci" },
-            { "RoleManagement", "RolIslemleri" },
+            { "RolYonetimi", "RolIslemleri" },
             { "Notification", "Bildirim" },
             { "Performance", "Performans" },
             { "Chat", "Sohbet" },
@@ -47,7 +47,7 @@ namespace MZDNETWORK.Helpers
             { "VisitorEntry", "ZiyaretciGiris" },
             { "LateArrivalReport", "GecGelisRaporu" },
             { "Announcements", "Duyurular" },
-            { "FoodPhoto", "YemekFoto" },
+            { "YemekPhoto", "YemekFoto" },
             { "BreakPhoto", "MolaFoto" },
             { "Merkez", "Merkez" },
             { "Yerleske", "Yerleske" }
@@ -98,3 +98,4 @@ namespace MZDNETWORK.Helpers
         }
     }
 }
+

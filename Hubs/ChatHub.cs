@@ -6,7 +6,7 @@ using MZDNETWORK.Data;
 using MZDNETWORK.Models;
 using System;
 
-[DynamicAuthorize(Permission = "Operational.Chat", Action = "Create")]
+[DynamicAuthorize(Permission = "Operasyon.Sohbet", Action = "Create")]
 public class ChatHub : Hub
 {
     private static HashSet<string> ConnectedUsers = new HashSet<string>();
@@ -112,3 +112,4 @@ public class ChatHub : Hub
         base.Dispose(disposing);
     }
 }
+

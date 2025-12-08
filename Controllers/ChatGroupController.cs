@@ -1,14 +1,14 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
 using MZDNETWORK.Attributes;
-using MZDNETWORK.Data; // ApplicationDbContext için ekleniyor
+using MZDNETWORK.Data; // ApplicationDbContext iÃ§in ekleniyor
 using MZDNETWORK.Data;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "Operational.Chat", Action = "Manage")]
+    [DynamicAuthorize(Permission = "Operasyon.Sohbet", Action = "Manage")]
     public class ChatGroupController : Controller
     {
         private readonly MZDNETWORKContext _db = new MZDNETWORKContext();
@@ -20,7 +20,7 @@ namespace MZDNETWORK.Controllers
             return View(groups);
         }
 
-        // Grup oluþturma
+        // Grup oluÅŸturma
         [HttpGet]
         public ActionResult Create()
         {
@@ -38,13 +38,13 @@ namespace MZDNETWORK.Controllers
             memberIds = memberIds ?? new int[0];
             if (ModelState.IsValid)
             {
-                // Giriþ yapan kullanýcýyý bul
+                // GiriÅŸ yapan kullanÄ±cÄ±yÄ± bul
                 var username = User.Identity.Name;
                 var currentUser = _db.Users.FirstOrDefault(u => u.Username == username);
                 if (currentUser != null)
                     model.CreatedBy = currentUser.Id;
                 else
-                    model.CreatedBy = 1; // fallback, sistem kullanýcýsý veya hata
+                    model.CreatedBy = 1; // fallback, sistem kullanÄ±cÄ±sÄ± veya hata
                 model.CreatedAt = System.DateTime.Now;
                 model.IsActive = true;
                 model.AllowedRoles = new List<Role>();
@@ -58,7 +58,7 @@ namespace MZDNETWORK.Controllers
                     model.Members.Add(user);
                 _db.ChatGroups.Add(model);
                 _db.SaveChanges();
-                // ChatGroupMember kayýtlarý oluþtur
+                // ChatGroupMember kayÄ±tlarÄ± oluÅŸtur
                 foreach (var userId in memberIds)
                 {
                     var canWrite = Request.Form[$"canWrite_{userId}"] == "true";
@@ -78,7 +78,7 @@ namespace MZDNETWORK.Controllers
             return View(model);
         }
 
-        // Grup düzenleme
+        // Grup dÃ¼zenleme
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -86,7 +86,7 @@ namespace MZDNETWORK.Controllers
             if (group == null) return HttpNotFound();
             ViewBag.Roles = _db.Roles.Where(r => r.IsActive).ToList();
             ViewBag.Users = _db.Users.ToList();
-            // Üyelerin yazma yetkisi
+            // Ãœyelerin yazma yetkisi
             var memberCanWrite = _db.ChatGroupMembers.Where(m => m.ChatGroupId == id)
                 .ToDictionary(m => m.UserId, m => m.CanWrite);
             ViewBag.MemberCanWrite = memberCanWrite;
@@ -106,7 +106,7 @@ namespace MZDNETWORK.Controllers
             {
                 group.Name = model.Name;
                 group.Description = model.Description;
-                // Koleksiyonlarý önce temizle
+                // KoleksiyonlarÄ± Ã¶nce temizle
                 group.AllowedRoles.Clear();
                 group.Managers.Clear();
                 group.Members.Clear();
@@ -117,15 +117,15 @@ namespace MZDNETWORK.Controllers
                     group.Managers.Add(user);
                 foreach (var user in _db.Users.Where(u => memberIds.Contains(u.Id)))
                     group.Members.Add(user);
-                // ChatGroupMember güncelle
+                // ChatGroupMember gÃ¼ncelle
                 var existingMembers = _db.ChatGroupMembers.Where(m => m.ChatGroupId == group.Id).ToList();
-                // Silinen üyeleri kaldýr
+                // Silinen Ã¼yeleri kaldÄ±r
                 foreach (var ex in existingMembers)
                 {
                     if (!memberIds.Contains(ex.UserId))
                         _db.ChatGroupMembers.Remove(ex);
                 }
-                // Eklenen veya güncellenen üyeleri iþle
+                // Eklenen veya gÃ¼ncellenen Ã¼yeleri iÅŸle
                 foreach (var userId in memberIds)
                 {
                     var canWrite = Request.Form[$"canWrite_{userId}"] == "true";
@@ -149,7 +149,7 @@ namespace MZDNETWORK.Controllers
             }
             ViewBag.Roles = _db.Roles.Where(r => r.IsActive).ToList();
             ViewBag.Users = _db.Users.ToList();
-            // Üyelerin yazma yetkisi
+            // Ãœyelerin yazma yetkisi
             var memberCanWrite2 = _db.ChatGroupMembers.Where(m => m.ChatGroupId == model.Id)
                 .ToDictionary(m => m.UserId, m => m.CanWrite);
             ViewBag.MemberCanWrite = memberCanWrite2;
@@ -169,3 +169,4 @@ namespace MZDNETWORK.Controllers
         }
     }
 }
+

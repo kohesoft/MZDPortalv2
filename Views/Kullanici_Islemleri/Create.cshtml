@@ -21,6 +21,18 @@
             <form class='login-form' action="@Url.Action("Create", "Kullanici_Islemleri")" method="post">
                 @Html.AntiForgeryToken()
 
+                @{
+                    // Ensure the UserInfo collection has one item so indexed bindings work
+                    if (Model.UserInfo == null)
+                    {
+                        Model.UserInfo = new List<MZDNETWORK.Models.UserInfo>();
+                    }
+                    if (!Model.UserInfo.Any())
+                    {
+                        Model.UserInfo.Add(new MZDNETWORK.Models.UserInfo());
+                    }
+                }
+
                 <div class="flex-row">
                     <label class="lf--label" for="Username">
                         <i class='bx bx-id-card'></i>
@@ -120,35 +132,35 @@
                     <label class="lf--label" for="Email">
                         <i class='bx bx-envelope'></i>
                     </label>
-                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Email, new { htmlAttributes = new { @class = "lf--input", placeholder = "E-posta" } })
+                    @Html.EditorFor(model => model.UserInfo[0].Email, new { htmlAttributes = new { @class = "lf--input", placeholder = "E-posta" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="RealPhoneNumber">
                         <i class='bx bx-phone'></i>
                     </label>
-                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().RealPhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Gerçek Telefon Numarası" } })
+                    @Html.EditorFor(model => model.UserInfo[0].RealPhoneNumber, new { htmlAttributes = new { @class = "lf--input", placeholder = "Gerçek Telefon Numarası" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="Adres">
                         <i class='bx bx-home'></i>
                     </label>
-                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Adres, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres" } })
+                    @Html.EditorFor(model => model.UserInfo[0].Adres, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="Adres2">
                         <i class='bx bx-home'></i>
                     </label>
-                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Adres2, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres 2" } })
+                    @Html.EditorFor(model => model.UserInfo[0].Adres2, new { htmlAttributes = new { @class = "lf--input", placeholder = "Adres 2" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="Sehir">
                         <i class='bx bx-map'></i>
                     </label>
-                    @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().Sehir, new SelectList(new List<SelectListItem>
+                    @Html.DropDownListFor(model => model.UserInfo[0].Sehir, new SelectList(new List<SelectListItem>
                             {
                         new SelectListItem { Text = "İstanbul", Value = "İstanbul" },
                         new SelectListItem { Text = "Ankara", Value = "Ankara" },
@@ -228,7 +240,7 @@
                     <label class="lf--label" for="Ulke">
                         <i class='bx bx-map'></i>
                     </label>
-                    @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().Ulke, new SelectList(new List<SelectListItem>
+                    @Html.DropDownListFor(model => model.UserInfo[0].Ulke, new SelectList(new List<SelectListItem>
                             {
                         new SelectListItem { Text = "Türkiye", Value = "Türkiye" }
                     }, "Value", "Text"), "Ülke Seçiniz", new { @class = "lf--input" })
@@ -238,14 +250,14 @@
                     <label class="lf--label" for="Postakodu">
                         <i class='bx bx-envelope'></i>
                     </label>
-                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().Postakodu, new { htmlAttributes = new { @class = "lf--input", placeholder = "Posta Kodu" } })
+                    @Html.EditorFor(model => model.UserInfo[0].Postakodu, new { htmlAttributes = new { @class = "lf--input", placeholder = "Posta Kodu" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="KanGrubu">
                         <i class='bx bx-droplet'></i>
                     </label>
-                    @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().KanGrubu, new SelectList(new List<SelectListItem>
+                    @Html.DropDownListFor(model => model.UserInfo[0].KanGrubu, new SelectList(new List<SelectListItem>
                             {
                         new SelectListItem { Text = "A Rh+", Value = "A Rh+" },
                         new SelectListItem { Text = "A Rh-", Value = "A Rh-" },
@@ -262,14 +274,14 @@
                     <label class="lf--label" for="DogumTarihi">
                         <i class='bx bx-calendar'></i>
                     </label>
-                    @Html.EditorFor(model => model.UserInfo.FirstOrDefault().DogumTarihi, new { htmlAttributes = new { @class = "lf--input", placeholder = "Doğum Tarihi", type = "date" } })
+                    @Html.EditorFor(model => model.UserInfo[0].DogumTarihi, new { htmlAttributes = new { @class = "lf--input", placeholder = "Doğum Tarihi", type = "date" } })
                 </div>
 
                 <div class="flex-row">
                     <label class="lf--label" for="Cinsiyet">
                         <i class='bx bx-user'></i>
                     </label>
-                    @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().Cinsiyet, new SelectList(new List<SelectListItem>
+                    @Html.DropDownListFor(model => model.UserInfo[0].Cinsiyet, new SelectList(new List<SelectListItem>
                             {
                         new SelectListItem { Text = "Erkek", Value = "Erkek" },
                         new SelectListItem { Text = "Kadın", Value = "Kadin" }
@@ -280,7 +292,7 @@
                     <label class="lf--label" for="MedeniDurum">
                         <i class='bx bx-user'></i>
                     </label>
-                    @Html.DropDownListFor(model => model.UserInfo.FirstOrDefault().MedeniDurum, new SelectList(new List<SelectListItem>
+                    @Html.DropDownListFor(model => model.UserInfo[0].MedeniDurum, new SelectList(new List<SelectListItem>
                             {
                         new SelectListItem { Text = "Evli", Value = "Evli" },
                         new SelectListItem { Text = "Bekar", Value = "Bekar" }

@@ -1,4 +1,4 @@
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using MZDNETWORK.Models;
 using MZDNETWORK.Data;
@@ -8,7 +8,7 @@ using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "UserManagement")]
+    [DynamicAuthorize(Permission = "KullaniciYonetimi")]
     public class UserController : Controller
     {
         private readonly MZDNETWORKContext db;
@@ -19,7 +19,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: User/Edit
-        [DynamicAuthorize(Permission = "UserManagement")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi")]
         [HttpGet]
         public ActionResult Edit()
         {
@@ -35,7 +35,7 @@ namespace MZDNETWORK.Controllers
                 return HttpNotFound();
             }
 
-            // Kullanıcı şifresini değiştirmemişse ChangePassword sayfasına yönlendir
+            // KullanÄ±cÄ± ÅŸifresini deÄŸiÅŸtirmemiÅŸse ChangePassword sayfasÄ±na yÃ¶nlendir
             if (!user.IsPasswordChanged)
             {
                 return RedirectToAction("ChangePassword");
@@ -44,14 +44,14 @@ namespace MZDNETWORK.Controllers
             var userInfo = db.UserInfos.Include("User").FirstOrDefault(u => u.User.Username == username);
             if (userInfo == null)
             {
-                // Kullanıcı için henüz UserInfo kaydı yoksa, boş bir model oluştur
+                // KullanÄ±cÄ± iÃ§in henÃ¼z UserInfo kaydÄ± yoksa, boÅŸ bir model oluÅŸtur
                 userInfo = new UserInfo { UserId = user.Id };
             }
             return View(userInfo);
         }
 
         // POST: User/Edit
-        [DynamicAuthorize(Permission = "UserManagement.UserInfo", Action = "Edit")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.KullaniciBilgisi", Action = "Edit")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserInfo userInfo)
@@ -61,14 +61,14 @@ namespace MZDNETWORK.Controllers
                 var existingUserInfo = db.UserInfos.Include("User").FirstOrDefault(u => u.UserId == userInfo.UserId);
                 if (existingUserInfo == null)
                 {
-                    // İlk kez oluşturuluyor
+                    // Ä°lk kez oluÅŸturuluyor
                     db.UserInfos.Add(userInfo);
                     db.SaveChanges();
-                    TempData["SuccessMessage"] = "Kullanıcı bilgileri başarıyla kaydedildi.";
+                    TempData["SuccessMessage"] = "KullanÄ±cÄ± bilgileri baÅŸarÄ±yla kaydedildi.";
                     return RedirectToAction("Index", "Home");
                 }
 
-                // UserInfo bilgilerini güncelle
+                // UserInfo bilgilerini gÃ¼ncelle
                 existingUserInfo.Email = userInfo.Email;
                 existingUserInfo.RealPhoneNumber = userInfo.RealPhoneNumber;
                 existingUserInfo.Adres = userInfo.Adres;
@@ -82,14 +82,14 @@ namespace MZDNETWORK.Controllers
                 existingUserInfo.MedeniDurum = userInfo.MedeniDurum;
 
                 db.SaveChanges();
-                TempData["SuccessMessage"] = "Kullanıcı bilgileri başarıyla güncellendi.";
+                TempData["SuccessMessage"] = "KullanÄ±cÄ± bilgileri baÅŸarÄ±yla gÃ¼ncellendi.";
                 return RedirectToAction("Index", "Home");
             }
             return View(userInfo);
         }
 
         // GET: User/ChangePassword
-        [DynamicAuthorize(Permission = "UserManagement")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi")]
         [HttpGet]
         public ActionResult ChangePassword()
         {
@@ -97,7 +97,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // POST: User/ChangePassword
-        [DynamicAuthorize(Permission = "UserManagement.UserInfo", Action = "Edit")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.KullaniciBilgisi", Action = "Edit")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordViewModel model)
@@ -106,40 +106,40 @@ namespace MZDNETWORK.Controllers
             {
                 if (!User.Identity.IsAuthenticated)
                 {
-                    ModelState.AddModelError("", "Kullanıcı kimlik doğrulaması yapılmamış.");
+                    ModelState.AddModelError("", "KullanÄ±cÄ± kimlik doÄŸrulamasÄ± yapÄ±lmamÄ±ÅŸ.");
                     return RedirectToAction("Login", "Account");
                 }
 
-                var username = User.Identity.Name; // Kullanıcı adını alır
+                var username = User.Identity.Name; // KullanÄ±cÄ± adÄ±nÄ± alÄ±r
                 var user = db.Users.FirstOrDefault(u => u.Username == username);
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "Kullanıcı bulunamadı.");
+                    ModelState.AddModelError("", "KullanÄ±cÄ± bulunamadÄ±.");
                     return View(model);
                 }
 
                 if (user.Password == model.OldPassword)
                 {
                     user.Password = model.NewPassword;
-                    user.IsPasswordChanged = true; // şifre değiştirildi olarak işaretle
+                    user.IsPasswordChanged = true; // ÅŸifre deÄŸiÅŸtirildi olarak iÅŸaretle
                     db.SaveChanges();
-                    TempData["SuccessMessage"] = "şifre başarıyla değiştirildi.";
+                    TempData["SuccessMessage"] = "ÅŸifre baÅŸarÄ±yla deÄŸiÅŸtirildi.";
                     TempData["RedirectUrl"] = Url.Action("Edit", "User");
                     return RedirectToAction("ChangePassword");
                 }
 
-                // Eğer kullanıcı ilk kez şifre belirliyorsa eski şifre sorgusunu atla
+                // EÄŸer kullanÄ±cÄ± ilk kez ÅŸifre belirliyorsa eski ÅŸifre sorgusunu atla
                 if (!user.IsPasswordChanged && string.IsNullOrEmpty(model.OldPassword))
                 {
                     user.Password = model.NewPassword;
                     user.IsPasswordChanged = true;
                     db.SaveChanges();
-                    TempData["SuccessMessage"] = "Şifreniz başarıyla belirlendi.";
+                    TempData["SuccessMessage"] = "Åifreniz baÅŸarÄ±yla belirlendi.";
                     TempData["RedirectUrl"] = Url.Action("Index", "Home");
                     return RedirectToAction("ChangePassword");
                 }
 
-                ModelState.AddModelError("", "Eski şifre yanlış.");
+                ModelState.AddModelError("", "Eski ÅŸifre yanlÄ±ÅŸ.");
             }
             return View(model);
         }

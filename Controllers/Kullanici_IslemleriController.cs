@@ -14,7 +14,7 @@ using static MZDNETWORK.Helpers.DynamicPermissionHelper;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "UserManagement.UserManagement")]
+    [DynamicAuthorize(Permission = "KullaniciYonetimi.KullaniciIslemleri")]
     public class Kullanici_IslemleriController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
@@ -28,7 +28,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: IK_Kullanici
-        [DynamicAuthorize(Permission = "UserManagement.UserManagement")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.KullaniciIslemleri")]
         public ActionResult Index()
         {
             // Fresh context ile temiz veri al - cache problemlerini önlemek için
@@ -45,7 +45,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: IK_Kullanici/Details/5
-        [DynamicAuthorize(Permission = "UserManagement.UserManagement")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.KullaniciIslemleri")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -61,12 +61,18 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: IK_Kullanici/Create
-        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Create")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.KullaniciIslemleri", Action = "Create")]
         public ActionResult Create()
         {
             // Tüm rolleri ViewBag'e ekle (dinamik olarak)
             ViewBag.AvailableRoles = RoleHelper.GetAllRoles();
-            return View();
+            var model = new User
+            {
+                // Ensure UserInfo collection exists so the view bindings work
+                UserInfo = new List<UserInfo> { new UserInfo() }
+            };
+
+            return View(model);
         }
 
         // POST: IK_Kullanici/Create
@@ -74,7 +80,7 @@ namespace MZDNETWORK.Controllers
         // daha fazla bilgi için bkz. https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Create")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.KullaniciIslemleri", Action = "Create")]
         public ActionResult Create([Bind(Include = "Id,Username,Password,Role,Name,Surname,Department,Position,Intercom,PhoneNumber,InternalEmail,ExternalEmail,Sicil")] User user, [Bind(Include = "Email,RealPhoneNumber,Adres,Adres2,Sehir,Ulke,Postakodu,KanGrubu,DogumTarihi,Cinsiyet,MedeniDurum")] UserInfo userInfo, string selectedRole)
         {
             if (ModelState.IsValid)
@@ -113,11 +119,21 @@ namespace MZDNETWORK.Controllers
 
             // Hata durumunda rolleri tekrar yükle
             ViewBag.AvailableRoles = RoleHelper.GetAllRoles();
+            if (user.UserInfo == null || !user.UserInfo.Any())
+            {
+                user.UserInfo = new List<UserInfo>();
+            }
+
+            // Preserve the posted user info so the form is repopulated
+            if (userInfo != null && !user.UserInfo.Any())
+            {
+                user.UserInfo.Add(userInfo);
+            }
             return View(user);
         }
 
         // GET: IK_Kullanici/Edit/5
-        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Edit")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.KullaniciIslemleri", Action = "Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -137,7 +153,7 @@ namespace MZDNETWORK.Controllers
         // daha fazla bilgi için bkz. https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Edit")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.KullaniciIslemleri", Action = "Edit")]
         public ActionResult Edit([Bind(Include = "Id,Username,Password,Name,Surname,Department,Position,Intercom,PhoneNumber,InternalEmail,ExternalEmail,Sicil")] User user, [Bind(Include = "Id,Email,RealPhoneNumber,Adres,Adres2,Sehir,Ulke,Postakodu,KanGrubu,DogumTarihi,Cinsiyet,MedeniDurum")] UserInfo userInfo)
         {
             if (ModelState.IsValid)
@@ -203,7 +219,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: IK_Kullanici/Delete/5
-        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Delete")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.KullaniciIslemleri", Action = "Delete")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -221,7 +237,7 @@ namespace MZDNETWORK.Controllers
         // POST: IK_Kullanici/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [DynamicAuthorize(Permission = "UserManagement.UserManagement", Action = "Delete")]
+        [DynamicAuthorize(Permission = "KullaniciYonetimi.KullaniciIslemleri", Action = "Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             using (var transaction = db.Database.BeginTransaction())
@@ -465,6 +481,13 @@ namespace MZDNETWORK.Controllers
                         foreach (var doc in dokumentasyons)
                         {
                             db.Dokumantasyons.Remove(doc);
+                        }
+
+                        // 24. ACCESS CHANGE TICKET TEMİZLİĞİ
+                        var accessChangeTickets = db.AccessChangeTickets.Where(t => t.RequesterUserId == id || t.TargetUserId == id).ToList();
+                        foreach (var ticket in accessChangeTickets)
+                        {
+                            db.AccessChangeTickets.Remove(ticket);
                         }
 
                         // 27. KULLANICI BİLGİLERİ TEMİZLİĞİ (SON ADIMLAR)

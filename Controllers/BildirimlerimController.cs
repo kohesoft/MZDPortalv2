@@ -9,7 +9,7 @@ using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "Operational.Suggestion")]
+    [DynamicAuthorize(Permission = "Operasyon.Oneri")]
     public class BildirimlerimController : Controller
     {
         public ActionResult Bildirimlerim()
@@ -30,3 +30,4 @@ namespace MZDNETWORK.Controllers
         }
     }
 }
+

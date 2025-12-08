@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Web.Mvc;
 using MZDNETWORK.Models;
@@ -7,7 +7,7 @@ using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "Operational.DailyMood")]
+    [DynamicAuthorize(Permission = "Operasyon.GunlukMood")]
     public class DailyMoodController : Controller
     {
         private readonly MZDNETWORKContext _db = new MZDNETWORKContext();

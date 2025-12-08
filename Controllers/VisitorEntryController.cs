@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -12,7 +12,7 @@ using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "HumanResources.VisitorEntry")]
+    [DynamicAuthorize(Permission = "InsanKaynaklari.ZiyaretciGiris")]
     public class VisitorEntryController : Controller
     {
         private readonly MZDNETWORKContext _db = new MZDNETWORKContext();
@@ -39,7 +39,7 @@ namespace MZDNETWORK.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        [DynamicAuthorize(Permission = "HumanResources.VisitorEntry", Action = "Create")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.ZiyaretciGiris", Action = "Create")]
         public ActionResult Create(VisitorEntry model)
         {
             if (!ModelState.IsValid)
@@ -47,7 +47,7 @@ namespace MZDNETWORK.Controllers
                 return View(model);
             }
 
-            // Sunucu tarafında tarih ve giriş saatini sabitle
+            // Sunucu tarafÄ±nda tarih ve giriÅŸ saatini sabitle
             model.Date = DateTime.Today;
             model.EntryTime = DateTime.Now.TimeOfDay;
 
@@ -57,7 +57,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET + POST: Header (Admin only)
-        [DynamicAuthorize(Permission = "HumanResources.VisitorEntry", Action = "Manage")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.ZiyaretciGiris", Action = "Manage")]
         public ActionResult Header()
         {
             var header = _db.VisitorEntryHeaders.FirstOrDefault() ?? new VisitorEntryHeader
@@ -69,7 +69,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "HumanResources.VisitorEntry", Action = "Manage")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.ZiyaretciGiris", Action = "Manage")]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Header(VisitorEntryHeader model)
@@ -92,7 +92,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // Excel export (Admin)
-        [DynamicAuthorize(Permission = "HumanResources.VisitorEntry", Action = "Export")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.ZiyaretciGiris", Action = "Export")]
         public ActionResult ExportExcel()
         {
             var rows = _db.VisitorEntries.OrderBy(e => e.Date).ToList();
@@ -100,7 +100,7 @@ namespace MZDNETWORK.Controllers
             {
                 var ws = pck.Workbook.Worksheets.Add("VisitorLog");
                 // Headers
-                string[] headerTitles = { "Sıra No", "Tarih", "Ad Soyad", "Geliş Sebebi", "Firma", "Görevi", "Kimlik No", "TC Kimlik", "Giriş", "Çıkış" };
+                string[] headerTitles = { "SÄ±ra No", "Tarih", "Ad Soyad", "GeliÅŸ Sebebi", "Firma", "GÃ¶revi", "Kimlik No", "TC Kimlik", "GiriÅŸ", "Ã‡Ä±kÄ±ÅŸ" };
                 for (int i = 0; i < headerTitles.Length; i++) ws.Cells[1, i + 1].Value = headerTitles[i];
                 int row = 2;
                 int index = 1;
@@ -125,7 +125,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // Print page (Admin)
-        [DynamicAuthorize(Permission = "HumanResources.VisitorEntry", Action = "Export")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.ZiyaretciGiris", Action = "Export")]
         public ActionResult Print()
         {
             var entries = _db.VisitorEntries.OrderBy(e => e.Date).ThenBy(e => e.EntryTime).ToList();
@@ -137,7 +137,7 @@ namespace MZDNETWORK.Controllers
         // POST: VisitorEntry/SetExit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DynamicAuthorize(Permission = "HumanResources.VisitorEntry", Action = "Edit")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.ZiyaretciGiris", Action = "Edit")]
         public ActionResult SetExit(int id)
         {
             var entry = _db.VisitorEntries.FirstOrDefault(e => e.Id == id);

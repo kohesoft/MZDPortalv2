@@ -43,12 +43,12 @@ namespace MZDNETWORK.Controllers
             var posts = GetGonderiler().Skip(skip).Take(take).ToList();
             return PartialView("_PostPartial", posts);
         }
-        [DynamicAuthorize(Permission = "Food.Merkez")]
+        [DynamicAuthorize(Permission = "Yemek.Merkez")]
         public ActionResult MerkezYemekListesi()
         {
             return View();
         }
-        [DynamicAuthorize(Permission = "Food.Yerleske")]
+        [DynamicAuthorize(Permission = "Yemek.Yerleske")]
         public ActionResult YerleskeYemekListesi()
         {
             return View();

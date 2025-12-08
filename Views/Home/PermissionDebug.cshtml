@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewBag.Title = "Permission Debug";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,10 +8,10 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-info text-white">
-                    <h4>Permission Debug - Food.Merkez</h4>
+                    <h4>Permission Debug - Yemek.Merkez</h4>
                 </div>
                 <div class="card-body">
-                    <h5>Kullanıcı Bilgileri</h5>
+                    <h5>KullanÄ±cÄ± Bilgileri</h5>
                     <ul class="list-group mb-3">
                         <li class="list-group-item">
                             <strong>Authenticated:</strong> 
@@ -34,55 +34,55 @@
                                 <tr>
                                     <th>Permission</th>
                                     <th>Action</th>
-                                    <th>Sonuç</th>
+                                    <th>SonuÃ§</th>
                                     <th>Durum</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Food.Merkez</td>
+                                    <td>Yemek.Merkez</td>
                                     <td>View</td>
                                     <td>
-                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Food.Merkez", "View"))
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Yemek.Merkez", "View"))
                                         {
-                                            <span class="badge badge-success">✓ İzin Var</span>
+                                            <span class="badge badge-success">âœ“ Ä°zin Var</span>
                                         }
                                         else
                                         {
-                                            <span class="badge badge-danger">✗ İzin Yok</span>
+                                            <span class="badge badge-danger">âœ— Ä°zin Yok</span>
                                         }
                                     </td>
-                                    <td>Layout'ta link kontrolü için kullanılıyor</td>
+                                    <td>Layout'ta link kontrolÃ¼ iÃ§in kullanÄ±lÄ±yor</td>
                                 </tr>
                                 <tr>
-                                    <td>Food.Merkez</td>
+                                    <td>Yemek.Merkez</td>
                                     <td>-</td>
                                     <td>
-                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Food.Merkez"))
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Yemek.Merkez"))
                                         {
-                                            <span class="badge badge-success">✓ İzin Var</span>
+                                            <span class="badge badge-success">âœ“ Ä°zin Var</span>
                                         }
                                         else
                                         {
-                                            <span class="badge badge-danger">✗ İzin Yok</span>
+                                            <span class="badge badge-danger">âœ— Ä°zin Yok</span>
                                         }
                                     </td>
-                                    <td>Layout'ta "any permission" kontrolü</td>
+                                    <td>Layout'ta "any permission" kontrolÃ¼</td>
                                 </tr>
                                 <tr>
-                                    <td>Food.Yerleske</td>
+                                    <td>Yemek.Yerleske</td>
                                     <td>View</td>
                                     <td>
-                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Food.Yerleske", "View"))
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Yemek.Yerleske", "View"))
                                         {
-                                            <span class="badge badge-success">✓ İzin Var</span>
+                                            <span class="badge badge-success">âœ“ Ä°zin Var</span>
                                         }
                                         else
                                         {
-                                            <span class="badge badge-danger">✗ İzin Yok</span>
+                                            <span class="badge badge-danger">âœ— Ä°zin Yok</span>
                                         }
                                     </td>
-                                    <td>Yerleşke yemek listesi için</td>
+                                    <td>YerleÅŸke yemek listesi iÃ§in</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -90,8 +90,8 @@
 
                     <h5>Debug Bilgileri</h5>
                     <div class="alert alert-info">
-                        <p><strong>Not:</strong> Bu sayfa permission debug için oluşturulmuştur.</p>
-                        <p>Eğer yemek listesi linkini görebiliyorsanız ama sayfaya erişemiyorsanız, yukarıdaki tablo size nedenini gösterecektir.</p>
+                        <p><strong>Not:</strong> Bu sayfa permission debug iÃ§in oluÅŸturulmuÅŸtur.</p>
+                        <p>EÄŸer yemek listesi linkini gÃ¶rebiliyorsanÄ±z ama sayfaya eriÅŸemiyorsanÄ±z, yukarÄ±daki tablo size nedenini gÃ¶sterecektir.</p>
                     </div>
 
                     <h5>Test Linkleri</h5>
@@ -100,7 +100,7 @@
                             Merkez Yemek Listesi
                         </a>
                         <a href="@Url.Action("YerleskeYemekListesi", "Home")" class="btn btn-secondary">
-                            Yerleşke Yemek Listesi
+                            YerleÅŸke Yemek Listesi
                         </a>
                         <a href="@Url.Action("Index", "Home")" class="btn btn-info">
                             Ana Sayfa
@@ -111,3 +111,4 @@
         </div>
     </div>
 </div>
+

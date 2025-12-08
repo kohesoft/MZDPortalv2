@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -13,25 +13,25 @@ namespace MZDNETWORK.Controllers
 {
     /// <summary>
     /// Role-Permission Matrix Management Controller
-    /// Rol ve permission ilişkilerinin yönetimi için matrix UI
+    /// Rol ve permission iliÅŸkilerinin yÃ¶netimi iÃ§in matrix UI
     /// </summary>
-    [DynamicAuthorize(Permission = "RoleManagement.RolePermission")]
+    [DynamicAuthorize(Permission = "RolYonetimi.RolYetkileri")]
     public class RolePermissionController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
 
         /// <summary>
-        /// Ana role-permission matrix sayfası
+        /// Ana role-permission matrix sayfasÄ±
         /// </summary>
         public ActionResult Index()
         {
-            // Cache'i devre dışı bırak
+            // Cache'i devre dÄ±ÅŸÄ± bÄ±rak
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetNoStore();
             
             ViewBag.Title = "Rol-Yetki Matrisi";
             
-            // Tabloları kontrol et ve yoksa oluştur
+            // TablolarÄ± kontrol et ve yoksa oluÅŸtur
             EnsureRolePermissionsTableExists();
             EnsurePermissionsExist();
             
@@ -39,7 +39,7 @@ namespace MZDNETWORK.Controllers
         }
         
         /// <summary>
-        /// Permission'ların mevcut olduğundan emin ol
+        /// Permission'larÄ±n mevcut olduÄŸundan emin ol
         /// </summary>
         private void EnsurePermissionsExist()
         {
@@ -58,7 +58,7 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// RolePermissions tablosunun mevcut olduğundan emin ol
+        /// RolePermissions tablosunun mevcut olduÄŸundan emin ol
         /// </summary>
         private void EnsureRolePermissionsTableExists()
         {
@@ -70,11 +70,11 @@ namespace MZDNETWORK.Controllers
             }
             catch (Exception ex)
             {
-                // Tablo yoksa oluştur
+                // Tablo yoksa oluÅŸtur
                 System.Diagnostics.Debug.WriteLine($"RolePermissions table might not exist: {ex.Message}");
                 try
                 {
-                    // Basit SQL ile tabloyu oluştur - daha uyumlu syntax
+                    // Basit SQL ile tabloyu oluÅŸtur - daha uyumlu syntax
                     var createTableSql = @"
                         IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='RolePermissions' AND xtype='U')
                         CREATE TABLE [RolePermissions](
@@ -122,7 +122,7 @@ namespace MZDNETWORK.Controllers
                     System.Diagnostics.Debug.WriteLine($"Failed to create RolePermissions table: {createEx.Message}");
                     System.Diagnostics.Debug.WriteLine($"Stack trace: {createEx.StackTrace}");
                     
-                    // Son çare olarak basit bir tablo oluştur
+                    // Son Ã§are olarak basit bir tablo oluÅŸtur
                     try
                     {
                         var simpleSql = "CREATE TABLE RolePermissions (Id int IDENTITY(1,1) PRIMARY KEY, RoleId int, PermissionNodeId int, CanView bit DEFAULT 0, CanCreate bit DEFAULT 0, CanEdit bit DEFAULT 0, CanDelete bit DEFAULT 0, CanManage bit DEFAULT 0, CanApprove bit DEFAULT 0, CanReject bit DEFAULT 0, CanExport bit DEFAULT 0, CanImport bit DEFAULT 0, IsActive bit DEFAULT 1, CreatedAt datetime DEFAULT GETDATE(), CreatedBy nvarchar(max), UpdatedAt datetime, UpdatedBy nvarchar(max), Notes nvarchar(max))";
@@ -139,7 +139,7 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Rol listesini getirir (Matrix için)
+        /// Rol listesini getirir (Matrix iÃ§in)
         /// </summary>
         public JsonResult GetRoles()
         {
@@ -166,13 +166,13 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Permission listesini hiyerarşik yapıda getirir
+        /// Permission listesini hiyerarÅŸik yapÄ±da getirir
         /// </summary>
         public JsonResult GetPermissions()
         {
             try
             {
-                // Permission'ları kontrol et
+                // Permission'larÄ± kontrol et
                 var permissionCount = db.PermissionNodes.Count();
                 if (permissionCount == 0)
                 {
@@ -201,7 +201,7 @@ namespace MZDNETWORK.Controllers
                     })
                     .ToList();
 
-                // Basit liste döndür (hiyerarşi değil)
+                // Basit liste dÃ¶ndÃ¼r (hiyerarÅŸi deÄŸil)
                 return Json(permissions, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -211,7 +211,7 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Test endpoint - Rol permissions'ı basit şekilde kontrol et
+        /// Test endpoint - Rol permissions'Ä± basit ÅŸekilde kontrol et
         /// </summary>
         public JsonResult TestRolePermissions(int roleId)
         {
@@ -224,7 +224,7 @@ namespace MZDNETWORK.Controllers
                     rolePermissionCount = db.RolePermissions.Count(rp => rp.RoleId == roleId),
                     activeRolePermissionCount = db.RolePermissions.Count(rp => rp.RoleId == roleId && rp.IsActive),
                     totalRolePermissions = db.RolePermissions.Count(),
-                    message = "Test başarılı"
+                    message = "Test baÅŸarÄ±lÄ±"
                 }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -283,13 +283,13 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Belirli bir rol için permission matrix'ini getirir
+        /// Belirli bir rol iÃ§in permission matrix'ini getirir
         /// </summary>
         public JsonResult GetRolePermissions(int? id, int? roleId)
         {
             try
             {
-                // Gelen değer hangisi doluysa onu kullan
+                // Gelen deÄŸer hangisi doluysa onu kullan
                 int roleIdValue = roleId ?? id ?? 0;
                 if (roleIdValue == 0)
                 {
@@ -307,14 +307,14 @@ namespace MZDNETWORK.Controllers
                 
                 try
                 {
-                    // Role ait permissions'ları getir
+                    // Role ait permissions'larÄ± getir
                     var rolePermissions = db.RolePermissions
                         .Where(rp => rp.RoleId == roleIdValue && rp.IsActive)
                         .ToList();
 
                     System.Diagnostics.Debug.WriteLine($"Found {rolePermissions.Count} permissions for role {roleIdValue}");
 
-                    // Dictionary formatına çevir
+                    // Dictionary formatÄ±na Ã§evir
                     result = rolePermissions.ToDictionary(
                         rp => rp.PermissionNodeId.ToString(),
                         rp => (object)new
@@ -335,7 +335,7 @@ namespace MZDNETWORK.Controllers
                 catch (Exception queryEx)
                 {
                     System.Diagnostics.Debug.WriteLine($"Query Error: {queryEx.Message}");
-                    // Tablo yoksa boş result döndür
+                    // Tablo yoksa boÅŸ result dÃ¶ndÃ¼r
                     result = new Dictionary<string, object>();
                 }
 
@@ -343,7 +343,7 @@ namespace MZDNETWORK.Controllers
             }
             catch (Exception ex)
             {
-                // Detaylı hata bilgisi döndür
+                // DetaylÄ± hata bilgisi dÃ¶ndÃ¼r
                 System.Diagnostics.Debug.WriteLine($"GetRolePermissions Error: {ex.Message}");
                 System.Diagnostics.Debug.WriteLine($"StackTrace: {ex.StackTrace}");
                 
@@ -356,7 +356,7 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Tam permission matrix'ini getirir (Tüm roller ve permission'lar)
+        /// Tam permission matrix'ini getirir (TÃ¼m roller ve permission'lar)
         /// </summary>
         public JsonResult GetFullMatrix()
         {
@@ -411,10 +411,10 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Belirli bir role permission atar veya günceller
+        /// Belirli bir role permission atar veya gÃ¼nceller
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.RolePermission", Action = "Edit")]
+        [DynamicAuthorize(Permission = "RolYonetimi.RolYetkileri", Action = "Edit")]
         public JsonResult AssignPermission(RolePermissionAssignModel model)
         {
             try
@@ -448,7 +448,7 @@ namespace MZDNETWORK.Controllers
                 }
                 else
                 {
-                    // Mevcut permission'ı güncelle
+                    // Mevcut permission'Ä± gÃ¼ncelle
                     existingRolePermission.CanView = model.CanView;
                     existingRolePermission.CanCreate = model.CanCreate;
                     existingRolePermission.CanEdit = model.CanEdit;
@@ -469,7 +469,7 @@ namespace MZDNETWORK.Controllers
                 // Cache'i temizle
                 DynamicPermissionHelper.ClearPermissionCache();
 
-                return Json(new { success = true, message = "Permission başarıyla atandı" });
+                return Json(new { success = true, message = "Permission baÅŸarÄ±yla atandÄ±" });
             }
             catch (Exception ex)
             {
@@ -478,10 +478,10 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Belirli bir rol-permission ilişkisini kaldırır
+        /// Belirli bir rol-permission iliÅŸkisini kaldÄ±rÄ±r
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.RolePermission", Action = "Edit")]
+        [DynamicAuthorize(Permission = "RolYonetimi.RolYetkileri", Action = "Edit")]
         public JsonResult RemovePermission(int roleId, int permissionNodeId)
         {
             try
@@ -499,10 +499,10 @@ namespace MZDNETWORK.Controllers
                     // Cache'i temizle
                     DynamicPermissionHelper.ClearPermissionCache();
 
-                    return Json(new { success = true, message = "Permission kaldırıldı" });
+                    return Json(new { success = true, message = "Permission kaldÄ±rÄ±ldÄ±" });
                 }
 
-                return Json(new { success = false, message = "Permission bulunamadı" });
+                return Json(new { success = false, message = "Permission bulunamadÄ±" });
             }
             catch (Exception ex)
             {
@@ -514,7 +514,7 @@ namespace MZDNETWORK.Controllers
         /// Toplu permission atama (Bulk assign)
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.RolePermission", Action = "Manage")]
+        [DynamicAuthorize(Permission = "RolYonetimi.RolYetkileri", Action = "Manage")]
         public JsonResult BulkAssignPermissions(BulkPermissionAssignModel model)
         {
             try
@@ -568,7 +568,7 @@ namespace MZDNETWORK.Controllers
                 // Cache'i temizle
                 DynamicPermissionHelper.ClearPermissionCache();
 
-                return Json(new { success = true, message = $"{model.Assignments.Count} permission atama başarıyla tamamlandı" });
+                return Json(new { success = true, message = $"{model.Assignments.Count} permission atama baÅŸarÄ±yla tamamlandÄ±" });
             }
             catch (Exception ex)
             {
@@ -577,10 +577,10 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Role template uygular (Hazır rol şablonu)
+        /// Role template uygular (HazÄ±r rol ÅŸablonu)
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.RolePermission", Action = "Manage")]
+        [DynamicAuthorize(Permission = "RolYonetimi.RolYetkileri", Action = "Manage")]
         public JsonResult ApplyRoleTemplate(int roleId, string templateName)
         {
             try
@@ -588,12 +588,12 @@ namespace MZDNETWORK.Controllers
                 var templates = GetRoleTemplates();
                 if (!templates.ContainsKey(templateName))
                 {
-                    return Json(new { success = false, message = "Geçersiz şablon" });
+                    return Json(new { success = false, message = "GeÃ§ersiz ÅŸablon" });
                 }
 
                 var template = templates[templateName];
                 
-                // Mevcut permission'ları temizle
+                // Mevcut permission'larÄ± temizle
                 var existingPermissions = db.RolePermissions
                     .Where(rp => rp.RoleId == roleId)
                     .ToList();
@@ -605,7 +605,7 @@ namespace MZDNETWORK.Controllers
                     perm.UpdatedBy = User.Identity.Name;
                 }
 
-                // Template permission'larını uygula
+                // Template permission'larÄ±nÄ± uygula
                 foreach (var permissionPath in template.PermissionPaths)
                 {
                     var permissionNode = db.PermissionNodes
@@ -629,7 +629,7 @@ namespace MZDNETWORK.Controllers
                             IsActive = true,
                             CreatedAt = DateTime.Now,
                             CreatedBy = User.Identity.Name,
-                            Notes = $"Template '{templateName}' uygulandı"
+                            Notes = $"Template '{templateName}' uygulandÄ±"
                         };
 
                         db.RolePermissions.Add(rolePermission);
@@ -641,7 +641,7 @@ namespace MZDNETWORK.Controllers
                 // Cache'i temizle
                 DynamicPermissionHelper.ClearPermissionCache();
 
-                return Json(new { success = true, message = $"{templateName} şablonu başarıyla uygulandı" });
+                return Json(new { success = true, message = $"{templateName} ÅŸablonu baÅŸarÄ±yla uygulandÄ±" });
             }
             catch (Exception ex)
             {
@@ -650,20 +650,20 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Rol kaydeder (Yeni oluştur veya güncelle)
+        /// Rol kaydeder (Yeni oluÅŸtur veya gÃ¼ncelle)
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.RolePermission", Action = "Edit")]
+        [DynamicAuthorize(Permission = "RolYonetimi.RolYetkileri", Action = "Edit")]
         public JsonResult SaveRole(Role roleModel)
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(roleModel.Name))
                 {
-                    return Json(new { success = false, message = "Rol adı boş olamaz" });
+                    return Json(new { success = false, message = "Rol adÄ± boÅŸ olamaz" });
                 }
 
-                // Aynı isimde rol var mı kontrol et
+                // AynÄ± isimde rol var mÄ± kontrol et
                 var existingRole = db.Roles.FirstOrDefault(r => r.Name == roleModel.Name && r.Id != roleModel.Id);
                 if (existingRole != null)
                 {
@@ -672,7 +672,7 @@ namespace MZDNETWORK.Controllers
 
                 if (roleModel.Id == 0)
                 {
-                    // Yeni rol oluştur
+                    // Yeni rol oluÅŸtur
                     var newRole = new Role
                     {
                         Name = roleModel.Name,
@@ -685,11 +685,11 @@ namespace MZDNETWORK.Controllers
                 }
                 else
                 {
-                    // Mevcut rolü güncelle
+                    // Mevcut rolÃ¼ gÃ¼ncelle
                     var role = db.Roles.Find(roleModel.Id);
                     if (role == null)
                     {
-                        return Json(new { success = false, message = "Rol bulunamadı" });
+                        return Json(new { success = false, message = "Rol bulunamadÄ±" });
                     }
 
                     role.Name = roleModel.Name;
@@ -703,7 +703,7 @@ namespace MZDNETWORK.Controllers
                 // Cache'i temizle
                 DynamicPermissionHelper.ClearPermissionCache();
 
-                return Json(new { success = true, message = "Rol başarıyla kaydedildi" });
+                return Json(new { success = true, message = "Rol baÅŸarÄ±yla kaydedildi" });
             }
             catch (Exception ex)
             {
@@ -715,7 +715,7 @@ namespace MZDNETWORK.Controllers
         /// Rol siler
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.RolePermission", Action = "Delete")]
+        [DynamicAuthorize(Permission = "RolYonetimi.RolYetkileri", Action = "Delete")]
         public JsonResult DeleteRole(int id)
         {
             try
@@ -723,28 +723,28 @@ namespace MZDNETWORK.Controllers
                 var role = db.Roles.Find(id);
                 if (role == null)
                 {
-                    return Json(new { success = false, message = "Rol bulunamadı" });
+                    return Json(new { success = false, message = "Rol bulunamadÄ±" });
                 }
 
-                // Rolün kullanıcıları var mı kontrol et
+                // RolÃ¼n kullanÄ±cÄ±larÄ± var mÄ± kontrol et
                 var userCount = db.UserRoles.Count(ur => ur.RoleId == id);
                 if (userCount > 0)
                 {
-                    return Json(new { success = false, message = $"Bu rol {userCount} kullanıcı tarafından kullanılıyor. Önce rol atamalarını kaldırın." });
+                    return Json(new { success = false, message = $"Bu rol {userCount} kullanÄ±cÄ± tarafÄ±ndan kullanÄ±lÄ±yor. Ã–nce rol atamalarÄ±nÄ± kaldÄ±rÄ±n." });
                 }
 
-                // Rol permission'larını sil
+                // Rol permission'larÄ±nÄ± sil
                 var rolePermissions = db.RolePermissions.Where(rp => rp.RoleId == id).ToList();
                 db.RolePermissions.RemoveRange(rolePermissions);
 
-                // Rolü sil
+                // RolÃ¼ sil
                 db.Roles.Remove(role);
                 db.SaveChanges();
 
                 // Cache'i temizle
                 DynamicPermissionHelper.ClearPermissionCache();
 
-                return Json(new { success = true, message = "Rol başarıyla silindi" });
+                return Json(new { success = true, message = "Rol baÅŸarÄ±yla silindi" });
             }
             catch (Exception ex)
             {
@@ -793,7 +793,7 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Permission hiyerarşisi oluşturur
+        /// Permission hiyerarÅŸisi oluÅŸturur
         /// </summary>
         private List<object> BuildPermissionHierarchy(dynamic permissions)
         {
@@ -816,7 +816,7 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Alt permission'ları getirir (Recursive)
+        /// Alt permission'larÄ± getirir (Recursive)
         /// </summary>
         private List<object> GetChildren(int parentId, List<dynamic> allPermissions)
         {
@@ -837,7 +837,7 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Hazır rol şablonlarını getirir
+        /// HazÄ±r rol ÅŸablonlarÄ±nÄ± getirir
         /// </summary>
         private Dictionary<string, RoleTemplate> GetRoleTemplates()
         {
@@ -845,37 +845,37 @@ namespace MZDNETWORK.Controllers
             {
                 ["BasicUser"] = new RoleTemplate
                 {
-                    Name = "Temel Kullanıcı",
-                    Description = "Sadece görüntüleme yetkisi",
-                    PermissionPaths = new[] { "UserManagement.View", "Operational.Chat.View", "Documentation.View" },
+                    Name = "Temel KullanÄ±cÄ±",
+                    Description = "Sadece gÃ¶rÃ¼ntÃ¼leme yetkisi",
+                    PermissionPaths = new[] { "KullaniciYonetimi.View", "Operasyon.Sohbet.View", "Documentation.View" },
                     DefaultPermissions = new PermissionSet { CanView = true }
                 },
                 ["Manager"] = new RoleTemplate
                 {
-                    Name = "Yönetici",
-                    Description = "Temel yönetim yetkiler",
-                    PermissionPaths = new[] { "UserManagement.View", "UserManagement.Edit", "HumanResources.LeaveRequests.Approve", "Operational.MeetingRoom.Manage" },
+                    Name = "YÃ¶netici",
+                    Description = "Temel yÃ¶netim yetkiler",
+                    PermissionPaths = new[] { "KullaniciYonetimi.View", "KullaniciYonetimi.Edit", "InsanKaynaklari.LeaveRequests.Approve", "Operasyon.ToplantiOdasi.Manage" },
                     DefaultPermissions = new PermissionSet { CanView = true, CanEdit = true, CanApprove = true }
                 },
                 ["HRManager"] = new RoleTemplate
                 {
-                    Name = "İK Yöneticisi",
-                    Description = "İnsan kaynakları yönetimi",
-                    PermissionPaths = new[] { "HumanResources.LeaveRequests.Manage", "HumanResources.Performance", "HumanResources.Announcements", "UserManagement.View" },
+                    Name = "Ä°K YÃ¶neticisi",
+                    Description = "Ä°nsan kaynaklarÄ± yÃ¶netimi",
+                    PermissionPaths = new[] { "InsanKaynaklari.LeaveRequests.Manage", "InsanKaynaklari.Performance", "InsanKaynaklari.Duyurular", "KullaniciYonetimi.View" },
                     DefaultPermissions = new PermissionSet { CanView = true, CanCreate = true, CanEdit = true, CanApprove = true }
                 },
                 ["ITManager"] = new RoleTemplate
                 {
-                    Name = "BT Yöneticisi",
-                    Description = "Bilgi işlem yönetimi",
-                    PermissionPaths = new[] { "InformationTechnology.Settings", "InformationTechnology.Monitoring", "SystemManagement.Configuration", "UserManagement.Manage" },
+                    Name = "BT YÃ¶neticisi",
+                    Description = "Bilgi iÅŸlem yÃ¶netimi",
+                    PermissionPaths = new[] { "BilgiIslem.Settings", "BilgiIslem.Monitoring", "SistemYonetimi.Configuration", "KullaniciYonetimi.Manage" },
                     DefaultPermissions = new PermissionSet { CanView = true, CanCreate = true, CanEdit = true, CanManage = true }
                 }
             };
         }
 
         /// <summary>
-        /// Debug JSON endpoint - Role ve Permission sayılarını kontrol et
+        /// Debug JSON endpoint - Role ve Permission sayÄ±larÄ±nÄ± kontrol et
         /// </summary>
         public JsonResult Debug()
         {
@@ -907,7 +907,7 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Test sayfası - Permission ve rol verilerini kontrol et
+        /// Test sayfasÄ± - Permission ve rol verilerini kontrol et
         /// </summary>
         public ActionResult Test()
         {
@@ -915,11 +915,11 @@ namespace MZDNETWORK.Controllers
             {
                 ViewBag.Title = "Yetki Sistemi Test";
                 
-                // Permission sayısı
+                // Permission sayÄ±sÄ±
                 var permissionCount = db.PermissionNodes.Count();
                 ViewBag.PermissionCount = permissionCount;
                 
-                // Rol sayısı
+                // Rol sayÄ±sÄ±
                 var roleCount = db.Roles.Count();
                 ViewBag.RoleCount = roleCount;
                 
@@ -931,11 +931,11 @@ namespace MZDNETWORK.Controllers
                 var roles = db.Roles.Take(10).ToList();
                 ViewBag.SampleRoles = roles;
                 
-                ViewBag.Message = "✅ Test başarılı";
+                ViewBag.Message = "âœ… Test baÅŸarÄ±lÄ±";
                 
                 if (permissionCount == 0)
                 {
-                    ViewBag.Message = "⚠️  Permission'lar bulunamadı. Seeding yapılıyor...";
+                    ViewBag.Message = "âš ï¸  Permission'lar bulunamadÄ±. Seeding yapÄ±lÄ±yor...";
                     Data.PermissionSeeder.SeedPermissions(db);
                     ViewBag.PermissionCount = db.PermissionNodes.Count();
                 }
@@ -944,20 +944,20 @@ namespace MZDNETWORK.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = $"❌ Test hatası: {ex.Message}";
+                ViewBag.Message = $"âŒ Test hatasÄ±: {ex.Message}";
                 ViewBag.Error = ex.ToString();
                 return View();
             }
         }
 
         /// <summary>
-        /// Manuel tablo oluşturma endpoint'i - debug için
+        /// Manuel tablo oluÅŸturma endpoint'i - debug iÃ§in
         /// </summary>
         public JsonResult CreateTableManually()
         {
             try
             {
-                // Önce tabloyu kontrol et
+                // Ã–nce tabloyu kontrol et
                 try
                 {
                     var test = db.RolePermissions.Take(1).ToList();
@@ -965,10 +965,10 @@ namespace MZDNETWORK.Controllers
                 }
                 catch
                 {
-                    // Tablo yok, oluştur
+                    // Tablo yok, oluÅŸtur
                 }
 
-                // En basit SQL ile tablo oluştur
+                // En basit SQL ile tablo oluÅŸtur
                 var sql = @"
                     CREATE TABLE RolePermissions (
                         Id int IDENTITY(1,1) NOT NULL,
@@ -999,7 +999,7 @@ namespace MZDNETWORK.Controllers
                 
                 return Json(new { 
                     success = true, 
-                    message = "RolePermissions tablosu başarıyla oluşturuldu!" 
+                    message = "RolePermissions tablosu baÅŸarÄ±yla oluÅŸturuldu!" 
                 }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -1050,7 +1050,7 @@ namespace MZDNETWORK.Controllers
     }
 
     /// <summary>
-    /// Rol şablonu
+    /// Rol ÅŸablonu
     /// </summary>
     public class RoleTemplate
     {

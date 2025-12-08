@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -10,7 +10,7 @@ using MZDNETWORK.Data;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "RoleManagement.RoleManagement")]
+    [DynamicAuthorize(Permission = "RolYonetimi.RolIslemleri")]
     public class RoleOrganizationController : Controller
     {
         private readonly MZDNETWORKContext db;
@@ -30,14 +30,14 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Ana rol organizasyon sayfası
+        /// Ana rol organizasyon sayfasÄ±
         /// </summary>
         public ActionResult Index()
         {
             var model = new RoleOrganizationViewModel
             {
                 Roles = RoleHelper.GetAllRoles(),
-                // Entity Framework Include ile UserRoles ve Role ilişkilerini yükle
+                // Entity Framework Include ile UserRoles ve Role iliÅŸkilerini yÃ¼kle
                 Users = db.Users
                     .Include("UserRoles.Role")
                     .OrderBy(u => u.Name)
@@ -51,15 +51,15 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Dinamik rol oluşturma
+        /// Dinamik rol oluÅŸturma
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.RoleManagement", Action = "Create")]
+        [DynamicAuthorize(Permission = "RolYonetimi.RolIslemleri", Action = "Create")]
         public ActionResult CreateDynamicRole(string roleName, string description)
         {
             if (string.IsNullOrWhiteSpace(roleName))
             {
-                TempData["ErrorMessage"] = "Rol adı boş olamaz";
+                TempData["ErrorMessage"] = "Rol adÄ± boÅŸ olamaz";
                 return RedirectToAction("Index");
             }
 
@@ -67,104 +67,104 @@ namespace MZDNETWORK.Controllers
             
             if (success)
             {
-                TempData["SuccessMessage"] = $"'{roleName}' rolü başarıyla oluşturuldu";
+                TempData["SuccessMessage"] = $"'{roleName}' rolÃ¼ baÅŸarÄ±yla oluÅŸturuldu";
             }
             else
             {
-                TempData["ErrorMessage"] = $"'{roleName}' rolü zaten mevcut";
+                TempData["ErrorMessage"] = $"'{roleName}' rolÃ¼ zaten mevcut";
             }
 
             return RedirectToAction("Index");
         }
 
         /// <summary>
-        /// Erişim matrisini oluşturur (permission-based)
-        /// PermissionSeeder ile uyumlu güncel permission'lar
+        /// EriÅŸim matrisini oluÅŸturur (permission-based)
+        /// PermissionSeeder ile uyumlu gÃ¼ncel permission'lar
         /// </summary>
         private List<AccessMatrixItem> GetAccessMatrix()
         {
             return new List<AccessMatrixItem>
             {
-                // Kullanıcı Yönetimi
+                // KullanÄ±cÄ± YÃ¶netimi
                 new AccessMatrixItem
                 {
                     ControllerName = "Kullanici_Islemleri",
                     ActionName = "All Actions",
-                    Description = "Kullanıcı İşlemleri",
-                    Permission = "UserManagement",
-                    RequiredPermissions = "UserManagement.View, UserManagement.Create, UserManagement.Edit, UserManagement.Delete, UserManagement.Manage, UserManagement.Roles, UserManagement.Passwords"
+                    Description = "KullanÄ±cÄ± Ä°ÅŸlemleri",
+                    Permission = "KullaniciYonetimi",
+                    RequiredPermissions = "KullaniciYonetimi.View, KullaniciYonetimi.Create, KullaniciYonetimi.Edit, KullaniciYonetimi.Delete, KullaniciYonetimi.Manage, KullaniciYonetimi.Roles, KullaniciYonetimi.Passwords"
                 },
 
-                // Rol Yönetimi
+                // Rol YÃ¶netimi
                 new AccessMatrixItem
                 {
                     ControllerName = "RolePermission",
                     ActionName = "Matrix Management",
                     Description = "Rol-Yetki Matrisi",
-                    Permission = "RoleManagement.Permissions",
-                    RequiredPermissions = "RoleManagement.Permissions.Edit, RoleManagement.Permissions.Manage, RoleManagement.Permissions.Delete"
+                    Permission = "RolYonetimi.Permissions",
+                    RequiredPermissions = "RolYonetimi.Permissions.Edit, RolYonetimi.Permissions.Manage, RolYonetimi.Permissions.Delete"
                 },
                 new AccessMatrixItem
                 {
-                    ControllerName = "RoleManagement",
+                    ControllerName = "RolYonetimi",
                     ActionName = "Role Operations",
-                    Description = "Rol Yönetimi",
-                    Permission = "SystemManagement.RoleManagement",
-                    RequiredPermissions = "SystemManagement.RoleManagement.View, SystemManagement.RoleManagement.Create, SystemManagement.RoleManagement.Edit, SystemManagement.RoleManagement.Delete"
+                    Description = "Rol YÃ¶netimi",
+                    Permission = "SistemYonetimi.RolYonetimi",
+                    RequiredPermissions = "SistemYonetimi.RolYonetimi.View, SistemYonetimi.RolYonetimi.Create, SistemYonetimi.RolYonetimi.Edit, SistemYonetimi.RolYonetimi.Delete"
                 },
                 new AccessMatrixItem
                 {
                     ControllerName = "RoleOrganization",
                     ActionName = "Organization",
                     Description = "Rol Organizasyonu",
-                    Permission = "SystemManagement.RoleManagement",
-                    RequiredPermissions = "SystemManagement.RoleManagement.View, SystemManagement.RoleManagement.Create, SystemManagement.RoleManagement.Edit"
+                    Permission = "SistemYonetimi.RolYonetimi",
+                    RequiredPermissions = "SistemYonetimi.RolYonetimi.View, SistemYonetimi.RolYonetimi.Create, SistemYonetimi.RolYonetimi.Edit"
                 },
 
-                // İnsan Kaynakları
+                // Ä°nsan KaynaklarÄ±
                 new AccessMatrixItem
                 {
                     ControllerName = "InsanKaynaklari",
                     ActionName = "HR Operations",
-                    Description = "İnsan Kaynakları",
-                    Permission = "HumanResources",
-                    RequiredPermissions = "HumanResources.LeaveRequests.View, HumanResources.Suggestions, HumanResources.Announcements, HumanResources.Performance, HumanResources.Surveys"
+                    Description = "Ä°nsan KaynaklarÄ±",
+                    Permission = "InsanKaynaklari",
+                    RequiredPermissions = "InsanKaynaklari.LeaveRequests.View, InsanKaynaklari.Oneris, InsanKaynaklari.Duyurular, InsanKaynaklari.Performance, InsanKaynaklari.Surveys"
                 },
 
-                // Sistem Yönetimi
+                // Sistem YÃ¶netimi
                 new AccessMatrixItem
                 {
                     ControllerName = "PermissionTree",
                     ActionName = "Permission Management",
-                    Description = "Yetki Ağacı Yönetimi",
-                    Permission = "SystemManagement.Permissions",
-                    RequiredPermissions = "SystemManagement.Permissions.Create, SystemManagement.Permissions.Edit, SystemManagement.Permissions.Delete, SystemManagement.Permissions.Manage"
+                    Description = "Yetki AÄŸacÄ± YÃ¶netimi",
+                    Permission = "SistemYonetimi.Permissions",
+                    RequiredPermissions = "SistemYonetimi.Permissions.Create, SistemYonetimi.Permissions.Edit, SistemYonetimi.Permissions.Delete, SistemYonetimi.Permissions.Manage"
                 },
 
-                // Bilgi İşlem
+                // Bilgi Ä°ÅŸlem
                 new AccessMatrixItem
                 {
                     ControllerName = "BilgiIslem",
                     ActionName = "IT Operations",
-                    Description = "Bilgi İşlem İşlemleri",
+                    Description = "Bilgi Ä°ÅŸlem Ä°ÅŸlemleri",
                     Permission = "IT",
-                    RequiredPermissions = "IT.View, IT.FoodPhoto.Merkez.Create, IT.FoodPhoto.Merkez.Delete, IT.FoodPhoto.Yerleske.Create, IT.FoodPhoto.Yerleske.Delete, IT.BreakPhoto.Create, IT.BreakPhoto.Delete"
+                    RequiredPermissions = "IT.View, IT.YemekPhoto.Merkez.Create, IT.YemekPhoto.Merkez.Delete, IT.YemekPhoto.Yerleske.Create, IT.YemekPhoto.Yerleske.Delete, IT.BreakPhoto.Create, IT.BreakPhoto.Delete"
                 },
                 new AccessMatrixItem
                 {
-                    ControllerName = "InformationTechnology",
+                    ControllerName = "BilgiIslem",
                     ActionName = "System Management",
-                    Description = "Sistem Ayarları",
-                    Permission = "InformationTechnology",
-                    RequiredPermissions = "InformationTechnology.Settings, InformationTechnology.Notifications, InformationTechnology.MenuManagement, InformationTechnology.TVManagement, InformationTechnology.BackupRestore, InformationTechnology.Monitoring"
+                    Description = "Sistem AyarlarÄ±",
+                    Permission = "BilgiIslem",
+                    RequiredPermissions = "BilgiIslem.Settings, BilgiIslem.Notifications, BilgiIslem.MenuManagement, BilgiIslem.TVManagement, BilgiIslem.BackupRestore, BilgiIslem.Monitoring"
                 },
 
-                // Dokümantasyon
+                // DokÃ¼mantasyon
                 new AccessMatrixItem
                 {
                     ControllerName = "Dokumantasyon",
                     ActionName = "Document Management",
-                    Description = "Dokümantasyon Yönetimi",
+                    Description = "DokÃ¼mantasyon YÃ¶netimi",
                     Permission = "Documentation",
                     RequiredPermissions = "Documentation.View, Documentation.Create, Documentation.Edit, Documentation.Delete, Documentation.Manage, Documentation.StockCards, Documentation.Requests"
                 },
@@ -174,7 +174,7 @@ namespace MZDNETWORK.Controllers
                 {
                     ControllerName = "Gonderi",
                     ActionName = "Announcements",
-                    Description = "Duyuru Yönetimi",
+                    Description = "Duyuru YÃ¶netimi",
                     Permission = "Announcements",
                     RequiredPermissions = "Announcements.View, Announcements.Create, Announcements.Edit, Announcements.Delete, Announcements.Manage"
                 },
@@ -219,12 +219,12 @@ namespace MZDNETWORK.Controllers
                     RequiredPermissions = "Feedback.View, Feedback.Create, Feedback.Manage"
                 },
 
-                // Öneri/Şikayet
+                // Ã–neri/Åikayet
                 new AccessMatrixItem
                 {
                     ControllerName = "DilekOneri",
                     ActionName = "Suggestions",
-                    Description = "Öneri/Şikayet Sistemi",
+                    Description = "Ã–neri/Åikayet Sistemi",
                     Permission = "Suggestion",
                     RequiredPermissions = "Suggestion.View, Suggestion.Create, Suggestion.Reply.Create, Suggestion.Reply.Manage, Suggestion.Manage"
                 },
@@ -242,27 +242,27 @@ namespace MZDNETWORK.Controllers
                 {
                     ControllerName = "Bildirimlerim",
                     ActionName = "Personal Notifications",
-                    Description = "Kişisel Bildirimler",
+                    Description = "KiÅŸisel Bildirimler",
                     Permission = "Notification",
                     RequiredPermissions = "Notification.View"
                 },
 
-                // Kişi Rehberi
+                // KiÅŸi Rehberi
                 new AccessMatrixItem
                 {
                     ControllerName = "Contact",
                     ActionName = "Contact Directory",
-                    Description = "Kişi Rehberi",
+                    Description = "KiÅŸi Rehberi",
                     Permission = "Contact",
                     RequiredPermissions = "Contact.View, Contact.Export.Export"
                 },
 
-                // Online Kullanıcılar
+                // Online KullanÄ±cÄ±lar
                 new AccessMatrixItem
                 {
                     ControllerName = "OnlineUsers",
                     ActionName = "Online Users",
-                    Description = "Online Kullanıcılar",
+                    Description = "Online KullanÄ±cÄ±lar",
                     Permission = "OnlineUsers",
                     RequiredPermissions = "OnlineUsers.View"
                 },
@@ -277,24 +277,24 @@ namespace MZDNETWORK.Controllers
                     RequiredPermissions = "Performance.View, Performance.Manage"
                 },
 
-                // Günlük Ruh Hali
+                // GÃ¼nlÃ¼k Ruh Hali
                 new AccessMatrixItem
                 {
                     ControllerName = "DailyMood",
                     ActionName = "Daily Mood",
-                    Description = "Günlük Ruh Hali",
+                    Description = "GÃ¼nlÃ¼k Ruh Hali",
                     Permission = "DailyMood",
                     RequiredPermissions = "DailyMood.View, DailyMood.Create"
                 },
 
-                // Operasyonel İşlemler
+                // Operasyonel Ä°ÅŸlemler
                 new AccessMatrixItem
                 {
-                    ControllerName = "Operational",
+                    ControllerName = "Operasyon",
                     ActionName = "Operations",
-                    Description = "Operasyonel İşlemler",
-                    Permission = "Operational",
-                    RequiredPermissions = "Operational.MeetingRoom.View, Operational.Chat.View, Operational.Notifications, Operational.Tasks, Operational.Calendar"
+                    Description = "Operasyonel Ä°ÅŸlemler",
+                    Permission = "Operasyon",
+                    RequiredPermissions = "Operasyon.ToplantiOdasi.View, Operasyon.Sohbet.View, Operasyon.Notifications, Operasyon.Gorevs, Operasyon.Calendar"
                 },
 
                 // Test ve Debug
@@ -303,81 +303,81 @@ namespace MZDNETWORK.Controllers
                     ControllerName = "TestPermission",
                     ActionName = "Testing",
                     Description = "Permission Test",
-                    Permission = "SystemManagement.Permissions",
-                    RequiredPermissions = "SystemManagement.Permissions.Manage"
+                    Permission = "SistemYonetimi.Permissions",
+                    RequiredPermissions = "SistemYonetimi.Permissions.Manage"
                 },
 
-                // Hesap İşlemleri (Permission'sız)
+                // Hesap Ä°ÅŸlemleri (Permission'sÄ±z)
                 new AccessMatrixItem
                 {
                     ControllerName = "Account",
                     ActionName = "Authentication",
-                    Description = "Hesap İşlemleri",
+                    Description = "Hesap Ä°ÅŸlemleri",
                     Permission = "Public",
-                    RequiredPermissions = "Herkes erişebilir"
+                    RequiredPermissions = "Herkes eriÅŸebilir"
                 },
 
-                // Ana Sayfa (Permission'sız)
+                // Ana Sayfa (Permission'sÄ±z)
                 new AccessMatrixItem
                 {
                     ControllerName = "Home",
                     ActionName = "Dashboard",
                     Description = "Ana Sayfa",
                     Permission = "Public",
-                    RequiredPermissions = "Giriş yapmış kullanıcılar"
+                    RequiredPermissions = "GiriÅŸ yapmÄ±ÅŸ kullanÄ±cÄ±lar"
                 }
             };
         }
 
         /// <summary>
-        /// Controller sayfalarını kategorilere göre listeler
-        /// PermissionSeeder ile uyumlu güncel controller listesi
+        /// Controller sayfalarÄ±nÄ± kategorilere gÃ¶re listeler
+        /// PermissionSeeder ile uyumlu gÃ¼ncel controller listesi
         /// </summary>
         
         private List<ControllerPageInfo> GetControllerPages()
         {
             return new List<ControllerPageInfo>
             {
-                // Kullanıcı Yönetimi
-                new ControllerPageInfo { ControllerName = "Kullanici_Islemleri", Description = "Kullanıcı İşlemleri", Category = "Kullanıcı Yönetimi" },
-                new ControllerPageInfo { ControllerName = "Account", Description = "Hesap İşlemleri", Category = "Kullanıcı Yönetimi" },
+                // KullanÄ±cÄ± YÃ¶netimi
+                new ControllerPageInfo { ControllerName = "Kullanici_Islemleri", Description = "KullanÄ±cÄ± Ä°ÅŸlemleri", Category = "KullanÄ±cÄ± YÃ¶netimi" },
+                new ControllerPageInfo { ControllerName = "Account", Description = "Hesap Ä°ÅŸlemleri", Category = "KullanÄ±cÄ± YÃ¶netimi" },
 
-                // Rol Yönetimi
-                new ControllerPageInfo { ControllerName = "RolePermission", Description = "Rol-Yetki Matrisi", Category = "Rol Yönetimi" },
-                new ControllerPageInfo { ControllerName = "RoleManagement", Description = "Rol Yönetimi", Category = "Rol Yönetimi" },
-                new ControllerPageInfo { ControllerName = "RoleOrganization", Description = "Rol Organizasyonu", Category = "Rol Yönetimi" },
+                // Rol YÃ¶netimi
+                new ControllerPageInfo { ControllerName = "RolePermission", Description = "Rol-Yetki Matrisi", Category = "Rol YÃ¶netimi" },
+                new ControllerPageInfo { ControllerName = "RolYonetimi", Description = "Rol YÃ¶netimi", Category = "Rol YÃ¶netimi" },
+                new ControllerPageInfo { ControllerName = "RoleOrganization", Description = "Rol Organizasyonu", Category = "Rol YÃ¶netimi" },
 
-                // İnsan Kaynakları
-                new ControllerPageInfo { ControllerName = "InsanKaynaklari", Description = "İnsan Kaynakları", Category = "İnsan Kaynakları" },
-                new ControllerPageInfo { ControllerName = "DilekOneri", Description = "Öneri/Şikayet", Category = "İnsan Kaynakları" },
-                new ControllerPageInfo { ControllerName = "Performance", Description = "Performans", Category = "İnsan Kaynakları" },
-                new ControllerPageInfo { ControllerName = "DailyMood", Description = "Günlük Ruh Hali", Category = "İnsan Kaynakları" },
+                // Ä°nsan KaynaklarÄ±
+                new ControllerPageInfo { ControllerName = "InsanKaynaklari", Description = "Ä°nsan KaynaklarÄ±", Category = "Ä°nsan KaynaklarÄ±" },
+                new ControllerPageInfo { ControllerName = "DilekOneri", Description = "Ã–neri/Åikayet", Category = "Ä°nsan KaynaklarÄ±" },
+                new ControllerPageInfo { ControllerName = "Performance", Description = "Performans", Category = "Ä°nsan KaynaklarÄ±" },
+                new ControllerPageInfo { ControllerName = "DailyMood", Description = "GÃ¼nlÃ¼k Ruh Hali", Category = "Ä°nsan KaynaklarÄ±" },
 
-                // Bilgi İşlem
-                new ControllerPageInfo { ControllerName = "BilgiIslem", Description = "Bilgi İşlem İşlemleri", Category = "Bilgi İşlem" },
-                new ControllerPageInfo { ControllerName = "BeyazTahta", Description = "Beyaz Tahta", Category = "Bilgi İşlem" },
+                // Bilgi Ä°ÅŸlem
+                new ControllerPageInfo { ControllerName = "BilgiIslem", Description = "Bilgi Ä°ÅŸlem Ä°ÅŸlemleri", Category = "Bilgi Ä°ÅŸlem" },
+                new ControllerPageInfo { ControllerName = "BeyazTahta", Description = "Beyaz Tahta", Category = "Bilgi Ä°ÅŸlem" },
 
-                // Dokümantasyon
-                new ControllerPageInfo { ControllerName = "Dokumantasyon", Description = "Dokümantasyon", Category = "Dokümantasyon" },
+                // DokÃ¼mantasyon
+                new ControllerPageInfo { ControllerName = "Dokumantasyon", Description = "DokÃ¼mantasyon", Category = "DokÃ¼mantasyon" },
 
-                // Sistem Yönetimi
-                new ControllerPageInfo { ControllerName = "PermissionTree", Description = "Yetki Ağacı", Category = "Sistem Yönetimi" },
-                new ControllerPageInfo { ControllerName = "TestPermission", Description = "Permission Test", Category = "Sistem Yönetimi" },
+                // Sistem YÃ¶netimi
+                new ControllerPageInfo { ControllerName = "PermissionTree", Description = "Yetki AÄŸacÄ±", Category = "Sistem YÃ¶netimi" },
+                new ControllerPageInfo { ControllerName = "TestPermission", Description = "Permission Test", Category = "Sistem YÃ¶netimi" },
 
-                // Operasyonel İşlemler
+                // Operasyonel Ä°ÅŸlemler
                 new ControllerPageInfo { ControllerName = "Home", Description = "Ana Sayfa", Category = "Operasyonel" },
-                new ControllerPageInfo { ControllerName = "Notification", Description = "Bildirim Yönetimi", Category = "Operasyonel" },
-                new ControllerPageInfo { ControllerName = "Bildirimlerim", Description = "Kişisel Bildirimler", Category = "Operasyonel" },
-                new ControllerPageInfo { ControllerName = "OnlineUsers", Description = "Online Kullanıcılar", Category = "Operasyonel" },
-                new ControllerPageInfo { ControllerName = "Contact", Description = "Kişi Rehberi", Category = "Operasyonel" },
+                new ControllerPageInfo { ControllerName = "Notification", Description = "Bildirim YÃ¶netimi", Category = "Operasyonel" },
+                new ControllerPageInfo { ControllerName = "Bildirimlerim", Description = "KiÅŸisel Bildirimler", Category = "Operasyonel" },
+                new ControllerPageInfo { ControllerName = "OnlineUsers", Description = "Online KullanÄ±cÄ±lar", Category = "Operasyonel" },
+                new ControllerPageInfo { ControllerName = "Contact", Description = "KiÅŸi Rehberi", Category = "Operasyonel" },
                 new ControllerPageInfo { ControllerName = "Chat", Description = "Chat Sistemi", Category = "Operasyonel" },
 
                 // Anket ve Geri Bildirim
-                new ControllerPageInfo { ControllerName = "Answer", Description = "Anket Sistemi", Category = "Anket/Değerlendirme" },
-                new ControllerPageInfo { ControllerName = "Feedback", Description = "Geri Bildirim", Category = "Anket/Değerlendirme" },
+                new ControllerPageInfo { ControllerName = "Answer", Description = "Anket Sistemi", Category = "Anket/DeÄŸerlendirme" },
+                new ControllerPageInfo { ControllerName = "Feedback", Description = "Geri Bildirim", Category = "Anket/DeÄŸerlendirme" },
 
                 // Duyurular
-                new ControllerPageInfo { ControllerName = "Gonderi", Description = "Duyuru Yönetimi", Category = "Duyurular" }
+                new ControllerPageInfo { ControllerName = "Gonderi", Description = "Duyuru YÃ¶netimi", Category = "Duyurular" }
             };
         }
         
@@ -385,7 +385,7 @@ namespace MZDNETWORK.Controllers
         /// <summary>
         /// Rol istatistikleri API
         /// </summary>
-        [DynamicAuthorize(Permission = "RoleManagement.RoleManagement")]
+        [DynamicAuthorize(Permission = "RolYonetimi.RolIslemleri")]
         public JsonResult GetRoleStatistics()
         {
             var stats = RoleHelper.GetRoleStatistics();
@@ -393,9 +393,9 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// En çok kullanılan rolleri getir
+        /// En Ã§ok kullanÄ±lan rolleri getir
         /// </summary>
-        [DynamicAuthorize(Permission = "RoleManagement.RoleManagement")]
+        [DynamicAuthorize(Permission = "RolYonetimi.RolIslemleri")]
         public JsonResult GetMostUsedRoles(int count = 5)
         {
             var roles = RoleHelper.GetMostUsedRoles(count)
@@ -410,10 +410,10 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı rollerini toplu güncelleme
+        /// KullanÄ±cÄ± rollerini toplu gÃ¼ncelleme
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.RoleManagement")]
+        [DynamicAuthorize(Permission = "RolYonetimi.RolIslemleri")]
         [ValidateAntiForgeryToken]
         public ActionResult BulkUpdateUserRoles(int userId, List<string> selectedRoles)
         {
@@ -421,20 +421,20 @@ namespace MZDNETWORK.Controllers
             {
                 System.Diagnostics.Debug.WriteLine($"BulkUpdateUserRoles called: UserId={userId}, Roles={string.Join(",", selectedRoles ?? new List<string>())}");
 
-                // Kullanıcının var olup olmadığını kontrol et
+                // KullanÄ±cÄ±nÄ±n var olup olmadÄ±ÄŸÄ±nÄ± kontrol et
                 var user = db.Users.Find(userId);
                 if (user == null)
                 {
-                    TempData["ErrorMessage"] = "Kullanıcı bulunamadı";
+                    TempData["ErrorMessage"] = "KullanÄ±cÄ± bulunamadÄ±";
                     System.Diagnostics.Debug.WriteLine($"User not found: {userId}");
                     return RedirectToAction("Index");
                 }
 
-                // ÖNCESİNDE: Kullanıcının cache'ini temizle
+                // Ã–NCESÄ°NDE: KullanÄ±cÄ±nÄ±n cache'ini temizle
                 System.Diagnostics.Debug.WriteLine($"Clearing cache for user {userId} before role update");
                 DynamicPermissionHelper.InvalidateUserCache(userId);
 
-                // Önce mevcut tüm rolleri kaldır
+                // Ã–nce mevcut tÃ¼m rolleri kaldÄ±r
                 System.Diagnostics.Debug.WriteLine("Removing all existing roles...");
                 bool removalSuccess = true;
                 try
@@ -479,30 +479,30 @@ namespace MZDNETWORK.Controllers
                     }
                 }
 
-                // SONRASINDA: Kullanıcının cache'ini tekrar temizle
+                // SONRASINDA: KullanÄ±cÄ±nÄ±n cache'ini tekrar temizle
                 System.Diagnostics.Debug.WriteLine($"Clearing cache for user {userId} after role update");
                 DynamicPermissionHelper.InvalidateUserCache(userId);
                 
-                // Güvenlik için tüm cache'i de temizle
+                // GÃ¼venlik iÃ§in tÃ¼m cache'i de temizle
                 DynamicPermissionHelper.ClearPermissionCache();
                 System.Diagnostics.Debug.WriteLine("All permission cache cleared for security");
 
-                // Sonuç mesajları
+                // SonuÃ§ mesajlarÄ±
                 if (successCount > 0)
                 {
-                    TempData["SuccessMessage"] = $"{successCount} rol başarıyla atandı";
+                    TempData["SuccessMessage"] = $"{successCount} rol baÅŸarÄ±yla atandÄ±";
                     if (failureCount > 0)
                     {
-                        TempData["WarningMessage"] = $"{failureCount} rol atanamadı";
+                        TempData["WarningMessage"] = $"{failureCount} rol atanamadÄ±";
                     }
                 }
                 else if (selectedRoles == null || !selectedRoles.Any())
                 {
-                    TempData["SuccessMessage"] = "Tüm roller kaldırıldı";
+                    TempData["SuccessMessage"] = "TÃ¼m roller kaldÄ±rÄ±ldÄ±";
                 }
                 else
                 {
-                    TempData["ErrorMessage"] = "Hiçbir rol atanamadı";
+                    TempData["ErrorMessage"] = "HiÃ§bir rol atanamadÄ±";
                 }
 
                 System.Diagnostics.Debug.WriteLine($"BulkUpdateUserRoles completed: Success={successCount}, Failures={failureCount}");

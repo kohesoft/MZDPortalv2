@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,12 +10,12 @@ namespace MZDNETWORK.Attributes
 {
     /// <summary>
     /// Dinamik permission-based authorization attribute
-    /// Tamamen permission yolu (path) bazlı yetki kontrolü
+    /// Tamamen permission yolu (path) bazlÄ± yetki kontrolÃ¼
     /// </summary>
     public class DynamicAuthorizeAttribute : AuthorizeAttribute
     {
         /// <summary>
-        /// Permission yolu (örn: "UserManagement.Create")
+        /// Permission yolu (Ã¶rn: "KullaniciYonetimi.Create")
         /// </summary>
         public string Permission { get; set; }
 
@@ -25,22 +25,22 @@ namespace MZDNETWORK.Attributes
         public string Action { get; set; } = "View";
 
         /// <summary>
-        /// Permission adı/açıklaması (backward compatibility için)
-        /// Şu an için sadece dokümantasyon amaçlı
+        /// Permission adÄ±/aÃ§Ä±klamasÄ± (backward compatibility iÃ§in)
+        /// Åu an iÃ§in sadece dokÃ¼mantasyon amaÃ§lÄ±
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Permission check'ini atla (bazı özel durumlar için)
+        /// Permission check'ini atla (bazÄ± Ã¶zel durumlar iÃ§in)
         /// </summary>
         public bool SkipPermissionCheck { get; set; } = false;
 
         /// <summary>
-        /// Yetki kontrolü
+        /// Yetki kontrolÃ¼
         /// </summary>
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            // Temel authentication kontrolü
+            // Temel authentication kontrolÃ¼
             if (!base.AuthorizeCore(httpContext))
             {
                 return false;
@@ -52,29 +52,29 @@ namespace MZDNETWORK.Attributes
                 return true;
             }
 
-            // Permission belirtilmemişse sadece authenticated kontrolü
+            // Permission belirtilmemiÅŸse sadece authenticated kontrolÃ¼
             if (string.IsNullOrEmpty(Permission))
             {
                 return httpContext.User.Identity.IsAuthenticated;
             }
 
-            // Kullanıcı ID'sini al
+            // KullanÄ±cÄ± ID'sini al
             var userId = GetUserIdFromContext(httpContext);
             if (userId <= 0)
             {
                 return false;
             }
 
-            // Permission kontrolü
+            // Permission kontrolÃ¼
             return DynamicPermissionHelper.HasPermission(userId, Permission, Action);
         }
 
         /// <summary>
-        /// Unauthorized durumunda JSON response döndür (AJAX istekler için)
+        /// Unauthorized durumunda JSON response dÃ¶ndÃ¼r (AJAX istekler iÃ§in)
         /// </summary>
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            // AJAX request kontrolü
+            // AJAX request kontrolÃ¼
             if (filterContext.HttpContext.Request.IsAjaxRequest())
             {
                 filterContext.Result = new JsonResult
@@ -82,7 +82,7 @@ namespace MZDNETWORK.Attributes
                     Data = new
                     {
                         success = false,
-                        message = "Bu işlem için yetkiniz bulunmuyor",
+                        message = "Bu iÅŸlem iÃ§in yetkiniz bulunmuyor",
                         errorCode = "PERMISSION_DENIED",
                         requiredPermission = Permission,
                         requiredAction = Action
@@ -92,13 +92,13 @@ namespace MZDNETWORK.Attributes
             }
             else
             {
-                // Normal request için standart unauthorized handling
+                // Normal request iÃ§in standart unauthorized handling
                 base.HandleUnauthorizedRequest(filterContext);
             }
         }
 
         /// <summary>
-        /// HTTP context'inden kullanıcı ID'sini al
+        /// HTTP context'inden kullanÄ±cÄ± ID'sini al
         /// </summary>
         private int GetUserIdFromContext(HttpContextBase httpContext)
         {
@@ -151,8 +151,8 @@ namespace MZDNETWORK.Attributes
         }
 
         /// <summary>
-        /// Belirli bir permission'ın kontrolü için helper method
-        /// Controller'larda kullanılabilir
+        /// Belirli bir permission'Ä±n kontrolÃ¼ iÃ§in helper method
+        /// Controller'larda kullanÄ±labilir
         /// </summary>
         public static bool CheckPermission(string permission, string action = "View", int? userId = null)
         {
@@ -171,7 +171,7 @@ namespace MZDNETWORK.Attributes
         }
 
         /// <summary>
-        /// Static helper - mevcut kullanıcı ID'sini al
+        /// Static helper - mevcut kullanÄ±cÄ± ID'sini al
         /// </summary>
         private static int GetCurrentUserIdStatic()
         {
@@ -185,14 +185,14 @@ namespace MZDNETWORK.Attributes
                 if (string.IsNullOrEmpty(username))
                     return 0;
 
-                // Session'dan userId'yi almaya çalış
+                // Session'dan userId'yi almaya Ã§alÄ±ÅŸ
                 if (httpContext.Session["UserId"] != null)
                 {
                     if (int.TryParse(httpContext.Session["UserId"].ToString(), out int sessionUserId))
                         return sessionUserId;
                 }
 
-                // Database'den kullanıcıyı bul
+                // Database'den kullanÄ±cÄ±yÄ± bul
                 using (var context = new MZDNETWORKContext())
                 {
                     var user = context.Users.FirstOrDefault(u => u.Username == username);
@@ -206,7 +206,7 @@ namespace MZDNETWORK.Attributes
         }
 
         /// <summary>
-        /// Permission yolu ve action'ı birleştirerek tam permission string'i oluştur
+        /// Permission yolu ve action'Ä± birleÅŸtirerek tam permission string'i oluÅŸtur
         /// </summary>
         public static string BuildPermissionString(string permissionPath, string action)
         {
@@ -220,8 +220,8 @@ namespace MZDNETWORK.Attributes
         }
 
         /// <summary>
-        /// Mevcut kullanıcının belirli bir permission'a sahip olup olmadığını kontrol et
-        /// View'larda kullanım için
+        /// Mevcut kullanÄ±cÄ±nÄ±n belirli bir permission'a sahip olup olmadÄ±ÄŸÄ±nÄ± kontrol et
+        /// View'larda kullanÄ±m iÃ§in
         /// </summary>
         public static bool CurrentUserHasPermission(string permission, string action = "View")
         {
@@ -229,7 +229,7 @@ namespace MZDNETWORK.Attributes
         }
 
         /// <summary>
-        /// Mevcut kullanıcının herhangi bir permission'a sahip olup olmadığını kontrol et
+        /// Mevcut kullanÄ±cÄ±nÄ±n herhangi bir permission'a sahip olup olmadÄ±ÄŸÄ±nÄ± kontrol et
         /// </summary>
         public static bool CurrentUserHasAnyPermission(params string[] permissions)
         {
@@ -243,12 +243,12 @@ namespace MZDNETWORK.Attributes
     }
 
     /// <summary>
-    /// Permission tabanlı yetki kontrolü için extension methods
+    /// Permission tabanlÄ± yetki kontrolÃ¼ iÃ§in extension methods
     /// </summary>
     public static class PermissionExtensions
     {
         /// <summary>
-        /// HtmlHelper extension - permission kontrolü
+        /// HtmlHelper extension - permission kontrolÃ¼
         /// </summary>
         public static bool HasPermission(this System.Web.Mvc.HtmlHelper htmlHelper, string permission, string action = "View")
         {

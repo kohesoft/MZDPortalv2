@@ -15,7 +15,7 @@ using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "SystemManagement.Performance")]
+    [DynamicAuthorize(Permission = "SistemYonetimi.Performans")]
     public class PerformanceController : Controller
     {
         private static PerformanceCounter cpuCounter;
@@ -497,3 +497,4 @@ namespace MZDNETWORK.Controllers
         }
     }
 }
+

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +13,7 @@ using OfficeOpenXml;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "Operational.LeaveRequest")]
+    [DynamicAuthorize(Permission = "Operasyon.IzinTalebi")]
     public class LeaveRequestController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
@@ -104,7 +104,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: LeaveRequest/Create
-        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "Create")]
+        [DynamicAuthorize(Permission = "Operasyon.IzinTalebi", Action = "Create")]
         public ActionResult Create()
         {
             PrepareSelectLists();
@@ -135,7 +135,7 @@ namespace MZDNETWORK.Controllers
         // POST: LeaveRequest/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "Create")]
+        [DynamicAuthorize(Permission = "Operasyon.IzinTalebi", Action = "Create")]
         public async Task<ActionResult> Create(LeaveRequest leaveRequest)
         {
             if (ModelState.IsValid)
@@ -147,24 +147,24 @@ namespace MZDNETWORK.Controllers
                     .FirstOrDefault();
 
                 leaveRequest.UserId = currentUserId;
-                // Yeni iş akışı: Talep oluşturulduğunda ilk olarak Şef onayı bekler
+                // Yeni iÅŸ akÄ±ÅŸÄ±: Talep oluÅŸturulduÄŸunda ilk olarak Åef onayÄ± bekler
                 leaveRequest.Status = LeaveStatus.PendingSupervisor;
                 leaveRequest.CreatedAt = DateTime.Now;
 
                 db.LeaveRequests.Add(leaveRequest);
                 await db.SaveChangesAsync();
 
-                // Onaylayıcı (Approve veya Manage) yetkisine sahip kullanıcıları bul
-                var approvePermissionPath = "Operational.LeaveRequest";
+                // OnaylayÄ±cÄ± (Approve veya Manage) yetkisine sahip kullanÄ±cÄ±larÄ± bul
+                var approvePermissionPath = "Operasyon.IzinTalebi";
 
-                // Öncelikle Approve yetkili roller
+                // Ã–ncelikle Approve yetkili roller
                 var approverRoleIds = db.RolePermissions
                     .Where(rp => rp.PermissionNode.Path == approvePermissionPath && rp.CanApprove)
                     .Select(rp => rp.RoleId)
                     .Distinct()
                     .ToList();
 
-                // Bu rollere sahip kullanıcılar
+                // Bu rollere sahip kullanÄ±cÄ±lar
                 var notifyUserIds = db.UserRoles
                     .Where(ur => approverRoleIds.Contains(ur.RoleId))
                     .Select(ur => ur.UserId)
@@ -180,7 +180,7 @@ namespace MZDNETWORK.Controllers
                     var notification = new Notification
                     {
                         UserId = targetUser.Id.ToString(),
-                        Message = $"{User.Identity.Name} tarafından yeni bir izin talebi oluşturuldu.",
+                        Message = $"{User.Identity.Name} tarafÄ±ndan yeni bir izin talebi oluÅŸturuldu.",
                         CreatedDate = DateTime.Now,
                         IsRead = false
                     };
@@ -198,7 +198,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: LeaveRequest/Review/5
-        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "Approve")]
+        [DynamicAuthorize(Permission = "Operasyon.IzinTalebi", Action = "Approve")]
         public async Task<ActionResult> Review(int? id)
         {
             if (id == null)
@@ -220,10 +220,10 @@ namespace MZDNETWORK.Controllers
                 .Select(u => u.Id)
                 .FirstOrDefault();
 
-            bool canApprove = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Approve");
-            bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Manage");
+            bool canApprove = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "Approve");
+            bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "Manage");
 
-            // Departman bazlı kısıtlama: Manage yetkisi olmayan şefler sadece kendi departmanındaki talepleri güncelleyebilir
+            // Departman bazlÄ± kÄ±sÄ±tlama: Manage yetkisi olmayan ÅŸefler sadece kendi departmanÄ±ndaki talepleri gÃ¼ncelleyebilir
             var currentUser = db.Users.FirstOrDefault(u => u.Id == currentUserId);
             if (!canManage && canApprove)
             {
@@ -244,7 +244,7 @@ namespace MZDNETWORK.Controllers
         // POST: LeaveRequest/Review/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "Approve")]
+        [DynamicAuthorize(Permission = "Operasyon.IzinTalebi", Action = "Approve")]
         public async Task<ActionResult> Review(int id, LeaveStatus status, string approvalReason)
         {
             var leaveRequest = await db.LeaveRequests.FindAsync(id);
@@ -258,11 +258,11 @@ namespace MZDNETWORK.Controllers
                 .Select(u => u.Id)
                 .FirstOrDefault();
 
-            const string approvePermissionPath = "Operational.LeaveRequest";
+            const string approvePermissionPath = "Operasyon.IzinTalebi";
             bool canApprove = DynamicAuthorizeAttribute.CurrentUserHasPermission(approvePermissionPath, "Approve");
             bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission(approvePermissionPath, "Manage");
 
-            // Departman bazlı kısıtlama: Manage yetkisi olmayan şefler sadece kendi departmanındaki talepleri güncelleyebilir
+            // Departman bazlÄ± kÄ±sÄ±tlama: Manage yetkisi olmayan ÅŸefler sadece kendi departmanÄ±ndaki talepleri gÃ¼ncelleyebilir
             var currentUser = db.Users.FirstOrDefault(u => u.Id == currentUserId);
             if (!canManage && canApprove)
             {
@@ -277,16 +277,16 @@ namespace MZDNETWORK.Controllers
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.Unauthorized);
             }
 
-            // Mevcut durum ve kullanıcının izinlerine göre iş akışını yönet
+            // Mevcut durum ve kullanÄ±cÄ±nÄ±n izinlerine gÃ¶re iÅŸ akÄ±ÅŸÄ±nÄ± yÃ¶net
             var previousStatus = leaveRequest.Status;
 
-            // Kullanıcı izinleri
+            // KullanÄ±cÄ± izinleri
             bool isSupervisor = canApprove && !canManage; // Sadece approve yetkisi
-            bool isManager = canManage; // Manage yetkisi (daha yüksek)
+            bool isManager = canManage; // Manage yetkisi (daha yÃ¼ksek)
 
             bool updateAllowed = false;
 
-            // Herhangi bir onay yetkisi olan kişi (şef veya müdür) onayı bekleyen talebi sonuçlandırabilir
+            // Herhangi bir onay yetkisi olan kiÅŸi (ÅŸef veya mÃ¼dÃ¼r) onayÄ± bekleyen talebi sonuÃ§landÄ±rabilir
             if (previousStatus == LeaveStatus.PendingSupervisor || previousStatus == LeaveStatus.PendingManager)
             {
                 if (!canApprove && !canManage)
@@ -303,7 +303,7 @@ namespace MZDNETWORK.Controllers
                 }
                 else
                 {
-                    // Tüm olumlu kararlar direkt onaylandı olur
+                    // TÃ¼m olumlu kararlar direkt onaylandÄ± olur
                     leaveRequest.Status = LeaveStatus.Approved;
                 }
 
@@ -312,7 +312,7 @@ namespace MZDNETWORK.Controllers
 
             if (!updateAllowed)
             {
-                // Diğer durumları değiştirmeye izin verme
+                // DiÄŸer durumlarÄ± deÄŸiÅŸtirmeye izin verme
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
 
@@ -332,33 +332,33 @@ namespace MZDNETWORK.Controllers
             await notificationHubContext.Clients.User(leaveRequest.UserId.ToString()).addNotification(
                 new
                 {
-                    title = "İzin Talebi Güncellendi",
-                    message = $"İzin talebiniz {leaveRequest.Status.ToString()} durumuna güncellenmiştir.",
+                    title = "Ä°zin Talebi GÃ¼ncellendi",
+                    message = $"Ä°zin talebiniz {leaveRequest.Status.ToString()} durumuna gÃ¼ncellenmiÅŸtir.",
                     url = Url.Action("Details", "LeaveRequest", new { id = leaveRequest.Id }, Request.Url.Scheme)
                 });
 
-            if (DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "View"))
+            if (DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "View"))
             {
-                // Görüntüleme yetkisi olanlar yönetim paneline gider
+                // GÃ¶rÃ¼ntÃ¼leme yetkisi olanlar yÃ¶netim paneline gider
                 return RedirectToAction("AdminDashboard");
             }
 
-            // Diğer tüm kullanıcılar (sadece Approve/Manage olanlar dâhil) kendi liste sayfasına yönlendirilir
+            // DiÄŸer tÃ¼m kullanÄ±cÄ±lar (sadece Approve/Manage olanlar dÃ¢hil) kendi liste sayfasÄ±na yÃ¶nlendirilir
             return RedirectToAction("Index");
         }
 
         // GET: LeaveRequest/AdminDashboard
-        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "View")]
+        [DynamicAuthorize(Permission = "Operasyon.IzinTalebi", Action = "View")]
         public async Task<ActionResult> AdminDashboard()
         {
             var query = db.LeaveRequests
                 .Include(l => l.RequestingUser)
                 .Include(l => l.ApprovedBy);
 
-            // Departman bazlı filtreleme: Manage yetkisi olmayan onaycılar sadece kendi departmanındaki talepleri görür
+            // Departman bazlÄ± filtreleme: Manage yetkisi olmayan onaycÄ±lar sadece kendi departmanÄ±ndaki talepleri gÃ¶rÃ¼r
             var currentUserName = User.Identity.Name;
             var currentUser = db.Users.FirstOrDefault(u => u.Username == currentUserName);
-            bool currentCanManage = Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Manage");
+            bool currentCanManage = Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "Manage");
             if (!currentCanManage && currentUser != null && !string.IsNullOrEmpty(currentUser.Department))
             {
                 query = query.Where(l => l.Department == currentUser.Department);
@@ -431,7 +431,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: LeaveRequest/ExportExcel
-        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "Export")]
+        [DynamicAuthorize(Permission = "Operasyon.IzinTalebi", Action = "Export")]
         public async Task<ActionResult> ExportExcel()
         {
             var data = await db.LeaveRequests
@@ -447,10 +447,10 @@ namespace MZDNETWORK.Controllers
 
                 // Header
                 ws.Cells[1, 1].Value = "Personel";
-                ws.Cells[1, 2].Value = "İzin Türü";
-                ws.Cells[1, 3].Value = "Başlangıç";
-                ws.Cells[1, 4].Value = "Bitiş";
-                ws.Cells[1, 5].Value = "Süre";
+                ws.Cells[1, 2].Value = "Ä°zin TÃ¼rÃ¼";
+                ws.Cells[1, 3].Value = "BaÅŸlangÄ±Ã§";
+                ws.Cells[1, 4].Value = "BitiÅŸ";
+                ws.Cells[1, 5].Value = "SÃ¼re";
                 ws.Cells[1, 6].Value = "Departman";
                 ws.Cells[1, 7].Value = "Vekil";
                 ws.Cells[1, 8].Value = "Durum";
@@ -480,7 +480,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: LeaveRequest/Details/5
-        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "View")]
+        [DynamicAuthorize(Permission = "Operasyon.IzinTalebi", Action = "View")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -503,8 +503,8 @@ namespace MZDNETWORK.Controllers
                 .Select(u => u.Id)
                 .FirstOrDefault();
 
-            bool canApprove = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Approve");
-            bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Manage");
+            bool canApprove = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "Approve");
+            bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "Manage");
 
             if (leaveRequest.UserId != currentUserId && !canApprove && !canManage)
             {
@@ -515,7 +515,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: LeaveRequest/GetSubstitutesByDepartment
-        [DynamicAuthorize(Permission = "Operational.LeaveRequest", Action = "View")]
+        [DynamicAuthorize(Permission = "Operasyon.IzinTalebi", Action = "View")]
         public JsonResult GetSubstitutesByDepartment(string department)
         {
             var substitutes = db.Users
@@ -536,7 +536,7 @@ namespace MZDNETWORK.Controllers
             {
                 case LeaveStatus.Approved:
                 case LeaveStatus.ConditionallyApproved:
-                    return "Onaylandı";
+                    return "OnaylandÄ±";
                 case LeaveStatus.Rejected:
                     return "Reddedildi";
                 case LeaveStatus.PendingSupervisor:

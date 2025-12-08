@@ -13,13 +13,13 @@ namespace MZDNETWORK.Controllers
 {
     // Dinamik yetki kontrolü – İnsan Kaynakları Duyuruları
     // Görüntüleme için class seviyesinde View izni yeterli
-    [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+    [DynamicAuthorize(Permission = "InsanKaynaklari.Duyurular")]
     public class GonderiController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext(); // Veritabanı context'i
 
         // Yeni duyuru oluşturma formu
-        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.Duyurular")]
         public ActionResult GonderiOlustur()
         {
             return View();
@@ -28,7 +28,7 @@ namespace MZDNETWORK.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        [DynamicAuthorize(Permission = "HumanResources.Announcements", Action = "Create")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.Duyurular", Action = "Create")]
         public ActionResult GonderiOlustur(Gonderi model, IEnumerable<HttpPostedFileBase> attachments)
         {
             try
@@ -95,7 +95,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // Dosya indirme
-        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.Duyurular")]
         public ActionResult DownloadFile(int id)
         {
             var attachment = db.GonderiEkler.Find(id);
@@ -118,7 +118,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // Dosyayı görüntüleme (resimler için)
-        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.Duyurular")]
         public ActionResult ViewFile(int id)
         {
             var attachment = db.GonderiEkler.Find(id);
@@ -203,7 +203,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // Duyuru listeleme
-        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.Duyurular")]
         public ActionResult GonderiListele()
         {
             try
@@ -219,7 +219,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // Duyuru detayı
-        [DynamicAuthorize(Permission = "HumanResources.Announcements")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.Duyurular")]
         public ActionResult GonderiDetay(int id)
         {
             try
@@ -240,7 +240,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // Duyuru silme – onay sayfası
-        [DynamicAuthorize(Permission = "HumanResources.Announcements", Action = "Delete")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.Duyurular", Action = "Delete")]
         [HttpGet]
         public ActionResult GonderiSil(int id)
         {
@@ -254,7 +254,7 @@ namespace MZDNETWORK.Controllers
 
         [HttpPost, ActionName("GonderiSil")]
         [ValidateAntiForgeryToken]
-        [DynamicAuthorize(Permission = "HumanResources.Announcements", Action = "Delete")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.Duyurular", Action = "Delete")]
         public ActionResult GonderiSilConfirmed(int id)
         {
             var gonderi = db.Gonderiler.Include("Ekler").FirstOrDefault(g => g.Id == id);
@@ -287,3 +287,4 @@ namespace MZDNETWORK.Controllers
         }
     }
 }
+

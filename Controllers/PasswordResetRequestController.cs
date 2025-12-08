@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Web.Mvc;
 using MZDNETWORK.Data;
@@ -7,8 +7,8 @@ using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    // Only administrators should access this controller – adjust permission/role as needed.
-    [DynamicAuthorize(Permission = "UserManagement.PasswordResetRequests")]
+    // Only administrators should access this controller â€“ adjust permission/role as needed.
+    [DynamicAuthorize(Permission = "KullaniciYonetimi.SifreSifirlamaTalepleri")]
     public class PasswordResetRequestController : Controller
     {
         private readonly MZDNETWORKContext db;

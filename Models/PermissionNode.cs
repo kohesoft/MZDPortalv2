@@ -1,11 +1,11 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MZDNETWORK.Models
 {
     /// <summary>
-    /// Dinamik yetki sistemi için hiyerarşik yetki düğümü modeli
+    /// Dinamik yetki sistemi iÃ§in hiyerarÅŸik yetki dÃ¼ÄŸÃ¼mÃ¼ modeli
     /// </summary>
     public class PermissionNode
     {
@@ -14,16 +14,16 @@ namespace MZDNETWORK.Models
 
         [Required]
         [StringLength(100)]
-        public string Name { get; set; } // Görünen isim (örn: "Kullanıcı Yönetimi")
+        public string Name { get; set; } // GÃ¶rÃ¼nen isim (Ã¶rn: "KullanÄ±cÄ± YÃ¶netimi")
 
         [Required]
         [StringLength(200)]
-        public string Path { get; set; } // Yetki yolu (örn: "UserManagement.Create")
+        public string Path { get; set; } // Yetki yolu (Ã¶rn: "KullaniciYonetimi.Create")
 
         [StringLength(500)]
-        public string Description { get; set; } // Açıklama
+        public string Description { get; set; } // AÃ§Ä±klama
 
-        // Hiyerarşik yapı için
+        // HiyerarÅŸik yapÄ± iÃ§in
         public int? ParentId { get; set; }
         
         [ForeignKey("ParentId")]
@@ -36,22 +36,22 @@ namespace MZDNETWORK.Models
         [StringLength(50)]
         public string Type { get; set; } // "Module", "Controller", "Action", "Page"
 
-        // UI için
+        // UI iÃ§in
         [StringLength(50)]
         public string Icon { get; set; } // Bootstrap/BoxIcons class
 
-        public int SortOrder { get; set; } // Sıralama
+        public int SortOrder { get; set; } // SÄ±ralama
 
         // Aktif/Pasif durumu
         public bool IsActive { get; set; } = true;
 
-        // CRUD yetki türleri
+        // CRUD yetki tÃ¼rleri
         public bool HasViewPermission { get; set; } = true;
         public bool HasCreatePermission { get; set; } = false;
         public bool HasEditPermission { get; set; } = false;
         public bool HasDeletePermission { get; set; } = false;
 
-        // İlişkiler
+        // Ä°liÅŸkiler
         public virtual ICollection<RolePermission> RolePermissions { get; set; }
 
         // Constructor
@@ -101,7 +101,7 @@ namespace MZDNETWORK.Models
         public bool IsRoot => ParentId == null;
 
         /// <summary>
-        /// Leaf node mu kontrol et (alt düğümü yok)
+        /// Leaf node mu kontrol et (alt dÃ¼ÄŸÃ¼mÃ¼ yok)
         /// </summary>
         [NotMapped]
         public bool IsLeaf => Children == null || Children.Count == 0;

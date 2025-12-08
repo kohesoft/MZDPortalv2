@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using MZDNETWORK.Models;
@@ -8,62 +8,62 @@ using System.Web.Mvc;
 namespace MZDNETWORK.Data
 {
     /// <summary>
-    /// MZD Portal için basit permission seeder'ı
+    /// MZD Portal iÃ§in basit permission seeder'Ä±
     /// </summary>
     public static class PermissionSeeder
     {
         /// <summary>
-        /// Ana permission ağacını oluşturur
+        /// Ana permission aÄŸacÄ±nÄ± oluÅŸturur
         /// </summary>
         public static void SeedPermissions(MZDNETWORKContext context)
         {
             try
             {
-                Console.WriteLine("🌱 Permission node'ları DynamicAuthorize taramasıyla senkronize ediliyor...");
+                Console.WriteLine("ğŸŒ± Permission node'larÄ± DynamicAuthorize taramasÄ±yla senkronize ediliyor...");
 
-                // Mevcut node'ları aktif hâle getir ve temizle (opsiyonel)
+                // Mevcut node'larÄ± aktif hÃ¢le getir ve temizle (opsiyonel)
                 if (context.PermissionNodes.Any())
                 {
                     UpdateExistingPermissions(context);
                 }
 
-                // Sadece Controller'lardaki [DynamicAuthorize] path'lerini tarayıp eksik node'ları ekle
+                // Sadece Controller'lardaki [DynamicAuthorize] path'lerini tarayÄ±p eksik node'larÄ± ekle
                 EnsureDynamicAuthorizePermissions(context);
 
                 context.SaveChanges();
 
-                // İstatistikler
+                // Ä°statistikler
                 ShowStatistics(context);
 
-                // Admin kullanıcı & rolü (varsa güncelle)
+                // Admin kullanÄ±cÄ± & rolÃ¼ (varsa gÃ¼ncelle)
                 CreateAdminUserAndRole(context);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Hata: {ex.Message}");
+                Console.WriteLine($"âŒ Hata: {ex.Message}");
                 throw;
             }
         }
 
         /// <summary>
-        /// Mevcut permission'ları günceller
+        /// Mevcut permission'larÄ± gÃ¼nceller
         /// </summary>
         private static void UpdateExistingPermissions(MZDNETWORKContext context)
         {
-            // Pasif node'ları aktif hale getir
+            // Pasif node'larÄ± aktif hale getir
             var inactiveNodes = context.PermissionNodes.Where(p => !p.IsActive).ToList();
             foreach (var node in inactiveNodes)
             {
                 node.IsActive = true;
-                Console.WriteLine($"🔄 Permission aktif hale getirildi: {node.Path}");
+                Console.WriteLine($"ğŸ”„ Permission aktif hale getirildi: {node.Path}");
             }
 
             context.SaveChanges();
-            Console.WriteLine("✅ Mevcut permission'lar güncellendi");
+            Console.WriteLine("âœ… Mevcut permission'lar gÃ¼ncellendi");
         }
 
         /// <summary>
-        /// İstatistikleri gösterir
+        /// Ä°statistikleri gÃ¶sterir
         /// </summary>
         private static void ShowStatistics(MZDNETWORKContext context)
         {
@@ -71,38 +71,38 @@ namespace MZDNETWORK.Data
             var modules = context.PermissionNodes.Count(p => p.Type == "Module");
             var actions = context.PermissionNodes.Count(p => p.Type == "Action");
 
-            Console.WriteLine("\n📊 İstatistikler:");
-            Console.WriteLine($"   📁 Toplam Node: {totalNodes}");
-            Console.WriteLine($"   🏢 Modül: {modules}");
-            Console.WriteLine($"   🔑 Action: {actions}");
+            Console.WriteLine("\nğŸ“Š Ä°statistikler:");
+            Console.WriteLine($"   ğŸ“ Toplam Node: {totalNodes}");
+            Console.WriteLine($"   ğŸ¢ ModÃ¼l: {modules}");
+            Console.WriteLine($"   ğŸ”‘ Action: {actions}");
             Console.WriteLine();
         }
 
         /// <summary>
-        /// Admin kullanıcısı ve rolü oluşturur
+        /// Admin kullanÄ±cÄ±sÄ± ve rolÃ¼ oluÅŸturur
         /// </summary>
         private static void CreateAdminUserAndRole(MZDNETWORKContext context)
         {
             try
             {
-                // Admin rolü oluştur
+                // Admin rolÃ¼ oluÅŸtur
                 var adminRole = context.Roles.FirstOrDefault(r => r.Name == "SuperAdmin");
                 if (adminRole == null)
                 {
                     adminRole = new Role
                     {
                         Name = "SuperAdmin",
-                        Description = "Süper Yönetici - Tüm yetkiler",
+                        Description = "SÃ¼per YÃ¶netici - TÃ¼m yetkiler",
                         IsActive = true,
                         CreatedDate = DateTime.Now,
                         CreatedBy = 0
                     };
                     context.Roles.Add(adminRole);
                     context.SaveChanges();
-                    Console.WriteLine("👑 SuperAdmin rolü oluşturuldu");
+                    Console.WriteLine("ğŸ‘‘ SuperAdmin rolÃ¼ oluÅŸturuldu");
                 }
 
-                // Tüm permission'lara tam yetki ver
+                // TÃ¼m permission'lara tam yetki ver
                 var allPermissions = context.PermissionNodes.Where(p => p.IsActive).ToList();
                 var existingRolePermissions = context.RolePermissions
                     .Where(rp => rp.RoleId == adminRole.Id)
@@ -135,7 +135,7 @@ namespace MZDNETWORK.Data
                     }
                 }
 
-                // Admin kullanıcısı oluştur
+                // Admin kullanÄ±cÄ±sÄ± oluÅŸtur
                 var adminUser = context.Users.FirstOrDefault(u => u.Username == "admin");
                 if (adminUser == null)
                 {
@@ -144,9 +144,9 @@ namespace MZDNETWORK.Data
                         Username = "admin",
                         Password = "admin123",
                         Name = "Sistem",
-                        Surname = "Yöneticisi",
-                        Department = "Bilgi İşlem",
-                        Position = "Sistem Yöneticisi",
+                        Surname = "YÃ¶neticisi",
+                        Department = "Bilgi Ä°ÅŸlem",
+                        Position = "Sistem YÃ¶neticisi",
                         InternalEmail = "admin@mzd.com",
                         ExternalEmail = "admin@mzd.com",
                         PhoneNumber = "1000",
@@ -157,10 +157,10 @@ namespace MZDNETWORK.Data
 
                     context.Users.Add(adminUser);
                     context.SaveChanges();
-                    Console.WriteLine("👤 Admin kullanıcısı oluşturuldu");
+                    Console.WriteLine("ğŸ‘¤ Admin kullanÄ±cÄ±sÄ± oluÅŸturuldu");
                 }
 
-                // Admin rolünü kullanıcıya ata
+                // Admin rolÃ¼nÃ¼ kullanÄ±cÄ±ya ata
                 var existingUserRole = context.UserRoles
                     .FirstOrDefault(ur => ur.UserId == adminUser.Id && ur.RoleId == adminRole.Id);
 
@@ -177,16 +177,16 @@ namespace MZDNETWORK.Data
 
                     context.UserRoles.Add(userRole);
                     context.SaveChanges();
-                    Console.WriteLine("✅ Admin rolü atandı");
+                    Console.WriteLine("âœ… Admin rolÃ¼ atandÄ±");
                 }
 
                 context.SaveChanges();
-                Console.WriteLine($"✅ SuperAdmin rolüne {allPermissions.Count} permission atandı");
-                Console.WriteLine("🎯 Admin kullanıcısı hazır! Giriş: admin / admin123");
+                Console.WriteLine($"âœ… SuperAdmin rolÃ¼ne {allPermissions.Count} permission atandÄ±");
+                Console.WriteLine("ğŸ¯ Admin kullanÄ±cÄ±sÄ± hazÄ±r! GiriÅŸ: admin / admin123");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Admin oluşturma hatası: {ex.Message}");
+                Console.WriteLine($"âŒ Admin oluÅŸturma hatasÄ±: {ex.Message}");
                 throw;
             }
         }
@@ -197,7 +197,7 @@ namespace MZDNETWORK.Data
             {
                 var discoveredPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-                // Tüm assembly'lerdeki Controller tiplerini tara
+                // TÃ¼m assembly'lerdeki Controller tiplerini tara
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies()
                     .Where(a => !a.IsDynamic && a.FullName.StartsWith("MZDNETWORK"));
 
@@ -208,7 +208,7 @@ namespace MZDNETWORK.Data
 
                     foreach (var ctrl in controllerTypes)
                     {
-                        // Sınıf seviyesindeki attribute
+                        // SÄ±nÄ±f seviyesindeki attribute
                         var classAttr = ctrl.GetCustomAttributes(typeof(Attributes.DynamicAuthorizeAttribute), true)
                                             .FirstOrDefault() as Attributes.DynamicAuthorizeAttribute;
                         if (classAttr != null && !string.IsNullOrWhiteSpace(classAttr.Permission))
@@ -235,9 +235,9 @@ namespace MZDNETWORK.Data
                 }
 
                 if (!discoveredPaths.Any())
-                    return; // Hiçbir permission keşfedilmedi
+                    return; // HiÃ§bir permission keÅŸfedilmedi
 
-                Console.WriteLine($"🔍 DynamicAuthorize taraması: {discoveredPaths.Count} benzersiz permission bulundu");
+                Console.WriteLine($"ğŸ” DynamicAuthorize taramasÄ±: {discoveredPaths.Count} benzersiz permission bulundu");
 
                 foreach (var path in discoveredPaths)
                 {
@@ -248,12 +248,12 @@ namespace MZDNETWORK.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"⚠️  EnsureDynamicAuthorizePermissions error: {ex.Message}");
+                Console.WriteLine($"âš ï¸  EnsureDynamicAuthorizePermissions error: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// DynamicAuthorize attribute'ındaki Permission + Action değerini tam path'e dönüştürür
+        /// DynamicAuthorize attribute'Ä±ndaki Permission + Action deÄŸerini tam path'e dÃ¶nÃ¼ÅŸtÃ¼rÃ¼r
         /// </summary>
         private static string BuildFullPermissionPath(Attributes.DynamicAuthorizeAttribute attr)
         {
@@ -263,7 +263,7 @@ namespace MZDNETWORK.Data
             if (string.IsNullOrEmpty(attr.Action) || attr.Action.Equals("View", StringComparison.OrdinalIgnoreCase))
                 return attr.Permission;
 
-            // Attr.Action zaten path içerisinde varsa tekrar ekleme
+            // Attr.Action zaten path iÃ§erisinde varsa tekrar ekleme
             if (attr.Permission.EndsWith($".{attr.Action}", StringComparison.OrdinalIgnoreCase))
                 return attr.Permission;
 
@@ -271,7 +271,7 @@ namespace MZDNETWORK.Data
         }
 
         /// <summary>
-        /// Verilen tam permission path'i için (ör. "UserManagement.Edit") hiyerarşideki tüm node'ların DB'de olduğundan emin olur
+        /// Verilen tam permission path'i iÃ§in (Ã¶r. "KullaniciYonetimi.Edit") hiyerarÅŸideki tÃ¼m node'larÄ±n DB'de olduÄŸundan emin olur
         /// </summary>
         private static void EnsurePathNodes(MZDNETWORKContext context, string fullPath)
         {
@@ -295,7 +295,7 @@ namespace MZDNETWORK.Data
 
                 // Yeni node ekle
                 string type;
-                if (i == 0) type = "Module"; // kök
+                if (i == 0) type = "Module"; // kÃ¶k
                 else if (i == segments.Length - 1) type = "Action"; // son seviye
                 else type = "Controller"; // ara seviye
 
@@ -315,15 +315,15 @@ namespace MZDNETWORK.Data
                 };
 
                 context.PermissionNodes.Add(newNode);
-                context.SaveChanges(); // ID almak için
+                context.SaveChanges(); // ID almak iÃ§in
 
                 parentId = newNode.Id;
-                Console.WriteLine($"➕ Otomatik node eklendi: {accumulatedPath} ({type})");
+                Console.WriteLine($"â• Otomatik node eklendi: {accumulatedPath} ({type})");
             }
         }
 
         /// <summary>
-        /// Dış çağrılar için geriye dönük uyumluluk: Admin rolünü oluşturur
+        /// DÄ±ÅŸ Ã§aÄŸrÄ±lar iÃ§in geriye dÃ¶nÃ¼k uyumluluk: Admin rolÃ¼nÃ¼ oluÅŸturur
         /// </summary>
         public static void CreateDefaultAdminRole(MZDNETWORKContext context)
         {
@@ -331,7 +331,7 @@ namespace MZDNETWORK.Data
         }
 
         /// <summary>
-        /// Dış çağrılar için geriye dönük uyumluluk: Admin kullanıcısını oluşturur
+        /// DÄ±ÅŸ Ã§aÄŸrÄ±lar iÃ§in geriye dÃ¶nÃ¼k uyumluluk: Admin kullanÄ±cÄ±sÄ±nÄ± oluÅŸturur
         /// </summary>
         public static void CreateDefaultAdminUser(MZDNETWORKContext context)
         {

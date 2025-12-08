@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Web.Mvc;
 using MZDNETWORK.Data;
@@ -9,14 +9,14 @@ using MZDNETWORK.Models;
 namespace MZDNETWORK.Controllers
 {
     /// <summary>
-    /// Permission sistemi test controller'ı
+    /// Permission sistemi test controller'Ä±
     /// </summary>
     public class TestPermissionController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
 
         /// <summary>
-        /// Permission debug sayfası
+        /// Permission debug sayfasÄ±
         /// </summary>
         public ActionResult Debug()
         {
@@ -24,7 +24,7 @@ namespace MZDNETWORK.Controllers
 
             try
             {
-                // Mevcut kullanıcı bilgileri
+                // Mevcut kullanÄ±cÄ± bilgileri
                 model.IsAuthenticated = User.Identity.IsAuthenticated;
                 model.Username = User.Identity.Name;
 
@@ -39,7 +39,7 @@ namespace MZDNETWORK.Controllers
                         // Roller
                         model.UserRoles = DynamicPermissionHelper.GetUserRoles(user.Id);
                         
-                        // Database'den direkt rol kontrolü
+                        // Database'den direkt rol kontrolÃ¼
                         var dbRoles = db.UserRoles
                             .Where(ur => ur.UserId == user.Id)
                             .Select(ur => ur.Role.Name)
@@ -49,18 +49,18 @@ namespace MZDNETWORK.Controllers
                         // Permission testleri
                         model.PermissionTests = new[]
                         {
-                            new PermissionTest { Permission = "UserManagement", Action = "View", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "UserManagement", "View") },
-                            new PermissionTest { Permission = "UserManagement", Action = "Create", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "UserManagement", "Create") },
-                            new PermissionTest { Permission = "UserManagement", Action = "Edit", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "UserManagement", "Edit") },
-                            new PermissionTest { Permission = "SystemManagement.RoleManagement", Action = "View", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "SystemManagement.RoleManagement", "View") },
-                            new PermissionTest { Permission = "HumanResources", Action = "View", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "HumanResources", "View") },
+                            new PermissionTest { Permission = "KullaniciYonetimi", Action = "View", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "KullaniciYonetimi", "View") },
+                            new PermissionTest { Permission = "KullaniciYonetimi", Action = "Create", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "KullaniciYonetimi", "Create") },
+                            new PermissionTest { Permission = "KullaniciYonetimi", Action = "Edit", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "KullaniciYonetimi", "Edit") },
+                            new PermissionTest { Permission = "SistemYonetimi.RolYonetimi", Action = "View", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "SistemYonetimi.RolYonetimi", "View") },
+                            new PermissionTest { Permission = "InsanKaynaklari", Action = "View", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "InsanKaynaklari", "View") },
                             new PermissionTest { Permission = "IT", Action = "View", HasPermission = DynamicPermissionHelper.CheckPermission(user.Id, "IT", "View") }
                         };
 
-                        // Permission Node'ları kontrol et
+                        // Permission Node'larÄ± kontrol et
                         model.PermissionNodesCount = db.PermissionNodes.Count(p => p.IsActive);
                         
-                        // Role Permission'ları kontrol et
+                        // Role Permission'larÄ± kontrol et
                         var roleIds = db.Roles.Where(r => dbRoles.Contains(r.Name)).Select(r => r.Id).ToList();
                         model.RolePermissionsCount = db.RolePermissions.Count(rp => roleIds.Contains(rp.RoleId) && rp.IsActive);
                     }
@@ -82,7 +82,7 @@ namespace MZDNETWORK.Controllers
             try
             {
                 DynamicPermissionHelper.InvalidateAllCache();
-                TempData["SuccessMessage"] = "Cache başarıyla temizlendi";
+                TempData["SuccessMessage"] = "Cache baÅŸarÄ±yla temizlendi";
             }
             catch (Exception ex)
             {
@@ -93,30 +93,30 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Permission Seeder'ı çalıştır
+        /// Permission Seeder'Ä± Ã§alÄ±ÅŸtÄ±r
         /// </summary>
         public ActionResult RunSeeder()
         {
             try
             {
-                // Static method olarak çağır
+                // Static method olarak Ã§aÄŸÄ±r
                 PermissionSeeder.SeedPermissions(db);
                 
                 // Cache'i temizle
                 DynamicPermissionHelper.InvalidateAllCache();
                 
-                TempData["SuccessMessage"] = "Permission Seeder başarıyla çalıştırıldı ve cache temizlendi";
+                TempData["SuccessMessage"] = "Permission Seeder baÅŸarÄ±yla Ã§alÄ±ÅŸtÄ±rÄ±ldÄ± ve cache temizlendi";
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = "Seeder çalıştırılırken hata: " + ex.Message + "\n" + ex.StackTrace;
+                TempData["ErrorMessage"] = "Seeder Ã§alÄ±ÅŸtÄ±rÄ±lÄ±rken hata: " + ex.Message + "\n" + ex.StackTrace;
             }
 
             return RedirectToAction("Debug");
         }
 
         /// <summary>
-        /// Test kullanıcısına admin rolü ata
+        /// Test kullanÄ±cÄ±sÄ±na admin rolÃ¼ ata
         /// </summary>
         public ActionResult AssignAdminRole(string username = null)
         {
@@ -126,26 +126,26 @@ namespace MZDNETWORK.Controllers
                 
                 if (string.IsNullOrEmpty(targetUsername))
                 {
-                    TempData["ErrorMessage"] = "Kullanıcı adı bulunamadı";
+                    TempData["ErrorMessage"] = "KullanÄ±cÄ± adÄ± bulunamadÄ±";
                     return RedirectToAction("Debug");
                 }
 
                 var user = db.Users.FirstOrDefault(u => u.Username == targetUsername);
                 if (user == null)
                 {
-                    TempData["ErrorMessage"] = "Kullanıcı bulunamadı: " + targetUsername;
+                    TempData["ErrorMessage"] = "KullanÄ±cÄ± bulunamadÄ±: " + targetUsername;
                     return RedirectToAction("Debug");
                 }
 
-                // Admin rolü var mı kontrol et
+                // Admin rolÃ¼ var mÄ± kontrol et
                 var adminRole = db.Roles.FirstOrDefault(r => r.Name == "Admin");
                 if (adminRole == null)
                 {
-                    // Admin rolü yoksa oluştur
+                    // Admin rolÃ¼ yoksa oluÅŸtur
                     adminRole = new Role
                     {
                         Name = "Admin",
-                        Description = "Sistem Yöneticisi",
+                        Description = "Sistem YÃ¶neticisi",
                         IsActive = true,
                         CreatedDate = DateTime.Now,
                         CreatedBy = user.Id
@@ -154,11 +154,11 @@ namespace MZDNETWORK.Controllers
                     db.SaveChanges();
                 }
 
-                // Kullanıcının admin rolü var mı kontrol et
+                // KullanÄ±cÄ±nÄ±n admin rolÃ¼ var mÄ± kontrol et
                 var existingUserRole = db.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id && ur.RoleId == adminRole.Id);
                 if (existingUserRole == null)
                 {
-                    // Admin rolü ata
+                    // Admin rolÃ¼ ata
                     db.UserRoles.Add(new UserRole
                     {
                         UserId = user.Id,
@@ -170,18 +170,18 @@ namespace MZDNETWORK.Controllers
                 // Cache temizle
                 DynamicPermissionHelper.InvalidateAllCache();
 
-                TempData["SuccessMessage"] = $"'{targetUsername}' kullanıcısına Admin rolü başarıyla atandı";
+                TempData["SuccessMessage"] = $"'{targetUsername}' kullanÄ±cÄ±sÄ±na Admin rolÃ¼ baÅŸarÄ±yla atandÄ±";
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = "Admin rolü atanırken hata: " + ex.Message;
+                TempData["ErrorMessage"] = "Admin rolÃ¼ atanÄ±rken hata: " + ex.Message;
             }
 
             return RedirectToAction("Debug");
         }
 
         /// <summary>
-        /// Cache bilgilerini JSON olarak döndür
+        /// Cache bilgilerini JSON olarak dÃ¶ndÃ¼r
         /// </summary>
         public JsonResult GetCacheInfo()
         {
@@ -197,7 +197,7 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Tüm cache'i temizle (AJAX için)
+        /// TÃ¼m cache'i temizle (AJAX iÃ§in)
         /// </summary>
         [HttpPost]
         public JsonResult ClearAllCache()
@@ -205,7 +205,7 @@ namespace MZDNETWORK.Controllers
             try
             {
                 DynamicPermissionHelper.InvalidateAllCache();
-                return Json(new { success = true, message = "Cache başarıyla temizlendi" });
+                return Json(new { success = true, message = "Cache baÅŸarÄ±yla temizlendi" });
             }
             catch (Exception ex)
             {
@@ -214,7 +214,7 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Belirli kullanıcının cache'ini temizle
+        /// Belirli kullanÄ±cÄ±nÄ±n cache'ini temizle
         /// </summary>
         [HttpPost]
         public JsonResult ClearUserCache(int userId)
@@ -222,7 +222,7 @@ namespace MZDNETWORK.Controllers
             try
             {
                 DynamicPermissionHelper.InvalidateUserCache(userId);
-                return Json(new { success = true, message = $"Kullanıcı {userId} cache'i temizlendi" });
+                return Json(new { success = true, message = $"KullanÄ±cÄ± {userId} cache'i temizlendi" });
             }
             catch (Exception ex)
             {

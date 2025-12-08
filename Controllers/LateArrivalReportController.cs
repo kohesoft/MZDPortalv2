@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -9,7 +9,7 @@ using OfficeOpenXml;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "HumanResources.LateArrivalReport")] // Yeni yetki kategorisi
+    [DynamicAuthorize(Permission = "InsanKaynaklari.GecGelisRaporu")] // Yeni yetki kategorisi
     public class LateArrivalReportController : Controller
     {
         private readonly MZDNETWORKContext _db = new MZDNETWORKContext();
@@ -22,7 +22,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET: LateArrivalReport/Create
-        [DynamicAuthorize(Permission = "HumanResources.LateArrivalReport", Action = "Create")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.GecGelisRaporu", Action = "Create")]
         public ActionResult Create()
         {
             var model = new LateArrivalReport
@@ -46,7 +46,7 @@ namespace MZDNETWORK.Controllers
         // POST: LateArrivalReport/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DynamicAuthorize(Permission = "HumanResources.LateArrivalReport", Action = "Create")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.GecGelisRaporu", Action = "Create")]
         [ValidateInput(false)]
         public ActionResult Create(LateArrivalReport model)
         {
@@ -70,7 +70,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // GET + POST: Header (Admin only)
-        [DynamicAuthorize(Permission = "HumanResources.LateArrivalReport", Action = "Manage")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.GecGelisRaporu", Action = "Manage")]
         public ActionResult Header()
         {
             var header = _db.LateArrivalReportHeaders.FirstOrDefault() ?? new LateArrivalReportHeader {
@@ -83,7 +83,7 @@ namespace MZDNETWORK.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        [DynamicAuthorize(Permission = "HumanResources.LateArrivalReport", Action = "Manage")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.GecGelisRaporu", Action = "Manage")]
         public ActionResult Header(LateArrivalReportHeader model)
         {
             if (!ModelState.IsValid)
@@ -104,14 +104,14 @@ namespace MZDNETWORK.Controllers
         }
 
         // Excel export
-        [DynamicAuthorize(Permission = "HumanResources.LateArrivalReport", Action = "Export")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.GecGelisRaporu", Action = "Export")]
         public ActionResult ExportExcel()
         {
             var rows = _db.LateArrivalReports.OrderBy(r => r.LateDate).ToList();
             using (var pck = new ExcelPackage())
             {
                 var ws = pck.Workbook.Worksheets.Add("LateArrival");
-                string[] headerTitles = { "Sıra No", "Tarih", "Ad Soyad", "Birim", "Ünvan", "Başlangıç Saati", "Fiili Başlangıç", "Savunma" };
+                string[] headerTitles = { "SÄ±ra No", "Tarih", "Ad Soyad", "Birim", "Ãœnvan", "BaÅŸlangÄ±Ã§ Saati", "Fiili BaÅŸlangÄ±Ã§", "Savunma" };
                 for (int i = 0; i < headerTitles.Length; i++) ws.Cells[1, i + 1].Value = headerTitles[i];
                 int row = 2, index = 1;
                 foreach (var r in rows)
@@ -133,7 +133,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // Print page
-        [DynamicAuthorize(Permission = "HumanResources.LateArrivalReport", Action = "Export")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.GecGelisRaporu", Action = "Export")]
         public ActionResult Print()
         {
             var reports = _db.LateArrivalReports.OrderBy(r => r.LateDate).ToList();
@@ -143,7 +143,7 @@ namespace MZDNETWORK.Controllers
         }
 
         // Print a single report
-        [DynamicAuthorize(Permission = "HumanResources.LateArrivalReport", Action = "Export")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.GecGelisRaporu", Action = "Export")]
         public ActionResult PrintSingle(int id)
         {
             var report = _db.LateArrivalReports.FirstOrDefault(r => r.Id == id);

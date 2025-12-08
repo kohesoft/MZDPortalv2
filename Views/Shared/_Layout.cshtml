@@ -44,7 +44,7 @@
                         <span class="nav-text">Rehber</span>
                     </a>
                 </li>
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SystemManagement.Performance"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SistemYonetimi.Performans"))
                 {
                     <li>
                         <a href="@Url.Action("AdminList", "AccessChangeTicket")" class="nav-link">
@@ -62,7 +62,7 @@
                         </a>
                     </li>
                 }
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Create"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "Create"))
                 {
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
@@ -71,18 +71,18 @@
                             <i class='bx bx-chevron-down icon'></i>
                         </button>
                         <ul class="dropdown-menu">
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Approve"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "Approve"))
                             {
                                 <li><a href="@Url.Action("AdminDashboard", "LeaveRequest")" class="nav-link">İzin Talebi Yönetimi</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.LeaveRequest", "Create"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "Create"))
                             {
                                 <li><a href="@Url.Action("Index", "LeaveRequest")" class="nav-link">İzin Talebi</a></li>
                             }
                         </ul>
                     </li>
                 }
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SystemManagement.Performance"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SistemYonetimi.Performans"))
                 {
                     <li>
                         <a href="@Url.Action("Index", "Performance")" class="nav-link">
@@ -91,7 +91,7 @@
                         </a>
                     </li>
                 }
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.Suggestion"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.Oneri"))
                 {
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
@@ -100,22 +100,22 @@
                             <i class='bx bx-chevron-down icon'></i>
                         </button>
                         <ul class="dropdown-menu">
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.Suggestion"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.Oneri"))
                             {
                                 <li><a href="@Url.Action("DilekIstek_IK", "InsanKaynaklari")" class="nav-link">Dilek Kutusu</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.Announcements"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.Duyurular"))
                             {
                                 <li><a href="@Url.Action("GonderiListele", "Gonderi")" class="nav-link">Duyurular</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SystemManagement.Notification", "Create"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SistemYonetimi.Bildirim", "Create"))
                             {
                                 <li><a href="@Url.Action("SendNotification", "Notification")" class="nav-link">Anlık Bildirim</a></li>
                             }
                         </ul>
                     </li>
                 }
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InformationTechnology"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("BilgiIslem"))
                 {
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
@@ -124,40 +124,40 @@
                             <i class='bx bx-chevron-down icon'></i>
                         </button>
                         <ul class="dropdown-menu">
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("UserManagement.UserManagement", "Create"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("KullaniciYonetimi.KullaniciIslemleri", "Create"))
                             {
                                 <li><a href="@Url.Action("Index", "Kullanici_Islemleri")" class="nav-link">Kullanıcı İşlemleri</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("RoleManagement.RolePermission"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("RolYonetimi.RolYetkileri"))
                             {
                                 <li><a href="@Url.Action("Index", "RolePermission")" class="nav-link">Rol Yetki Matrisi</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("RoleManagement.RoleManagement"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("RolYonetimi.RolIslemleri"))
                             {
                                 <li><a href="@Url.Action("Index", "RoleOrganization")" class="nav-link">Kullanıcı Rol Yönetimi</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("RoleManagement.PermissionTree"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("RolYonetimi.YetkiAgaci"))
                             {
                                 <li><a href="@Url.Action("Index", "PermissionTree")" class="nav-link">Yetki Ağacı</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("UserManagement.AccessChange", "Manage"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("KullaniciYonetimi.YetkiDegisikligi", "Manage"))
                             {
                                 <li><a href="@Url.Action("AdminList", "AccessChangeTicket")" class="nav-link">Erişim Talepleri</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InformationTechnology.BilgiIslem"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("BilgiIslem.BilgiIslem"))
                             {
                                 <li><a href="@Url.Action("YemekYukle", "BilgiIslem")" class="nav-link">Yemek Yükle/Sil</a></li>
                                 <li><a href="@Url.Action("MolaYukle", "BilgiIslem")" class="nav-link">Mola Yükle/Sil</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SystemManagement.Notification", "Create"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SistemYonetimi.Bildirim", "Create"))
                             {
                                 <li><a href="@Url.Action("SendNotification", "Notification")" class="nav-link">Anlık Bildirim</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("UserManagement.PasswordResetRequests"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("KullaniciYonetimi.SifreSifirlamaTalepleri"))
                             {
                                 <li><a href="@Url.Action("Index", "PasswordResetRequest")" class="nav-link">Şifre Sıfırlama İstekleri</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.Chat", "Manage"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Sohbet", "Manage"))
                             {
                                 <li><a href="@Url.Action("Index", "ChatGroup")" class="nav-link">Chat Grupları</a></li>
                             }
@@ -166,7 +166,7 @@
                 }
                 @* Güvenlik menüsü *@
 
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("HumanResources.VisitorEntry", "HumanResources.LateArrivalReport"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("InsanKaynaklari.ZiyaretciGiris", "InsanKaynaklari.GecGelisRaporu"))
                 {
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
@@ -182,22 +182,22 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a href="@Url.Action("Index", "VisitorEntry")" class="nav-link">Ziyaretçi Kayıtları</a></li>
-                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.VisitorEntry", "Create"))
+                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.ZiyaretciGiris", "Create"))
                                     {
                                         <li><a href="@Url.Action("Create", "VisitorEntry")" class="nav-link">Ziyaretçi Ekle</a></li>
                                     }
-                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.VisitorEntry", "Manage"))
+                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.ZiyaretciGiris", "Manage"))
                                     {
                                         <li><a href="@Url.Action("Header", "VisitorEntry")" class="nav-link">Üst Bilgi</a></li>
                                     }
-                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.VisitorEntry", "Export"))
+                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.ZiyaretciGiris", "Export"))
                                     {
                                         <li><a href="@Url.Action("ExportExcel", "VisitorEntry")" class="nav-link">Excel İndir</a></li>
                                         <li><a href="@Url.Action("Print", "VisitorEntry")" class="nav-link">Yazdır</a></li>
                                     }
                                 </ul>
                             </li>
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.LateArrivalReport"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.GecGelisRaporu"))
                             {
                                 <li class="dropdown">
                                     <button class="dropdown-toggle nav-link" type="button">
@@ -206,15 +206,15 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a href="@Url.Action("Index", "LateArrivalReport")" class="nav-link">Tutanaklar</a></li>
-                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.LateArrivalReport", "Create"))
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.GecGelisRaporu", "Create"))
                                         {
                                             <li><a href="@Url.Action("Create", "LateArrivalReport")" class="nav-link">Tutanak Ekle</a></li>
                                         }
-                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.LateArrivalReport", "Manage"))
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.GecGelisRaporu", "Manage"))
                                         {
                                             <li><a href="@Url.Action("Header", "LateArrivalReport")" class="nav-link">Üst Bilgi</a></li>
                                         }
-                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("HumanResources.LateArrivalReport", "Export"))
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.GecGelisRaporu", "Export"))
                                         {
                                             <li><a href="@Url.Action("ExportExcel", "LateArrivalReport")" class="nav-link">Excel İndir</a></li>
                                             <li><a href="@Url.Action("Print", "LateArrivalReport")" class="nav-link">Yazdır</a></li>
@@ -242,7 +242,7 @@
         </li>
                 -->
 
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.Suggestion", "Create"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Oneri", "Create"))
                 {
                     <li>
                         <a href="@Url.Action("Create", "DilekOneri")" class="nav-link">
@@ -251,7 +251,7 @@
                         </a>
                     </li>
                 }
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.Survey"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Anket"))
                 {
                     <li>
                         <a href="@Url.Action("Index", "Survey")" class="nav-link">
@@ -260,20 +260,20 @@
                         </a>
                     </li>
                 }
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Food.Merkez"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Yemek.Merkez"))
                 {
                     <li>
                         <a href="@Url.Action("MerkezYemekListesi", "Home")" class="nav-link">
-                            <i class='bx bx-food-menu icon'></i>
+                            <i class='bx bx-restaurant icon'></i>
                             <span class="nav-text">Merkez Yemek Listesi</span>
                         </a>
                     </li>
                 }
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Food.Yerleske"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Yemek.Yerleske"))
                 {
                     <li>
                         <a href="@Url.Action("YerleskeYemekListesi", "Home")" class="nav-link">
-                            <i class='bx bx-food-menu icon'></i>
+                            <i class='bx bx-restaurant icon'></i>
                             <span class="nav-text">Yerleşke Yemek Listesi</span>
                         </a>
                     </li>
@@ -304,7 +304,7 @@
                     </ul>
                 </li>
 
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Operational.Task"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Operasyon.Gorev"))
                 {
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
@@ -313,18 +313,18 @@
                             <i class='bx bx-chevron-down icon'></i>
                         </button>
                         <ul class="dropdown-menu">
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.Task", "Create"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Gorev", "Create"))
                             {
                                 <li><a href="@Url.Action("Index", "Task")" class="nav-link">Görev Atama</a></li>
                             }
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.Task"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Gorev"))
                             {
                                 <li><a href="@Url.Action("UserTasks", "Task")" class="nav-link">Görevlerim</a></li>
                             }
                         </ul>
                     </li>
                 }
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.ToplantiOdasi"))
                 {
                     <li class="dropdown">
                         <button class="dropdown-toggle nav-link" type="button">
@@ -334,14 +334,14 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="@Url.Action("Index", "MeetingRoom")" class="nav-link">Rezervasyon</a></li>
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom", "Manage"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.ToplantiOdasi", "Manage"))
                             {
                                 <li><a href="@Url.Action("ManageRooms", "MeetingRoom")" class="nav-link">Salon Yönetimi</a></li>
                             }
                         </ul>
                     </li>
                 }
-                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.WhiteBoard.Entry"))
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.BeyazTahta.Girdi"))
                 {
                     <li>
                         <a href="@Url.Action("Index", "BeyazTahta")" class="nav-link">
@@ -394,7 +394,7 @@
                                     Profil Detayları
                                 </a>
                             </li>
-                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.Suggestion"))
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Oneri"))
                             {
                                 <li>
                                     <a href="@Url.Action("Bildirimlerim", "DilekOneri")" class="nav-link">

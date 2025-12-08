@@ -11,14 +11,14 @@ using NLog;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "SystemManagement.Notification")]
+    [DynamicAuthorize(Permission = "SistemYonetimi.Bildirim")]
     public class NotificationController : Controller
     {
         private readonly MZDNETWORKContext db;
         private readonly IHubContext _hubContext;
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        [DynamicAuthorize(Permission = "SystemManagement.Notification", Action = "Create")]
+        [DynamicAuthorize(Permission = "SistemYonetimi.Bildirim", Action = "Create")]
         public ActionResult SendNotification()
         {
             return View();
@@ -32,7 +32,7 @@ namespace MZDNETWORK.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        [DynamicAuthorize(Permission = "SystemManagement.Notification", Action = "Create")]
+        [DynamicAuthorize(Permission = "SistemYonetimi.Bildirim", Action = "Create")]
         public ActionResult SendNotification(string message, int duration = 4000, string color = "info", bool playSound = false, string sound = null)
         {
             var sanitizer = new HtmlSanitizer();
@@ -51,7 +51,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "SystemManagement.Notification")]
+        [DynamicAuthorize(Permission = "SistemYonetimi.Bildirim")]
         public ActionResult MarkAsRead(int id)
         {
             var notification = db.Notifications.SingleOrDefault(n => n.Id == id);
@@ -64,7 +64,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpGet]
-        [DynamicAuthorize(Permission = "SystemManagement.Notification")]
+        [DynamicAuthorize(Permission = "SistemYonetimi.Bildirim")]
         public ActionResult GetUnreadNotifications()
         {
             var username = User.Identity.Name;
@@ -77,3 +77,4 @@ namespace MZDNETWORK.Controllers
         }
     }
 }
+

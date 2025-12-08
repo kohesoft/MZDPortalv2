@@ -94,7 +94,8 @@
     string ToJsonData(object obj)
     {
         var json = JsonConvert.SerializeObject(obj);
-        return HttpUtility.JavaScriptStringEncode(json, true);
+        // Encode for attribute context so quotes/apostrophes don't break the tag
+        return HttpUtility.HtmlAttributeEncode(json);
     }
 }
 
@@ -156,7 +157,7 @@
                         <td class="text-gray-700">@t.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
                         <td class="text-gray-600">@Safe(t.AdminNote)</td>
                         <td>
-                            <button type="button" class="inline-flex items-center px-3 py-1.5 rounded bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-800 detail-btn" data-detail="@ToJsonData(detail)">Detay</button>
+                            <button type="button" class="inline-flex items-center px-3 py-1.5 rounded bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-800 detail-btn" data-detail="@Html.Raw(ToJsonData(detail))">Detay</button>
                         </td>
                         <td class="space-x-2 whitespace-nowrap">
                             @if (t.Status == AccessChangeStatus.Pending)
@@ -233,17 +234,18 @@
 
             function userInfo(label, info) {
                 if (!info) return line(label, '—');
-                const rows = [
-                    info.Name ? `${info.Name} ${info.Surname || ''}`.trim() : '',
-                    info.Username,
-                    info.Department,
-                    info.Title,
-                    info.InternalEmail,
-                    info.ExternalEmail,
-                    info.PhoneNumber,
-                    info.Intercom
-                ].filter(Boolean);
-                return list(label, rows);
+                const fields = [
+                    ['Ad Soyad', [info.Name, info.Surname].filter(Boolean).join(' ').trim()],
+                    ['Departman', info.Department],
+                    ['Ünvan', info.Title],
+                    ['İç E-posta', info.InternalEmail],
+                    ['Dış E-posta', info.ExternalEmail],
+                    ['Telefon', info.PhoneNumber],
+                    ['Dahili', info.Intercom]
+                ].filter(f => f[1]);
+                if (!fields.length) return line(label, '—');
+                const content = fields.map(([k, v]) => `<div class="flex justify-between gap-3 text-xs text-gray-800 w-full"><span class="text-gray-500">${k}</span><span class="font-medium text-gray-900">${v}</span></div>`).join('');
+                return `<div class="flex flex-col gap-1"><span class="text-gray-500 text-sm w-40">${label}</span><div class="flex flex-col gap-1 bg-gray-50 border border-gray-100 rounded p-3 max-h-64 overflow-y-auto">${content}</div></div>`;
             }
 
             $(document).on('click', '.detail-btn', function () {

@@ -14,7 +14,7 @@
 <body class="bg-gray-100 p-6">
     <div class="max-w-full mx-auto bg-white rounded-lg shadow p-8">
         <h2 class="text-2xl font-bold mb-6">Anketler</h2>
-        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.Survey", "Create"))
+        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Anket", "Create"))
         {
             <a href="@Url.Action("Create", "Survey")" class="inline-block mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Yeni Anket Oluştur</a>
         }
@@ -59,7 +59,7 @@
                                             <i class="bx bx-edit-alt mr-2"></i> Cevapla
                                         </a>
                                     }
-                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.Survey", "View"))
+                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Anket", "View"))
                                     {
                                         <a href="@Url.Action("SurveyResults", "Survey", new { surveyId = survey.ID })" class="flex items-center px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600 transition">
                                             <i class="bx bx-bar-chart-alt-2 mr-2"></i> Sonuçları Gör
@@ -179,3 +179,4 @@
     <script src="~/Scripts/jquery-2.2.4.min.js"></script>
 </body>
 </html>
+

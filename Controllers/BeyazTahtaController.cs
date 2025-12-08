@@ -35,7 +35,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "Operational.WhiteBoard.UpdateHeader", Action = "Edit")]
+        [DynamicAuthorize(Permission = "Operasyon.BeyazTahta.BaslikGuncelle", Action = "Edit")]
         public JsonResult UpdateHeader(string title)
         {
             var h = db.TvHeaders.Find(1);
@@ -62,7 +62,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "Operational.WhiteBoard.Entry", Action = "Create")]
+        [DynamicAuthorize(Permission = "Operasyon.BeyazTahta.Girdi", Action = "Create")]
         public JsonResult CreateEntry(BeyazTahtaEntry vm)
         {
             vm.CreatedAt = DateTime.Now;
@@ -72,7 +72,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "Operational.WhiteBoard.Entry", Action = "Edit")]
+        [DynamicAuthorize(Permission = "Operasyon.BeyazTahta.Girdi", Action = "Edit")]
         public JsonResult EditEntry(BeyazTahtaEntry vm)
         {
             var ent = db.BeyazTahtaEntries.Find(vm.Id);
@@ -85,7 +85,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "Operational.WhiteBoard.Entry", Action = "Delete")]
+        [DynamicAuthorize(Permission = "Operasyon.BeyazTahta.Girdi", Action = "Delete")]
         public JsonResult DeleteEntry(int id)
         {
             var ent = db.BeyazTahtaEntries.Find(id);
@@ -102,3 +102,4 @@ namespace MZDNETWORK.Controllers
         }
     }
 }
+

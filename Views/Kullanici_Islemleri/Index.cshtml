@@ -262,12 +262,6 @@
                         document.querySelector('.max-w-full').insertBefore(successMessage, document.querySelector('.max-w-full').firstChild);
                         setTimeout(() => successMessage.remove(), 3000);
                         
-                        // Local storage'a silinen kullanıcı ID'sini kaydet
-                        let deletedUsers = JSON.parse(localStorage.getItem('deletedUsers') || '[]');
-                        if (!deletedUsers.includes(deleteUserId)) {
-                            deletedUsers.push(deleteUserId);
-                            localStorage.setItem('deletedUsers', JSON.stringify(deletedUsers));
-                        }
                     } else {
                         const errorMessage = document.createElement('div');
                         errorMessage.className = 'mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative';
@@ -294,21 +288,6 @@
                 });
             }
             document.getElementById('deleteModal').classList.add('hidden');
-        });
-        
-        // Sayfa yüklendiğinde silinen kullanıcıları kontrol et ve gizle
-        document.addEventListener('DOMContentLoaded', function() {
-            const deletedUsers = JSON.parse(localStorage.getItem('deletedUsers') || '[]');
-            deletedUsers.forEach(userId => {
-                const userRow = document.querySelector(`.user-row[data-user-id="${userId}"]`);
-                const infoRow = document.getElementById(`user-info-${userId}`);
-                if (userRow) {
-                    userRow.remove();
-                }
-                if (infoRow) {
-                    infoRow.remove();
-                }
-            });
         });
     </script>
 </body>

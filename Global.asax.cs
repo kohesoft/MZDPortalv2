@@ -1,4 +1,4 @@
-using System.Web;
+﻿using System.Web;
 using System;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -22,12 +22,12 @@ using System.Configuration;
 
 namespace MZDNETWORK
 {
-    // Hangfire Dashboard için yetkilendirme filtresi
+    // Hangfire Dashboard iÃ§in yetkilendirme filtresi
     public class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
     {
         public bool Authorize(DashboardContext context)
         {
-            // HttpContext'e System.Web üzerinden eriş
+            // HttpContext'e System.Web Ã¼zerinden eriÅŸ
             var httpContext = System.Web.HttpContext.Current;
             
             if (httpContext == null || httpContext.User == null || !httpContext.User.Identity.IsAuthenticated)
@@ -35,10 +35,10 @@ namespace MZDNETWORK
                 return false;
             }
 
-            // Sadece admin kullanıcılar erişebilir
+            // Sadece admin kullanÄ±cÄ±lar eriÅŸebilir
             try
             {
-                return Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom", "Manage");
+                return Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.ToplantiOdasi", "Manage");
             }
             catch
             {
@@ -61,7 +61,7 @@ namespace MZDNETWORK
                 RouteConfig.RegisterRoutes(RouteTable.Routes);
                 BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-                // EPPlus 5+ gereği lisans bağlamını belirle
+                // EPPlus 5+ gereÄŸi lisans baÄŸlamÄ±nÄ± belirle
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
                 // Seed
@@ -102,7 +102,7 @@ namespace MZDNETWORK
                             var username = userData[0];
                             var userId = userData[1];
                             
-                            // Multiple roles desteği için RoleHelper kullan
+                            // Multiple roles desteÄŸi iÃ§in RoleHelper kullan
                             string[] roles;
                             if (int.TryParse(userId, out int userIdInt))
                             {
@@ -189,7 +189,7 @@ namespace MZDNETWORK
             // Check if it's a SignalR ping timeout or similar
             if (exception.Message.Contains("ping") || 
                 exception.Message.Contains("Connection aborted") ||
-                exception.Message.Contains("Uzak ana bilgisayar bağlantıyı kapattı"))
+                exception.Message.Contains("Uzak ana bilgisayar baÄŸlantÄ±yÄ± kapattÄ±"))
             {
                 return true;
             }
@@ -247,7 +247,7 @@ namespace MZDNETWORK
                         var dashboardOptions = new DashboardOptions
                         {
                             Authorization = new[] { new HangfireAuthorizationFilter() },
-                            AppPath = "/", // Ana sayfaya dön butonu için
+                            AppPath = "/", // Ana sayfaya dÃ¶n butonu iÃ§in
                             DisplayStorageConnectionString = false
                         };
                         app.UseHangfireDashboard("/hangfire", dashboardOptions);
@@ -256,7 +256,7 @@ namespace MZDNETWORK
                     app.UseHangfireServer();
                     logger.Info("Hangfire server started");
                     
-                    // Recurring job'ları server başladıktan sonra tanımla
+                    // Recurring job'larÄ± server baÅŸladÄ±ktan sonra tanÄ±mla
                     RecurringJob.AddOrUpdate("daily-overtime-cleanup", () => OvertimeServiceScheduler.ResetOvertimeData(null), Cron.Daily);
                     RecurringJob.AddOrUpdate("hourly-connection-cleanup", () => ConnectionPoolManager.ClearConnectionPools(), Cron.Hourly);
                     RecurringJob.AddOrUpdate("meeting-reminders", () => new MeetingReminderService().CheckAndSendReminders(), "*/5 * * * *");
@@ -275,3 +275,4 @@ namespace MZDNETWORK
         }
     }
 }
+

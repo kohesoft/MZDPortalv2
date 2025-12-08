@@ -7,14 +7,14 @@ using System.Linq;
 using System.Web.Mvc;
 using MZDNETWORK.Attributes;
 
-[DynamicAuthorize(Permission = "Operational.Survey")]
+[DynamicAuthorize(Permission = "Operasyon.Anket")]
 public class AnswerController : Controller
 {
     // Sınıf genelinde Survey görüntüleme izni
     private MZDNETWORKContext db = new MZDNETWORKContext();
 
     // Kullanıcı anketi doldururken
-    [DynamicAuthorize(Permission = "Operational.Survey")]
+    [DynamicAuthorize(Permission = "Operasyon.Anket")]
     public ActionResult TakeSurvey(int surveyId)
     {
         var survey = db.Surveys
@@ -33,7 +33,7 @@ public class AnswerController : Controller
         return View(survey);
     }
 
-    [DynamicAuthorize(Permission = "Operational.Survey", Action = "Create")]
+    [DynamicAuthorize(Permission = "Operasyon.Anket", Action = "Create")]
     [HttpPost]
     public ActionResult SubmitSurvey(FormCollection form)
     {
@@ -115,3 +115,4 @@ public class AnswerController : Controller
         return Json(hasAnswered, JsonRequestBehavior.AllowGet);
     }
 }
+

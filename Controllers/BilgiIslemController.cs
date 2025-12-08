@@ -8,7 +8,7 @@ using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem")]
+    [DynamicAuthorize(Permission = "BilgiIslem.BilgiIslem")]
     public class BilgiIslemController : Controller
     {
         public ActionResult Index()
@@ -42,7 +42,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.FoodPhoto", Action = "Manage")]
+        [DynamicAuthorize(Permission = "BilgiIslem.YemekFoto", Action = "Manage")]
         public ActionResult UploadPhotoMerkez(HttpPostedFileBase photo)
         {
             if (photo != null && photo.ContentLength > 0)
@@ -62,7 +62,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.FoodPhoto", Action = "Manage")]
+        [DynamicAuthorize(Permission = "BilgiIslem.YemekFoto", Action = "Manage")]
         public ActionResult UploadPhotoYerleske(HttpPostedFileBase photo)
         {
             if (photo != null && photo.ContentLength > 0)
@@ -82,7 +82,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.FoodPhoto", Action = "Manage")]
+        [DynamicAuthorize(Permission = "BilgiIslem.YemekFoto", Action = "Manage")]
         public ActionResult DeleteYemekMerkez(string fileName)
         {
             if (!string.IsNullOrEmpty(fileName))
@@ -113,7 +113,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.FoodPhoto", Action = "Manage")]
+        [DynamicAuthorize(Permission = "BilgiIslem.YemekFoto", Action = "Manage")]
         public ActionResult DeleteYemekYerleske(string fileName)
         {
             if (!string.IsNullOrEmpty(fileName))
@@ -144,7 +144,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.BreakPhoto", Action = "Manage")]
+        [DynamicAuthorize(Permission = "BilgiIslem.MolaFoto", Action = "Manage")]
         public ActionResult UploadMolaPhoto(HttpPostedFileBase photo)
         {
             if (photo != null && photo.ContentLength > 0)
@@ -164,7 +164,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "InformationTechnology.BilgiIslem.BreakPhoto", Action = "Manage")]
+        [DynamicAuthorize(Permission = "BilgiIslem.MolaFoto", Action = "Manage")]
         public ActionResult DeleteMola(string fileName)
         {
             if (!string.IsNullOrEmpty(fileName))

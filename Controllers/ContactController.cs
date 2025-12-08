@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,7 +18,7 @@ namespace MZDNETWORK.Controllers
 
         public ContactController()
         {
-            // Cache problemlerini önlemek için
+            // Cache problemlerini Ã¶nlemek iÃ§in
             db.Configuration.AutoDetectChangesEnabled = true;
             db.Configuration.ValidateOnSaveEnabled = true;
             db.Configuration.LazyLoadingEnabled = false;
@@ -26,11 +26,11 @@ namespace MZDNETWORK.Controllers
 
         public ActionResult Index()
         {
-            // Fresh context ile temiz veri al - cache problemlerini önlemek için
+            // Fresh context ile temiz veri al - cache problemlerini Ã¶nlemek iÃ§in
             using (var freshContext = new MZDNETWORKContext())
             {
                 var users = freshContext.Users
-                    .AsNoTracking() // Read-only için tracking'i devre dýþý býrak
+                    .AsNoTracking() // Read-only iÃ§in tracking'i devre dÄ±ÅŸÄ± bÄ±rak
                     .OrderBy(u => u.Department)
                     .ThenBy(u => u.Name)
                     .ThenBy(u => u.Surname)
@@ -40,7 +40,7 @@ namespace MZDNETWORK.Controllers
             }
         }
 
-        [DynamicAuthorize(Permission = "Operational.Contact", Action = "Export")]
+        [DynamicAuthorize(Permission = "Operasyon.Iletisim", Action = "Export")]
         [HttpPost]
         public ActionResult ExportToExcel(List<List<string>> data)
         {
@@ -54,20 +54,20 @@ namespace MZDNETWORK.Controllers
             {
                 var worksheet = package.Workbook.Worksheets.Add("KullaniciListesi");
                 
-                // Header'larý ekle
-                string[] headers = { "Sicil", "Adý", "Soyadý", "Departman ve Pozisyon", "Dahili", "Cep Tel", "Ýç mail", "Dýþ mail" };
+                // Header'larÄ± ekle
+                string[] headers = { "Sicil", "AdÄ±", "SoyadÄ±", "Departman ve Pozisyon", "Dahili", "Cep Tel", "Ä°Ã§ mail", "DÄ±ÅŸ mail" };
                 for (int i = 0; i < headers.Length; i++)
                 {
                     worksheet.Cells[1, i + 1].Value = headers[i];
                     worksheet.Cells[1, i + 1].Style.Font.Bold = true;
                 }
                 
-                // Veri satýrlarýný ekle
+                // Veri satÄ±rlarÄ±nÄ± ekle
                 for (int i = 0; i < data.Count; i++)
                 {
                     for (int j = 0; j < data[i].Count && j < headers.Length; j++)
                     {
-                        worksheet.Cells[i + 2, j + 1].Value = data[i][j]; // i + 2 çünkü header satýrý var
+                        worksheet.Cells[i + 2, j + 1].Value = data[i][j]; // i + 2 Ã§Ã¼nkÃ¼ header satÄ±rÄ± var
                     }
                 }
 
@@ -91,4 +91,5 @@ namespace MZDNETWORK.Controllers
         }
     }
 }
+
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -12,19 +12,19 @@ namespace MZDNETWORK.Controllers
 {
     /// <summary>
     /// Permission Tree Management Controller
-    /// Hiyerarşik yetki ağacı yönetimi için modern UI
+    /// HiyerarÅŸik yetki aÄŸacÄ± yÃ¶netimi iÃ§in modern UI
     /// </summary>
-    [DynamicAuthorize(Permission = "RoleManagement.PermissionTree")]
+    [DynamicAuthorize(Permission = "RolYonetimi.YetkiAgaci")]
     public class PermissionTreeController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
 
         /// <summary>
-        /// Ana permission tree sayfası
+        /// Ana permission tree sayfasÄ±
         /// </summary>
         public ActionResult Index()
         {
-            ViewBag.Title = "Yetki Ağacı Yönetimi";
+            ViewBag.Title = "Yetki AÄŸacÄ± YÃ¶netimi";
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Permission detaylarını getirir
+        /// Permission detaylarÄ±nÄ± getirir
         /// </summary>
         public JsonResult GetPermissionDetails(int id)
         {
@@ -77,7 +77,7 @@ namespace MZDNETWORK.Controllers
                 var permission = db.PermissionNodes.Find(id);
                 if (permission == null)
                 {
-                    return Json(new { success = false, message = "Permission bulunamadı" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = false, message = "Permission bulunamadÄ±" }, JsonRequestBehavior.AllowGet);
                 }
 
                 var result = new
@@ -113,10 +113,10 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Yeni permission node oluşturur
+        /// Yeni permission node oluÅŸturur
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.PermissionTree", Action = "Create")]
+        [DynamicAuthorize(Permission = "RolYonetimi.YetkiAgaci", Action = "Create")]
         public JsonResult CreatePermissionNode(PermissionNodeCreateModel model)
         {
             try
@@ -127,10 +127,10 @@ namespace MZDNETWORK.Controllers
                     return Json(new { success = false, message = string.Join(", ", errors) });
                 }
 
-                // Path benzersizlik kontrolü
+                // Path benzersizlik kontrolÃ¼
                 if (db.PermissionNodes.Any(p => p.Path == model.Path))
                 {
-                    return Json(new { success = false, message = "Bu path zaten kullanılıyor" });
+                    return Json(new { success = false, message = "Bu path zaten kullanÄ±lÄ±yor" });
                 }
 
                 var permission = new PermissionNode
@@ -155,7 +155,7 @@ namespace MZDNETWORK.Controllers
                 return Json(new
                 {
                     success = true,
-                    message = "Permission başarıyla oluşturuldu",
+                    message = "Permission baÅŸarÄ±yla oluÅŸturuldu",
                     data = new { id = permission.Id, name = permission.Name, path = permission.Path }
                 });
             }
@@ -166,10 +166,10 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Permission node günceller
+        /// Permission node gÃ¼nceller
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.PermissionTree", Action = "Edit")]
+        [DynamicAuthorize(Permission = "RolYonetimi.YetkiAgaci", Action = "Edit")]
         public JsonResult UpdatePermissionNode(PermissionNodeUpdateModel model)
         {
             try
@@ -177,13 +177,13 @@ namespace MZDNETWORK.Controllers
                 var permission = db.PermissionNodes.Find(model.Id);
                 if (permission == null)
                 {
-                    return Json(new { success = false, message = "Permission bulunamadı" });
+                    return Json(new { success = false, message = "Permission bulunamadÄ±" });
                 }
 
-                // Path benzersizlik kontrolü (kendi ID'si hariç)
+                // Path benzersizlik kontrolÃ¼ (kendi ID'si hariÃ§)
                 if (db.PermissionNodes.Any(p => p.Path == model.Path && p.Id != model.Id))
                 {
-                    return Json(new { success = false, message = "Bu path zaten kullanılıyor" });
+                    return Json(new { success = false, message = "Bu path zaten kullanÄ±lÄ±yor" });
                 }
 
                 permission.Name = model.Name;
@@ -201,7 +201,7 @@ namespace MZDNETWORK.Controllers
                 // Cache'i temizle
                 DynamicPermissionHelper.ClearPermissionCache();
 
-                return Json(new { success = true, message = "Permission başarıyla güncellendi" });
+                return Json(new { success = true, message = "Permission baÅŸarÄ±yla gÃ¼ncellendi" });
             }
             catch (Exception ex)
             {
@@ -213,7 +213,7 @@ namespace MZDNETWORK.Controllers
         /// Permission node siler (soft delete)
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.PermissionTree", Action = "Delete")]
+        [DynamicAuthorize(Permission = "RolYonetimi.YetkiAgaci", Action = "Delete")]
         public JsonResult DeletePermissionNode(int id)
         {
             try
@@ -221,21 +221,21 @@ namespace MZDNETWORK.Controllers
                 var permission = db.PermissionNodes.Find(id);
                 if (permission == null)
                 {
-                    return Json(new { success = false, message = "Permission bulunamadı" });
+                    return Json(new { success = false, message = "Permission bulunamadÄ±" });
                 }
 
-                // Alt permission'ları kontrol et
+                // Alt permission'larÄ± kontrol et
                 var hasChildren = db.PermissionNodes.Any(p => p.ParentId == id && p.IsActive);
                 if (hasChildren)
                 {
-                    return Json(new { success = false, message = "Alt permission'ları olan bir permission silinemez" });
+                    return Json(new { success = false, message = "Alt permission'larÄ± olan bir permission silinemez" });
                 }
 
-                // Role assignment'larını kontrol et
+                // Role assignment'larÄ±nÄ± kontrol et
                 var hasRoleAssignments = db.RolePermissions.Any(rp => rp.PermissionNodeId == id && rp.IsActive);
                 if (hasRoleAssignments)
                 {
-                    return Json(new { success = false, message = "Role atanmış permission'lar silinemez. Önce role atamalarını kaldırın." });
+                    return Json(new { success = false, message = "Role atanmÄ±ÅŸ permission'lar silinemez. Ã–nce role atamalarÄ±nÄ± kaldÄ±rÄ±n." });
                 }
 
                 // Soft delete
@@ -245,7 +245,7 @@ namespace MZDNETWORK.Controllers
                 // Cache'i temizle
                 DynamicPermissionHelper.ClearPermissionCache();
 
-                return Json(new { success = true, message = "Permission başarıyla silindi" });
+                return Json(new { success = true, message = "Permission baÅŸarÄ±yla silindi" });
             }
             catch (Exception ex)
             {
@@ -286,15 +286,15 @@ namespace MZDNETWORK.Controllers
         }
 
         /// <summary>
-        /// Permission tree'yi yeniden oluşturur (Re-seed)
+        /// Permission tree'yi yeniden oluÅŸturur (Re-seed)
         /// </summary>
         [HttpPost]
-        [DynamicAuthorize(Permission = "RoleManagement.PermissionTree", Action = "Manage")]
+        [DynamicAuthorize(Permission = "RolYonetimi.YetkiAgaci", Action = "Manage")]
         public JsonResult ReseedPermissionTree()
         {
             try
             {
-                // Mevcut permission'ları pasif yap
+                // Mevcut permission'larÄ± pasif yap
                 var existingPermissions = db.PermissionNodes.ToList();
                 foreach (var perm in existingPermissions)
                 {
@@ -308,7 +308,7 @@ namespace MZDNETWORK.Controllers
                 // Cache'i temizle
                 DynamicPermissionHelper.ClearPermissionCache();
 
-                return Json(new { success = true, message = "Permission tree başarıyla yeniden oluşturuldu" });
+                return Json(new { success = true, message = "Permission tree baÅŸarÄ±yla yeniden oluÅŸturuldu" });
             }
             catch (Exception ex)
             {
@@ -327,7 +327,7 @@ namespace MZDNETWORK.Controllers
     }
 
     /// <summary>
-    /// Permission node oluşturma modeli
+    /// Permission node oluÅŸturma modeli
     /// </summary>
     public class PermissionNodeCreateModel
     {
@@ -345,7 +345,7 @@ namespace MZDNETWORK.Controllers
     }
 
     /// <summary>
-    /// Permission node güncelleme modeli
+    /// Permission node gÃ¼ncelleme modeli
     /// </summary>
     public class PermissionNodeUpdateModel : PermissionNodeCreateModel
     {

@@ -8,13 +8,13 @@ using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "Operational.Survey")]
+    [DynamicAuthorize(Permission = "Operasyon.Anket")]
     public class SurveyController : Controller
     {
         private MZDNETWORKContext db = new MZDNETWORKContext();
 
         // Anketleri listele
-        [DynamicAuthorize(Permission = "Operational.Survey")]
+        [DynamicAuthorize(Permission = "Operasyon.Anket")]
         public ActionResult Index()
         {
             var surveys = db.Surveys.ToList();
@@ -22,14 +22,14 @@ namespace MZDNETWORK.Controllers
         }
 
         // Yeni anket oluşturma GET
-        [DynamicAuthorize(Permission = "Operational.Survey", Action = "Manage")]
+        [DynamicAuthorize(Permission = "Operasyon.Anket", Action = "Manage")]
         public ActionResult Create()
         {
             return View();
         }
 
         // Yeni anket oluşturma POST
-        [DynamicAuthorize(Permission = "Operational.Survey", Action = "Manage")]
+        [DynamicAuthorize(Permission = "Operasyon.Anket", Action = "Manage")]
         [HttpPost]
         public ActionResult Create(Survey survey)
         {
@@ -73,7 +73,7 @@ namespace MZDNETWORK.Controllers
         }
 
 
-        [DynamicAuthorize(Permission = "Operational.Survey", Action = "Export")]
+        [DynamicAuthorize(Permission = "Operasyon.Anket", Action = "Export")]
         public ActionResult SurveyResults(int surveyId)
         {
             var survey = db.Surveys
@@ -86,7 +86,7 @@ namespace MZDNETWORK.Controllers
             return View(survey);
         }
 
-        [DynamicAuthorize(Permission = "Operational.Survey", Action = "Delete")]
+        [DynamicAuthorize(Permission = "Operasyon.Anket", Action = "Delete")]
         public ActionResult Delete(int id)
         {
             var survey = db.Surveys.Find(id);
@@ -108,3 +108,4 @@ namespace MZDNETWORK.Controllers
         }
     }
 }
+

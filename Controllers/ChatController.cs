@@ -11,7 +11,7 @@ using MZDNETWORK.Data;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "Operational.Chat")]
+    [DynamicAuthorize(Permission = "Operasyon.Sohbet")]
     public class ChatController : Controller
     {
         private readonly IHubContext _hubContext;
@@ -23,7 +23,7 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpPost]
-        [DynamicAuthorize(Permission = "Operational.Chat", Action = "Create")]
+        [DynamicAuthorize(Permission = "Operasyon.Sohbet", Action = "Create")]
         public ActionResult SendMessage(string user, string message, int groupId)
         {
             var dbUser = _db.Users.FirstOrDefault(u => u.Username == user);

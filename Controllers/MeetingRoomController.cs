@@ -10,7 +10,7 @@ using MZDNETWORK.Helpers;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "Operational.MeetingRoom")]
+    [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi")]
     public class MeetingRoomController : Controller
     {
         private readonly MZDNETWORKContext db = new MZDNETWORKContext();
@@ -21,26 +21,26 @@ namespace MZDNETWORK.Controllers
             _notificationService = new NotificationService(db);
         }
 
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "View")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "View")]
         public ActionResult Index()
         {
             ViewBag.Reservations = db.Reservations
                 .OrderBy(r => r.Date)
                 .ThenBy(r => r.StartTime)
                 .ToList();
-            ViewBag.IsAdmin = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom", "Manage");
+            ViewBag.IsAdmin = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.ToplantiOdasi", "Manage");
             ViewBag.CurrentUserName = User.Identity.GetUserName();
             ViewBag.CurrentUserId = User.Identity.GetUserId();
             return View();
         }
 
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "View")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "View")]
         public ActionResult MyMeetings()
         {
             return View();
         }
 
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "View")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "View")]
         [HttpGet]
         public JsonResult GetReservations()
         {
@@ -82,7 +82,7 @@ namespace MZDNETWORK.Controllers
             return Json(reservations, JsonRequestBehavior.AllowGet);
         }
 
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "View")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "View")]
         [HttpGet]
         public JsonResult GetActiveUsers()
         {
@@ -111,7 +111,7 @@ namespace MZDNETWORK.Controllers
             }
         }
 
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "View")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "View")]
         [HttpGet]
         public JsonResult GetMeetingRooms()
         {
@@ -140,7 +140,7 @@ namespace MZDNETWORK.Controllers
             }
         }
 
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Create")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult CreateReservation(
@@ -265,7 +265,7 @@ namespace MZDNETWORK.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult ApproveReservation(int id)
         {
-            const string permissionPath = "Operational.MeetingRoom";
+            const string permissionPath = "Operasyon.ToplantiOdasi";
 
             bool canApprove = DynamicAuthorizeAttribute.CurrentUserHasPermission(permissionPath, "Approve");
             bool canManage  = DynamicAuthorizeAttribute.CurrentUserHasPermission(permissionPath, "Manage");
@@ -317,7 +317,7 @@ namespace MZDNETWORK.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult RejectReservation(int id, string reason)
         {
-            const string permissionPath = "Operational.MeetingRoom";
+            const string permissionPath = "Operasyon.ToplantiOdasi";
 
             bool canApprove = DynamicAuthorizeAttribute.CurrentUserHasPermission(permissionPath, "Approve");
             bool canManage  = DynamicAuthorizeAttribute.CurrentUserHasPermission(permissionPath, "Manage");
@@ -366,7 +366,7 @@ namespace MZDNETWORK.Controllers
             if (r == null)
                 return Json(new { success = false, message = "Rezervasyon bulunamadı" });
 
-            var permissionPath = "Operational.MeetingRoom";
+            var permissionPath = "Operasyon.ToplantiOdasi";
             bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission(permissionPath, "Manage");
 
             var currentUserId = User.Identity.GetUserId();
@@ -400,7 +400,7 @@ namespace MZDNETWORK.Controllers
         // Rezervasyon Düzenleme
         // --------------------------------------------------
 
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "View")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "View")]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -415,7 +415,7 @@ namespace MZDNETWORK.Controllers
             }
 
             var currentUserId = User.Identity.GetUserId();
-            bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom", "Manage");
+            bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.ToplantiOdasi", "Manage");
 
             // Sadece kendi rezervasyonunu düzenleyebilir (Pending durumda) veya yönetici
             if (!canManage && (reservation.UserId.ToString() != currentUserId || reservation.Status != ReservationStatus.Pending))
@@ -428,7 +428,7 @@ namespace MZDNETWORK.Controllers
             return View(reservation);
         }
 
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "View")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "View")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult UpdateReservation(
@@ -448,7 +448,7 @@ namespace MZDNETWORK.Controllers
                     return Json(new { success = false, message = "Rezervasyon bulunamadı" });
 
                 var currentUserId = User.Identity.GetUserId();
-                bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom", "Manage");
+                bool canManage = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.ToplantiOdasi", "Manage");
 
                 // Yetki kontrolü
                 if (!canManage && (reservation.UserId.ToString() != currentUserId || reservation.Status != ReservationStatus.Pending))
@@ -673,7 +673,7 @@ namespace MZDNETWORK.Controllers
         // Toplantı Detay ve Karar Yönetimi
         // --------------------------------------------------
 
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "View")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "View")]
         public ActionResult Details(int id)
         {
             var reservation = db.Reservations
@@ -687,7 +687,7 @@ namespace MZDNETWORK.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IsAdmin = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operational.MeetingRoom", "Manage");
+            ViewBag.IsAdmin = DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.ToplantiOdasi", "Manage");
             ViewBag.CurrentUserId = User.Identity.GetUserId();
             return View(reservation);
         }
@@ -1027,7 +1027,7 @@ namespace MZDNETWORK.Controllers
         /// <summary>
         /// Toplantı salonu yönetim sayfası
         /// </summary>
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "Manage")]
         public ActionResult ManageRooms()
         {
             var rooms = db.MeetingRooms.OrderBy(r => r.Name).ToList();
@@ -1037,7 +1037,7 @@ namespace MZDNETWORK.Controllers
         /// <summary>
         /// Yeni toplantı salonu ekleme
         /// </summary>
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "Manage")]
         [HttpPost]
         public JsonResult AddRoom(string name, int capacity, string description, string features = null, string colorCode = null)
         {
@@ -1078,7 +1078,7 @@ namespace MZDNETWORK.Controllers
         /// <summary>
         /// Toplantı salonu güncelleme
         /// </summary>
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "Manage")]
         [HttpPost]
         public JsonResult UpdateRoom(int id, string name, int capacity, string description, string features = null, string colorCode = null)
         {
@@ -1118,7 +1118,7 @@ namespace MZDNETWORK.Controllers
         /// <summary>
         /// Toplantı salonu silme (soft delete)
         /// </summary>
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "Manage")]
         [HttpPost]
         public JsonResult DeleteRoom(int id)
         {
@@ -1153,7 +1153,7 @@ namespace MZDNETWORK.Controllers
         /// <summary>
         /// Devre dışı salonu tekrar aktif etme
         /// </summary>
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "Manage")]
         [HttpPost]
         public JsonResult ActivateRoom(int id)
         {
@@ -1179,7 +1179,7 @@ namespace MZDNETWORK.Controllers
         /// <summary>
         /// Onaylanan rezervasyonu silme (admin)
         /// </summary>
-        [DynamicAuthorize(Permission = "Operational.MeetingRoom", Action = "Manage")]
+        [DynamicAuthorize(Permission = "Operasyon.ToplantiOdasi", Action = "Manage")]
         [HttpPost]
         public JsonResult DeleteReservation(int id)
         {
@@ -1234,3 +1234,4 @@ namespace MZDNETWORK.Controllers
         #endregion
     }
 }
+

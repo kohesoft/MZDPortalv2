@@ -9,7 +9,7 @@ using MZDNETWORK.Attributes;
 
 namespace MZDNETWORK.Controllers
 {
-    [DynamicAuthorize(Permission = "HumanResources.Suggestion")]
+    [DynamicAuthorize(Permission = "InsanKaynaklari.Oneri")]
     public class InsanKaynaklariController : Controller
     {
         private readonly MZDNETWORKContext db;
@@ -20,14 +20,14 @@ namespace MZDNETWORK.Controllers
         }
 
         [HttpGet]
-        [DynamicAuthorize(Permission = "HumanResources.Suggestion")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.Oneri")]
         public ActionResult DilekIstek_IK()
         {
             var dilekIstekler = db.DilekOneriler.ToList();
             return View(dilekIstekler);
         }
 
-        [DynamicAuthorize(Permission = "HumanResources.Suggestion")]
+        [DynamicAuthorize(Permission = "InsanKaynaklari.Oneri")]
         public ActionResult Index()
         {
             return View();
