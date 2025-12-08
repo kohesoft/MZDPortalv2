@@ -22,7 +22,8 @@ namespace MZDNETWORK.Models
         public string InternalEmail { get; set; }
         public string ExternalEmail { get; set; }
         public string Sicil { get; set; }
-        public ICollection<UserInfo> UserInfo { get; set; }
+        // IList enables indexed access in views while still working with EF navigation properties
+        public IList<UserInfo> UserInfo { get; set; }
         public ICollection<Task> Tasks { get; set; }
         public bool IsPasswordChanged { get; set; }
         
