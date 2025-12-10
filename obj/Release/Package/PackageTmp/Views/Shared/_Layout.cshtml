@@ -1,0 +1,696 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>MZD Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='~/Content/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+    <link href="~/Content/_layout.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
+    @RenderSection("styles", required: false)
+</head>
+
+<body>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" style="padding:15px; margin:10px; background-color:#d1fae5; color:#065f46; border:1px solid #a7f3d0; border-radius:8px; text-align:center;">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    <nav class="sidebar">
+        <div class="logo-container">
+            <span class="image">
+                <img src="~/imgs/logo.png" alt="Logo" />
+            </span>
+            <span id="dateTime" class="logo-date"></span>
+            <span class="logo-text">MZD Portal</span>
+            <button id="closeSidebar" class="sidebar-close-btn" type="button" aria-label="Menüyü Kapat">×</button>
+        </div>
+        <div class="menu-bar">
+            <ul class="menu menu-links">
+                <li>
+                    <a href="@Url.Action("Index", "Home")" class="nav-link">
+                        <i class='bx bx-home-alt icon'></i>
+                        <span class="nav-text">Anasayfa</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Contact")" class="nav-link">
+                        <i class='bx bxs-contact icon'></i>
+                        <span class="nav-text">Rehber</span>
+                    </a>
+                </li>
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SistemYonetimi.Performans"))
+                {
+                    <li>
+                        <a href="@Url.Action("AdminList", "AccessChangeTicket")" class="nav-link">
+                            <i class='bx bx-id-card icon'></i>
+                            <span class="nav-text">Erişim / Rol Talepleri</span>
+                        </a>
+                    </li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a href="@Url.Action("Create", "AccessChangeTicket")" class="nav-link">
+                            <i class='bx bx-id-card icon'></i>
+                            <span class="nav-text">Erişim / Rol Talebi</span>
+                        </a>
+                    </li>
+                }
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "Create"))
+                {
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
+                            <i class='bx bx-calendar-check icon'></i>
+                            <span class="nav-text">İzin İşlemleri</span>
+                            <i class='bx bx-chevron-down icon'></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "Approve"))
+                            {
+                                <li><a href="@Url.Action("AdminDashboard", "LeaveRequest")" class="nav-link">İzin Talebi Yönetimi</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.IzinTalebi", "Create"))
+                            {
+                                <li><a href="@Url.Action("Index", "LeaveRequest")" class="nav-link">İzin Talebi</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SistemYonetimi.Performans"))
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "Performance")" class="nav-link">
+                            <i class='bx bx-line-chart icon'></i>
+                            <span class="nav-text">Performans</span>
+                        </a>
+                    </li>
+                }
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.Oneri"))
+                {
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
+                            <i class='bx bx-street-view icon'></i>
+                            <span class="nav-text">İnsan Kaynakları</span>
+                            <i class='bx bx-chevron-down icon'></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.Oneri"))
+                            {
+                                <li><a href="@Url.Action("DilekIstek_IK", "InsanKaynaklari")" class="nav-link">Dilek Kutusu</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.Duyurular"))
+                            {
+                                <li><a href="@Url.Action("GonderiListele", "Gonderi")" class="nav-link">Duyurular</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SistemYonetimi.Bildirim", "Create"))
+                            {
+                                <li><a href="@Url.Action("SendNotification", "Notification")" class="nav-link">Anlık Bildirim</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("BilgiIslem"))
+                {
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
+                            <i class='bx bx-signal-5 icon'></i>
+                            <span class="nav-text">Bilgi İşlem</span>
+                            <i class='bx bx-chevron-down icon'></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("KullaniciYonetimi.KullaniciIslemleri", "Create"))
+                            {
+                                <li><a href="@Url.Action("Index", "Kullanici_Islemleri")" class="nav-link">Kullanıcı İşlemleri</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("RolYonetimi.RolYetkileri"))
+                            {
+                                <li><a href="@Url.Action("Index", "RolePermission")" class="nav-link">Rol Yetki Matrisi</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("RolYonetimi.RolIslemleri"))
+                            {
+                                <li><a href="@Url.Action("Index", "RoleOrganization")" class="nav-link">Kullanıcı Rol Yönetimi</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("RolYonetimi.YetkiAgaci"))
+                            {
+                                <li><a href="@Url.Action("Index", "PermissionTree")" class="nav-link">Yetki Ağacı</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("KullaniciYonetimi.YetkiDegisikligi", "Manage"))
+                            {
+                                <li><a href="@Url.Action("AdminList", "AccessChangeTicket")" class="nav-link">Erişim Talepleri</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("BilgiIslem.BilgiIslem"))
+                            {
+                                <li><a href="@Url.Action("YemekYukle", "BilgiIslem")" class="nav-link">Yemek Yükle/Sil</a></li>
+                                <li><a href="@Url.Action("MolaYukle", "BilgiIslem")" class="nav-link">Mola Yükle/Sil</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("SistemYonetimi.Bildirim", "Create"))
+                            {
+                                <li><a href="@Url.Action("SendNotification", "Notification")" class="nav-link">Anlık Bildirim</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("KullaniciYonetimi.SifreSifirlamaTalepleri"))
+                            {
+                                <li><a href="@Url.Action("Index", "PasswordResetRequest")" class="nav-link">Şifre Sıfırlama İstekleri</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Sohbet", "Manage"))
+                            {
+                                <li><a href="@Url.Action("Index", "ChatGroup")" class="nav-link">Chat Grupları</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+                @* Güvenlik menüsü *@
+
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("InsanKaynaklari.ZiyaretciGiris", "InsanKaynaklari.GecGelisRaporu"))
+                {
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
+                            <i class='bx bx-shield icon'></i>
+                            <span class="nav-text">Güvenlik</span>
+                            <i class='bx bx-chevron-down icon'></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown">
+                                <button class="dropdown-toggle nav-link" type="button">
+                                    <span class="nav-text">Ziyaretçi</span>
+                                    <i class='bx bx-chevron-down icon'></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Index", "VisitorEntry")" class="nav-link">Ziyaretçi Kayıtları</a></li>
+                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.ZiyaretciGiris", "Create"))
+                                    {
+                                        <li><a href="@Url.Action("Create", "VisitorEntry")" class="nav-link">Ziyaretçi Ekle</a></li>
+                                    }
+                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.ZiyaretciGiris", "Manage"))
+                                    {
+                                        <li><a href="@Url.Action("Header", "VisitorEntry")" class="nav-link">Üst Bilgi</a></li>
+                                    }
+                                    @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.ZiyaretciGiris", "Export"))
+                                    {
+                                        <li><a href="@Url.Action("ExportExcel", "VisitorEntry")" class="nav-link">Excel İndir</a></li>
+                                        <li><a href="@Url.Action("Print", "VisitorEntry")" class="nav-link">Yazdır</a></li>
+                                    }
+                                </ul>
+                            </li>
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.GecGelisRaporu"))
+                            {
+                                <li class="dropdown">
+                                    <button class="dropdown-toggle nav-link" type="button">
+                                        <span class="nav-text">İşe Geç Gelme</span>
+                                        <i class='bx bx-chevron-down icon'></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("Index", "LateArrivalReport")" class="nav-link">Tutanaklar</a></li>
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.GecGelisRaporu", "Create"))
+                                        {
+                                            <li><a href="@Url.Action("Create", "LateArrivalReport")" class="nav-link">Tutanak Ekle</a></li>
+                                        }
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.GecGelisRaporu", "Manage"))
+                                        {
+                                            <li><a href="@Url.Action("Header", "LateArrivalReport")" class="nav-link">Üst Bilgi</a></li>
+                                        }
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("InsanKaynaklari.GecGelisRaporu", "Export"))
+                                        {
+                                            <li><a href="@Url.Action("ExportExcel", "LateArrivalReport")" class="nav-link">Excel İndir</a></li>
+                                            <li><a href="@Url.Action("Print", "LateArrivalReport")" class="nav-link">Yazdır</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                <!--
+        <li class="dropdown">
+            <button class="dropdown-toggle nav-link" type="button">
+                <i class='bx bx-book-open icon'></i>
+                <span class="nav-text">Dokümantasyon</span>
+                <i class='bx bx-chevron-down icon'></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="@Url.Action("Index", "Dokumantasyon")" class="nav-link">Stok Kartı</a></li>
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Documentation", "Manage"))
+                {
+                    <li><a href="@Url.Action("Index_sorumlu", "Dokumantasyon")" class="nav-link">Gelen Talepler</a></li>
+                }
+            </ul>
+        </li>
+                -->
+
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Oneri", "Create"))
+                {
+                    <li>
+                        <a href="@Url.Action("Create", "DilekOneri")" class="nav-link">
+                            <i class='bx bx-envelope icon'></i>
+                            <span class="nav-text">Dilek & Öneri</span>
+                        </a>
+                    </li>
+                }
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Anket"))
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "Survey")" class="nav-link">
+                            <i class='bx bx-edit icon'></i>
+                            <span class="nav-text">Anketler</span>
+                        </a>
+                    </li>
+                }
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Yemek.Merkez"))
+                {
+                    <li>
+                        <a href="@Url.Action("MerkezYemekListesi", "Home")" class="nav-link">
+                            <i class='bx bx-restaurant icon'></i>
+                            <span class="nav-text">Merkez Yemek Listesi</span>
+                        </a>
+                    </li>
+                }
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Yemek.Yerleske"))
+                {
+                    <li>
+                        <a href="@Url.Action("YerleskeYemekListesi", "Home")" class="nav-link">
+                            <i class='bx bx-restaurant icon'></i>
+                            <span class="nav-text">Yerleşke Yemek Listesi</span>
+                        </a>
+                    </li>
+                }
+                <li>
+                    <a href="@Url.Action("Mola", "Home")" class="nav-link">
+                        <i class='bx bx-time icon'></i>
+                        <span class="nav-text">Mola Saatleri</span>
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <button class="dropdown-toggle nav-link" type="button">
+                        <i class='bx bx-map icon'></i>
+                        <span class="nav-text">Servis</span>
+                        <i class='bx bx-chevron-down icon'></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("Index","ServiceRoute")" class="nav-link">Servis Güzergahı</a></li>
+                        <li><a href="@Url.Action("Personnel","ServiceRoute")" class="nav-link">Personel Servis Listesi</a></li>
+                        <li><a href="@Url.Action("OvertimePersonnel","ServiceRoute")" class="nav-link">Mesai Servis Listesi</a></li>
+                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("ServiceManagement.Configuration", "Edit"))
+                        {
+                            <li><a href="@Url.Action("Index", "ServiceConfiguration")" class="nav-link">Servis Ayarları</a></li>
+                            <li><a href="@Url.Action("Admin", "ServicePersonnel")" class="nav-link">Personel Ayarları</a></li>
+                            <li><a href="@Url.Action("Index", "OvertimeServiceManager")" class="nav-link">Kolay Mesai</a></li>
+                        }
+                    </ul>
+                </li>
+
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Operasyon.Gorev"))
+                {
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
+                            <i class='bx bx-user icon'></i>
+                            <span class="nav-text">Görev</span>
+                            <i class='bx bx-chevron-down icon'></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Gorev", "Create"))
+                            {
+                                <li><a href="@Url.Action("Index", "Task")" class="nav-link">Görev Atama</a></li>
+                            }
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Gorev"))
+                            {
+                                <li><a href="@Url.Action("UserTasks", "Task")" class="nav-link">Görevlerim</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.ToplantiOdasi"))
+                {
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
+                            <i class='bx bx-calendar icon'></i>
+                            <span class="nav-text">Toplantı</span>
+                            <i class='bx bx-chevron-down icon'></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index", "MeetingRoom")" class="nav-link">Rezervasyon</a></li>
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.ToplantiOdasi", "Manage"))
+                            {
+                                <li><a href="@Url.Action("ManageRooms", "MeetingRoom")" class="nav-link">Salon Yönetimi</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+                @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.BeyazTahta.Girdi"))
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "BeyazTahta")" class="nav-link">
+                            <i class='bx bx-tv icon'></i>
+                            <span class="nav-text">TV Düzenle</span>
+                        </a>
+                    </li>
+                }
+
+                <li>
+                    <a href="@Url.Action("TV", "BeyazTahta")" class="nav-link no-loading">
+                        <i class='bx bx-tv icon'></i>
+                        <span class="nav-text">TV Görüntüle</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="bottom-content">
+            <div id="onlineUsers" style="font-size:12px; top: 10px; right: 10px; padding: 10px; border-radius: 5px;">
+                Çevrimiçi Kullanıcılar: <span id="onlineUsersCount"></span>
+            </div>
+            <ul class="menu menu-links">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a href="@Url.Action("ChatPage", "Chat")" class="nav-link">
+                            <i class='bx bx-message icon'></i>
+                            <span class="nav-text">Sohbet</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
+                            <i class='bx bxs-inbox icon'></i>
+                            <span class="nav-text">Gelen Kutusu</span>
+                            <span id="notificationCount"></span>
+                            <i id="notificationIcon" class="bx bxs-bell-ring bx-tada" style="display: none; color:gray; margin-left:5px;"></i>
+                        </button>
+                        <ul class="dropdown-menu" id="notificationList">
+                            <li><span class="text nav-text">Hiç Bildirim Yok</span></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <button class="dropdown-toggle nav-link" type="button">
+                            <i class='bx bx-user icon'></i>
+                            <span class="nav-text">Profilim</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="@Url.Action("Edit", "User")" class="nav-link">
+                                    Profil Detayları
+                                </a>
+                            </li>
+                            @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Operasyon.Oneri"))
+                            {
+                                <li>
+                                    <a href="@Url.Action("Bildirimlerim", "DilekOneri")" class="nav-link">
+                                        Dilek ve Öneri Kutum
+                                    </a>
+                                </li>
+                            }
+                            <li>
+                                <a href="@Url.Action("ChangePassword", "User")" class="nav-link">
+                                    Şifre Değiştir
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Create", "AccessChangeTicket")" class="nav-link">
+                                    Erişim / Rol Talebi
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                <li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("Logout", "Account")" class="nav-link">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="nav-text">Çıkış yap</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login", "Account")" class="nav-link">
+                            <i class='bx bx-log-in icon'></i>
+                            <span class="nav-text">Giriş yap</span>
+                        </a>
+                    }
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div id="loadingOverlay" style="display:none;">
+            <div class="loader"></div>
+        </div>
+        @RenderBody()
+    </div>
+
+    <!-- Global Toast Container (stacked) -->
+    <div id="globalToastContainer" class="fixed top-5 right-5 z-50 space-y-3 pointer-events-none"></div>
+
+    <!-- jQuery and dependencies -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/popper")
+    
+    <!-- Select2 -->
+    <script src="~/Scripts/select2.min.js"></script>
+    <script src="~/Scripts/select2-tr.js"></script>
+    
+    <!-- SignalR -->
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/signalr-manager.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+    <script>
+$(document).ready(function () {
+    console.log('Layout JavaScript starting');
+
+    window.addEventListener('unhandledrejection', function (event) {
+        try {
+            var reason = event.reason;
+            var msg = (reason && (reason.message || reason.toString())) || '';
+            if (msg && msg.indexOf('Receiving end does not exist') !== -1) {
+                event.preventDefault();
+                console.warn('Ignored external extension error:', msg);
+            }
+        } catch (e) { }
+    });
+
+    function safeExecute(func, context) { try { return func.call(context); } catch (error) { console.error('Error in function:', error); return null; } }
+
+    // Sidebar
+    $('#closeSidebar').on('click', function () { safeExecute(function () { $('.sidebar').removeClass('active'); }); });
+    $('#openSidebar').on('click', function () { safeExecute(function () { $('.sidebar').addClass('active'); }); });
+
+    // Dropdowns
+    $(document).on('click', '.dropdown-toggle', function (e) {
+        safeExecute(function () {
+            e.stopPropagation();
+            var $dropdownMenu = $(this).next('.dropdown-menu');
+            var $parentDropdown = $(this).closest('.dropdown-menu');
+            if ($parentDropdown.length > 0) { $parentDropdown.find('> .dropdown > .dropdown-menu').not($dropdownMenu).hide(); }
+            else { $('.dropdown-menu').not($dropdownMenu).hide(); }
+            $dropdownMenu.toggle();
+        }.bind(this));
+    });
+    $(document).on('click', function (e) { safeExecute(function () { if (!$(e.target).closest('.dropdown-toggle, .dropdown-menu').length) { $('.dropdown-menu').hide(); } }); });
+
+    // Date & Time
+    function updateDateTime() {
+        safeExecute(function () {
+            var now = new Date();
+            var options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+            var dateTimeElement = document.getElementById('dateTime');
+            if (dateTimeElement) { dateTimeElement.textContent = now.toLocaleString('tr-TR', options); }
+        });
+    }
+    updateDateTime(); setInterval(updateDateTime, 60000);
+
+    var desktopPermissionRequested = false;
+    function requestDesktopPermission() {
+        if (!('Notification' in window)) return;
+        if (Notification.permission === 'default' && !desktopPermissionRequested) {
+            desktopPermissionRequested = true;
+            Notification.requestPermission();
+        }
+    }
+
+    function pushDesktopNotification(message, type) {
+        if (!('Notification' in window)) return;
+        if (Notification.permission === 'granted') {
+            var icon = type === 'success' ? '@Url.Content("~/imgs/logo.png")' : '@Url.Content("~/imgs/logo.png")';
+            new Notification('MZD Portal', { body: message || 'Bildirim', icon: icon });
+        } else if (Notification.permission === 'default') {
+            requestDesktopPermission();
+        }
+    }
+
+    // Corporate toast helper (stacked)
+    function showToast(msg, type, duration, playSound, soundPath) {
+        safeExecute(function () {
+            var $container = $('#globalToastContainer');
+            if ($container.length === 0) return;
+
+            var t = (type || 'info').toLowerCase();
+            var map = {
+                success: { color: 'bg-green-600', icon: 'bx-check-circle' },
+                error:   { color: 'bg-red-600',   icon: 'bx-x-circle' },
+                warning: { color: 'bg-yellow-600',icon: 'bx-error' },
+                info:    { color: 'bg-indigo-600',icon: 'bx-info-circle' }
+            };
+            var m = map[t] || map.info;
+
+            var id = 'toast-' + Date.now();
+            var $toast = $('<div>', {
+                id: id,
+                class: 'pointer-events-auto max-w-sm w-96 shadow-xl rounded-lg border border-gray-200 bg-white ring-1 ring-black/5 overflow-hidden transform transition ease-out duration-300 translate-y-2 opacity-0',
+                role: 'alert',
+                'aria-live': 'assertive'
+            });
+
+            var $bar = $('<div>', { class: m.color + ' h-1 w-full' });
+            var $body = $('<div>', { class: 'p-4 flex items-start' });
+            var $iconWrap = $('<div>', { class: 'flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ' + m.color + ' text-white mr-3' })
+                               .append($('<i>', { class: 'bx ' + m.icon + ' text-xl' }));
+            var $content = $('<div>', { class: 'flex-1 text-sm text-gray-800 leading-snug' }).html(msg || 'Bildirim');
+            var $close = $('<button>', {
+                class: 'ml-4 text-gray-400 hover:text-gray-600 focus:outline-none',
+                'aria-label': 'Kapat',
+                html: '<i class="bx bx-x text-xl"></i>'
+            });
+
+            $close.on('click', function () { dismiss(); });
+            $body.append($iconWrap, $content, $close);
+            $toast.append($bar, $body);
+            $container.append($toast);
+
+            // Animate in
+            setTimeout(function(){ $toast.removeClass('translate-y-2 opacity-0').addClass('translate-y-0 opacity-100'); }, 10);
+
+            // Auto dismiss
+            var hideAfter = (typeof duration === 'number' && duration > 0) ? duration : 4000;
+            var timer = setTimeout(dismiss, hideAfter);
+
+            function dismiss(){
+                clearTimeout(timer);
+                $toast.addClass('opacity-0 translate-y-2').removeClass('opacity-100');
+                setTimeout(function(){ $toast.remove(); }, 250);
+            }
+
+            if (playSound) {
+                try { new Audio(soundPath || '@Url.Content("~/Content/notification.mp3")').play(); } catch (e) { }
+            }
+
+            // Masaüstü bildirimi
+            pushDesktopNotification(msg, t);
+        });
+    }
+
+    // Notifications (list)
+    function updateNotifications() {
+        safeExecute(function () {
+            $.get('@Url.Action("GetUnreadNotifications", "Notification")')
+                .done(function (data) {
+                    var $list = $('#notificationList');
+                    var $icon = $('#notificationIcon');
+                    var $count = $('#notificationCount');
+                    if ($list.length === 0) return;
+                    $list.empty();
+                    if (data && data.length > 0) {
+                        $icon.show(); $count.text(data.length).show();
+                        $.each(data, function (i, n) { $list.append('<li><a href="#" class="notification-link" data-id="' + n.Id + '">' + (n.Message || 'Bildirim') + '</a></li>'); });
+                    } else {
+                        $icon.hide(); $count.hide();
+                        $list.append('<li><span class="text nav-text">Hiç Bildirim Yok</span></li>');
+                    }
+                })
+                .fail(function () { /* ignore */ });
+        });
+    }
+    updateNotifications(); setInterval(updateNotifications, 60000);
+
+    $(document).on('click', '.notification-link', function (e) {
+        safeExecute(function () {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var message = ($(this).text() || '').toLowerCase();
+            var url = '#';
+            if (message.includes('anket')) url = '@Url.Action("Index", "Survey")';
+            else if (message.includes('görev')) url = '@Url.Action("UserTasks", "Task")';
+            else if (message.includes('dilek')) url = '@Url.Action("Bildirimlerim", "DilekOneri")';
+            else if (message.includes('toplantı') || message.includes('davet')) url = '@Url.Action("Index", "MeetingRoom")';
+            $.post('@Url.Action("MarkAsRead", "Notification")', { id: id }).done(function (d) { if (d && d.success) window.location.href = url; });
+        }.bind(this));
+    });
+
+    // SignalR
+    function initializeSignalR() {
+        if (typeof $ === 'undefined' || typeof $.connection === 'undefined') return;
+        try {
+            if ($.connection && $.connection.notificationHub) {
+                $.connection.notificationHub.client.showNotification = function (message, duration, color, playSound, soundPath) {
+                    console.log('[NotificationHub] showNotification received', { message, duration, color, playSound, soundPath });
+                    showToast(message || 'Bildirim', color || 'info', duration || 4000, playSound, soundPath);
+                };
+                console.log('[NotificationHub] client handler attached (early)');
+            }
+        } catch (e) { console.warn('Failed to attach early notification handler', e); }
+
+        if (window.SignalRManager && typeof window.SignalRManager.init === 'function') {
+            window.SignalRManager.init().then(function(){ console.log('[SignalR] Manager init resolved'); setupHubHandlers(); })
+                .catch(function(err){ console.warn('[SignalR] Manager init failed, trying direct', err); tryDirectConnection(); });
+        } else { tryDirectConnection(); }
+    }
+    function tryDirectConnection() {
+        try {
+            if ($.connection && $.connection.hub) {
+                if ($.connection.hub.state === $.signalR.connectionState.disconnected) {
+                    console.log('[SignalR] Starting hub...');
+                    $.connection.hub.start().done(function(){ console.log('[SignalR] Hub started'); setupHubHandlers(); });
+                } else if ($.connection.hub.state === $.signalR.connectionState.connected) {
+                    console.log('[SignalR] Hub already connected');
+                    setupHubHandlers();
+                }
+            }
+        } catch (e) { console.warn('Direct SignalR connection error', e); }
+    }
+    function setupHubHandlers() {
+        try {
+            if ($.connection && $.connection.hubs && $.connection.hub) {
+                $.connection.hub.stateChanged(function (c) { console.log('SignalR state:', c.oldState, '->', c.newState); });
+            }
+            if ($.connection && $.connection.notificationHub) {
+                if (!$.connection.notificationHub.client.showNotification) {
+                    $.connection.notificationHub.client.showNotification = function (message, duration, color, playSound, soundPath) {
+                        console.log('[NotificationHub] showNotification received (post-start)', { message, duration, color, playSound, soundPath });
+                        showToast(message || 'Bildirim', color || 'info', duration || 4000, playSound, soundPath);
+                    };
+                    console.log('[NotificationHub] client handler attached (post-start)');
+                }
+            } else { console.warn('[NotificationHub] proxy not found on $.connection'); }
+            if ($.connection && $.connection.onlineUsersHub) {
+                $.connection.onlineUsersHub.client.updateOnlineUsers = function (count) { $('#onlineUsersCount').text(count || 0); };
+            }
+        } catch (e) { console.warn('setupHubHandlers error', e); }
+    }
+    setTimeout(initializeSignalR, 500);
+
+    // Page loading overlay
+    $(window).on('beforeunload', function () { safeExecute(function () { $('#loadingOverlay').show().addClass('active'); }); });
+
+    // Desktop notification iznini erken iste
+    requestDesktopPermission();
+
+    // Global error handler
+    window.onerror = function (msg, url, lineNo, columnNo, error) { console.error('Global error:', msg, 'at', url, ':', lineNo); return false; };
+
+    console.log('Layout JavaScript initialized');
+});
+</script>
+
+<!-- Mobilde menü açma düğmesi -->
+<button id="openSidebar" class="sidebar-open-btn" type="button" aria-label="Menüyü Aç">
+    <i class='bx bx-menu'></i>
+</button>
+
+</body>
+</html>

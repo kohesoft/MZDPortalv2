@@ -248,14 +248,17 @@ namespace MZDNETWORK.Controllers
 
         private void ApplyUserInfoChange(User user, AccessChangeUserInfoDto newInfo)
         {
-            user.Name = newInfo.Name;
-            user.Surname = newInfo.Surname;
-            user.InternalEmail = newInfo.InternalEmail;
-            user.ExternalEmail = newInfo.ExternalEmail;
-            user.Department = newInfo.Department;
-            user.Position = newInfo.Title;
-            user.PhoneNumber = newInfo.PhoneNumber;
-            user.Intercom = newInfo.Intercom;
+            if (user == null || newInfo == null) return;
+
+            // Only update fields that were provided; leave blanks unchanged as UI promises
+            user.Name = string.IsNullOrWhiteSpace(newInfo.Name) ? user.Name : newInfo.Name;
+            user.Surname = string.IsNullOrWhiteSpace(newInfo.Surname) ? user.Surname : newInfo.Surname;
+            user.InternalEmail = string.IsNullOrWhiteSpace(newInfo.InternalEmail) ? user.InternalEmail : newInfo.InternalEmail;
+            user.ExternalEmail = string.IsNullOrWhiteSpace(newInfo.ExternalEmail) ? user.ExternalEmail : newInfo.ExternalEmail;
+            user.Department = string.IsNullOrWhiteSpace(newInfo.Department) ? user.Department : newInfo.Department;
+            user.Position = string.IsNullOrWhiteSpace(newInfo.Title) ? user.Position : newInfo.Title;
+            user.PhoneNumber = string.IsNullOrWhiteSpace(newInfo.PhoneNumber) ? user.PhoneNumber : newInfo.PhoneNumber;
+            user.Intercom = string.IsNullOrWhiteSpace(newInfo.Intercom) ? user.Intercom : newInfo.Intercom;
             _db.SaveChanges();
         }
 

@@ -1,0 +1,126 @@
+@model IEnumerable<MZDNETWORK.Models.LateArrivalReport>
+@{
+    ViewBag.Title = "İşe Geç Gelme Tutanakları";
+}
+<head>
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+    <link href='~/Content/boxicons.min.css' rel='stylesheet'>
+</head>
+<section class="p-6 bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto bg-white shadow rounded-lg p-6">
+        <div class="px-4 md:px-0 mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <h2 class="text-2xl font-bold">İşe Geç Gelme Tutanakları</h2>
+            <div class="flex flex-col md:flex-row md:items-center gap-2">
+                <a href="@Url.Action("Create")" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg shadow flex items-center gap-2"><i class='bx bx-plus'></i>Yeni Tutanak</a>
+                <a href="@Url.Action("Print")" target="_blank" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg shadow">Yazdır</a>
+                <a href="@Url.Action("ExportExcel")" class="bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-lg shadow">Excel</a>
+                <!-- Tarih filtreleri -->
+                <select id="yearFilter" class="form-select border border-gray-300 rounded px-2 py-1">
+                    <option value="">Yıl (Hepsi)</option>
+                    @{
+                        var years = Model.Select(m => m.LateDate.Year).Distinct().OrderByDescending(y => y);
+                        foreach (var y in years)
+                        {
+                            <option value="@y">@y</option>
+                        }
+                    }
+                </select>
+                <select id="monthFilter" class="form-select border border-gray-300 rounded px-2 py-1">
+                    <option value="">Ay (Hepsi)</option>
+                    @{ var monthNames = new[]{"Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"}; }
+                    @for(int m=1;m<=12;m++){
+                        <option value="@m">@monthNames[m-1]</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto border-collapse" id="reportTable">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="px-4 py-2 text-left">Tarih</th>
+                        <th class="px-4 py-2 text-left">Ad Soyad</th>
+                        <th class="px-4 py-2 text-left">Birim</th>
+                        <th class="px-4 py-2 text-left">Ünvan</th>
+                        <th class="px-4 py-2 text-left">Başlaması Gereken Saat</th>
+                        <th class="px-4 py-2 text-left">Gerçek Başlangıç</th>
+                        <th class="px-4 py-2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in Model)
+                    {
+                        <tr class="border-b">
+                            <td class="px-4 py-2">@r.LateDate.ToString("dd.MM.yyyy")</td>
+                            <td class="px-4 py-2">@r.FullName</td>
+                            <td class="px-4 py-2">@r.Department</td>
+                            <td class="px-4 py-2">@r.Title</td>
+                            <td class="px-4 py-2">@r.ShiftStartTime.ToString("hh\\:mm")</td>
+                            <td class="px-4 py-2">@r.ArrivalTime.ToString("hh\\:mm")</td>
+                            <td class="px-4 py-2 text-right">
+                                <a href="@Url.Action("Details", new { id = r.Id })" class="text-blue-600 hover:underline">Detay</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
+}
+
+@section scripts {
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var table = $('#reportTable').DataTable({
+                dom: "<'flex justify-between items-center mb-4'lf>rt<'flex justify-between items-center mt-4'ip>",
+                lengthMenu: [[10,25,50,100,-1],[10,25,50,100,"Hepsi"]],
+                order:[[0,'desc']],
+                language: {
+                    decimal: ",",
+                    emptyTable: "Tabloda herhangi bir veri mevcut değil",
+                    info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor",
+                    infoEmpty: "Kayıt yok",
+                    infoFiltered: "(_MAX_ kayıt içerisinden bulunan)",
+                    thousands: ".",
+                    lengthMenu: "Sayfada _MENU_ kayıt göster",
+                    loadingRecords: "Yükleniyor...",
+                    processing: "İşleniyor...",
+                    search: "Ara:",
+                    zeroRecords: "Eşleşen kayıt bulunamadı",
+                    paginate: {
+                        first: "İlk",
+                        last: "Son",
+                        next: "Sonraki",
+                        previous: "Önceki"
+                    },
+                    aria: {
+                        sortAscending: ": artan sütun sıralamasını aktifleştir",
+                        sortDescending: ": azalan sütun sıralamasını aktifleştir"
+                    }
+                }
+            });
+
+            $.fn.dataTable.ext.search.push(function(settings,data,dataIndex){
+                var yearVal = $('#yearFilter').val();
+                var monthVal = $('#monthFilter').val();
+                var dateStr = data[0]; // ilk sütun Tarih
+                if(!dateStr) return true;
+                var parts = dateStr.split('.');
+                if(parts.length!==3) return true;
+                var d = new Date(parts[2], parts[1]-1, parts[0]);
+                if(yearVal && d.getFullYear().toString()!==yearVal) return false;
+                if(monthVal && (d.getMonth()+1).toString()!==monthVal) return false;
+                return true;
+            });
+
+            $('#yearFilter, #monthFilter').on('change', function(){
+                table.draw();
+            });
+        });
+    </script>
+}

@@ -223,6 +223,27 @@
             <!-- Yönetici Arayüzü -->
             <div id="adminInterface" class="hidden">
                 <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+                        <input id="adminSearchInput" type="text" placeholder="Başlık / organizatör / salon" class="border rounded-md px-3 py-2 w-full" />
+                        <div class="flex gap-2">
+                            <input id="adminStartDate" type="date" class="border rounded-md px-3 py-2 w-full" />
+                            <input id="adminEndDate" type="date" class="border rounded-md px-3 py-2 w-full" />
+                        </div>
+                        <select id="adminRoomFilter" class="border rounded-md px-3 py-2 w-full">
+                            <option value="">Tüm Salonlar</option>
+                        </select>
+                        <div class="flex gap-2">
+                            <select id="adminStatusFilter" class="border rounded-md px-3 py-2 w-full">
+                                <option value="">Tüm Durumlar</option>
+                                <option value="pending">Onay Bekleyen</option>
+                                <option value="approved">Onaylanan</option>
+                                <option value="rejected">Reddedilen</option>
+                                <option value="cancelled">İptal</option>
+                            </select>
+                            <button id="adminApplyFilters" class="px-3 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Filtrele</button>
+                            <button id="adminClearFilters" class="px-3 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Temizle</button>
+                        </div>
+                    </div>
                     <div class="flex border-b mb-4">
                         <button id="pendingTab" class="tab-active px-4 py-2 font-medium">Onay Bekleyenler</button>
                         <button id="approvedTab" class="px-4 py-2 font-medium">Onaylananlar</button>
@@ -357,6 +378,7 @@
         let reservations = [];
         let allUsers = []; // Tüm kullanıcılar
         let meetingRooms = []; // Toplantı odaları
+        let currentAdminTab = 'pending';
 
         var currentUser = {
             id: '@User.Identity.GetUserId()',
@@ -373,6 +395,7 @@
                         return;
                     }
                     meetingRooms = data;
+                    populateAdminRoomFilter();
                     renderRooms();
                 })
                 .catch(err => {
@@ -534,6 +557,13 @@
         const approvedReservationsEl = document.getElementById('approvedReservations');
         const rejectedReservationsEl = document.getElementById('rejectedReservations');
         const allReservationsEl = document.getElementById('allReservations');
+        const adminSearchInput = document.getElementById('adminSearchInput');
+        const adminStartDateInput = document.getElementById('adminStartDate');
+        const adminEndDateInput = document.getElementById('adminEndDate');
+        const adminRoomFilter = document.getElementById('adminRoomFilter');
+        const adminStatusFilter = document.getElementById('adminStatusFilter');
+        const adminApplyFiltersBtn = document.getElementById('adminApplyFilters');
+        const adminClearFiltersBtn = document.getElementById('adminClearFilters');
         const pendingTab = document.getElementById('pendingTab');
         const approvedTab = document.getElementById('approvedTab');
         const rejectedTab = document.getElementById('rejectedTab');
@@ -711,6 +741,19 @@
                 updateProgress();
                 if (selectedDate) {
                     timeSelectionEl.classList.remove('hidden');
+                }
+            });
+        }
+
+        function populateAdminRoomFilter() {
+            if (!adminRoomFilter) return;
+            const existingValues = Array.from(adminRoomFilter.options).map(o => o.value);
+            meetingRooms.forEach(room => {
+                if (!existingValues.includes(room.name)) {
+                    const opt = document.createElement('option');
+                    opt.value = room.name;
+                    opt.textContent = room.name;
+                    adminRoomFilter.appendChild(opt);
                 }
             });
         }
@@ -893,14 +936,73 @@
         if (rejectedTab) rejectedTab.addEventListener('click', function () { setActiveTab(rejectedTab); loadAdminReservations('rejected'); });
         if (allTab) allTab.addEventListener('click', function () { setActiveTab(allTab); loadAdminReservations('all'); });
 
+        if (adminApplyFiltersBtn) adminApplyFiltersBtn.addEventListener('click', function () {
+            loadAdminReservations(currentAdminTab);
+        });
+
+        if (adminClearFiltersBtn) adminClearFiltersBtn.addEventListener('click', function () {
+            if (adminSearchInput) adminSearchInput.value = '';
+            if (adminStartDateInput) adminStartDateInput.value = '';
+            if (adminEndDateInput) adminEndDateInput.value = '';
+            if (adminRoomFilter) adminRoomFilter.value = '';
+            if (adminStatusFilter) adminStatusFilter.value = '';
+            loadAdminReservations(currentAdminTab);
+        });
+
         function setActiveTab(activeTab) {
             [pendingTab, approvedTab, rejectedTab, allTab].forEach(tab => tab.classList.remove('tab-active'));
             activeTab.classList.add('tab-active');
             [pendingReservationsEl, approvedReservationsEl, rejectedReservationsEl, allReservationsEl].forEach(el => el.classList.add('hidden'));
-            if (activeTab === pendingTab) pendingReservationsEl.classList.remove('hidden');
-            else if (activeTab === approvedTab) approvedReservationsEl.classList.remove('hidden');
-            else if (activeTab === rejectedTab) rejectedReservationsEl.classList.remove('hidden');
-            else if (activeTab === allTab) allReservationsEl.classList.remove('hidden');
+            if (activeTab === pendingTab) {
+                currentAdminTab = 'pending';
+                pendingReservationsEl.classList.remove('hidden');
+            }
+            else if (activeTab === approvedTab) {
+                currentAdminTab = 'approved';
+                approvedReservationsEl.classList.remove('hidden');
+            }
+            else if (activeTab === rejectedTab) {
+                currentAdminTab = 'rejected';
+                rejectedReservationsEl.classList.remove('hidden');
+            }
+            else if (activeTab === allTab) {
+                currentAdminTab = 'all';
+                allReservationsEl.classList.remove('hidden');
+            }
+        }
+
+        function applyAdminFilters(list) {
+            let filtered = [...list];
+
+            const search = (adminSearchInput?.value || '').toLowerCase().trim();
+            if (search) {
+                filtered = filtered.filter(r =>
+                    (r.title || '').toLowerCase().includes(search) ||
+                    (r.userName || '').toLowerCase().includes(search) ||
+                    (r.room || '').toLowerCase().includes(search)
+                );
+            }
+
+            const startDate = adminStartDateInput?.value ? new Date(adminStartDateInput.value) : null;
+            const endDate = adminEndDateInput?.value ? new Date(adminEndDateInput.value) : null;
+            if (startDate) {
+                filtered = filtered.filter(r => new Date(r.date) >= startDate);
+            }
+            if (endDate) {
+                filtered = filtered.filter(r => new Date(r.date) <= endDate);
+            }
+
+            const roomFilter = (adminRoomFilter?.value || '').toLowerCase();
+            if (roomFilter) {
+                filtered = filtered.filter(r => (r.room || '').toLowerCase() === roomFilter);
+            }
+
+            const statusFilter = (adminStatusFilter?.value || '').toLowerCase();
+            if (statusFilter) {
+                filtered = filtered.filter(r => (r.status || '').toLowerCase() === statusFilter);
+            }
+
+            return filtered;
         }
 
         // Yönetici rezervasyonlarını yükle
@@ -909,6 +1011,8 @@
                 let filteredReservations;
                 if (type === 'all') filteredReservations = [...reservations];
                 else filteredReservations = reservations.filter(r => (r.status || '').toLowerCase() === type);
+
+                filteredReservations = applyAdminFilters(filteredReservations);
                 let containerEl;
                 if (type === 'pending') containerEl = pendingReservationsEl;
                 else if (type === 'approved') containerEl = approvedReservationsEl;
@@ -1010,6 +1114,10 @@
             }
 
             if (modalReservationDetailsEl) {
+                const rejectionInfo = (reservation.rejectionReason && (reservation.status || '').toLowerCase() === 'rejected')
+                    ? `<p class="text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2"><strong>Red Nedeni:</strong> ${reservation.rejectionReason}</p>`
+                    : '';
+
                 modalReservationDetailsEl.innerHTML = `
                     <div class="flex justify-between">
                         <h4 class="font-medium">${reservation.title}</h4>
@@ -1019,6 +1127,7 @@
                     <p class="text-gray-600"><strong>Salon:</strong> ${reservation.room}</p>
                     <p class="text-gray-600"><strong>Tarih/Saat:</strong> ${reservation.date} ${reservation.startTime} - ${reservation.endTime}</p>
                     <p class="text-gray-600"><strong>Açıklama:</strong> ${reservation.description || 'Belirtilmedi'}</p>
+                    ${rejectionInfo}
                     ${attendeeListHtml}
                     <p class="text-gray-600 mt-2"><strong>Oluşturulma Tarihi:</strong> ${reservation.createdAt || ''}</p>
                 `;
@@ -1050,9 +1159,21 @@
         if (historyBtn) {
             if (historyBtn) historyBtn.addEventListener('click', function () {
                 fetchReservations(function () {
-                    // Sadece giriş yapan kullanıcının geçmişi gösterilsin
+                    // Sadece giriş yapan kullanıcının geçmişi gösterilsin (organizatör veya katılımcı)
                     const userId = currentUser.id;
-                    const userReservations = reservations.filter(r => r.userId == userId);
+                    const userIdInt = parseInt(userId, 10);
+                    const userName = (currentUser.name || '').toLowerCase();
+
+                    const userReservations = reservations.filter(r => {
+                        const organizerMatch = (!isNaN(userIdInt) && r.userId === userIdInt) ||
+                            (r.userName && r.userName.toLowerCase() === userName);
+
+                        const attendeeMatch = Array.isArray(r.attendeeList) && r.attendeeList.some(a =>
+                            (!isNaN(userIdInt) && a.id === userIdInt) ||
+                            ((a.name || '').toLowerCase() === userName));
+
+                        return organizerMatch || attendeeMatch;
+                    });
                     historyTableBody.innerHTML = userReservations.length === 0
                         ? '<tr><td colspan="7" class="text-center text-gray-500 py-4">Geçmiş rezervasyon bulunamadı.</td></tr>'
                         : userReservations.map(r => `

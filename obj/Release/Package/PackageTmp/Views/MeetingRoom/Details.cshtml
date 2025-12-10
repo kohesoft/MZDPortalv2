@@ -1,0 +1,946 @@
+﻿@model MZDNETWORK.Models.Reservation
+@{
+    ViewBag.Title = "Toplantı Detayları";
+}
+
+@section styles {
+    <link href='~/Content/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .meeting-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .detail-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-header {
+            border-bottom: 2px solid #4f46e5;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-approved {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-cancelled {
+            background: #e5e7eb;
+            color: #4b5563;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .info-icon {
+            font-size: 1.5rem;
+            color: #4f46e5;
+            margin-top: 0.2rem;
+        }
+
+        .info-content h4 {
+            margin: 0 0 0.25rem 0;
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .info-content p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .attendees-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .attendee-card {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            border: 1px solid #e5e7eb;
+            min-width: 200px;
+        }
+
+        .attendee-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .attendee-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #4f46e5;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .attendee-info h5 {
+            margin: 0;
+            font-size: 1rem;
+            color: #1f2937;
+        }
+
+        .attendee-info p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .response-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .response-accepted {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .response-declined {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .response-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .decision-item {
+            background: #f9fafb;
+            border-left: 4px solid #4f46e5;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .decision-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            gap: 1rem;
+        }
+
+        .decision-title-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex: 1;
+        }
+
+        .decision-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .decision-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+            .decision-title.completed {
+                text-decoration: line-through;
+                color: #6b7280;
+            }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+            .btn-primary:hover {
+                background: #4338ca;
+            }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+            .btn-secondary:hover {
+                background: #4b5563;
+            }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+            .btn-success:hover {
+                background: #059669;
+            }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+            .btn-danger:hover {
+                background: #dc2626;
+            }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .modal.show {
+                display: flex;
+            }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+                color: #1f2937;
+            }
+
+            .form-group input, .form-group textarea {
+                width: 100%;
+                padding: 0.75rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 8px;
+                font-size: 1rem;
+            }
+
+            .form-group textarea {
+                min-height: 120px;
+                resize: vertical;
+            }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+    </style>
+}
+
+<div class="meeting-detail-container">
+    <!-- Ana Bilgiler -->
+    <div class="detail-card">
+        <div class="detail-header">
+            <h1 class="detail-title">
+                @Model.Title
+                <span class="status-badge status-@Model.Status.ToString().ToLower()">
+                    @(Model.Status == MZDNETWORK.Models.ReservationStatus.Pending ? "Onay Bekliyor" :
+                        Model.Status == MZDNETWORK.Models.ReservationStatus.Approved ? "Onaylandı" :
+                        Model.Status == MZDNETWORK.Models.ReservationStatus.Rejected ? "Reddedildi" : "İptal Edildi")
+                </span>
+            </h1>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <i class='bx bx-door-open info-icon'></i>
+                <div class="info-content">
+                    <h4>Toplantı Salonu</h4>
+                    <p>@Model.Room</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class='bx bx-calendar info-icon'></i>
+                <div class="info-content">
+                    <h4>Tarih</h4>
+                    <p>@Model.Date.ToString("dd MMMM yyyy, dddd", new System.Globalization.CultureInfo("tr-TR"))</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class='bx bx-time info-icon'></i>
+                <div class="info-content">
+                    <h4>Saat</h4>
+                    <p>@Model.StartTime.ToString(@"hh\:mm") - @Model.EndTime.ToString(@"hh\:mm")</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class='bx bx-user info-icon'></i>
+                <div class="info-content">
+                    <h4>Organizatör</h4>
+                    <p>@Model.UserName</p>
+                </div>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Description))
+        {
+            <div style="margin-top: 1.5rem;">
+                <h4 style="color: #6b7280; margin-bottom: 0.5rem;">Açıklama</h4>
+                <p style="color: #1f2937; line-height: 1.6;">@Model.Description</p>
+            </div>
+        }
+    </div>
+
+    <!-- Kat�l�mc�lar -->
+    <div class="detail-card">
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">
+            <i class='bx bx-group' style="margin-right: 0.5rem;"></i>
+            Katılımcılar (@Model.ReservationAttendees.Count)
+        </h2>
+
+        <div class="attendees-list">
+            @foreach (var attendee in Model.ReservationAttendees)
+            {
+                var initials = (attendee.User.Name?.Substring(0, 1) ?? "") + (attendee.User.Surname?.Substring(0, 1) ?? "");
+                var isCurrentUser = attendee.UserId.ToString() == ViewBag.CurrentUserId;
+
+                <div class="attendee-card">
+                    <div class="attendee-header">
+                        <div class="attendee-avatar">@initials</div>
+                        <div class="attendee-info">
+                            <h5>@attendee.User.Name @attendee.User.Surname</h5>
+                            <p>@attendee.User.Department</p>
+                        </div>
+                    </div>
+
+                    @if (attendee.HasAccepted)
+                    {
+                        <span class="response-badge response-accepted">Katılacak</span>
+                    }
+                    else if (attendee.HasDeclined)
+                    {
+                        <span class="response-badge response-declined">Katılmayacak</span>
+                    }
+                    else
+                    {
+                        <span class="response-badge response-pending">Yanıt Bekliyor</span>
+                    }
+
+                    @if (isCurrentUser && !attendee.HasAccepted && !attendee.HasDeclined && Model.Status == MZDNETWORK.Models.ReservationStatus.Approved)
+                    {
+                        <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                            <button class="btn-success" onclick="acceptMeeting(@Model.Id)">
+                                <i class='bx bx-check'></i> Katılacağım
+                            </button>
+                            <button class="btn-danger" onclick="declineMeeting(@Model.Id)">
+                                <i class='bx bx-x'></i> Katılmam
+                            </button>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Kararlar ve Aksiyonlar (Sadece yönetici veya organizatör görsün) -->
+    @if (ViewBag.IsAdmin || Model.UserId.ToString() == ViewBag.CurrentUserId)
+    {
+        <!-- Kararlar Bölümü -->
+        <div class="detail-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin: 0;">
+                    <i class='bx bx-task' style="margin-right: 0.5rem;"></i>
+                    Toplantı Kararları
+                </h2>
+                <button class="btn-primary" onclick="openDecisionModal()">
+                    <i class='bx bx-plus'></i> Karar Ekle
+                </button>
+            </div>
+
+            <div id="decisionsList">
+                <p style="text-align: center; color: #6b7280; padding: 2rem;">Henüz karar eklenmemiş</p>
+            </div>
+        </div>
+
+        <!-- Aksiyonlar Bölümü -->
+        <div class="detail-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin: 0;">
+                    <i class='bx bx-list-check' style="margin-right: 0.5rem;"></i>
+                    Aksiyon Maddeleri
+                </h2>
+                <button class="btn-primary" onclick="openActionModal()">
+                    <i class='bx bx-plus'></i> Aksiyon Ekle
+                </button>
+            </div>
+
+            <div id="actionsList">
+                <p style="text-align: center; color: #6b7280; padding: 2rem;">Henüz aksiyon eklenmemiş</p>
+            </div>
+        </div>
+    }
+
+    <div class="action-buttons">
+        @* Sadece kendi rezervasyonunu düzenleyebilir (Pending durumda) *@
+        @if (Model.UserId.ToString() == ViewBag.CurrentUserId && Model.Status == MZDNETWORK.Models.ReservationStatus.Pending)
+        {
+            <a href="@Url.Action("Edit", "MeetingRoom", new { id = Model.Id })" class="btn-primary">
+                <i class='bx bx-edit'></i> Düzenle
+            </a>
+        }
+        
+        @* Kullanıcı kendi toplantısını iptal edebilir (Pending veya Approved) *@
+        @* Admin tüm toplantıları iptal edebilir *@
+        @if ((Model.UserId.ToString() == ViewBag.CurrentUserId || ViewBag.IsAdmin) && 
+             (Model.Status == MZDNETWORK.Models.ReservationStatus.Pending || Model.Status == MZDNETWORK.Models.ReservationStatus.Approved))
+        {
+            <button class="btn-danger" onclick="cancelReservation(@Model.Id)">
+                <i class='bx bx-x-circle'></i> İptal Et
+            </button>
+        }
+        
+        <a href="@Url.Action("Index", "MeetingRoom")" class="btn-secondary">
+            <i class='bx bx-arrow-back'></i> Geri Dön
+        </a>
+    </div>
+</div>
+
+<!-- Karar Ekleme Modal -->
+<div id="decisionModal" class="modal">
+    <div class="modal-content">
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 700;">Yeni Karar Ekle</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label>Başlık *</label>
+                <input type="text" id="decisionTitle" required placeholder="Örn: Backend API geliştirmesi" />
+            </div>
+
+            <div class="form-group">
+                <label>Açıklama *</label>
+                <textarea id="decisionDescription" required placeholder="Detaylı açıklama..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Sorumlu Kişi(ler)</label>
+                <input type="text" id="decisionResponsible" placeholder="Örn: Berat Yılmaz, Ahmet Demir" />
+            </div>
+
+            <div class="form-group">
+                <label>Hedef Tarih</label>
+                <input type="date" id="decisionDueDate" />
+            </div>
+
+            <div class="form-group">
+                <label>Notlar</label>
+                <textarea id="decisionNotes" rows="3" placeholder="Ek notlar (opsiyonel)"></textarea>
+            </div>
+
+            <div class="action-buttons">
+                <button type="button" class="btn-primary" onclick="saveDecision()">
+                    <i class='bx bx-save'></i> Kaydet
+                </button>
+                <button type="button" class="btn-secondary" onclick="closeDecisionModal()">İptal</button>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Aksiyon Ekleme Modal -->
+<div id="actionModal" class="modal">
+    <div class="modal-content">
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 700;">Yeni Aksiyon Ekle</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label>Başlık *</label>
+                <input type="text" id="actionTitle" required placeholder="Örn: Tasarım dokümanı hazırla" />
+            </div>
+
+            <div class="form-group">
+                <label>Açıklama *</label>
+                <textarea id="actionDescription" required placeholder="Detaylı açıklama..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Sorumlu Kişi(ler)</label>
+                <input type="text" id="actionResponsible" placeholder="Örn: Berat Yılmaz, Ahmet Demir" />
+            </div>
+
+            <div class="form-group">
+                <label>Hedef Tarih</label>
+                <input type="date" id="actionDueDate" />
+            </div>
+
+            <div class="form-group">
+                <label>Notlar</label>
+                <textarea id="actionNotes" rows="3" placeholder="Ek notlar (opsiyonel)"></textarea>
+            </div>
+
+            <div class="action-buttons">
+                <button type="button" class="btn-primary" onclick="saveAction()">
+                    <i class='bx bx-save'></i> Kaydet
+                </button>
+                <button type="button" class="btn-secondary" onclick="closeActionModal()">İptal</button>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        const reservationId = @Model.Id;
+
+        $(document).ready(function () {
+            loadDecisions();
+            loadActions();
+            setupSignalRNotifications();
+        });
+
+        // SignalR bildirimleri dinle
+        function setupSignalRNotifications() {
+            console.log('[Details] SignalR kurulumu başlatılıyor...');
+
+            if (typeof $ !== 'undefined' && $.connection && $.connection.notificationHub) {
+                $.connection.notificationHub.client.refreshMeetings = function() {
+                    console.log('[Details] SignalR: Toplantı detayları güncelleniyor...');
+                    // Sayfayı yenile (kararlar ve katılımcı durumları güncellensin)
+                    location.reload();
+                };
+                console.log('[Details] SignalR bildirim dinleyicisi kuruldu');
+            } else {
+                console.warn('[Details] SignalR mevcut değil');
+            }
+        }
+
+        // Kararları yükle
+        function loadDecisions() {
+            $.get('@Url.Action("GetMeetingDecisions", "MeetingRoom")', { reservationId: reservationId })
+                .done(function (data) {
+                    if (data && data.length > 0) {
+                        let html = '';
+                        data.forEach(function (decision) {
+                            const isCompleted = decision.status === 'completed';
+                            const statusClass = isCompleted ? 'response-accepted' :
+                                decision.status === 'inprogress' ? 'response-pending' :
+                                    decision.status === 'cancelled' ? 'response-declined' : 'response-pending';
+
+                            const statusText = isCompleted ? 'Tamamlandı' :
+                                decision.status == 'inprogress' ? 'Devam Ediyor' :
+                                    decision.status == 'cancelled' ? 'İptal' : 'Beklemede';
+
+                            html += `
+                                <div class="decision-item">
+                                    <div class="decision-header">
+                                        <div class="decision-title-area">
+                                            <input type="checkbox" class="decision-checkbox"
+                                                   ${isCompleted ? 'checked' : ''}
+                                                   onchange="toggleDecision(${decision.id}, this.checked)" />
+                                            <div class="decision-title ${isCompleted ? 'completed' : ''}">
+                                                ${decision.orderIndex}. ${decision.title}
+                                            </div>
+                                        </div>
+                                        <span class="decision-status ${statusClass}">${statusText}</span>
+                                    </div>
+                                    <p style="margin: 0.5rem 0 0.5rem 2rem; color: #4b5563;">${decision.description}</p>
+                                    ${decision.responsiblePerson ? '<p style="margin: 0.5rem 0 0.5rem 2rem; color: #6b7280;"><strong>Sorumlu:</strong> ' + decision.responsiblePerson + '</p>' : ''}
+                                    ${decision.dueDate ? '<p style="margin: 0.5rem 0 0.5rem 2rem; color: #6b7280;"><strong>Hedef:</strong> ' + new Date(decision.dueDate).toLocaleDateString('tr-TR') + '</p>' : ''}
+                                    ${decision.notes ? '<p style="margin: 0.5rem 0 0.5rem 2rem; font-style: italic; color: #6b7280;">' + decision.notes + '</p>' : ''}
+                                    <div style="margin-top: 1rem; margin-left: 2rem; display: flex; gap: 0.5rem;">
+                                        <button class="btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;" onclick="deleteDecision(${decision.id})">
+                                            <i class='bx bx-trash'></i> Sil
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        $('#decisionsList').html(html);
+                    }
+                })
+                .fail(function () {
+                    console.error('Kararlar yüklenemedi');
+                });
+        }
+
+        // Checkbox toggle - karar tamamland�/beklemede
+        function toggleDecision(id, isChecked) {
+            const status = isChecked ? 2 : 0; // 2 = Completed, 0 = Pending
+            $.post('@Url.Action("UpdateDecisionStatus", "MeetingRoom")', {
+                id: id,
+                status: status,
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            })
+            .done(function (result) {
+                if (result.success) {
+                    loadDecisions();
+                } else {
+                    alert(result.message || 'Bir hata oluştu');
+                    loadDecisions(); // Revert
+                }
+            })
+            .fail(function () {
+                alert('Durum güncellenirken hata oluştu');
+                loadDecisions(); // Revert
+            });
+        }
+
+        // Modal a�/kapat
+        function openDecisionModal() {
+            $('#decisionModal').addClass('show');
+        }
+
+        function closeDecisionModal() {
+            $('#decisionModal').removeClass('show');
+            $('#decisionTitle, #decisionDescription, #decisionResponsible, #decisionDueDate, #decisionNotes').val('');
+        }
+
+        // Karar kaydet
+        function saveDecision() {
+            const title = $('#decisionTitle').val();
+            const description = $('#decisionDescription').val();
+
+            if (!title || !description) {
+                alert('Başlık ve açıklama zorunludur');
+                return;
+            }
+
+            const data = {
+                reservationId: reservationId,
+                title: title,
+                description: description,
+                responsiblePerson: $('#decisionResponsible').val(),
+                dueDate: $('#decisionDueDate').val() || null,
+                notes: $('#decisionNotes').val(),
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            };
+
+            $.post('@Url.Action("AddDecision", "MeetingRoom")', data)
+                .done(function (result) {
+                    if (result.success) {
+                        closeDecisionModal();
+                        loadDecisions();
+                        alert('Karar başarıyla eklendi');
+                    } else {
+                        alert(result.message || 'Bir hata oluştu');
+                    }
+                })
+                .fail(function () {
+                    alert('Karar eklenirken hata oluştu');
+                });
+        }
+
+        // Karar sil
+        function deleteDecision(id) {
+            if (!confirm('Bu kararı silmek istediğinize emin misiniz?')) return;
+
+            $.post('@Url.Action("DeleteDecision", "MeetingRoom")', {
+                id: id,
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            })
+            .done(function (result) {
+                if (result.success) {
+                    loadDecisions();
+                    alert('Karar silindi');
+                } else {
+                    alert(result.message || 'Bir hata oluştu');
+                }
+            })
+            .fail(function () {
+                alert('Karar silinirken hata oluştu');
+            });
+        }
+
+        // ======== AKSIYON FONKSİYONLARI ========
+
+        // Aksiyonları yükle
+        function loadActions() {
+            $.get('@Url.Action("GetMeetingActions", "MeetingRoom")', { reservationId: reservationId })
+                .done(function (data) {
+                    if (data && data.length > 0) {
+                        let html = '';
+                        data.forEach(function (action) {
+                            const isCompleted = action.status === 'completed';
+                            const statusClass = isCompleted ? 'response-accepted' :
+                                action.status === 'inprogress' ? 'response-pending' :
+                                    action.status === 'cancelled' ? 'response-declined' : 'response-pending';
+
+                            const statusText = isCompleted ? 'Tamamlandı' :
+                                action.status == 'inprogress' ? 'Devam Ediyor' :
+                                    action.status == 'cancelled' ? 'İptal' : 'Beklemede';
+
+                            html += `
+                                <div class="decision-item">
+                                    <div class="decision-header">
+                                        <div class="decision-title-area">
+                                            <input type="checkbox" class="decision-checkbox"
+                                                   ${isCompleted ? 'checked' : ''}
+                                                   onchange="toggleAction(${action.id}, this.checked)" />
+                                            <div class="decision-title ${isCompleted ? 'completed' : ''}">
+                                                ${action.orderIndex}. ${action.title}
+                                            </div>
+                                        </div>
+                                        <span class="decision-status ${statusClass}">${statusText}</span>
+                                    </div>
+                                    <p style="margin: 0.5rem 0 0.5rem 2rem; color: #4b5563;">${action.description}</p>
+                                    ${action.responsiblePerson ? '<p style="margin: 0.5rem 0 0.5rem 2rem; color: #6b7280;"><strong>Sorumlu:</strong> ' + action.responsiblePerson + '</p>' : ''}
+                                    ${action.dueDate ? '<p style="margin: 0.5rem 0 0.5rem 2rem; color: #6b7280;"><strong>Hedef:</strong> ' + new Date(action.dueDate).toLocaleDateString('tr-TR') + '</p>' : ''}
+                                    ${action.notes ? '<p style="margin: 0.5rem 0 0.5rem 2rem; font-style: italic; color: #6b7280;">' + action.notes + '</p>' : ''}
+                                    <div style="margin-top: 1rem; margin-left: 2rem; display: flex; gap: 0.5rem;">
+                                        <button class="btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;" onclick="deleteAction(${action.id})">
+                                            <i class='bx bx-trash'></i> Sil
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        $('#actionsList').html(html);
+                    }
+                })
+                .fail(function () {
+                    console.error('Aksiyonlar yüklenemedi');
+                });
+        }
+
+        // Checkbox toggle - aksiyon tamamlandı/beklemede
+        function toggleAction(id, isChecked) {
+            const status = isChecked ? 2 : 0; // 2 = Completed, 0 = Pending
+            $.post('@Url.Action("UpdateActionStatus", "MeetingRoom")', {
+                id: id,
+                status: status,
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            })
+            .done(function (result) {
+                if (result.success) {
+                    loadActions();
+                } else {
+                    alert(result.message || 'Bir hata oluştu');
+                    loadActions(); // Revert
+                }
+            })
+            .fail(function () {
+                alert('Durum güncellenirken hata oluştu');
+                loadActions(); // Revert
+            });
+        }
+
+        // Modal aç/kapat
+        function openActionModal() {
+            $('#actionModal').addClass('show');
+        }
+
+        function closeActionModal() {
+            $('#actionModal').removeClass('show');
+            $('#actionTitle, #actionDescription, #actionResponsible, #actionDueDate, #actionNotes').val('');
+        }
+
+        // Aksiyon kaydet
+        function saveAction() {
+            const title = $('#actionTitle').val();
+            const description = $('#actionDescription').val();
+
+            if (!title || !description) {
+                alert('Başlık ve açıklama zorunludur');
+                return;
+            }
+
+            const data = {
+                reservationId: reservationId,
+                title: title,
+                description: description,
+                responsiblePerson: $('#actionResponsible').val(),
+                dueDate: $('#actionDueDate').val() || null,
+                notes: $('#actionNotes').val(),
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            };
+
+            $.post('@Url.Action("AddAction", "MeetingRoom")', data)
+                .done(function (result) {
+                    if (result.success) {
+                        closeActionModal();
+                        loadActions();
+                        alert('Aksiyon başarıyla eklendi');
+                    } else {
+                        alert(result.message || 'Bir hata oluştu');
+                    }
+                })
+                .fail(function () {
+                    alert('Aksiyon eklenirken hata oluştu');
+                });
+        }
+
+        // Aksiyon sil
+        function deleteAction(id) {
+            if (!confirm('Bu aksiyonu silmek istediğinize emin misiniz?')) return;
+
+            $.post('@Url.Action("DeleteAction", "MeetingRoom")', {
+                id: id,
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            })
+            .done(function (result) {
+                if (result.success) {
+                    loadActions();
+                    alert('Aksiyon silindi');
+                } else {
+                    alert(result.message || 'Bir hata oluştu');
+                }
+            })
+            .fail(function () {
+                alert('Aksiyon silinirken hata oluştu');
+            });
+        }
+
+        // ======== KATILIMCI FONKSİYONLARI ========
+
+        function acceptMeeting(reservationId) {
+            $.post('@Url.Action("AcceptMeeting", "MeetingRoom")', {
+                reservationId: reservationId,
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            })
+            .done(function (result) {
+                if (result.success) {
+                    alert('Toplantıya katılımınız onaylandı!');
+                    location.reload();
+                } else {
+                    alert(result.message || 'Bir hata oluştu');
+                }
+            })
+            .fail(function () {
+                alert('İşlem sırasında hata oluştu');
+            });
+        }
+
+        function declineMeeting(reservationId) {
+            if (!confirm('Toplantıya katılamayacağınızı onaylıyor musunuz?')) return;
+
+            $.post('@Url.Action("DeclineMeeting", "MeetingRoom")', {
+                reservationId: reservationId,
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            })
+            .done(function (result) {
+                if (result.success) {
+                    alert('Katılım reddiniz kaydedildi');
+                    location.reload();
+                } else {
+                    alert(result.message || 'Bir hata oluştu');
+                }
+            })
+            .fail(function () {
+                alert('İşlem sırasında hata oluştu');
+            });
+        }
+
+        // Rezervasyon iptal
+        function cancelReservation(reservationId) {
+            if (!confirm('Bu rezervasyonu iptal etmek istediğinize emin misiniz? Bu işlem geri alınamaz.')) return;
+
+            $.post('@Url.Action("CancelReservation", "MeetingRoom")', {
+                id: reservationId,
+                __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val()
+            })
+            .done(function (result) {
+                if (result.success) {
+                    alert('Rezervasyon iptal edildi');
+                    window.location.href = '@Url.Action("Index", "MeetingRoom")';
+                } else {
+                    alert(result.message || 'Bir hata oluştu');
+                }
+            })
+            .fail(function () {
+                alert('İptal işlemi sırasında hata oluştu');
+            });
+        }
+    </script>
+}

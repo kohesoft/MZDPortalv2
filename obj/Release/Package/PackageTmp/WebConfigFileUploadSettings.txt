@@ -1,0 +1,40 @@
+<!--
+To allow file uploads up to 10MB, add the following configuration to your web.config:
+
+In the <system.web> section:
+-->
+<httpRuntime maxRequestLength="10240" executionTimeout="3600" />
+
+<!--
+In the <system.webServer> section:
+-->
+<security>
+  <requestFiltering>
+    <requestLimits maxAllowedContentLength="10485760" />
+  </requestFiltering>
+</security>
+
+<!--
+Complete example for web.config:
+
+<configuration>
+  <system.web>
+    <httpRuntime maxRequestLength="10240" executionTimeout="3600" />
+    <!-- Other settings -->
+  </system.web>
+  
+  <system.webServer>
+    <security>
+      <requestFiltering>
+        <requestLimits maxAllowedContentLength="10485760" />
+      </requestFiltering>
+    </security>
+    <!-- Other settings -->
+  </system.webServer>
+</configuration>
+
+This allows:
+- maxRequestLength: 10MB (in KB)
+- maxAllowedContentLength: 10MB (in bytes)
+- executionTimeout: 1 hour for large file uploads
+-->

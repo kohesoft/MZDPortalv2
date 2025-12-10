@@ -33,17 +33,6 @@
                 },
                 new Models.MeetingRoom
                 {
-                    Name = "Yerleşke Küçük Toplantı Salonu",
-                    Location = "Yerleşke",
-                    Capacity = 6,
-                    Features = "Projeksiyon",
-                    ColorCode = "blue",
-                    IsActive = true,
-                    OrderIndex = 2,
-                    CreatedAt = DateTime.Now
-                },
-                new Models.MeetingRoom
-                {
                     Name = "Merkez Toplantı Salonu",
                     Location = "Merkez",
                     Capacity = 10,

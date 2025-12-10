@@ -1,0 +1,65 @@
+@model IEnumerable<MZDNETWORK.Models.PasswordResetRequest>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Şifre Sıfırlama İstekleri";
+}
+
+<link rel="stylesheet" href="~/Content/tailwind.min.css" />
+<link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
+
+<h2 class="text-2xl font-semibold mb-6">Şifre Sıfırlama İstekleri</h2>
+
+<table id="resetTable" class="display stripe hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Kullanıcı</th>
+            <th>Talep Tarihi</th>
+            <th>Onay Durumu</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@(item.User != null ? item.User.Username : "-")</td>
+                <td>@item.RequestedAt.ToString("g")</td>
+                <td>
+                    @if (item.Approved)
+                    {
+                        <span class="inline-flex items-center px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">Onaylandı</span>
+                    }
+                    else
+                    {
+                        <span class="inline-flex items-center px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full">Bekliyor</span>
+                    }
+                </td>
+                <td class="text-center">
+                    @if (!item.Approved)
+                    {
+                        using (Html.BeginForm("Approve", "PasswordResetRequest", new { id = item.Id }, FormMethod.Post, new { @class="inline" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded transition" onclick="return confirm('Bu isteği onaylamak istediğinize emin misiniz?');">Onayla</button>
+                        }
+                    }
+                    else
+                    {
+                        <span class="text-gray-400 text-xs">-</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#resetTable').DataTable({"order":[[2,"desc"]], "language": {"url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json" }});
+        });
+    </script>
+}

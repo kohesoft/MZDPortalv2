@@ -1,0 +1,155 @@
+@model MZDNETWORK.Models.LeaveRequest
+
+@{
+    ViewBag.Title = "İzin Talebi Oluştur";
+}
+
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-600 to-blue-800 p-8">
+                    <h1 class="text-white text-3xl font-bold tracking-tight">İzin Talep Formu</h1>
+                    <p class="text-blue-100 mt-2 text-lg">İzin bilgilerinizi doldurunuz</p>
+                </div>
+                <div class="p-8 bg-white">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="space-y-8">
+                            <div class="bg-white rounded-lg">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="col-span-2">
+                                        @Html.LabelFor(m => m.LeaveType, new { @class = "block text-base font-semibold text-gray-900 mb-2" })
+                                        @Html.EnumDropDownListFor(m => m.LeaveType, new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200" })
+                                        @Html.ValidationMessageFor(m => m.LeaveType, "", new { @class = "mt-2 text-sm text-red-600 font-medium" })
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                                    <div>
+                                        @Html.LabelFor(m => m.StartDate, new { @class = "block text-base font-semibold text-gray-900 mb-2" })
+                                        <div class="relative">
+                                            @Html.EditorFor(m => m.StartDate, new { htmlAttributes = new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200", type = "datetime-local" } })
+                                            @Html.ValidationMessageFor(m => m.StartDate, "", new { @class = "mt-2 text-sm text-red-600 font-medium" })
+                                        </div>
+                                    </div>
+                                    <div>
+                                        @Html.LabelFor(m => m.EndDate, new { @class = "block text-base font-semibold text-gray-900 mb-2" })
+                                        <div class="relative">
+                                            @Html.EditorFor(m => m.EndDate, new { htmlAttributes = new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200", type = "datetime-local" } })
+                                            @Html.ValidationMessageFor(m => m.EndDate, "", new { @class = "mt-2 text-sm text-red-600 font-medium" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-4">
+                                        <p class="text-base text-blue-800 font-medium">İzinde olduğunuz süre boyunca görevlerinizi devredeceğiniz çalışma arkadaşınızı seçiniz.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    @Html.LabelFor(m => m.Department, new { @class = "block text-base font-semibold text-gray-900 mb-2" })
+                                    @Html.DropDownListFor(m => m.Department, (IEnumerable<SelectListItem>)ViewBag.Departments, "Seçiniz", new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200" })
+                                    @Html.ValidationMessageFor(m => m.Department, "", new { @class = "mt-2 text-sm text-red-600 font-medium" })
+                                </div>
+                                <div>
+                                    @Html.LabelFor(m => m.SubstituteName, new { @class = "block text-base font-semibold text-gray-900 mb-2" })
+                                    @Html.DropDownListFor(m => m.SubstituteName, (IEnumerable<SelectListItem>)ViewBag.Substitutes, "Seçiniz", new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200" })
+                                    @Html.ValidationMessageFor(m => m.SubstituteName, "", new { @class = "mt-2 text-sm text-red-600 font-medium" })
+                                </div>
+                            </div>
+
+                            <div>
+                                @Html.LabelFor(m => m.Tasks, new { @class = "block text-base font-semibold text-gray-900 mb-2" })
+                                @Html.TextAreaFor(m => m.Tasks, new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200", rows = "3", placeholder = "Devredilecek görevleri belirtiniz" })
+                                @Html.ValidationMessageFor(m => m.Tasks, "", new { @class = "mt-2 text-sm text-red-600 font-medium" })
+                            </div>
+
+                            <div>
+                                @Html.LabelFor(m => m.ContactInfo, new { @class = "block text-base font-semibold text-gray-900 mb-2" })
+                                @Html.TextBoxFor(m => m.ContactInfo, new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200", placeholder = "İzin süresince iletişim bilgisi" })
+                                @Html.ValidationMessageFor(m => m.ContactInfo, "", new { @class = "mt-2 text-sm text-red-600 font-medium" })
+                            </div>
+
+                            <div>
+                                @Html.LabelFor(m => m.Reason, new { @class = "block text-base font-semibold text-gray-900 mb-2" })
+                                @Html.TextAreaFor(m => m.Reason, new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200", rows = "3", placeholder = "İzin Nedeni" })
+                                @Html.ValidationMessageFor(m => m.Reason, "", new { @class = "mt-2 text-sm text-red-600 font-medium" })
+                            </div>
+
+                            <div>
+                                @Html.LabelFor(m => m.Description, new { @class = "block text-base font-semibold text-gray-900 mb-2" })
+                                @Html.TextAreaFor(m => m.Description, new { @class = "block w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200", rows = "4", placeholder = "Açıklama (isteğe bağlı)" })
+                                @Html.ValidationMessageFor(m => m.Description, "", new { @class = "mt-2 text-sm text-red-600 font-medium" })
+                            </div>
+                        </div>
+
+                        <div class="mt-10 flex flex-col sm:flex-row justify-end space-y-4 sm:space-y-0 sm:space-x-4">
+                            @Html.ActionLink("İptal", "Index", null, new { @class = "inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border-2 border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200" })
+                            <button type="submit" class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 border-2 border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200">
+                                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                                Kaydet
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $('#StartDate').change(function () {
+                var startDate = $(this).val();
+                $('#EndDate').attr('min', startDate);
+            });
+
+            $('#EndDate').change(function () {
+                var endDate = $(this).val();
+                $('#StartDate').attr('max', endDate);
+            });
+
+            $('#Department').change(function () {
+                var selectedDepartment = $(this).val();
+                if (selectedDepartment) {
+                    $.getJSON('@Url.Action("GetSubstitutesByDepartment", "LeaveRequest")', { department: selectedDepartment }, function (data) {
+                        var substituteSelect = $('#SubstituteName');
+                        substituteSelect.empty();
+                        substituteSelect.append($('<option>', {
+                            value: '',
+                            text: 'Seçiniz'
+                        }));
+                        $.each(data, function (index, item) {
+                            substituteSelect.append($('<option>', {
+                                value: item.FullName,
+                                text: item.FullName
+                            }));
+                        });
+                    });
+                } else {
+                    $('#SubstituteName').empty().append($('<option>', {
+                        value: '',
+                        text: 'Seçiniz'
+                    }));
+                }
+            });
+        });
+    </script>
+} 

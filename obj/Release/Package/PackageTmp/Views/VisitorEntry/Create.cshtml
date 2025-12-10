@@ -1,0 +1,116 @@
+@model MZDNETWORK.Models.VisitorEntry
+@{
+    ViewBag.Title = "Yeni Ziyaretçi Kaydı";
+}
+<head>
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+</head>
+<section class="min-h-screen flex justify-center bg-gray-50">
+    <div class="w-full max-w-xl">
+        @using (Html.BeginForm("Create", "VisitorEntry", FormMethod.Post, new { @class = "bg-white shadow-2xl rounded-2xl p-8 mt-10 space-y-4" }))
+        {
+            @Html.AntiForgeryToken()
+            <h2 class="text-2xl font-bold mb-4">Yeni Ziyaretçi Kaydı</h2>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">Tarih</label>
+                @Html.TextBoxFor(m=>m.Date, "{0:yyyy-MM-dd}", new { @class="form-input w-full border-2 border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none", type="date", @readonly="readonly"})
+                @Html.ValidationMessageFor(m=>m.Date)
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Ad Soyad</label>
+                @Html.TextBoxFor(m=>m.FullName, new { @class="form-input w-full border-2 border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"})
+                @Html.ValidationMessageFor(m=>m.FullName)
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Firma</label>
+                @Html.TextBoxFor(m=>m.Organization, new { @class="form-input w-full border-2 border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"})
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Geliş Sebebi</label>
+                @Html.DropDownListFor(m=>m.ArrivalReason, new SelectList(new[]{ "Toplantı", "İş Görüşmesi", "Görüşme", "Tamir/Tadilat", "Diğer" }), "Seçiniz", new { @class="form-select w-full border-2 border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"})
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Görev</label>
+                @Html.TextBoxFor(m=>m.Duty, new { @class="form-input w-full border-2 border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"})
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Kimlik No</label>
+                @Html.TextBoxFor(m=>m.IdentityNo, new { @class="form-input w-full border-2 border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"})
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">TC Kimlik</label>
+                @Html.TextBoxFor(m=>m.TCKimlik, new { @class="form-input w-full border-2 border-gray-300 rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"})
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1">İmza</label>
+                <div id="signaturePreviewContainer" class="mb-2 hidden">
+                    <img id="signaturePreview" class="border-2 border-gray-300 rounded-lg h-24" />
+                </div>
+                <button type="button" id="openSignatureModal" class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg shadow flex items-center gap-2">
+                    <i class='bx bx-pencil'></i> İmza Çiz
+                </button>
+                <input type="hidden" id="SignaturePath" name="SignaturePath" />
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Giriş Saati</label>
+                @Html.TextBoxFor(m=>m.EntryTime, "{0:hh\\:mm}", new { @class="form-input w-full", type="time", @readonly="readonly"})
+            </div>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg shadow">Kaydet</button>
+            <a href="@Url.Action("Index")" class="text-gray-600 ml-2">İptal</a>
+        }
+    </div>
+</section>
+
+<!-- Signature Modal -->
+<div id="signatureModal" class="fixed inset-0 bg-gray-900/50 flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-[460px]">
+        <h3 class="text-lg font-semibold mb-2">İmzanızı Çizin</h3>
+        <canvas id="signatureCanvas" width="400" height="200" class="border-2 border-gray-300 rounded-lg"></canvas>
+        <div class="flex justify-between mt-3">
+            <button id="clearSig" type="button" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">Temizle</button>
+            <div class="space-x-2">
+                <button id="saveSig" type="button" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Kaydet</button>
+                <button id="closeSig" type="button" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/signature_pad.umd.min.js"></script>
+<script>
+    const openBtn = document.getElementById('openSignatureModal');
+    const modal = document.getElementById('signatureModal');
+    const canvas = document.getElementById('signatureCanvas');
+    const sigPad = new SignaturePad(canvas);
+
+    const clearBtn = document.getElementById('clearSig');
+    const saveBtn = document.getElementById('saveSig');
+    const closeBtn = document.getElementById('closeSig');
+
+    const hiddenInput = document.getElementById('SignaturePath');
+    const previewContainer = document.getElementById('signaturePreviewContainer');
+    const previewImg = document.getElementById('signaturePreview');
+
+    openBtn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+        sigPad.clear();
+    });
+
+    clearBtn.addEventListener('click', () => sigPad.clear());
+
+    function closeModal(){ modal.classList.add('hidden'); }
+    closeBtn.addEventListener('click', closeModal);
+
+    saveBtn.addEventListener('click', () => {
+        if(sigPad.isEmpty()){
+            alert('İmza boş!');
+            return;
+        }
+        const dataURL = sigPad.toDataURL('image/png');
+        hiddenInput.value = dataURL;
+        previewImg.src = dataURL;
+        previewContainer.classList.remove('hidden');
+        closeModal();
+    });
+</script> 

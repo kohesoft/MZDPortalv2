@@ -1,0 +1,151 @@
+@model IEnumerable<MZDNETWORK.Models.VisitorEntry>
+@{
+    ViewBag.Title = "Ziyaretçi Formu";
+}
+<head>
+    <link rel="stylesheet" href="~/Content/tailwind.min.css" />
+    <link href='~/Content/boxicons.min.css' rel='stylesheet'>
+</head>
+<section class="min-h-screen flex justify-center bg-gray-50">
+    <div class="w-full max-w-6xl">
+        <div class="bg-white/90 shadow-2xl rounded-2xl border border-gray-200">
+            <div class="px-8 py-6 border-b border-gray-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <h3 class="text-2xl font-bold text-gray-800">Ziyaretçi/Giriş-Çıkış Formu</h3>
+                <div class="flex flex-col md:flex-row md:items-center gap-2">
+                    <a href="@Url.Action("Create","VisitorEntry")" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow flex items-center gap-2">
+                        <i class='bx bx-plus'></i>Yeni Kayıt
+                    </a>
+                    <!-- Tarih Filtreleri -->
+                    <select id="yearFilter" class="form-select border border-gray-300 rounded px-2 py-1">
+                        <option value="">Yıl (Hepsi)</option>
+                        @{
+                            var years = Model.Select(m => m.Date.Year).Distinct().OrderByDescending(y => y);
+                            foreach (var y in years)
+                            {
+                                <option value="@y">@y</option>
+                            }
+                        }
+                    </select>
+                    <select id="monthFilter" class="form-select border border-gray-300 rounded px-2 py-1">
+                        <option value="">Ay (Hepsi)</option>
+                        @{ var monthNames = new[]{"Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"}; }
+                        @for(int m=1;m<=12;m++){
+                            <option value="@m">@monthNames[m-1]</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="px-8 py-6 overflow-x-auto" style="max-height: 550px;">
+                <table class="min-w-full bg-white rounded-lg shadow-sm" id="entryTable">
+                    <thead class="sticky top-0 z-10 bg-white">
+                        <tr>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Sıra</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Tarih</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Ad Soyad</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Geliş Sebebi</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Firma</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Görevi</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Kimlik No</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">TC Kimlik</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Giriş</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">Çıkış</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500 uppercase">İmza</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int i=1;}
+                        @foreach(var item in Model){
+                            <tr class="border-b last:border-b-0 hover:bg-indigo-50 transition">
+                                <td class="px-4 py-2">@i</td>
+                                <td class="px-4 py-2">@item.Date.ToString("dd.MM.yyyy")</td>
+                                <td class="px-4 py-2">@item.FullName</td>
+                                <td class="px-4 py-2">@item.ArrivalReason</td>
+                                <td class="px-4 py-2">@item.Organization</td>
+                                <td class="px-4 py-2">@item.Duty</td>
+                                <td class="px-4 py-2">@item.IdentityNo</td>
+                                <td class="px-4 py-2">@item.TCKimlik</td>
+                                <td class="px-4 py-2">@(item.EntryTime.ToString(@"hh\:mm"))</td>
+                                <td class="px-4 py-2">
+                                    @if(item.ExitTime == null){
+                                        using (Html.BeginForm("SetExit","VisitorEntry", FormMethod.Post, new { @class="inline" })){
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("id", item.Id)
+                                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-1 px-3 rounded">Çıkış Kaydet</button>
+                                        }
+                                    }else{
+                                        @(item.ExitTime?.ToString(@"hh\:mm"))
+                                    }
+                                </td>
+                                <td class="px-4 py-2">
+                                    @if(!string.IsNullOrEmpty(item.SignaturePath)){
+                                        <img src="@item.SignaturePath" class="h-12 inline-block" />
+                                    }
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/jquery.dataTables.min.css" />
+}
+
+@section scripts {
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // DataTable ile arama, sıralama ve filtreleme aktif
+            var table = $('#entryTable').DataTable({
+                dom: "<'flex justify-between items-center mb-4'lf>rt<'flex justify-between items-center mt-4'ip>",
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Hepsi"]],
+                order: [[1, 'desc']], // Tarih sütunu varsayılan sıralama (yeniler üstte)
+                language: {
+                    decimal: ",",
+                    emptyTable: "Tabloda herhangi bir veri mevcut değil",
+                    info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor",
+                    infoEmpty: "Kayıt yok",
+                    infoFiltered: "(_MAX_ kayıt içerisinden bulunan)",
+                    thousands: ".",
+                    lengthMenu: "Sayfada _MENU_ kayıt göster",
+                    loadingRecords: "Yükleniyor...",
+                    processing: "İşleniyor...",
+                    search: "Ara:",
+                    zeroRecords: "Eşleşen kayıt bulunamadı",
+                    paginate: {
+                        first: "İlk",
+                        last: "Son",
+                        next: "Sonraki",
+                        previous: "Önceki"
+                    },
+                    aria: {
+                        sortAscending: ": artan sütun sıralamasını aktifleştir",
+                        sortDescending: ": azalan sütun sıralamasını aktifleştir"
+                    }
+                }
+            });
+
+            // Özel tarih filtreleri
+            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex){
+                var yearVal = $('#yearFilter').val();
+                var monthVal = $('#monthFilter').val();
+                var dateStr = data[1]; // "Tarih" sütunu
+                if(!dateStr) return true;
+                var parts = dateStr.split('.'); // dd.MM.yyyy
+                if(parts.length !== 3) return true;
+                var d = new Date(parts[2], parts[1]-1, parts[0]);
+                if(yearVal && d.getFullYear().toString() !== yearVal) return false;
+                if(monthVal && (d.getMonth()+1).toString() !== monthVal) return false;
+                return true;
+            });
+
+            $('#yearFilter, #monthFilter').on('change', function(){
+                table.draw();
+            });
+        });
+    </script>
+}

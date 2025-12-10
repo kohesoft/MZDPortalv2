@@ -342,6 +342,13 @@
             </h1>
         </div>
 
+        @if (Model.Status == MZDNETWORK.Models.ReservationStatus.Rejected && !string.IsNullOrWhiteSpace(Model.RejectionReason))
+        {
+            <div class="bg-red-50 border border-red-200 text-red-800 rounded-md p-3 mb-4">
+                <strong>Red Nedeni:</strong> @Model.RejectionReason
+            </div>
+        }
+
         <div class="info-grid">
             <div class="info-item">
                 <i class='bx bx-door-open info-icon'></i>

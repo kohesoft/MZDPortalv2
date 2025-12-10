@@ -3,7 +3,6 @@
 
 @{
     ViewBag.Title = "Ana Sayfa";
-    Model.Reverse();
     var imageFiles = ViewBag.ImageFiles as List<string>;
 }
 
@@ -54,7 +53,7 @@
                                             <div class="anasayfa-attachment-item">
                                                 <span class="anasayfa-attachment-name">@ek.OriginalFileName</span>
                                                 <a href="@Url.Action("DownloadFile", "Gonderi", new { id = ek.Id })" 
-                                                   class="anasayfa-attachment-download">
+                                                   class="anasayfa-attachment-download no-loading">
                                                     <i class='bx bx-download'></i>
                                                 </a>
                                             </div>

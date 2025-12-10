@@ -39,9 +39,53 @@
                     <input type="text" id="searchInput" placeholder="Toplantı ara... (başlık, organizatör, salon)" 
                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
+
+                <!-- Ek Filtreler -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+                    <div>
+                        <label class="text-sm text-gray-600 mb-1 block">Durum</label>
+                        <select id="statusFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            <option value="">Tümü</option>
+                            <option value="approved">Onaylandı</option>
+                            <option value="pending">Onay Bekliyor</option>
+                            <option value="rejected">Reddedildi</option>
+                            <option value="cancelled">İptal</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-sm text-gray-600 mb-1 block">Cevap</label>
+                        <select id="responseFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            <option value="">Tümü</option>
+                            <option value="accepted">Katılacağım</option>
+                            <option value="declined">Katılmayacağım</option>
+                            <option value="pending">Cevap Bekliyor</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="flex-1">
+                            <label class="text-sm text-gray-600 mb-1 block">Başlangıç Tarihi</label>
+                            <input id="startDateFilter" type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                        </div>
+                        <div class="flex-1">
+                            <label class="text-sm text-gray-600 mb-1 block">Bitiş Tarihi</label>
+                            <input id="endDateFilter" type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-sm text-gray-600 mb-1 block">Salon</label>
+                        <select id="roomFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            <option value="">Tümü</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mb-4">
+                    <button id="applyFilters" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">Filtrele</button>
+                    <button id="clearFilters" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">Temizle</button>
+                </div>
                 
                 <!-- Filtreleme Tabs -->
-                <div class="flex flex-wrap gap-2 border-b">
+                <div id="tabContainer" class="flex flex-wrap gap-2 border-b">
                     <button id="allMeetingsTab" class="tab-active px-4 py-2 font-medium border-b-2 border-indigo-600 text-indigo-600">
                         Tümü
                     </button>
@@ -121,6 +165,24 @@
             applyFilters();
         });
 
+        // Filtre butonları
+        $('#applyFilters').on('click', function() {
+            applyFilters();
+        });
+
+        $('#clearFilters').on('click', function() {
+            $('#statusFilter').val('');
+            $('#responseFilter').val('');
+            $('#startDateFilter').val('');
+            $('#endDateFilter').val('');
+            $('#roomFilter').val('');
+            $('#searchInput').val('');
+            currentFilter = 'all';
+            $('#tabContainer button').removeClass('tab-active border-b-2 border-indigo-600 text-indigo-600').addClass('text-gray-600');
+            $('#allMeetingsTab').addClass('tab-active border-b-2 border-indigo-600 text-indigo-600').removeClass('text-gray-600');
+            applyFilters();
+        });
+
         // Toplantıları yükle
         function loadMyMeetings() {
             $.get('/MeetingRoom/GetMyMeetings', function(data) {
@@ -141,10 +203,21 @@
                     allMeetings = data;
                 }
                 
+                populateRoomFilter(allMeetings);
                 filterMeetings('all');
             }).fail(function(err) {
                 console.error('Toplantılar yüklenemedi:', err);
                 $('#meetingsList').html('<div class="text-center text-red-500 py-8">Toplantılar yüklenirken hata oluştu</div>');
+            });
+        }
+
+        function populateRoomFilter(list) {
+            const roomSelect = $('#roomFilter');
+            roomSelect.find('option:not(:first)').remove();
+            const uniqueRooms = [...new Set(list.filter(m => m.room).map(m => m.room))];
+            uniqueRooms.sort();
+            uniqueRooms.forEach(r => {
+                roomSelect.append(`<option value="${r}">${r}</option>`);
             });
         }
 
@@ -164,6 +237,34 @@
                 filtered = filtered.filter(m => m.hasAccepted);
             } else if (currentFilter === 'declined') {
                 filtered = filtered.filter(m => m.hasDeclined);
+            }
+
+            // Dropdown durum filtresi
+            const statusFilter = $('#statusFilter').val();
+            if (statusFilter) {
+                filtered = filtered.filter(m => (m.status || '').toLowerCase() === statusFilter);
+            }
+
+            // Cevap filtresi
+            const responseFilter = $('#responseFilter').val();
+            if (responseFilter === 'accepted') filtered = filtered.filter(m => m.hasAccepted);
+            else if (responseFilter === 'declined') filtered = filtered.filter(m => m.hasDeclined);
+            else if (responseFilter === 'pending') filtered = filtered.filter(m => !m.hasAccepted && !m.hasDeclined);
+
+            // Tarih aralığı filtresi
+            const startDate = $('#startDateFilter').val();
+            const endDate = $('#endDateFilter').val();
+            if (startDate) {
+                filtered = filtered.filter(m => new Date(m.date) >= new Date(startDate));
+            }
+            if (endDate) {
+                filtered = filtered.filter(m => new Date(m.date) <= new Date(endDate));
+            }
+
+            // Salon filtresi
+            const roomFilter = $('#roomFilter').val();
+            if (roomFilter) {
+                filtered = filtered.filter(m => (m.room || '').toLowerCase() === roomFilter.toLowerCase());
             }
             
             // Arama filtresi
@@ -369,8 +470,8 @@
         }
 
         // Tab switching
-        $('.flex button').click(function() {
-            $('.flex button').removeClass('tab-active border-b-2 border-indigo-600 text-indigo-600').addClass('text-gray-600');
+        $('#tabContainer button').click(function() {
+            $('#tabContainer button').removeClass('tab-active border-b-2 border-indigo-600 text-indigo-600').addClass('text-gray-600');
             $(this).addClass('tab-active border-b-2 border-indigo-600 text-indigo-600').removeClass('text-gray-600');
             
             let filter = 'all';

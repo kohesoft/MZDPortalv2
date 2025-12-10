@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Permission Debug";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4>Permission Debug - Yemek.Merkez</h4>
+                </div>
+                <div class="card-body">
+                    <h5>KullanÄ±cÄ± Bilgileri</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">
+                            <strong>Authenticated:</strong> 
+                            <span class="badge badge-@(User.Identity.IsAuthenticated ? "success" : "danger")">
+                                @User.Identity.IsAuthenticated
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Username:</strong> @User.Identity.Name
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Session UserId:</strong> @Session["UserId"]
+                        </li>
+                    </ul>
+
+                    <h5>Permission Testleri</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Permission</th>
+                                    <th>Action</th>
+                                    <th>SonuÃ§</th>
+                                    <th>Durum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Yemek.Merkez</td>
+                                    <td>View</td>
+                                    <td>
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Yemek.Merkez", "View"))
+                                        {
+                                            <span class="badge badge-success">âœ“ Ä°zin Var</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">âœ— Ä°zin Yok</span>
+                                        }
+                                    </td>
+                                    <td>Layout'ta link kontrolÃ¼ iÃ§in kullanÄ±lÄ±yor</td>
+                                </tr>
+                                <tr>
+                                    <td>Yemek.Merkez</td>
+                                    <td>-</td>
+                                    <td>
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasAnyPermission("Yemek.Merkez"))
+                                        {
+                                            <span class="badge badge-success">âœ“ Ä°zin Var</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">âœ— Ä°zin Yok</span>
+                                        }
+                                    </td>
+                                    <td>Layout'ta "any permission" kontrolÃ¼</td>
+                                </tr>
+                                <tr>
+                                    <td>Yemek.Yerleske</td>
+                                    <td>View</td>
+                                    <td>
+                                        @if (MZDNETWORK.Attributes.DynamicAuthorizeAttribute.CurrentUserHasPermission("Yemek.Yerleske", "View"))
+                                        {
+                                            <span class="badge badge-success">âœ“ Ä°zin Var</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">âœ— Ä°zin Yok</span>
+                                        }
+                                    </td>
+                                    <td>YerleÅŸke yemek listesi iÃ§in</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>Debug Bilgileri</h5>
+                    <div class="alert alert-info">
+                        <p><strong>Not:</strong> Bu sayfa permission debug iÃ§in oluÅŸturulmuÅŸtur.</p>
+                        <p>EÄŸer yemek listesi linkini gÃ¶rebiliyorsanÄ±z ama sayfaya eriÅŸemiyorsanÄ±z, yukarÄ±daki tablo size nedenini gÃ¶sterecektir.</p>
+                    </div>
+
+                    <h5>Test Linkleri</h5>
+                    <div class="btn-group" role="group">
+                        <a href="@Url.Action("MerkezYemekListesi", "Home")" class="btn btn-primary">
+                            Merkez Yemek Listesi
+                        </a>
+                        <a href="@Url.Action("YerleskeYemekListesi", "Home")" class="btn btn-secondary">
+                            YerleÅŸke Yemek Listesi
+                        </a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-info">
+                            Ana Sayfa
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
